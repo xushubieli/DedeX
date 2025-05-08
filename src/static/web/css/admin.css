@@ -61,7 +61,7 @@ input {
 }
 input[type=file] {
 	padding:0;
-	border:0;
+	border:none;
 	border-radius:0!important
 }
 input:focus,select:focus,textarea:focus {
@@ -758,13 +758,13 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	background:var(--green)
 }
 .nav-pills .nav-link,.btn-sm {
-	padding:0 0.5rem;
+	padding:0 0.5rem!important;
 	height:30px;
 	line-height:30px;
 	font-size:12px!important
 }
 .btn-xs {
-	padding:0.15rem;
+	padding:0.15rem!important;
 	line-height:1;
 	font-size:12px!important;
 	border-radius:var(--b-radius-sm)!important
