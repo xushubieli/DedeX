@@ -813,6 +813,9 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	body.menu-show .admin-content {
 		left:0
 	}
+	.card .card-body .pagination {
+		display:none
+	}
 	.tips {
 		padding:0 1rem
 	}

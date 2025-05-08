@@ -240,13 +240,13 @@ class DataListCP
             $listdd .= $j == $this->pageNO ? "<li class='page-item'><span class='page-link'>$j</span></li>\r\n" : "<li class='page-item'><a class='page-link' href='".$purl."pageno=$j'>".$j."</a></li>\r\n";
         }
         $plist = "<div class='d-flex justify-content-end'>\r\n";
-        $sizesel = "<select name='pagesize' id='dedepagesize' class='form-control mr-2' style='width:120px'>\r\n";
+        $sizesel = "<select name='pagesize' id='dedepagesize' class='form-control mr-3' style='width:120px'>\r\n";
         $sizesel .= "<option value='30' ".($this->pagesize == 30 ? "selected='selected'" : "").">30条/页</option>\r\n";
         $sizesel .= "<option value='50' ".($this->pagesize == 50 ? "selected='selected'" : "").">50条/页</option>\r\n";
         $sizesel .= "<option value='100' ".($this->pagesize == 100 ? "selected='selected'" : "").">100条/页</option>\r\n";
         $sizesel .= "<option value='500' ".($this->pagesize == 500 ? "selected='selected'" : "").">500条/页</option>\r\n";
         $sizesel .= "<option value='1000' ".($this->pagesize == 1000 ? "selected='selected'" : "").">1000条/页</option>\r\n";
-        $sizesel .= "</select><script>document.addEventListener('DOMContentLoaded', function() {var selectElement = document.getElementById('dedepagesize');selectElement.addEventListener('change', function() {var selectedSize = this.value;var url = new URL(window.location.href);url.searchParams.set('pagesize', selectedSize);window.location.href = url.toString();});});</script><ul class='pagination'>\r\n";
+        $sizesel .= "</select><script>document.addEventListener('DOMContentLoaded', function() {var selectElement = document.getElementById('dedepagesize');selectElement.addEventListener('change', function() {var selectedSize = this.value;var url = new URL(window.location.href);url.searchParams.set('pagesize', selectedSize);window.location.href = url.toString();});});</script><ul class='pagination mr-3'>\r\n";
         if (preg_match("#pagesize#i", $atts['listitem'])) {
             $plist .= $sizesel;
         }
@@ -271,8 +271,8 @@ class DataListCP
         if (preg_match("#form#i", $atts['listitem'])) {
             $plist .= "</ul><form name='pagelist' action='".$this->GetCurUrl()."'>$hidenform";
             if ($totalpage > $total_list) {
-                $plist .= "<input type='text' name='pageno' class='form-control admin-input-xs ml-2' placeholder='页数'>\r\n";
-                $plist .= "<button type='submit' name='plistgo' class='btn btn-success btn-sm'>跳转</button>\r\n";
+                $plist .= "<input type='text' name='pageno' class='form-control admin-input-xs' placeholder='页数'>\r\n";
+                $plist .= "<button type='submit' name='plistgo' class='btn btn-success btn-sm'>前往</button>\r\n";
             }
             $plist .= "</form>\r\n";
         }
