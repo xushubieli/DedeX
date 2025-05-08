@@ -1,0 +1,16 @@
+任意表数据标签
+>>dede>>
+<html>
+	...
+	<body>
+		<ul>{dede:loop table='' sort='' row='10' if=''}
+			<li><a href='[field:arcurl/]'>[field:title/]</a></li>{/dede:loop}
+		</ul>
+	</body>
+</html>
+>>dede>>
+table='biz_archives' 数据表名（支持同数据库内其他后台程序数据表名）
+sort='' 排序方式
+row='10' 调用10条数据
+if='' 调用条件
+注：在后台-系统设置-SQL命令工具-数据库文档，查看数据库表了解更多信息

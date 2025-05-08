@@ -1,0 +1,505 @@
+<?php
+if (!defined('DEDEINC')) exit('dedebiz');
+/**
+ * 管理员登录
+ *
+ * @version        $id:userlogin.class.php 15:59 2010年7月5日 tianya $
+ * @package        DedeBIZ.Libraries
+ * @copyright      Copyright (c) 2022 DedeBIZ.COM
+ * @license        GNU GPL v2 (https://www.dedebiz.com/license)
+ * @link           https://www.dedebiz.com
+ */
+session_start();
+/**
+ *  检验会员是否有权使用某功能，这个函数是一个回值函数CheckPurview函数只是对他回值的一个处理过程
+ *
+ * @access    public
+ * @param     string  $n  功能名称
+ * @return    mixed  如果具有则返回TRUE
+ */
+function TestPurview($n)
+{
+    $rs = FALSE;
+    $purview = $GLOBALS['cuserLogin']->getPurview();
+    if (preg_match('/admin_AllowAll/i', $purview)) {
+        return TRUE;
+    }
+    if ($n == '') {
+        return TRUE;
+    }
+    if (!isset($GLOBALS['groupRanks'])) {
+        $GLOBALS['groupRanks'] = explode(' ', $purview);
+    }
+    $ns = explode(',', $n);
+    foreach ($ns as $n) {
+        //只要找到一个匹配的权限，即可认为会员有权浏览此页面
+        if ($n == '') {
+            continue;
+        }
+        if (in_array($n, $GLOBALS['groupRanks'])) {
+            $rs = TRUE;
+            break;
+        }
+    }
+    return $rs;
+}
+/**
+ *  对权限检测后返回操作对话框
+ *
+ * @access    public
+ * @param     string  $n  功能名称
+ * @return    void
+ */
+function CheckPurview($n)
+{
+    if (!TestPurview($n)) {
+        ShowMsg("您没有权限进行此操作", "-1");
+        exit();
+    }
+}
+/**
+ *  是否没权限限制，超级管理员
+ *
+ * @access    public
+ * @param     string
+ * @return    bool
+ */
+function TestAdmin()
+{
+    $purview = $GLOBALS['cuserLogin']->getPurview();
+    if (preg_match('/admin_AllowAll/i', $purview)) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+$DedeUserCatalogs = array();
+/**
+ *  检测会员是否有权限操作某栏目
+ *
+ * @access    public
+ * @param     int   $cid  栏目id
+ * @param     string   $msg  返回消息
+ * @return    string
+ */
+function CheckCatalog($cid, $msg)
+{
+    global $cfg_admin_channel, $admin_catalogs;
+    if ($cfg_admin_channel == 'all' || TestAdmin()) {
+        return TRUE;
+    }
+    if (!in_array($cid, $admin_catalogs)) {
+        ShowMsg("$msg", "-1");
+        exit();
+    }
+    return TRUE;
+}
+/**
+ *  发布文档临时附件信息缓存，前先清空附件信息，完成后把它与文档关连
+ *
+ * @access    public
+ * @param     string   $fid  文件id
+ * @param     string   $filename  文件名称
+ * @return    void
+ */
+function AddMyAddon($fid, $filename)
+{
+    $cacheFile = DEDEDATA.'/cache/addon-'.session_id().'.inc';
+    if (!file_exists($cacheFile)) {
+        $fp = fopen($cacheFile, 'w');
+        fwrite($fp, '<'.'?php'."\r\n");
+        fwrite($fp, "\$myaddons = array();\r\n");
+        fwrite($fp, "\$maNum = 0;\r\n");
+        fclose($fp);
+    }
+    include($cacheFile);
+    $fp = fopen($cacheFile, 'a');
+    $arrPos = $maNum;
+    $maNum++;
+    fwrite($fp, "\$myaddons[\$maNum] = array('$fid', '$filename');\r\n");
+    fwrite($fp, "\$maNum = $maNum;\r\n");
+    fclose($fp);
+}
+/**
+ *  清理附件，如果关连的文档id，先把上一批附件传给这个文档id
+ *
+ * @access    public
+ * @param     string  $aid  文档id
+ * @param     string  $title  文档标题
+ * @return    void
+ */
+function ClearMyAddon($aid = 0, $title = '')
+{
+    global $dsql;
+    $cacheFile = DEDEDATA.'/cache/addon-'.session_id().'.inc';
+    $_SESSION['bigfile_info'] = array();
+    $_SESSION['file_info'] = array();
+    if (!file_exists($cacheFile)) {
+        return;
+    }
+    //把附件与文档关连
+    if (!empty($aid)) {
+        include($cacheFile);
+        foreach ($myaddons as $addons) {
+            if (!empty($title)) {
+                $dsql->ExecuteNoneQuery("Update `#@__uploads` set arcid='$aid',title='$title' where aid='{$addons[0]}'");
+            } else {
+                $dsql->ExecuteNoneQuery("Update `#@__uploads` set arcid='$aid' where aid='{$addons[0]}' ");
+            }
+        }
+    }
+    @unlink($cacheFile);
+}
+/**
+ * 登录类
+ *
+ * @package          userLogin
+ * @subpackage       DedeBIZ.Libraries
+ * @link             https://www.dedebiz.com
+ */
+class userLogin
+{
+    var $userName = '';
+    var $userPwd = '';
+    var $userID = '';
+    var $adminDir = '';
+    var $userType = '';
+    var $userChannel = '';
+    var $userPurview = '';
+    var $userFace = '';
+    var $keepUserIDTag = 'dede_admin_id';
+    var $keepUserTypeTag = 'dede_admin_type';
+    var $keepUserChannelTag = 'dede_admin_channel';
+    var $keepUserNameTag = 'dede_admin_name';
+    var $keepUserPurviewTag = 'dede_admin_purview';
+    var $keepAdminStyleTag = 'dede_admin_style';
+    var $keepUserFace = 'dede_admin_face';
+    var $adminStyle = 'DedeBIZ';
+    //php5构造函数
+    function __construct($admindir = '')
+    {
+        global $admin_path;
+        if (isset($_SESSION[$this->keepUserIDTag])) {
+            $this->userID = $_SESSION[$this->keepUserIDTag];
+            $this->userType = $_SESSION[$this->keepUserTypeTag];
+            $this->userChannel = $_SESSION[$this->keepUserChannelTag];
+            $this->userName = $_SESSION[$this->keepUserNameTag];
+            $this->userPurview = $_SESSION[$this->keepUserPurviewTag];
+            $this->adminStyle = $_SESSION[$this->keepAdminStyleTag];
+            $this->userFace = $_SESSION[$this->keepUserFace];
+        }
+        if ($admindir != '') {
+            $this->adminDir = $admindir;
+        } else {
+            $this->adminDir = $admin_path;
+        }
+    }
+    function userLogin($admindir = '')
+    {
+        $this->__construct($admindir);
+    }
+    /**
+     *  检验会员是否正确
+     *
+     * @access    public
+     * @param     string    $username  账号
+     * @param     string    $userpwd  密码
+     * @return    string
+     */
+    function checkUser($username, $userpwd)
+    {
+        global $dsql;
+        //只允许账号和密码用0-9,a-z,A-Z,'@','_','.','-'这些字符
+        $this->userName = preg_replace("/[^0-9a-zA-Z_@!\.-]/", '', $username);
+        $this->userPwd = preg_replace("/[^0-9a-zA-Z_@!\.-]/", '', $userpwd);
+        $pwd = substr(md5($this->userPwd), 5, 20);
+        $dsql->SetQuery("SELECT admin.*,atype.purviews,member.face FROM `#@__admin` admin LEFT JOIN `#@__admintype` atype ON atype.`rank`=admin.usertype LEFT JOIN `#@__member` member ON member.mid = admin.id WHERE admin.userid LIKE '".$this->userName."' LIMIT 0,1");
+        $dsql->Execute();
+        $row = $dsql->GetObject();
+        if (!isset($row->pwd)) {
+            return -1;
+        } else if (!empty($row->pwd_new) && !password_verify($this->userPwd, $row->pwd_new)) {
+            $this->loginError($row->id);
+            return -2;
+        } else if (!empty($row->pwd) && $pwd != $row->pwd) {
+            $this->loginError($row->id);
+            return -2;
+        } else {
+            $upsql = '';
+            if (empty($row->pwd_new) && function_exists('password_hash')) {
+                //升级密码
+                $newpwd = password_hash($this->userPwd, PASSWORD_BCRYPT);
+                $upsql .= ",pwd='',pwd_new='{$newpwd}'";
+            }
+            $loginip = GetIP();
+            $this->userID = $row->id;
+            $this->userType = $row->usertype;
+            $this->userChannel = $row->typeid;
+            $this->userName = $row->uname;
+            $this->userPurview = $row->purviews;
+            $this->userFace = $row->face;
+            $inquery = "UPDATE `#@__admin` SET loginip='$loginip',logintime='".time()."'{$upsql},loginerr=0 WHERE id='".$row->id."'";
+            $dsql->ExecuteNoneQuery($inquery);
+            $sql = "UPDATE `#@__member` SET logintime=".time().", loginip='$loginip' WHERE mid=".$row->id;
+            $dsql->ExecuteNoneQuery($sql);
+            return 1;
+        }
+    }
+    /**
+     * 是否需要验证码
+     *
+     * @param  mixed $username
+     * @return bool
+     */
+    function isNeedCheckCode($username)
+    {
+        $num = $this->getLoginError($username);
+        return $num >= 3 ? true : false;
+    }
+    /**
+     * 1分钟以内登录错误的次数
+     *
+     * @param  mixed $username
+     * @return int 登录错误次数
+     */
+    function getLoginError($username)
+    {
+        global $dsql;
+        if (!TableHasField("#@__admin", "loginerr")) {
+            return 0;
+        }
+        $this->userName = preg_replace("/[^0-9a-zA-Z_@!\.-]/", '', $username);
+        $row = $dsql->GetOne("SELECT loginerr,logintime FROM `#@__admin` WHERE userid LIKE '$this->userName'");
+        if (is_array($row)) {
+            //1分钟内如果输错3次则需要验证码
+            return (time() - (int)$row['logintime']) < 60 ?  (int)$row['loginerr'] : 0;
+        } else {
+            return -1;
+        }
+    }
+    /**
+     * 记录登录错误
+     *
+     * @return void
+     */
+    function loginError($adminid)
+    {
+        global $dsql;
+        $loginip = GetIP();
+        $inquery = "UPDATE `#@__admin` SET loginip='$loginip',logintime='".time()."',loginerr=loginerr+1 WHERE id='".$adminid."'";
+        $dsql->ExecuteNoneQuery($inquery);
+    }
+    /**
+     *  保持会员的会话状态
+     *
+     * @access    public
+     * @return    int    成功返回 1，失败返回 -1
+     */
+    function keepUser()
+    {
+        if ($this->userID != '' && $this->userType != '') {
+            global $admincachefile, $adminstyle;
+            if (empty($adminstyle)) $adminstyle = 'DedeBIZ';
+            @session_register($this->keepUserIDTag);
+            $_SESSION[$this->keepUserIDTag] = $this->userID;
+            @session_register($this->keepUserTypeTag);
+            $_SESSION[$this->keepUserTypeTag] = $this->userType;
+            @session_register($this->keepUserChannelTag);
+            $_SESSION[$this->keepUserChannelTag] = $this->userChannel;
+            @session_register($this->keepUserNameTag);
+            $_SESSION[$this->keepUserNameTag] = $this->userName;
+            @session_register($this->keepUserPurviewTag);
+            $_SESSION[$this->keepUserPurviewTag] = $this->userPurview;
+            @session_register($this->keepAdminStyleTag);
+            $_SESSION[$this->keepAdminStyleTag] = $adminstyle;
+            @session_register($this->keepUserFace);
+            $_SESSION[$this->keepUserFace] = $this->userFace;
+            PutCookie('DedeUserID', $this->userID, 3600 * 24, '/');
+            PutCookie('DedeLoginTime', time(), 3600 * 24, '/');
+            $this->ReWriteAdminChannel();
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+    /**
+     *  重写会员权限栏目
+     *
+     * @access    public
+     * @return    void
+     */
+    function ReWriteAdminChannel()
+    {
+        //$this->userChannel
+        $cacheFile = DEDEDATA.'/cache/admincat_'.$this->userID.'.inc';
+        //管理员管理的栏目列表
+        $typeid = trim($this->userChannel);
+        if (empty($typeid) || $this->getUserType() >= 10) {
+            $firstConfig = "\$cfg_admin_channel = 'all';\r\n\$admin_catalogs = array();\r\n";
+        } else {
+            $firstConfig = "\$cfg_admin_channel = 'array';\r\n";
+        }
+        $fp = fopen($cacheFile, 'w');
+        fwrite($fp, '<'.'?php'."\r\n");
+        fwrite($fp, $firstConfig);
+        if (!empty($typeid)) {
+            $typeids = explode(',', $typeid);
+            $typeid = '';
+            foreach ($typeids as $tid) {
+                $typeid .= ($typeid == '' ? GetSonIdsUL($tid) : ','.GetSonIdsUL($tid));
+            }
+            $typeids = explode(',', $typeid);
+            $typeidsnew = array_unique($typeids);
+            $typeid = join(',', $typeidsnew);
+            fwrite($fp, "\$admin_catalogs = array($typeid);\r\n");
+        }
+        fwrite($fp, '?'.'>');
+        fclose($fp);
+    }
+    /**
+     *  结束会员的会话状态
+     *
+     * @access    public
+     * @return    void
+     */
+    function exitUser()
+    {
+        ClearMyAddon();
+        @session_unregister($this->keepUserIDTag);
+        @session_unregister($this->keepUserTypeTag);
+        @session_unregister($this->keepUserChannelTag);
+        @session_unregister($this->keepUserNameTag);
+        @session_unregister($this->keepUserPurviewTag);
+        @session_unregister($this->keepUserFace);
+        DropCookie('dedeAdmindir');
+        DropCookie('DedeUserID');
+        DropCookie('DedeLoginTime');
+        $_SESSION = array();
+    }
+    /**
+     *  获得会员管理栏目的值
+     *
+     * @access    public
+     * @return    string
+     */
+    function getUserChannel()
+    {
+        if ($this->userChannel != '') {
+            return $this->userChannel;
+        } else {
+            return '';
+        }
+    }
+    /**
+     *  获得会员的权限值
+     *
+     * @access    public
+     * @return    int
+     */
+    function getUserType()
+    {
+        if ($this->userType != '') {
+            return $this->userType;
+        } else {
+            return -1;
+        }
+    }
+    function getUserFace()
+    {
+        if ($this->userFace != '') {
+            return $this->userFace;
+        } else {
+            return '/static/web/img/admin.png';
+        }
+    }
+    /**
+     *  获取会员权限值
+     *
+     * @access    public
+     * @return    int
+     */
+    function getUserRank()
+    {
+        return $this->getUserType();
+    }
+    /**
+     *  获得会员的id
+     *
+     * @access    public
+     * @return    int
+     */
+    function getUserID()
+    {
+        if ($this->userID != '') {
+            return $this->userID;
+        } else {
+            return -1;
+        }
+    }
+    /**
+     *  获得会员的名称
+     *
+     * @access    public
+     * @return    string
+     */
+    function getUserName()
+    {
+        if ($this->userName != '') {
+            return $this->userName;
+        } else {
+            return -1;
+        }
+    }
+    /**
+     *  会员权限表
+     *
+     * @access    public
+     * @return    string
+     */
+    function getPurview()
+    {
+        return $this->userPurview;
+    }
+}
+/**
+ *  获得某id的所有下级id
+ *
+ * @access    public
+ * @param     int   $id  栏目id
+ * @param     int   $channel  栏目id
+ * @param     int   $addthis  是否加入当前这个栏目
+ * @return    string
+ */
+function GetSonIdsUL($id, $channel = 0, $addthis = TRUE)
+{
+    global $cfg_Cs;
+    $GLOBALS['idArray'] = array();
+    if (!is_array($cfg_Cs)) {
+        require_once(DEDEDATA."/cache/inc_catalog_base.inc");
+    }
+    GetSonIdsLogicUL($id, $cfg_Cs, $channel, $addthis);
+    $rquery = join(',', $GLOBALS['idArray']);
+    return $rquery;
+}
+/**
+ *  递归逻辑
+ *
+ * @access    public
+ * @param     int  $id  栏目id
+ * @param     array  $sArr  缓存数组
+ * @param     int   $channel  栏目id
+ * @param     int   $addthis  是否加入当前这个栏目
+ * @return    void
+ */
+function GetSonIdsLogicUL($id, $sArr, $channel = 0, $addthis = FALSE)
+{
+    if ($id != 0 && $addthis) {
+        $GLOBALS['idArray'][$id] = $id;
+    }
+    foreach ($sArr as $k => $v) {
+        if ($v[0] == $id && ($channel == 0 || $v[1] == $channel)) {
+            GetSonIdsLogicUL($k, $sArr, $channel, TRUE);
+        }
+    }
+}
+?>

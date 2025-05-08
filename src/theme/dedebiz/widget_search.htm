@@ -1,0 +1,9 @@
+<div class="item-hot bg-white shadow-sm rounded p-3">
+    <form class="search" name="formsearch" action="{dede:global.cfg_phpurl/}/search.php">
+        <input type="hidden" name="kwtype" value="0">
+        <div class="input-group">
+            <input name="q" type="text" class="form-control" value="{dede:global name='keyword' function='RemoveXSS(@me)'/}" placeholder="请输入关键词" required>
+            <div class="input-group-append"><button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button></div>
+        </div>
+    </form>
+</div>

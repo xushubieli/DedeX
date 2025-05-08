@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>订单确认-会员中心-<?php echo $cfg_webname;?></title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/style.css">
+	</head>
+	<body>
+		<?php ThemeInclude('top.htm');?>
+		<main class="container py-3">
+			<div class="row">
+				<?php include(DEDEMEMBER."/templets/menu.htm");?>
+				<div class="col-md-9">
+					<div class="pannel-main-container shadow-sm rounded">
+						<div class="alert alert-success">您申请购买的产品如下，确认无误后请点击购买并支付按钮，进行网上支付，如果支付失败，请与管理员联系其它支付方式</div>
+						<h3 class="py-3">订单确认</h3>
+						<form name="E_FORM" action="<?php echo $cfg_memberurl;?>/buy_action.php" method="post">
+							<input type="hidden" name="pd_encode" value="<?php echo $pr_encode;?>">
+							<input type="hidden" name="pd_verify" value="<?php echo $pr_verify;?>">
+							<input type="hidden" name="aid" value="<?php echo $buyid;?>">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td width="15%" align="right">订单编号</td>
+										<td><?php echo $buyid?></td>
+									</tr>
+									<tr>
+										<td align="right">产品类型</td>
+										<td><?php echo $ptype?></td>
+									</tr>
+									<tr>
+										<td align="right">产品名称</td>
+										<td><?php echo $pname?></td>
+									</tr>
+									<tr>
+										<td align="right"><span class="td1">产品价格：</span></td>
+										<td><?php echo $price;?>元</td>
+									</tr>
+									<tr>
+										<td align="right"><span class="td1">支付方式：</span></td>
+										<td>
+											{dede:array.payment_list}
+											<div class="form-check mb-2">
+												<input class="form-check-input" id="iptPayment{dede:value.id/}" type="radio" name="paytype" value="{dede:value.id/}">
+												<label class="form-check-label" for="iptPayment{dede:value.id/}">
+													{dede:value.name/}<?php echo intval($value['id'])=== 4? '(余额：'.$cfg_ml->M_UserMoney.')' : '' ;?>
+												</label>
+											</div>
+											{/dede:array}
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" align="center">
+											<button type="submit" class="btn btn-success btn-sm">购买并支付</button>
+											<button type="button" class="btn btn-secondary btn-sm" onclick="location='buy.php'">返回</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</main>
+		<?php ThemeInclude('foot.htm');?>
+	</body>
+</html>

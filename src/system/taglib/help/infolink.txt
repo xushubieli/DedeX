@@ -1,0 +1,4 @@
+分类信息地区链接标签
+>>dede>>
+{dede:infolink/}
+>>dede>>

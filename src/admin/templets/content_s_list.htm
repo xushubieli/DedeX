@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>专题列表</title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
+		<script src="/static/web/js/jquery.min.js"></script>
+		<script src="/static/web/js/moment.min.js"></script>
+		<script src="/static/web/js/daterangepicker.js"></script>
+		<script src="/static/web/js/admin.list.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
+				<li class="breadcrumb-item active">专题列表</li>
+			</ol>
+			<div class="card shadow-sm mb-3">
+				<div class="card-body">
+					<div class="admin-btns">
+						<a class="btn btn-success btn-sm" href="spec_add.php">添加专题</a>
+						<?php echo $CheckUserSend?>
+						<a class="btn btn-success btn-sm" href="catalog_main.php">栏目管理</a>
+						<a class="btn btn-success btn-sm" href="makehtml_spec.php">更新专题</a>
+					</div>
+				</div>
+			</div>
+			<div class="card shadow-sm mb-3">
+				<div class="card-body">
+					<div class="admin-btns">
+						<form name="form3" action="content_s_list.php" method="get">
+							<input type="hidden" name="dopost" value="listArchives">
+							<input type="hidden" name="channelid" value="3">
+							<input type="text" name="keyword" class="admin-input-lg" value="<?php echo $keyword?>" placeholder="请输入文档标题或文档id">
+							<select name="cid" class="admin-input-sm">
+								<option value="0">选择分类</option>
+								<?php echo $optionarr?>
+							</select>
+							<input type="text" name="timerange" autocomplete="off" id="timerange" class="admin-input-lg" value="<?php echo $strTimerange;?>" placeholder="请选择日期">
+							<button type="submit" class="btn btn-success btn-sm">搜索</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="card shadow-sm">
+				<div class="card-header">专题列表</div>
+				<div class="card-body">
+					<form name="form2">
+						<div class="table-responsive">
+							<table class="table table-borderless table-hover">
+								<thead>
+									<tr>
+										<td scope="col">选择</td>
+										<td scope="col">id</td>
+										<td width="30%">文档标题</td>
+										<td scope="col">栏目</td>
+										<td scope="col">网页</td>
+										<td scope="col">权限</td>
+										<td scope="col">更新时间</td>
+										<td scope="col">点击</td>
+										<td scope="col">操作</td>
+									</tr>
+								</thead>
+								<tbody>
+									{dede:datalist}
+									<tr>
+										<td><input type="checkbox" name="arcID" value="{dede:field.id/}"></td>
+										<td>{dede:field.id/}</td>
+										<td><a href="archives_do.php?aid={dede:field.id/}&dopost=editArchives">{dede:field.title/}</a></td>
+										<td>{dede:field.typeid function='GetTypename(@me)'/}</td>
+										<td><?php echo IsHtmlArchives($fields['ismake'])?></td>
+										<td><?php echo GetRankName($fields['arcrank'])?></td>
+										<td><?php echo MyDate("Y-m-d H:i:s",$fields['senddate'])?></td>
+										<td>{dede:field.click/}</td>
+										<td>
+											<a href="javascript:editArc({dede:field.id/});" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="编辑"></i></a>
+											<a href="javascript:viewArc({dede:field.id/});" class="btn btn-light btn-sm"><i class="fa fa-eye" title="预览"></i></a>
+										</td>
+									</tr>
+									{/dede:datalist}
+									<tr>
+										<td colspan="9">
+											<a href="javascript:selAll();" class="btn btn-success btn-sm">全选</a>
+											<a href="javascript:noSelAll();" class="btn btn-success btn-sm">取消</a>
+											<a href="javascript:updateArc(0);" class="btn btn-success btn-sm">更新</a>
+											<a href="javascript:checkArc(0);" class="btn btn-success btn-sm">审核</a>
+											<a href="javascript:adArc(0);" class="btn btn-success btn-sm">推荐</a>
+											<a href="javascript:delArc(0);" class="btn btn-danger btn-sm">删除</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
+					{dede:pagelist listsize='2'/}
+				</div>
+			</div>
+		</div>
+		<script>
+			$(function($) {
+				$('#timerange').daterangepicker({
+					autoUpdateInput: false,
+					timePicker: true,
+					locale : {
+						format: 'YYYY-MM-DD HH:mm',
+						applyLabel: '确定',
+						cancelLabel: '清空',
+						daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+						monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+						firstDay: 1
+					},
+				});
+				$('#timerange').on('apply.daterangepicker', function(ev, picker) {
+					$(this).val(picker.startDate.format('YYYY-MM-DD HH:mm') + ' - ' + picker.endDate.format('YYYY-MM-DD HH:mm'));
+				});
+				$('#timerange').on('cancel.daterangepicker', function(ev, picker) {
+					$(this).val('');
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+当前栏目列表标签
+>>dede>>
+栏目调用示例
+<html>
+	...
+	<body>{dede:channelartlist row='10' typeid='' notypeid=''}
+		<ul>
+			<li class="{dede:field.currentstyle/}"><a href='{dede:field.typeurl/}'>{dede:field.typename/}</a>
+				{dede:channel type='son' noself='yes' row='1'}<ul>{/dede:channel}
+					{dede:channel type='son' row='10'}
+					<li><a href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}
+				{dede:channel type='son' noself='yes' row='1'}</ul>{/dede:channel}
+			</li>
+		</ul>{/dede:channelartlist}
+		<hr>
+		{dede:channelartlist typeid='' notypeid='' row='10'}
+		{dede:arclist titlelen='255' row='10'}
+		<article>
+			<a href="[field:arcurl/]">[field:title/]</a>
+			[field:pubdate function="MyDate('Y-m-d',@me)"/]
+		</article>{/dede:arclist}{/dede:channelartlist}
+	</body>
+</html>
+>>dede>>
+row='10' 调用10个栏目
+typeid='1' 调用指定栏目id全部子类，多个栏目，例：typeid='1,2,3'，调用单个栏目，例：typeid='1,1'
+notypeid='2' 排除指定栏目id，多个栏目，例：notypeid='4,5,6'
+{dede:field.currentstyle/} 当前栏目应用样式为active
+【进阶用法】
+{dede:channel type='son' noself='yes' row='1'} 判断栏目是否有子类栏目
+[field:pubdate function="MyDate('Y-m-d',@me)"/] 文章发布时间格式（可用参数：Y年、m月、d日，Y大小写有不同的格式，英文日期标签为[field:pubdate function='strftime("%b %d, %Y",@me)'/]，标准日期标签为{dede:field.senddate function="strftime('%Y-%m-%dT%H:%M:%S+01:00',@me)"/}）
+{dede:field.typeurl/}{dede:field name='typeurl'/} 两种不同标签写法
+{dede:channelartlist} 支持嵌套{dede:type}{dede:arclist}标签
+注：在后台-系统设置-SQL命令工具-数据库文档，查看数据库表了解更多信息

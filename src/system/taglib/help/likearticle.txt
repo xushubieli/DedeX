@@ -1,0 +1,15 @@
+自动关连文档标签
+>>dede>>
+<html>
+	...
+	<body>
+		<ul>{dede:likearticle row='' titlelen='' infolen=''}
+			<li><a href='[field:arcurl/]'>[field:title/]</a></li>{/dede:likearticle}
+		</ul>
+	</body>
+</html>
+>>dede>>
+row='10' 调用10篇文档
+titlelen='160' 限制标题显示160个字符
+infolen='260' 限制简介显示260个字符
+col='2' 限制2列显示，默认1列

@@ -1,0 +1,12 @@
+指定栏目信息标签
+>>dede>>
+<html>
+	...
+	<body>
+		<ul>
+			<li><a href="[field:typelink/]">[field:typename/]</a></li>{/dede:type}
+		</ul>
+	</body>
+</html>
+>>dede>>
+typeid='1' 调用指定栏目id

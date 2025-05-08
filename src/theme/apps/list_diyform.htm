@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title><?php echo $diy->name;?>-<?php echo $cfg_webname;?></title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/style.css">
+	</head>
+	<body>
+		<?php ThemeInclude('top.htm');?>
+		<main class="container py-3">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">首页</a></li>
+				<li class="breadcrumb-item"><a href="<?php echo $cfg_phpurl?>/diy.php?action=list&diyid=<?php echo $diy->diyid;?>"><?php echo $diy->name;?>列表</a></li>
+			</ol>
+			<div class="mb-3">
+				<a href="<?php echo $cfg_phpurl?>/diy.php?action=post&diyid=<?php echo $diy->diyid;?>" class="btn btn-success btn-sm">发布信息</a>
+			</div>
+			{dede:datalist}
+			<table class="table">
+				<?php
+				if (!empty($fields)) {
+					echo "<tbody>";
+					echo '<tr><td>表单'.$fields['id'].' <a href="diy.php?action=view&diyid='.$diy->diyid.'&id='.$fields['id'].'" target="_blank" class="btn btn-light btn-sm">详细</a></td></tr></td>';
+					foreach($fieldlist as $field=>$fielddata)
+					{
+						if ($fields[$field]=='') continue;
+						echo "<tr><td>{$fielddata[0]}</td></tr><tr><td>{$fields[$field]}</td></tr>";
+					}
+					echo "</tbody>";
+				} else {
+					echo "<tr><td>暂无记录</td></tr>";
+				}
+				?>
+			</table>
+			{/dede:datalist}
+			{dede:pagelist listsize='2'/}
+		</main>
+		<?php ThemeInclude('foot.htm');?>
+	</body>
+</html>

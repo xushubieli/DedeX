@@ -1,0 +1,12 @@
+用户信息标签
+>>dede>>
+<html>
+	...
+	<body>
+		<ul>{dede:userinfo mid=''}
+			<li>用户名：[field:uname/]|用户等级：[field:rankname/]|注册时间：[field:jointime function="MyDate('Y-m-d H:m',@me)"/]|登录时间：[field:logintime function="MyDate('Y-m-d H:m',@me)"/]</li>{/dede:userinfo}
+		</ul>
+	</body>
+</html>
+>>dede>>
+mid='1' 调用指定会员id，若是管理员则不显示，空文档详情页面则显示当前文档关联的会员信息

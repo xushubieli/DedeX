@@ -1,0 +1,9 @@
+投票标签
+>>dede>>
+{dede:vote id='' lineheight='' tablewidth='100%' titlebgcolor='#EDEDE2' titlebackground='' tablebgcolor='#ffffff'/}
+>>dede>>
+id='1' 调用指定投票id
+lineheight='30' 限制表格显示高度30px
+tablewidth='100%' 限制表格显示宽度100%
+titlebgcolor='#EDEDE2' 限制表格显示标题背景色#EDEDE2
+tablebg='' 限制表格显示背景色，在后台-插件列表-投票管理，直接复制网页代码来使用

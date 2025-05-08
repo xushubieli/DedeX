@@ -1,0 +1,22 @@
+自定义文档列表标签
+>>dede>>
+<html>
+	...
+	<body>{dede:arclistsg row='' titlelen='' typeid='' flag='h' keyword='' orderway='' limit='0,1'}
+		<article>
+			<a href="[field:arcurl/]">[field:title/]</a>
+		</article>{/dede:arclistsg}
+	</body>
+</html>
+>>dede>>
+row='10' 调用10篇文档
+titlelen='160' 限制标题显示160个字符
+infolen='260' 限制简介显示260个字符
+typeid='1' 调用指定栏目id，多个栏目，例：typeid='1,2,3'
+orderby='sortrank' 排序方式：sortrank按发布时间（可用参数：hot/click按点击数、pubdate按发布时间、lastpost按评论时间、scores按得分、rand随机）
+keyword='得德' 调用指定关键词文档，多个关键词，例：keyword='DedeBIZ,得德'
+limit='0,1' 从第0开始调用1篇
+flag='h' 文档属性：h头条（可用参数：c推荐、p图片、f幻灯、s滚动、j跳转、b加粗）
+noflag='' 同flag，排除指定文章属性
+orderway='desc' 文档排序：默认desc降序（asc升序）
+subday='7' 调用7天内发布的文档

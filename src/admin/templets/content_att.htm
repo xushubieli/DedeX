@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>文档自定义属性</title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
+				<li class="breadcrumb-item active">文档自定义属性</li>
+			</ol>
+			<div class="card shadow-sm">
+				<div class="card-header">文档自定义属性</div>
+				<div class="card-body">
+					<form name="form1" action="content_att.php" method="post">
+						<input type="hidden" name="dopost" value="save">
+						<div class="table-responsive">
+							<table class="table table-borderless">
+								<thead>
+									<tr>
+										<td scope="col">id</td>
+										<td scope="col">排序</td>
+										<td scope="col">属性</td>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									$dsql->SetQuery("SELECT * FROM `#@__arcatt` ORDER BY sortid ASC");
+									$dsql->Execute();
+									$k=0;
+									while($row = $dsql->GetObject())
+									{
+										$k++;
+									?>
+									<input type="hidden" name="att_<?php echo $k?>" value="<?php echo $row->att?>">
+									<tr>
+										<td><?php echo $row->att;?></td>
+										<td><input type="text" name="sortid_<?php echo $k?>" value="<?php echo $row->sortid;?>"  id="sortid_<?php echo $k?>" class="admin-input-sm"></td>
+										<td align="left"><input type="text" name="attname_<?php echo $k?>" value="<?php echo $row->attname;?>" id="attname_<?php echo $k?>" class="admin-input-lg"></td>
+									</tr>
+									<?php }?>
+									<input type="hidden" name="idend" value="<?php echo $k?>">
+									<tr>
+										<td colspan="3" align="center">
+											<button type="submit" class="btn btn-success btn-sm">保存</button>
+											<button type="reset" class="btn btn-outline-success btn-sm">重置</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

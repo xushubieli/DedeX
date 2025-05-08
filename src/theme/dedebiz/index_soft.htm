@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>{dede:field.title/}-{dede:global.cfg_webname/}</title>
+		<meta name="keywords" content="{dede:global.cfg_keywords/}">
+		<meta name="description" content="{dede:global.cfg_description/}">
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/style.css">
+	</head>
+	<body>
+		{dede:include filename='top.htm'/}
+		{dede:include filename='head.htm'/}
+		<div class="container py-3">
+			<ol class="breadcrumb mb-0">
+				<li class="breadcrumb-item">当前位置</li>
+				{dede:field name='position'/}
+			</ol>
+		</div>
+		<section class="container py-3">
+			<div class="row biz-mb">{dede:channelartlist}
+				<div class="col-md-12 mb-3">
+					<div class="item-title text-left">
+						<h2>{dede:field.typename/}</h2>
+					</div>
+				</div>{dede:arclist row='3' orderby='id'}
+				<div class="col-md-4">
+					<article class="item-news bg-white shadow-sm rounded">
+						<div class="item-news-img"><a href="[field:arcurl/]"><img src="[field:litpic/]" alt="[field:title/]" title="[field:title/]"></a></div>
+						<div class="title"><h5><a href="[field:arcurl/]">[field:title/]</a></h5></div>
+						<p>[field:description function="cn_substr(@me,130)"/]...</p>
+						<div class="meta">
+							<span class="author mr-3"><a href="[field:userurl/]"><img src="[field:face/]" class="user-img-xs mr-2">[field:uname/]</a></span>
+							<span class="date"><i class="fa fa-calendar mr-2"></i>[field:pubdate function="MyDate('Y-m-d',@me)"/]</span>
+						</div>
+					</article>
+				</div>{/dede:arclist}{/dede:channelartlist}
+			</div>
+		</section>
+		{dede:include filename='foot.htm'/}
+	</body>
+</html>

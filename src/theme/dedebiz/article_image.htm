@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>{dede:field.title/}-{dede:global.cfg_webname/}</title>
+		<meta name="keywords" content="{dede:field.keywords/}">
+		<meta name="description" content="{dede:field.description/}">
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/style.css">
+		<script>
+			var shortname = "{dede:global.art_shortname/}";
+			var npage = parseInt("{dede:field name='nowpage'/}");
+			var totalpage = parseInt("{dede:field name='totalpage'/}");
+			var namehand = "{dede:field name='namehand'/}";
+			var displaytype = "{dede:field name='displaytype'/}";
+			var gtimer = null;
+			//大图
+			function dPlayBig() {
+				var imgObj = document.getElementById("bigimg");
+				window.open(imgObj.src);
+			}
+			//停止幻灯
+			function dStopPlay() {
+				if (gtimer) clearTimeout(gtimer);
+				else dPlayNext();
+			}
+			//开始幻灯
+			function dStartPlay() {
+				if (npage != totalpage) {
+					gtimer = setTimeout("dPlayNext()", 1000);
+				}
+			}
+			//上一张
+			function dPlayPre() {
+				if (npage < 2) {
+					ShowMsg("这是第一页");
+				} else {
+					if (npage == 2) {
+						if (namehand != '') location.href = namehand + shortname;
+						else location.href = "{dede:global.cfg_phpurl/}/view.php?aid={dede:field.id/}";
+					} else if (displaytype == 'st' && namehand != '') {
+						location.href = namehand + "-" + (npage - 1) + shortname;
+					} else {
+						location.href = "{dede:global.cfg_phpurl/}/view.php?aid={dede:field.id/}&PageNo=" + (npage - 1);
+					}
+				}
+			}
+			//下一张
+			function dPlayNext() {
+				if (npage == totalpage) {
+					ShowMsg("没有了哦");
+			} 	else {
+					if (displaytype == 'st' && namehand != '') location.href = namehand + "-" + (npage + 1) + shortname;
+					else location.href = "{dede:global.cfg_phpurl/}/view.php?aid={dede:field.id/}&PageNo=" + (npage + 1);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		{dede:include filename='top.htm'/}
+		{dede:include filename='head.htm'/}
+		<div class="container py-3">
+			<ol class="breadcrumb mb-0">
+				<li class="breadcrumb-item">当前位置</li>
+				{dede:field name='position'/}
+			</ol>
+		</div>
+		<main class="container py-3">
+			<div class="row">
+				<div class="col-md-9">
+					<article class="article-main bg-white shadow-sm rounded p-3">
+						<div class="title">
+							<h1>{dede:field.title/}</h1>
+						</div>
+						<div class="meta py-3">
+							<a href="{dede:field.userurl/}"><span><img src="{dede:field.face/}" class="user-img-xs mr-2">{dede:field.uname/}</span></a>
+							<span><i class="fa fa-calendar mr-2"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
+							<span><i class="fa fa-globe mr-2"></i>{dede:field.source/}</span>
+							<span><i class="fa fa-user mr-2"></i>{dede:field.writer/}</span>
+							<span><i class="fa fa-eye mr-2"></i><script src="{dede:global.cfg_phpurl/}/count.php?view=yes&aid={dede:field.id/}&mid={dede:field name='mid'/}"></script>次</span>
+						</div>
+						<div class="picbox py-3">
+							{dede:field name='pagestyle' alt='图片头部调用' runphp='yes'}
+							if (@me==3) {
+								@me = '<div class="row">';
+							} else if (@me==2) {
+								@me = "<div class='text-center mb-3'>
+									<a href='javascript:dPlayBig();' class='btn btn-success btn-sm'>原图片</a>
+									<a href='javascript:dPlayPre();' class='btn btn-success btn-sm'>上一张</a>
+									<a href='javascript:dPlayNext();' class='btn btn-success btn-sm'>下一张</a>
+									<a href='javascript:dStopPlay();' class='btn btn-success btn-sm'>自动/暂停播放</a>
+								</div>";
+							} else {
+								@me = '';
+							}
+							{/dede:field}
+								<!--如果多页单图模式，链接改为javascript:dPlayNext();表示查看下页-->
+								{dede:field name='imgurls' alt='图片信息调用'}
+								[field:pagestyle runphp='yes'] @me=(@me==3 ? '<div class="col-4">' : '');[/field:pagestyle]
+								<p><a href='[field:linkurl/]'><img src='[field:imgsrc/]' [field:imgwidth/] id='bigimg' alt='[field:alttext/]' title='[field:alttext/]'></a></p>
+								<p class='text-center'><a href='[field:linkurl/]'>[field:alttext/]</a></p>
+								[field:pagestyle runphp='yes'] @me=(@me==3 ? '</div>' : ''); [/field:pagestyle]
+								{/dede:field}
+							{dede:field name='pagestyle' alt='图片底部调用' runphp='yes'}
+							if (@me==3) {
+								@me = '</div>';
+							} else if (@me==2) {
+								@me = "<script>dStartPlay();</script>";
+							} else {
+								@me = '';
+							}
+							{/dede:field}
+						</div>
+						<div class="body py-3">
+							{dede:field.body/}
+							<p>图集于 {dede:field.senddate function="MyDate('Y-m-d H:i',@me)"/} 修改</p>
+						</div>
+						<div class="edit py-3">责任编辑：{dede:adminname/}</div>
+						<div class="page py-3 row">
+							<div class="col-md-4 prenext">
+								<div class="pagination-previous mb-3">{dede:prenext get='pre'/}</div>
+								<div class="pagination-next">{dede:prenext get='next'/}</div>
+							</div>
+							<div class="col-md-8">
+								<div class="row actbox">
+									<ul>
+										<li><i class="fa fa-star-o mr-2"></i><a href="{dede:global.cfg_phpurl/}/stow.php?aid={dede:field.id/}">收藏</a></li>
+										<li><i class="fa fa-bug mr-2"></i><a href="javascript:ErrorAddSave({dede:field.id/}, '{dede:field.title/}');">挑错</a></li>
+										<li><i class="fa fa-thumbs-o-up mr-2"></i><a href="{dede:global.cfg_phpurl/}/recommend.php?aid={dede:field.id/}">推荐</a></li>
+										<li><i class="fa fa-print mr-2"></i><a href="javascript:;" onclick="window.print();">打印</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						{dede:include filename='widget_article_likes.htm'/}
+						{dede:include filename='widget_article_feedback.htm'/}
+					</article>
+				</div>
+				<aside class="col-md-3">
+					<div class="pb-3">{dede:include filename='widget_search.htm'/}</div>
+					<div class="pb-3">{dede:include filename='widget_menu.htm'/}</div>
+					<div class="pb-3">{dede:include filename='widget_hot.htm'/}</div>
+				</aside>
+			</div>
+		</main>
+		<script>const PHPURL = '{dede:global.cfg_phpurl/}';</script>
+		{dede:include filename='foot.htm'/}
+		<script>
+			//顶踩功能
+			function GetDigg(aid,cid) {
+				let url = `{dede:global.cfg_phpurl/}/digg_ajax.php?id=${aid}&cid=${cid}&format=json`;
+				$.get(url, function(data) {
+					let reval = JSON.parse(data);
+					if (reval.code === 200) {
+						$("#goodpost").html(reval.data.goodpost);
+						$("#badpost").html(reval.data.badpost);
+						$("#goodper").css("width", `${reval.data.goodper}%`)
+						$("#badper").css("width", `${reval.data.badper}%`)
+					}
+				})
+			}
+			function PostDigg(ftype, aid) {
+				var saveid = GetCookie('diggid');
+				if (saveid != null) {
+					var saveids = saveid.split(',');
+					var hasid = false;
+					saveid = '';
+					j = 1;
+					for (i = saveids.length - 1; i >= 0; i--) {
+						if (saveids[i] == aid && hasid) continue;
+						else {
+							if (saveids[i] == aid && !hasid) hasid = true;
+							saveid += (saveid == '' ? saveids[i] : ',' + saveids[i]);
+							j++;
+							if (j == 20 && hasid) break;
+							if (j == 19 && !hasid) break;
+						}
+					}
+					if (hasid) { ShowMsg("您已经顶过该帖，请不要重复顶帖"); return; }
+					else saveid += ',' + aid;
+					SetCookie('diggid', saveid, 1);
+				} else {
+					SetCookie('diggid', aid, 1);
+				}
+				let url = "{dede:global.cfg_phpurl/}/digg_ajax.php?action=" + ftype + "&id=" + aid + "&format=json&cid={dede:field.channel/}";
+				$.get(url, function(data) {
+					let reval = JSON.parse(data);
+					if (reval.code === 200) {
+						$("#goodpost").html(reval.data.goodpost);
+						$("#badpost").html(reval.data.badpost);
+						$("#goodper").css("width", `${reval.data.goodper}%`)
+						$("#badper").css("width", `${reval.data.badper}%`)
+					}
+				});
+			}
+			GetDigg("{dede:field.id/}", "{dede:field.channel/}");
+			//发表评论
+			function SendFeedback() {
+				let feedback = {
+					action: "send",
+					comtype: "comments",
+					aid: "{dede:field.id/}",
+					msg: $("#iptMsg").val(),
+					username: $("#iptUsername").val(),
+					validate: $("#iptValidate").val(),
+					notuser: $("#iptAny").is(":checked") ? "1" : "",
+				};
+				$.post("{dede:global.cfg_phpurl/}/feedback.php", feedback, function(data) {
+					let result = JSON.parse(data);
+					if (result.code === 200) {
+						ShowAlert("#feedback-alert", result.msg, "success");
+						$("#iptMsg").val("");
+						$("#iptValidate").val("");
+						($("#iptUsername").attr("disabled") !== "disabled") && $("#iptUsername").val("");
+						$("#validateimg").attr("src", '{dede:global.cfg_phpurl/}/vdimgck.php?' + new Date().getTime() + Math.round(Math.random() * 10000));
+					} else {
+						ShowAlert("#feedback-alert", `评论失败：${result.msg}`, "danger");
+						$("#validateimg").attr("src", '{dede:global.cfg_phpurl/}/vdimgck.php?' + new Date().getTime() + Math.round(Math.random() * 10000));
+					}
+				});
+			}
+			//回复评论，回复必须登录
+			function SendReplyFeedback(fid) {
+				let content = $(`._feedback_reply[for="${fid}"]`).find(".iptReplyContent").val();
+				let reply = {
+					action : "send",
+					comtype : "reply",
+					fid : fid,
+					aid : "{dede:field.id/}",
+					msg : content,
+				}
+				$.post("{dede:global.cfg_phpurl/}/feedback.php", reply, function(data) {
+					let result = JSON.parse(data);
+					if (result.code === 200) {
+						ShowAlert(`._feedback_reply[for="${fid}"]`, result.msg, "success");
+					} else {
+						ShowAlert(`._feedback_reply[for="${fid}"]`, `评论失败：${result.msg}`, "danger");
+					}
+				})
+				$(`._feedback_reply[for="${fid}"]`).find(".btn-send").attr("disabled", "disabled");
+			}
+			//回复某个评论
+			function ReplyFeedback(fid) {
+				let replyPannel = `<div class="form-group">
+					<div class="input-group">
+						<input type="text" class="form-control iptReplyContent">
+						<div class="input-group-append"><button type="button" class="btn btn-success btn-send" onclick='SendReplyFeedback(${fid})'>评论</button></div>
+					</div>
+				</div>`;
+				$.get("{dede:global.cfg_memberurl/}/api.php?format=json", function(result) {
+					if (result.code !== 200) {
+						$(`._feedback_reply`).html("");
+						ShowAlert(`._feedback_reply[for="${fid}"]`, '回复需要登录会员中心，您可以<a href="{dede:global.cfg_memberurl/}/login.php">点击登录</a>后再来回复', 'warning', 3000);
+					} else {
+						$(`._feedback_reply`).html("");
+						$(`._feedback_reply[for="${fid}"]`).html(replyPannel);
+					}
+				});
+				$(`._feedback_reply[for="${fid}"]`).html('<i class="fa fa-spinner"></i>');
+			}
+			//加载回复评论
+			function LoadReplyFeedbacks(fid) {
+				$(`.feedback_replies[for="${fid}"]`).html('<i class="fa fa-spinner"></i>');
+				$.get("{dede:global.cfg_phpurl/}/feedback.php", {
+					"aid" : "{dede:field.id/}",
+					"fid" : fid,
+				}, function(data) {
+					let result = JSON.parse(data);
+					let tpl = `<div class="media py-3">
+						<img src="~face~" class="face mr-3">
+						<div class="media-body">
+							<div class="feedback-infos pb-3">
+								<div class="feedback-basic">
+									<span>~username~</span>
+									<span>~dtimestr~</span>
+								</div>
+								<div class="feedback-action">
+									<a href="javascript:GoodFeedback(~id~, ~good~)">
+										<i class="fa fa-thumbs-up"></i>
+										<i id="feedbackGood~id~">~good~</i>
+									</a>
+								</div>
+							</div>
+							<div class="feedback-content">~msg~</div>
+						</div>
+					</div>`;
+					if (result.code === 200) {
+						$(`.feedback_replies[for="${fid}"]`).html("");
+						for (let i = 0; i < result.data.length; i++) {
+							const feedback = result.data[i];
+							let rs = tpl;
+							for (const key in feedback) {
+								if (feedback.hasOwnProperty(key)) {
+									rs = rs.replace(new RegExp(`~${key}~`,"gm"), feedback[key])
+								}
+							}
+							$(`.feedback_replies[for="${fid}"]`).append(rs);
+						}
+					}
+				})
+			}
+			//评论点赞
+			function GoodFeedback(fid, g) {
+				let good = {
+					action : "send",
+					feedbacktype : "good",
+					good : g,
+					fid : fid,
+				}
+				$.post("{dede:global.cfg_phpurl/}/feedback.php", good, function(data) {
+					let result = JSON.parse(data);
+					$(`#feedbackGood${fid}`).html(result.data);
+				})
+			}
+		</script>
+	</body>
+</html>

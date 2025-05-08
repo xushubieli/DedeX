@@ -1,0 +1,6 @@
+TAG标签
+>>dede>>
+{dede:tag row='30' sort='new'/}
+>>dede>>
+row='30' 调用30个标签
+sort='new' 标签排序（可用参数：month当月热门、rand随机条件）

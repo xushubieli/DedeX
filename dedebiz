@@ -1,0 +1,642 @@
+#!/usr/bin/env php
+<?php
+/**
+ * 命令行工具
+ *
+ * @version        2020年12月11日 tianya $
+ * @package        DedeBIZ.Command
+ * @copyright      Copyright (c) 2022, DedeBIZ.COM
+ * @license        https://www.dedebiz.com/license
+ * @link           https://www.dedebiz.com
+ */
+define("DEDE_CLITOOLS", TRUE);
+define('DEDE_ENVIRONMENT', 'production');
+define('DEBUG_LEVEL', FALSE); //如果设置为TRUE则会打印执行SQL的时间和标签加载时间方便调试
+//切换工作目录到/src
+$workDir = dirname(__FILE__) . "/src";
+if (!file_exists($workDir . "/system/common.inc.php")) {
+	DedeCli::error("检查目录是否正确");
+	exit;
+}
+if (!file_exists($workDir."/data/config.cache.inc.php")) {
+	require_once($workDir."/install/config.cache.inc.php");
+}
+require_once($workDir . "/system/common.inc.php");
+require_once(DEDEINC . "/libraries/cli.class.php");
+chdir($workDir);
+if (substr(php_sapi_name(), 0, 3) === 'cgi') {
+	DedeCli::error("DedeBIZ:需要使用php-cli运行");
+	exit;
+}
+$helpStr = "
+NAME:
+	DedeBIZ命令行工具
+USAGE:
+	php ./dedebiz command [arguments...]
+COMMANDS:
+	serv,s 运行DedeBIZ开发服务
+	make,m 更新网页
+	update,u 更新到最新系统
+	help,h Shows 帮助
+	quick,q 快速开始一个开发环境
+	tdata 生成测试数据
+	pwd 更改管理员密码
+WEBSITE:
+	https://www.dedebiz.com/help/
+";
+//将选项转化为SQL IN参数
+function Option2SQLin($str = "")
+{
+	$str = preg_replace("#[^0-9-,]#", "", $str);
+	$strs = explode(",", $str);
+	foreach ($strs as $key => $si) {
+		if (preg_match("#-#", $si)) {
+			$tstart = 0;
+			$tend = 0;
+			$tss = explode("-", $si);
+			if (intval($tss[0]) > intval($tss[1])) {
+				$tstart = intval($tss[1]);
+				$tend = intval($tss[0]);
+			} else {
+				$tstart = intval($tss[0]);
+				$tend = intval($tss[1]);
+			}
+			$tmpArr = array();
+			for ($i = $tstart; $i <= $tend; $i++) {
+				$tmpArr[] = $i;
+			}
+			$strs[$key] = implode(",", $tmpArr);
+		}
+	}
+	return implode(",", $strs);
+}
+function RandEncode($length=26)
+{
+    $chars='abcdefghigklmnopqrstuvwxwyABCDEFGHIGKLMNOPQRSTUVWXWY0123456789';
+    $rnd_cookieEncode='';
+    $length = rand(28,32);
+    $max = strlen($chars) - 1;
+    for ($i = 0; $i < $length; $i++) {
+        $rnd_cookieEncode .= $chars[mt_rand(0, $max)];
+    }
+    return $rnd_cookieEncode;
+}
+if (count($argv) > 1 && ($argv[1] == "serv" || $argv[1] == "s")) {
+	//PHP5.4以下不支持内建服务器，用于开发调试
+	if (phpversion() < "5.4") {
+		DedeCli::error("DedeBIZ:命令行Web Server不支持");
+		exit;
+	}
+	echo "启动DedeBIZ开发环境\n\r";
+	echo "浏览器打开 http://localhost:8088\n\r";
+	passthru(PHP_BINARY . ' -S localhost:8088 -t' . escapeshellarg('./'));
+} else if (count($argv) > 1 && ($argv[1] == "make" || $argv[1] == "m")) {
+	//一个命令行的生成工具
+	if (count($argv) > 2 && ($argv[2] == "arc" || $argv[2] == "a")) {
+		//生成文档
+		//make arc typeid=1
+		$t1 = ExecTime();
+		$addsql = "1=1";
+		$typeid = Option2SQLin(DedeCli::getOption("typeid"));
+		if (!empty($typeid)) {
+			$addsql .= " AND typeid IN(" . $typeid . ")";
+		}
+		$aid = Option2SQLin(DedeCli::getOption("aid"));
+		if (!empty($aid)) {
+			$addsql .= " AND id IN(" . $typeid . ")";
+		}
+		$tt = $dsql->GetOne("SELECT COUNT(id) as dd FROM `#@__arctiny` WHERE " . $addsql);
+		$total = intval($tt['dd']);
+		$dsql->Execute('out', "SELECT id FROM `#@__arctiny` WHERE " . $addsql . " ORDER BY typeid ASC");
+		$i = 0;
+		while ($row = $dsql->GetObject('out')) {
+			$id = $row->id;
+			$ac = new Archives($id);
+			$rurl = $ac->MakeHtml(0);
+			DedeCli::showProgress(ceil(($i / $total) * 100), 100, $i, $total);
+			$i++;
+		}
+		DedeCli::write("成功更新文档页");
+		$queryTime = ExecTime() - $t1;
+		DedeCli::write($queryTime);
+		exit;
+	} else if (count($argv) > 2 && ($argv[2] == "list" || $argv[2] == "l")) {
+		//生成栏目
+		$addsql = "1=1";
+		$typeid = Option2SQLin(DedeCli::getOption("typeid"));
+		if (!empty($typeid)) {
+			$addsql .= " AND id IN(" . $typeid . ")";
+		}
+		$dsql->Execute('out', "SELECT id,channeltype FROM `#@__arctype` WHERE " . $addsql);
+		$i = 0;
+		while ($row = $dsql->GetObject('out')) {
+			if ($row->channeltype > 0) {
+				$lv = new ListView($row->id);
+			} else {
+				$lv = new SgListView($row->id);
+			}
+			$lv->CountRecord();
+			DedeCli::write("开始更新列表页[id:{$row->id}]");
+			$lv->MakeHtml('', '', 0);
+		}
+		exit;
+	} else if (count($argv) > 2 && ($argv[2] == "index" || $argv[2] == "i")) {
+		//生成首页
+		$position = DedeCli::getOption("position");
+		if (empty($position)) {
+			$position = "../index.html";
+		}
+		if (!preg_match("#\.html$#", $position)) {
+			DedeCli::error("位置必须以.html结尾");
+			exit;
+		}
+		$homeFile = DEDEINC . "/" . $position;
+		$homeFile = str_replace("\\", "/", $homeFile);
+		$homeFile = str_replace("//", "/", $homeFile);
+		$row = $dsql->GetOne("SELECT * FROM `#@__homepageset`");
+		$templet = $row['templet'];
+		$templet = str_replace("{style}", $cfg_df_style, $templet);
+        $pv = new PartView();
+		$GLOBALS['_arclistEnv'] = 'index';
+        $pv->SetTemplet($cfg_basedir . $cfg_templets_dir . "/" . $templet);
+        $pv->SaveToHtml($homeFile);
+		DedeCli::write("成功更新首页");
+	} else if (count($argv) > 2 && ($argv[2] == "auto" || $argv[2] == "o")) {
+		//自动生成
+		function OptimizeData($dsql)
+		{
+			global $cfg_dbprefix;
+			$tptables = array("{$cfg_dbprefix}archives", "{$cfg_dbprefix}arctiny");
+			$dsql->SetQuery("SELECT maintable,addtable FROM `#@__channeltype` ");
+			$dsql->Execute();
+			while ($row = $dsql->GetObject()) {
+				$addtable = str_replace('#@__', $cfg_dbprefix, $row->addtable);
+				if ($addtable != '' && !in_array($addtable, $tptables)) $tptables[] = $addtable;
+			}
+			$tptable = '';
+			foreach ($tptables as $t) $tptable .= ($tptable == '' ? "`{$t}`" : ",`{$t}`");
+			$dsql->ExecuteNoneQuery(" OPTIMIZE TABLE $tptable; ");
+		}
+		$start = empty(DedeCli::getOption("start"))? "-1 day" : DedeCli::getOption("start");
+		$start = strtotime($start);
+		if (!$start) {
+			DedeCli::error("start参数为空");
+			exit;
+		}
+		//1.生成首页
+        $pv = new PartView();
+        $row = $pv->dsql->GetOne("SELECT * FROM `#@__homepageset` ");
+        $templet = str_replace("{style}", $cfg_df_style, $row['templet']);
+        $homeFile = DEDEINC . '/' . $row['position'];
+        $homeFile = str_replace("\\", '/', $homeFile);
+        $homeFile = preg_replace("#\/{1,}#", '/', $homeFile);
+        if ($row['showmod'] == 1) {
+            $pv->SetTemplet($cfg_basedir . $cfg_templets_dir . '/' . $templet);
+            $pv->SaveToHtml($homeFile);
+            $pv->Close();
+        } else {
+            if (file_exists($homeFile)) @unlink($homeFile);
+		}
+		DedeCli::write("成功更新首页");
+		//2.生成栏目
+		$query = "SELECT DISTINCT typeid From `#@__arctiny` WHERE senddate >=" . $start . " AND arcrank>-1";
+		$dsql->SetQuery($query);
+		$dsql->Execute();
+		$typeids = array();
+		while ($row = $dsql->GetArray()) {
+			$typeids[$row['typeid']] = 1;
+		}
+		if (count($typeids) > 0) {
+			foreach ($typeids as $k => $v) {
+				$vs = array();
+				$vs = GetParentIds($k);
+				if (!isset($typeidsok[$k])) {
+					$typeidsok[$k] = 1;
+				}
+				foreach ($vs as $k => $v) {
+					if (!isset($typeidsok[$v])) {
+						$typeidsok[$v] = 1;
+					}
+				}
+			}
+			foreach ($typeidsok as $tt=> $k) {
+				$row = $dsql->GetOne("SELECT id,channeltype FROM `#@__arctype` WHERE id=".$tt);
+				if ($row['channeltype'] > 0) {
+					$lv = new ListView($tt);
+				} else {
+					$lv = new SgListView($tt);
+				}
+				$lv->CountRecord();
+				DedeCli::write("开始更新列表页[id:{$tt}]");
+				$lv->MakeHtml('', '', 0);
+			}
+			DedeCli::write("成功更新列表页");
+		}
+		//生成文档
+		$tt = $dsql->GetOne("SELECT COUNT(id) as dd FROM `#@__arctiny` WHERE senddate >=" . $start . " AND arcrank>-1");
+		$total = intval($tt['dd']);
+		$dsql->Execute('out', "SELECT id FROM `#@__arctiny` WHERE senddate >=" . $start . " AND arcrank>-1 ORDER BY typeid ASC");
+		$i = 0;
+		while ($row = $dsql->GetObject('out')) {
+			$id = $row->id;
+			$ac = new Archives($id);
+			$rurl = $ac->MakeHtml(0);
+			DedeCli::showProgress(ceil(($i / $total) * 100), 100);
+			$i++;
+		}
+		DedeCli::write("成功更新网页");
+		//优化数据
+		OptimizeData($dsql);
+		DedeCli::write("成功优化数据");
+	} else {
+		$helpStr = "
+		USAGE:
+			php ./dedebiz make action [arguments...]
+		ACTIONS:
+			index,i 更新首页
+				--position 首页位置,默认: ../index.html(相对system目录)
+			arc,a 更新文档页
+				--typeid 栏目id
+				--aid    文档id
+			list,l 更新列表页
+				--typeid 栏目id
+			auto,o 自动更新
+				--start 开始时间(format:2012-03-12)
+			tdata 更新测试数据
+			pwd 更改管理员密码
+		WEBSITE:
+			https://www.dedebiz.com/help/";
+		DedeCli::write($helpStr);
+		exit;
+	}
+} else if (count($argv) > 1 && ($argv[1] == "update" || $argv[1] == "u")) {
+	define("DEDEINC", $workDir."/system");
+	require_once(DEDEINC."/dedehttpdown.class.php");
+	require_once(DEDEINC . "/libraries/cli.class.php");
+	//更新系统
+	$latestURL = "https://cdn.dedebiz.com/release/latest.txt";
+	$del = new DedeHttpDown();
+	$del->OpenUrl($latestURL);
+	$remoteVerStr = $del->GetHtml();
+	$commStr = file_get_contents(DEDEINC."/common.inc.php");
+	preg_match("#_version_detail = '([\d\.]+)'#", $commStr, $matchs);
+	$cfg_version_detail = $localVerStr = $matchs[1];
+	if (version_compare($localVerStr, $remoteVerStr, '>=')) {
+		DedeCli::error("已经是最新版本，无需继续升级");
+		exit;
+	}
+	$fileHashURL = "https://cdn.dedebiz.com/release/{$cfg_version_detail}.json";
+	$del = new DedeHttpDown();
+	$del->OpenUrl($fileHashURL);
+	$filelist = $del->GetJSON();
+	$offFiles = array();
+	//TODO 命令行自动更新
+} else if (count($argv) > 1 && ($argv[1] == "quick" || $argv[1] == "q")){
+	if (!defined('DEDEINC')) {
+		define("DEDEINC", $workDir."/system");
+	}
+	require_once(DEDEINC . "/libraries/cli.class.php");
+	//快速开始一个用于开发的DedeBIZ环境，基于SQLite无其他依赖
+	if (file_exists($workDir."/data/DedeBIZ.db")) {
+		DedeCli::write("开发环境已经初始化");
+		echo "启动DedeBIZ开发环境\n\r";
+		echo "浏览器打开 http://localhost:8088\n\r";
+		passthru(PHP_BINARY . ' -S localhost:8088 -t' . escapeshellarg('./'));
+		exit;
+	}
+	//初始化安装一个开发环境
+	$db = new SQLite3($workDir.'/data/DedeBIZ.db');
+	$fp = fopen($workDir."/install/common.inc.php","r");
+    $configStr1 = fread($fp,filesize($workDir."/install/common.inc.php"));
+    fclose($fp);
+    @chmod($workDir."/data",0777);
+    $dbtype = "sqlite";
+    $dbhost = "";
+    $dbname = "DedeBIZ";
+    $dbuser = "";
+    $dbpwd = "";
+    $dbprefix = "dede_";
+    $dblang = "utf8";
+	if (!is_dir($workDir.'/data/tplcache')) {
+		mkdir($workDir.'/data/tplcache', 0777);
+	}
+    //common.inc.php
+    $configStr1 = str_replace("~dbtype~",$dbtype,$configStr1);
+    $configStr1 = str_replace("~dbhost~",$dbhost,$configStr1);
+    $configStr1 = str_replace("~dbname~",$dbname,$configStr1);
+    $configStr1 = str_replace("~dbuser~",$dbuser,$configStr1);
+    $configStr1 = str_replace("~dbpwd~",$dbpwd,$configStr1);
+    $configStr1 = str_replace("~dbprefix~",$dbprefix,$configStr1);
+    $configStr1 = str_replace("~dblang~",$dblang,$configStr1);
+    $fp = fopen($workDir."/data/common.inc.php","w") or die("error,check /data writeable");
+    fwrite($fp,$configStr1);
+    fclose($fp);
+    $cookieencode = RandEncode(26);
+    $baseurl = "http://127.0.0.1:8088";
+    $indexUrl = "/";
+    $cmspath = "";
+    $webname = "穆云智能";
+    $adminmail = "admin@dedebiz.com";
+    $fp = fopen($workDir."/install/config.cache.inc.php","r");
+    $configStr2 = fread($fp,filesize($workDir."/install/config.cache.inc.php"));
+    fclose($fp);
+    $configStr2 = str_replace("~baseurl~",$baseurl,$configStr2);
+    $configStr2 = str_replace("~basepath~",$cmspath,$configStr2);
+    $configStr2 = str_replace("~indexurl~",$indexUrl,$configStr2);
+    $configStr2 = str_replace("~cookieEncode~",$cookieencode,$configStr2);
+    $configStr2 = str_replace("~webname~",$webname,$configStr2);
+    $configStr2 = str_replace("~adminmail~",$adminmail,$configStr2);
+    $fp = fopen($workDir.'/data/config.cache.inc.php','w');
+    fwrite($fp,$configStr2);
+    fclose($fp);
+    $fp = fopen($workDir.'/data/config.cache.bak.php','w');
+    fwrite($fp,$configStr2);
+    fclose($fp);
+    $query = '';
+    $fp = fopen($workDir.'/install/sql-dftables.txt','r');
+    while (!feof($fp))
+    {
+        $line = rtrim(fgets($fp,1024));
+        if (preg_match("#;$#", $line))
+        {
+            $query .= $line."\n";
+            $query = str_replace('#@__',$dbprefix,$query);
+			$query = ConvertMysqlToSqlite($query);
+			@$db->exec($query);
+            $query='';
+        } else if (!preg_match("#^(\/\/|--)#", $line)) {
+            $query .= $line;
+        }
+    }
+    fclose($fp);
+    //导入默认数据
+    $query = '';
+    $fp = fopen($workDir.'/install/sql-dfdata.txt','r');
+    while (!feof($fp))
+    {
+        $line = rtrim(fgets($fp, 1024));
+        if (preg_match("#;$#", $line)) {
+            $query .= $line;
+            $query = str_replace('#@__',$dbprefix,$query);
+            $query = str_replace("\'","\"",$query);
+            $query = str_replace('\t\n\n',"",$query);
+            $query = str_replace('\t\n',"",$query);
+            @$db->exec($query);
+    
+            $query='';
+        } else if (!preg_match("#^(\/\/|--)#", $line)) {
+            $query .= $line;
+        }
+    }
+    fclose($fp);
+    //更新配置
+    $cquery = "UPDATE `{$dbprefix}sysconfig` SET value='{$baseurl}' WHERE varname='cfg_basehost';";
+    $db->exec($cquery);
+    $cquery = "UPDATE `{$dbprefix}sysconfig` SET value='{$cmspath}' WHERE varname='cfg_cmspath';";
+    $db->exec($cquery);
+    $cquery = "UPDATE `{$dbprefix}sysconfig` SET value='{$indexUrl}' WHERE varname='cfg_indexurl';";
+    $db->exec($cquery);
+    $cquery = "UPDATE `{$dbprefix}sysconfig` SET value='{$cookieencode}' WHERE varname='cfg_cookie_encode';";
+    $db->exec($cquery);
+    $cquery = "UPDATE `{$dbprefix}sysconfig` SET value='{$webname}' WHERE varname='cfg_webname';";
+    $db->exec($cquery);
+    $cquery = "UPDATE `{$dbprefix}sysconfig` SET value='{$adminmail}' WHERE varname='cfg_adminemail';";
+    $db->exec($cquery);
+    $adminuser = "admin";
+    $adminpwd = "admin";
+    //增加管理员帐号
+    $pfd = "pwd";
+    $apwd = substr(md5($adminpwd),5,20);
+    $upwd = md5($adminpwd);
+    if (function_exists('password_hash')) {
+        $pfd = "pwd_new";
+        $apwd = password_hash($adminpwd, PASSWORD_BCRYPT);
+        $upwd = password_hash($adminpwd, PASSWORD_BCRYPT);
+    }
+    //增加管理员帐号
+    $adminquery = "INSERT INTO `{$dbprefix}admin` (`id`,`usertype`,`userid`,`$pfd`,`uname`,`tname`,`email`,`typeid`,`logintime`,`loginip`) VALUES (1,10,'$adminuser','".$apwd."','admin','','',0,'".time()."','127.0.0.1');";
+    $db->exec($adminquery);
+    //关连前台会员帐号
+    $adminquery = "INSERT INTO `{$dbprefix}member` (`mid`,`mtype`,`userid`,`{$pfd}`,`uname`,`sex`,`rank`,`money`,`email`,`scores`,`matt`,`face`,`safequestion`,`safeanswer`,`jointime`,`joinip`,`logintime`,`loginip`) VALUES ('1','个人','$adminuser','".$upwd."','$adminuser','男','100','0','','10000','10','','0','','".time()."','','0',''); ";
+    $db->exec($adminquery);
+    $adminquery = "INSERT INTO `{$dbprefix}member_person` (`mid`,`onlynet`,`sex`,`uname`,`qq`,`msn`,`tel`,`mobile`,`place`,`oldplace`,`birthday`,`star`,`income`,`education`,`height`,`bodytype`,`blood`,`vocation`,`smoke`,`marital`,`house`,`drink`,`datingtype`,`language`,`nature`,`lovemsg`,`address`,`uptime`) VALUES ('1','1','男','{$adminuser}','','','','','0','0','1980-01-01','1','0','0','160','0','0','0','0','0','0','0','0','','','','','0'); ";
+    $db->exec($adminquery);
+    $adminquery = "INSERT INTO `{$dbprefix}member_tj` (`mid`,`article`,`album`,`archives`,`homecount`,`pagecount`,`feedback`,`friend`,`stow`) VALUES ('1','0','0','0','0','0','0','0','0'); ";
+    $db->exec($adminquery);
+    $adminquery = "INSERT INTO `{$dbprefix}member_space` (`mid`,`pagesize`,`matt`,`spacename`,`spacelogo`,`spacestyle`,`sign`,`spacenews`) VALUES ('1','10','0','{$adminuser}的空间','','person','',''); ";
+    $db->exec($adminquery);
+    DedeCli::write("用户名:admin");
+    DedeCli::write("密码:admin");
+	if (phpversion() < "5.4") {
+		die("DedeBIZ:命令行Web Server不支持\n\n");
+	}
+	//写入程序安装锁
+	file_put_contents($workDir.'/install/install_lock.txt', 'ok');
+	echo "Start Dev Server For DedeBIZ\n\r";
+	echo "Open http://localhost:8088\n\r";
+	passthru(PHP_BINARY . ' -S localhost:8088 -t' . escapeshellarg('./'));
+	exit;
+} else if(count($argv) > 1 && ($argv[1] =="tdata")){
+	if (!file_exists($workDir . "/system/common.inc.php")) {
+		DedeCli::error("检查根目录是否存在错误");
+		exit;
+	}
+	require_once($workDir . "/system/common.inc.php");
+	require_once(DEDEINC . "/libraries/cli.class.php");
+	for ($t=1; $t <= 10; $t++) {
+		$in_query = "INSERT INTO `#@__arctype` (reid,topid,sortrank,typename,cnoverview,enname,enoverview,bigpic,litimg,typedir,isdefault,defaultname,issend,channeltype,tempindex,templist,temparticle,modname,namerule,namerule2,ispart,corank,description,keywords,seotitle,moresite,siteurl,sitepath,ishidden,`cross`,`crossid`,`content`,`smalltypes`) VALUES ('0','0','999','测试栏目{$t}','','','','','','{cmspath}/a/ceshilanmu{$t}','1','index.html','1','1','{style}/index_article.htm','{style}/list_article.htm','{style}/article_article.htm','default','{typedir}/{aid}.html','{typedir}/{tid}-{page}.html','0','0','测试','测试','','0','','','0','0','','','')";
+		if (!$dsql->ExecuteNoneQuery($in_query)) {
+			DedeCli::error("保存目录数据时失败，请检查您的输入资料是否存在问题");
+		}
+		$typeid = $dsql->GetLastID();
+		DedeCli::write("开始生成[测试栏目{$t}]测试数据...");
+		for ($i=0; $i < 1000; $i++) { 
+			DedeCli::showProgress(ceil(($i / 1000) * 100), 100);
+			$now = time();
+			$arcID = GetIndexKey(0, $typeid, $now, 1, $now, 1);
+			if (empty($arcID)) {
+				DedeCli::error("无法获得主键，因此无法进行后续操作");
+			}
+			$query = "INSERT INTO `#@__archives` (id,typeid,typeid2,sortrank,flag,ismake,channel,arcrank,click,money,title,shorttitle,color,writer,source,litpic,pubdate,senddate,mid,notpost,description,keywords,filename,dutyadmin,weight) VALUES ('$arcID','$typeid','0','$now','','1','1','0','100','0','这是一篇测试文章$arcID','测试文章$arcID','','天涯','DedeBIZ','','$now','$now','1','0','测试描述','测试关键词','','1','');";
+			if (!$dsql->ExecuteNoneQuery($query)) {
+				$gerr = $dsql->GetError();
+				$dsql->ExecuteNoneQuery("DELETE FROM `#@__arctiny` WHERE id='$arcID'");
+				DedeCli::error("数据保存到数据库主表`#@__archives`时出错，请检查数据库字段".str_replace('"', '', $gerr));
+			}
+			$body = str_repeat("<p>DedeBIZ系统基于PHP7版本开发，具有很强的可扩展性，并且采用GPLv2协议完全开放源代码。DedeBIZ支持采用现流行的Go语言设计开发，拥有简单易用、灵活扩展特性之外更安全、高效。模板设计制作简单，一直是系统一大特点，延续之前标签，同时采用响应式模板引擎Bootstrap作为系统模板渲染引擎，让搭建跨终端和移动端全媒体站点更简单。</p>",5);
+			$query = "INSERT INTO `#@__addonarticle` (aid,typeid,redirecturl,templet,userip,body) VALUES ('$arcID','$typeid','','','127.0.0.1','$body')";
+			if (!$dsql->ExecuteNoneQuery($query)) {
+				$gerr = $dsql->GetError();
+				$dsql->ExecuteNoneQuery("DELETE FROM `#@__archives` WHERE id='$arcID'");
+				$dsql->ExecuteNoneQuery("DELETE FROM `#@__arctiny` WHERE id='$arcID'");
+				DedeCli::error("数据保存到数据库附加表时出错，请检查数据库字段".str_replace('"', '', $gerr));
+			}
+			InsertTags("天涯{$arcID},穆云智能", $arcID);
+		}
+	}
+    $dsql->SetQuery("SELECT id,reid,channeltype,issend,typename FROM `#@__arctype`");
+    $dsql->Execute();
+	$cacheFile = DEDEDATA.'/cache/inc_catalog_base.inc';
+    $fp = fopen($cacheFile, 'w');
+    $phph = '?';
+    $fpHeader = "<{$phph}php\r\nglobal \$cfg_Cs;\r\n\$cfg_Cs=array();\r\n";
+    fwrite($fp, $fpHeader);
+    while ($row = $dsql->GetObject()) {
+        //typename缓存起来
+        $row->typename = base64_encode($row->typename);
+        fwrite($fp, "\$cfg_Cs[{$row->id}]=array({$row->reid},{$row->channeltype},{$row->issend},'{$row->typename}');\r\n");
+    }
+    fwrite($fp, "{$phph}>");
+    fclose($fp);
+	DedeCli::write("成功生成所有测试数据");
+}  else if(count($argv) > 1 && ($argv[1] =="pwd")){
+	DedeCli::write("请选择需要更改密码的用户名：");
+	$dsql->Execute('out', "SELECT id,userid FROM `#@__admin`");
+	$ids = array();
+	while ($row = $dsql->GetObject('out')) {
+		DedeCli::write("[id:{$row->id}]{$row->userid}");
+		$ids[] = $row->id;
+	}
+	$id = intval(DedeCli::prompt('输入id?', $ids));
+	$pwd = DedeCli::prompt('请输入新的密码');
+	if (function_exists('password_hash')) {
+		$pwdm = "pwd='',pwd_new='".password_hash($pwd, PASSWORD_BCRYPT)."'";
+		$pwd = "pwd='',pwd_new='".password_hash($pwd, PASSWORD_BCRYPT)."'";
+	} else {
+		$pwdm = "pwd='".md5($pwd)."'";
+		$pwd = "pwd='".substr(md5($pwd), 5, 20)."'";
+	}
+	$query = "UPDATE `#@__admin` SET $pwd WHERE id='$id'";
+    $dsql->ExecuteNoneQuery($query);
+    $query = "UPDATE `#@__member` SET $pwdm WHERE mid='$id'";
+    $dsql->ExecuteNoneQuery($query);
+	DedeCli::write("成功修改密码");
+} else if(count($argv) > 1 && ($argv[1] =="clean")){
+	// 当前功能仅开发方便清空构建站点测试用，常规情况下慎用
+	function deleteDirectory($dir) {
+		if (!is_dir($dir)) {
+			return false;
+		}
+		$files = array_diff(scandir($dir), array('.', '..'));
+		foreach ($files as $file) {
+			$path = $dir . '/' . $file;
+			if (is_dir($path)) {
+				deleteDirectory($path);
+			} else {
+				unlink($path);
+			}
+		}
+		return rmdir($dir);
+	}
+	$isClean = DedeCli::prompt('确认清空站点资源，将会删除所有配置内容请谨慎使用（y：是，n：否）？');
+	if (strtolower($isClean) == 'y') {
+		$directory = $workDir.'/data';
+		// 删除data下的文件
+		if ($handle = opendir($directory)) {
+			// 遍历目录中的所有文件和文件夹
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != "." && $entry != "..") {
+					$fullPath = $directory . '/' . $entry;
+					// 匹配文件夹规则
+					if (is_dir($fullPath) && preg_match('/^sessions_|^updatefile_/', $entry)) {
+						// 删除文件夹及其内容
+						deleteDirectory($fullPath);
+					} elseif (is_file($fullPath) && preg_match('/.*_safe\.txt$|.*\.db$|.*\.php|.*\.inc/', $entry)) {
+						unlink($fullPath);
+					}
+				}
+			}
+			// 关闭目录
+			closedir($handle);
+		}
+		
+		if ($handle = opendir($directory."/backupdata")) {
+			// 遍历目录中的所有文件和文件夹
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != "." && $entry != "..") {
+					$fullPath = $directory . '/backupdata/' . $entry;
+					if (is_file($fullPath) && preg_match('/.*\.txt$/', $entry)) {
+						unlink($fullPath);
+					}
+				}
+			}
+			// 关闭目录
+			closedir($handle);
+		}
+		if ($handle = opendir($directory."/tplcache")) {
+			// 遍历目录中的所有文件和文件夹
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != "." && $entry != "..") {
+					$fullPath = $directory . '/tplcache/' . $entry;
+					if (is_file($fullPath) && preg_match('/.*\.inc$|.*\.txt$/', $entry)) {
+						unlink($fullPath);
+					}
+				}
+			}
+			// 关闭目录
+			closedir($handle);
+		}
+		if ($handle = opendir($directory.'/cache')) {
+			// 遍历目录中的所有文件和文件夹
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != "." && $entry != "..") {
+					$fullPath = $directory . '/cache/' . $entry;
+					// 匹配文件夹规则
+					if (is_dir($fullPath) && preg_match('/^mask_|CSS|diggCache|HTML|memberlogin|tagjsonq|update|URI/', $entry)) {
+						// 删除文件夹及其内容
+						deleteDirectory($fullPath);
+					} elseif (is_file($fullPath) && preg_match('/.*\.inc|.*\.dat/', $entry)) {
+						unlink($fullPath);
+					}
+				}
+			}
+			// 关闭目录
+			closedir($handle);
+		}
+		unlink($workDir.'/install/install_lock.txt');
+		DedeCli::write("站点清除成功");
+	}
+	
+} else if(count($argv) > 1 && ($argv[1] =="make_filehash")){
+	$gitFiles = shell_exec('git ls-files');
+	// 将输出的字符串按行拆分成数组
+	$fileList = explode("\n", trim($gitFiles));
+	// 输出文件列表
+	$hashs = array();
+	foreach ($fileList as $file) {
+		if (!file_exists($file)) {
+			continue;
+		}
+		$name = $file;
+		$size = filesize($file);
+		$hash = md5_file($file);
+		$f = array(
+			"filename" => $name,
+		);
+		$hashs[] = $f;
+	}
+	file_put_contents(DEDEDATA.'/admin/files.txt',json_encode($hashs));
+	DedeCli::write("成功生成文件哈希");
+} else if(count($argv) > 1 && ($argv[1] =="find_stringvals")){
+	// 用于找出php8.2字符串变量的
+	function searchPhpFiles($directory) {
+		$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
+		$variablePattern = '/["\'].*?\$\{\$\w+\}.*?["\']/';
+		foreach ($iterator as $file) {
+			if ($file->isFile() && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+				$filePath = $file->getPathname();
+				$lines = file($filePath, FILE_IGNORE_NEW_LINES);
+	
+				foreach ($lines as $lineNumber => $line) {
+					if (preg_match($variablePattern, $line)) {
+						DedeCli::write( "文件: $filePath, 行号: ". ($lineNumber + 1). ", 内容: ". trim($line));
+					}
+				}
+			}
+		}
+	}
+	searchPhpFiles($workDir);
+} else {
+	DedeCli::write($helpStr);
+}
+?>

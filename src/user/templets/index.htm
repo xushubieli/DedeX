@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>会员中心-<?php echo $cfg_webname;?></title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/style.css">
+	</head>
+	<body>
+		<?php ThemeInclude('top.htm');?>
+		<main class="container py-3">
+			<div class="row">
+				<?php
+				$_menu_home = true;
+				?>
+				<?php include(DEDEMEMBER."/templets/menu.htm");?>
+				<div class="col-md-9">
+					<div class="pb-3">
+						<div class="pannel-main-container shadow-sm rounded">
+							<div class="media-body row">
+								<div class="col-12 text-center">
+									<img src="<?php echo $cfg_ml->fields['face'];?>" title="<?php echo $cfg_ml->M_LoginID;?>" class="user-img-md">
+									<div class="my-3">
+										<h3 class="d-inline-block mr-2" style="vertical-align:middle"><?php echo $cfg_ml->M_UserName;?></h3>
+										<span class="btn btn-outline-success btn-sm"><?php echo $cfg_ml->GetMemberTypeName();?></span>
+										<span class="btn btn-outline-warning btn-sm"><?php echo $cfg_ml->M_Honor;?></span>
+									</div>
+									<p class="mb-0">
+										<span>积分：<?php echo $cfg_ml->M_Scores;?></span>
+										<span>金币：<?php echo $cfg_ml->M_Money;?></span>
+										<span>余额：<?php echo $cfg_ml->M_UserMoney;?></span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="py-3">
+						<div class="pannel-main-container shadow-sm rounded">
+							<div class="media-body">
+								<ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled text-center mb-0">
+									<li class="col pb-m-3">
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/pm.php?folder=inbox"><i class="fa fa-commenting"></i></a></div>
+										<a href="<?php echo $cfg_memberurl;?>/pm.php?folder=inbox">消息管理</a>
+									</li>
+									<li class="col pb-m-3">
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/content_list.php?channelid=1"><i class="fa fa-file-text"></i></a></div>
+										<a href="<?php echo $cfg_memberurl;?>/content_list.php?channelid=1">文档管理</a>
+									</li>
+									<li class="col pb-m-3">
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/mystow.php"><i class="fa fa-star"></i></a></div>
+										<a href="<?php echo $cfg_memberurl;?>/mystow.php">我的收藏</a>
+									</li>
+									<li class="col">
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/buy.php"><i class="fa fa-credit-card-alt"></i></a></div>
+										<a href="<?php echo $cfg_memberurl;?>/buy.php">积分钱包</a>
+									</li>
+									<li class="col">
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/edit_baseinfo.php"><i class="fa fa fa-pencil-square"></i></a></div>
+										<a href="<?php echo $cfg_memberurl;?>/edit_baseinfo.php">资料修改</a>
+									</li>
+									<li class="col">
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/index_do.php?fmdo=purl"><i class="fa fa fa-share"></i></a></div>
+										<a href="<?php echo $cfg_memberurl;?>/index_do.php?fmdo=purl">推广链接</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<?php if ($cfg_mb_max > 0){?>
+					<div class="py-3">
+						<div class="pannel-main-container shadow-sm rounded">
+							<div class="media-body item-article">
+								<h3 class="mb-3 userspace">用户空间<span class="info">（<?php echo $minfos['totaluse'];?>MB/<?php echo $cfg_mb_max;?>MB）</span></h3>
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="<?php echo $ddsize;?>%" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $ddsize;?>%"><?php echo $ddsize;?>%</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php }?>
+					<div class="pt-3">
+						<div class="pannel-main-container shadow-sm rounded">
+							<div class="media-body item-article">
+								<h3 class="mb-3">最新文档</h3>
+								<ul>
+									<?php foreach ($archives as $archive) {?>
+									<li><a href="<?php echo $archive['htmlurl'];?>" title="<?php echo $archive['title'];?>"><?php echo $archive['title'];?></a></li>
+									<?php }?>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<?php ThemeInclude('foot.htm');?>
+	</body>
+</html>

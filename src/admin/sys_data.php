@@ -1,0 +1,128 @@
+<?php
+/**
+ * 数据库备份还原
+ *
+ * @version        $id:sys_data.php 17:19 2010年7月20日 tianya $
+ * @package        DedeBIZ.Administrator
+ * @copyright      Copyright (c) 2022 DedeBIZ.COM
+ * @license        GNU GPL v2 (https://www.dedebiz.com/license)
+ * @link           https://www.dedebiz.com
+ */
+require_once(dirname(__FILE__)."/config.php");
+if (DEDEBIZ_SAFE_MODE) {
+    die(DedeAlert("系统已启用安全模式，无法使用当前功能",ALERT_DANGER));
+}
+CheckPurview('sys_Data');
+if (empty($dopost)) $dopost = '';
+if ($cfg_dbtype == 'sqlite') {
+    showMsg("系统使用SQLite数据库，备份系统根目录下/data/".$cfg_dbname.".db文件即可", "javascript:;");
+    exit();
+}
+//查看表结构
+if ($dopost == "viewinfo") {
+    if ($cfg_dbtype == 'sqlite') {
+        echo "<xmp>";
+        if (empty($tablename)) {
+            echo "没有指定表名";
+        } else {
+            //获取创建表的SQL语句
+            $dsql->SetQuery("SELECT sql FROM sqlite_master WHERE type='table' AND name='$tablename'");
+            $dsql->Execute('me');
+            $row = $dsql->GetArray('me', SQLITE3_ASSOC);
+            if ($row) {
+                $createTableSql = $row['sql'];
+                echo "创建表的 SQL 语句:\n";
+                echo trim($createTableSql)."\n\n";
+            }
+            //获取表的列信息
+            $dsql->SetQuery("PRAGMA table_info($tablename)");
+            $dsql->Execute('cols');
+            echo "表的列信息:\n";
+            while ($colRow = $dsql->GetArray('cols', SQLITE3_ASSOC)) {
+                echo "列名: ".$colRow['name'].", 类型: ".$colRow['type'].", 是否为主键: ".($colRow['pk'] ? '是' : '否')."\n";
+            }
+        }
+        echo '</xmp>';
+        exit();
+    } else {
+        echo "<xmp>";
+        if (empty($tablename)) {
+            echo "没有指定表名";
+        } else {
+            $dsql->SetQuery("SHOW CREATE TABLE ".$dsql->dbName.".".$tablename);
+            $dsql->Execute('me');
+            $row2 = $dsql->GetArray('me', MYSQL_BOTH);
+            $ctinfo = $row2[1];
+            echo trim($ctinfo);
+        }
+        echo '</xmp>';
+    }
+    exit();
+}
+//优化表
+else if ($dopost == "opimize") {
+    echo "<xmp>";
+    if (empty($tablename)) {
+        echo "没有指定表名";
+    } else {
+        if ($cfg_dbtype == 'sqlite') {
+            $rs = $dsql->ExecuteNoneQuery("VACUUM");
+            if ($rs) {
+                echo "执行优化表 {$tablename} 完成<br>";
+            } else {
+                echo "执行优化表 {$tablename} 失败，原因是：".$dsql->GetError();
+            }
+        } else {
+            $rs = $dsql->ExecuteNoneQuery("OPTIMIZE TABLE `$tablename`");
+            if ($rs) {
+                echo "执行优化表".$tablename."完成<br>";
+            } else {
+                echo "执行优化表".$tablename."失败，原因是：".$dsql->GetError();
+            }
+        }
+    }
+    echo '</xmp>';
+    exit();
+}
+//修复表
+else if ($dopost == "repair") {
+    echo "<xmp>";
+    if (empty($tablename)) {
+        echo "没有指定表名";
+    } else {
+        $rs = $dsql->ExecuteNoneQuery("REPAIR TABLE `$tablename`");
+        if ($rs) {
+            echo "修复表".$tablename."完成<br>";
+        } else {
+            echo "修复表".$tablename."失败，原因是：".$dsql->GetError();
+        }
+    }
+    echo '</xmp>';
+    exit();
+}
+//获取系统存在的表信息
+$otherTables = array();
+$dedeSysTables = array();
+$channelTables = array();
+$dsql->SetQuery("SELECT addtable FROM `#@__channeltype`");
+$dsql->Execute();
+while ($row = $dsql->GetObject()) {
+    $channelTables[] = $row->addtable;
+}
+$dsql->SetQuery("SHOW TABLES");
+$dsql->Execute('t');
+while ($row = $dsql->GetArray('t', MYSQL_BOTH)) {
+    if (preg_match("#^{$cfg_dbprefix}#", $row[0]) || in_array($row[0], $channelTables)) {
+        $dedeSysTables[] = $row[0];
+    } else {
+        $otherTables[] = $row[0];
+    }
+}
+$mysql_version = $dsql->GetVersion();
+include DedeInclude('templets/sys_data.htm');
+function TjCount($tbname, &$dsql)
+{
+    $row = $dsql->GetOne("SELECT COUNT(*) AS dd FROM $tbname");
+    return $row['dd'];
+}
+?>

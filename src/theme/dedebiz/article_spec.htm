@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>{dede:field.title/}-{dede:global.cfg_webname/}</title>
+		<meta name="keywords" content="{dede:field.keywords/}">
+		<meta name="description" content="{dede:field.description/}">
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/style.css">
+	</head>
+	<body>
+		{dede:include filename='top.htm'/}
+		{dede:include filename='head.htm'/}
+		<div class="container py-3">
+			<ol class="breadcrumb mb-0">
+				<li class="breadcrumb-item">当前位置</li>
+				{dede:field name='position'/}
+			</ol>
+		</div>
+		<main class="container py-3">
+			<div class="row">
+				<div class="col-md-9">
+					<article class="article-main bg-white shadow-sm rounded p-3">
+						<div class="title">
+							<h1>{dede:field.title/}</h1>
+						</div>
+						<div class="meta py-3">
+							<a href="{dede:field.userurl/}"><span><img src="{dede:field.face/}" class="user-img-xs mr-2">{dede:field.uname/}</span></a>
+							<span><i class="fa fa-calendar mr-2"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
+							<span><i class="fa fa-globe mr-2"></i>{dede:field.source/}</span>
+							<span><i class="fa fa-user mr-2"></i>{dede:field.writer/}</span>
+							<span><i class="fa fa-eye mr-2"></i><script src="{dede:global.cfg_phpurl/}/count.php?view=yes&aid={dede:field.id/}&mid={dede:field name='mid'/}"></script>次</span>
+						</div>
+						<div class="speciallist row py-3">{dede:field.note/}</div>
+						<div class="body py-3">
+							{dede:field.body/}
+							<p>专题于 {dede:field.senddate function="MyDate('Y-m-d H:i',@me)"/} 修改</p>
+						</div>
+						<div class="edit py-3">责任编辑：{dede:adminname/}</div>
+					</article>
+				</div>
+				<aside class="col-md-3">
+					<div class="pb-3">{dede:include filename='widget_search.htm'/}</div>
+					<div class="pb-3">{dede:include filename='widget_menu.htm'/}</div>
+					<div class="pb-3">{dede:include filename='widget_hot.htm'/}</div>
+				</aside>
+			</div>
+		</main>
+		<script>const PHPURL = '{dede:global.cfg_phpurl/}';</script>
+		{dede:include filename='foot.htm'/}
+	</body>
+</html>

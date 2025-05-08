@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>标签调用测试</title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/codemirror.css">
+		<script src="/static/web/js/codemirror.js"></script>
+		<script src="/static/web/js/mode/xml/xml.js"></script>
+		<script src="/static/web/js/mode/javascript/javascript.js"></script>
+		<script src="/static/web/js/mode/css/css.js"></script>
+		<script src="/static/web/js/mode/htmlmixed/htmlmixed.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
+				<li class="breadcrumb-item active">标签调用测试</li>
+			</ol>
+			<div class="card shadow-sm mb-3">
+				<div class="card-header">标签调用测试</div>
+				<div class="card-body">
+					<form name="form1" action="tag_test_action.php" method="post" target="stafrm">
+						<input type="hidden" name="dopost" value="make">
+						<input type="hidden" name="_csrf_token" value="<?php echo $GLOBALS['csrf_token'];?>">
+						<div class="table-responsive">
+							<table class="table table-borderless">
+								<tbody>
+									<tr>
+										<td width="260">环境变量</td>
+										<td>
+											<?php
+											if (empty($cid)) $cid="0";
+											$tl = new TypeLink($cid);
+											$typeOptions = $tl->GetOptionArray($cid,$admin_catalogs,0);
+											echo "<select name='typeid' class='admin-input-sm'>";
+											if ($cid=="0") echo "<option value='0' selected>不使用环境</option>";
+											echo $typeOptions;
+											echo "</select>";
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2"><textarea name="partcode" id="partcode" class="admin-textarea-xl"></textarea></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="center"><button type="submit" class="btn btn-success btn-sm">提交测试</button></td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<div class="admin-win-iframe"><iframe name="stafrm" frameborder="0" id="stafrm" width="100%" height="100%"></iframe></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+			var editor = CodeMirror.fromTextArea(document.getElementById("partcode"), {
+				lineNumbers: true,
+				lineWrapping: true,
+				mode: 'text/html',
+			});
+		</script>
+	</body>
+</html>

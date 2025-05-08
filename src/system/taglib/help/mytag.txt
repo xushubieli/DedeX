@@ -1,0 +1,6 @@
+自定义宏标签
+>>dede>>
+{dede:mytag name='' typeid=''/}
+>>dede>>
+name='' 标签名
+typeid='1' 调用指定栏目id（0全部栏目）

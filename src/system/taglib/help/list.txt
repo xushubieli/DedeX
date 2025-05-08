@@ -1,0 +1,21 @@
+列表标签
+>>dede>>
+<html>
+	...
+	<body>{dede:list pagesize='10' titlelen='' orderby='' channelid='1' addfields='diy'}
+		<article>
+			<a href="[field:arcurl/]">[field:title/]</a>
+		</article>{dede:list}
+		<ul>
+			{dede:pagelist listitem='info,index,end,pre,next,pageno' listsize='1'/}
+		</ul>
+	</body>
+</html>
+>>dede>>
+pagesize='10' 调用10篇文档
+titlelen='160' 限制标题显示160个字符
+orderby='sortrank' 排序方式：sortrank按发布时间（可用参数：hot/click按点击数、pubdate按发布时间、lastpost按评论时间、scores按得分、rand随机）
+pagelist 列表分页（可用参数：index首页、pre上页、next下页、end末页、pageno页码、option跳转、info条数信息）
+listsize 限制页码
+【进阶用法】
+channelid='1' addfields='diy' 调用文档模型id为1的diy字段（需在后台添加附加字段，多个字段，例：addfields='diy,url'，则标签为[field:diy/][field:url/]）

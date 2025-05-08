@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>修改文档</title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
+		<link rel="stylesheet" href="/static/web/css/cropper.min.css">
+		<script>const cfg_uplitpic_cut = '<?php echo $cfg_uplitpic_cut;?>';</script>
+		<script src="/static/web/js/jquery.min.js"></script>
+		<script src="/static/web/js/bootstrap.min.js"></script>
+		<script src="/static/web/js/webajax.js"></script>
+		<script src="/static/web/js/moment.min.js"></script>
+		<script src="/static/web/js/daterangepicker.js"></script>
+		<script src="/static/web/js/cropper.min.js"></script>
+		<script src="/static/web/js/admin.main.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
+				<?php $cid=isset($cid) ? $cid : '';$channelid=isset($channelid) ? $channelid : '';?><li class="breadcrumb-item"><a href="catalog_do.php?cid=<?php echo $cid?>&channelid=<?php echo $channelid?>&dopost=listArchives">文档列表</a></li>
+				<li class="breadcrumb-item active">修改文档</li>
+			</ol>
+			<div class="card shadow-sm">
+				<div class="card-header d-flex justify-content-between align-items-center"><span>修改<?php echo $arcRow['title'];?>文档</span><?php if ($cfg_ai_enabled == 'Y'){;?><button type="button" id="btnAI" onclick="showAI();" class="btn btn-success btn-sm">小德AI助手</button><?php };?></div>
+				<div class="card-body">
+					<form name="form1" action="article_edit.php" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="dopost" value="save">
+						<input type="hidden" name="channelid" value="<?php echo $channelid?>">
+						<input type="hidden" name="id" value="<?php echo $aid?>">
+						<div class="table-responsive">
+							<table class="table table-borderless">
+								<tbody>
+									<tr>
+										<td width="160">文档标题</td>
+										<td width="650"><input type="text" name="title" id="title" value="<?php echo $arcRow['title'];?>" class="admin-input-lg" required></td>
+										<td width="160">简略标题</td>
+										<td><input type="text" name="shorttitle" id="shorttitle" value="<?php echo $arcRow['shorttitle'];?>" class="admin-input-sm"></td>
+									</tr>
+									<tr>
+										<td>自定义属性</td>
+										<td colspan="3">
+											<?php
+											$dsql->SetQuery("SELECT * FROM `#@__arcatt` ORDER BY sortid ASC");
+											$dsql->Execute();
+											while($trow = $dsql->GetObject())
+											{
+												if ($trow->att=='j') {
+													$jumpclick = " onclick='ShowUrlTr()'";
+												} else {
+													$jumpclick = '';
+												}
+												if (preg_match("#".$trow->att."#", $arcRow['flag'])) {
+													echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' {$jumpclick} checked> {$trow->attname}[{$trow->att}]</label> ";
+												} else {
+													echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' {$jumpclick}> {$trow->attname}[{$trow->att}]</label> ";
+												}
+											}
+											?>
+										</td>
+									</tr>
+									<tr id="redirecturltr" style="display:<?php echo (empty($addRow['redirecturl']) ? 'none' : 'table-row');?>">
+										<td>跳转网址</td>
+										<td colspan="3"><input type="text" name="redirecturl" id="redirecturl" value="<?php echo $addRow['redirecturl']?>" class="admin-input-lg"></td>
+									</tr>
+									<tr>
+										<td>标签</td>
+										<td><input type="text" name="tags" id="tags" value="<?php echo $tags;?>" class="admin-input-lg">（英文逗号隔开，例：DedeBIZ,得德）</td>
+										<td>权重</td>
+										<td><input type="text" name="weight" id="weight" value="<?php echo $arcRow['weight'];?>" class="admin-input-sm">（越小越靠前）</td>
+									</tr>
+									<tr id="pictable">
+										<td>缩略图</td>
+										<td colspan="3">
+											<input type="text" name="picname" id="picname" value="<?php echo $arcRow['litpic']?>" class="admin-input-lg">
+											<label><input type="checkbox" name="ddisremote" value="1" id="ddisremote"> 远程图片</label>
+											<span class="btn btn-success btn-sm opt-button">上传<input type="file" name="files[]" id="iptAddImages"></span>
+											<button type="button" onclick="SelectImage('form1.picname','');" class="btn btn-success btn-sm">选择</button>
+											<button id="btnClearAll" type="button" class="btn btn-success btn-sm">清空</button>
+											<img src="<?php if ($arcRow['litpic']!='') echo $arcRow['litpic']; else echo '/static/web/img/thumbnail.jpg';?>" id="litPic" class="thumbnail-md ml-3">
+										</td>
+									</tr>
+									<tr>
+										<td>来源</td>
+										<td>
+											<input type="text" name="source" id="source" value="<?php echo $arcRow['source']?>" class="admin-input-sm">
+											<button type="button" name="selsource" id="selsource" class="btn btn-success btn-sm">选择</button>
+										</td>
+										<td>编辑</td>
+										<td>
+											<input type="text" name="writer" id="writer" value="<?php echo $arcRow['writer']?>" class="admin-input-sm">
+											<button type="button" name="selwriter" id="selwriter" class="btn btn-success btn-sm">选择</button>
+										</td>
+									</tr>
+									<tr>
+										<td>发布栏目</td>
+										<td>
+											<?php
+											$typeOptions = GetOptionList($arcRow['typeid'],$cuserLogin->getUserChannel(),$channelid);
+											echo "<select name='typeid' id='typeid' class='admin-input-sm'>";
+											if ($arcRow["typeid"]=="0") echo "<option value='0' selected>请选择文档栏目</option>";
+											echo $typeOptions;
+											echo "</select>";
+											?>
+											<a href="javascript:ShowCatMap(event,this,<?php echo $channelid;?>,'typeid','<?php echo $arcRow['typeid'];?>');" class="btn btn-success btn-sm">选择</a>
+										</td>
+										<td>金币</td>
+										<td><input type="text" name="money" id="money" value="<?php echo $arcRow['money']?>" class="admin-input-sm"></td>
+									</tr>
+									<?php if ($cfg_need_typeid2=='Y') {?>
+									<tr>
+										<td>副栏目</td>
+										<td colspan="3">
+											<span id="typeid2ct"></span>
+											<input type="text" name="typeid2" id="typeid2" value="<?php echo ($arcRow['typeid2']=='0'?'':$arcRow['typeid2']);?>" class="admin-input-sm">
+											<a href="javascript:ShowCatMap(event,this,<?php echo $channelid;?>,'typeid2','<?php echo $arcRow['typeid2'];?>');" class="btn btn-success btn-sm">选择</a>
+										</td>
+									</tr>
+									<?php }?>
+									<tr>
+										<td>关键词</td>
+										<td colspan="3">
+											<input type="text" name="keywords" id="keywords" value="<?php echo $arcRow['keywords']?>" class="admin-input-lg">
+											<label><input type="checkbox" name="autokey" id="autokey" value="1" <?php if ($cfg_arc_autokeyword=='Y') echo 'checked';?>> 自动获取</label>
+											<button type="button" onclick="SelectKeywords('form1.keywords');" class="btn btn-success btn-sm">选择</button>
+										</td>
+									</tr>
+									<tr>
+										<td>描述</td>
+										<td colspan="3"><textarea name="description" id="description" class="admin-textarea-sm"><?php echo $arcRow['description']?></textarea></td>
+									</tr>
+									<tr>
+										<td>附加选项</td>
+										<td colspan="3">
+											<label><input type="checkbox" name="remote" id="remote" value="1" <?php if ($cfg_rm_remote=='Y') echo 'checked';?>> 下载远程图片和资源</label>
+											<label><input type="checkbox" name="autolitpic" id="autolitpic" value="1" <?php if ($cfg_arc_autopic=='Y') echo 'checked';?>> 提取第一个图片为缩略图</label>
+										</td>
+									</tr>
+									<?php PrintAutoFieldsEdit(stripslashes($cInfos['fieldset']),$addRow,'autofield');?>
+									<tr>
+										<td colspan="4"><?php GetEditor('body',stripcslashes($addRow['body']),350);?></td>
+									</tr>
+									<tr>
+										<td>评论选项</td>
+										<td>
+											<label><input type="radio" name="notpost" value="0" <?php if ($arcRow['notpost']==0) echo 'checked';?>> 允许评论</label>
+											<label><input type="radio" name="notpost" value="1" <?php if ($arcRow['notpost']==1) echo 'checked';?>> 禁止评论</label>
+										</td>
+										<td>发布选项</td>
+										<td>
+											<label><input name="ishtml" type="radio" value="1" <?php if ($arcRow["ismake"]!=-1) echo 'checked';?>> 静态浏览</label>
+											<label><input type="radio" name="ishtml" value="0" <?php if ($arcRow["ismake"]==-1) echo 'checked';?>> 动态浏览</label>
+										</td>
+									</tr>
+									<tr>
+										<td>文档排序</td>
+										<td>
+											<select name="sortup" id="sortup" class="admin-input-sm">
+												<?php
+												$subday = SubDay($arcRow["sortrank"],$arcRow["pubdate"]);
+												echo "<option value='0'>正常排序</option>";
+												if ($subday>0) echo "<option value='$subday' selected>置顶".$subday."天</option>";
+												?>
+												<option value="7">置顶一周</option>
+												<option value="30">置顶一个月</option>
+												<option value="90">置顶三个月</option>
+												<option value="180">置顶半年</option>
+												<option value="360">置顶一年</option>
+											</select>
+										</td>
+										<td>标题颜色</td>
+										<td>
+											<input type="text" name="color" id="color" value="<?php echo $arcRow['color']?>" class="admin-input-sm">
+											<button type="button" name="modcolor" id="modcolor" onclick="ShowColor(event,this);" class="btn btn-success btn-sm">选择</button>
+										</td>
+									</tr>
+									<tr>
+										<td>浏览权限</td>
+										<td>
+											<select name="arcrank" id="arcrank" class="admin-input-sm">
+												<option value='<?php echo $arcRow["arcrank"]?>'><?php echo $arcRow["rankname"]?> </option>
+												<?php
+												$urank = $cuserLogin->getUserRank();
+												$dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE adminrank<='$urank' ORDER BY `rank` ASC");
+												$dsql->Execute();
+												while($row = $dsql->GetObject()){
+													echo "<option value='".$row->rank."'>".$row->membername."</option>";
+												}
+												?>
+											</select>
+											<span>（暂不支持静态）</span>
+										</td>
+										<td>文件名称</td>
+										<td><input type="text" name="filename" id="filename" value="<?php echo $arcRow['filename']?>" class="admin-input-sm">（不包括文件扩展名）</td>
+										<td><?php echo "<input type='hidden' name='templet' value='{$addRow['templet']}'>";?></td>
+									</tr>
+									<tr>
+										<td>发布时间</td>
+										<td>
+											<?php
+											$notime = GetDateTimeMk($arcRow["pubdate"]);
+											echo "<input type='text' name='pubdate' value='$notime' id='pubdate' class='datepicker admin-input-sm'>";
+											?>
+										</td>
+										<td>更新时间</td>
+										<td>
+											<?php
+											$nowtime = GetDateTimeMk(time());
+											echo "<input type='text' name='senddate' value='$nowtime' id='senddate' class='datepicker admin-input-sm'>";
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td>浏览次数</td>
+										<td><input type="text" name="click" value="<?php echo $arcRow['click'];?>" class="admin-input-sm"></td>
+									</tr>
+									<tr>
+										<td align="center" colspan="4">
+											<button type="submit" class="btn btn-success btn-sm">保存</button>
+											<button type="reset" class="btn btn-outline-success btn-sm">重置</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="mdlAI" class="modal fade" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">小德AI助手：修改<?php echo $arcRow['title'];?>文档</h5>
+						<button type="button" class="update-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<textarea id="prompt" class="form-control" style="height:160px" placeholder="请输入修改文档要求，例：我需要对当前文章就行润色，内容轻松活泼些，不要出现错别字。"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="modelid" class="form-label">选择模型</label>
+								<select id="modelid" class="form-control">
+									<?php
+									$dsql->SetQuery("SELECT AM.*,A.title as aititle FROM `#@__ai_model` AM LEFT JOIN `#@__ai` A ON A.id = AM.aiid ORDER BY AM.sortrank ASC,AM.id DESC");
+									$dsql->Execute();
+									while ($row = $dsql->GetObject()) {
+									?>
+										<option value="<?php echo $row->id;?>" <?php echo $row->isdefault==1?' selected' : '';?>><?php echo $row->model;?> <?php echo $row->aititle;?></option>
+									<?php
+									}
+									?>
+								</select>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button id="btnAIAction" class="btn btn-success btn-sm">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>InitPage();</script>
+		<script>
+			let eventSource; //保存EventSource实例
+			let modelid = 0;
+			function showAI() {
+				$("#mdlAI").modal('show');
+			}
+			$("#btnAIAction").click(async function() {
+				let prompt = document.getElementById("prompt").value;
+				let modelid = document.getElementById("modelid").value;
+				let req = await fetch(`api.php?action=get_ai_server&pname=article_edit&aid=<?php echo $aid?>&modelid=${modelid}&prompt=${prompt}`);
+				let resp = await req.json();
+				if (resp.code !== 0) {
+					ShowMsg("获取服务器地址失败");
+					return
+				}
+				let eventSource = new EventSource(resp.data);
+				//新增状态跟踪变量
+				let currentKey = null;
+				let tagBuffer = "";
+				let isClosingTag = false;
+				$("#mdlAI").modal('hide');
+				$("#btnAI").attr("disabled", "disabled");
+				prompt = "";
+				let lastChar = "";
+				let bodyHtml = "";
+				let typeid = "";
+				eventSource.onmessage = (event) => {
+					const chars = event.data.split('');
+					chars.forEach(char => {
+						if (lastChar === '\\' && char === 'r') {
+							char = '<br>';  //替换为br标签
+							lastChar = "";  //清空追踪字符
+						} else {
+							lastChar = char;  //记录当前字符
+						}
+						if (char === '\\') {
+							return; //如果是反斜杠，跳过处理
+						}
+						if (currentKey) {
+							if (char === '{') {
+								isClosingTag = true;
+								tagBuffer = '{';
+								return;
+							}
+							if (isClosingTag) {
+								tagBuffer += char;
+								if (tagBuffer === `{/${currentKey}}`) {
+									if (currentKey == "body") {
+										CKEDITOR.instances["body"].setReadOnly(false);
+										bodyHtml = "";
+									} else if (currentKey == "typeid") {
+										const input = document.querySelector(`[name="${currentKey}"]`);
+										if (input) {
+											$(input).val(typeid);
+											$(input).prop("disabled", false).removeClass("disabled"); //恢复输入状态
+										}
+									} else {
+										const input = document.querySelector(`[name="${currentKey}"]`);
+										if (input) $(input).prop("disabled", false).removeClass("disabled"); //恢复输入状态
+									}
+									currentKey = null;
+									isClosingTag = false;
+									tagBuffer = "";
+									return;
+								}
+								if (!`{/${currentKey}}`.startsWith(tagBuffer)) {
+									if (currentKey == "body") {
+										bodyHtml += tagBuffer;
+										CKEDITOR.instances["body"].setData(bodyHtml)
+									} else if (currentKey == "typeid") {
+										typeid += char;
+									} else {
+										const input = document.querySelector(`[name="${currentKey}"]`);
+										if (input) input.value += tagBuffer;
+									}
+									isClosingTag = false;
+									tagBuffer = "";
+								}
+							} else {
+								if (currentKey == "body") {
+									//CKEDITOR.instances["body"].insertHtml(char);
+									bodyHtml += char;
+									CKEDITOR.instances["body"].setData(bodyHtml)
+								} else if (currentKey == "typeid") {
+									typeid += char;
+								} else {
+									const input = document.querySelector(`[name="${currentKey}"]`);
+									if (input) {
+										input.value += char;
+										input.scrollTop = input.scrollHeight; //滚动到底部
+									}
+								}
+							}
+						} else {
+							if (char === '{') {
+								tagBuffer = '{';
+							} else if (tagBuffer.startsWith('{')) {
+								tagBuffer += char;
+								if (char === '}') {
+									const match = tagBuffer.match(/{([^>]+)}/);
+									if (match) {
+										currentKey = match[1];
+										if (currentKey == "body") {
+											CKEDITOR.instances["body"].setReadOnly(true);
+										} else {
+											const input = document.querySelector(`[name="${currentKey}"]`);
+											if (input) {
+												$(input).prop("disabled", true).addClass("disabled"); //仅禁用当前输入框
+												input.value = "";
+											}
+										}
+									}
+									tagBuffer = "";
+								}
+							}
+						}
+					});
+				};
+				eventSource.onerror = (error) => {
+					if (error.target.readyState === EventSource.CONNECTING) {
+						ShowMsg("连接失败，请确保您已开启并正确配置了DedeBIZ小德AI助手。 <a class='text-success' href='https://www.dedebiz.com/ai?from=dedebiz' target='_blank'>如何配置？</a>");
+					} else if (typeof error.data!=="undefined" && error.data !== "" && error.target.readyState !== EventSource.CLOSED) {
+						ShowMsg(error.data);
+					}
+					$("#btnAI").prop("disabled", false);
+					eventSource.close();
+				};
+				//监听特定事件 "close"
+				eventSource.addEventListener('close', (event) => {
+					console.log('SSE connection closed:', event.data);
+					$("#btnAI").prop("disabled", false);
+					eventSource.close(); //关闭连接
+				});
+			});
+		</script>
+	</body>
+</html>

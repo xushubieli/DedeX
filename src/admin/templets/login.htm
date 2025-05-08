@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="robots" content="noindex,nofollow">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title><?php echo $cfg_webname;?>后台登录</title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<script src="/static/web/js/jquery.min.js"></script>
+		<script src="/static/web/js/login.js"></script>
+	</head>
+	<body>
+		<div class="login-step">
+			<div class="row h-100">
+				<div class="col-lg-8 d-none d-lg-block">
+					<div class="login-bg"></div>
+				</div>
+				<div class="col-lg-4">
+					<div class="login-box">
+						<div class="logo">
+							<a href="/" target="_blank"><img src="/favicon.ico" title="<?php echo $cfg_webname;?>"><?php echo $cfg_webname;?></a>
+						</div>
+						<div class="title">
+							<h1>后台登录</h1>
+							<span><?php echo $cfg_description;?></span>
+						</div>
+						<?php if (preg_match('/MSIE/i',$_SERVER['HTTP_USER_AGENT']) || preg_match('/Trident/i',$_SERVER['HTTP_USER_AGENT'])) {?><div class="alert alert-danger">您使用的浏览器已过时，请<a href="https://www.dedebiz.com/browsehappy" target="_blank">更换浏览器</a>，提高后台操作体验</div><?php }?>
+						<?php echo $redmsg;?>
+						<div class="login-from">
+							<form name="form1" method="post" action="login.php">
+								<input type="hidden" name="gotopage" value="<?php if (!empty($gotopage)) echo RemoveXSS($gotopage);?>">
+								<input type="hidden" name="dopost" value="login">
+								<input type="hidden" name="adminstyle" value="newDedeBIZ">
+								<div class="form-group">
+									<input type="text" name="userid" id="iptUserid" class="form-control" placeholder="请输入管理员账号" required>
+									<div class="form-icon">
+										<i class="fa fa-user-circle"></i>
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="password" name="pwd" id="iptPwd" class="form-control" placeholder="请输入管理员密码" autocomplete="off" required>
+									<div class="form-icon">
+										<i class="fa fa-key"></i>
+									</div>
+								</div>
+								<div id="vdimgck" class="form-group" style="display:none">
+									<div class="input-group">
+										<input type="text" name="validate" id="iptValidate" class="form-control text-uppercase" placeholder="请输入验证码">
+										<div class="input-group-append"><img src="<?php echo $cfg_phpurl;?>/vdimgck.php" onclick="this.src='<?php echo $cfg_phpurl;?>/vdimgck.php?'+new Date().getTime()+Math.round(Math.random() * 10000)" title="验证码" id="validateimg"></div>
+									</div>
+									<div class="form-icon">
+										<i class="fa fa-code"></i>
+									</div>
+								</div>
+								<div class="operate">
+									<button type="submit" class="btn btn-success shadow-lg">登录</button>
+								</div>
+							</form>
+						</div>
+						<p><?php echo $cfg_powerby;?></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

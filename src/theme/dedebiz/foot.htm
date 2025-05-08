@@ -1,0 +1,26 @@
+<footer class="copyright shadow-sm mt-3">
+	<div class="container text-center">
+		<p>{dede:global.cfg_powerby/} <a href="https://www.dedebiz.com" target="_blank">Powered by DedeBIZ开发团队</a></p>
+		<span>友情连接：{dede:flink row='10'/}</span>
+	</div>
+</footer>
+<div class="scroll-top">
+	<button id="returntop" title="返回顶部"><i class="fa fa-chevron-up"></i> </button>
+</div>
+<script src="/static/web/js/jquery.min.js"></script>
+<script src="/static/web/js/bootstrap.min.js"></script>
+<script src="/static/web/js/style.js"></script>
+{dede:statistics/}
+<script>
+	$.get("{dede:global.cfg_memberurl/}/api.php?format=json",function(result) {
+		if (result.code === 200) {
+			$("#loginTop").html(`<a href="{dede:global.cfg_memberurl/}/" class="mr-3"><img src="${result.data.facepic}" alt="${result.data.username}" title="${result.data.username}" class="user-img-xs mr-2">${result.data.username}</a><a href="{dede:global.cfg_memberurl/}/pm.php" class="btn btn-primary btn-sm rounded-circle"><i class="fa fa-bell"></i></a><a href="{dede:global.cfg_phpurl/}/search.php" class="btn btn-outline-success btn-sm rounded-circle"><i class="fa fa-search"></i></a><a href="{dede:global.cfg_memberurl/}/index_do.php?fmdo=login&dopost=exit" class="btn btn-success btn-sm rounded-circle"><i class="fa fa-sign-out"></i></a>`);
+			$("#loginWin").html(`<div class="form-group"><p><img src="${result.data.facepic}" alt="${result.data.username}" title="${result.data.username}" class="user-img-md"></p><h2>${result.data.username}</h2></div><div class="form-group"><a href="{dede:global.cfg_memberurl/}/pm.php" class="btn btn-success btn-sm btn-block">消息</a></div><div class="form-group mb-0"><a href="{dede:global.cfg_memberurl/}/index_do.php?fmdo=login&dopost=exit" class="btn btn-success btn-sm btn-block">退出</a></div>`);
+			$("#iptUsername").val(result.data.username);
+			$("#iptUsername").attr("disabled", "disabled");
+			$(".areaValidate").hide();
+		} else {
+			$(".areaValidate").show();
+		}
+	});
+</script>

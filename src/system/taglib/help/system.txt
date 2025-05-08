@@ -1,0 +1,17 @@
+system标签
+>>dede>>
+<html>
+	<head>
+		<title>{dede:field.title/}-{dede:global.cfg_webname/}</title>
+	</head>
+	<body>
+		{dede:include filename='head.htm'/}
+		...
+		{dede:include filename='foot.htm'/}
+	</body>
+</html>
+>>dede>>
+{dede:include filename='head.htm'/} 调用指定模板（全局标签）
+{dede:global.cfg_webname/} 调用指定网站名称（全局标签）
+{dede:field.title/} 调用指定栏目名称（局部标签）
+注：在后台-系统设置-SQL命令工具-数据库文档，查看数据库表了解更多信息

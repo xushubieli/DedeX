@@ -1,0 +1,5 @@
+单页文档标签
+>>dede>>
+{dede:likespage row=''/}
+>>dede>>
+row='10' 调用10篇文档

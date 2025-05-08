@@ -1,0 +1,103 @@
+<?php
+if (!defined('DEDEINC')) exit('dedebiz');
+/**
+ * 自定义模型视图
+ *
+ * @version        $id:sgpage.class.php 15:48 2010年7月7日 tianya $
+ * @package        DedeBIZ.Libraries
+ * @copyright      Copyright (c) 2022 DedeBIZ.COM
+ * @license        GNU GPL v2 (https://www.dedebiz.com/license)
+ * @link           https://www.dedebiz.com
+ */
+require_once(DEDEINC."/archive/partview.class.php");
+class sgpage
+{
+    var $dsql;
+    var $dtp;
+    var $TypeID;
+    var $Fields;
+    var $TypeLink;
+    var $partView;
+    /**
+     *  php5构造函数
+     *
+     * @access    public
+     * @param     int  $aid  文档id
+     * @return    string
+     */
+    function __construct($aid)
+    {
+        global $cfg_basedir, $cfg_templets_dir, $cfg_df_style, $envs;
+        $this->dsql = $GLOBALS['dsql'];
+        $this->dtp = new DedeTagParse();
+        $this->dtp->refObj = $this;
+        $this->dtp->SetNameSpace("dede", "{", "}");
+        $this->Fields = $this->dsql->GetOne("SELECT * FROM `#@__sgpage` WHERE aid='$aid' ");
+        $envs['aid'] = $this->Fields['aid'];
+        //设置一些全局参数的值
+        foreach ($GLOBALS['PubFields'] as $k => $v) {
+            $this->Fields[$k] = $v;
+        }
+        if ($this->Fields['ismake'] == 1) {
+            $pv = new PartView();
+            $pv->SetTemplet($this->Fields['body'], 'string');
+            $this->Fields['body'] = $pv->GetResult();
+        }
+        $tplfile = $cfg_basedir.str_replace('{style}', $cfg_templets_dir.'/'.$cfg_df_style, $this->Fields['template']);
+        $this->dtp->LoadTemplate($tplfile);
+        $this->ParseTemplet();
+    }
+    //php4构造函数
+    function sgpage($aid)
+    {
+        $this->__construct($aid);
+    }
+    /**
+     *  显示文档
+     *
+     * @access    public
+     * @return    void
+     */
+    function Display()
+    {
+        $this->dtp->Display();
+    }
+    /**
+     *  获取文档
+     *
+     * @access    public
+     * @return    string
+     */
+    function GetResult()
+    {
+        return $this->dtp->GetResult();
+    }
+    /**
+     *  保存结果为文件
+     *
+     * @access    public
+     * @return    void
+     */
+    function SaveToHtml()
+    {
+        $filename = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_cmspath'].'/'.$this->Fields['filename'];
+        $filename = preg_replace("/\/{1,}/", '/', $filename);
+        $this->dtp->SaveTo($filename);
+    }
+    /**
+     *  解析模板里的标签
+     *
+     * @access    public
+     * @return    void
+     */
+    function ParseTemplet()
+    {
+        $GLOBALS['envs']['likeid'] = $this->Fields['likeid'];
+        MakeOneTag($this->dtp, $this);
+    }
+    //关闭所占用的资源
+    function Close()
+    {
+    }
+}
+?>

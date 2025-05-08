@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>支付接口设置</title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<script src="/static/web/js/jquery.min.js"></script>
+		<script src="/static/web/js/bootstrap.min.js"></script>
+		<script src="/static/web/js/admin.main.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
+				<li class="breadcrumb-item active">支付接口设置</li>
+			</ol>
+			<div class="card shadow-sm mb-3">
+				<div class="card-header">支付接口设置</div>
+				<div class="card-body">
+					<ul class="nav nav-pills mb-3" id="pay-tab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button type="button" id="wechat-tab" class="nav-link active" data-toggle="tab" data-target="#wechat" role="tab" aria-controls="wechat" aria-selected="true">微信支付</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button type="button" id="alipay-tab" class="nav-link" data-toggle="tab" data-target="#alipay" role="tab" aria-controls="alipay" aria-selected="false">支付宝</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button type="button" id="bank-tab" class="nav-link" data-toggle="tab" data-target="#bank" role="tab" aria-controls="bank" aria-selected="false">银行转帐</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button type="button" id="balance-tab" class="nav-link" data-toggle="tab" data-target="#balance" role="tab" aria-controls="balance" aria-selected="false">积分支付</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button type="button" id="cod-tab" class="nav-link" data-toggle="tab" data-target="#cod" role="tab" aria-controls="cod" aria-selected="false">货到付款</button>
+						</li>
+					</ul>
+					<div class="tab-content" id="pay-tabContent">
+						<div class="tab-pane fade show active" id="wechat" role="tabpanel" aria-labelledby="wechat-tab">
+							<form>
+								<div class="form-group">
+									<input type="checkbox" id="iptWechatEnabled">
+									<label for="iptWechatEnabled">是否启用</label>
+								</div>
+								<div class="form-group">
+									<label for="iptWechatAppID">AppID</label>
+									<input type="text" id="iptWechatAppID" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="iptWechatAPIv2Secret">APIv2Secret</label>
+									<input type="text" id="iptWechatAPIv2Secret" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="iptWechatMchID">商户号</label>
+									<input type="text" id="iptWechatMchID" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="iptWechatSortrank">排序（越小越靠前）</label>
+									<input type="text" id="iptWechatSortrank" class="form-control" value="0">
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane fade" id="alipay" role="tabpanel" aria-labelledby="alipay-tab">
+							<form>
+								<div class="form-group">
+									<input type="checkbox" id="iptAlipayEnabled">
+									<label for="iptAlipayEnabled">是否启用</label>
+								</div>
+								<div class="form-group">
+									<label for="iptAlipayAPPID">APPID</label>
+									<input type="text" id="iptAlipayAPPID" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="iptAlipayPrivateKey">应用私钥</label>
+									<input type="text" id="iptAlipayPrivateKey" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="iptAlipayCertPublicKey">支付宝公钥证书</label>
+									<input type="text" id="iptAlipayCertPublicKey" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="iptAlipaySignType">签名类型</label>
+									<input type="text" id="iptAlipaySignType" class="form-control" value="RSA2" disabled>
+								</div>
+								<div class="form-group">
+									<label for="iptAlipaySortrank">排序（越小越靠前）</label>
+									<input type="text" id="iptAlipaySortrank" class="form-control" value="0">
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="bank-tab">
+							<form>
+								<div class="form-group">
+									<input type="checkbox" id="iptBankEnabled">
+									<label for="iptBankEnabled">是否启用</label>
+									<span>（会员支付到指定银行卡，手动确认订单收款）</span>
+								</div>
+								<div class="form-group">
+									<label for="iptBankAccountName">账户名</label>
+									<input type="text" id="iptBankAccountName" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="iptBankAccountNO">账号</label>
+									<input type="text" id="iptBankAccountNO" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="iptBankName">开户行</label>
+									<input type="text" id="iptBankName" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="iptBankSortrank">排序（越小越靠前）</label>
+									<input type="text" id="iptBankSortrank" class="form-control" value="0">
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane fade" id="balance" role="tabpanel" aria-labelledby="balance-tab">
+							<form>
+								<div class="form-group">
+									<input type="checkbox" id="iptBalanceEnabled">
+									<label for="iptBalanceEnabled">是否启用</label>
+									<span>（采用积分进行支付）</span>
+								</div>
+								<div class="form-group">
+									<label for="iptBalanceSortrank">排序（越小越靠前）</label>
+									<input type="text" id="iptBalanceSortrank" class="form-control" value="0">
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane fade" id="cod" role="tabpanel" aria-labelledby="cod-tab">
+							<form>
+								<div class="form-group">
+									<input type="checkbox" id="iptCodEnabled">
+									<label for="iptCodEnabled">是否启用</label>
+									<span>（购买直接发货，到货后支付）</span>
+								</div>
+								<div class="form-group">
+									<label for="iptCodSortrank">排序（越小越靠前）</label>
+									<input type="text" id="iptCodSortrank" class="form-control" value="0">
+								</div>
+							</form>
+						</div>
+						<div class="text-center"><button type="submit" id="btnSave" class="btn btn-success btn-sm">保存</button></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+		$('.custom-file-input').on('change', function() {
+			let fileName = $(this).val().split('\\').pop();
+			$(this).siblings('.custom-file-label').addClass("selected").html(fileName);
+		});
+		let config = {
+			Wechat: {
+				AppID: '',
+				APIv2Secret: '',
+				MchID: '',
+				Sortrank: 0,
+				Enabled: true,
+			},
+			Alipay: {
+				APPID: '',
+				PrivateKey: '',
+				CertPublicKey: '',
+				SignType: 'RSA2',
+				Sortrank: 0,
+				Enabled: false,
+			},
+			Bank: {
+				AccountName: '',
+				AccountNO: '',
+				Name: '',
+				Sortrank: 0,
+				Enabled: true,
+			},
+			Balance: {
+				Sortrank: 0,
+				Enabled: false,
+			},
+			Cod: {
+				Sortrank: 0,
+				Enabled: true,
+			}
+		}
+		//加载系统config
+		function getPayments() {
+			$.get("sys_payment.php?dopost=get_payments", function(data) {
+				if (data.code === 0) {
+					for (const key in data.data) {
+						if (Object.hasOwnProperty.call(data.data, key)) {
+							const element = data.data[key];
+							let itemConfig = {};
+							try {
+								itemConfig = JSON.parse(element.config);
+							} catch (error) {
+								itemConfig = config[key]
+							}
+							itemConfig.Sortrank = element.sortrank;
+							itemConfig.Enabled = parseInt(element.status) === 0? false : true;
+							for (const k1 in config[key]) {
+								if (Object.hasOwnProperty.call(config[key], k1)) {
+									const ee = config[key][k1];
+									if (typeof itemConfig[k1] === "undefined") {
+										itemConfig[k1] = ee;
+									}
+								}
+							}
+							for (const k2 in itemConfig) {
+								if (Object.hasOwnProperty.call(itemConfig, k2)) {
+									const element = itemConfig[k2];
+									if ($(`#ipt${key}${k2}`).attr('type') === 'text') {
+										$(`#ipt${key}${k2}`).val(element);
+									} else if ($(`#ipt${key}${k2}`).attr('type') === 'checkbox') {
+										$(`#ipt${key}${k2}`).prop('checked', element);
+									}
+								}
+							}
+							config[key] = itemConfig;
+						}
+					}
+				}
+			});
+		}
+		//更新config
+		function updateConfig() {
+			for (const key in config) {
+				if (Object.hasOwnProperty.call(config, key)) {
+					const element = config[key];
+					for (const kk in element) {
+						if (Object.hasOwnProperty.call(element, kk)) {
+							const itemConfig = element[kk];
+							if ($(`#ipt${key}${kk}`).attr('type') === 'text') {
+								let val = $(`#ipt${key}${kk}`).val();
+								if (kk === "Sortrank") {
+									val = parseInt(val);
+								}
+								config[key][kk] = val;
+							} else if ($(`#ipt${key}${kk}`).attr('type') === 'checkbox') {
+								config[key][kk] = $(`#ipt${key}${kk}`).prop('checked');
+							}
+						}
+					}
+				}
+			}
+		}
+		//保存配置信息
+		function saveConfig() {
+			$.ajax({
+				type: "post",
+				url: 'sys_payment.php?dopost=save_config',
+				data: JSON.stringify(config),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(data) {
+					if (data.code === 0) {
+						ShowMsg("保存支付接口设置成功");
+					} else {
+						ShowMsg("保存支付接口设置失败");
+					}
+				}
+			})
+		}
+		$(function($) {
+			getPayments();
+			$("#btnSave").click(() => {
+				updateConfig()
+				saveConfig();
+			});
+		});
+		</script>
+	</body>
+</html>

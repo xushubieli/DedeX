@@ -1,0 +1,17 @@
+栏目列表标签
+>>dede>>
+<html>
+	...
+	<body>
+		<ul>{dede:channel row='8' type='top' typeid='' currentstyle='<li><a href="~typelink~" class="thisclass">~typename~</a></li>'}
+			<li><a href="[field:typelink/]">[field:typename/]</a></li>{/dede:channel}
+		</ul>
+	</body>
+</html>
+>>dede>>
+row='10' 调用10个栏目
+typeid='1' 调用指定栏目id，多个栏目，例：typeid='1,2,3'
+type='son' 调用下级栏目类型（可用参数：self同级栏目、top顶级栏目）
+reid='0' 调用指定上级栏目id
+currentstyle='' 调用当前栏目应用样式，示例中a应用样式为class="thisclass"
+注：在后台-系统设置-SQL命令工具-数据库文档，查看数据库表了解更多信息

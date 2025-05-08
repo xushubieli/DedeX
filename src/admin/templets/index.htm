@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="robots" content="noindex,nofollow">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title><?php echo $cfg_webname;?>后台管理</title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<script src="/static/web/js/jquery.min.js"></script>
+		<script src="/static/web/js/admin.main.js"></script>
+	</head>
+	<body class="menu-show">
+		<header class="admin-head navbar navbar-expand navbar-dark">
+			<div class="logo">
+				<a href="index_body.php" target="main" class="name mr-2"><?php echo cn_substr($cfg_webname, 18);?></a>
+				<?php if (DEDEBIZ_SAFE_MODE) {?>
+				<a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-primary btn-xs">安全</a>
+				<?php } else {?>
+				<a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-warning btn-xs">开发</a>
+				<?php }?>
+			</div>
+			<nav class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-md-auto">
+					<li class="nav-item"><a class="nav-link" href="javascript:;" id="togglemenu"><i class="fa fa-dedent" title="侧边伸缩"></i></a></li>
+					<?php if ($cuserLogin->getUserType() >= 5) {?>
+					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="catalog_main.php" target="main" data-target="common"><i class="fa fa-navicon" title="栏目管理"></i></a></li>
+					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="tags_main.php" target="main" data-target="common"><i class="fa fa-tags" title="标签管理"></i></a></li>
+					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="statistics_list.php" target="main" data-target="common"><i class="fa fa-bar-chart" title="流量统计"></i></a></li>
+					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="file_manage_main.php<?php echo DEDEBIZ_SAFE_MODE ? '?activepath='.$cfg_medias_dir:'';?>" target="main" data-target="plus"><i class="fa fa-folder" title="文件管理"></i></a></li>
+					<li class="nav-item"><a class="nav-link" href="diy_main.php" target="main" data-target="channel"><i class="fa fa-wpforms" title="自定义表单"></i></a></li>
+					<?php }?>
+					<?php if (!DEDEBIZ_SAFE_MODE) {?>
+					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="templets_main.php" target="main" data-target="templets"><i class="fa fa-cube" title="主题模板"></i></a></li>
+					<?php }?>
+					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="makehtml_all.php" target="main" data-target="makehtml"><i class="fa fa-repeat" title="更新整站"></i></a></li>
+					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="sys_info.php" target="main" data-target="sys"><i class="fa fa-cog" title="系统设置"></i></a></li>
+					<?php echo ($cfg_mb_open == 'Y') ? '<li class="nav-item"><a class="nav-link" href="/user/" target="_blank"><i class="fa fa-user-circle" title="会员中心"></i></a></li>' : '';?>
+					<li class="nav-item"><a class="nav-link" href="/" target="_blank"><i class="fa fa-home" title="预览首页"></i></a></li>
+					<li class="nav-item d-none d-lg-block">
+						<form action="action_search.php" method="post" target="main">
+							<input type="text" name="keyword" placeholder="功能搜索" class="admin-input-sm ml-3">
+							<button type="submit" class="btn btn-sm search"><i class="fa fa-search"></i></button>
+						</form>
+					</li>
+				</ul>
+				<div class="navbar-admin d-none d-md-block">
+					<ul class="nav">
+						<li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('main').contentWindow.location.reload(true);"><i class="fa fa-refresh" title="刷新页面"></i></a></li>
+						<li class="nav-item"><a class="nav-link user" href="sys_admin_user_edit.php?id=<?php echo $cuserLogin->getUserID();?>&dopost=edit" target="main"><img src="<?php echo $cuserLogin->getUserFace();?>"><?php echo $cuserLogin->getUserName();?></a></li>
+						<li class="nav-item"><a class="nav-link" href="exit.php"><i class="fa fa-power-off" title="退了"></i></a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<aside class="admin-aside">
+			<div class="side-menu">
+				<?php 
+				$openitem = 100;
+				GetMenus($cuserLogin->getUserRank(), 'main'); 
+				?>
+			</div>
+		</aside>
+		<main class="admin-content">
+			<iframe src="index_body.php" name="main" id="main" frameborder="0"></iframe>
+		</main>
+	</body>
+</html>

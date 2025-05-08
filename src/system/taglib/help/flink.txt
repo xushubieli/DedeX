@@ -1,0 +1,16 @@
+友情链接标签
+>>dede>>
+<html>
+	...
+	<body>
+		<ul>{dede:flink row='10' titlelen='' type='textall'}
+			<li>[field:link/]</li>{/dede:flink}
+		</ul>
+	</body>
+</html>
+>>dede>>
+row='10' 调用10条友情链接
+titlelen='30' 限制友情链接标题显示30个字符
+type='image' 调用图片友情链接（text文字友情链接） 
+linktype='1' 调用友情链接位置（可用参数：1首页、2内页）
+typeid='0' 调用所有友情链接类型

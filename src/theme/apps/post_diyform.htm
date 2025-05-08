@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title><?php echo $diy->name;?>-<?php echo $cfg_webname;?></title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/style.css">
+		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
+	</head>
+	<body>
+		<?php ThemeInclude('top.htm');?>
+		<main class="container py-3">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">首页</a></li>
+				<li class="breadcrumb-item"><a href="<?php echo $cfg_phpurl?>/diy.php?action=list&diyid=<?php echo $diy->diyid;?>"><?php echo $diy->name;?>列表</a></li>
+				<li class="breadcrumb-item"><?php echo $diy->name;?>发布</li>
+			</ol>
+			<div class="mb-3">
+				<a href="<?php echo $cfg_phpurl?>/diy.php?action=list&diyid=<?php echo $diy->diyid;?>" class="btn btn-success btn-sm">返回列表</a>
+			</div>
+			<form name="addcontent" action="<?php echo $cfg_phpurl?>/diy.php" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="action" value="post">
+				<input type="hidden" name="diyid" value="<?php echo $diyid;?>">
+				<input type="hidden" name="do" value="2">
+				<table class="table mb-0">
+					<?php echo $postform;?>
+					<tr>
+						<td>验证码</td>
+						<td>
+							<input type="text" name="validate" class="form-control admin-input-lg">
+							<img src="/apps/vdimgck.php" onclick="this.src='/apps/vdimgck.php?tag='+Math.random();" style="cursor:pointer">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<button type="submit" name="submit" class="btn btn-success btn-sm">提交</button>
+							<button type="reset" name="reset" class="btn btn-outline-success btn-sm">重置</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</main>
+		<?php ThemeInclude('foot.htm');?>
+		<script src="/static/web/js/moment.min.js"></script>
+		<script src="/static/web/js/daterangepicker.js"></script>
+		<script src="/static/web/js/diy.js"></script>
+	</body>
+</html>

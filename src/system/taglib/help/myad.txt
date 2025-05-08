@@ -1,0 +1,6 @@
+广告标签
+>>dede>>
+{dede:myad name=''/}
+>>dede>>
+name='' 广告标识
+typeid='0' 广告投放全站

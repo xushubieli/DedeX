@@ -1,0 +1,9 @@
+PHP标签
+>>dede>>
+{dede:php}编写PHP代码{/dede:php}
+{dede:field.demo runphp='yes'}编写demo字段PHP代码{/dede:field.demo}
+>>dede>>
+{dede:field.demo runphp='yes'} 字段demo支持PHP语法，任何字段都支持runphp='yes'（其他写法[field:demo runphp='yes']）
+【进阶用法】
+{dede:arclist}[field:global name='autoindex' runphp='yes'](@me==1)? @me='<span>Top1</span>' : @me='';[/field:global]{/dede:arclist} 文档第1篇文章显示<span>Top1</span>，应对模板第1个样式和后面不同的复杂情况
+注：在后台-系统设置-SQL命令工具-数据库文档，查看数据库表了解更多信息

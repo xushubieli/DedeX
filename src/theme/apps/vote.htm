@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>投票结果-<?php echo $cfg_webname;?></title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/style.css">
+	</head>
+	<body>
+		<?php ThemeInclude('top.htm');?>
+		<main class="container py-3">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">首页</a></li>
+				<li class="breadcrumb-item"><?php echo $voname?></li>
+			</ol>
+			<p>投票开始时间：<?php echo $starttime;?></p>
+			<p>投票结束时间：<?php echo $endtime;?></p>
+			<p>投票人数：<?php echo $totalcount;?></p>
+			<p><?php echo $rsmsg;?></p>
+			<p><?php echo $votelist;?></p>
+		</main>
+		<?php ThemeInclude('foot.htm');?>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title><?php echo $diy->name;?>-<?php echo $cfg_webname;?></title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/style.css">
+	</head>
+	<body>
+		<?php ThemeInclude('top.htm');?>
+		<main class="container py-3">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">首页</a></li>
+				<li class="breadcrumb-item"><a href="<?php echo $cfg_phpurl?>/diy.php?action=list&diyid=<?php echo $diy->diyid;?>"><?php echo $diy->name;?>列表</a></li>
+				<li class="breadcrumb-item"><?php echo $diy->name;?>查看</li>
+			</ol>
+			<div class="mb-3">
+				<a href="<?php echo $cfg_phpurl?>/diy.php?action=post&diyid=<?php echo $diy->diyid;?>" class="btn btn-success btn-sm">发布信息</a>
+			</div>
+			<table class="table mb-0">
+				<?php
+				echo '<tbody>';
+				echo '<tr><td>id'.$row['id'].'</td></tr>';
+				$allowhtml = array('htmltext');
+				foreach($fieldlist as $field=>$fielddata)
+				{
+					if ($row[$field]=='') continue;
+				}
+				echo '<tr><td>'.$fielddata[0].'</td></tr><tr><td>'.$row[$field].'</td></tr>';
+				echo '</tbody>';
+				?>
+			</table>
+		</main>
+		<?php ThemeInclude('foot.htm');?>
+	</body>
+</html>

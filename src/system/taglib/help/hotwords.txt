@@ -1,0 +1,7 @@
+热搜标签
+>>dede>>
+{dede:hotwords num='6' subday='365'/}
+>>dede>>
+num='6' 调用6条热搜标签
+subday='365' 调用7天内热搜标签
+maxlength='16' 限制热搜标签显示16个字符

@@ -1,0 +1,7 @@
+SQL标签
+>>dede>>
+{dede:sql sql='编写SQL代码'}编写字段{/dede:sql}
+>>dede>>
+【进阶用法】
+{dede:sql sql='SELECT * FROM `#@__arctype` WHERE id=1'}[field:content function='cn_substr(Html2text("@me")."...",180)'/]{/dede:sql} 调用指定栏目id内容，过滤网页代码，限制显示180个字符
+注：在后台-系统设置-SQL命令工具-数据库文档，查看数据库表了解更多信息

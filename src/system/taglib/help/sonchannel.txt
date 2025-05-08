@@ -1,0 +1,13 @@
+子栏目标签
+>>dede>>
+<html>
+	...
+	<body>
+		<ul>{dede:sonchannel}
+			<li><a href='[field:typeurl/]'>[field:typename/]</a></li>{/dede:sonchannel}
+		</ul>
+	</body>
+</html>
+>>dede>>
+row='10' 调用10个栏目
+col='2' 限制2列显示，默认1列

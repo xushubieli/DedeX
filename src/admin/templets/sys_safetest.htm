@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>文件扫描工具</title>
+		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<script src="/static/web/js/jquery.min.js"></script>
+		<script src="/static/web/js/webajax.js"></script>
+		<script src="/static/web/js/admin.main.js"></script>
+	</head>
+	<body>
+		<?php echo $alter;?>
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
+				<li class="breadcrumb-item active">文件扫描工具</li>
+			</ol>
+			<div class="card shadow-sm mb-3">
+				<div class="card-header">文件扫描工具</div>
+				<div class="card-body">
+					<div class="alert alert-info">检测结果仅供参阅，请确认源码后再删除非法文件。建议data、system、theme目录设置为不可浏览，static和a目录禁止执行脚本，以增强系统安全性。本检测程序基于开发模式设计，若网站目录包含其他系统，可能会导致误判。检测程序会跳过模板缓存目录的检查，为确保安全，建议在检测完成后清空模板缓存。</div>
+					<div class="table-responsive">
+						<table class="table table-borderless">
+							<tbody>
+								<tr>
+									<td>
+										<label>文件类型：<input type="text" name="filetype" id="filetype" value="php|inc" class="admin-input-lg"></label>
+										<label>代码特征：<input type="text" name="info" id="info" value="eval|cmd|system|exec|_GET|_POST|_REQUEST|base64_decode" class="admin-input-lg"></label>
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+										<a href="javascript:LoadCtTest();" class="btn btn-success btn-sm">开始执行</a>
+										<a href="javascript:LoadCtClear();" class="btn btn-success btn-sm">清空模板缓存</a>
+									</td>
+								</tr>
+								<tr>
+									<td id="messagetd"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			function LoadCtTest() {
+				var filetype = $Obj('filetype').value;
+				var info = $Obj('info').value;
+				fetch('sys_safetest.php?action=test&filetype=' + filetype + "&info=" + info).then(resp => {
+					if (resp.ok) {
+					   return resp.text()
+					}
+					throw new Error('系统错误，无法获取数据');
+				}).then((d) => {
+					$DE('messagetd').innerHTML = d;
+				}).catch((error) => {
+					console.log(error);
+				});
+			}
+			function LoadCtClear() {
+				fetch('sys_safetest.php?action=clear').then(resp => {
+					if (resp.ok) {
+						return resp.text()
+					}
+					throw new Error('系统错误，无法获取数据');
+				}).then((d) => {
+					$DE('messagetd').innerHTML = d;
+				}).catch((error) => {
+					$DE('messagetd').innerHTML = errMsg;
+				});
+			}
+		</script>
+	</body>
+</html>

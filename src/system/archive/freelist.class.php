@@ -1,0 +1,856 @@
+<?php
+if (!defined('DEDEINC')) exit('dedebiz');
+/**
+ * 自由列表
+ *
+ * @version        $id:freelist.class.php 3 15:15 2010年7月7日 tianya $
+ * @package        DedeBIZ.Libraries
+ * @copyright      Copyright (c) 2022 DedeBIZ.COM
+ * @license        GNU GPL v2 (https://www.dedebiz.com/license)
+ * @link           https://www.dedebiz.com
+ */
+require_once DEDEINC.'/archive/partview.class.php';
+@set_time_limit(0);
+class FreeList
+{
+    var $dsql;
+    var $dtp;
+    var $FreeID;
+    var $TypeID;
+    var $TypeLink;
+    var $PageNo;
+    var $TotalPage;
+    var $TotalResult;
+    var $pagesize;
+    var $ChannelUnit;
+    var $Fields;
+    var $PartView;
+    var $FLInfos;
+    var $ListObj;
+    var $TempletsFile;
+    var $maintable;
+    //php5构造函数
+    function __construct($fid)
+    {
+        global $dsql;
+        $this->FreeID = $fid;
+        $this->TypeLink = new TypeLink(0);
+        $this->dsql = $dsql;
+        $this->maintable = '#@__archives';
+        $this->TempletsFile = '';
+        $this->FLInfos = $this->dsql->GetOne("SELECT * FROM `#@__freelist` WHERE aid='$fid' ");
+        $liststr = $this->FLInfos['listtag'];
+        $this->FLInfos['maxpage'] = (empty($this->FLInfos['maxpage']) ? 100 : $this->FLInfos['maxpage']);
+        //载入数据里保存的列表属性信息
+        $ndtp = new DedeTagParse();
+        $ndtp->SetNameSpace("dede", "{", "}");
+        $ndtp->LoadString($liststr);
+        $this->ListObj = $ndtp->GetTag('list');
+        $this->pagesize = $this->ListObj->GetAtt('pagesize');
+        if (empty($this->pagesize)) {
+            $this->pagesize = 30;
+        }
+        $channelid = $this->ListObj->GetAtt('channel');
+        $channelid = intval($channelid);
+        $this->maintable = '#@__archives';
+        //全局模板解析器
+        $this->dtp = new DedeTagParse();
+        $this->dtp->SetNameSpace("dede", "{", "}");
+        $this->dtp->SetRefObj($this);
+        //设置一些全局参数的值
+        $this->Fields['aid'] = $this->FLInfos['aid'];
+        $this->Fields['title'] = $this->FLInfos['title'];
+        $this->Fields['position'] = "<li class=\"breadcrumb-item\">{$this->FLInfos['title']}</li>";
+        $this->Fields['keywords'] = $this->FLInfos['keywords'];
+        $this->Fields['description'] = $this->FLInfos['description'];
+        $channelid = $this->ListObj->GetAtt('channel');
+        if (!empty($channelid)) {
+            $this->Fields['channeltype'] = $channelid;
+            $this->ChannelUnit = new ChannelUnit($channelid);
+        } else {
+            $this->Fields['channeltype'] = 0;
+        }
+        foreach ($GLOBALS['PubFields'] as $k => $v) {
+            $this->Fields[$k] = $v;
+        }
+        $this->PartView = new PartView();
+        $this->CountRecord();
+    }
+    //php4构造函数
+    function FreeList($fid)
+    {
+        $this->__construct($fid);
+    }
+    //关闭相关资源
+    function Close()
+    {
+    }
+    /**
+     *  统计列表里的记录
+     *
+     * @access    private
+     * @return    void
+     */
+    function CountRecord()
+    {
+        global $cfg_list_son, $cfg_needsontype;
+        //统计数据库记录
+        $this->TotalResult = -1;
+        if (isset($GLOBALS['TotalResult'])) {
+            $this->TotalResult = $GLOBALS['TotalResult'];
+        }
+        if (isset($GLOBALS['PageNo'])) {
+            $this->PageNo = $GLOBALS['PageNo'];
+        } else {
+            $this->PageNo = 1;
+        }
+        //已经有总记录的值
+        if ($this->TotalResult == -1) {
+            $addSql  = " arcrank > -1 AND channel>-1 ";
+            $typeid = $this->ListObj->GetAtt('typeid');
+            $subday = $this->ListObj->GetAtt('subday');
+            $listtype = $this->ListObj->GetAtt('type');
+            $att = $this->ListObj->GetAtt('att');
+            $channelid = $this->ListObj->GetAtt('channel');
+            if (empty($channelid)) {
+                $channelid = 0;
+            }
+            //是否指定栏目条件
+            if (!empty($typeid)) {
+                if ($cfg_list_son == 'N') {
+                    $addSql .= " AND (typeid='$typeid') ";
+                } else {
+                    $addSql .= " AND typeid in (".GetSonIds($typeid, 0, TRUE).") ";
+                }
+            }
+            //自定义属性条件
+            if ($att != '') {
+                $flags = explode(',', $att);
+                for ($i = 0; isset($flags[$i]); $i++) $addSql .= " AND FIND_IN_SET('{$flags[$i]}',flag)>0 ";
+            }
+            //文档的栏目模型
+            if ($channelid > 0 && !preg_match("#spec#i", $listtype)) {
+                $addSql .= " AND channel = '$channelid' ";
+            }
+            //推荐文档，带缩略图，专题文档
+            if (preg_match("#commend#i", $listtype)) {
+                $addSql .= " AND FIND_IN_SET('c',flag) > 0  ";
+            }
+            if (preg_match("#image#i", $listtype)) {
+                $addSql .= " AND litpic <> '' ";
+            }
+            if (preg_match("#spec#i", $listtype) || $channelid == -1) {
+                $addSql .= " AND channel = -1  ";
+            }
+            if (!empty($subday)) {
+                $starttime = time() - $subday * 86400;
+                $addSql .= " AND senddate > $starttime  ";
+            }
+            $keyword = $this->ListObj->GetAtt('keyword');
+            if (!empty($keyword)) {
+                $keyword = str_replace(',', '|', $keyword);
+                $addSql .= " AND CONCAT(title,keywords) REGEXP '$keyword' ";
+            }
+            $cquery = "SELECT COUNT(*) AS dd FROM `{$this->maintable}` WHERE $addSql";
+            $row = $this->dsql->GetOne($cquery);
+            if (is_array($row)) {
+                $this->TotalResult = $row['dd'];
+            } else {
+                $this->TotalResult = 0;
+            }
+        }
+        $this->TotalPage = ceil($this->TotalResult / $this->pagesize);
+        if ($this->TotalPage > $this->FLInfos['maxpage']) {
+            $this->TotalPage = $this->FLInfos['maxpage'];
+            $this->TotalResult = $this->TotalPage * $this->pagesize;
+        }
+    }
+    /**
+     *  载入模板
+     *
+     * @access    public
+     * @return    void
+     */
+    function LoadTemplet()
+    {
+        $tmpdir = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir'];
+        $tempfile = str_replace("{style}", $GLOBALS['cfg_df_style'], $this->FLInfos['templet']);
+        $tempfile = $tmpdir."/".$tempfile;
+        if (!file_exists($tempfile)) {
+            $tempfile = $tmpdir."/".$GLOBALS['cfg_df_style']."/list_free.htm";
+        }
+        $this->dtp->LoadTemplate($tempfile);
+        $this->TempletsFile = preg_replace("#^".$GLOBALS['cfg_basedir']."#", '', $tempfile);
+    }
+    /**
+     *  列表创建网页
+     *
+     * @access    public
+     * @param     string  $startpage  开始页面
+     * @param     string  $makepagesize  生成的页码数
+     * @return    string
+     */
+    function MakeHtml($startpage = 1, $makepagesize = 0)
+    {
+        $this->LoadTemplet();
+        $murl = '';
+        if (empty($startpage)) {
+            $startpage = 1;
+        }
+        $this->ParseTempletsFirst();
+        $totalpage = ceil($this->TotalResult / $this->pagesize);
+        if ($totalpage == 0) {
+            $totalpage = 1;
+        }
+        if ($makepagesize > 0) {
+            $endpage = $startpage + $makepagesize;
+        } else {
+            $endpage = ($totalpage + 1);
+        }
+        if ($endpage > ($totalpage + 1)) {
+            $endpage = $totalpage;
+        }
+        $firstFile = '';
+        for ($this->PageNo = $startpage; $this->PageNo < $endpage; $this->PageNo++) {
+            $this->ParseDMFields($this->PageNo, 1);
+            //文件名
+            $makeFile = $this->GetMakeFileRule();
+            if (!preg_match("#^\/#", $makeFile)) {
+                $makeFile = "/".$makeFile;
+            }
+            $makeFile = str_replace('{page}', $this->PageNo, $makeFile);
+            $murl = $makeFile;
+            $makeFile = $GLOBALS['cfg_basedir'].$makeFile;
+            $makeFile = preg_replace("#\/{1,}#", "/", $makeFile);
+            if ($this->PageNo == 1) {
+                $firstFile = $makeFile;
+            }
+            //保存文件
+            $this->dtp->SaveTo($makeFile);
+        }
+        if ($this->FLInfos['nodefault'] == 0) {
+            $murl = '/'.str_replace('{cmspath}', $GLOBALS['cfg_cmspath'], $this->FLInfos['listdir']);
+            $murl .= '/'.$this->FLInfos['defaultpage'];
+            $indexfile = $GLOBALS['cfg_basedir'].$murl;
+            $murl = preg_replace("#\/{1,}#", "/", $murl);
+            copy($firstFile, $indexfile);
+        }
+        $this->Close();
+        return $murl;
+    }
+    /**
+     *  显示列表
+     *
+     * @access    public
+     * @return    void
+     */
+    function Display()
+    {
+        $this->LoadTemplet();
+        $this->ParseTempletsFirst();
+        $this->ParseDMFields($this->PageNo, 0);
+        $this->dtp->Display();
+    }
+    /**
+     *  显示单独模板页面
+     *
+     * @access    public
+     * @return    void
+     */
+    function DisplayPartTemplets()
+    {
+        $nmfa = 0;
+        $tmpdir = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir'];
+        if ($this->Fields['ispart'] == 1) {
+            $tempfile = str_replace("{tid}", $this->FreeID, $this->Fields['tempindex']);
+            $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
+            $tempfile = $tmpdir."/".$tempfile;
+            if (!file_exists($tempfile)) {
+                $tempfile = $tmpdir."/".$GLOBALS['cfg_df_style']."/index_default.htm";
+            }
+            $this->PartView->SetTemplet($tempfile);
+        } else if ($this->Fields['ispart'] == 2) {
+            $tempfile = str_replace("{tid}", $this->FreeID, $this->Fields['tempone']);
+            $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
+            if (is_file($tmpdir."/".$tempfile)) {
+                $this->PartView->SetTemplet($tmpdir."/".$tempfile);
+            } else {
+                $this->PartView->SetTemplet("未使用单独页模板", "string");
+                $nmfa = 1;
+            }
+        }
+        CreateDir($this->Fields['typedir']);
+        $makeUrl = $this->GetMakeFileRule($this->Fields['id'], "index", $this->Fields['typedir'], $this->Fields['defaultname'], $this->Fields['namerule2']);
+        $makeFile = $this->GetTruePath().$makeUrl;
+        if ($nmfa == 0) {
+            $this->PartView->Display();
+        } else {
+            if (!file_exists($makeFile)) {
+                $this->PartView->Display();
+            } else {
+                include($makeFile);
+            }
+        }
+    }
+    /**
+     *  获得站点的真实根路径
+     *
+     * @access    public
+     * @return    string
+     */
+    function GetTruePath()
+    {
+        $truepath = $GLOBALS["cfg_basedir"];
+        return $truepath;
+    }
+    /**
+     *  解析模板，对固定的标记进行初始给值
+     *
+     * @access    public
+     * @return    void
+     */
+    function ParseTempletsFirst()
+    {
+        MakeOneTag($this->dtp, $this);
+    }
+    /**
+     *  解析模板，对文档里的变动进行赋值
+     *
+     * @access    public
+     * @param     string  $PageNo  页码
+     * @param     string  $ismake  是否编译
+     * @return    string
+     */
+    function ParseDMFields($PageNo, $ismake = 1)
+    {
+        foreach ($this->dtp->CTags as $tagid => $ctag) {
+            if ($ctag->GetName() == "freelist") {
+                $limitstart = ($this->PageNo - 1) * $this->pagesize;
+                if ($this->PageNo > $this->FLInfos['maxpage']) $this->dtp->Assign($tagid, '已经超过了最大允许列出的页面');
+                else $this->dtp->Assign($tagid, $this->GetList($limitstart, $ismake));
+            } else if ($ctag->GetName() == "pagelist") {
+                $list_len = trim($ctag->GetAtt("listsize"));
+                $ctag->GetAtt("listitem") == "" ? $listitem = "info,index,pre,pageno,next,end,option" : $listitem = $ctag->GetAtt("listitem");
+                if ($list_len == "") {
+                    $list_len = 3;
+                }
+                if ($ismake == 0) {
+                    $this->dtp->Assign($tagid, $this->GetPageListDM($list_len, $listitem));
+                } else {
+                    $this->dtp->Assign($tagid, $this->GetPageListST($list_len, $listitem));
+                }
+            } else if ($ctag->GetName() == "pageno") {
+                $this->dtp->Assign($tagid, $PageNo);
+            }
+        }
+    }
+    /**
+     *  获得要创建的文件名称规则
+     *
+     * @access    public
+     * @return    string
+     */
+    function GetMakeFileRule()
+    {
+        $okfile = '';
+        $namerule = $this->FLInfos['namerule'];
+        $listdir = $this->FLInfos['listdir'];
+        $listdir = str_replace('{cmspath}', $GLOBALS['cfg_cmspath'], $listdir);
+        $okfile = str_replace('{listid}', $this->FLInfos['aid'], $namerule);
+        $okfile = str_replace('{listdir}', $listdir, $okfile);
+        $okfile = str_replace("\\", "/", $okfile);
+        $mdir = preg_replace("#/([^/]*)$#", "", $okfile);
+        if (!preg_match("#\/#", $mdir) && preg_match("#\.#", $mdir)) {
+            return $okfile;
+        } else {
+            CreateDir($mdir, '', '');
+            return $okfile;
+        }
+    }
+    /**
+     *  获得一个单列的文档列表
+     *
+     * @access    public
+     * @param     string  $limitstart  开始限制
+     * @param     string  $ismake  是否编译
+     * @return    string
+     */
+    function GetList($limitstart, $ismake = 1)
+    {
+        global $cfg_list_son, $cfg_needsontype;
+        $col = $this->ListObj->GetAtt('col');
+        if (empty($col)) {
+            $col = 1;
+        }
+        $titlelen = $this->ListObj->GetAtt('titlelen');
+        $infolen = $this->ListObj->GetAtt('infolen');
+        $imgwidth = $this->ListObj->GetAtt('imgwidth');
+        $imgheight = $this->ListObj->GetAtt('imgheight');
+        $titlelen = AttDef($titlelen, 60);
+        $infolen = AttDef($infolen, 250);
+        $imgwidth = AttDef($imgwidth, 80);
+        $imgheight = AttDef($imgheight, 80);
+        $innertext = trim($this->ListObj->GetInnerText());
+        if (empty($innertext)) $innertext = GetSysTemplets("list_fulllist.htm");
+        $tablewidth = 100;
+        if ($col == "") $col = 1;
+        $colWidth = ceil(100 / $col);
+        $tablewidth = $tablewidth."%";
+        $colWidth = $colWidth."%";
+        //按不同情况设定SQL条件
+        $orwhere = " arc.arcrank > -1 AND channel>-1 ";
+        $typeid = $this->ListObj->GetAtt('typeid');
+        $subday = $this->ListObj->GetAtt('subday');
+        $listtype = $this->ListObj->GetAtt('type');
+        $att = $this->ListObj->GetAtt('att');
+        $channelid = $this->ListObj->GetAtt('channel');
+        if (empty($channelid)) $channelid = 0;
+        //是否指定栏目条件
+        if (!empty($typeid)) {
+            if ($cfg_list_son == 'N') {
+                $orwhere .= " AND (arc.typeid='$typeid') ";
+            } else {
+                $orwhere .= " AND arc.typeid IN (".GetSonIds($typeid, 0, TRUE).") ";
+            }
+        }
+        //自定义属性条件
+        if ($att != '') {
+            $flags = explode(',', $att);
+            for ($i = 0; isset($flags[$i]); $i++) $orwhere .= " AND FIND_IN_SET('{$flags[$i]}',flag)>0 ";
+        }
+        //文档的栏目模型
+        if ($channelid > 0 && !preg_match("#spec#i", $listtype)) {
+            $orwhere .= " AND arc.channel = '$channelid' ";
+        }
+        //推荐文档，带缩略图，专题文档
+        if (preg_match("#commend#i", $listtype)) {
+            $orwhere .= " AND FIND_IN_SET('c',flag) > 0  ";
+        }
+        if (preg_match("#image#i", $listtype)) {
+            $orwhere .= " AND arc.litpic <> '' ";
+        }
+        if (preg_match("#spec#i", $listtype) || $channelid == -1) {
+            $orwhere .= " AND arc.channel = -1  ";
+        }
+        if (!empty($subday)) {
+            $starttime = time() - $subday * 86400;
+            $orwhere .= " AND arc.senddate > $starttime  ";
+        }
+        $keyword = $this->ListObj->GetAtt('keyword');
+        if (!empty($keyword)) {
+            $keyword = str_replace(',', '|', $keyword);
+            $orwhere .= " AND CONCAT(arc.title,arc.keywords) REGEXP '$keyword' ";
+        }
+        $orderby = $this->ListObj->GetAtt('orderby');
+        $orderWay = $this->ListObj->GetAtt('orderway');
+        //排序方式
+        $ordersql = '';
+        if ($orderby == "senddate") {
+            $ordersql = " ORDER BY arc.senddate $orderWay";
+        } else if ($orderby == "pubdate") {
+            $ordersql = " ORDER BY arc.pubdate $orderWay";
+        } else if ($orderby == "id") {
+            $ordersql = " ORDER BY arc.id $orderWay";
+        } else if ($orderby == "hot" || $orderby == "click") {
+            $ordersql = " ORDER BY arc.click $orderWay";
+        } else if ($orderby == "lastpost") {
+            $ordersql = " ORDER BY arc.lastpost $orderWay";
+        } else if ($orderby == "scores") {
+            $ordersql = " ORDER BY arc.scores $orderWay";
+        } else if ($orderby == "rand") {
+            $ordersql = " ORDER BY rand()";
+        } else {
+            $ordersql = " ORDER BY arc.sortrank $orderWay";
+        }
+        //获得附加表的相关信息
+        $addField = '';
+        $addJoin = '';
+        if (is_object($this->ChannelUnit)) {
+            $addtable  = $this->ChannelUnit->ChannelInfos['addtable'];
+            if ($addtable != "") {
+                $addJoin = " LEFT JOIN $addtable ON arc.id = ".$addtable.".aid ";
+                $addField = '';
+                $fields = explode(",", $this->ChannelUnit->ChannelInfos['listfields']);
+                foreach ($fields as $k => $v) {
+                    $nfields[$v] = $k;
+                }
+                foreach ($this->ChannelUnit->ChannelFields as $k => $arr) {
+                    if (isset($nfields[$k])) {
+                        if (!empty($arr['rename'])) {
+                            $addField .= ",".$addtable.".".$k." as ".$arr['rename'];
+                        } else {
+                            $addField .= ",".$addtable.".".$k;
+                        }
+                    }
+                }
+            }
+        }
+        $query = "SELECT arc.*,tp.typedir,tp.typename,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath,mb.uname,mb.face,mb.userid $addField FROM {$this->maintable} arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id LEFT JOIN `#@__member` mb on arc.mid = mb.mid $addJoin WHERE $orwhere $ordersql LIMIT $limitstart,".$this->pagesize;
+        $this->dsql->SetQuery($query);
+        $this->dsql->Execute("al");
+        $artlist = '';
+        if ($col > 1) {
+            $artlist = "<table width='$tablewidth'>";
+        }
+        $indtp = new DedeTagParse();
+        $indtp->SetNameSpace("field", "[", "]");
+        $indtp->LoadSource($innertext);
+        $GLOBALS['autoindex'] = 0;
+        for ($i = 0; $i < $this->pagesize; $i++) {
+            if ($col > 1) {
+                $artlist .= "<tr>";
+            }
+            for ($j = 0; $j < $col; $j++) {
+                if ($col > 1) {
+                    $artlist .= "<td width='$colWidth'>";
+                }
+                if ($row = $this->dsql->GetArray("al")) {
+                    $GLOBALS['autoindex']++;
+                    //处理一些特殊字段
+                    $row['id'] =  $row['id'];
+                    $row['arcurl'] = $this->GetArcUrl(
+                        $row['id'],
+                        $row['typeid'],
+                        $row['senddate'],
+                        $row['title'],
+                        $row['ismake'],
+                        $row['arcrank'],
+                        $row['namerule'],
+                        $row['typedir'],
+                        $row['money'],
+                        $row['filename'],
+                        $row['moresite'],
+                        $row['siteurl'],
+                        $row['sitepath']
+                    );
+                    $row['typeurl'] = GetTypeUrl(
+                        $row['typeid'],
+                        $row['typedir'],
+                        $row['isdefault'],
+                        $row['defaultname'],
+                        $row['ispart'],
+                        $row['namerule2'],
+                        $row['siteurl'],
+                        $row['sitepath']
+                    );
+                    if ($ismake == 0 && $GLOBALS['cfg_multi_site'] == 'Y') {
+                        if ($row["siteurl"] == "") {
+                            $row["siteurl"] = $GLOBALS['cfg_mainsite'];
+                        }
+                    }
+                    $row['description'] = cn_substr($row['description'], $infolen);
+                    if ($row['litpic'] == '-' || $row['litpic'] == '') {
+                        $row['litpic'] = $GLOBALS['cfg_cmspath'].'/static/web/img/thumbnail.jpg';
+                    }
+                    if (!preg_match("#^(http|https):\/\/#i", $row['litpic']) && $GLOBALS['cfg_multi_site'] == 'Y') {
+                        $row['litpic'] = $GLOBALS['cfg_mainsite'].$row['litpic'];
+                    }
+                    $row['picname'] = $row['litpic'];
+                    $row['info'] = $row['description'];
+                    $row['filename'] = $row['arcurl'];
+                    $row['stime'] = GetDateMK($row['pubdate']);
+                    $row['textlink'] = "<a href='".$row['filename']."' title='".str_replace("'", "", $row['title'])."'>".$row['title']."</a>";
+                    $row['typelink'] = "<a href='".$row['typeurl']."'>[".$row['typename']."]</a>";
+                    $row['imglink'] = "<a href='".$row['filename']."'><img src='".$row['picname']."' width='$imgwidth' height='$imgheight' title='".str_replace("'", "", $row['title'])."'></a>";
+                    $row['image'] = "<img src='".$row['picname']."' width='$imgwidth' height='$imgheight' title='".str_replace("'", "", $row['title'])."'>";
+                    $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
+                    $row['memberurl'] = $GLOBALS['cfg_memberurl'];
+                    $row['userurl'] = $GLOBALS['cfg_memberurl'].'/index.php?uid='.$row['userid'];
+                    $row['templeturl'] = $GLOBALS['cfg_templeturl'];
+                    $row['title'] = cn_substr($row['title'], $titlelen);
+                    if ($row['color'] != "") {
+                        $row['title'] = "<span style='color:".$row['color']."'>".$row['title']."</span>";
+                    }
+                    if (preg_match("#c#", $row['flag'])) {
+                        $row['title'] = "".$row['title']."";
+                    }
+                    $row['face'] = empty($row['face'])? $GLOBALS['cfg_mainsite'].'/static/web/img/admin.png' : $row['face'];
+                    //编译附加表里的数据
+                    if (is_object($this->ChannelUnit)) {
+                        foreach ($row as $k => $v) {
+                            if (preg_match("#[A-Z]#", $k)) {
+                                $row[strtolower($k)] = $v;
+                            }
+                        }
+                        foreach ($this->ChannelUnit->ChannelFields as $k => $arr) {
+                            if (isset($row[$k])) {
+                                $row[$k] = $this->ChannelUnit->MakeField($k, $row[$k]);
+                            }
+                        }
+                    }
+                    //解析单条记录
+                    if (is_array($indtp->CTags)) {
+                        foreach ($indtp->CTags as $k => $ctag) {
+                            $_f = $ctag->GetName();
+                            if ($_f == 'array') {
+                                //传递整个数组，在runphp模式中有特殊作用
+                                $indtp->Assign($k, $row);
+                            } else {
+                                if (isset($row[$_f])) {
+                                    $indtp->Assign($k, $row[$_f]);
+                                } else {
+                                    $indtp->Assign($k, "");
+                                }
+                            }
+                        }
+                    }
+                    $artlist .= $indtp->GetResult();
+                }  else {
+                    $artlist .= '';
+                }
+                if ($col > 1) {
+                    $artlist .= "</td>";
+                }
+            }
+            if ($col > 1) {
+                $i += $col - 1;
+            }
+            if ($col > 1) {
+                $artlist .= "</tr>";
+            }
+        }
+        if ($col > 1) {
+            $artlist .= "</table>";
+        }
+        $this->dsql->FreeResult("al");
+        return $artlist;
+    }
+    /**
+     *  获取静态的分页列表
+     *
+     * @access    public
+     * @param     string  $list_len  列表尺寸
+     * @param     string  $listitem  列表项目
+     * @return    string
+     */
+    function GetPageListST($list_len, $listitem = "info,index,end,pre,next,pageno")
+    {
+        $prepage = '';
+        $nextpage = '';
+        $prepagenum = $this->PageNo - 1;
+        $nextpagenum = $this->PageNo + 1;
+        if ($list_len == "" || preg_match("#[^0-9]#", $list_len)) {
+            $list_len = 3;
+        }
+        $totalpage = ceil($this->TotalResult / $this->pagesize);
+        if ($totalpage <= 1 && $this->TotalResult > 0) {
+            return "<li class='page-item disabled'><span class='page-link'>1页{$this->TotalResult}条</span></li>";
+        }
+        if ($this->TotalResult == 0) {
+            return "<li class='page-item disabled'><span class='page-link'>0页{$this->TotalResult}条</span></li>";
+        }
+        $maininfo = "<li class='page-item disabled'><span class='page-link'>{$totalpage}页{$this->TotalResult}条</span></li>";
+        $purl = $this->GetCurUrl();
+        $tnamerule = $this->GetMakeFileRule();
+        $tnamerule = preg_replace("#^(.*)\/#", '', $tnamerule);
+        //获得上页和首页的链接
+        if ($this->PageNo != 1) {
+            $prepage .= "<li class='page-item'><a href='".str_replace("{page}", $prepagenum, $tnamerule)."' class='page-link'>上页</a></li>";
+            $indexpage = "<li class='page-item'><a href='".str_replace("{page}", 1, $tnamerule)."' class='page-link'>首页</a></li>";
+        } else {
+            $indexpage = "<li class='page-item'><span class='page-link'>首页</span></li>";
+        }
+        //下页和未页的链接
+        if ($this->PageNo != $totalpage && $totalpage > 1) {
+            $nextpage .= "<li class='page-item'><a href='".str_replace("{page}", $nextpagenum, $tnamerule)."' class='page-link'>下页</a></li>";
+            $endpage = "<li class='page-item'><a href='".str_replace("{page}", $totalpage, $tnamerule)."' class='page-link'>末页</a></li>";
+        } else {
+            $endpage = "<li class='page-item'><span class='page-link'>末页</span></li>";
+        }
+        //option链接
+        $optionlen = strlen($totalpage);
+        $optionlen = $optionlen * 12 + 18;
+        if ($optionlen < 36) $optionlen = 36;
+        if ($optionlen > 100) $optionlen = 100;
+        $optionlist = "<select name='sldd' style='width:$optionlen' onchange='location.href=this.options[this.selectedIndex].value;'>";
+        for ($fl = 1; $fl <= $totalpage; $fl++) {
+            if ($fl == $this->PageNo) {
+                $optionlist .= "<option value='".str_replace("{page}", $fl, $tnamerule)."' selected>{$fl}</option>";
+            } else {
+                $optionlist .= "<option value='".str_replace("{page}", $fl, $tnamerule)."'>{$fl}</option>";
+            }
+        }
+        $optionlist .= "</select>";
+        //获得数字链接
+        $listdd = '';
+        $total_list = $list_len * 2 + 1;
+        if ($this->PageNo >= $total_list) {
+            $j = $this->PageNo - $list_len;
+            $total_list = $this->PageNo + $list_len;
+            if ($total_list > $totalpage) {
+                $total_list = $totalpage;
+            }
+        } else {
+            $j = 1;
+            if ($total_list > $totalpage) {
+                $total_list = $totalpage;
+            }
+        }
+        for ($j; $j <= $total_list; $j++) {
+            if ($j == $this->PageNo) {
+                $listdd .= "<li class='page-item active'><span class='page-link'>{$j}</span></li>";
+            } else {
+                $listdd .= "<li class='page-item'><a href='".str_replace("{page}", $j, $tnamerule)."' class='page-link'>{$j}</a></li>";
+            }
+        }
+        $plist = '';
+        $plist .= preg_match('/index/i', $listitem)? $indexpage : "";
+        $plist .= preg_match('/pre/i', $listitem)? $prepage : "";
+        $plist .= preg_match('/pageno/i', $listitem)? $listdd : "";
+        $plist .= preg_match('/next/i', $listitem)? $nextpage : "";
+        $plist .= preg_match('/end/i', $listitem)? $endpage : "";
+        $plist .= preg_match('/option/i', $listitem)? $optionlist : "";
+        $plist .= preg_match('/info/i', $listitem)? $maininfo : "";
+        return $plist;
+    }
+    /**
+     *  获取动态的分页列表
+     *
+     * @access    public
+     * @param     string  $list_len  列表尺寸
+     * @param     string  $listitem  列表项目
+     * @return    string
+     */
+    function GetPageListDM($list_len, $listitem = "index,end,pre,next,pageno")
+    {
+        $prepage = '';
+        $nextpage = '';
+        $prepagenum = $this->PageNo - 1;
+        $nextpagenum = $this->PageNo + 1;
+        if ($list_len == "" || preg_match("/[^0-9]/", $list_len)) {
+            $list_len = 3;
+        }
+        $totalpage = ceil($this->TotalResult / $this->pagesize);
+        if ($totalpage <= 1 && $this->TotalResult > 0) {
+            return "<li class='page-item disabled'><span class='page-link'>1页{$this->TotalResult}条</span></li>";
+        }
+        if ($this->TotalResult == 0) {
+            return "<li class='page-item disabled'><span class='page-link'>0页{$this->TotalResult}条</span></li>";
+        }
+        $maininfo = "<li class='page-item disabled'><span class='page-link'>{$totalpage}页{$this->TotalResult}条</span></li>";
+        $purl = $this->GetCurUrl();
+        //开启伪静态对规则替换
+        if ($cfg_rewrite == 'Y') {
+            $purl = str_replace("/apps", "", $purl);
+            $nowurls = preg_replace("/", ".php?", $purl);
+            $nowurls = explode("?", $nowurls);
+            $purl = $nowurls[0];
+        }
+        $geturl = "tid={$this->TypeID}&TotalResult={$this->TotalResult}&";
+        $purl .= '?'.$geturl;
+        //获得上页和下页的链接
+        if ($this->PageNo != 1) {
+            $prepage .= "<li class='page-item'><a href='{$purl}PageNo={$prepagenum}' class='page-link'>上页</a></li>";
+            $indexpage = "<li class='page-item'><a href='{$purl}PageNo=1' class='page-link'>首页</a>";
+        } else {
+            $indexpage = "<li class='page-item'><span class='page-link'>首页</span></li>";
+        }
+        if ($this->PageNo != $totalpage && $totalpage > 1) {
+            $nextpage .= "<li class='page-item'><a href='{$purl}PageNo={$nextpagenum}' class='page-link'>下页</a></li>";
+            $endpage = "<li class='page-item'><a href='{$purl}PageNo={$totalpage}' class='page-link'>末页</a></li>";
+        } else {
+            $endpage = "<li class='page-item'><span class='page-link'>末页</span></li>";
+        }
+        //获得数字链接
+        $listdd = '';
+        $total_list = $list_len * 2 + 1;
+        if ($this->PageNo >= $total_list) {
+            $j = $this->PageNo - $list_len;
+            $total_list = $this->PageNo + $list_len;
+            if ($total_list > $totalpage) $total_list = $totalpage;
+        } else {
+            $j = 1;
+            if ($total_list > $totalpage) $total_list = $totalpage;
+        }
+        for ($j; $j <= $total_list; $j++) {
+            if ($j == $this->PageNo) {
+                $listdd .= "<li class='page-item active'><span class='page-link'>{$j}</span></li>";
+            } else {
+                $listdd .= "<li class='page-item'><a href='{$purl}PageNo={$j}' class='page-link'>{$j}</a></li>";
+            }
+        }
+        $plist = '';
+        if (preg_match('/index/i', $listitem)) $plist .= $indexpage;
+        if (preg_match('/pre/i', $listitem)) $plist .= $prepage;
+        if (preg_match('/pageno/i', $listitem)) $plist .= $listdd;
+        if (preg_match('/next/i', $listitem)) $plist .= $nextpage;
+        if (preg_match('/end/i', $listitem)) $plist .= $endpage;
+        if (preg_match('/option/i', $listitem)) $plist .= $optionlist;
+        if (preg_match('/info/i', $listitem)) $plist .= $maininfo;
+        //伪静态栏目分页
+        if ($cfg_rewrite == 'Y') {
+            $plist = str_replace("?tid=", "", $plist);
+            $plist = preg_replace("/&pageno=(\d+)/i", "-\\1", $plist);
+            $plist = preg_replace("/&TotalResult=(\d+)/i", "", $plist);//去掉分页数值
+        }
+        return $plist;
+    }
+    /**
+     *  获得一个指定文档的链接
+     *
+     * @access    public
+     * @param     int  $aid  文档id
+     * @param     int  $typeid  栏目id
+     * @param     int  $timetag  时间戳
+     * @param     string  $title  标题
+     * @param     int  $ismake  是否生成
+     * @param     int  $rank  阅读权限
+     * @param     string  $namerule  名称规则
+     * @param     string  $typedir  栏目dir
+     * @param     string  $money  金币
+     * @param     string  $filename  文件名称
+     * @param     string  $moresite  多站点
+     * @param     string  $siteurl  站点地址
+     * @param     string  $sitepath  站点路径
+     * @return    string
+     */
+    function GetArcUrl(
+        $aid,
+        $typeid,
+        $timetag,
+        $title,
+        $ismake = 0,
+        $rank = 0,
+        $namerule = '',
+        $artdir = '',
+        $money = 0,
+        $filename = '',
+        $moresite = '',
+        $siteurl = '',
+        $sitepath = ''
+    ) {
+        return GetFileUrl(
+            $aid,
+            $typeid,
+            $timetag,
+            $title,
+            $ismake,
+            $rank,
+            $namerule,
+            $artdir,
+            $money,
+            $filename,
+            $moresite,
+            $siteurl,
+            $sitepath
+        );
+    }
+    /**
+     *  获得当前的页面文件链接
+     *
+     * @access    public
+     * @return    void
+     */
+    function GetCurUrl()
+    {
+        if (!empty($_SERVER["REQUEST_URI"])) {
+            $nowurl = $_SERVER["REQUEST_URI"];
+            $nowurls = explode("?", $nowurl);
+            $nowurl = $nowurls[0];
+        } else {
+            $nowurl = $_SERVER["PHP_SELF"];
+        }
+        return $nowurl;
+    }
+}
+?>

@@ -1,0 +1,13 @@
+指定排序栏目信息标签
+>>dede>>
+<html>
+	...
+	<body>
+		<ul>{dede:autochannel partsort='' typeid=''}
+			<li><a href="[field:typelink/]">[field:typename/]</a></li>{/dede:autochannel}
+		</ul>
+	</body>
+</html>
+>>dede>>
+partsort='' 栏目所在排序位置
+typeid='' 调用指定父栏目id
