@@ -53,10 +53,11 @@
 										$allowhtml = array('htmltext');
 										$fields['sta'] = $fields['ifcheck']==1 ? '已审核' : '待审核';
 										echo '<tr>
-											<td width="16%">
-												<label><input type="checkbox" name="id[]" value="'.$fields['id'].'"> '.$fields['id'].'表单'.$fields['sta'].'</label>
+											<td width="260">
+												<label><input type="checkbox" name="id[]" value="'.$fields['id'].'"> '.$fields['id'].'</label>
 											</td>
 											<td align="right">
+												<span class="btn btn-light btn-sm">'.$fields['sta'].'</span>
 												<a href="diy_list.php?action=edit&diyid='.$diy->diyid.'&id='.$fields['id'].'" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
 											</td>
 										</tr>';
@@ -80,7 +81,6 @@
 											<button type="button" onclick="selAll();" class="btn btn-success btn-sm">全选</button>
 											<button type="button" onclick="noSelAll();" class="btn btn-success btn-sm">取消</button>
 											<button type="submit" class="btn btn-success btn-sm">提交</button>
-											<a href="<?php echo $cfg_phpurl;?>/diy.php?action=list&diyid=<?php echo $diy->diyid;?>" target="_blank" class="btn btn-success btn-sm">预览</a>
 										</td>
 									</tr>
 								</tbody>
