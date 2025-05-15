@@ -69,10 +69,7 @@ if ($action == 'save') {
 //检测模型相关信息，并初始化相关数据
 $row = $dsql->GetOne("SELECT `table` FROM `#@__diyforms` WHERE diyid='$diyid'");
 $trueTable = $row['table'];
-$tabsql = "CREATE TABLE IF NOT EXISTS  `$trueTable`(
-`id` int(10) unsigned NOT NULL auto_increment,
-`ifcheck` tinyint(1) NOT NULL default '0',
-";
+$tabsql = "CREATE TABLE IF NOT EXISTS  `$trueTable` (`id` int(10) unsigned NOT NULL auto_increment,`ifcheck` tinyint(1) NOT NULL default '0',";
 if ($mysql_version < 4.1) {
     $tabsql .= " PRIMARY KEY (`id`)\r\n) TYPE=MyISAM; ";
 } else {

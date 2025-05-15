@@ -39,7 +39,7 @@ if ($action == 'save') {
         exit();
     }
     //检测数据库是否存在附加表，不存在则新建一个
-    $tabsql = "CREATE TABLE IF NOT EXISTS  `$trueTable`(`id` int(10) unsigned NOT NULL auto_increment,`ifcheck` tinyint(1) NOT NULL default '0', ";
+    $tabsql = "CREATE TABLE IF NOT EXISTS  `$trueTable` (`id` int(10) unsigned NOT NULL auto_increment,`ifcheck` tinyint(1) NOT NULL default '0', ";
     if ($mysql_version < 4.1) {
         $tabsql .= " PRIMARY KEY (`id`)\r\n) TYPE=MyISAM; ";
     } else {

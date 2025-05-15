@@ -48,10 +48,7 @@ if (empty($action)) {
             exit();
         }
     }
-    $sql = "CREATE TABLE IF NOT EXISTS  `$table`(
-    `id` int(10) unsigned NOT NULL auto_increment,
-    `ifcheck` tinyint(1) NOT NULL default '0',
-    ";
+    $sql = "CREATE TABLE IF NOT EXISTS  `$table` (`id` int(10) unsigned NOT NULL auto_increment,`ifcheck` tinyint(1) NOT NULL default '0',";
     if ($mysql_version < 4.1) {
         $sql .= " PRIMARY KEY (`id`)\r\n) TYPE=MyISAM; ";
     } else {
