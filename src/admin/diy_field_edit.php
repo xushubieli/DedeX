@@ -41,9 +41,9 @@ if ($action == 'save') {
     //检测数据库是否存在附加表，不存在则新建一个
     $tabsql = "CREATE TABLE IF NOT EXISTS  `$trueTable`(`id` int(10) unsigned NOT NULL auto_increment,`ifcheck` tinyint(1) NOT NULL default '0', ";
     if ($mysql_version < 4.1) {
-        $tabsql .= " PRIMARY KEY (`id`)\r\n) TYPE=InnoDB; ";
+        $tabsql .= " PRIMARY KEY (`id`)\r\n) TYPE=MyISAM; ";
     } else {
-        $tabsql .= " PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=".$cfg_db_language."; ";
+        $tabsql .= " PRIMARY KEY (`id`)\r\n) ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language."; ";
     }
     $dsql->ExecuteNoneQuery($tabsql);
     //检测表里含有的字段

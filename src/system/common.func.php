@@ -471,7 +471,7 @@ function GetUpdateSQL()
     global $cfg_dbprefix, $cfg_dbtype, $cfg_db_language;
     $result = array();
     $query = '';
-    $sql4tmp = "ENGINE=InnoDB DEFAULT CHARSET=".$cfg_db_language;
+    $sql4tmp = "ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language;
     $fp = fopen(DEDEDATA.'/admin/update.txt','r');
     $sqls = array();
     $current_ver = '';
@@ -491,13 +491,13 @@ function GetUpdateSQL()
             if ($cfg_dbtype == 'sqlite') {
                 $query = preg_replace('/character set (.*?) /i','',$query);
                 $query = preg_replace('/unsigned/i','',$query);
-                $query = str_replace('TYPE=InnoDB','',$query);
+                $query = str_replace('TYPE=MyISAM','',$query);
                 $query = preg_replace ('/TINYINT\(([\d]+)\)/i','INTEGER',$query);
                 $query = preg_replace ('/mediumint\(([\d]+)\)/i','INTEGER',$query);
                 $query = preg_replace ('/smallint\(([\d]+)\)/i','INTEGER',$query);
                 $query = preg_replace('/int\(([\d]+)\)/i','INTEGER',$query);
                 $query = preg_replace('/auto_increment/i','PRIMARY KEY AUTOINCREMENT',$query);
-                $query = preg_replace('/,([\t\s ]+)KEY(.*?)InnoDB;/','',$query);
+                $query = preg_replace('/,([\t\s ]+)KEY(.*?)MyISAM;/','',$query);
                 $query = preg_replace('/,([\t\s ]+)KEY(.*?);/',');',$query);
                 $query = preg_replace('/,([\t\s ]+)UNIQUE KEY(.*?);/',');',$query);
                 $query = preg_replace('/set\(([^\)]*?)\)/','varchar',$query);
@@ -508,7 +508,7 @@ function GetUpdateSQL()
                 $sqls[] = $query;
             } else {
                 if (preg_match('#CREATE#i', $query)) {
-                    $sqls[] = preg_replace("#TYPE=InnoDB#i",$sql4tmp,$query);
+                    $sqls[] = preg_replace("#TYPE=MyISAM#i",$sql4tmp,$query);
                 } else {
                     $sqls[] = $query;
                 }
@@ -719,7 +719,7 @@ function ConvertMysqlToSqlite($mysqlQuery) {
     $query = preg_replace('/ENGINE=\S+/i', '', $query);
     $query = preg_replace('/DEFAULT CHARSET=\S+/i', '', $query);
     $query = preg_replace('/COLLATE=\S+/i', '', $query);
-    $query = preg_replace('/TYPE=InnoDB;/i', '', $query);
+    $query = preg_replace('/TYPE=MyISAM;/i', '', $query);
     //移除COMMENT语法（SQLite不支持）
     $query = preg_replace('/COMMENT\s+\'[^\']*\'/i', '', $query);
     //移除KEY和UNIQUE KEY定义（SQLite会自动管理索引），同时处理USING BTREE

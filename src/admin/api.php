@@ -312,9 +312,9 @@ if ($action === 'is_need_check_code') {
             //执行更新SQL文件
             $sql = file_get_contents($backupVerPath.'/update.sql');
             if (!empty($sql)) {
-                $sql = preg_replace('#ENGINE=InnoDB#i', 'TYPE=InnoDB', $sql);
-                $sql41tmp = 'ENGINE=InnoDB DEFAULT CHARSET='.$cfg_db_language;
-                $sql = preg_replace('#TYPE=InnoDB#i', $sql41tmp, $sql);
+                $sql = preg_replace('#ENGINE=MyISAM#i', 'TYPE=MyISAM', $sql);
+                $sql41tmp = 'ENGINE=MyISAM DEFAULT CHARSET='.$cfg_db_language;
+                $sql = preg_replace('#TYPE=MyISAM#i', $sql41tmp, $sql);
                 $sqls = explode(";\r\n", $sql);
                 foreach ($sqls as $sql) {
                     if (trim($sql) != '') {

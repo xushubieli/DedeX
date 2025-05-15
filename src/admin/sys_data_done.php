@@ -73,8 +73,8 @@ if ($dopost == 'bak') {
                 $row = $dsql->GetArray('me', MYSQL_BOTH);
                 //去除AUTO_INCREMENT
                 $row[1] = preg_replace("#AUTO_INCREMENT=([0-9]{1,})[\r\n]{1,}#i", "", $row[1]);
-                $eng1 = "#ENGINE=InnoDB[\r\n]{1,}DEFAULT[\r\n]{1,}CHARSET=".$cfg_db_language."#i";
-                $tableStruct = preg_replace($eng1, "TYPE=InnoDB", $row[1]);
+                $eng1 = "#ENGINE=MyISAM[\r\n]{1,}DEFAULT[\r\n]{1,}CHARSET=".$cfg_db_language."#i";
+                $tableStruct = preg_replace($eng1, "TYPE=MyISAM", $row[1]);
                 fwrite($fp, ''.$tableStruct.";\r\n");
             }
             fclose($fp);
@@ -204,7 +204,7 @@ else if ($dopost == 'redat') {
         fclose($fp);
         $querys = explode(';', $tbdata);
         foreach ($querys as $q) {
-            $q = preg_replace("#TYPE=InnoDB#i","ENGINE=InnoDB DEFAULT CHARSET=".$cfg_db_language, $q);
+            $q = preg_replace("#TYPE=MyISAM#i","ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language, $q);
             $rs = $dsql->ExecuteNoneQuery(trim($q).';');
         }
         if ($delfile == 1) {

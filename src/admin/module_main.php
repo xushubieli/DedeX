@@ -229,12 +229,12 @@ if ($action == '') {
     //系统自动安装
     else {
         $mysql_version = $dsql->GetVersion(TRUE);
-        //默认使用MySQL 4.1 以下版本的SQL语句，对大于4.1版本采用替换处理 TYPE=InnoDB ==> ENGINE=InnoDB DEFAULT CHARSET=#~lang~#
+        //默认使用MySQL 4.1 以下版本的SQL语句，对大于4.1版本采用替换处理 TYPE=MyISAM ==> ENGINE=MyISAM DEFAULT CHARSET=#~lang~#
         $setupsql = $dm->GetSystemFile($hash, 'setupsql40');
-        $setupsql = preg_replace("#ENGINE=InnoDB#i", 'TYPE=InnoDB', $setupsql);
-        $sql41tmp = 'ENGINE=InnoDB DEFAULT CHARSET='.$cfg_db_language;
+        $setupsql = preg_replace("#ENGINE=MyISAM#i", 'TYPE=MyISAM', $setupsql);
+        $sql41tmp = 'ENGINE=MyISAM DEFAULT CHARSET='.$cfg_db_language;
         if ($mysql_version >= 4.1) {
-            $setupsql = preg_replace("#TYPE=InnoDB#i", $sql41tmp, $setupsql);
+            $setupsql = preg_replace("#TYPE=MyISAM#i", $sql41tmp, $setupsql);
         }
         //_ROOTURL_
         if ($cfg_cmspath == '/') $cfg_cmspath = '';
