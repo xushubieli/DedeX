@@ -62,7 +62,6 @@ if ($dopost == 'bak') {
             }
         }
         $dh->close();
-        $tmsg .= "完成备份目录旧数据清理";
         if ($isstruct == 1) {
             $bkfile = $bkdir."/tables_struct_".substr(md5(time().mt_rand(1000, 6000).$cfg_cookie_encode), 0, 16).".txt";
             $mysql_version = $dsql->GetVersion();
@@ -74,24 +73,11 @@ if ($dopost == 'bak') {
                 $row = $dsql->GetArray('me', MYSQL_BOTH);
                 //去除AUTO_INCREMENT
                 $row[1] = preg_replace("#AUTO_INCREMENT=([0-9]{1,})[\r\n]{1,}#i", "", $row[1]);
-                //4.1以下版本备份为低版本
-                if ($datatype == 4.0 && $mysql_version > 4.0) {
-                    $eng1 = "#ENGINE=InnoDB[\r\n]{1,}DEFAULT[\r\n]{1,}CHARSET=".$cfg_db_language."#i";
-                    $tableStruct = preg_replace($eng1, "TYPE=InnoDB", $row[1]);
-                }
-                //4.1以下版本备份为高版本
-                else if ($datatype == 4.1 && $mysql_version < 4.1) {
-                    $eng1 = "#ENGINE=InnoDB DEFAULT CHARSET={$cfg_db_language}#i";
-                    $tableStruct = preg_replace("TYPE=InnoDB", $eng1, $row[1]);
-                }
-                //普通备份
-                else {
-                    $tableStruct = $row[1];
-                }
-                fwrite($fp,''.$tableStruct.";\r\n");
+                $eng1 = "#ENGINE=InnoDB[\r\n]{1,}DEFAULT[\r\n]{1,}CHARSET=".$cfg_db_language."#i";
+                $tableStruct = preg_replace($eng1, "TYPE=InnoDB", $row[1]);
+                fwrite($fp, ''.$tableStruct.";\r\n");
             }
             fclose($fp);
-            $tmsg .= "完成备份数据表结构信息";
         }
         $tmsg .= "正在进行数据备份初始化工作，请稍后";
         $doneForm = "<form name='gonext' method='post' action='sys_data_done.php'>

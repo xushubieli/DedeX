@@ -497,7 +497,7 @@ function GetUpdateSQL()
                 $query = preg_replace ('/smallint\(([\d]+)\)/i','INTEGER',$query);
                 $query = preg_replace('/int\(([\d]+)\)/i','INTEGER',$query);
                 $query = preg_replace('/auto_increment/i','PRIMARY KEY AUTOINCREMENT',$query);
-                $query = preg_replace('/,([\t\s ]+)KEY(.*?)MyISAM;/','',$query);
+                $query = preg_replace('/,([\t\s ]+)KEY(.*?)InnoDB;/','',$query);
                 $query = preg_replace('/,([\t\s ]+)KEY(.*?);/',');',$query);
                 $query = preg_replace('/,([\t\s ]+)UNIQUE KEY(.*?);/',');',$query);
                 $query = preg_replace('/set\(([^\)]*?)\)/','varchar',$query);
