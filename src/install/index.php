@@ -158,7 +158,7 @@ else if ($step==2) {
     fwrite($fp, $configStr2);
     fclose($fp);
     if ($mysqlVersion >= 4.1) {
-        $sql4tmp = "ENGINE=MyISAM DEFAULT CHARSET=".$dblang;
+        $sql4tmp = "ENGINE=InnoDB DEFAULT CHARSET=".$dblang;
     }
     //创建数据表
     $query = '';
@@ -174,7 +174,7 @@ else if ($step==2) {
                 $db->exec($query);
             } else {
                 if (preg_match('#CREATE#i', $query)) {
-                    $rs = mysql_query(preg_replace("#TYPE=MyISAM#i", $sql4tmp, $query), $conn);
+                    $rs = mysql_query(preg_replace("#TYPE=InnoDB#i", $sql4tmp, $query), $conn);
                 } else {
                     $rs = mysql_query($query, $conn);
                 }

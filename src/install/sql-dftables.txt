@@ -8,7 +8,7 @@ CREATE TABLE `#@__addonarticle` (
 	`userip` char(46) NOT NULL default '' COMMENT '用户ip',
 	PRIMARY KEY (`aid`),
 	KEY `typeid` (`typeid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__addonimages`;
 CREATE TABLE `#@__addonimages` (
@@ -28,7 +28,7 @@ CREATE TABLE `#@__addonimages` (
 	`body` mediumtext COMMENT '文档内容',
 	PRIMARY KEY (`aid`),
 	KEY `imagesMain` (`typeid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__addoninfos`;
 CREATE TABLE `#@__addoninfos` (
@@ -58,7 +58,7 @@ CREATE TABLE `#@__addoninfos` (
 	PRIMARY KEY (`aid`),
 	KEY `typeid` (`typeid`,`nativeplace`,`infotype`),
 	KEY `channel` (`channel`,`arcrank`,`mid`,`click`,`title`,`litpic`,`senddate`,`flag`,`endtime`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__addonsoft`;
 CREATE TABLE `#@__addonsoft` (
@@ -82,7 +82,7 @@ CREATE TABLE `#@__addonsoft` (
 	`redirecturl` varchar(255) NOT NULL default '' COMMENT '跳转地址',
 	PRIMARY KEY (`aid`),
 	KEY `softMain` (`typeid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__addonspec`;
 CREATE TABLE `#@__addonspec` (
@@ -94,7 +94,7 @@ CREATE TABLE `#@__addonspec` (
 	`redirecturl` varchar(255) NOT NULL default '' COMMENT '跳转地址',
 	PRIMARY KEY (`aid`),
 	KEY `typeid` (`typeid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__admin`;
 CREATE TABLE `#@__admin` (
@@ -111,7 +111,7 @@ CREATE TABLE `#@__admin` (
 	`loginip` varchar(46) NOT NULL default '' COMMENT '登录ip',
 	`loginerr` tinyint NULL DEFAULT 0 COMMENT '登录错误次数',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__admintype`;
 CREATE TABLE `#@__admintype` (
@@ -120,7 +120,7 @@ CREATE TABLE `#@__admintype` (
 	`system` smallint(6) NOT NULL default '0' COMMENT '系统组 0:用户 1:系统',
 	`purviews` text COMMENT '权限',
 	PRIMARY KEY (`rank`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__advancedsearch`;
 CREATE TABLE `#@__advancedsearch` (
@@ -132,7 +132,7 @@ CREATE TABLE `#@__advancedsearch` (
 	`forms` text COMMENT '表单',
 	`template` varchar(256) NOT NULL default '' COMMENT '模板',
 	UNIQUE KEY `mid` (`mid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__arcatt`;
 CREATE TABLE `#@__arcatt` (
@@ -140,7 +140,7 @@ CREATE TABLE `#@__arcatt` (
 	`att` char(10) NOT NULL default '' COMMENT '属性值',
 	`attname` char(30) NOT NULL default '' COMMENT '属性名',
 	PRIMARY KEY (`att`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__arccache`;
 CREATE TABLE `#@__arccache` (
@@ -148,7 +148,7 @@ CREATE TABLE `#@__arccache` (
 	`uptime` int(11) NOT NULL default '0' COMMENT '更新时间',
 	`cachedata` mediumtext COMMENT '缓存数据',
 	PRIMARY KEY (`md5hash`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__archives`;
 CREATE TABLE `#@__archives` (
@@ -187,7 +187,7 @@ CREATE TABLE `#@__archives` (
 	KEY `sortrank` (`sortrank`),
 	KEY `mainindex` (`arcrank`,`typeid`,`channel`,`flag`,`mid`),
 	KEY `lastpost` (`lastpost`,`scores`,`goodpost`,`badpost`,`notpost`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__arcrank`;
 CREATE TABLE `#@__arcrank` (
@@ -199,7 +199,7 @@ CREATE TABLE `#@__arcrank` (
 	`scores` mediumint(8) NOT NULL default '0' COMMENT '初始拥有积分',
 	`purviews` mediumtext COMMENT '权限列表',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__arctiny`;
 CREATE TABLE `#@__arctiny` (
@@ -213,7 +213,7 @@ CREATE TABLE `#@__arctiny` (
 	`mid` mediumint(8) unsigned NOT NULL COMMENT '会员id',
 	PRIMARY KEY (`id`),
 	KEY `sortrank` (`sortrank`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__arctype`;
 CREATE TABLE `#@__arctype` (
@@ -257,7 +257,7 @@ CREATE TABLE `#@__arctype` (
 	PRIMARY KEY (`id`),
 	KEY `reid` (`reid`,`isdefault`,`channeltype`,`ispart`,`corank`,`topid`,`ishidden`),
 	KEY `sortrank` (`sortrank`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__area`;
 CREATE TABLE `#@__area` (
@@ -266,7 +266,7 @@ CREATE TABLE `#@__area` (
 	`reid` int(10) unsigned NOT NULL default '0' COMMENT '隶属id',
 	`disorder` int(10) unsigned NOT NULL default '0' COMMENT '排序',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__channeltype`;
 CREATE TABLE `#@__channeltype` (
@@ -298,7 +298,7 @@ CREATE TABLE `#@__channeltype` (
 	`dfcid` smallint(5) unsigned NOT NULL default '0' COMMENT '默认栏目ID',
 	PRIMARY KEY (`id`),
 	KEY `nid` (`nid`,`isshow`,`arcsta`,`sendrank`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__diyforms`;
 CREATE TABLE `#@__diyforms` (
@@ -311,7 +311,7 @@ CREATE TABLE `#@__diyforms` (
 	`info` text COMMENT '表单相关信息，如字段配置等',
 	`public` tinyint(1) NOT NULL default '1' COMMENT '公开状态 0:不公开 1:审核公开 2:完全公开',
 	PRIMARY KEY (`diyid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__downloads`;
 CREATE TABLE `#@__downloads` (
@@ -319,7 +319,7 @@ CREATE TABLE `#@__downloads` (
 	`id` int(10) unsigned NOT NULL default '0' COMMENT '下载id',
 	`downloads` int(10) unsigned NOT NULL default '0' COMMENT '下载次数',
 	PRIMARY KEY (`hash`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__erradd`;
 CREATE TABLE `#@__erradd` (
@@ -332,7 +332,7 @@ CREATE TABLE `#@__erradd` (
 	`oktxt` mediumtext COMMENT '修改建议',
 	`sendtime` int(10) unsigned NOT NULL default '0' COMMENT '挑错时间',
 	KEY `id` (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__feedback`;
 CREATE TABLE `#@__feedback` (
@@ -354,7 +354,7 @@ CREATE TABLE `#@__feedback` (
 	`msg` text COMMENT '评论内容',
 	PRIMARY KEY (`id`),
 	KEY `aid` (`aid`,`ischeck`,`mid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__feedback_goodbad`;
 CREATE TABLE `#@__feedback_goodbad` (
@@ -363,7 +363,7 @@ CREATE TABLE `#@__feedback_goodbad` (
 	`fid` int(11) NOT NULL DEFAULT '0' COMMENT '评论id',
 	`fgtype` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '顶踩类型 0:顶 1:踩',
 	PRIMARY KEY (`fgid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__flink`;
 CREATE TABLE `#@__flink` (
@@ -378,14 +378,14 @@ CREATE TABLE `#@__flink` (
 	`typeid` smallint(5) unsigned NOT NULL default '0' COMMENT '栏目id',
 	`ischeck` smallint(6) NOT NULL default '1' COMMENT '链接位置 1:内页 2:首页',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__flinktype`;
 CREATE TABLE `#@__flinktype` (
 	`id` mediumint(8) unsigned NOT NULL auto_increment COMMENT '友情链接分类id',
 	`typename` varchar(50) NOT NULL default '' COMMENT '分类名称',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__freelist`;
 CREATE TABLE `#@__freelist` (
@@ -403,14 +403,14 @@ CREATE TABLE `#@__freelist` (
 	`keywords` varchar(100) NOT NULL default '' COMMENT '关键词',
 	`description` varchar(255) NOT NULL default '' COMMENT '描述',
 	PRIMARY KEY (`aid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__homepageset`;
 CREATE TABLE `#@__homepageset` (
 	`templet` char(50) NOT NULL default '' COMMENT '模板',
 	`position` char(30) NOT NULL default '' COMMENT '位置',
 	`showmod` tinyint(2) NOT NULL default '1' COMMENT '浏览模式 0:动态 1:静态'
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__keywords`;
 CREATE TABLE `#@__keywords` (
@@ -421,7 +421,7 @@ CREATE TABLE `#@__keywords` (
 	`rpurl` char(60) NOT NULL default '' COMMENT '链接网址',
 	PRIMARY KEY (`aid`),
 	KEY `keyword` (`keyword`,`rank`,`sta`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__log`;
 CREATE TABLE `#@__log` (
@@ -433,7 +433,7 @@ CREATE TABLE `#@__log` (
 	`cip` char(46) NOT NULL default '' COMMENT '参数',
 	`dtime` int(10) unsigned NOT NULL default '0' COMMENT '时间',
 	PRIMARY KEY (`lid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__member`;
 CREATE TABLE `#@__member` (
@@ -467,7 +467,7 @@ CREATE TABLE `#@__member` (
 	PRIMARY KEY (`mid`),
 	KEY `userid` (`userid`,`sex`),
 	KEY `logintime` (`logintime`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__member_flink`;
 CREATE TABLE `#@__member_flink` (
@@ -476,7 +476,7 @@ CREATE TABLE `#@__member_flink` (
 	`title` varchar(30) NOT NULL default '' COMMENT '标题',
 	`url` varchar(100) NOT NULL default '' COMMENT '链接',
 	PRIMARY KEY (`aid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__member_operation`;
 CREATE TABLE `#@__member_operation` (
@@ -493,7 +493,7 @@ CREATE TABLE `#@__member_operation` (
 	PRIMARY KEY (`aid`),
 	KEY `buyid` (`buyid`),
 	KEY `pid` (`pid`,`mid`,`sta`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__member_pms`;
 CREATE TABLE `#@__member_pms` (
@@ -511,7 +511,7 @@ CREATE TABLE `#@__member_pms` (
 	`message` text COMMENT '消息内容',
 	PRIMARY KEY (`id`),
 	KEY `sendtime` (`sendtime`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__member_space`;
 CREATE TABLE `#@__member_space` (
@@ -524,7 +524,7 @@ CREATE TABLE `#@__member_space` (
 	`sign` varchar(100) NOT NULL default '没签名' COMMENT '用户签名',
 	`spacenews` text COMMENT '空间新闻',
 	PRIMARY KEY (`mid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__member_stow`;
 CREATE TABLE `#@__member_stow` (
@@ -536,7 +536,7 @@ CREATE TABLE `#@__member_stow` (
 	`type` varchar(10) default NULL COMMENT '类型',
 	PRIMARY KEY (`id`),
 	KEY `uid` (`mid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__member_stowtype`;
 CREATE TABLE `#@__member_stowtype` (
@@ -544,7 +544,7 @@ CREATE TABLE `#@__member_stowtype` (
 	`indexname` varchar(30) NOT NULL COMMENT '名称',
 	`indexurl` varchar(50) NOT NULL COMMENT '地址',
 	PRIMARY KEY (`stowname`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__member_tj`;
 CREATE TABLE `#@__member_tj` (
@@ -561,7 +561,7 @@ CREATE TABLE `#@__member_tj` (
 	`info` int(10) NOT NULL default '0' COMMENT '分类信息',
 	`shop` int(10) NOT NULL default '0' COMMENT '商品',
 	PRIMARY KEY (`mid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__member_type`;
 CREATE TABLE `#@__member_type` (
@@ -571,7 +571,7 @@ CREATE TABLE `#@__member_type` (
 	`money` int(11) NOT NULL default '0' COMMENT '金币数',
 	`exptime` int(11) NOT NULL default '30' COMMENT '过期时间',
 	PRIMARY KEY (`aid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__moneycard_record`;
 CREATE TABLE `#@__moneycard_record` (
@@ -588,7 +588,7 @@ CREATE TABLE `#@__moneycard_record` (
 	KEY `ctid` (`ctid`),
 	KEY `cardid` (`cardid`),
 	KEY `uid` (`uid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__moneycard_type`;
 CREATE TABLE `#@__moneycard_type` (
@@ -597,7 +597,7 @@ CREATE TABLE `#@__moneycard_type` (
 	`money` int(11) NOT NULL default '50' COMMENT '积分数值',
 	`pname` varchar(50) NOT NULL default '' COMMENT '名称',
 	PRIMARY KEY (`tid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__mtypes`;
 CREATE TABLE `#@__mtypes` (
@@ -606,7 +606,7 @@ CREATE TABLE `#@__mtypes` (
 	`channelid` smallint(6) NOT NULL default '1' COMMENT '模型id',
 	`mid` mediumint(8) unsigned NOT NULL default '0' COMMENT '会员id',
 	PRIMARY KEY (`mtypeid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__myad`;
 CREATE TABLE `#@__myad` (
@@ -622,7 +622,7 @@ CREATE TABLE `#@__myad` (
 	`expbody` text COMMENT '过期内容',
 	PRIMARY KEY (`aid`),
 	KEY `tagname` (`tagname`,`typeid`,`timeset`,`endtime`,`starttime`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__mytag`;
 CREATE TABLE `#@__mytag` (
@@ -636,7 +636,7 @@ CREATE TABLE `#@__mytag` (
 	`expbody` text COMMENT '过期内容',
 	PRIMARY KEY (`aid`),
 	KEY `tagname` (`tagname`,`typeid`,`timeset`,`endtime`,`starttime`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__plus`;
 CREATE TABLE `#@__plus` (
@@ -648,7 +648,7 @@ CREATE TABLE `#@__plus` (
 	`isshow` smallint(6) NOT NULL default '1' COMMENT '是否显示 0:不显示 1:显示',
 	`filelist` text COMMENT '文件列表',
 	PRIMARY KEY (`aid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__purview`;
 CREATE TABLE `#@__purview` (
@@ -658,7 +658,7 @@ CREATE TABLE `#@__purview` (
 	`pkey` varchar(30) NOT NULL COMMENT '键名',
 	`pvalue` text NOT NULL COMMENT '键值',
 	KEY `pkey` USING BTREE (`pkey`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__pwd_tmp`;
 CREATE TABLE `#@__pwd_tmp` (
@@ -667,7 +667,7 @@ CREATE TABLE `#@__pwd_tmp` (
 	`pwd` char(32) NOT NULL default '' COMMENT '密码',
 	`mailtime` int(10) NOT NULL default '0' COMMENT '找回密码邮件时间',
 	PRIMARY KEY (`mid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__scores`;
 CREATE TABLE `#@__scores` (
@@ -678,7 +678,7 @@ CREATE TABLE `#@__scores` (
 	`isdefault` tinyint(1) unsigned NOT NULL default '0' COMMENT '是否默认 0:否 1:是',
 	PRIMARY KEY (`id`),
 	KEY `integral` (`integral`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__search_cache`;
 CREATE TABLE `#@__search_cache` (
@@ -687,7 +687,7 @@ CREATE TABLE `#@__search_cache` (
 	`rsnum` mediumint(8) unsigned NOT NULL default '0' COMMENT '结果数',
 	`ids` mediumtext COMMENT '内容id',
 	PRIMARY KEY (`hash`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__search_keywords`;
 CREATE TABLE `#@__search_keywords` (
@@ -700,14 +700,14 @@ CREATE TABLE `#@__search_keywords` (
 	`channelid` smallint(5) unsigned NOT NULL default '0' COMMENT '模型id',
 	`typeid` smallint(5) unsigned NOT NULL default '0' COMMENT '栏目id',
 	PRIMARY KEY (`aid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__search_limits`;
 CREATE TABLE `#@__search_limits` (
 	`ip` VARCHAR(200) NOT NULL COMMENT '搜索ip',
 	`searchtime` int(11) NULL DEFAULT NULL COMMENT '搜索时间',
 	PRIMARY KEY (`ip`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__search_sync`;
 CREATE TABLE `#@__search_sync` (
@@ -717,7 +717,7 @@ CREATE TABLE `#@__search_sync` (
 	`add_at` int NULL DEFAULT NULL COMMENT '添加时间',
 	`update_at` int NULL DEFAULT NULL COMMENT '更新时间',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__sgpage`;
 CREATE TABLE `#@__sgpage` (
@@ -734,7 +734,7 @@ CREATE TABLE `#@__sgpage` (
 	PRIMARY KEY (`aid`),
 	KEY `ismake` (`ismake`,`uptime`),
 	KEY `likeid` (`likeid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__softconfig`;
 CREATE TABLE `#@__softconfig` (
@@ -749,7 +749,7 @@ CREATE TABLE `#@__softconfig` (
 	`dfywboy` smallint(5) unsigned NOT NULL default '0' COMMENT '金币',
 	`argrange` smallint(5) unsigned NOT NULL default '0' COMMENT '参数限制方式 1:所有软件均使用此权限 0:所有软件重新选择权限',
 	PRIMARY KEY (`downtype`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__statistics`;
 CREATE TABLE `#@__statistics` (
@@ -760,7 +760,7 @@ CREATE TABLE `#@__statistics` (
 	`ip` int(11) DEFAULT NULL COMMENT 'ip',
 	`vv` int(11) DEFAULT NULL COMMENT 'vv',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__statistics_detail`;
 CREATE TABLE `#@__statistics_detail` (
@@ -783,7 +783,7 @@ CREATE TABLE `#@__statistics_detail` (
 	KEY `idx_created_date_dduuid` (`created_date`,`dduuid`),
 	KEY `idx_created_date_ip` (`created_date`,`ip`),
 	KEY `idx_created_date_ssid` (`created_date`,`ssid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__stepselect`;
 CREATE TABLE `#@__stepselect` (
@@ -793,7 +793,7 @@ CREATE TABLE `#@__stepselect` (
 	`issign` tinyint(1) unsigned default '0' COMMENT '层级',
 	`issystem` tinyint(1) unsigned NOT NULL default '0' COMMENT '是否系统 0:否 1:是',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__sys_enum`;
 CREATE TABLE `#@__sys_enum` (
@@ -804,7 +804,7 @@ CREATE TABLE `#@__sys_enum` (
 	`disorder` smallint(5) unsigned NOT NULL default '0' COMMENT '排序',
 	`issign` tinyint(1) unsigned NOT NULL default '1' COMMENT '层级',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__sys_module`;
 CREATE TABLE `#@__sys_module` (
@@ -816,7 +816,7 @@ CREATE TABLE `#@__sys_module` (
 	`ismember` tinyint(4) NOT NULL default '1' COMMENT '是否会员 0:官方 1:用户',
 	`menustring` text COMMENT '菜单配置',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__sys_payment`;
 CREATE TABLE `#@__sys_payment` (
@@ -828,7 +828,7 @@ CREATE TABLE `#@__sys_payment` (
 	`config` text NOT NULL COMMENT '配置',
 	`status` int(3) unsigned NOT NULL DEFAULT '0' COMMENT '状态 0:禁用 1:启用',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__sys_set`;
 CREATE TABLE `#@__sys_set` (
@@ -836,7 +836,7 @@ CREATE TABLE `#@__sys_set` (
 	`sname` char(20) NOT NULL default '' COMMENT '名称',
 	`items` text COMMENT '项',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__sysconfig`;
 CREATE TABLE `#@__sysconfig` (
@@ -847,7 +847,7 @@ CREATE TABLE `#@__sysconfig` (
 	`type` varchar(10) NOT NULL default 'string' COMMENT '类型 string:文本 number:数字 bool:布尔 bstring:多行文本 img:图片',
 	`value` text COMMENT '值',
 	PRIMARY KEY (`varname`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__tagindex`;
 CREATE TABLE `#@__tagindex` (
@@ -867,7 +867,7 @@ CREATE TABLE `#@__tagindex` (
 	`uptime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '更新时间',
 	`mktime` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '生成时间',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__tagindex_infos`;
 CREATE TABLE `#@__tagindex_infos` (
@@ -875,7 +875,7 @@ CREATE TABLE `#@__tagindex_infos` (
   `litpic` varchar(255) DEFAULT NULL COMMENT '缩略图',
   `body` mediumtext COMMENT '内容',
   PRIMARY KEY (`tagid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__taglist`;
 CREATE TABLE `#@__taglist` (
@@ -885,7 +885,7 @@ CREATE TABLE `#@__taglist` (
 	`typeid` smallint(5) unsigned NOT NULL default '0' COMMENT '栏目id',
 	`tag` varchar(255) NOT NULL default '' COMMENT '标签',
 	PRIMARY KEY (`tid`,`aid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__uploads`;
 CREATE TABLE `#@__uploads` (
@@ -903,7 +903,7 @@ CREATE TABLE `#@__uploads` (
 	PRIMARY KEY (`aid`),
 	KEY `memberid` (`mid`),
 	KEY `arcid` (`arcid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__verifies`;
 CREATE TABLE `#@__verifies` (
@@ -912,7 +912,7 @@ CREATE TABLE `#@__verifies` (
 	`method` enum('local','official') NOT NULL default 'official' COMMENT '类型 local:本地 official:官方',
 	`filename` varchar(254) NOT NULL default '' COMMENT '文件名',
 	PRIMARY KEY (`nameid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__vote`;
 CREATE TABLE `#@__vote` (
@@ -928,7 +928,7 @@ CREATE TABLE `#@__vote` (
 	`isenable` tinyint(6) NOT NULL default '0' COMMENT '是否启用该投票 0:启用 1:不启用',
 	`votenote` text COMMENT '投票项内容',
 	PRIMARY KEY (`aid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__vote_member`;
 CREATE TABLE `#@__vote_member` (
@@ -937,7 +937,7 @@ CREATE TABLE `#@__vote_member` (
 	`userid` varchar(50) NOT NULL default '' COMMENT '用户id',
 	`uptime` int(10) unsigned NOT NULL default '0' COMMENT '投票时间',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__dl_log`;
 CREATE TABLE `#@__dl_log` (
@@ -951,14 +951,14 @@ CREATE TABLE `#@__dl_log` (
 	PRIMARY KEY (`id`),
 	KEY `dltime` (`dltime`),
 	KEY `dl_ip` (`ip`,`dltime`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__myadtype`;
 CREATE TABLE `#@__myadtype` (
 	`id` mediumint(8) unsigned NOT NULL auto_increment COMMENT '广告类型id',
 	`typename` varchar(50) NOT NULL default '' COMMENT '类型名称',
 	PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__ai`;
 CREATE TABLE `#@__ai` (
@@ -970,7 +970,7 @@ CREATE TABLE `#@__ai` (
   `company` varchar(255) DEFAULT NULL COMMENT '公司名称',
   `website` varchar(255) DEFAULT NULL COMMENT '官方网址',
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__ai_log`;
 CREATE TABLE `#@__ai_log` (
@@ -986,7 +986,7 @@ CREATE TABLE `#@__ai_log` (
   `completion_tokens` int unsigned NOT NULL DEFAULT '0' COMMENT '完成token',
   `total_tokens` int unsigned NOT NULL DEFAULT '0' COMMENT 'token总计',
   PRIMARY KEY (`lid`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__ai_model`;
 CREATE TABLE `#@__ai_model` (
@@ -998,7 +998,7 @@ CREATE TABLE `#@__ai_model` (
   `isdefault` tinyint DEFAULT '0' COMMENT '是否是默认',
   `sortrank` int NOT NULL DEFAULT '50' COMMENT '排序',
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) TYPE=InnoDB;
 
 DROP TABLE IF EXISTS `#@__ai_prompt`;
 CREATE TABLE `#@__ai_prompt` (
@@ -1012,4 +1012,4 @@ CREATE TABLE `#@__ai_prompt` (
   `dfprompt` text COMMENT '默认提示词',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unq_pname` (`pname`) USING BTREE
-) TYPE=MyISAM;
+) TYPE=InnoDB;

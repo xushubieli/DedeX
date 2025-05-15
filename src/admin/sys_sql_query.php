@@ -153,8 +153,8 @@ else if ($dopost == "query") {
         exit();
     }
     if ($mysqlVersion >= 4.1 && preg_match('#CREATE#i', $sqlquery)) {
-        $sql4tmp = "ENGINE=MyISAM DEFAULT CHARSET=".$$cfg_db_language;
-        $sqlquery = preg_replace("#TYPE=MyISAM#i", $sql4tmp, $sqlquery);
+        $sql4tmp = "ENGINE=InnoDB DEFAULT CHARSET=".$$cfg_db_language;
+        $sqlquery = preg_replace("#TYPE=InnoDB#i", $sql4tmp, $sqlquery);
     }
     echo '<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">';
     //运行查询语句

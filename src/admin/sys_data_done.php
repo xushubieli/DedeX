@@ -76,13 +76,13 @@ if ($dopost == 'bak') {
                 $row[1] = preg_replace("#AUTO_INCREMENT=([0-9]{1,})[\r\n]{1,}#i", "", $row[1]);
                 //4.1以下版本备份为低版本
                 if ($datatype == 4.0 && $mysql_version > 4.0) {
-                    $eng1 = "#ENGINE=MyISAM[\r\n]{1,}DEFAULT[\r\n]{1,}CHARSET=".$cfg_db_language."#i";
-                    $tableStruct = preg_replace($eng1, "TYPE=MyISAM", $row[1]);
+                    $eng1 = "#ENGINE=InnoDB[\r\n]{1,}DEFAULT[\r\n]{1,}CHARSET=".$cfg_db_language."#i";
+                    $tableStruct = preg_replace($eng1, "TYPE=InnoDB", $row[1]);
                 }
                 //4.1以下版本备份为高版本
                 else if ($datatype == 4.1 && $mysql_version < 4.1) {
-                    $eng1 = "#ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}#i";
-                    $tableStruct = preg_replace("TYPE=MyISAM", $eng1, $row[1]);
+                    $eng1 = "#ENGINE=InnoDB DEFAULT CHARSET={$cfg_db_language}#i";
+                    $tableStruct = preg_replace("TYPE=InnoDB", $eng1, $row[1]);
                 }
                 //普通备份
                 else {
@@ -218,7 +218,7 @@ else if ($dopost == 'redat') {
         fclose($fp);
         $querys = explode(';', $tbdata);
         foreach ($querys as $q) {
-            $q = preg_replace("#TYPE=MyISAM#i","ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language, $q);
+            $q = preg_replace("#TYPE=InnoDB#i","ENGINE=InnoDB DEFAULT CHARSET=".$cfg_db_language, $q);
             $rs = $dsql->ExecuteNoneQuery(trim($q).';');
         }
         if ($delfile == 1) {
