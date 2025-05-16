@@ -35,9 +35,9 @@ function lib_channelartlist(&$ctag, &$refObj)
     $order = " ORDER BY sortrank ASC ";
     if ($type == 'reid') {        
         $reid = $refObj->TypeLink->TypeInfos['reid'];          
-        $tpsql = " reid='$reid' AND ispart<>2 AND ishidden<>1 ";
+        $tpsql = " reid='$reid' AND ishidden<>1 ";
     } else if ($typeid == 0 || $typeid == 'top') {
-        $tpsql = " reid=0 AND ispart<>2 AND ishidden<>1 AND channeltype>0 ";
+        $tpsql = " reid=0 AND ishidden<>1 AND channeltype>0 ";
     } else {
         if (!preg_match('#,#', $typeid)) {
             $tpsql = " reid='$typeid' AND ishidden<>1 ";
@@ -48,7 +48,7 @@ function lib_channelartlist(&$ctag, &$refObj)
     }
     //否定栏目调用
     if ($notypeid != 0) {
-        $tpsql = $tpsql." and not(id in($notypeid)) ";
+        $tpsql = $tpsql." AND not(id in($notypeid)) ";
     }
     $dsql->SetQuery("SELECT * FROM `#@__arctype` WHERE $tpsql $order LIMIT $totalnum");
     $dsql->Execute();
