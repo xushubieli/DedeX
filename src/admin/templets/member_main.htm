@@ -117,7 +117,7 @@
 			function getCheckboxItem() {
 				var allSel="";
 				if (document.form2.mid.value) return document.form2.mid.value;
-				for (i = 0;i < document.form2.mid.length;i++) {
+				for (i = 0; i < document.form2.mid.length; i++) {
 					if (document.form2.mid[i].checked) {
 						if (allSel == "")
 							allSel = document.form2.mid[i].value;
@@ -130,7 +130,7 @@
 			function getOneItem() {
 				var allSel="";
 				if (document.form2.mid.value) return document.form2.mid.value;
-				for (i = 0;i < document.form2.mid.length;i++) {
+				for (i = 0; i < document.form2.mid.length; i++) {
 					if (document.form2.mid[i].checked) {
 						allSel = document.form2.mid[i].value;
 						break;
@@ -142,7 +142,7 @@
 				if (typeof document.form2.mid.length === "undefined") {
 					document.form2.mid.checked = true;
 				}
-				for (i = 0;i < document.form2.mid.length;i++) {
+				for (i = 0; i < document.form2.mid.length; i++) {
 					if (!document.form2.mid[i].checked) {
 						document.form2.mid[i].checked = true;
 					}
@@ -152,7 +152,7 @@
 				if (typeof document.form2.mid.length === "undefined") {
 					document.form2.mid.checked = false;
 				}
-				for (i = 0;i < document.form2.mid.length;i++) {
+				for (i = 0; i < document.form2.mid.length; i++) {
 					if (document.form2.mid[i].checked) {
 						document.form2.mid[i].checked = false;
 					}
