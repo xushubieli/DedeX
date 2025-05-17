@@ -1,24 +1,20 @@
-## DedeBIZ
+## DedeX
 
-DedeBIZ系统基于PHP开发，遵循国际GPLv2开源许可协议做到真正开源免费，具有可扩展性且完全开放源代码。其商业支持采用Go语言设计，具备简单易用、灵活扩展、安全高效的特性。模板设计简便，延续原有标签并引入Bootstrap响应式模板引擎，让跨终端与移动端全媒体站点搭建更轻松。当前版本支持AI功能，兼容PHP高版本，既保留经典操作体验又融入新技术，让DedeBIZ成为智能的开源CMS。
+DedeX系统基于PHP7开发，具有高度可扩展性，并根据GPLv2协议开源。除了支持流行的Go语言进行开发外，还具备简单易用、灵活扩展以及更高的安全性和效率。该系统的模板设计简便，延续了以往的标签系统，同时引入了响应式模板引擎Bootstrap，简化了跨终端和移动端全媒体站点的搭建过程。
 
 ## 版本说明
 
-DedeBIZ v6.x是一个LTS版本，支持将到2025年10月截止，目前DedeBIZ已经发布，可以[点击下载](https://www.dedebiz.com/download)获取
+DedeX1.x是一个LTS版本，支持将到2035年11月截止，目前DedeX已经发布，可以[点击下载](https://codeload.github.com/xushubieli/DedeX/zip/refs/heads/main)获取
 
-![DedeBIZ](docs/dedebiz.png)
+![DedeX](docs/dedex.png)
 
 ## 参与开源
 
-访问[代码托管](https://www.dedebiz.com/git)，可以看到我们已经将代码托管在几个知名代码托管平台，可以通过提交Pull requests的方式来贡献您的力量
+访问[代码托管](https://github.com/xushubieli/DedeX.git)，可以通过提交Pull requests的方式来贡献您的力量
 
-## v7.0 Roadmap
+## v2.0 Roadmap
 
 我们将会收集、整理新的功能需求制定新的Roadmap
-
-[开发者](https://www.dedebiz.com/developer)可以到[工单管理](https://www.zhelixie.com/DedeBiz/DedeBIZ/issues)中进行交流反馈
-
-普通用户可以通过微信公众号或者邮件的方式进行反馈，详见本页底部资源
 
 在这里，可以查看版本[更新记录](docs/changelog.md)
 
@@ -36,17 +32,11 @@ Apache/Nginx + PHP7/PHP8 + MySQL5/8/10 (PHP必须在非安全模式下运行)
 
 3.PHP必须环境或启用的系统函数
 
-CURL：数据采集
-
 Fileinfo：文件上传安全校验
 
 GD扩展库：图像验证码、水印、二维码生成
 
 MySQL扩展库：数据存储
-
-OpenSSL：支持DedeBIZ商业支持
-
-Sockets：支持接入DedeBIZ商业组件模块
 
 4.基本目录结构及文件
 
@@ -82,62 +72,16 @@ Sockets：支持接入DedeBIZ商业组件模块
 
 2.上传程序目录中的`/src`到网站根目录；
 
-3.运行`http://www.yourname.com/install/index.php`(yourname表示您的域名),按照安装提速说明进行程序安装；
-
-详细安装步骤可以查看[帮助文档](https://www.dedebiz.com/help)
-
-## DedeBIZ命令行工具
-
-在程序包中，我们增加了一个命令行工具`dedebiz`，通过这个命令行工具，我们可以完成例如：静态文件生成、快速搭建开发环境、更新系统等功能
-
-保证我们系统PATH目录中含有`php`命令，如果是Linux系统，我们可以赋予`dedebiz`文件可执行的权限
-
-运行`php dedebiz`命令（如果系统中有bash命令行，直接可以执行`./dedebiz`）我们可以看到如下信息：
-
-```
-NAME:
-	DedeBIZ命令行工具
-USAGE:
-	php ./dedebiz command [arguments...]
-COMMANDS:
-	serv,s 运行DedeBIZ开发服务
-	make,m 更新网页
-	update,u 更新到最新系统
-	help,h Shows 帮助
-	quick,q 快速开始一个开发环境
-	tdata 生成测试数据
-	pwd 更改管理员密码
-WEBSITE:
-	https://www.dedebiz.com/help/
-```
-想要快速启动站点，运行`./dedebiz s`，根据提示打开浏览器地址即可快速使用系统
-
-如果我们想要生成静态文件，可以执行`./dedebiz m o`，便可以自动生成
-
-除了上面的“程序安装使用”中的步骤，我们也可以通过命令行工具快速开始一个本地开发的站点，执行脚本`./dedebiz q`，就可以快速初始化一个本地开发的站点，非常方便
-
-![DedeBIZ命令行工具](docs/dedebiz_cli.gif)
+3.运行`http://www.yourwebsite.com/install/index.php`（yourwebsite.com）表示您的站点，按照安装说明进行程序安装；
 
 ## 版权信息
 
-详细参考：[DedeBIZ站点授权协议](https://www.dedebiz.com/license)
+详细参考：[DedeX站点授权协议](/LICENSE)
 
-DedeBIZ 系统严格遵循 GPLv2 国际开源标准，全力打造纯粹的开源环境，开发者可自由使用、修改与分发代码，畅享开源带来的无限可能。
-
-在商业化层面，我们将商业化功能及服务独立设计为扩展形式。这种方式既能保证系统核心开源部分的纯粹性与稳定性，又能为有进阶需求的企业或个人，提供定制化商业服务与功能。我们始终紧跟主流新技术趋势，积极将前沿技术融入系统，不断拓展DedeBIZ的应用边界与效能，无论是开源基础功能，还是商业化扩展，都致力于为用户带来更优质、高效的体验。
+DedeX 系统严格遵循 GPLv2 国际开源标准，全力打造纯粹的开源环境，开发者可自由使用、修改与分发代码，畅享开源带来的无限可能。
 
 ## 相关资源
 
-- [DedeBIZ](https://www.dedebiz.com)
+- [代码托管](https://github.com/xushubieli/DedeX.git)
 
-- [帮助中心](https://www.dedebiz.com/help)
-
-- [DedeBIZ商业支持](https://www.dedebiz.com)
-
-- [代码托管](https://www.dedebiz.com/git)
-
-- 微信公众号：dedebiz
-
-![微信公众号：dedebiz](docs/dedebiz_wechat_qr.jpg)
-
-- 邮箱：support#dedebiz.com
+- 邮箱：xushubieli@qq.com

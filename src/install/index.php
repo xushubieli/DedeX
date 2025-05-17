@@ -7,7 +7,7 @@
 error_reporting(E_ALL || ~E_NOTICE);
 define('INSLOCKFILE', dirname(__FILE__).'/install_lock.txt');
 $dfDbname = 'DedeX';
-$cfg_version_detail = '1.0'; //详细版本号
+$cfg_version_detail = '1.0.0'; //详细版本号
 $errmsg = '';
 if (version_compare(PHP_VERSION, '8.0.0', '>=') && function_exists("mysqli_report")) {
     mysqli_report(MYSQLI_REPORT_OFF);

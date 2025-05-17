@@ -1,1 +1,0 @@
-﻿通过访问 https://www.dedebiz.com/license 获取许可协议

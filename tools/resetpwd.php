@@ -1,14 +1,13 @@
 <?php
 /**
- * DedeBIZ后台账号密码修改工具，改完即删，别留着过年，老铁们～
+ * DedeX后台账号密码修改工具，改完即删，别留着过年，老铁们～
  * 
  * @version        $id:resetpwd.php tianya $
- * @package        DedeBIZ.Tools
- * @copyright      Copyright (c) 2023 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Tools
+ * @license        GNU GPL v2 (/license.txt)
+ * 
  */
-define('DEDEBIZ_REPWD_VER', '1.0.0');
+define('DedeX_REPWD_VER', '1.0.0');
 /**
  * ToolAlert
  *
@@ -23,7 +22,7 @@ function ToolAlert($content, $colors = array('#cfe2ff', '#b6d4fe', '#084298'))
     return str_replace(array('~color~', '~background~', '~border~', '~content~'), array($color, $background, $border, $content), TOOLS_ALERT_TPL);
 }
 if (!file_exists(dirname(__FILE__) . '/system/common.inc.php')) {
-    echo ToolAlert("请把当前文件放置到DedeBIZ根目录下，通过`http://网站域名/dedebiz_repwd.php`进行操作");
+    echo ToolAlert("请把当前文件放置到DedeX根目录下，通过`http://网站域名/DedeX_repwd.php`进行操作");
     exit;
 }
 require_once dirname(__FILE__) . '/system/common.inc.php';
@@ -66,20 +65,20 @@ if ($dopost === 'change') {
     ShowMsg("管理员密码成功修改为<code>{$newpwd}</code>，请务必删除当前文件", 'javascript:;');
     exit;
 }
-$wintitle = "DedeBIZ后台账号密码修改工具";
-$wecome_info = "DedeBIZ后台账号密码修改工具 V" . DEDEBIZ_REPWD_VER;
+$wintitle = "DedeX后台账号密码修改工具";
+$wecome_info = "DedeX后台账号密码修改工具 V" . DedeX_REPWD_VER;
 $win = new OxWindow();
 $win->Init(basename(__FILE__), 'js/blank.js', 'POST');
 $win->AddHidden('dopost', 'change');
 $win->AddHidden('token', $_SESSION['token']);
-$win->AddTitle("<div class='alert alert-info mb-0'>需要技术服务或商业工具，请<a href='https://www.dedebiz.com/service' target='_blank'>联系官方</a></div>");
+$win->AddTitle("<div class='alert alert-info mb-0'>更多技术支持，请联系DedeX团队</div>");
 $win->AddMsgItem('
 <tr>
     <td width="260">管理员账号：</td>
     <td><input type="text" name="adminname" id="adminname" class="admin-input-lg" placeholder="输入需要修改密码的管理员账号"></td>
 </tr>
 <tr>
-    <td width="260">密码：</td>
+    <td width="260">管理员密码：</td>
     <td><input type="password" name="newpwd" id="newpwd" class="admin-input-lg" placeholder="新的密码"></td>
 </tr>
 <tr>
@@ -89,7 +88,6 @@ $win->AddMsgItem('
 <tr>
     <td width="260">数据库密码：</td>
     <td><input type="password" name="dbpwd" id="dbpwd" class="admin-input-lg" placeholder="输入数据库连接密码"> 查看`data/common.inc.php`中的`cfg_dbpwd`</td>
-</tr>
-');
+</tr>');
 $winform = $win->GetWindow('ok');
 $win->Display();
