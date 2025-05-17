@@ -7,7 +7,7 @@
  * @license        GNU GPL v2 (/license.txt)
  * 
  */
-define('DedeX_REPWD_VER', '1.0.0');
+define('DEDEX_REPWD_VER', '1.0.0');
 /**
  * ToolAlert
  *
@@ -66,7 +66,7 @@ if ($dopost === 'change') {
     exit;
 }
 $wintitle = "DedeX后台账号密码修改工具";
-$wecome_info = "DedeX后台账号密码修改工具 V" . DedeX_REPWD_VER;
+$wecome_info = "DedeX后台账号密码修改工具 V" . DEDEX_REPWD_VER;
 $win = new OxWindow();
 $win->Init(basename(__FILE__), 'js/blank.js', 'POST');
 $win->AddHidden('dopost', 'change');
