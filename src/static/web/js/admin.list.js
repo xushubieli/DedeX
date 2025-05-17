@@ -62,11 +62,19 @@ function editArc(aid) {
 function updateArc(aid) {
 	var qstr = getCheckboxItem();
 	if (aid ==  0) aid = getOneItem();
+	if (qstr == '') {
+		ShowMsg('请选择一个或多个文档');
+		return;
+	}
 	location = "archives_do.php?aid=" + aid + "&dopost=makeArchives&qstr=" + qstr;
 }
 function checkArc(aid) {
 	var qstr = getCheckboxItem();
 	if (aid ==  0) aid = getOneItem();
+	if (qstr == '') {
+		ShowMsg('请选择一个或多个文档');
+		return;
+	}
 	location = "archives_do.php?aid=" + aid + "&dopost=checkArchives&qstr=" + qstr;
 }
 function moveArc(e, obj, cid){
@@ -75,12 +83,16 @@ function moveArc(e, obj, cid){
 		ShowMsg('请选择一个或多个文档');
 		return;
 	}
-	LoadQuickDiv(e, 'archives_do.php?dopost=moveArchives&qstr=' + qstr + '&channelid=' + cid + '&rnd=' + Math.random(), 'moveArchives', 'auto', '300px');
+	LoadQuickDiv(e, 'archives_do.php?dopost=moveArchives&qstr=' + qstr + '&channelid=' + cid + '&rnd=' + Math.random(), 'moveArchives', 'auto', '500px');
 	ChangeFullDiv('show');
 }
 function adArc(aid) {
 	var qstr = getCheckboxItem();
 	if (aid == 0) aid = getOneItem();
+	if (qstr == '') {
+		ShowMsg('请选择一个或多个文档');
+		return;
+	}
 	location = "archives_do.php?aid=" + aid + "&dopost=commendArchives&qstr=" + qstr;
 }
 function cAtts(jname, e, obj) {
@@ -90,15 +102,19 @@ function cAtts(jname, e, obj) {
 		ShowMsg('请选择一个或多个文档');
 		return;
 	}
-	LoadQuickDiv(e, 'archives_do.php?dopost=attsDlg&qstr=' + qstr + '&dojob=' + jname + '&rnd=' + Math.random(), 'attsDlg', 'auto', '300px');
+	LoadQuickDiv(e, 'archives_do.php?dopost=attsDlg&qstr=' + qstr + '&dojob=' + jname + '&rnd=' + Math.random(), 'attsDlg', 'auto', '500px');
 	ChangeFullDiv('show', screeheight);
 }
 function delArc(aid) {
 	var qstr = getCheckboxItem();
 	if (aid == 0) aid = getOneItem();
+	if (qstr == '') {
+		ShowMsg('请选择一个或多个文档');
+		return;
+	}
 	location = "archives_do.php?qstr=" + qstr + "&aid=" + aid + "&dopost=delArchives";
 }
 function QuickEdit(aid, e, obj) {
-	LoadQuickDiv(e, 'archives_do.php?dopost=quickEdit&aid=' + aid + '&rnd=' + Math.random(), 'quickEdit', 'auto', '300px');
+	LoadQuickDiv(e, 'archives_do.php?dopost=quickEdit&aid=' + aid + '&rnd=' + Math.random(), 'quickEdit', 'auto', '500px');
 	ChangeFullDiv('show');
 }

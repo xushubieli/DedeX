@@ -176,7 +176,6 @@
 					ShowMsg("操作失败");
 				});
 			}
-			//获得选中文件的数据表
 			function getCheckboxItem() {
 				var myform = document.form1;
 				var allSel = '';
@@ -191,7 +190,6 @@
 				}
 				return allSel;
 			}
-			//反选
 			function ReSel() {
 				var myform = document.form1;
 				for (i = 0; i < myform.tables.length; i++) {
@@ -199,14 +197,12 @@
 					else myform.tables[i].checked = true;
 				}
 			}
-			//全选
 			function SelAll() {
 				var myform = document.form1;
 				for (i = 0; i < myform.tables.length; i++) {
 					myform.tables[i].checked = true;
 				}
 			}
-			//取消
 			function NoneSel() {
 				var myform = document.form1;
 				for (i = 0; i < myform.tables.length; i++) {
