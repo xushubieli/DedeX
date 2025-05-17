@@ -1,13 +1,11 @@
 <?php
 /**
  * @version        $id:common.inc.php 2025 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
-//系统默认运行模式为安全模式，模板管理、标签管理、数据库管理、模块管理等功能已暂停，如果您需要这些功能，DEDEBIZ_SAFE_MODE后面值`TRUE`改为`FALSE`恢复使用
-define('DEDEBIZ_SAFE_MODE', FALSE);
+//系统默认运行模式为安全模式，模板管理、标签管理、数据库管理、模块管理等功能已暂停，如果您需要这些功能，DEDEX_SAFE_MODE后面值`TRUE`改为`FALSE`恢复使用
+define('DEDEX_SAFE_MODE', FALSE);
 //生产环境使用`production`，如果采用`dev`模式，会有一些php的报错信息提示，用于开发调试
 if (!defined('DEDE_ENVIRONMENT')) {
     define('DEDE_ENVIRONMENT', 'production');
@@ -40,24 +38,6 @@ define('DEDEDATA', substr(DEDEINC, 0, -6).'data');
 define('DEDESTATIC', DEDEROOT.'/static');
 define('DEDEMEMBER', DEDEROOT.'/user');
 define('DEDETEMPLATE', DEDEROOT.'/theme');
-define('DEDEBIZURL', "https://www.dedebiz.com");//DedeBiz商业支持
-define('DEDEBIZCDN', "https://cdn.dedebiz.com");//DedeBizCDN镜像
-define('DEDEVER', 6);//当前系统大版本
-define('DEDEPUB', '
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvupO2Lixns34bBqwTzK0
-9wA9sfGBdgc03zh1sUacieJBikx08e7xmkJbMF81jb/YfNGW/+iJ3qHULdc9Dtd3
-+FsnHG+tUDnzjkPnVVmnrjucQqfHRRVKKAgXOWxtuRKUVF3NDjiJtDAf5Y2BMAhw
-oqzeepye5I4mWyO4A8/V2ougO+xDK426MIf1dq+W59NVZj8k+zeZrbPh7+fPFw4u
-PwAMpkTJJ9nwNOO6saH2eMGaQ3oxZIQ+SmminDB8miI/+hwIn2hNmaHFuur0OGlB
-NQabUzX9JoYtXqPcpZRT7ymHrppU0KFdUSEJiW0utTWJo0HrDOBIT5qWlM0MP9p/
-PwIDAQAB
------END PUBLIC KEY-----
-');//DedeBIZ系统公钥
-define('DEDECDNURL', 'https://cdn.dedebiz.com');//默认静态资源地址
-define('DEDEBIZSEARCH', FALSE);//是否启用DedeBIZ全文检索服务
-define('DEDEBIZSEARCHHOST', 'http://127.0.0.1:8818');//搜索服务地址 
-define('DEDEBIZSEARCHKEY', '设置DedeSearch密钥');//用于进行加密验签
 if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
     if (!function_exists('session_register')) {
         function session_register()
@@ -114,7 +94,7 @@ $registerGlobals = @ini_get("register_globals");
 $isUrlOpen = @ini_get("allow_url_fopen");
 //系统配置参数
 if (!file_exists(DEDEDATA."/config.cache.inc.php") && !defined('DEDE_CLITOOLS')) {
-    die('DedeBIZ初始化失败，确保系统正确被安装');
+    die('DedeX初始化失败，确保系统正确被安装');
 }
 if (file_exists(DEDEDATA."/config.cache.inc.php")) {
     require_once(DEDEDATA."/config.cache.inc.php");
@@ -154,12 +134,6 @@ if (PHP_VERSION > '5.1') {
     @date_default_timezone_set('Etc/GMT'.$time51);
 }
 $cfg_isUrlOpen = @ini_get("allow_url_fopen");
-//会员浏览默认网址
-if (PHP_SAPI === 'cli') {
-    $cfg_clihost = 'https://www.dedebiz.com';
-} else {
-    $cfg_clihost = 'http://'.$_SERVER['HTTP_HOST'];
-}
 if (!isset($cfg_cmspath)) $cfg_cmspath = '';
 //站点根目录
 $cfg_basedir = preg_replace('#'.$cfg_cmspath.'\/system$#i', '', DEDEINC);
@@ -200,14 +174,14 @@ $cfg_other_medias = $cfg_medias_dir.'/media';
 //附件目录
 $cfg_medias_dir = $cfg_cmspath.$cfg_medias_dir;
 $cfg_mediasurl = $cfg_mainsite.$cfg_medias_dir;
-//程序信息摘要，请不要删除则系统无法接收升级信息
-$cfg_version = 'V6';
-$cfg_version_detail = '6.5.9';//详细版本号
+//程序信息摘要
+$cfg_version = '1';
+$cfg_version_detail = '1.0';//详细版本号
 $cfg_soft_lang = 'utf-8';
 $cfg_soft_public = 'base';
-$cfg_softname = '得德系统';
-$cfg_soft_enname = 'DedeV6';
-$cfg_soft_devteam = 'DedeBIZ';
+$cfg_softname = '得德未来';
+$cfg_soft_enname = 'DedeX';
+$cfg_soft_devteam = 'DedeX团队';
 //文档的默认命名规则
 $art_shortname = $cfg_df_ext = '.html';
 $cfg_df_namerule = '{typedir}/{aid}'.$cfg_df_ext;
@@ -228,8 +202,6 @@ if (empty($cfg_addon_savetype)) {
 if ($cfg_sendmail_bysmtp == 'Y' && !empty($cfg_smtp_usermail)) {
     $cfg_adminemail = $cfg_smtp_usermail;
 }
-//DedeBIZ商业化组件
-require_once(DEDEINC.'/libraries/dedebiz.class.php');
 //第三方SDKs
 require_once(DEDEINC.'/sdks/include.php');
 //对全局分页传递参数进行过滤
@@ -254,9 +226,6 @@ if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
 } else {
     require_once(DEDEINC.'/autoload.inc.php');
 }
-$cfg_biz_helpUrl = DEDEBIZURL."/help";
-$cfg_biz_gitUrl = DEDEBIZURL."/git";
-$cfg_biz_dedebizUrl = DEDEBIZURL;
 //引入数据库类
 if (!defined('MYSQL_BOTH')) {
     define('MYSQL_BOTH', MYSQLI_BOTH);

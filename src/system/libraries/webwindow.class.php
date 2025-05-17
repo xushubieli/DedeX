@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 前台提示对话框
  *
  * @version        $id:WebWindow.class.php 2 13:53 2010-11-11 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC."/dedetag.class.php");
 class WebWindow
@@ -153,14 +151,14 @@ class WebWindow
         if ($wintype != "") {
             if ($wintype != "hand") {
                 $this->myWin .= "<div class='text-center'>
-                    <button type='submit' class='btn btn-success btn-sm'>$tt</button>
-                    <button type='button' class='btn btn-outline-success btn-sm' onclick='javascript:history.go(-1);'>返回</button>
+                    <button type='submit' class='btn btn-primary btn-sm'>$tt</button>
+                    <button type='button' class='btn btn-outline-primary btn-sm' onclick='javascript:history.go(-1);'>返回</button>
                 </div>";
             } else {
                 if ($msg != "") {
                     $this->myWin .= "<div class='mb-3'>$msg</div>
                     <div class='text-center'>
-                        <button type='button' class='btn btn-success btn-sm' onclick='javascript:history.go(-1);'>返回</button></td>
+                        <button type='button' class='btn btn-primary btn-sm' onclick='javascript:history.go(-1);'>返回</button></td>
                     </div>";
                 } else {
                     $this->myWin .= '';

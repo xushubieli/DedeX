@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 报错助手
  *
  * @version        $id:debug.helper.php 2 13:56 2010年7月5日 tianya $
- * @package        DedeBIZ.Helpers
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Helpers
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  * 浏览器友好的变量输出，便于调试时候使用

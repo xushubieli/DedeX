@@ -33,23 +33,31 @@
 							<span><i class="fa fa-user mr-2"></i>{dede:field.writer/}</span>
 							<span><i class="fa fa-eye mr-2"></i><script src="{dede:global.cfg_phpurl/}/count.php?view=yes&aid={dede:field.id/}&mid={dede:field name='mid'/}"></script>次</span>
 						</div>
-						<div class="alert alert-warning my-3">您看到这个提示，因为某个栏目对应模板不存在，不同模型的文档模板为：article_模型标识.htm，在后台-网站栏目管理-修改栏目查看</div>
-						{dede:fieldlist}
-						<table class="table">
-							<tr>
-								<td width="70%" align="center">
-									[field:name/]文档：<br>
-									模板调用标记：<br>
-									<script>document.write("{" + "dede:field.[field:tagname/] /" + "}");</script>
-								</td>
-								<td width="70%">[field:value/]</td>
-							</tr>
-						</table>
-						{/dede:fieldlist}
-						<div class="body py-3">
-							{dede:field.body/}
-							<p>文档于 {dede:field.senddate function="MyDate('Y-m-d H:i',@me)"/} 修改</p>
+						<div class="img py-3">{dede:field.image/}</div>
+						<div class="info py-3">
+							<p>软件类型：{dede:field.softtype/}</p>
+							<p>授权方式：{dede:field.accredit/}</p>
+							<p>界面语言：{dede:field.language/}</p>
+							<p>软件大小：{dede:field.softsize/}</p>
+							<p>文件类型：{dede:field.filetype/}</p>
+							<p>运行环境：{dede:field.os/}</p>
+							<p>软件等级：{dede:field.softrank function='GetRankStar(@me)'/}</p>
+							<p>发布时间：{dede:field.pubdate function="GetDateMk('@me')"/}</p>
+							<p>官方网址：{dede:field.officialurl/}</p>
+							<p>演示网址：{dede:field.officialdemo/}</p>
+							<p>下载次数：<script src="{dede:field.phpurl/}/disdls.php?aid={dede:field.id/}"></script></p>
 						</div>
+						<div class="body py-3">
+							{dede:field.introduce/}
+							<p>工具于 {dede:field.senddate function="MyDate('Y-m-d H:i',@me)"/} 修改</p>
+						</div>
+						<div class="download py-3">
+							<h4>下载地址</h4>
+							<ul class="downurllist">
+								{dede:field.softlinks/}
+							</ul>
+						</div>
+						<div class="alert alert-success my-3">{dede:softmsg/}</div>
 						<div class="edit py-3">责任编辑：{dede:adminname/}</div>
 						<div class="page py-3 row">
 							<div class="col-md-4 prenext">
@@ -179,7 +187,7 @@
 				let replyPannel = `<div class="form-group">
 					<div class="input-group">
 						<input type="text" class="form-control iptReplyContent">
-						<div class="input-group-append"><button type="button" class="btn btn-success btn-send" onclick='SendReplyFeedback(${fid})'>评论</button></div>
+						<div class="input-group-append"><button type="button" class="btn btn-primary btn-send" onclick='SendReplyFeedback(${fid})'>评论</button></div>
 					</div>
 				</div>`;
 				$.get("{dede:global.cfg_memberurl/}/api.php?format=json", function(result) {

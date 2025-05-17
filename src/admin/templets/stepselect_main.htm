@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
-		<script src="/static/web/js/bootstrap.min.js"></script>
+		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 		<script>
@@ -165,11 +165,11 @@
 							}
 							?>
 						</select>
-						<a href="javascript:AddType();" class="btn btn-success btn-sm">添加</a>
-						<a href="javascript:EditType();" class="btn btn-success btn-sm">修改</a>
-						<a href="javascript:ViewType();" class="btn btn-success btn-sm">预览</a>
+						<a href="javascript:AddType();" class="btn btn-primary btn-sm">添加</a>
+						<a href="javascript:EditType();" class="btn btn-primary btn-sm">修改</a>
+						<a href="javascript:ViewType();" class="btn btn-primary btn-sm">预览</a>
 						<a href="javascript:DelType();" class="btn btn-danger btn-sm">删除</a>
-						<a href="stepselect_main.php?action=upallcache" class="btn btn-success btn-sm">更新所有缓存</a>
+						<a href="stepselect_main.php?action=upallcache" class="btn btn-primary btn-sm">更新所有缓存</a>
 					</div>
 				</div>
 			</div>
@@ -201,8 +201,8 @@
 								<?php echo $options;?>
 							</select>
 							<input type="text" name="ename" class="admin-input-lg" placeholder="请填分类名称">
-							<button type="submit" class="btn btn-success btn-sm">添加分类</button>
-							<?php if ($egroup=='nativeplace') {echo "<a href='stepselect_main.php?action=exarea' class='btn btn-success btn-sm'>导入默认地区</a>";}?>
+							<button type="submit" class="btn btn-primary btn-sm">添加分类</button>
+							<?php if ($egroup=='nativeplace') {echo "<a href='stepselect_main.php?action=exarea' class='btn btn-primary btn-sm'>导入默认地区</a>";}?>
 						</form>
 					</div>
 				</div>
@@ -276,7 +276,7 @@
 									{/dede:datalist}
 									<tr>
 										<td colspan="8">
-											<a href="javascript:TogSel();" class="btn btn-success btn-sm">选择</a>
+											<a href="javascript:TogSel();" class="btn btn-primary btn-sm">选择</a>
 											<a href="javascript:DelSel();" class="btn btn-danger btn-sm">删除</a>
 										</td>
 									</tr>

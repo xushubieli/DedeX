@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 字符编码转换
  * 
  * @version        $id:charset.func.php 17:44 2020-09-22 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 //仅做一个映射
 helper("charset");

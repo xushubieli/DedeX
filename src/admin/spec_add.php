@@ -3,10 +3,8 @@
  * 发布专题
  *
  * @version        $id:spec_add.php 16:22 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('a_New,a_AccNew');
@@ -177,7 +175,7 @@ if ($dopost != 'save') {
     }
     //返回成功信息
     $msg = "<tr>
-        <td align='center'><a href='$artUrl' target='_blank' class='btn btn-success btn-sm'>浏览专题</a><a href='spec_add.php?cid=$typeid' class='btn btn-success btn-sm'>发布专题</a><a href='archives_do.php?aid=".$id."&dopost=editArchives' class='btn btn-success btn-sm'>修改专题</a><a href='content_s_list.php' class='btn btn-success btn-sm'>返回专题列表</a></td>
+        <td align='center'><a href='$artUrl' target='_blank' class='btn btn-primary btn-sm'>浏览专题</a><a href='spec_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布专题</a><a href='archives_do.php?aid=".$id."&dopost=editArchives' class='btn btn-primary btn-sm'>修改专题</a><a href='content_s_list.php' class='btn btn-primary btn-sm'>返回专题列表</a></td>
     </tr>";
     $wintitle = "成功发布专题";
     $win = new OxWindow();

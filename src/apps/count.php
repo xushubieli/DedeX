@@ -5,10 +5,8 @@
  * 显示点点击次数，添加view参数：<script src="{dede:field name='phpurl'/}/count.php?view=yes&aid={dede:field name='id'/}&mid={dede:field name='mid'/}"></script>普通计数器：<script src="{dede:field name='phpurl'/}/count.php?aid={dede:field name='id'/}&mid={dede:field name='mid'/}"></script>
  *
  * @version        $id:count.php$
- * @package        DedeBIZ.Site
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Site
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../system/common.inc.php");
 if (isset($aid)) $arcID = $aid;

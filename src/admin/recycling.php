@@ -3,10 +3,8 @@
  * 文档回收站
  *
  * @version        $id:recycling.php 15:46 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__).'/config.php');
 CheckPurview('a_Recycling');

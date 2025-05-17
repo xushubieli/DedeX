@@ -3,10 +3,8 @@
  * 选择图片
  *
  * @version        $id:select_images.php 2022-07-01 tianya $
- * @package        DedeBIZ.Dialog
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Dialog
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 include(DEDEDATA.'/mark/inc_photowatermark_config.php');
@@ -78,7 +76,7 @@ if (!empty($iseditor)) {
                     <label><input type="checkbox" name="resize" value="1"> 缩小</label>
                     <label><input type="text" name="iwidth" value="<?php echo $cfg_ddimg_width ?>" class="admin-input-xs"> 宽</label>
                     <label><input type="text" name="iheight" value="<?php echo $cfg_ddimg_height ?>" class="admin-input-xs"> 高</label>
-                    <button type="submit" class="btn btn-success btn-sm">上传</button>
+                    <button type="submit" class="btn btn-primary btn-sm">上传</button>
                 </form>
             </div>
         </div>
@@ -112,7 +110,7 @@ if (!empty($iseditor)) {
                         $tmp = preg_replace("#[\/][^\/]*$#i", "", $activepath);
                         $line = "<div class='d-flex justify-content-between align-items-center mb-3'>
                             <span>当前目录：$activepath</span>
-                            <a href='select_images.php?imgstick=$imgstick&v=$v&f=$f&activepath=".urlencode($tmp).$addparm."' class='btn btn-success btn-sm'>返回上级</a>
+                            <a href='select_images.php?imgstick=$imgstick&v=$v&f=$f&activepath=".urlencode($tmp).$addparm."' class='btn btn-primary btn-sm'>返回上级</a>
                         </div>";
                         echo $line;
                     } else if (is_dir("$inpath/$file")) {

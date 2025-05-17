@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * This is a stub include that automatically configures the include path.
  */

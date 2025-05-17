@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 采集助手
  *
  * @version        $id:charset.helper.php 2010-07-05 11:43:09 tianya $
- * @package        DedeBIZ.Helpers
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Helpers
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC."/libraries/dedehttpdown.class.php");
 require_once(DEDEINC."/dedetag.class.php");
@@ -95,7 +93,7 @@ function DownImageKeep($gurl, $rfurl, $filename, $gcookie = "", $JumpCount = 0, 
     }
     $contentLength = $m_httphead['content-length'];
     //保存文件
-    $fp = fopen($filename, "w") or die("写入文件：{$filename} 失败");
+    $fp = fopen($filename, "w") or die("写入文件：{$filename}失败");
     $i = 0;
     $okdata = '';
     $starttime = time();

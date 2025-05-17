@@ -1,14 +1,12 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
-if (isset($_FILES['GLOBALS'])) exit ('Request not allow!');
+if (!defined('DEDEINC')) exit('dedex');
+if (isset($_FILES['GLOBALS'])) exit('Request not allow!');
 /**
  * 文件上传安全校验方法
  *
  * @version        $id:uploadsafe.inc.php 15:59 2020年8月19日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 //为了防止会员通过注入，这里强制限定的某些文件类型禁止上传
 $cfg_not_allowall = "php|pl|cgi|asp|aspx|jsp|php3|shtm|shtml|htm";
@@ -24,7 +22,7 @@ if (
 foreach ($_FILES as $_key => $_value) {
     foreach ($keyarr as $k) {
         if (!isset($_FILES[$_key][$k])) {
-            exit('dedebiz');
+            exit('dedex');
         }
     }
     if (preg_match('#^(cfg_|GLOBALS)#', $_key)) {

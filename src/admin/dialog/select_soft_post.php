@@ -3,10 +3,8 @@
  * 选择软件发送
  *
  * @version        $id:select_soft_post.php 9:43 2010年7月8日 tianya $
- * @package        DedeBIZ.Dialog
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Dialog
+ * @license        GNU GPL v2 (/license.txt)
  */
 if (!isset($cfg_basedir)) {
     include_once(dirname(__FILE__).'/config.php');

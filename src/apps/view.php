@@ -3,10 +3,8 @@
  * 文档页
  *
  * @version        $id:view.php$
- * @package        DedeBIZ.Site
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Site
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../system/common.inc.php");
 require_once(DEDEINC.'/archive/archives.class.php');
@@ -15,7 +13,7 @@ if (empty($okview)) $okview = '';
 if (isset($arcID)) $aid = $arcID;
 if (!isset($dopost)) $dopost = '';
 $arcID = $aid = (isset($aid) && is_numeric($aid)) ? $aid : 0;
-if ($aid == 0) die("dedebiz");
+if ($aid == 0) die("DedeX");
 $arc = new Archives($aid);
 if ($arc->IsError) ParamError();
 //检查阅读权限
@@ -55,7 +53,7 @@ if ($needMoney > 0 || $needRank > 1) {
         if (!is_array($row)) {
             if ($cfg_ml->M_Money == '' || $needMoney > $cfg_ml->M_Money) {
                 $msgtitle = "您没有权限浏览文档：{$arctitle}";
-                $moremsg = "该文档需要消费".$needMoney."</span>金币才能浏览，您目前金币".$cfg_ml->M_Money." <a class='btn btn-success btn-sm' href='{$cfg_memberurl}/buy.php' target='_blank'>充值金币</a>";
+                $moremsg = "该文档需要消费".$needMoney."</span>金币才能浏览，您目前金币".$cfg_ml->M_Money." <a class='btn btn-primary btn-sm' href='{$cfg_memberurl}/buy.php' target='_blank'>充值金币</a>";
                 include_once(DEDETEMPLATE.'/apps/view_msg.htm');
                 $arc->Close();
                 exit();
@@ -76,7 +74,7 @@ if ($needMoney > 0 || $needRank > 1) {
                     }
                 }
                 $msgtitle = "扣金币购买阅读";
-                $moremsg = "该文档需要消费".$needMoney."金币才能浏览，您目前金币".$cfg_ml->M_Money." <a href='/apps/view.php?aid=".$aid."&dopost=buy' target='_blank' class='btn btn-success btn-sm'>确认阅读</a>";
+                $moremsg = "该文档需要消费".$needMoney."金币才能浏览，您目前金币".$cfg_ml->M_Money." <a href='/apps/view.php?aid=".$aid."&dopost=buy' target='_blank' class='btn btn-primary btn-sm'>确认阅读</a>";
                 include_once($cfg_basedir.$cfg_templets_dir."/apps/view_msg.htm");
                 $arc->Close();
                 exit();

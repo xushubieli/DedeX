@@ -1,11 +1,9 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * @version        $id:autoload.inc.php 17:44 2020-09-22 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 function __autoload($classname)
 {
@@ -25,7 +23,7 @@ function __autoload($classname)
             echo '<pre>';
             echo $classname.'类找不到';
             echo '</pre>';
-            exit ();
+            exit();
         } else {
             header ("location:/404.html");
             die ();

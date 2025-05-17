@@ -3,10 +3,8 @@
  * 修改单表文档模型
  *
  * @version        $id:archives_sg_edit.php 8:26 2010年7月12日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('a_Edit,a_AccEdit,a_MyEdit');
@@ -110,7 +108,7 @@ if ($dopost != 'save') {
     ClearMyAddon($id, $title);
     //返回成功信息
     $msg = "<tr>
-        <td align='center'><a href='$artUrl' target='_blank' class='btn btn-success btn-sm'>浏览文档</a><a href='archives_sg_add.php?cid=$typeid' class='btn btn-success btn-sm'>发布文档</a><a href='archives_do.php?aid=".$id."&dopost=editArchives' class='btn btn-success btn-sm'>修改文档</a><a href='catalog_do.php?cid=$typeid&channelid={$channelid}&dopost=listArchives' class='btn btn-success btn-sm'>返回文档列表</a></td>
+        <td align='center'><a href='$artUrl' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='archives_sg_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布文档</a><a href='archives_do.php?aid=".$id."&dopost=editArchives' class='btn btn-primary btn-sm'>修改文档</a><a href='catalog_do.php?cid=$typeid&channelid={$channelid}&dopost=listArchives' class='btn btn-primary btn-sm'>返回文档列表</a></td>
     </tr>";
     $wintitle = "成功修改分类文档";
     $win = new OxWindow();

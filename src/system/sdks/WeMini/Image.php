@@ -1,6 +1,6 @@
 <?php
 namespace WeMini;
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 use WeChat\Contracts\BasicWeChat;
 /**
  * 小程序图像处理

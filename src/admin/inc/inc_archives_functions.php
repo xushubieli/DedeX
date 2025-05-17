@@ -3,10 +3,8 @@
  * 文档操作函数
  *
  * @version        $id:inc_archives_functions.php 9:56 2010年7月21日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC.'/libraries/dedehttpdown.class.php');
 require_once(DEDEINC.'/image.func.php');
@@ -392,7 +390,7 @@ function GetDDImage($litpic, $picname, $isremote)
         } else {
             if ($litpic == 'ddfirst' && !preg_match("#^(http|https):\/\/#i", $picname)) {
                 $oldpic = $cfg_basedir.$picname;
-                $litpic = str_replace('.', '-ty.', $picname);
+                $litpic = str_replace('.', '-X.', $picname);
                 @ImageResizeNew($oldpic, $cfg_ddimg_width, $cfg_ddimg_height, $cfg_basedir.$litpic);
                 if (!is_file($cfg_basedir.$litpic)) $litpic = '';
             } else {
@@ -508,7 +506,7 @@ function PrintAutoFieldsEdit(&$fieldset, &$fieldValues, $loadtype = 'all')
  */
 function AnalyseHtmlBody($body, &$description, &$litpic, &$keywords, $dtype = '')
 {
-    global $autolitpic, $remote, $dellink, $autokey, $cfg_basehost, $cfg_auot_description, $id, $title, $cfg_bizcore_appid, $cfg_bizcore_key;
+    global $autolitpic, $remote, $dellink, $autokey, $cfg_basehost, $cfg_auot_description, $id, $title;
     $autolitpic = (empty($autolitpic) ? '' : $autolitpic);
     $body = stripslashes($body);
     //远程图片本地化
@@ -537,32 +535,23 @@ function AnalyseHtmlBody($body, &$description, &$litpic, &$keywords, $dtype = ''
     //自动获取关键词
     if ($autokey == 1) {
         $subject = $title." ".Html2Text($body);
-        //采用DedeBIZ Core分词组件分词
-        if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-            $keywords = '';
-            $client = new DedeBizClient();
-            $data = $client->Spliteword($subject.Html2Text($subject));
-            $keywords = $data->data;
-            $client->Close();
-        } else {
-            include_once(DEDEINC.'/libraries/splitword.class.php');
-            $keywords = '';
-            $sp = new SplitWord();
-            $sp->SetSource($subject);
-            $sp->StartAnalysis();
-            $indexs = preg_replace("/#p#|#e#/", '', $sp->GetFinallyIndex());
-            if (is_array($indexs)) {
-                foreach ($indexs as $k => $v) {
-                    if (strlen($keywords.$k) >= 60) {
-                        break;
-                    } else {
-                        if (strlen($k) < 6) continue;
-                        $keywords .= ($keywords == '' ? "{$k}" : ",{$k}");
-                    }
+        include_once(DEDEINC.'/libraries/splitword.class.php');
+        $keywords = '';
+        $sp = new SplitWord();
+        $sp->SetSource($subject);
+        $sp->StartAnalysis();
+        $indexs = preg_replace("/#p#|#e#/", '', $sp->GetFinallyIndex());
+        if (is_array($indexs)) {
+            foreach ($indexs as $k => $v) {
+                if (strlen($keywords.$k) >= 60) {
+                    break;
+                } else {
+                    if (strlen($k) < 6) continue;
+                    $keywords .= ($keywords == '' ? "{$k}" : ",{$k}");
                 }
             }
-            $sp = null;
         }
+        $sp = null;
     }
     $body = GetFieldValueA($body, $dtype, $id);
     $body = addslashes($body);
@@ -614,7 +603,7 @@ function GetImageMapDD($filename, $maxwidth)
 {
     global $cuserLogin, $dsql, $cfg_ddimg_height;
     $ddn = substr($filename, -3);
-    $ddpicok = preg_replace("#\.".$ddn."$#", "-ty.".$ddn, $filename);
+    $ddpicok = preg_replace("#\.".$ddn."$#", "-X.".$ddn, $filename);
     $toFile = $GLOBALS['cfg_basedir'].$ddpicok;
     ImageResizeNew($GLOBALS['cfg_basedir'].$filename, $maxwidth, $cfg_ddimg_height, $toFile);
     //保存图片附件信息

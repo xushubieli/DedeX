@@ -3,14 +3,12 @@
  * 添加自定义标记
  *
  * @version        $id:mytag_add.php 15:35 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require(dirname(__FILE__)."/config.php");
-if (DEDEBIZ_SAFE_MODE) {
-    die(DedeAlert("系统已启用安全模式，无法使用当前功能",ALERT_DANGER));
+if (DEDEX_SAFE_MODE) {
+    die(DedeAlert("系统已启用安全模式，无法使用当前功能", ALERT_DANGER));
 }
 CheckPurview('temp_Other');
 require_once(DEDEINC."/typelink/typelink.class.php");

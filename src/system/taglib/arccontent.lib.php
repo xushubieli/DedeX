@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 文档标签
  *
  * @version        $id:arccontent.lib.php 2020年9月14日 tianya $
- * @package        DedeBIZ.Taglib
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Taglib
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC."/channelunit.class.php");
 //这是一个用来调用文档的标签，只是提供一种方法，不建议太多地方调用，毕竟比较损耗性能，用法：{dede:arccontent type='pre|next'}[field:body/]{/dede:arccontent}

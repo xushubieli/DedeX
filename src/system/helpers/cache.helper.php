@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
- * 缓存助手，支持文件和dedebiz cache
+ * 缓存助手，支持文件和dedex cache
  *
  * @version        $id:cache.helper.php 10:46 2011-3-2 tianya $
- * @package        DedeBIZ.Helpers
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Helpers
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  *  读缓存
@@ -20,24 +18,13 @@ if (!defined('DEDEINC')) exit('dedebiz');
 if (!function_exists('GetCache')) {
     function GetCache($prefix, $key)
     {
-        global $cfg_bizcore_appid, $cfg_bizcore_key;
-
         $key = md5($key);
-        //商业组件缓存
-        if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-            $client = new DedeBizClient();
-            $key = trim($prefix.'_'.$key);
-            $data = $client->CacheGet($key);
-            $result = unserialize($data->data);
-            $client->Close();
-            return $result;
-        }
         $key = substr($key, 0, 2).'/'.substr($key, 2, 2).'/'.substr($key, 4, 2).'/'.$key;
         $result = @file_get_contents(DEDEDATA."/cache/$prefix/$key.php");
         if ($result === false) {
             return false;
         }
-        $result = str_replace("<?php exit('dedebiz');?>\n\r", "", $result);
+        $result = str_replace("<?php exit('dedex');?>\n\r", "", $result);
         $result = @unserialize($result);
         if ($result['timeout'] != 0 && $result['timeout'] < time()) {
             return false;
@@ -58,21 +45,11 @@ if (!function_exists('GetCache')) {
 if (!function_exists('SetCache')) {
     function SetCache($prefix, $key, $value, $timeout = 3600)
     {
-        global $cfg_bizcore_appid, $cfg_bizcore_key;
         $key = md5($key);
-        //商业组件缓存
-        if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-            $client = new DedeBizClient();
-            $key = trim($prefix.'_'.$key);
-            $data = $client->CacheSet($key,serialize($value),$timeout);
-            $result = unserialize($data->data);
-            $client->Close();
-            return $result;
-        }
         $key = substr($key, 0, 2).'/'.substr($key, 2, 2).'/'.substr($key, 4, 2).'/'.$key;
         $tmp['data'] = $value;
         $tmp['timeout'] = $timeout != 0 ? time() + (int) $timeout : 0;
-        $cache_data = "<?php exit('dedebiz');?>\n\r".@serialize($tmp);
+        $cache_data = "<?php exit('dedex');?>\n\r".@serialize($tmp);
         return @PutFile(DEDEDATA."/cache/$prefix/$key.php",  $cache_data);
     }
 }
@@ -88,16 +65,7 @@ if (!function_exists('DelCache')) {
     //删缓存
     function DelCache($prefix, $key)
     {
-        global $cfg_bizcore_appid, $cfg_bizcore_key;
         $key = md5($key);
-        //商业组件缓存
-        if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-            $client = new DedeBizClient();
-            $key = trim($prefix.'_'.$key);
-            $data = $client->CacheDel($key);
-            $client->Close();
-            return true;
-        }
         $key = substr($key, 0, 2).'/'.substr($key, 2, 2).'/'.substr($key, 4, 2).'/'.$key;
         return @unlink(DEDEDATA."/cache/$prefix/$key.php");
     }

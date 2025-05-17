@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 搜索视图
  *
  * @version        $id:searchview.class.php 15:26 2010年7月7日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC."/typelink/typelink.class.php");
 require_once(DEDEINC."/dedetag.class.php");
@@ -157,39 +155,27 @@ class SearchView
      */
     function GetKeywords($keyword)
     {
-        global $cfg_soft_lang, $cfg_bizcore_appid, $cfg_bizcore_key;
+        global $cfg_soft_lang;
         $keyword = cn_substr($keyword, 50);
         $row = $this->dsql->GetOne("SELECT spwords FROM `#@__search_keywords` WHERE keyword='".addslashes($keyword)."';");
         if (!is_array($row)) {
             if (strlen($keyword) > 7) {
-                if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-                    $client = new DedeBizClient();
-                    $data = $client->Spliteword($keyword);
-                    $kvs = explode(",", $data->data);
-                    $keywords = $keyword." ";
-                    foreach ($kvs as $key => $value) {
-                        $keywords .= ' '.$value;
+                $sp = new SplitWord();
+                $sp->SetSource($keyword);
+                $sp->SetResultType(2);
+                $sp->StartAnalysis(TRUE);
+                $keywords = $sp->GetFinallyResult();
+                $idx_keywords = $sp->GetFinallyIndex();
+                ksort($idx_keywords);
+                $keywords = $keyword.' ';
+                foreach ($idx_keywords as $key => $value) {
+                    if (strlen($key) < 6) {
+                        continue;
                     }
-                    $keywords = preg_replace("/[ ]{1,}/", " ", $keywords);
-                    $client->Close();
-                } else {
-                    $sp = new SplitWord();
-                    $sp->SetSource($keyword);
-                    $sp->SetResultType(2);
-                    $sp->StartAnalysis(TRUE);
-                    $keywords = $sp->GetFinallyResult();
-                    $idx_keywords = $sp->GetFinallyIndex();
-                    ksort($idx_keywords);
-                    $keywords = $keyword.' ';
-                    foreach ($idx_keywords as $key => $value) {
-                        if (strlen($key) < 6) {
-                            continue;
-                        }
-                        $keywords .= ' '.$key;
-                    }
-                    $keywords = preg_replace("/[ ]{1,}/", " ", $keywords);
-                    unset($sp);
+                    $keywords .= ' '.$key;
                 }
+                $keywords = preg_replace("/[ ]{1,}/", " ", $keywords);
+                unset($sp);
             } else {
                 $keywords = $keyword;
             }

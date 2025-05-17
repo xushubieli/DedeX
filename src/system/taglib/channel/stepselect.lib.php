@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 获取二级枚举值
  *
  * @version        $id:stepselect.lib.php 16:24 2010年7月26日 tianya $
- * @package        DedeBIZ.Taglib
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Taglib
+ * @license        GNU GPL v2 (/license.txt)
  */
 function ch_stepselect($fvalue, &$arcTag, &$refObj, $fname = '')
 {

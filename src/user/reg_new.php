@@ -3,10 +3,8 @@
  * 会员注册
  * 
  * @version        $id:reg_new.php 8:38 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 if ($cfg_mb_allowreg == 'N') {
@@ -102,7 +100,7 @@ if ($step == 1) {
             $spacequery = "INSERT INTO `#@__member_space` (`mid`,`pagesize`,`matt`,`spacename`,`spacelogo`,`spacestyle`,`sign`,`spacenews`) VALUES ('{$mid}','10','0','{$uname}的个人主页','','$space','',''); ";
             $dsql->ExecuteNoneQuery($spacequery);
             //写入其它默认数据
-            $dsql->ExecuteNoneQuery("INSERT INTO `#@__member_flink`(mid,title,url) VALUES ('$mid','DedeBIZ','https://www.dedebiz.com');");
+            $dsql->ExecuteNoneQuery("INSERT INTO `#@__member_flink`(mid,title,url) VALUES ('$mid','DedeX','');");
             //模拟登录
             $cfg_ml = new MemberLogin(7 * 3600);
             $rs = $cfg_ml->CheckUser($userid, $userpwd);

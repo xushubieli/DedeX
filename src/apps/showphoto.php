@@ -3,16 +3,14 @@
  * 图片操作
  *
  * @version        $id:showphoto.php$
- * @package        DedeBIZ.Site
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Site
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../system/common.inc.php");
 require_once(DEDEINC."/channelunit.class.php");
 if (isset($arcID)) $aid = $arcID;
 $arcID = $aid = (isset($aid) && is_numeric($aid)) ? $aid : 0;
-if ($aid == 0) die("dedebiz");
+if ($aid == 0) die("DedeX");
 //读取文档信息
 $arctitle = '';
 $arcurl = '';

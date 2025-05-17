@@ -3,10 +3,8 @@
  * 所有文档列表
  *
  * @version        $id:content_list.php 14:31 2010年7月12日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__).'/config.php');
 require_once(DEDEINC.'/typelink/typelink.class.php');
@@ -147,9 +145,9 @@ if ($stime > 0 && $etime > 0) {
 }
 if ($arcrank != '') {
     $whereSql .= " AND arc.arcrank = '$arcrank' ";
-    $CheckUserSend = "<button type='button' class='btn btn-success btn-sm' onclick=\"location='catalog_do.php?cid=".$cid."&dopost=listArchives&gurl=content_list.php';\">所有文档</button>";
+    $CheckUserSend = "<button type='button' class='btn btn-primary btn-sm' onclick=\"location='catalog_do.php?cid=".$cid."&dopost=listArchives&gurl=content_list.php';\">所有文档</button>";
 } else {
-    $CheckUserSend = "<button type='button' class='btn btn-success btn-sm' onclick=\"location='catalog_do.php?cid=".$cid."&dopost=listArchives&arcrank=-1&gurl=content_list.php';\">稿件审核</button>";
+    $CheckUserSend = "<button type='button' class='btn btn-primary btn-sm' onclick=\"location='catalog_do.php?cid=".$cid."&dopost=listArchives&arcrank=-1&gurl=content_list.php';\">稿件审核</button>";
 }
 $orderby = empty($orderby) ? 'id' : preg_replace("#[^a-z0-9]#", "", $orderby);
 $orderbyField = 'arc.'.$orderby;

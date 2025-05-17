@@ -3,10 +3,8 @@
  * 文档操作
  *
  * @version        $id:inc_batchup.php 10:32 2010年7月21日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  *  删除文档信息
@@ -92,14 +90,6 @@ function DelArc($aid, $type = 'ON', $onlyfile = FALSE, $recycle = 0)
         //删除文本数据
         $filenameh = DEDEDATA."/textdata/".(ceil($aid / 5000))."/{$aid}-".substr(md5($cfg_cookie_encode), 0, 16).".txt";
         if (@is_file($filenameh)) @unlink($filenameh);
-    }
-    if ($dsql->IsTable('#@__search_sync')) {
-        $intime = time();
-        $insql = "INSERT INTO `#@__search_sync` (`aid`, `add_at`) VALUES ({$aid}, $intime)";
-        $dsql->ExecuteNoneQuery($insql);
-        if (DEDEBIZSEARCH) {
-            DedeSearchDo("delete",array('id'=>$aid));
-        }
     }
     if (empty($arcRow['money'])) $arcRow['money'] = 0;
     if (empty($arcRow['ismake'])) $arcRow['ismake'] = 1;

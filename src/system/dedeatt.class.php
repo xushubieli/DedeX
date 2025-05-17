@@ -3,10 +3,8 @@
  * 属性数据描述
  *
  * @version        $id:dedeatt.class.php 13:50 2010年7月6日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 class DedeAtt
 {
@@ -72,8 +70,7 @@ class DedeAtt
  * function c____DedeAttParse();
  *
  * @package          DedeAtt
- * @subpackage       DedeBIZ.Libraries
- * @link             https://www.dedebiz.com
+ * @subpackage       DedeX.Libraries
  */
 class DedeAttParse
 {

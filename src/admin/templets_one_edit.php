@@ -3,10 +3,8 @@
  * 修改自定义页面
  *
  * @version        $id:templets_one_edit.php 23:07 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require(dirname(__FILE__)."/config.php");
 CheckPurview('temp_One');
@@ -27,7 +25,7 @@ if ($dopost == "saveedit") {
     $uptime = time();
     $body = str_replace('&quot;', '\\"', $body);
     $filename = preg_replace("#^\/#", "", $nfilename);
-    if (DEDEBIZ_SAFE_MODE) $ismake = 0; //安全模式不允许编译
+    if (DEDEX_SAFE_MODE) $ismake = 0; //安全模式不允许编译
     if (!preg_match('#\.htm$#i', trim($template))) {
         ShowMsg("文件扩展名已被系统禁止", "javascript:;");
         exit();

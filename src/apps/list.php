@@ -3,17 +3,15 @@
  * 栏目页
  *
  * @version        $id:list.php$
- * @package        DedeBIZ.Site
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Site
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../system/common.inc.php");
 $t1 = ExecTime();
 $tid = (isset($tid) && is_numeric($tid) ? $tid : 0);
 $mod = (isset($mod) && is_numeric($mod) ? $mod : 0);
 $channelid = (isset($channelid) && is_numeric($channelid) ? $channelid : 0);
-if ($tid == 0 && $channelid == 0) die("dedebiz");
+if ($tid == 0 && $channelid == 0) die("DedeX");
 if (isset($TotalResult)) $TotalResult = intval(preg_replace("/[^\d]/", '', $TotalResult));
 //如果指定了文档模型id但没有指定栏目id，那么自动获得为这个文档模型的第一个顶级栏目作为栏目默认栏目
 if (!empty($channelid) && empty($tid)) {
@@ -49,7 +47,7 @@ if (isset($lv->Fields['corank']) && $lv->Fields['corank'] > 0) {
         }
         $memberTypes[0] = "游客或没权限会员";
         $msgtitle = "您没有权限浏览栏目：{$lv->Fields['typename']}";
-        $moremsg = "该栏目需要等级".$memberTypes[$lv->Fields['corank']]."才能浏览，您目前等级是".$memberTypes[$cfg_ml->M_Rank]." <a href='{$cfg_memberurl}/buy.php' class='btn btn-success btn-sm'>升级会员</a>";
+        $moremsg = "该栏目需要等级".$memberTypes[$lv->Fields['corank']]."才能浏览，您目前等级是".$memberTypes[$cfg_ml->M_Rank]." <a href='{$cfg_memberurl}/buy.php' class='btn btn-primary btn-sm'>升级会员</a>";
         include_once(DEDETEMPLATE.'/apps/view_msg_catalog.htm');
         exit();
     }

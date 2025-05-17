@@ -3,10 +3,8 @@
  * 修改软件模型
  *
  * @version        $id:soft_edit.php 16:09 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('a_Edit,a_AccEdit,a_MyEdit');
@@ -24,7 +22,7 @@ if ($dopost != 'save') {
     $dsql->SetQuery($arcQuery);
     $arcRow = $dsql->GetOne($arcQuery);
     if (!is_array($arcRow)) {
-        ShowMsg("读取文档信息出错", "-1");
+        ShowMsg("读取文档信息出错", "javascript:;");
         exit();
     }
     $query = "SELECT * FROM `#@__channeltype` WHERE id='".$arcRow['channel']."'";
@@ -48,7 +46,7 @@ if ($dopost != 'save') {
                 if ($ctag->GetName() == 'link') {
                     $islocal = $ctag->GetAtt('islocal');
                     if ($islocal != 1) $needmsg = "<label><input type='checkbox' name='del{$newRowStart}' value='1'> 删除</label>";
-                    else $needmsg = '<button type="button" name="sel1" id="sel1" class="btn btn-success btn-sm" onclick="SelectSoft(\'form1.softurl'.$newRowStart.'\')">选择</button>';
+                    else $needmsg = '<button type="button" name="sel1" id="sel1" class="btn btn-primary btn-sm" onclick="SelectSoft(\'form1.softurl'.$newRowStart.'\')">选择</button>';
                     $nForm .= "<div class='my-2'><label>软件网址{$newRowStart}：<input type='text' name='softurl{$newRowStart}' value='".trim($ctag->GetInnerText())."' class='admin-input-lg'></label> <label>下载名称：<input type='text' name='servermsg{$newRowStart}' value='".$ctag->GetAtt("text")."' class='admin-input-sm'></label><input type='hidden' name='islocal{$newRowStart}' value='{$islocal}'> $needmsg</div>\r\n";
                     $newRowStart++;
                 }
@@ -210,7 +208,7 @@ if ($dopost != 'save') {
     }
     //返回成功信息
     $msg = "<tr>
-        <td align='center'><a href='$arcUrl' target='_blank' class='btn btn-success btn-sm'>浏览文档</a><a href='soft_add.php?cid=$typeid' class='btn btn-success btn-sm'>发布文档</a><a href='archives_do.php?aid=".$id."&dopost=editArchives' class='btn btn-success btn-sm'>修改文档</a><a href='catalog_do.php?cid=$typeid&dopost=listArchives' class='btn btn-success btn-sm'>返回文档列表</a></td>
+        <td align='center'><a href='$arcUrl' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='soft_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布文档</a><a href='archives_do.php?aid=".$id."&dopost=editArchives' class='btn btn-primary btn-sm'>修改文档</a><a href='catalog_do.php?cid=$typeid&dopost=listArchives' class='btn btn-primary btn-sm'>返回文档列表</a></td>
     </tr>";
     $wintitle = "成功修改软件文档";
     $win = new OxWindow();

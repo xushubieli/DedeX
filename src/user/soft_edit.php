@@ -3,10 +3,8 @@
  * 修改软件模型
  * 
  * @version        $id:soft_edit.php 2 14:16 2010-11-11 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 require_once(DEDEINC."/dedetag.class.php");
@@ -49,7 +47,7 @@ if (empty($dopost)) {
         if (is_array($dtp->CTags)) {
             foreach ($dtp->CTags as $ctag) {
                 if ($ctag->GetName() == 'link') {
-                    $nForm .= "<div class='form-group'><label>下载地址".$newRowStart."：</label><div class='input-group mb-3'><input type='text' name='softurl".$newRowStart."' value='".trim($ctag->GetInnerText())."' class='form-control'><div class='input-group-append'><span class='btn btn-success btn-sm btn-send' onclick=\"SelectSoft('addcontent.softurl".$newRowStart."')\">选择</span></div></div>
+                    $nForm .= "<div class='form-group'><label>下载地址".$newRowStart."：</label><div class='input-group mb-3'><input type='text' name='softurl".$newRowStart."' value='".trim($ctag->GetInnerText())."' class='form-control'><div class='input-group-append'><span class='btn btn-primary btn-sm btn-send' onclick=\"SelectSoft('addcontent.softurl".$newRowStart."')\">选择</span></div></div>
                     <label>下载名称：</label><input type='text' name='servermsg".$newRowStart."' value='".$ctag->GetAtt("text")."' class='form-control'></div>";
                     $newRowStart++;
                 }
@@ -164,7 +162,7 @@ if (empty($dopost)) {
         $artUrl = $cfg_phpurl."/view.php?aid=$aid";
     }
     //返回成功信息
-    $msg = "<a href='$artUrl' target='_blank' class='btn btn-success btn-sm'>浏览文档</a><a href='soft_add.php?cid=$typeid' class='btn btn-success btn-sm'>发布文档</a><a href='soft_edit.php?channelid=$channelid&aid=".$aid."' class='btn btn-success btn-sm'>修改文档</a><a href='content_list.php?channelid=$channelid' class='btn btn-success btn-sm'>返回文档列表</a>";
+    $msg = "<a href='$artUrl' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='soft_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布文档</a><a href='soft_edit.php?channelid=$channelid&aid=".$aid."' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid=$channelid' class='btn btn-primary btn-sm'>返回文档列表</a>";
     $wintitle = "成功修改软件文档";
     $win = new WebWindow();
     $win->AddMsgItem($msg);

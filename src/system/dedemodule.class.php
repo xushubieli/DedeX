@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 模块插件
  *
  * @version        $id:dedemodule.class.php 10:31 2010年7月6日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC.'/charset.func.php');
 require_once(DEDEINC.'/dedeatt.class.php');
@@ -171,27 +169,12 @@ class DedeModule
             $minfos['lang'] = "utf-8";
         }
         if (isset($minfos['lang'])) $this->moduleLang = trim($minfos['lang']);
-        else $this->moduleLang = 'gbk';
-        if ($this->sysLang == 'gb2312') $this->sysLang = 'gbk';
-        if ($this->moduleLang == 'gb2312') $this->moduleLang = 'gbk';
+        else $this->moduleLang = 'utf-8';
         if ($this->sysLang != $this->moduleLang) {
             foreach ($minfos as $k => $v) $minfos[$k] = $this->AppCode($v);
         }
-        if (isset($minfos['pubkey'])) {
-            //验证模块信息
-            $pubKey = @base64url_decode($minfos['pubkey']);
-            @openssl_public_decrypt(base64url_decode($minfos['info']), $decontent, $pubKey);
-            $enInfo = (array)json_decode($decontent);
-            if (count($enInfo) == 0) {
-                return array();
-            }
-            if ($enInfo['module_name'] != $minfos['name'] || $enInfo['dev_id'] != $minfos['dev_id']) {
-                return array();
-            }
-        }
         return $minfos;
     }
-
     /**
      *  获得某模块的基本信息
      *
@@ -223,8 +206,7 @@ class DedeModule
         return $filexml;
     }
     /**
-     *  获得系统文件的文档
-     *  指安装、删除、协议文件
+     *  获得系统文件的文档，指安装、删除、协议文件
      *
      * @access    public
      * @param     string   $hashcode  hash码
@@ -446,8 +428,7 @@ class DedeModule
                             //转换HTML编码标识
                             if (preg_match('/\.(php|htm|html|shtml|inc|tpl)$/i', $filename)) {
                                 if ($this->sysLang == 'big5') $charset = 'charset=big5';
-                                else if ($this->sysLang == 'utf-8') $charset = 'charset=gb2312';
-                                else  $charset = 'charset=gb2312';
+                                else  $charset = 'charset=utf-8';
                                 $ct = preg_match("/charset=([a-z0-9-]*)/i", $charset, $ct);
                             }
                         }

@@ -44,7 +44,7 @@ function DedeConfirm(content = "", title = "确认提示") {
 			reject("cancel");
 			CloseModal(`DedeModal${modalID}`);
 		}
-		let footer = `<button type="button" class="btn btn-success btn-sm" onClick="__DedeConfirmRun(\'${modalID}\')">确定</button> <button type="button" class="btn btn-outline-success btn-sm" onClick="__DedeConfirmRunClose(\'${modalID}\')">取消</button>`;
+		let footer = `<button type="button" class="btn btn-primary btn-sm" onClick="__DedeConfirmRun(\'${modalID}\')">确定</button> <button type="button" class="btn btn-outline-primary btn-sm" onClick="__DedeConfirmRunClose(\'${modalID}\')">取消</button>`;
 		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DedeModalLabel${modalID}"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="DedeModalLabel${modalID}">${title}</h6>`;modal +=`<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>`;
 		modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
 		$("body").append(modal)
@@ -62,7 +62,7 @@ function ShowMsg(content, ...args) {
 	title = "系统提示";
 	if (typeof content == "undefined") content = '';
 	modalID = guid();
-	var footer = `<button type="button" class="btn btn-success btn-sm" onClick="CloseModal(\'DedeModal${modalID}\')">确定</button>`;
+	var footer = `<button type="button" class="btn btn-primary btn-sm" onClick="CloseModal(\'DedeModal${modalID}\')">确定</button>`;
 	var noClose = false;
 	if (args.length == 1) {
 		//存在args参数
@@ -174,7 +174,7 @@ function ErrorAddSave(id, title) {
 	<label for="message-text" class="col-form-label">修正建议：</label>
 	<textarea name="optErradd" class="form-control" id="iptErradd"></textarea>
 </div>`;
-	let footer = `<button type="button" id="btnsubmit" class="btn btn-success btn-sm" onClick="ErrAddSaveDo('DedeModal~modalID~')">提交</button> <button type="button" class="btn btn-outline-success btn-sm" onClick="CloseModal('DedeModal~modalID~')">确定</button>`;
+	let footer = `<button type="button" id="btnsubmit" class="btn btn-primary btn-sm" onClick="ErrAddSaveDo('DedeModal~modalID~')">提交</button> <button type="button" class="btn btn-outline-primary btn-sm" onClick="CloseModal('DedeModal~modalID~')">确定</button>`;
 	ShowMsg(content, {
 		'footer': footer,
 	});

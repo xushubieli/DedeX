@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 动态模板channel标签
  *
  * @version        $id:plus_channel.php 13:58 2010年7月5日 tianya $
- * @package        DedeBIZ.Tpllib
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Tpllib
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC.'/channelunit.func.php');
 function plus_channel(&$atts, &$refObj, &$fields)

@@ -1,6 +1,6 @@
 <?php
 namespace WeChat\Exceptions;
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /***
  * 本地缓存异常
  * Class LocalCacheException

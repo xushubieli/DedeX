@@ -3,10 +3,8 @@
  * 更新专题
  *
  * @version        $id:makehtml_spec.php 11:17 2010年7月19日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('sys_MakeHtml');

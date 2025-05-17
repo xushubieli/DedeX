@@ -3,10 +3,8 @@
  * 模型解析函数
  *
  * @version        $id:inc_archives_all.php 9:56 2010年7月21日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  * 获得一个附加表单

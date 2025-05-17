@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 栏目选项函数
  * 
  * @version        $id:inc_catalog_options.php 13:52 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  *  获取选项列表

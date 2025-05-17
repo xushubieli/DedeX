@@ -3,10 +3,8 @@
  * 自定义表单
  *
  * @version        $id:diy.php$
- * @package        DedeBIZ.Site
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Site
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../system/common.inc.php");
 $diyid = isset($diyid) && is_numeric($diyid) ? $diyid : 0;
@@ -76,7 +74,7 @@ if ($action == 'post') {
             showmsg('您输入的信息太多了，请重新填写', '-1');
             exit();
         }*/
-        //获取表单提交的链接、时间、ip，字段标识默认为link、date、ip，前台表单可以不用出现该输入框，但是biz_fields和biz_fieldshash的值要最新，下面是重复提交表单限制，恢复注释代码使用
+        //获取表单提交的链接、时间、ip，字段标识默认为link、date、ip，前台表单可以不用出现该输入框，但是x_fields和x_fieldshash的值要最新，下面是重复提交表单限制，恢复注释代码使用
         /*$result = $dsql->getOne("SELECT count(*) AS dd FROM `{$diy->table}` WHERE ip='$ip' AND date_format(date,'Y-m-d') = date_format(now(),'Y-m-d')");
         if ($result['dd'] >= 3) {
             showmsg('您已重复提交太多次了，请等待平台联系', '-1');

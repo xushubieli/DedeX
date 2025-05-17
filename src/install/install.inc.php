@@ -1,10 +1,7 @@
 <?php
 /**
  * @version        $id:install.inc.php 13:41 2010年7月26日 tianya $
- * @package        DedeBIZ.Install
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Install
  */
 function RunMagicQuotes(&$str)
 {

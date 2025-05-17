@@ -3,10 +3,8 @@
  * 流量统计表
  *
  * @version        $id:statistics_list.php 2024-04-15 tianya,xushubieli $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 require_once(DEDEINC.'/datalistcp.class.php');

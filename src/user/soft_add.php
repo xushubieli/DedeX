@@ -3,10 +3,8 @@
  * 发布软件模型
  * 
  * @version        $id:soft_add.php 2 14:16 2010-11-11 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 require_once(DEDEINC."/dedetag.class.php");
@@ -158,7 +156,7 @@ if (empty($dopost)) {
     }
     ClearMyAddon($arcID, $title);
     //返回成功信息
-    $msg = "<a href='$artUrl' target='_blank' class='btn btn-success btn-sm'>浏览文档</a><a href='soft_add.php?cid=$typeid' class='btn btn-success btn-sm'>发布文档</a><a href='soft_edit.php?channelid=$channelid&aid=$arcID' class='btn btn-success btn-sm'>修改文档</a><a href='content_list.php?channelid={$channelid}' class='btn btn-success btn-sm'>返回文档列表</a>";
+    $msg = "<a href='$artUrl' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='soft_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布文档</a><a href='soft_edit.php?channelid=$channelid&aid=$arcID' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid={$channelid}' class='btn btn-primary btn-sm'>返回文档列表</a>";
     $wintitle = "成功发布文档";
     $win = new WebWindow();
     $win->AddMsgItem($msg);

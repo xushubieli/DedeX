@@ -1,6 +1,6 @@
 <?php
 namespace WePayV3\Contracts;
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 use WeChat\Exceptions\InvalidArgumentException;
 use WeChat\Exceptions\InvalidDecryptException;
 /**

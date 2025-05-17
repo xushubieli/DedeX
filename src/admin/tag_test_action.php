@@ -3,14 +3,12 @@
  * 标签调用测试操作
  *
  * @version        $id:tag_test_action.php 23:07 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
-if (DEDEBIZ_SAFE_MODE) {
-    die(DedeAlert("系统已启用安全模式，无法使用当前功能",ALERT_DANGER));
+if (DEDEX_SAFE_MODE) {
+    die(DedeAlert("系统已启用安全模式，无法使用当前功能", ALERT_DANGER));
 }
 CheckPurview('temp_Test');
 require_once(DEDEINC."/archive/partview.class.php");

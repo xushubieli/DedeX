@@ -3,10 +3,8 @@
  * 文档列表相关操作
  *
  * @version        $id:archives_do.php 8:26 2010年7月12日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__).'/config.php');
 require_once(DEDEADMIN.'/inc/inc_batchup.php');
@@ -227,10 +225,6 @@ else if ($dopost == "checkArchives") {
     while ($row = $dsql->GetArray('ckall')) {
         $aid = $row['id'];
         $maintable = (trim($row['maintable']) == '' ? '#@__archives' : trim($row['maintable']));
-        $indexedsql = "";
-        if (TableHasField("#@__arctiny", "indexed")) {
-            $indexedsql = ", `indexed`=2 ";
-        }
         $dsql->ExecuteNoneQuery("UPDATE `#@__arctiny` SET arcrank='0'{$indexedsql} WHERE id='$aid' ");
         if ($row['issystem'] == -1) {
             $dsql->ExecuteNoneQuery("UPDATE `".trim($row['addtable'])."` SET arcrank='0' WHERE aid='$aid' ");
@@ -239,7 +233,6 @@ else if ($dopost == "checkArchives") {
         }
         $dsql->ExecuteNoneQuery("UPDATE `#@__taglist` SET arcrank='0' WHERE aid='$aid' ");
         $pageurl = MakeArt($aid, false);
-        DedeSearchDo("add", array("id" => $aid));
     }
     ShowMsg("成功审核指定文档", $ENV_GOBACK_URL);
     exit();
@@ -275,8 +268,8 @@ else if ($dopost == "checkArchives") {
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <button type="submit" class="btn btn-success btn-sm">保存</button>
-                    <button type="button" onclick="HideObj('<?php echo $divname;?>');ChangeFullDiv('hide');" class="btn btn-outline-success btn-sm">关闭</button>
+                    <button type="submit" class="btn btn-primary btn-sm">保存</button>
+                    <button type="button" onclick="HideObj('<?php echo $divname;?>');ChangeFullDiv('hide');" class="btn btn-outline-primary btn-sm">关闭</button>
                 </td>
             </tr>
         </tbody>
@@ -554,8 +547,8 @@ else if ($dopost == 'quickEdit') {
         </tr>
         <tr>
             <td colspan="2" align="center">
-                <button type="submit" class="btn btn-success btn-sm">保存</button>
-                <button type="button" onclick="HideObj('<?php echo $divname;?>');ChangeFullDiv('hide');" class="btn btn-outline-success btn-sm">关闭</button>
+                <button type="submit" class="btn btn-primary btn-sm">保存</button>
+                <button type="button" onclick="HideObj('<?php echo $divname;?>');ChangeFullDiv('hide');" class="btn btn-outline-primary btn-sm">关闭</button>
             </td>
         </tr>
     </tbody>
@@ -614,63 +607,39 @@ else if ($dopost == "makekw") {
     $query = "SELECT arc.*, addt.* From `#@__archives` arc LEFT JOIN `#@__addonarticle` addt ON addt.aid=arc.id WHERE arc.id in($arcids) AND arc.channel=1 ";
     $dsql->SetQuery($query);
     $dsql->Execute();
-    if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-        $client = new DedeBizClient();
-        while ($row = $dsql->GetArray()) {
-            //跳过已经有关键词文档
-            if (trim($row['keywords']) != '') continue;
-            $aid = $row['id'];
-            $keywords = '';
-            $title = $row['title'];
-            $description = $row['description'];
-            $body = cn_substr($row['body'], 3000);
-            $data = $client->Spliteword($title." ".Html2Text($body));
-            $keywords = $data->data;
-            $description = str_replace('　', ' ', trim($description));
-            $description = str_replace('［', ' ', $description);
-            $description = str_replace('］', ' ', $description);
-            $description = preg_replace("#[ \t]{1,}#is", ' ', $description);
-            $description = str_replace('关键词', '', $description);
-            $description = str_replace('关键词', '', $description);
-            $description = addslashes($description);
-            $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET `keywords`='$keywords',`description`='$description' WHERE id='{$aid}' ");
-        }
-        $client->Close();
-    } else {
-        include_once(DEDEINC.'/libraries/splitword.class.php');
-        $sp = new SplitWord();
-        while ($row = $dsql->GetArray()) {
-            //跳过已经有关键词文档
-            if (trim($row['keywords']) != '') continue;
-            $aid = $row['id'];
-            $keywords = '';
-            $title = $row['title'];
-            $description = $row['description'];
-            $body = cn_substr($row['body'], 3000);
-            $sp->SetSource($title." ".Html2Text($body));
-            $sp->StartAnalysis();
-            $indexs = preg_replace("/#p#|#e#/", '', $sp->GetFinallyIndex());
-            if (is_array($indexs)) {
-                foreach ($indexs as $k => $v) {
-                    if (strlen($keywords.$k) >= 60) {
-                        break;
-                    } else {
-                        if (strlen($k) < 6) continue;
-                        $keywords .= ($keywords == '' ? "{$k}" : ",{$k}");
-                    }
+    include_once(DEDEINC.'/libraries/splitword.class.php');
+    $sp = new SplitWord();
+    while ($row = $dsql->GetArray()) {
+        //跳过已经有关键词文档
+        if (trim($row['keywords']) != '') continue;
+        $aid = $row['id'];
+        $keywords = '';
+        $title = $row['title'];
+        $description = $row['description'];
+        $body = cn_substr($row['body'], 3000);
+        $sp->SetSource($title." ".Html2Text($body));
+        $sp->StartAnalysis();
+        $indexs = preg_replace("/#p#|#e#/", '', $sp->GetFinallyIndex());
+        if (is_array($indexs)) {
+            foreach ($indexs as $k => $v) {
+                if (strlen($keywords.$k) >= 60) {
+                    break;
+                } else {
+                    if (strlen($k) < 6) continue;
+                    $keywords .= ($keywords == '' ? "{$k}" : ",{$k}");
                 }
             }
-            $description = str_replace('　', ' ', trim($description));
-            $description = str_replace('［', ' ', $description);
-            $description = str_replace('］', ' ', $description);
-            $description = preg_replace("#[ \t]{1,}#is", ' ', $description);
-            $description = str_replace('关键词', '', $description);
-            $description = str_replace('关键词', '', $description);
-            $description = addslashes($description);
-            $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET `keywords`='$keywords',`description`='$description' WHERE id='{$aid}' ");
         }
-        $sp = null;
+        $description = str_replace('　', ' ', trim($description));
+        $description = str_replace('［', ' ', $description);
+        $description = str_replace('］', ' ', $description);
+        $description = preg_replace("#[ \t]{1,}#is", ' ', $description);
+        $description = str_replace('关键词', '', $description);
+        $description = str_replace('关键词', '', $description);
+        $description = addslashes($description);
+        $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET `keywords`='$keywords',`description`='$description' WHERE id='{$aid}' ");
     }
+    $sp = null;
     ShowMsg("成功分析指定文档关键词", $ENV_GOBACK_URL);
     exit();
 }
@@ -784,8 +753,8 @@ else if ($dopost == 'attsDlg') {
         </tr>
         <tr>
             <td colspan="2" align="center">
-                <button type="submit" class="btn btn-success btn-sm">保存</button>
-                <button type="button" onclick="HideObj('<?php echo $divname;?>');ChangeFullDiv('hide');" class="btn btn-outline-success btn-sm">关闭</button>
+                <button type="submit" class="btn btn-primary btn-sm">保存</button>
+                <button type="button" onclick="HideObj('<?php echo $divname;?>');ChangeFullDiv('hide');" class="btn btn-outline-primary btn-sm">关闭</button>
             </td>
         </tr>
     </tbody>
@@ -802,12 +771,12 @@ else if ($dopost == 'attsDlg') {
     $divname = 'getCatMap';
     echo "<div class='card shadow-sm'><div class='card-header'>选择副栏目</div><div class='card-body'>";
     $tus = new TypeUnitSelector();
-    ?>    
+    ?>
     <form name="fastselectbox" action="javascript:;" method="get">
         <div class="fastselectbox"><?php $tus->ListAllType($channelid);?></div>
         <div class="text-center">
-            <button onclick="getSelCat('<?php echo $targetid;?>');" class="btn btn-success btn-sm">保存</button>
-            <button type="button" onclick="HideObj('<?php echo $divname;?>');ChangeFullDiv('hide');" class="btn btn-outline-success btn-sm">关闭</button>
+            <button onclick="getSelCat('<?php echo $targetid;?>');" class="btn btn-primary btn-sm">保存</button>
+            <button type="button" onclick="HideObj('<?php echo $divname;?>');ChangeFullDiv('hide');" class="btn btn-outline-primary btn-sm">关闭</button>
         </div>
     </form>
 </div>

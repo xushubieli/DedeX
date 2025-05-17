@@ -3,10 +3,8 @@
  * 验证码
  *
  * @version        $id:vdimgck.php$
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__).'/../system/common.inc.php');
 require_once(DEDEDATA.'/config.cache.inc.php');

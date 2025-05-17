@@ -3,10 +3,8 @@
  * 搜索关键词管理
  *
  * @version        $id:search_keywords_main.php 15:46 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 DedeSetCookie("ENV_GOBACK_URL", $dedeNowurl, time() + 3600, "/");
@@ -103,8 +101,8 @@ function GetKeywordList($dsql, $pageno, $pagesize, $orderby = 'aid')
     }
     echo "<tr>
             <td colspan='9'>
-            <a href=\"javascript:selAll();\" class='btn btn-success btn-sm'>反选</a>
-            <a href=\"javascript:noselAll();\" class='btn btn-success btn-sm'>取消</a>
+            <a href=\"javascript:selAll();\" class='btn btn-primary btn-sm'>反选</a>
+            <a href=\"javascript:noselAll();\" class='btn btn-primary btn-sm'>取消</a>
             <a href=\"javascript:delall();\" class='btn btn-danger btn-sm'>删除</a>
            </td>
         </tr>

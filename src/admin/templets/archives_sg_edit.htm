@@ -11,11 +11,10 @@
 		<link rel="stylesheet" href="/static/web/css/cropper.min.css">
 		<script>const cfg_uplitpic_cut = '<?php echo $cfg_uplitpic_cut;?>';</script>
 		<script src="/static/web/js/jquery.min.js"></script>
-		<script src="/static/web/js/bootstrap.min.js"></script>
+		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
 		<script src="/static/web/js/moment.min.js"></script>
 		<script src="/static/web/js/daterangepicker.js"></script>
-		<script src="/static/web/js/cropper.min.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 	</head>
 	<body>
@@ -63,9 +62,9 @@
 										<td colspan="3">
 											<input type="text" name="picname" id="picname" class="admin-input-lg" value="<?php echo $addRow['litpic']?>">
 											<label><input type="checkbox" name="ddisremote" value="1" id="ddisremote"> 远程图片</label>
-											<span class="btn btn-success btn-sm opt-button">上传<input type="file" name="files[]" id="iptAddImages"></span>
-											<button type="button" onclick="SelectImage('form1.picname','');" class="btn btn-success btn-sm">选择</button>
-											<button type="button" id="btnClearAll" class="btn btn-success btn-sm">清空</button>
+											<span class="btn btn-primary btn-sm opt-button">上传<input type="file" name="files[]" id="iptAddImages"></span>
+											<button type="button" onclick="SelectImage('form1.picname','');" class="btn btn-primary btn-sm">选择</button>
+											<button type="button" id="btnClearAll" class="btn btn-primary btn-sm">清空</button>
 											<img src="<?php if ($addRow['litpic']!='') echo $addRow['litpic']; else echo '/static/web/img/thumbnail.jpg';?>" id="litPic" class="thumbnail-md ml-3">
 										</td>
 									</tr>
@@ -84,7 +83,7 @@
 											echo $typeOptions;
 											echo "</select>";
 											?>
-											<a href="javascript:ShowCatMap(event,this,<?php echo $channelid;?>,'typeid','<?php echo $addRow['typeid'];?>');" class="btn btn-success btn-sm">选择</a>
+											<a href="javascript:ShowCatMap(event,this,<?php echo $channelid;?>,'typeid','<?php echo $addRow['typeid'];?>');" class="btn btn-primary btn-sm">选择</a>
 										</td>
 									</tr>
 									<?php }?>
@@ -108,8 +107,8 @@
 									</tr>
 									<tr>
 										<td align="center" colspan="4">
-											<button type="submit" class="btn btn-success btn-sm">保存</button>
-											<button type="reset" class="btn btn-outline-success btn-sm">重置</button>
+											<button type="submit" class="btn btn-primary btn-sm">保存</button>
+											<button type="reset" class="btn btn-outline-primary btn-sm">重置</button>
 										</td>
 									</tr>
 								</tbody>

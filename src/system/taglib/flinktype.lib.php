@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 友情链接标签
  *
  * @version        $id:flinktype.lib.php 15:57 2011年2月18日Z niap $
- * @package        DedeBIZ.Taglib
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Taglib
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC."/taglib/flink.lib.php");
 function lib_flinktype(&$ctag, &$refObj)
@@ -32,10 +30,10 @@ function lib_flinktype(&$ctag, &$refObj)
     while ($dbrow = $dsql->GetObject()) {
         $row[] = $dbrow;
     }
-    $DedeBIZ = new stdClass;
-    $DedeBIZ->id = 999;
-    $DedeBIZ->typename = 'DedeBIZ';
-    if ($type == 'DedeBIZ') $row[] = $DedeBIZ;
+    $DedeX = new stdClass;
+    $DedeX->id = 999;
+    $DedeX->typename = 'DedeX';
+    if ($type == 'DedeX') $row[] = $DedeX;
     foreach ($row as $key => $value) {
         if (is_array($dtp->CTags)) {
             $GLOBALS['envs']['flinkid'] = $value->id;

@@ -24,7 +24,7 @@
 			<div class="card shadow-sm">
 				<div class="card-header">修改文档模型</div>
 				<div class="card-body">
-					<?php if ($row['issystem'] == 1) {?><div class="alert alert-warning">默认文档模型字段，请谨慎修改</div><?php }?>
+					<?php if ($row['issystem'] == 1) {?><div class="alert alert-info">默认文档模型字段，请谨慎修改</div><?php }?>
 					<form name="form1" action="mychannel_edit.php" method="post">
 						<input type="hidden" name="id" value="<?php echo $id?>">
 						<input type="hidden" name="dopost" value="save">
@@ -212,7 +212,7 @@
 														</td>
 														<td>
 															<?php if ($ft==1) {?>
-															<a href="mychannel_field_edit.php?id=<?php echo $id;?>&fname=<?php echo $ctag->GetTagName();?>&issystem=<?php echo $row['issystem'];?>" class="btn btn-success btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
+															<a href="mychannel_field_edit.php?id=<?php echo $id;?>&fname=<?php echo $ctag->GetTagName();?>&issystem=<?php echo $row['issystem'];?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
 															<?php if ($row['issystem']!=1) {?>
 															<a href="javascript:DelNote('mychannel_field_edit.php?id=<?php echo $id;?>&fname=<?php echo $ctag->GetTagName();?>&action=delete');" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
 															<?php }?>
@@ -230,12 +230,12 @@
 									<tr>
 										<td colspan="2"><textarea name="fieldset" id="fieldset" class="admin-textarea-xl"><?php echo stripslashes($row['fieldset']);?></textarea></td>
 									</tr>
-										<td colspan="2"><a href="mychannel_field_add.php?id=<?php echo $id;?>" class="btn btn-success btn-sm">添加新字段</button></td>
+										<td colspan="2"><a href="mychannel_field_add.php?id=<?php echo $id;?>" class="btn btn-primary btn-sm">添加新字段</button></td>
 									</tr>
 									<tr>
 										<td align="center" colspan="2">
-											<button type="submit" class="btn btn-success btn-sm">保存</button>
-											<button type="reset" class="btn btn-outline-success btn-sm">重置</button>
+											<button type="submit" class="btn btn-primary btn-sm">保存</button>
+											<button type="reset" class="btn btn-outline-primary btn-sm">重置</button>
 										</td>
 									</tr>
 								</tbody>

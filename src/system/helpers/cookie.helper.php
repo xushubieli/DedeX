@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * Cookie处理助手
  *
  * @version        $id:cookie.helper.php 2024-04-11 tianya $
- * @package        DedeBIZ.Helpers
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Helpers
+ * @license        GNU GPL v2 (/license.txt)
  */
 function DedeSetCookie($key, $value = "", $expires = 0, $path = ""){
     global $cfg_domain_cookie,$cfg_cookie_samesite,$cfg_cookie_secure,$cfg_cookie_httponly;

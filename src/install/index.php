@@ -1,17 +1,13 @@
 <?php
 /**
  * @version        $id:index.php 2022-01-03 tianya $
- * @package        DedeBIZ.Install
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Install
  */
 @set_time_limit(0);
 error_reporting(E_ALL || ~E_NOTICE);
 define('INSLOCKFILE', dirname(__FILE__).'/install_lock.txt');
-$verMsg = 'V6';
-$dfDbname = 'DedeBIZ';
-$cfg_version_detail = '6.5.9'; //详细版本号
+$dfDbname = 'DedeX';
+$cfg_version_detail = '1.0'; //详细版本号
 $errmsg = '';
 if (version_compare(PHP_VERSION, '8.0.0', '>=') && function_exists("mysqli_report")) {
     mysqli_report(MYSQLI_REPORT_OFF);
@@ -41,10 +37,7 @@ if ($step==1) {
         $arrMsg[] = "PHP请升级到5.3及以上版本，低版本PHP环境无法正常使用本系统";
     }
     if (!extension_loaded("openssl")) {
-        $arrMsg[] = "OpenSSL未开启，无法完成<a href='https://www.dedebiz.com' target='_blank'>DedeBIZ商业支持</a>";
-    }
-    if (!extension_loaded("sockets")) {
-        $arrMsg[] = "Sockets未开启，无法安装<a href='https://www.dedebiz.com/download#dedebiz' target='_blank'>DedeBIZ商业组件</a>";
+        $arrMsg[] = "OpenSSL未开启";
     }
     if (!extension_loaded("fileinfo")) {
         $arrMsg[] = "Fileinfo未开启，无法正常进行文件上传";
@@ -93,7 +86,7 @@ else if ($step==2) {
     $dbhost = empty($dbhost)? "localhost" : $dbhost;
     $dbuser = empty($dbuser)? "root" : $dbuser;
     $dbuser = empty($dbuser)? "root" : $dbuser;
-    $dbprefix = empty($dbprefix)? "biz_" : $dbprefix;
+    $dbprefix = empty($dbprefix)? "x_" : $dbprefix;
     $dbname = empty($dbname)? $dfDbname : $dbname;
     $adminuser = empty($adminuser)? "admin" : $adminuser;
     $adminpwd = empty($adminpwd)? "admin" : $adminpwd;

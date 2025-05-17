@@ -3,10 +3,8 @@
  * 添加友情链接
  *
  * @version        $id:friendlink_add.php 10:59 2010年7月13日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require(dirname(__FILE__)."/config.php");
 CheckPurview('plus_友情链接');

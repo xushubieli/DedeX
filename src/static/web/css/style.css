@@ -1,8 +1,10 @@
 :root {
 	--bg:#f8fafb;
+	--primary:#4285f4;
 	--gray-300:#dee2e6;
 	--gray-500:#adb5bd;
-	--b-radius:0.5rem
+	--b-radius:0.5rem;
+	--b-radius-sm:0.25rem
 }
 * {
 	scrollbar-width:thin;
@@ -302,7 +304,7 @@ input[type=radio],input[type=checkbox],input[type=radio]:focus,input[type=checkb
 }
 .user-meter i {
 	font-size:24px!important;
-	color:var(--green)
+	color:var(--primary)
 }
 .userspace .info {
 	font-size:14px;
@@ -321,13 +323,13 @@ input[type=radio],input[type=checkbox],input[type=radio]:focus,input[type=checkb
 	bottom:1rem;
 	color:var(--white);
 	cursor:pointer;
-	background:var(--orange);
+	background:var(--primary);
 	border-radius:var(--b-radius);
 	border:0;
 	z-index:9998
 }
 #returntop:hover {
-	background:var(--orange)
+	background:var(--primary)
 }
 .biz-mb {
 	margin-bottom:-2rem
@@ -439,6 +441,17 @@ a:hover,.item-theme:hover,.item-news:hover,.table-hover tbody tr:hover {
 }
 .btn+.btn {
 	margin-left:1rem
+}
+.btn-primary {
+	background-color:var(--primary);
+	border-color:var(--primary)
+}
+.bg-primary {
+	background-color:var(--primary)!important
+}
+.list-group-item.active {
+	background-color:var(--primary);
+	border-color:var(--primary)
 }
 .shadow-sm {
 	box-shadow:0 0.125rem 0.25rem rgba(0,0,0,0.015)!important

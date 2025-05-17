@@ -1,14 +1,12 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 require_once(DEDEINC."/libraries/agent.class.php");
 /**
  * 流量统计操作
  *
  * @version        $id:statistics.class.php 11:42 2022年03月26日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 class DedeStatistics {
     function __construct()
@@ -97,11 +95,11 @@ class DedeStatistics {
         $sign = $pmvalue['sign'];
         unset($pmvalue['sign']);
         if (time() - $pmvalue['t'] > 5) {
-            die("DedeBIZ:time out");
+            die("DedeX:time out");
         }
         $cs = sha1(http_build_query($pmvalue).md5($cfg_cookie_encode));
         if ($sign !== $cs) {
-            die("DedeBIZ:check sign failed");
+            die("DedeX:check sign failed");
         }
         $pmvalue['ip'] = GetIP();
         $kstr = $vstr = array();

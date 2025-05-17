@@ -3,10 +3,8 @@
  * 会员修改
  *
  * @version        $id:member_edit.php 14:15 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require(dirname(__FILE__)."/config.php");
 CheckPurview('member_Edit');

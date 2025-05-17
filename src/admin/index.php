@@ -3,10 +3,8 @@
  * 后台管理主页
  *
  * @version        $id:index.php 11:06 2010年7月13日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 if (preg_match("#PHP (.*) Development Server#", $_SERVER['SERVER_SOFTWARE'])) {
     if ($_SERVER['REQUEST_URI'] == dirname($_SERVER['SCRIPT_NAME'])) {

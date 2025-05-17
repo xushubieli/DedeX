@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 动态模板文档列表标签
  *
  * @version        $id:plus_userarclist.php tianya $
- * @package        DedeBIZ.Tpllib
- * @copyright      Copyright (c) 2023 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Tpllib
+ * @license        GNU GPL v2 (/license.txt)
  */
 function plus_userarclist(&$atts, &$refObj, &$fields)
 {

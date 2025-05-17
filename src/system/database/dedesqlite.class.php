@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 系统底层数据库核心，调用这个类前，请先设定这些外部变量
  * 
@@ -10,10 +10,8 @@ if (!defined('DEDEINC')) exit('dedebiz');
  * $GLOBALS['cfg_dbprefix'];
  *
  * @version        $id:dedesqlite.class.php 15:00 2011-1-21 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 @set_time_limit(0);
 if (!extension_loaded("sqlite3")) {
@@ -26,8 +24,7 @@ $dsql = $dsqlitete = $db = new DedeSqlite(FALSE);
  * Dede SQLite3数据库类
  *
  * @package        DedeSqli
- * @subpackage     DedeBIZ.Libraries
- * @link           https://www.dedebiz.com
+ * @subpackage     DedeX.Libraries
  */
 if (!defined('MYSQL_BOTH')) {
     define('MYSQL_BOTH', MYSQLI_BOTH);
@@ -468,7 +465,7 @@ class DedeSqlite
     function RecordLog($runtime = 0)
     {
         global $cfg_cookie_encode;
-        $enkey = substr(md5(substr($cfg_cookie_encode.'dedebiz', 0, 5)), 0, 10);
+        $enkey = substr(md5(substr($cfg_cookie_encode.'DedeX', 0, 5)), 0, 10);
         $RecordLogFile = DEDEDATA.'/mysqli_record_log_'.$enkey.'.inc';
         $url = $this->GetCurUrl();
         $savemsg = <<<EOT
@@ -486,7 +483,7 @@ EOT;
     function DisplayError($msg)
     {
         global $cfg_cookie_encode;
-        $enkey = substr(md5(substr($cfg_cookie_encode.'dedebiz', 0, 5)), 0, 10);
+        $enkey = substr(md5(substr($cfg_cookie_encode.'DedeX', 0, 5)), 0, 10);
         $errorTrackFile = DEDEDATA.'/sqlite_error_trace_'.$enkey.'.inc';
         if ($this->showError) {
             $msg = str_replace(array("\r","\n"),"",addslashes($msg));

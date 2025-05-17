@@ -26,13 +26,13 @@
 							<h1>后台登录</h1>
 							<span><?php echo $cfg_description;?></span>
 						</div>
-						<?php if (preg_match('/MSIE/i',$_SERVER['HTTP_USER_AGENT']) || preg_match('/Trident/i',$_SERVER['HTTP_USER_AGENT'])) {?><div class="alert alert-danger">您使用的浏览器已过时，请<a href="https://www.dedebiz.com/browsehappy" target="_blank">更换浏览器</a>，提高后台操作体验</div><?php }?>
+						<?php if (preg_match('/MSIE/i',$_SERVER['HTTP_USER_AGENT']) || preg_match('/Trident/i',$_SERVER['HTTP_USER_AGENT'])) {?><div class="alert alert-danger">您使用的浏览器已过时，请更换浏览器，提高后台操作体验</div><?php }?>
 						<?php echo $redmsg;?>
 						<div class="login-from">
 							<form name="form1" method="post" action="login.php">
 								<input type="hidden" name="gotopage" value="<?php if (!empty($gotopage)) echo RemoveXSS($gotopage);?>">
 								<input type="hidden" name="dopost" value="login">
-								<input type="hidden" name="adminstyle" value="newDedeBIZ">
+								<input type="hidden" name="adminstyle" value="newDedeX">
 								<div class="form-group">
 									<input type="text" name="userid" id="iptUserid" class="form-control" placeholder="请输入管理员账号" required>
 									<div class="form-icon">
@@ -55,7 +55,7 @@
 									</div>
 								</div>
 								<div class="operate">
-									<button type="submit" class="btn btn-success shadow-lg">登录</button>
+									<button type="submit" class="btn btn-primary shadow-lg">登录</button>
 								</div>
 							</form>
 						</div>

@@ -3,10 +3,8 @@
  * 后台侧边菜单
  *
  * @version        $id:inc_menu.php 10:32 2010年7月21日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../config.php");
 require_once(dirname(__FILE__)."/inc_menu_module.php");
@@ -30,19 +28,16 @@ $dsql->Execute('im');
 while ($row = $dsql->GetObject('im')) {
     $addset .= "<m:item name='{$row->typename}' ischannel='1' link='{$row->mancon}?channelid={$row->id}' linkadd='{$row->addcon}?channelid={$row->id}' channelid='{$row->id}' rank='' target='main' />";
 }
-$helpUrl = DEDEBIZURL."/help";
-$gitUrl = DEDEBIZURL."/git";
-$dedebizUrl = DEDEBIZURL;
 $adminMenu1 = $adminMenu2 = '';
 if ($cuserLogin->getUserType() >= 10) {
-    $adminMenu1 = (DEDEBIZ_SAFE_MODE ? "" : "<m:top item='11_' name='模板管理' rank='temp_One,temp_Other,temp_MyTag,temp_test,temp_All' icon='fa fa-cube' data-target='templets'>
+    $adminMenu1 = (DEDEX_SAFE_MODE ? "" : "<m:top item='11_' name='模板管理' rank='temp_One,temp_Other,temp_MyTag,temp_test,temp_All' icon='fa fa-cube' data-target='templets'>
     <m:item name='默认模板管理' link='templets_main.php' rank='temp_All' target='main' />
     <m:item name='标签文件管理' link='templets_tagsource.php' rank='temp_All' target='main' />
     <m:item name='自定义宏标签' link='mytag_main.php' rank='temp_MyTag' target='main' />
     <m:item name='标签调用测试' link='tag_test.php' rank='temp_Test' target='main' />
 </m:top>")."
 <m:top item='4_' name='模型管理' rank='t_List,t_AccList,c_List,temp_One' icon='fa fa-area-chart' data-target='channel'>
-    ".(DEDEBIZ_SAFE_MODE ? "" : "<m:item name='文档模型管理' link='mychannel_main.php' rank='c_List' target='main' />")."
+    ".(DEDEX_SAFE_MODE ? "" : "<m:item name='文档模型管理' link='mychannel_main.php' rank='c_List' target='main' />")."
     <m:item name='文档单页管理' link='templets_one.php' rank='temp_One' target='main' />
     <m:item name='联动类型管理' link='stepselect_main.php' rank='c_Stepseclect' target='main' />
     <m:item name='自由列表管理' link='freelist_main.php' rank='c_List' target='main' />
@@ -54,11 +49,6 @@ if ($cuserLogin->getUserType() >= 10) {
     <m:item name='积分产品分类' link='cards_type.php' rank='sys_Data' target='main' />
     <m:item name='支付接口设置' link='sys_payment.php' .php' rank='sys_Data' target='main' />
 </m:top>
-<m:top item='10_' name='AI管理' rank='sys_Data' icon='fa fa-gg'>
-    <m:item name='AI模型管理' link='ai_main.php' rank='sys_Data' target='main' />
-    <m:item name='提示词管理' link='ai_prompt_main.php' rank='sys_Data' target='main' />
-    <m:item name='调用日志管理' link='ai_log_main.php' rank='sys_Data' target='main' />
-</m:top>
 <m:top item='12_' name='系统设置' rank='sys_User,sys_Group,sys_Edit,sys_Log,sys_Data' icon='fa fa-cog' data-target='sys'>
     <m:item name='系统设置' link='sys_info.php' rank='sys_Edit' target='main' />
     <m:item name='日志管理' link='log_list.php' rank='sys_Log' target='main' />
@@ -67,8 +57,8 @@ if ($cuserLogin->getUserType() >= 10) {
     <m:item name='图片水印设置' link='sys_info_mark.php' rank='sys_Edit' target='main' />
     <m:item name='自定义文档属性' link='content_att.php' rank='sys_Att' target='main' />
     <m:item name='软件下载设置' link='soft_config.php' rank='sys_SoftConfig' target='main' />
-    ".(DEDEBIZ_SAFE_MODE ? "" : "<m:item name='数据备份' link='sys_data.php' rank='sys_Data' target='main' />")."
-    ".(DEDEBIZ_SAFE_MODE ? "" : "<m:item name='SQL命令工具' link='sys_sql_query.php' rank='sys_Data' target='main' />")."
+    ".(DEDEX_SAFE_MODE ? "" : "<m:item name='数据备份' link='sys_data.php' rank='sys_Data' target='main' />")."
+    ".(DEDEX_SAFE_MODE ? "" : "<m:item name='SQL命令工具' link='sys_sql_query.php' rank='sys_Data' target='main' />")."
     <m:item name='文件扫描工具' link='sys_safetest.php' rank='sys_verify' target='main' />
     <m:item name='系统修复工具' link='sys_repair.php' rank='sys_verify' target='main' />
 </m:top>";
@@ -98,7 +88,7 @@ $adminMenu1
     <m:item name='文档关键词维护' link='article_keywords_main.php' rank='sys_Keyword' target='main' />
     <m:item name='搜索关键词维护' link='search_keywords_main.php' rank='sys_Keyword' target='main' />
     <m:item name='自动摘要分页' link='article_description_main.php' rank='sys_Keyword' target='main' />
-    ".(DEDEBIZ_SAFE_MODE ? "" : "<m:item name='数据库字段替换' link='sys_data_replace.php' rank='sys_ArcBatch' target='main' />")."
+    ".(DEDEX_SAFE_MODE ? "" : "<m:item name='数据库字段替换' link='sys_data_replace.php' rank='sys_ArcBatch' target='main' />")."
 </m:top>
 {$GLOBALS['menusMoudle']}
 <m:top item='8_' name='更新网站' rank='sys_MakeHtml' icon='fa fa-repeat' data-target='makehtml'>
@@ -120,7 +110,6 @@ $adminMenu1
 </m:top>
 $adminMenu2
 <m:top item='12_' name='系统帮助' icon='fa fa-question-circle'>
-    <m:item name='系统概况' link='$cfg_biz_helpUrl' rank='' target='_blank' />
-    <m:item name='代码托管' link='$cfg_biz_gitUrl' rank='' target='_blank' />
+    <m:item name='GitHub托管' link='https://github.com/xushubieli/DedeX' rank='' target='_blank' />
 </m:top>";
 ?>

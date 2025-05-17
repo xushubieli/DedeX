@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 图片标签
  *
  * @version        $id:img.lib.php 9:33 2010年7月8日 tianya $
- * @package        DedeBIZ.Taglib
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Taglib
+ * @license        GNU GPL v2 (/license.txt)
  */
 function ch_img($fvalue, &$arcTag, &$refObj, $fname = '')
 {

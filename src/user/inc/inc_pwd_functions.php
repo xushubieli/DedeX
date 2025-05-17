@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 密码函数
  * 
  * @version        $id:inc_pwd_functions.php 15:18 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  *  验证码生成函数
@@ -42,21 +40,15 @@ function random($length, $numeric = 0)
  */
 function sendmail($email, $mailtitle, $mailbody, $headers)
 {
-    global $cfg_sendmail_bysmtp, $cfg_smtp_server, $cfg_smtp_port, $cfg_smtp_usermail, $cfg_smtp_user, $cfg_smtp_password, $cfg_adminemail, $cfg_bizcore_appid, $cfg_bizcore_key;
-    if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-        $client = new DedeBizClient();
-        $client->MailSend($email,$mailtitle,$mailtitle,$mailbody);
-        $client->Close();
+    global $cfg_sendmail_bysmtp, $cfg_smtp_server, $cfg_smtp_port, $cfg_smtp_usermail, $cfg_smtp_user, $cfg_smtp_password, $cfg_adminemail;
+    if ($cfg_sendmail_bysmtp == 'Y') {
+        $mailtype = 'TXT';
+        require_once(DEDEINC.'/libraries/mail.class.php');
+        $smtp = new smtp($cfg_smtp_server, $cfg_smtp_port, true, $cfg_smtp_usermail, $cfg_smtp_password);
+        $smtp->debug = false;
+        $smtp->sendmail($email, $cfg_webname, $cfg_smtp_usermail, $mailtitle, $mailbody, $mailtype);
     } else {
-        if ($cfg_sendmail_bysmtp == 'Y') {
-            $mailtype = 'TXT';
-            require_once(DEDEINC.'/libraries/mail.class.php');
-            $smtp = new smtp($cfg_smtp_server, $cfg_smtp_port, true, $cfg_smtp_usermail, $cfg_smtp_password);
-            $smtp->debug = false;
-            $smtp->sendmail($email, $cfg_webname, $cfg_smtp_usermail, $mailtitle, $mailbody, $mailtype);
-        } else {
-            @mail($email, $mailtitle, $mailbody, $headers);
-        }
+        @mail($email, $mailtitle, $mailbody, $headers);
     }
 }
 /**

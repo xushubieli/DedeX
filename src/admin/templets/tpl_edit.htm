@@ -47,7 +47,7 @@
 											</div>
 											<?php
 											foreach ($helps as $key => $help) {
-												echo '<div id="'.$key.'" class="helpinfo mt-3"><span class="float-right"><a href="javascript:;" onclick="showdiv(\'\');" class="btn btn-success btn-sm">关闭</a></span><p>标签名称：'.$key.'</p><p>标签说明：'.trim($help[0]).'</p><p><textarea id="'.$key.'" class="admin-textarea-xl">'.trim($help[1]).'</textarea></p><span>'."";
+												echo '<div id="'.$key.'" class="helpinfo mt-3"><span class="float-right"><a href="javascript:;" onclick="showdiv(\'\');" class="btn btn-primary btn-sm">关闭</a></span><p>标签名称：'.$key.'</p><p>标签说明：'.trim($help[0]).'</p><p><textarea id="'.$key.'" class="admin-textarea-xl">'.trim($help[1]).'</textarea></p><span>'."";
 												$parameters = explode("\n", $help[2]);
 												foreach($parameters as $parameter)
 												{
@@ -67,8 +67,8 @@
 									</tr>
 									<tr>
 										<td colspan="2" align="center">
-											<button type="submit" class="btn btn-success btn-sm">保存</button>
-											<button type="reset" class="btn btn-outline-success btn-sm">重置</button>
+											<button type="submit" class="btn btn-primary btn-sm">保存</button>
+											<button type="reset" class="btn btn-outline-primary btn-sm">重置</button>
 										</td>
 									</tr>
 								</tbody>

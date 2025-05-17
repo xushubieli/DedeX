@@ -3,10 +3,8 @@
  * 会员登录
  * 
  * @version        $id:login.php 8:38 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 if (empty($dopost)) $dopost = '';
@@ -25,21 +23,15 @@ if ($fmdo == 'sendMail') {
     $mailtitle = "来自{$cfg_webname}：邮件验证通知";
     $mailbody = '';
     $mailbody .= "尊敬的{$cfg_ml->fields['uname']}会员，欢迎成为{$cfg_webname}会员！\r\n通过注册还须进行最后一步操作，请点击链接或复制链接到地址栏访问：{$url}";
-    $headers = "From: ".$cfg_adminemail."\r\nReply-To: ".$cfg_adminemail;
-    if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-        $client = new DedeBizClient();
-        $client->MailSend($cfg_ml->fields['email'],$mailtitle,$mailtitle,$mailbody);
-        $client->Close();
+    $headers = "From: ".$cfg_adminemail."\r\nReply-To: ".$cfg_adminemail;    
+    if ($cfg_sendmail_bysmtp == 'Y' && !empty($cfg_smtp_server)) {
+        $mailtype = 'HTML';
+        require_once(DEDEINC.'/libraries/mail.class.php');
+        $smtp = new smtp($cfg_smtp_server, $cfg_smtp_port, true, $cfg_smtp_usermail, $cfg_smtp_password);
+        $smtp->debug = false;
+        $smtp->sendmail($cfg_ml->fields['email'], $cfg_webname, $cfg_smtp_usermail, $mailtitle, $mailbody, $mailtype);
     } else {
-        if ($cfg_sendmail_bysmtp == 'Y' && !empty($cfg_smtp_server)) {
-            $mailtype = 'HTML';
-            require_once(DEDEINC.'/libraries/mail.class.php');
-            $smtp = new smtp($cfg_smtp_server, $cfg_smtp_port, true, $cfg_smtp_usermail, $cfg_smtp_password);
-            $smtp->debug = false;
-            $smtp->sendmail($cfg_ml->fields['email'], $cfg_webname, $cfg_smtp_usermail, $mailtitle, $mailbody, $mailtype);
-        } else {
-            @mail($cfg_ml->fields['email'], $mailtitle, $mailbody, $headers);
-        }
+        @mail($cfg_ml->fields['email'], $mailtitle, $mailbody, $headers);
     }
     ShowMsg('成功发送邮件，请稍后登录邮箱进行接收', 'index.php');
     exit();
@@ -216,17 +208,17 @@ if ($fmdo == 'sendMail') {
         </div>
     </div>
     <div class='media mb-3'>
-        <span class='btn btn-success btn-sm mr-3'>码</span>
+        <span class='btn btn-primary btn-sm mr-3'>码</span>
         <div class='media-body pb-3 border-bottom border-gray'>
             <div class='d-flex justify-content-between align-items-center'>
                 <h4>二维码邀请</h4>
-                <a href='javascript:ShowQrcode()' class='btn btn-outline-success btn-sm'>查看二维码</a>
+                <a href='javascript:ShowQrcode()' class='btn btn-outline-primary btn-sm'>查看二维码</a>
             </div>
             <span class='d-block'>分享二维码到移动设备，通过二维码扫码注册，双方均可获得{$cfg_userad_adds}积分</span>
         </div>
     </div>
     <div id='qrcode'></div>
-    <div class='text-center'><a href='index.php' class='btn btn-success btn-sm'>返回</a></div>
+    <div class='text-center'><a href='index.php' class='btn btn-primary btn-sm'>返回</a></div>
     <style>.modal-body img{margin:0 auto}#qrcode{display:none;margin:15px auto;width:200px;height:200px}</style>
     <script>
         var qrcode = new QRCode(document.getElementById(\"qrcode\"), {

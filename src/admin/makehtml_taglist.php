@@ -3,10 +3,8 @@
  * 更新标签
  *
  * @version        $id:makehtml_taglist.php 11:17 2020年8月19日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 $tagid = isset($tagid)? (int)$tagid : 0;

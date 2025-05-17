@@ -258,7 +258,7 @@ function DedeConfirm(content = "", title = "确认提示") {
 			reject("cancel");
 			CloseModal(`DedeModal${modalID}`);
 		}
-		let footer = `<button type="button" class="btn btn-outline-success btn-sm" onclick="__DedeConfirmRunClose(\'${modalID}\')">取消</button><button type="button" class="btn btn-success btn-sm" onclick="__DedeConfirmRun(\'${modalID}\')">确定</button>`;
+		let footer = `<button type="button" class="btn btn-outline-primary btn-sm" onclick="__DedeConfirmRunClose(\'${modalID}\')">取消</button><button type="button" class="btn btn-primary btn-sm" onclick="__DedeConfirmRun(\'${modalID}\')">确定</button>`;
 		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DedeModalLabel${modalID}"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="DedeModalLabel${modalID}">${title}</h6>`;
 		modal += `<button type="button" class="update-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>`;
 		modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
@@ -388,7 +388,7 @@ function uploadImage(litpicImgSrc) {
 	});
 }
 function SetThumb(srcURL) {
-	var footer = "<p><a href='javascript:useDefault(\"~modalID~\");' class='btn btn-success btn-sm'>使用原图</a><a href='javascript:okImage(\"~modalID~\")' class='btn btn-success btn-sm'>确定</a></p>";
+	var footer = "<p><a href='javascript:useDefault(\"~modalID~\");' class='btn btn-primary btn-sm'>使用原图</a><a href='javascript:okImage(\"~modalID~\")' class='btn btn-primary btn-sm'>确定</a></p>";
 	var optButton = `<p><label for="aspectRatio">比例</label><select id="aspectRatio" onchange="setAspectRatio(this.selectedIndex)"><option>16:9</option><option selected>4:3</option><option>1:1</option><option>2:3</option><option>自定义</option></select></p>`;
 	mdlCropperID = ShowMsg('<div class="float-left" style="width:320px"><p><img id="cropImg~modalID~" src="' + srcURL + '"></p><p>宽度：<span id="cropWidth"></span>px，高度：<span id="cropHeight"></span>px</p>' + optButton + '</div><div class="pv float-right" style="width:200px;height:100px;overflow:hidden"></div>', {
 		footer: footer,

@@ -3,10 +3,8 @@
  * 积分钱包
  * 
  * @version        $id:buy_action.php 8:38 2023年02月13日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 $dopost = isset($dopost)? $dopost : '';
@@ -198,7 +196,7 @@ if ($paytype === 0) {
             //生成预支付码
             $result = $wechat->createOrder($options);
             $payurl = $result['code_url'];
-            $msg = "<div>打开微信扫一扫，扫描以下二维码支付<div><div id='qrcode' style='margin:15px 0;width:200px;height:200px'></div><div><a href='buy_action.php?dopost=wechat_ok&buyid={$buyid}' class='btn btn-success btn-sm'>已完成支付</a> <a href='operation.php' class='btn btn-outline-success btn-sm'>返回订单管理</a></div>";
+            $msg = "<div>打开微信扫一扫，扫描以下二维码支付<div><div id='qrcode' style='margin:15px 0;width:200px;height:200px'></div><div><a href='buy_action.php?dopost=wechat_ok&buyid={$buyid}' class='btn btn-primary btn-sm'>已完成支付</a> <a href='operation.php' class='btn btn-outline-primary btn-sm'>返回订单管理</a></div>";
             $script = '<script type="text/javascript">var qrcode = new QRCode(document.getElementById("qrcode"), {
                 width : 300,
                 height : 300,
@@ -245,7 +243,7 @@ if ($paytype === 0) {
         //银行转账
         $pInfo = $dsql->GetOne("SELECT * FROM `#@__sys_payment` WHERE id = $paytype");
         $pData = (array)json_decode($pInfo['config']);
-        $msg = "<p>请汇款至如下账户：</p><p>账户名：{$pData['AccountName']}</p><p>账号：{$pData['AccountNO']}</p><p>开户行：{$pData['Name']}</p><p>备注：{$buyid}</p><p>如您已经完成转账，请点击下面按钮，等待管理员确认后即可完成充值</p><div><a href='buy_action.php?dopost=bank_ok&buyid={$buyid}' class='btn btn-success btn-sm'>已完成银行转账</a> <a href='operation.php' class='btn btn-outline-success btn-sm'>返回订单管理</a></div>";
+        $msg = "<p>请汇款至如下账户：</p><p>账户名：{$pData['AccountName']}</p><p>账号：{$pData['AccountNO']}</p><p>开户行：{$pData['Name']}</p><p>备注：{$buyid}</p><p>如您已经完成转账，请点击下面按钮，等待管理员确认后即可完成充值</p><div><a href='buy_action.php?dopost=bank_ok&buyid={$buyid}' class='btn btn-primary btn-sm'>已完成银行转账</a> <a href='operation.php' class='btn btn-outline-primary btn-sm'>返回订单管理</a></div>";
         $wintitle = "银行转账";//这个空格不要去
         $win = new WebWindow();
         $win->AddMsgItem($msg);

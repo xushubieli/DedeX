@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEMEMBER')) exit('dedebiz');
+if (!defined('DEDEMEMBER')) exit('dedex');
 /**
  * 文档验证
  * 
  * @version        $id:archives_check.php 13:52 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 include_once(DEDEINC.'/image.func.php');
 include_once(DEDEINC.'/libraries/webwindow.class.php');

@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 会员信息标签
  *
  * @version        $id:memberlist.lib.php 9:29 2010年7月6日 tianya $
- * @package        DedeBIZ.Taglib
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Taglib
+ * @license        GNU GPL v2 (/license.txt)
  */
 function lib_memberlist(&$ctag, &$refObj)
 {

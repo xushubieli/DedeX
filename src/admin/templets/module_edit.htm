@@ -30,13 +30,6 @@
 										<td><input type="text" name="modulname" id="modulname" class="admin-input-sm" value="<?php echo $name;?>" required></td>
 									</tr>
 									<tr>
-										<td>贡献者id</td>
-										<td>
-											<input type="text" name="dev_id2" id="dev_id2" class="admin-input-sm" value="<?php echo $dev_id;?>" disabled>
-											<a href="<?php echo $cfg_biz_dedebizUrl;?>/developer" target="_blank" class="btn btn-success btn-sm">如何获取贡献者id</a>
-										</td>
-									</tr>
-									<tr>
 										<td>语言编码</td>
 										<td><?php echo $lang;?></td>
 									</tr>
@@ -123,16 +116,9 @@
 										</td>
 									</tr>
 									<tr>
-										<td>贡献者私钥</td>
-										<td>
-											<p>（贡献者认证后获取的私钥）</p>
-											<textarea name="priv" id="priv" class="admin-textarea-xl"></textarea>
-										</td>
-									</tr>
-									<tr>
 										<td colspan="2" align="center">
-											<button type="submit" class="btn btn-success btn-sm">保存</button>
-											<button type="reset" class="btn btn-outline-success btn-sm">重置</button>
+											<button type="submit" class="btn btn-primary btn-sm">保存</button>
+											<button type="reset" class="btn btn-outline-primary btn-sm">重置</button>
 										</td>
 									</tr>
 								</tbody>

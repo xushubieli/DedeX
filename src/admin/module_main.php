@@ -3,14 +3,12 @@
  * 模块管理
  *
  * @version        $id:module_main.php 14:17 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
-if (DEDEBIZ_SAFE_MODE) {
-  die(DedeAlert("系统已启用安全模式，无法使用当前功能",ALERT_DANGER));
+if (DEDEX_SAFE_MODE) {
+  die(DedeAlert("系统已启用安全模式，无法使用当前功能", ALERT_DANGER));
 }
 CheckPurview('sys_module');
 require_once(DEDEINC."/dedemodule.class.php");
@@ -56,42 +54,15 @@ if ($action == '') {
     $types = array('soft' => '模块', 'templets' => '模板', 'plus' => '小插件', 'patch' => '补丁');
     $dm = new DedeModule($mdir);
     if (empty($moduletype)) $moduletype = '';
-    $modules_remote = $dm->GetModuleUrlList($moduletype, $mdurl);
+    //$modules_remote = $dm->GetModuleUrlList($moduletype, $mdurl);
     $modules = array();
     $modules = $dm->GetModuleList($moduletype);
     is_array($modules) || $modules = array();
-    if (is_array($modules_remote) && count($modules_remote) > 0) {
-        $modules = array_merge($modules, $modules_remote);
-    }
+    //$modules = array_merge($modules, $modules_remote);
     require_once(dirname(__FILE__)."/templets/module_main.htm");
     $dm->Clear();
     exit();
-} else if ($action == 'view_developoer') {
-    //检验贡献者信息
-    $dm = new DedeModule($mdir);
-    $info = $dm->GetModuleInfo($hash);
-    if ($info == null) {
-        ShowMsg("获取模块信息错误，模块文件错误", -1);
-        exit;
-    }
-    $dev_id = $info['dev_id'];
-    $devURL = DEDECDNURL."/developers/$dev_id.json";
-    $dhd = new DedeHttpDown();
-    $dhd->OpenUrl($devURL);
-    $devContent = $dhd->GetHtml();
-    $devInfo = (array)json_decode($devContent);
-    $offUrl = '';
-    if ($devInfo['dev_type'] == 1) {
-        $offUrl = "官方网址：<code>{$devInfo['offurl']}</code><br>";
-    }
-    $authAt = date("Y-m-d", $devInfo['auth_at']);
-    if (!isset($info['dev_id'])) {
-        $devInfo['dev_name'] = $info['team']."<span class='btn btn-warning btn-sm'>未认证</span>";
-        $authAt = "<span class='btn btn-warning btn-sm'>未知</span>";
-    }
-    ShowMsg("贡献者名称：{$devInfo['dev_name']}<br>贡献者id：{$devInfo['dev_id']}<br>认证于：{$authAt}", "-1");
-    exit;
-} else if ($action == 'setup') {
+} if ($action == 'setup') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
     if ($infos == null) {
@@ -140,17 +111,9 @@ if ($action == '') {
     $win = new OxWindow();
     $win->Init("module_main.php", "/static/web/js/admin.blank.js", "post");
     $wintitle = "安装{$infos['name']}";
-    $devURL = DEDECDNURL."/developers/{$infos['dev_id']}.json";
-    $dhd = new DedeHttpDown();
-    $dhd->OpenUrl($devURL);
-    $devContent = $dhd->GetHtml();
-    $devInfo = (array)json_decode($devContent);
-    $s = "未认证";
-    if (($devInfo['dev_id'] == $infos['dev_id']) && !empty($devInfo['dev_id'])) {
-      $s = "已认证";
-    }
     $win->AddHidden("hash", $hash);
-    $win->AddHidden("action", 'setupstart');
+    $win->AddHidden("action",'setupstart');
+    if (trim($infos['url'])=='') $infos['url'] = '无';
     $msg = "<tr>
     </tr>
     <tr>
@@ -166,16 +129,12 @@ if ($action == '') {
         <td>{$infos['filesize']}</td>
     </tr>
     <tr>
-        <td>贡献者id</td>
-        <td>{$infos['dev_id']} <a href='{$cfg_biz_dedebizUrl}/developer?dev_id={$infos['dev_id']}' target='_blank' class='btn btn-success btn-sm'>{$s}</a></td>
-    </tr>
-    <tr>
         <td>发布时间</td>
         <td>{$infos['time']}</td>
     </tr>
     <tr>
         <td>使用协议</td>
-        <td><a href='module_main.php?action=showreadme&hash={$hash}' target='_blank' class='btn btn-success btn-sm'>浏览</a></td>
+        <td><a href='module_main.php?action=showreadme&hash={$hash}' target='_blank' class='btn btn-primary btn-sm'>浏览</a></td>
     </tr>
     <tr>
         <td>目录权限说明<br>/为根目录<br>./表示当前目录</td>
@@ -258,16 +217,17 @@ if ($action == '') {
 } else if ($action == 'del') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
+    if ($infos['url']=='') $infos['url'] = '';
     $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '<br>该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
-    $dev_id = empty($infos['dev_id'])? "<a href='{$cfg_biz_dedebizUrl}/developer' target='_blank' class='btn btn-warning btn-sm'>未认证</a>" : "{$infos['dev_id']} <a href='{$cfg_biz_dedebizUrl}/developer?dev_id={$infos['dev_id']}' target='_blank' class='btn btn-success btn-sm'>已认证</a>";
     $win = new OxWindow();
     $win->Init("module_main.php", "/static/web/js/admin.blank.js", "post");
+    $wecome_info = "模块管理";
     $wintitle = "删除{$infos['name']}";
-    $win->AddHidden("hash", $hash);
-    $win->AddHidden("action", "delok");
+    $win->AddHidden('hash', $hash);
+    $win->AddHidden('action', 'delok');
     $msg = "<tr>
         <td colspan='2'>
-            <div class='alert alert-warning'>删除模块仅删除模块安装后文件，用<a href='module_main.php?hash={$hash}&action=uninstall'>卸载程序</a>来删除</div>
+            <div class='alert alert-info'>删除模块仅删除模块安装后文件，用<a href='module_main.php?hash={$hash}&action=uninstall'>卸载程序</a>来删除</div>
         </td>
     </tr>
     <tr>
@@ -283,16 +243,12 @@ if ($action == '') {
         <td>{$infos['filesize']}</td>
     </tr>
     <tr>
-        <td>贡献者id</td>
-        <td>{$dev_id}</td>
-    </tr>
-    <tr>
         <td>发布时间</td>
         <td>{$infos['time']}</td>
     </tr>
     <tr>
         <td>使用协议</td>
-        <td><a href='module_main.php?action=showreadme&hash={$hash}' target='_blank' class='btn btn-success btn-sm'>浏览</a></td>
+        <td><a href='module_main.php?action=showreadme&hash={$hash}' target='_blank' class='btn btn-primary btn-sm'>浏览</a></td>
     </tr>";
     $win->AddMsgItem($msg);
     $winform = $win->GetWindow("ok", "");
@@ -318,7 +274,6 @@ if ($action == '') {
         else $v['type'] = '文件';
         $filelist .= "{$v['type']}|{$v['name']}\r\n";
     }
-    $dev_id = empty($infos['dev_id'])? "<a href='{$cfg_biz_dedebizUrl}/developer' target='_blank' class='btn btn-warning btn-sm'>未认证</a>" : "{$infos['dev_id']} <a href='{$cfg_biz_dedebizUrl}/developer?dev_id={$infos['dev_id']}' target='_blank' class='btn btn-success btn-sm'>已认证</a>";
     $win = new OxWindow();
     $win->Init("module_main.php", "/static/web/js/admin.blank.js", "post");
     $wintitle = "卸载{$infos['name']}";
@@ -337,16 +292,12 @@ if ($action == '') {
         <td>{$infos['filesize']}</td>
     </tr>
     <tr>
-        <td>贡献者id</td>
-        <td>{$dev_id}</td>
-    </tr>
-    <tr>
         <td>发布时间</td>
         <td>{$infos['time']}</td>
     </tr>
     <tr>
         <td>使用协议</td>
-        <td><a href='module_main.php?action=showreadme&hash={$hash}' target='_blank' class='btn btn-success btn-sm'>浏览</a></td>
+        <td><a href='module_main.php?action=showreadme&hash={$hash}' target='_blank' class='btn btn-primary btn-sm'>浏览</a></td>
     </tr>
     <tr>
         <td>模块文件</td>
@@ -413,20 +364,11 @@ if ($action == '') {
 } else if ($action == 'view') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
-    if ($infos['url'] == '') $infos['url'] = ' ';
+    if ($infos['url'] == '') $infos['url'] = '';
     $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '<br>该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
     $filelists = (array)$dm->GetFileLists($hash);
     $filelist = '';
     $setupinfo = '';
-    $devURL = DEDECDNURL."/developers/{$infos['dev_id']}.json";
-    $dhd = new DedeHttpDown();
-    $dhd->OpenUrl($devURL);
-    $devContent = $dhd->GetHtml();
-    $devInfo = (array)json_decode($devContent);
-    $s = "未认证";
-    if (($devInfo['dev_id'] == $infos['dev_id']) && !empty($devInfo['dev_id'])) {
-      $s = "已认证";
-    }
     foreach ($filelists as $v) {
         if (empty($v['name'])) continue;
         if ($v['type'] == 'dir') $v['type'] = '目录';
@@ -434,11 +376,10 @@ if ($action == '') {
         $filelist .= "{$v['type']}|{$v['name']}\r\n";
     }
     if (file_exists(DEDEDATA."/module/{$hash}-readme.php")) {
-        $setupinfo = "已安装 <a href='module_main.php?action=uninstall&hash={$hash}' class='btn btn-danger btn-sm'>卸载</a>";
+        $setupinfo = "<span class='btn btn-primary btn-sm'>已安装</span><a href='module_main.php?action=uninstall&hash={$hash}' class='btn btn-danger btn-sm'>卸载</a>";
     } else {
-        $setupinfo = "未安装 <a href='module_main.php?action=setup&hash={$hash}' class='btn btn-success btn-sm'>安装</a>";
+        $setupinfo = "<span class='btn btn-outline-secondary btn-sm'>未安装</span><a href='module_main.php?action=setup&hash={$hash}' class='btn btn-primary btn-sm'>安装</a>";
     }
-    $dev_id = empty($infos['dev_id'])? "<a href='module_main.php?action=setup&hash={$hash}' class='btn btn-success btn-sm'>安装</a><a href='{$cfg_biz_dedebizUrl}/developer' target='_blank' class='btn btn-success btn-sm'>{$s}</a>" : "{$infos['dev_id']} <a href='module_main.php?action=setup&hash={$hash}' class='btn btn-success btn-sm'>安装</a><a href='{$cfg_biz_dedebizUrl}/developer?dev_id={$infos['dev_id']}' target='_blank' class='btn btn-success btn-sm'>{$s}</a>";
     $win = new OxWindow();
     $win->Init("", "/static/web/js/admin.blank.js", "");
     $wintitle = "{$infos['name']}";
@@ -455,16 +396,12 @@ if ($action == '') {
         <td>{$infos['filesize']}</td>
     </tr>
     <tr>
-        <td>贡献者id</td>
-        <td>{$dev_id}</td>
-    </tr>
-    <tr>
         <td>发布时间</td>
         <td>{$infos['time']}</td>
     </tr>
     <tr>
-        <td>使用协议</td>
-        <td><a href='module_main.php?action=showreadme&hash={$hash}' target='_blank' class='btn btn-success btn-sm'>浏览</a></td>
+        <td>是否安装</td>
+        <td>{$setupinfo}</td>
     </tr>
     <tr>
         <td colspan='2'><textarea name='filelists' id='filelists' class='admin-textarea-xl'>{$filelist}</textarea></td>
@@ -478,7 +415,7 @@ if ($action == '') {
     $dm = new DedeModule($mdir);
     $minfos = (array)$dm->GetModuleInfo($hash);
     extract($minfos, EXTR_SKIP);
-    if (!isset($lang)) $lang = 'gb2312';
+    if (!isset($lang)) $lang = 'utf-8';
     if (!isset($moduletype)) $moduletype = 'soft';
     $menustring = $dm->GetSystemFile($hash, 'menustring');
     $setupsql40 = dede_htmlspecialchars($dm->GetSystemFile($hash, 'setupsql40'));

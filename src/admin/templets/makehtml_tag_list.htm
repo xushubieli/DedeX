@@ -27,7 +27,7 @@
 										<td width="260">输入标签</td>
 										<td>
 											<input type="hidden" name="tagid" value="<?php echo $tagid;?>"><?php echo $row['tag'];?>
-											<a href="makehtml_taglist.php" class="btn btn-success btn-sm">重新选择</a>
+											<a href="makehtml_taglist.php" class="btn btn-primary btn-sm">重新选择</a>
 										</td>
 									</tr>
 									<?php } else {?>
@@ -49,7 +49,7 @@
 										<td><input type="text" name="maxpagesize" id="maxpagesize" value="50" class="admin-input-sm">（网页）</td>
 									</tr>
 									<tr>
-										<td colspan="2" align="center"><button type="button" class="btn btn-success btn-sm" onclick="document.form1.action='makehtml_taglist_action.php';onTagSubmit();">开始执行</button></td>
+										<td colspan="2" align="center"><button type="button" class="btn btn-primary btn-sm" onclick="document.form1.action='makehtml_taglist_action.php';onTagSubmit();">开始执行</button></td>
 									</tr>
 									<tr>
 										<td colspan="2">

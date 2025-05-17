@@ -3,10 +3,8 @@
  * 后台操作记录信息
  *
  * @version        $id:inc_action_info.php 2 14:55 2010-11-11 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../config.php");
 $cuserLogin = new userLogin();
@@ -70,7 +68,7 @@ $actionSearch[1] = array(
 $actionSearch[2] = array(
     'title' => '文档模型',
     'soniterm' => array(
-        0  => DEDEBIZ_SAFE_MODE? null : array(
+        0  => DEDEX_SAFE_MODE? null : array(
             'title' => '文档模型管理',
             'purview' => 'c_List',
             'linkurl' => 'mychannel_main.php'
@@ -130,7 +128,7 @@ $actionSearch[3] = array(
             'purview' => 'sys_Keyword',
             'linkurl' => 'article_description_main.php'
         ),
-        5  => DEDEBIZ_SAFE_MODE? null : array(
+        5  => DEDEX_SAFE_MODE? null : array(
             'title' => '数据库字段替换',
             'purview' => 'sys_ArcBatch',
             'linkurl' => 'sys_data_replace.php'
@@ -227,7 +225,7 @@ $actionSearch[6] = array(
         ),
     )
 );
-$actionSearch[7] = DEDEBIZ_SAFE_MODE? null : array(
+$actionSearch[7] = DEDEX_SAFE_MODE? null : array(
     'title' => '模板管理',
     'soniterm' => array(
         0  => array(
@@ -285,12 +283,12 @@ $actionSearch[8] = array(
             'purview' => 'sys_SoftConfig',
             'linkurl' => 'soft_config.php'
         ),
-        6  => DEDEBIZ_SAFE_MODE? null : array(
+        6  => DEDEX_SAFE_MODE? null : array(
             'title' => '数据库备份还原',
             'purview' => 'sys_data',
             'linkurl' => 'sys_data.php'
         ),
-        7  => DEDEBIZ_SAFE_MODE? null : array(
+        7  => DEDEX_SAFE_MODE? null : array(
             'title' => 'SQL命令工具',
             'purview' => 'sys_data',
             'linkurl' => 'sys_sql_query.php'

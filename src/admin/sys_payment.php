@@ -3,10 +3,8 @@
  * 支付接口设置
  *
  * @version        $id:sys_info_mark.php 22:28 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 if (!empty($_REQUEST['dopost'])) define('IS_DEDEAPI', TRUE);
 require_once(dirname(__FILE__)."/config.php");

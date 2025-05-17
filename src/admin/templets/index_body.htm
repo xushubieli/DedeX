@@ -7,13 +7,11 @@
 		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
-		<script>const cfg_biz_dedebizUrl = '<?php echo $cfg_biz_dedebizUrl;?>'; const cfg_webname = '<?php echo $cfg_webname;?>';</script>
 		<script src="/static/web/js/jquery.min.js"></script>
-		<script src="/static/web/js/bootstrap.min.js"></script>
+		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
 		<script src="/static/web/js/chart.min.js"></script>
 		<script src="/static/web/js/admin.body.js"></script>
-		<script src="/static/web/js/admin.update.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 	</head>
 	<body>
@@ -54,7 +52,7 @@
 											<td id="yestoday_vv">0</td>
 										</tr>
 										<tr>
-											<td>半月峰值</td>
+											<td>半月记录</td>
 											<td id="total_pv">0</td>
 											<td id="total_uv">0</td>
 											<td id="total_ip">0</td>
@@ -72,32 +70,24 @@
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-borderless">
+									<thead>
+										<tr>
+											<td width="16%">软件版本</td>
+											<td width="16%">IP地址</td>
+											<td width="16%">系统服务器</td>
+											<td width="16%">PHP版本</td>
+											<td width="16%">数据库版本</td>
+											<td width="16%">上传限制</td>
+										</tr>
+									</thead>
 									<tbody>
 										<tr>
-											<td width="16%">
-												<p>软件版本</p>
-												<span><?php echo $cfg_version_detail;?></span>
-											</td>
-											<td width="16%">
-												<p>IP地址</p>
-												<span><?php echo gethostbyname($_SERVER['SERVER_NAME']);?></span>
-											</td>
-											<td width="16%">
-												<p>系统服务器</p>
-												<span><?php echo PHP_OS;?> / <?php echo GetSimpleServerSoftware();?></span>
-											</td>
-											<td width="16%">
-												<p>PHP版本</p>
-												<span><?php echo @phpversion();?></span>
-											</td>
-											<td width="16%">
-												<p>数据库版本</p>
-												<span><?php echo $dsql->GetVersion();?></span>
-											</td>
-											<td width="16%">
-												<p>上传限制</p>
-												<span><?php echo ini_get("post_max_size")?></span>
-											</td>
+											<td><?php echo $cfg_version_detail;?></td>
+											<td><?php echo gethostbyname($_SERVER['SERVER_NAME']);?></td>
+											<td><?php echo PHP_OS;?> / <?php echo GetSimpleServerSoftware();?></td>
+											<td><?php echo @phpversion();?></td>
+											<td><?php echo $dsql->GetVersion();?></td>
+											<td><?php echo ini_get("post_max_size")?></td>
 										</tr>
 									</tbody>
 								</table>
@@ -107,17 +97,29 @@
 				</div>
 				<div class="w-35 pb-3">
 					<div class="card shadow-sm">
-						<div class="card-header d-flex justify-content-between">
+						<div class="card-header">
 							<span><i class="fa fa-copyright"></i> 版本授权</span>
-							<a href="javascript:;" id="systemUpdate">软件更新<span class="updates-dot"></span></a>
 						</div>
-						<div class="card-body" id="system-info">正在加载</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-borderless">
+									<tbody>
+										<tr>
+											<td>站点（<?php echo $cfg_basehost;?>）已获得<?php echo $cfg_soft_enname;?><?php echo $cfg_version_detail;?>授权，并依据GPLv2协议全面开源</td>
+										</tr>
+										<tr>
+											<td>更多技术支持，请联系DedeX团队</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="w-65 pr-md-3 pb-3 pb-lg-0">
 					<div class="card shadow-sm">
 						<div class="card-header"><i class="fa fa-line-chart"></i> 流量统计图</div>
-						<div class="card-body p-3">
+						<div class="card-body">
 							<canvas id="statChart"></canvas>
 						</div>
 					</div>
@@ -126,64 +128,6 @@
 					<div class="card shadow-sm">
 						<div class="card-header"><i class="fa fa-list"></i> 最新文档</div>
 						<div class="card-body" id="system-word">正在加载</div>
-					</div>
-				</div>
-			</div>
-			<div id="mdlUpdate" class="modal fade" tabindex="-1" aria-hidden="true">
-				<div class="modal-dialog modal-xl">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">软件更新</h5>
-							<button type="button" class="update-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-						</div>
-						<div class="modal-body">
-							<div id="stepArea0" class="stepArea">
-								<span>获取服务器版本资源失败，无法正常升级，请联系DedeBIZ官方团队</span>
-							</div>
-							<div id="stepArea1" class="stepArea">
-								<span class="spinner-border text-success" role="status"></span>
-								<span id="step1Msg">对比版本更改的文件</span>
-							</div>
-							<div id="stepArea2" class="stepArea">
-								<p>本更新包含重要安全补丁，建议所有用户升级。请备份相关文件，并确保目录有写入权限</p>
-								<div id="_fileList">正在加载</div>
-							</div>
-							<div id="stepArea3" class="stepArea">
-								<p>发下以下版本的更新文件</p>
-								<div id="_verList">正在加载</div>
-							</div>
-							<div id="stepArea4" class="stepArea">
-								<p>
-									<span class="spinner-border text-success" role="status"></span>
-									<span>正在进行以下操作，耐心等待...</span>
-								</p>
-								<div id="_updateMsg">正在加载</div>
-							</div>
-							<div id="stepArea5" class="stepArea">已是最新软件版本</div>
-							<div id="_msgInfo" class="mt-2"></div>
-						</div>
-						<div class="modal-footer">
-							<div id="btnStep0" class="btnStep">
-								<button id="btnCancel" type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">知道了</button>
-							</div>
-							<div id="btnStep1" class="btnStep"></div>
-							<div id="btnStep2" class="btnStep">
-								<button id="btnCancel" type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">取消</button>
-								<button id="btnBackup" type="button" class="btn btn-outline-success btn-sm">备份</button>
-								<button id="btnGoStep3" type="button" class="btn btn-success btn-sm">下一步</button>
-							</div>
-							<div id="btnStep3" class="btnStep">
-								<button id="btnCancel" type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">取消</button>
-								<button id="btnGoStep4" type="button" class="btn btn-success btn-sm">下载</button>
-							</div>
-							<div id="btnStep5" class="btnStep">
-								<div class="form-check form-check-inline" style="vertical-align:middle">
-									<input class="form-check-input" type="checkbox" id="chkUpdate" name="chkUpdate" value="true">
-									<label class="form-check-label" for="chkUpdate">自动检查更新</label>
-								</div>
-								<button id="btnOK" type="button" class="btn btn-success btn-sm" data-dismiss="modal">完成</button>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>

@@ -3,10 +3,8 @@
  * 单表文档列表
  *
  * @version        $id:content_sg_list.php 14:31 2010年7月12日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 $channelid = isset($channelid) ? intval($channelid) : 0;
@@ -69,9 +67,9 @@ if ($keyword != '') $whereSql .= " AND (arc.title like '%$keyword%') ";
 if ($cid != 0 && !empty(GetSonIds($cid))) $whereSql .= " AND arc.typeid in (".GetSonIds($cid).")";
 if ($arcrank != '') {
     $whereSql .= " AND arc.arcrank = '$arcrank' ";
-    $CheckUserSend = "<button type='button' class='btn btn-success btn-sm' onclick=\"location='content_sg_list.php?cid={$cid}&channelid={$channelid}&dopost=listArchives';\">所有文档</button>";
+    $CheckUserSend = "<button type='button' class='btn btn-primary btn-sm' onclick=\"location='content_sg_list.php?cid={$cid}&channelid={$channelid}&dopost=listArchives';\">所有文档</button>";
 } else {
-    $CheckUserSend = "<button type='button' class='btn btn-success btn-sm' onclick=\"location='content_sg_list.php?cid={$cid}&channelid={$channelid}&dopost=listArchives&arcrank=-1';\">稿件审核</button>";
+    $CheckUserSend = "<button type='button' class='btn btn-primary btn-sm' onclick=\"location='content_sg_list.php?cid={$cid}&channelid={$channelid}&dopost=listArchives&arcrank=-1';\">稿件审核</button>";
 }
 $query = "SELECT arc.aid,arc.aid as id,arc.typeid,arc.arcrank,arc.flag,arc.senddate,arc.channel,arc.title,arc.mid,arc.click,tp.typename,ch.typename as channelname FROM `$listtable` arc LEFT JOIN `#@__arctype` tp ON tp.id=arc.typeid LEFT JOIN `#@__channeltype` ch ON ch.id=arc.channel $whereSql ORDER BY arc.aid DESC";
 $dlist = new DataListCP();

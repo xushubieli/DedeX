@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 文档列表函数
  * 
  * @version        $id:inc_list_functions.php 13:52 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  *  获得是否推荐的表述
@@ -39,7 +37,7 @@ function IsCommendArchives($iscommend)
 function GetCommendTitle($title, $iscommend)
 {
     if (preg_match('/c/', $iscommend)) {
-        $title = '$title <span class="btn btn-success btn-sm">推荐</span>';
+        $title = '$title <span class="btn btn-primary btn-sm">推荐</span>';
     }
     return '$title';
 }

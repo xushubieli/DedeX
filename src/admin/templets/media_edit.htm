@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
-		<script src="/static/web/js/bootstrap.min.js"></script>
+		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 	</head>
 	<body>
@@ -53,7 +53,7 @@
 										<td>源文件</td>
 										<td>
 											<input type="text" name="filename" id="filename" value="<?php echo $myrow['url']?>" class="admin-input-lg">
-											<a href="<?php echo $myrow['url']?>" target="_blank" class="btn btn-success btn-sm">查看</a>
+											<a href="<?php echo $myrow['url']?>" target="_blank" class="btn btn-primary btn-sm">查看</a>
 										</td>
 									</tr>
 									<?php
@@ -77,8 +77,8 @@
 									</tr>
 									<tr>
 										<td colspan="2" align="center">
-											<button type="submit" class="btn btn-success btn-sm">保存</button>
-											<button type="reset" class="btn btn-outline-success btn-sm">重置</button>
+											<button type="submit" class="btn btn-primary btn-sm">保存</button>
+											<button type="reset" class="btn btn-outline-primary btn-sm">重置</button>
 										</td>
 									</tr>
 								</tbody>

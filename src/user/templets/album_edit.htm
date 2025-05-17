@@ -33,7 +33,7 @@
 						<span class="col-sm-2 col-form-label">缩略图</span>
 						<div class="col-sm-10">
 							<img id="imgLitpic" src="<?php echo empty($row['litpic'])? $cfg_staticurl.'/web/img/thumbnail.jpg' : $row['litpic'];?>" class="thumbnail-md mr-3">
-							<span class="btn btn-success btn-sm" id="btnUploadLitpic">修改缩略图</span>
+							<span class="btn btn-primary btn-sm" id="btnUploadLitpic">修改缩略图</span>
 							<input id="iptLitpic" type="file" name="iptLitpic" class="d-none">
 						</div>
 					</div>
@@ -75,7 +75,7 @@
 					<div class="form-group">
 						<span>图片数目：</span>
 						<input type="text" name="picnum" value="5" id="picnum" class="form-control w-25 mr-2">
-						<button type="button" name="kkkup" id="kkkup2" class="btn btn-success btn-sm" onclick="MakeUpload(0);">添加</button>
+						<button type="button" name="kkkup" id="kkkup2" class="btn btn-primary btn-sm" onclick="MakeUpload(0);">添加</button>
 					</div>
 					<?php
 					$j = 1;
@@ -92,7 +92,7 @@
 						<span>图片<?php echo $j;?>上传：</span>
 						<div class="input-group mb-3">
 							<input type="text" name="imgfile<?php echo $j;?>" class="form-control" value="<?php echo trim($ctag->GetInnerText());?>" placeholder="请输入网址">
-							<div class="input-group-append"><span class="btn btn-success btn-sm btn-send" onclick="SelectImage('addcontent.imgfile<?php echo $j;?>', 'big')">选择</span></div>
+							<div class="input-group-append"><span class="btn btn-primary btn-sm btn-send" onclick="SelectImage('addcontent.imgfile<?php echo $j;?>', 'big')">选择</span></div>
 						</div>
 						<span>图片<?php echo $j;?>简介：</span>
 						<textarea name="imgmsg<?php echo $j;?>" class="form-control"><?php echo trim($ctag->GetAtt('text'))?></textarea>
@@ -106,9 +106,9 @@
 					?>
 					<div id="uploadfield"></div>
 					<div class="text-center">
-						<button type="submit" class="btn btn-success btn-sm">提交</button>
-						<button type="reset" class="btn btn-outline-success btn-sm" onclick="location.reload();">重置</button>
-						<a href="<?php echo $cfg_memberurl;?>/content_list.php?channelid=<?php echo $channelid;?>" class="btn btn-outline-success btn-sm">返回</a>
+						<button type="submit" class="btn btn-primary btn-sm">提交</button>
+						<button type="reset" class="btn btn-outline-primary btn-sm" onclick="location.reload();">重置</button>
+						<a href="<?php echo $cfg_memberurl;?>/content_list.php?channelid=<?php echo $channelid;?>" class="btn btn-outline-primary btn-sm">返回</a>
 					</div>
 				</form>
 			</div>

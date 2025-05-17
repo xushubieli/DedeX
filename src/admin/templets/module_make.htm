@@ -19,7 +19,6 @@
 			<div class="card shadow-sm">
 				<div class="card-header">模块打包</div>
 				<div class="card-body">
-					<div class="alert alert-info">开发模块插件前，请先了解<a href="<?php echo $cfg_biz_dedebizUrl;?>/developer" target="_blank">《DedeBIZ贡献者》</a></div>
 					<form name="form1" action="module_make.php" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="action" value="make">
 						<div class="table-responsive">
@@ -40,13 +39,6 @@
 											<label><input type="radio" name="moduletype" id="moduletype2" value="templets"> 模板</label>
 											<label><input type="radio" name="moduletype" id="moduletype3" value="plus"> 小插件</label>
 											<label><input type="radio" name="moduletype" id="moduletype4" value="patch"> 补丁</label>
-										</td>
-									</tr>
-									<tr>
-										<td>贡献者id</td>
-										<td>
-											<input type="text" name="dev_id" id="dev_id" class="admin-input-sm">
-											<a href="<?php echo $cfg_biz_dedebizUrl;?>/developer" target="_blank" class="btn btn-success btn-sm">如何获取贡献者id</a>
 										</td>
 									</tr>
 									<tr>
@@ -113,16 +105,9 @@
 										</td>
 									</tr>
 									<tr>
-										<td>贡献者私钥</td>
-										<td>
-											<p>（贡献者认证后获取的私钥）</p>
-											<textarea name="priv" id="priv" class="admin-textarea-xl"></textarea>
-										</td>
-									</tr>
-									<tr>
 										<td colspan="2" align="center">
-											<button type="submit" class="btn btn-success btn-sm">保存</button>
-											<button type="reset" class="btn btn-outline-success btn-sm">重置</button>
+											<button type="submit" class="btn btn-primary btn-sm">保存</button>
+											<button type="reset" class="btn btn-outline-primary btn-sm">重置</button>
 										</td>
 									</tr>
 								</tbody>

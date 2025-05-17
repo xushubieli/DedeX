@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 会员登录
  *
  * @version        $id:userlogin.class.php 15:59 2010年7月5日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 helper('cache');
 /**
@@ -89,8 +87,7 @@ function FormatUsername($username)
  * 网站会员登录类
  *
  * @package          MemberLogin
- * @subpackage       DedeBIZ.Libraries
- * @link             https://www.dedebiz.com
+ * @subpackage       DedeX.Libraries
  */
 class MemberLogin
 {

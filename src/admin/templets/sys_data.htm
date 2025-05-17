@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
-		<script src="/static/web/js/bootstrap.min.js"></script>
+		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 	</head>
@@ -21,8 +21,8 @@
 			<div class="card shadow-sm mb-3">
 				<div class="card-body">
 					<div class="admin-btns">
-						<a href="sys_data_revert.php" class="btn btn-success btn-sm">数据还原</a>
-						<a href="sys_sql_query.php" class="btn btn-success btn-sm">SQL命令工具</a>
+						<a href="sys_data_revert.php" class="btn btn-primary btn-sm">数据还原</a>
+						<a href="sys_sql_query.php" class="btn btn-primary btn-sm">SQL命令工具</a>
 					</div>
 				</div>
 			</div>
@@ -141,10 +141,10 @@
 											<?php if (@function_exists('gzcompress') && false) {?>
 											<label><input type="checkbox" name="iszip" id="iszip" value="1" checked> 完成后压缩成ZIP</label>
 											<?php }?>
-											<a href="javascript:SelAll();" class="btn btn-success btn-sm">全选</a>
-											<a href="javascript:ReSel();" class="btn btn-success btn-sm">反选</a>
-											<a href="javascript:NoneSel();" class="btn btn-success btn-sm">取消</a>
-											<button type="submit" class="btn btn-success btn-sm">备份</button>
+											<a href="javascript:SelAll();" class="btn btn-primary btn-sm">全选</a>
+											<a href="javascript:ReSel();" class="btn btn-primary btn-sm">反选</a>
+											<a href="javascript:NoneSel();" class="btn btn-primary btn-sm">取消</a>
+											<button type="submit" class="btn btn-primary btn-sm">备份</button>
 										</td>
 									</tr>
 									<tr>

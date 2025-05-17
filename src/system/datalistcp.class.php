@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 系统列表分页
  *
  * @version        $id:datalistcp.class.php 3 17:02 2010年7月9日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC.'/dedetemplate.class.php');
 //分页说明
@@ -20,7 +18,7 @@ $lang_page = '页';
 /**
  * DataListCP
  *
- * @package DedeBIZ.Libraries
+ * @package DedeX.Libraries
  */
 class DataListCP
 {
@@ -272,7 +270,7 @@ class DataListCP
             $plist .= "</ul><form name='pagelist' action='".$this->GetCurUrl()."'>$hidenform";
             if ($totalpage > $total_list) {
                 $plist .= "<input type='text' name='pageno' class='form-control admin-input-xs' placeholder='页数'>\r\n";
-                $plist .= "<button type='submit' name='plistgo' class='btn btn-success btn-sm'>前往</button>\r\n";
+                $plist .= "<button type='submit' name='plistgo' class='btn btn-primary btn-sm'>前往</button>\r\n";
             }
             $plist .= "</form>\r\n";
         }

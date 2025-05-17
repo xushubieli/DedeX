@@ -31,7 +31,7 @@
 						<span class="col-sm-2 col-form-label">缩略图</span>
 						<div class="col-sm-10">
 							<img id="imgLitpic" src="<?php echo empty($row['litpic'])? $cfg_staticurl.'/web/img/thumbnail.jpg' : $row['litpic'];?>" class="thumbnail-md mr-3">
-							<span class="btn btn-success btn-sm" id="btnUploadLitpic">修改缩略图</span>
+							<span class="btn btn-primary btn-sm" id="btnUploadLitpic">修改缩略图</span>
 							<input id="iptLitpic" type="file" name="iptLitpic" class="d-none">
 						</div>
 					</div>
@@ -151,8 +151,8 @@
 					<div class="form-group">
 						<span>链接上传：</span>
 						<input type="text" name="picnum" id="picnum" value="5" class="form-control w-25">
-						<button type="button" name="kkkup" id="kkkup2" onclick="MakeUpload();" class="btn btn-success btn-sm">添加网址</button>
-						<button type="button" name="submit3" id="btsh3" onclick="ShowHideAddr();" class="btn btn-success btn-sm">隐藏网址</button>
+						<button type="button" name="kkkup" id="kkkup2" onclick="MakeUpload();" class="btn btn-primary btn-sm">添加网址</button>
+						<button type="button" name="submit3" id="btsh3" onclick="ShowHideAddr();" class="btn btn-primary btn-sm">隐藏网址</button>
 					</div>
 					<div id="morelink">
 						<?php
@@ -161,9 +161,9 @@
 						?>
 					</div>
 					<div class="text-center">
-						<button type="submit" class="btn btn-success btn-sm">提交</button>
-						<button type="reset" class="btn btn-outline-success btn-sm" onclick="location.reload();">重置</button>
-						<a href="<?php echo $cfg_memberurl;?>/content_list.php?channelid=<?php echo $channelid;?>" class="btn btn-outline-success btn-sm">返回</a>
+						<button type="submit" class="btn btn-primary btn-sm">提交</button>
+						<button type="reset" class="btn btn-outline-primary btn-sm" onclick="location.reload();">重置</button>
+						<a href="<?php echo $cfg_memberurl;?>/content_list.php?channelid=<?php echo $channelid;?>" class="btn btn-outline-primary btn-sm">返回</a>
 					</div>
 				</form>
 			</div>
@@ -179,7 +179,7 @@
 				morelinkobj.style.display = "block";
 				if (endNum > 12) endNum = 12;
 				for (startNum; startNum <= endNum; startNum++) {
-					upfield.innerHTML += "<div class='form-group'><label>软件网址" + startNum + "：</label><div class='input-group mb-3'><input type='text' name='softurl" + startNum + "' class='form-control' placeholder='请选择软件上传或填写软件网址'><div class='input-group-append'><span class='btn btn-success btn-sm btn-send' onclick=\"SelectSoft('addcontent.softurl"+startNum+"')\">选择</span></div></div><label>下载名称" + startNum + "：</label><input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control'></div>";
+					upfield.innerHTML += "<div class='form-group'><label>软件网址" + startNum + "：</label><div class='input-group mb-3'><input type='text' name='softurl" + startNum + "' class='form-control' placeholder='请选择软件上传或填写软件网址'><div class='input-group-append'><span class='btn btn-primary btn-sm btn-send' onclick=\"SelectSoft('addcontent.softurl"+startNum+"')\">选择</span></div></div><label>下载名称" + startNum + "：</label><input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control'></div>";
 				}
 			}
 			function ShowHideAddr() {

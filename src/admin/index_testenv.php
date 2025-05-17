@@ -28,7 +28,7 @@ if (!function_exists('IsWritable')) {
         if ($isDir) {
             if (is_dir($pathfile)) {
                 mt_srand((float)microtime() * 1000000);
-                $pathfile = $pathfile.'biz_'.uniqid(mt_rand()).'.tmp';
+                $pathfile = $pathfile.'x_'.uniqid(mt_rand()).'.tmp';
             } elseif (@mkdir($pathfile)) {
                 return IsWritable($pathfile);
             } else {
@@ -46,8 +46,8 @@ if (!function_exists('IsWritable')) {
 //检查权限
 $safeMsg = array();
 $dirname = str_replace('index_body.php', '', strtolower($_SERVER['PHP_SELF']));
-if (!DEDEBIZ_SAFE_MODE) {
-    $safeMsg[] = '系统运行环境为开发模式，建议您启用安全模式 <a href="index_body.php?dopost=safe_mode" class="btn btn-success btn-xs">详情</a>';
+if (!DEDEX_SAFE_MODE) {
+    $safeMsg[] = '系统运行环境为开发模式，建议您启用安全模式 <a href="index_body.php?dopost=safe_mode" class="btn btn-primary btn-xs">详情</a>';
 }
 if (!IsSSL()) {
     $safeMsg[] = '检查到网址非安全链接，建议您部署https';
@@ -56,20 +56,20 @@ if (IsWritable(DEDEDATA.'/common.inc.php')) {
     $safeMsg[] = '检查到data/common.inc.php数据库配置文件权限可以写入，建议您以最高管理员权限设置禁止写入和执行';
 }
 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-    $safeMsg[] = '检查到php版本过低会无法正常使用后台，建议您升级到php8.x';
+    $safeMsg[] = '检查到php版本过低会导致无法操作后台，建议您升级到php.x';
 }
-if (preg_match("#[\\|/]admin[\\|/]#", $dirname)) {
-    $safeMsg[] = '检查到后台管理目录名称中包含admin，强烈建议后台管理目录修改为其它名称';
+if (preg_match("#admin#", $dirname)) {
+    $safeMsg[] = '检查到后台管理文件夹命名为admin，建议您修改后台管理文件夹名称';
 }
 $rs = TestAdminPWD();
 if ($rs < 0) {
-    $linkurl = ' <a href="sys_admin_user.php" class="btn btn-success btn-xs">修改</a>';
+    $linkurl = ' <a href="sys_admin_user.php" class="btn btn-primary btn-xs">修改</a>';
     switch ($rs) {
         case -1:
-            $msg = "检查到默认账号没有修改，建议您修改{$linkurl}";
+            $msg = "检查到默认管理员账号，建议您修改{$linkurl}";
             break;
         case -2:
-            $msg = "检查到默认账号和密码没有修改，建议您修改{$linkurl}";
+            $msg = "检查到默认管理员账号和密码，建议您修改{$linkurl}";
             break;
     }
     $safeMsg[] = $msg;
@@ -78,13 +78,13 @@ if ($rs < 0) {
 <?php
 if (count($safeMsg) > 0) {
 ?>
-<div class="alert alert-warning">
+<div class="alert alert-info">
     <ul>
         <?php
         $i = 1;
         foreach ($safeMsg as $key => $val) {
         ?>
-        <li><?php echo $i;?>、<?php echo $val;?></li>
+        <li><?php echo $i;?>.<?php echo $val;?></li>
         <?php
         $i++;
         }

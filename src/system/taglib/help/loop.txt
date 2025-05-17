@@ -9,7 +9,7 @@
 	</body>
 </html>
 >>dede>>
-table='biz_archives' 数据表名（支持同数据库内其他后台程序数据表名）
+table='x_archives' 数据表名（支持同数据库内其他后台程序数据表名）
 sort='' 排序方式
 row='10' 调用10条数据
 if='' 调用条件

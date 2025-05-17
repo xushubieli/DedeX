@@ -1,6 +1,6 @@
 <?php
 namespace WeChat\Exceptions;
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 返回异常
  * Class InvalidResponseException

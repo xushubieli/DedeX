@@ -3,14 +3,12 @@
  * 修改文档模型
  *
  * @version        $id:mychannel_edit.php 14:49 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
-if (DEDEBIZ_SAFE_MODE) {
-    die(DedeAlert("系统已启用安全模式，无法使用当前功能",ALERT_DANGER));
+if (DEDEX_SAFE_MODE) {
+    die(DedeAlert("系统已启用安全模式，无法使用当前功能", ALERT_DANGER));
 }
 CheckPurview('c_Edit');
 require_once(DEDEINC."/dedetag.class.php");
@@ -88,8 +86,8 @@ if ($dopost == "show") {
     }
     $row = $dsql->GetOne("SELECT * FROM `#@__channeltype` WHERE id='$id' ");
     $channelconfig = '';
-    $row['maintable'] = preg_replace('#biz_#', '#@__', $row['maintable']);
-    $row['addtable'] = preg_replace('#biz_#', '#@__', $row['addtable']);
+    $row['maintable'] = preg_replace('#x_#', '#@__', $row['maintable']);
+    $row['addtable'] = preg_replace('#x_#', '#@__', $row['addtable']);
     foreach ($row as $k => $v) {
         if ($k == 'fieldset') $v = "\r\n$v\r\n";
         $channelconfig .= "<channel:{$k}>$v</channel:{$k}>\r\n";
@@ -132,7 +130,7 @@ if ($dopost == "show") {
         <td>文档模型规则出错</td>
     </tr>
     <tr>
-        <td align='center'><button type='button' class='btn btn-success btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
+        <td align='center'><button type='button' class='btn btn-primary btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
     </tr>");
     $fields = array();
     foreach ($dtp->CTags as $ctag) {
@@ -144,7 +142,7 @@ if ($dopost == "show") {
             <td>文档模型规则出错</td>
         </tr>
         <tr>
-            <td align='center'><button type='button' class='btn btn-success btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
+            <td align='center'><button type='button' class='btn btn-primary btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
         </tr>");
     }
     //正常的导入过程
@@ -155,7 +153,7 @@ if ($dopost == "show") {
             <td>已经存在相同的{$fields['nid']}模型</td>
         </tr>
         <tr>
-            <td align='center'><button type='button' class='btn btn-success btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
+            <td align='center'><button type='button' class='btn btn-primary btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
         </tr>");
     }
     //创建表
@@ -175,7 +173,7 @@ if ($dopost == "show") {
             <td>创建数据表失败：{$dsql->GetError()}</td>
         </tr>
         <tr>
-            <td align='center'><button type='button' class='btn btn-success btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
+            <td align='center'><button type='button' class='btn btn-primary btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
         </tr>");
         exit();
     }
@@ -195,7 +193,7 @@ if ($dopost == "show") {
         <td>导入文档模型时发生错误：{$dsql->GetError()}</td>
     </tr>
     <tr>
-        <td align='center'><button type='button' class='btn btn-success btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
+        <td align='center'><button type='button' class='btn btn-primary btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
     </tr>");
     $dtp = new DedeTagParse();
     $dtp->SetNameSpace("field", "<", ">");
@@ -225,7 +223,7 @@ if ($dopost == "show") {
         <td>成功导入一个文档模型</td>
     </tr>
     <tr>
-        <td align='center'><button type='button' class='btn btn-success btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
+        <td align='center'><button type='button' class='btn btn-primary btn-sm' onclick=\"location='mychannel_main.php';\">文档模型管理</button></td>
     </tr>");
 } else if ($dopost == "copysave") {
     $cid = intval($cid);
@@ -290,19 +288,19 @@ if ($dopost == "show") {
     $msg = "<tr>
         <td>
             <span>文档模板：{$defaulttemplate}/article_{$row['nid']}.htm</span>
-            <a href='tpl.php?acdir={$cfg_df_style}&action=edit&filename=article_{$row['nid']}.htm' class='btn btn-success btn-sm'>修改</a>
+            <a href='tpl.php?acdir={$cfg_df_style}&action=edit&filename=article_{$row['nid']}.htm' class='btn btn-primary btn-sm'>修改</a>
         </td>
     </tr>
     <tr>
         <td>
             <span>列表模板：{$defaulttemplate}/list_{$row['nid']}.htm</span>
-            <a href='tpl.php?acdir={$cfg_df_style}&action=edit&filename=list_{$row['nid']}.htm' class='btn btn-success btn-sm'>修改</a>
+            <a href='tpl.php?acdir={$cfg_df_style}&action=edit&filename=list_{$row['nid']}.htm' class='btn btn-primary btn-sm'>修改</a>
         </td>
     </tr>
     <tr>
         <td>
             <span>封面栏目模板：{$defaulttemplate}/index_{$row['nid']}.htm</span>
-            <a href='tpl.php?acdir={$cfg_df_style}&action=edit&filename=index_{$row['nid']}.htm' class='btn btn-success btn-sm'>修改</a>
+            <a href='tpl.php?acdir={$cfg_df_style}&action=edit&filename=index_{$row['nid']}.htm' class='btn btn-primary btn-sm'>修改</a>
         </td>
     </tr>";
     $win->AddMsgItem($msg);
@@ -547,7 +545,7 @@ if ($dopost == "show") {
                 $addonstring .= $tmp.',';
             }
         }
-        $forms .= "<input type=\"submit\" name=\"submit\" value=\"开始搜索\" class=\"btn btn-success btn-sm\"></form>";
+        $forms .= "<input type=\"submit\" name=\"submit\" value=\"开始搜索\" class=\"btn btn-primary btn-sm\"></form>";
         $formssql = addslashes($forms);
         $query = "REPLACE INTO `#@__advancedsearch` (mid, maintable, mainfields, addontable, addonfields, forms, template) VALUES ('$mid','$maintable','$mainstring','$addontable','$addonstring','$formssql', '$template')";
         $dsql->ExecuteNoneQuery($query);

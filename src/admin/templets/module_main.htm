@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
-		<script src="/static/web/js/bootstrap.min.js"></script>
+		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
 		<script>
 			function getmodule(action, hash) {
@@ -28,12 +28,12 @@
 			<div class="card shadow-sm mb-3">
 				<div class="card-body">
 					<div class="admin-btns">
-						<a class="btn btn-success btn-sm" href="module_main.php">全部</a>
-						<a class="btn btn-success btn-sm" href="module_main.php?moduletype=soft">模块</a>
-						<a class="btn btn-success btn-sm" href="module_main.php?moduletype=templets">模板</a>
-						<a class="btn btn-success btn-sm" href="module_main.php?moduletype=plus">小插件</a>
-						<a class="btn btn-success btn-sm" href="module_main.php?moduletype=patch">补丁</a>
-						<a class="btn btn-success btn-sm" href="module_upload.php">上传</a>
+						<a class="btn btn-primary btn-sm" href="module_main.php">全部</a>
+						<a class="btn btn-primary btn-sm" href="module_main.php?moduletype=soft">模块</a>
+						<a class="btn btn-primary btn-sm" href="module_main.php?moduletype=templets">模板</a>
+						<a class="btn btn-primary btn-sm" href="module_main.php?moduletype=plus">小插件</a>
+						<a class="btn btn-primary btn-sm" href="module_main.php?moduletype=patch">补丁</a>
+						<a class="btn btn-primary btn-sm" href="module_upload.php">上传</a>
 					</div>
 				</div>
 			</div>
@@ -71,12 +71,12 @@
 											$file = DEDEDATA."/module/{$v['hash']}.xml";
 											if (file_exists($file)) {
 												if (file_exists(DEDEDATA."/module/{$v['hash']}-readme.php")){
-													echo "<span class='btn btn-success btn-sm'>已安装</span><a href='module_main.php?action=uninstall&hash={$v['hash']}' class='btn btn-outline-danger btn-sm'>卸载</a>";
+													echo "<span class='btn btn-primary btn-sm'>已安装</span><a href='module_main.php?action=uninstall&hash={$v['hash']}' class='btn btn-danger btn-sm'>卸载</a>";
 												} else {
-													echo "<span class='btn btn-warning btn-sm'>未安装</span><a href='module_main.php?action=setup&hash={$v['hash']}' class='btn btn-outline-success btn-sm'>安装</a>";
+													echo "<span class='btn btn-secondary btn-sm'>未安装</span><a href='module_main.php?action=setup&hash={$v['hash']}' class='btn btn-primary btn-sm'>安装</a>";
 												}
 											} else {
-												echo "<div id=\"status_{$v['hash']}\"><a href=\"javascript:getmodule('download','{$v['hash']}')\" class=\"btn btn-outline-warning btn-sm\">下载</a></div>";
+												echo "<div id=\"status_{$v['hash']}\"><a href=\"javascript:getmodule('download','{$v['hash']}')\" class=\"btn btn-outline-secondary btn-sm\">下载</a></div>";
 											}
 											?>
 										</td>

@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 管理员登录
  *
  * @version        $id:userlogin.class.php 15:59 2010年7月5日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 session_start();
 /**
@@ -154,8 +152,7 @@ function ClearMyAddon($aid = 0, $title = '')
  * 登录类
  *
  * @package          userLogin
- * @subpackage       DedeBIZ.Libraries
- * @link             https://www.dedebiz.com
+ * @subpackage       DedeX.Libraries
  */
 class userLogin
 {
@@ -174,7 +171,7 @@ class userLogin
     var $keepUserPurviewTag = 'dede_admin_purview';
     var $keepAdminStyleTag = 'dede_admin_style';
     var $keepUserFace = 'dede_admin_face';
-    var $adminStyle = 'DedeBIZ';
+    var $adminStyle = 'DedeX';
     //php5构造函数
     function __construct($admindir = '')
     {
@@ -299,7 +296,7 @@ class userLogin
     {
         if ($this->userID != '' && $this->userType != '') {
             global $admincachefile, $adminstyle;
-            if (empty($adminstyle)) $adminstyle = 'DedeBIZ';
+            if (empty($adminstyle)) $adminstyle = 'DedeX';
             @session_register($this->keepUserIDTag);
             $_SESSION[$this->keepUserIDTag] = $this->userID;
             @session_register($this->keepUserTypeTag);

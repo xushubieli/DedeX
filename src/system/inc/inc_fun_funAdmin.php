@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 后台管理函数
  *
  * @version        $id:inc_fun_funAdmin.php 13:58 2010年7月5日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  *  获取拼音信息
@@ -30,7 +28,7 @@ function SpGetPinyin($str, $ishead = 0, $isclose = 1)
         if ($cfg_soft_lang == "utf-8") {
             $str = gb2utf8($str);
         }
-        $client = new DedeBizClient();
+        $client = new DedeXClient();
         $data = $client->Pinyin($str, "");
         $restr = $data->data;
         $client->Close();
@@ -146,7 +144,7 @@ function SpGetEditor($fname, $fvalue, $nheight = "350", $etype = "Basic", $gtype
             if ($GLOBALS['cfg_db_language'] == "utf8mb4") {
                 $emoji = ",emoji";
             }
-            $addConfig = ",{allowedContent:true,pasteFilter:null,filebrowserImageUploadUrl:'./dialog/select_images_post.php',filebrowserUploadUrl:'./dialog/select_media_post.php?ck=1',extraPlugins:'html5video,html5audio,dedepagebreak,ddfilebrowser,mimage,dedebizai,textindent,tabletools,tableresize,tableselection,codesnippet{$emoji}',codeSnippet_theme: 'default'}";
+            $addConfig = ",{allowedContent:true,pasteFilter:null,filebrowserImageUploadUrl:'./dialog/select_images_post.php',filebrowserUploadUrl:'./dialog/select_media_post.php?ck=1',extraPlugins:'html5video,html5audio,dedepagebreak,ddfilebrowser,mimage,textindent,tabletools,tableresize,tableselection,codesnippet{$emoji}',codeSnippet_theme: 'default'}";
         }
         if (defined('DEDEUSER')) {
             $addConfig = ",{filebrowserImageUploadUrl:'api.php?action=upload&type=litpic&ck=1',filebrowserUploadUrl:'api.php?action=upload&type=media&ck=1',extraPlugins:'html5video,html5audio,textindent',filebrowserImageBrowseDisabled:true}";
@@ -162,32 +160,5 @@ EOT;
             return $code;
         }
     }
-}
-/**
- *  获取更新信息
- *
- * @return    string
- */
-function SpGetNewInfo()
-{
-    global $cfg_version_detail, $dsql;
-    $nurl = $_SERVER['HTTP_HOST'];
-    if (preg_match("#[a-z\-]{1,}\.[a-z]{2,}#i", $nurl)) {
-        $nurl = urlencode($nurl);
-    } else {
-        $nurl = "test";
-    }
-    $phpv = phpversion();
-    $sp_os = PHP_OS;
-    $mysql_ver = $dsql->GetVersion();
-    $add_query = '';
-    $query = "SELECT COUNT(*) AS dd FROM `#@__member` ";
-    $row1 = $dsql->GetOne($query);
-    if ($row1) $add_query .= "&mcount={$row1['dd']}";
-    $query = "SELECT COUNT(*) AS dd FROM `#@__arctiny` ";
-    $row2 = $dsql->GetOne($query);
-    if ($row2) $add_query .= "&acount={$row2['dd']}";
-    $offUrl = DEDEBIZURL."/version?version={$cfg_version_detail}&formurl={$nurl}&phpver={$phpv}&os={$sp_os}&mysqlver={$mysql_ver}{$add_query}";
-    return $offUrl;
 }
 ?>

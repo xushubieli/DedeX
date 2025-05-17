@@ -3,10 +3,8 @@
  * 文档描述管理
  *
  * @version        $id:article_description_main.php 14:12 2010年7月12日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 @ob_start();
 @set_time_limit(3600);
@@ -79,7 +77,7 @@ if ($dojob == '') {
                 exit();
             }
             $dvlen = $tjlen * 1;
-            $tjsta = "<div class='progress mb-3'><div class='progress-bar progress-bar-striped bg-success' role='progressbar' aria-valuenow='$dvlen%' aria-valuemin='0' aria-valuemax='100' style='width:$dvlen%'>$dvlen%</div></div>";  
+            $tjsta = "<div class='progress mb-3'><div class='progress-bar progress-bar-striped bg-primary' role='progressbar' aria-valuenow='$dvlen%' aria-valuemin='0' aria-valuemax='100' style='width:$dvlen%'>$dvlen%</div></div>";  
             $tjsta .= "完成更新文档总数$tjlen%";
             $nurl = "article_description_main.php?totalnum=$totalnum&startdd={$startdd}&pagesize=$pagesize&table={$table}&field={$field}&dsize={$dsize}&msize={$msize}&channel={$channel}&dojob={$dojob}";
             ShowMsg($tjsta, $nurl);
@@ -139,7 +137,7 @@ if ($dojob == '') {
             $tjlen = 100;
         }
         $dvlen = $tjlen * 1;
-        $tjsta = "<div class='progress mb-3'><div class='progress-bar progress-bar-striped bg-success' role='progressbar' aria-valuenow='$dvlen%' aria-valuemin='0' aria-valuemax='100' style='width:$dvlen%'>$dvlen%</div></div>";
+        $tjsta = "<div class='progress mb-3'><div class='progress-bar progress-bar-striped bg-primary' role='progressbar' aria-valuenow='$dvlen%' aria-valuemin='0' aria-valuemax='100' style='width:$dvlen%'>$dvlen%</div></div>";
         $tjsta .= "完成更新文档总数$tjlen%";
         if ($tjnum < $totalnum) {
             $nurl = "article_description_main.php?totalnum=$totalnum&startdd=".($startdd + $pagesize)."&pagesize=$pagesize&table={$table}&field={$field}&dsize={$dsize}&msize={$msize}&channel={$channel}&dojob={$dojob}";

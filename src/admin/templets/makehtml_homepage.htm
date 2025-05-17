@@ -24,55 +24,11 @@
 						<div class="table-responsive">
 							<table class="table table-borderless">
 								<tbody>
-									<?php
-									if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-										$client = new DedeBizClient();
-										$data = $client->AdminPWDExists();
-										if ($data->code == -1) {
-									?>
-									<tr>
-										<td colspan="2">
-											<div class="alert alert-info mb-0">启动商业组件失败，立即<a href="https://www.dedebiz.com/start?code=-1008" target="_blank">启动组件</a></div>
-										</td>
-									</tr>
-									<?php
-									} else {
-										$data = json_decode($data->data);
-										$rs = (array)($data->result);
-										if ($rs["admin_pwd_exists"] == "false") {
-									?>
-									<tr>
-										<td>设置密码</td>
-										<td><input type="password" name="dedebiz_admin" autocomplete="off" id="dedebiz_admin" class="admin-input-sm"></td>
-									</tr>
-									<tr>
-										<td>重复密码</td>
-										<td><input type="password" name="re_dedebiz_admin" autocomplete="off" id="re_dedebiz_admin" class="admin-input-sm"></td>
-									</tr>
-									<?php } else {?>
-									<tr>
-										<td>输入密码</td>
-										<td><input type="password" name="dedebiz_admin" autocomplete="off" id="dedebiz_admin" class="admin-input-sm"></td>
-									</tr>
-									<tr>
-										<td>首页状态</td>
-										<td>
-											<label><input type="radio" name="lockindex" value="unlock" <?php echo ($rs['index_lock_state']==true)? "checked" : "";?>> 解锁</label>
-											<label><input type="radio" name="lockindex" value="lock" <?php echo ($row['index_lock_state']==false)? "checked" : "";?>> 锁定</label>
-										</td>
-									</tr>
-									<?php }}} else {?>
-									<tr>
-										<td colspan="2">
-											<div class="alert alert-info mb-0">启动商业组件失败，立即<a href="https://www.dedebiz.com/start?code=-1008" target="_blank">启动组件</a></div>
-										</td>
-									</tr>
-									<?php }?>
 									<tr>
 										<td width="260">选择首页模板</td>
 										<td>
 											<input type="text" name="templet" id="templet" value="<?php echo $row['templet']?>" class="admin-input-sm">
-											<button type="button" class="btn btn-success btn-sm" onclick="SelectTemplets('form1.templet');">选择</button>
+											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.templet');">选择</button>
 										</td>
 									</tr>
 									<tr>
@@ -94,7 +50,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2" align="center"><button type="submit" class="btn btn-success btn-sm">开始执行</button></td>
+										<td colspan="2" align="center"><button type="submit" class="btn btn-primary btn-sm">开始执行</button></td>
 									</tr>
 									<tr>
 										<td colspan="2">
@@ -112,10 +68,6 @@
 			function SelectTemplets(fname) {
 				var pos = GetWinPos(800, 600);
 				window.open("./dialog/select_templets.php?f=" + fname, "poptempWin","scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
-			}
-			function htmlSubmit() {
-				form1.submit();
-				$("#dedebiz_admin").val("");
 			}
 		</script>
 	</body>

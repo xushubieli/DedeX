@@ -1,2 +1,1 @@
-www.dedebiz.com
-www.zhelixie.com
+https://github.com/xushubieli/DedeX

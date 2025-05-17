@@ -1,13 +1,18 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 栏目列表标签
+ * {dede:channel}
+ *     [field:sonchannel1 type='son']
+ *         [field:sonchannel2 type='son']
+ *              [field:sonchannel3][/field:sonchannel3]
+ *         [/field:sonchannel2]
+ *     [/field:sonchannel1]
+ * {/dede:channel}
  *
- * @version        $id:channel.lib.php 9:29 2010年7月6日 tianya $
- * @package        DedeBIZ.Taglib
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @version        $id:channel.lib.php 11:00
+ * @package        DedeX.Taglib
+ * @license        GNU GPL v2 (/license.txt)
  */
 function lib_channel(&$ctag, &$refObj)
 {
@@ -49,19 +54,23 @@ function lib_channel(&$ctag, &$refObj)
     if ($type == '' || $type == 'sun') $type = 'son';
     if ($innertext == '') $innertext = GetSysTemplets("channel_list.htm");
     if ($type == 'top') {
-        $sql = "SELECT * FROM `#@__arctype` WHERE reid=0 AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $line";
+        $sql = "SELECT * FROM `#@__arctype` WHERE reid=0 AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $row";
     } else if ($type == 'son') {
         if ($typeid == 0) return '';
-        $sql = "SELECT * FROM `#@__arctype` WHERE reid='$typeid' AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $line";
+        $sql = "SELECT * FROM `#@__arctype` WHERE reid='$typeid' AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $row";
     } else if ($type == 'self') {
         if ($reid == 0) return '';
-        $sql = "SELECT * FROM `#@__arctype` WHERE reid='$reid' AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $line";
+        $sql = "SELECT * FROM `#@__arctype` WHERE reid='$reid' AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $row";
     }
     $needRel = false;
     $dtp2 = new DedeTagParse();
     $dtp2->SetNameSpace('field', '[', ']');
     $dtp2->LoadSource($innertext);
-    //检查是否有子栏目，并返回rel提示用于二级菜单
+    $dsql2 = clone $dsql;
+    $dsql->SetQuery($sql);
+    $dsql->Execute();
+    $line = $row;
+    //检查是否有子栏目，并返回rel提示，用于二级菜单
     if (preg_match('#:rel#', $innertext)) $needRel = true;
     if (empty($sql)) return '';
     $dsql->SetQuery($sql);
@@ -69,15 +78,15 @@ function lib_channel(&$ctag, &$refObj)
     $totalRow = $dsql->GetTotalRow();
     //如果用子栏目模式，当没有子栏目时显示同级栏目
     if ($type == 'son' && $reid != 0 && $totalRow == 0) {
-        $sql = "SELECT * FROM `#@__arctype` WHERE reid='$reid' AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $line";
+        $sql = "SELECT * FROM `#@__arctype` WHERE reid='$reid' AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $row";
         $dsql->SetQuery($sql);
         $dsql->Execute();
     }
     $GLOBALS['autoindex'] = 0;
     for ($i = 0; $i < $line; $i++) {
-        if ($col > 1) $likeType .= "<dl>\r\n";
+        if ($col > 1) $likeType .= "<dl>";
         for ($j = 0; $j < $col; $j++) {
-            if ($col > 1) $likeType .= "<dd>\r\n";
+            if ($col > 1) $likeType .= "<dd>";
             if ($row = $dsql->GetArray()) {
                 $row['sonids'] = $row['rel'] = '';
                 if ($needRel) {
@@ -86,41 +95,91 @@ function lib_channel(&$ctag, &$refObj)
                     else $row['rel'] = " rel='dropmenu{$row['id']}'";
                 }
                 //处理同级栏目中，当前栏目的样式
-                if (($row['id'] == $typeid || ($topid == $row['id'] && $type == 'top')) && $currentstyle != '') {
-                    $linkOkstr = $currentstyle;
-                    $row['typelink'] = GetOneTypeUrlA($row);
-                    $linkOkstr = str_replace("~rel~", $row['rel'], $linkOkstr);
-                    $linkOkstr = str_replace("~id~", $row['id'], $linkOkstr);
-                    $linkOkstr = str_replace("~typename~", $row['typename'], $linkOkstr);
-                    $linkOkstr = str_replace("~cnoverview~", $row['cnoverview'], $linkOkstr);
-                    $linkOkstr = str_replace("~enname~", $row['enname'], $linkOkstr);
-                    $linkOkstr = str_replace("~enoverview~", $row['enoverview'], $linkOkstr);
-                    $linkOkstr = str_replace("~typelink~", $row['typelink'], $linkOkstr);
-                    $linkOkstr = str_replace("~bigpic~", $row['bigpic'], $linkOkstr);
-                    $linkOkstr = str_replace("~litimg~", $row['litimg'], $linkOkstr);
-                    $likeType .= $linkOkstr;
+                if (($row['id'] == $typeid || ($topid == $row['id'] && $type == 'top') ) && $currentstyle != '') {
+                    if ($currentstyle != '') {
+                        $linkOkstr = $currentstyle;
+                        $row['typelink'] = GetOneTypeUrlA($row);
+                        $linkOkstr = str_replace("~rel~", $row['rel'], $linkOkstr);
+                        $linkOkstr = str_replace("~id~", $row['id'], $linkOkstr);
+                        $linkOkstr = str_replace("~typename~", $row['typename'], $linkOkstr);
+                        $linkOkstr = str_replace("~cnoverview~", $row['cnoverview'], $linkOkstr);
+                        $linkOkstr = str_replace("~enname~", $row['enname'], $linkOkstr);
+                        $linkOkstr = str_replace("~enoverview~", $row['enoverview'], $linkOkstr);
+                        $linkOkstr = str_replace("~typelink~", $row['typelink'], $linkOkstr);
+                        $linkOkstr = str_replace("~bigpic~", $row['bigpic'], $linkOkstr);
+                        $linkOkstr = str_replace("~litimg~", $row['litimg'], $linkOkstr);
+                        $likeType .= $linkOkstr;
+                    }
                 } else {
                     $row['typelink'] = $row['typeurl'] = GetOneTypeUrlA($row);
                     if (is_array($dtp2->CTags)) {
-                        foreach ($dtp2->CTags as $tagid => $ctag) {
-                            if (isset($row[$ctag->GetName()])) $dtp2->Assign($tagid, $row[$ctag->GetName()]);
+                        foreach($dtp2->CTags as $tagid=>$ctag) {
+                            if (isset($row[$ctag->GetName()])) {
+                                $dtp2->Assign($tagid, $row[$ctag->GetName()]);
+                            } else if (preg_match('/^sonchannel[0-9]*$/', $ctag->GetName())) {
+                                $dtp2->Assign($tagid,lib_channel_son($ctag, $row['id'], $dsql2));
+                            }
                         }
                     }
                     $likeType .= $dtp2->GetResult();
                 }
             }
-            if ($col > 1) $likeType .= "</dd>\r\n";
+            if ($col > 1) $likeType .= "</dd>";
             $GLOBALS['autoindex']++;
         }
         if ($col > 1) {
             $i += $col - 1;
-            $likeType .= "</dl>\r\n";
+            $likeType .= "</dl>";
         }
     }
+    reset($dsql2);
     $dsql->FreeResult();
-    if ($cacheid != '') {
-        WriteCacheBlock($cacheid, $likeType);
+    return $likeType;
+}
+function lib_channel_son($ctag, $typeid = 0, $dsql2)
+{
+    $attlist = 'row|100,col|1,currentstyle|,notypeid|0';
+    FillAttsDefault($ctag->CAttribute->Items, $attlist);
+    extract($ctag->CAttribute->Items, EXTR_SKIP);
+    $innertext = $ctag->GetInnerText();
+    $dsql3 = clone $dsql2;
+    $likeType = '';
+    if ($notypeid != 0) {
+        $tpsql = $tpsql."and not(id in($notypeid)) ";
     }
+    $sql = "SELECT * FROM `#@__arctype` WHERE reid='$typeid' AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $row";
+    $dtp2 = new DedeTagParse();
+    $dtp2->SetNameSpace("field","[","]");
+    $dtp2->LoadSource($innertext);
+    $dsql2->SetQuery($sql);
+    $dsql2->Execute();
+    $line = $row;
+    for ($i = 0; $i < $line; $i++) {
+        if ($col > 1) $likeType .= "<dl>";
+        for ($j = 0; $j < $col; $j++) {
+            if ($col > 1) $likeType .= "<dd>";
+            if ($row = $dsql2->GetArray()) {
+                $row['typelink'] = $row['typeurl'] = GetOneTypeUrlA($row);
+                if (is_array($dtp2->CTags)) {
+                    foreach($dtp2->CTags as $tagid=>$ctag) {
+                        if (isset($row[$ctag->GetName()])) {
+                            $dtp2->Assign($tagid, $row[$ctag->GetName()]);
+                        } else if (preg_match('/^sonchannel[0-9]*$/', $ctag->GetName())) {
+                            $dtp2->Assign($tagid,lib_channel_son($ctag, $row['id'], $dsql3));
+                        }
+                    }
+                }
+                $likeType .= $dtp2->GetResult();
+            }
+            if ($col > 1) $likeType .= "</dd>";
+        }
+        if ($col > 1) {
+            $i += $col - 1;
+            $likeType .= "</dl>";
+        }
+    }
+    reset($dsql3);
+    $dsql2->FreeResult();
     return $likeType;
 }
 ?>

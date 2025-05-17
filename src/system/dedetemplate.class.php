@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 主题模板引擎
  *
  * @version        $id:dedetemplate.class.php 3 15:44 2010年7月6日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 function MakePublicTag($atts = array(), $refObj = null, $fields = array())
 {
@@ -79,8 +77,7 @@ function FillFields(&$atts, &$refObj, &$fields)
  * function C__Tag();
  *
  * @package          Tag
- * @subpackage       DedeBIZ.Libraries
- * @link             https://www.dedebiz.com
+ * @subpackage       DedeX.Libraries
  */
 class Tag
 {
@@ -129,8 +126,7 @@ class Tag
  * function C__DedeTemplate
  *
  * @package          DedeTemplate
- * @subpackage       DedeBIZ.Libraries
- * @link             https://www.dedebiz.com
+ * @subpackage       DedeX.Libraries
  */
 class DedeTemplate
 {
@@ -393,7 +389,7 @@ class DedeTemplate
             foreach ($tokens as $token) {
                 if (is_array($token)) {
                     if ($token[0] = '306' && in_array($token[1], $disabled_functions)) {
-                        $errmsg = 'DedeBIZ Error:function disabled "'.$token[1].'" <a href="https://www.dedebiz.com/help" target="_blank">more</a>';
+                        $errmsg = 'DedeX Error:function disabled "'.$token[1].'"';
                         return FALSE;
                     }
                 }
@@ -964,8 +960,7 @@ class DedeTemplate
  * 属性的数据描述
  *
  * @package          TagAttribute
- * @subpackage       DedeBIZ.Libraries
- * @link             https://www.dedebiz.com
+ * @subpackage       DedeX.Libraries
  */
 class TagAttribute
 {
@@ -1038,8 +1033,7 @@ class TagAttribute
  * function C__TagAttributeParse();
  *
  * @package          TagAttribute
- * @subpackage       DedeBIZ.Libraries
- * @link             https://www.dedebiz.com
+ * @subpackage       DedeX.Libraries
  */
 class TagAttributeParse
 {

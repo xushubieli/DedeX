@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 系统存放函数
  * 
  * @version        $id:common.func.php 4 16:39 2010年7月6日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once DEDEINC."/archive/partview.class.php";
 if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
@@ -138,7 +136,7 @@ if (!function_exists('CheckSql')) {
         $error = '';
         $old_pos = 0;
         $pos = -1;
-        $enkey = substr(md5(substr($cfg_cookie_encode.'dedebiz', 0, 5)), 0, 10);
+        $enkey = substr(md5(substr($cfg_cookie_encode.'DedeX', 0, 5)), 0, 10);
         $log_file = DEDEDATA.'/checksql_'.$enkey.'_safe.txt';
         $userIP = GetIP();
         $getUrl = GetCurUrl();
@@ -345,7 +343,7 @@ function ShowMsg($msg, $gourl, $onlymsg = 0, $limittime = 0)
         $rmsg .= "";
         if ($onlymsg == 0) {
             if ($gourl != 'javascript:;' && $gourl != '') {
-                $rmsg .= "<div class='text-center mt-3'><a href='{$gourl}' class='btn btn-success btn-sm'>点击反应</a></div>";
+                $rmsg .= "<div class='text-center mt-3'><a href='{$gourl}' class='btn btn-primary btn-sm'>点击反应</a></div>";
                 $rmsg .= "<script>setTimeout('JumpUrl()', $litime);</script>";
             } else {
                 $rmsg .= "</div>";
@@ -465,65 +463,6 @@ function IsSSL()
     }
     return false;
 }
-//获取对应版本号的更新SQL
-function GetUpdateSQL()
-{
-    global $cfg_dbprefix, $cfg_dbtype, $cfg_db_language;
-    $result = array();
-    $query = '';
-    $sql4tmp = "ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language;
-    $fp = fopen(DEDEDATA.'/admin/update.txt','r');
-    $sqls = array();
-    $current_ver = '';
-    while(!feof($fp))
-    {
-        $line = rtrim(fgets($fp,1024));
-        if (preg_match("/\-\- ([\d\.]+)/",$line,$matches)) {
-            if (count($sqls) > 0) {
-                $result[$current_ver] = $sqls;
-            }
-            $sqls = array();
-            $current_ver = $matches[1];
-        }
-        if (preg_match("#;$#", $line)) {
-            $query .= $line."\n";
-            $query = str_replace('#@__',$cfg_dbprefix,$query);
-            if ($cfg_dbtype == 'sqlite') {
-                $query = preg_replace('/character set (.*?) /i','',$query);
-                $query = preg_replace('/unsigned/i','',$query);
-                $query = str_replace('TYPE=MyISAM','',$query);
-                $query = preg_replace ('/TINYINT\(([\d]+)\)/i','INTEGER',$query);
-                $query = preg_replace ('/mediumint\(([\d]+)\)/i','INTEGER',$query);
-                $query = preg_replace ('/smallint\(([\d]+)\)/i','INTEGER',$query);
-                $query = preg_replace('/int\(([\d]+)\)/i','INTEGER',$query);
-                $query = preg_replace('/auto_increment/i','PRIMARY KEY AUTOINCREMENT',$query);
-                $query = preg_replace('/,([\t\s ]+)KEY(.*?)MyISAM;/','',$query);
-                $query = preg_replace('/,([\t\s ]+)KEY(.*?);/',');',$query);
-                $query = preg_replace('/,([\t\s ]+)UNIQUE KEY(.*?);/',');',$query);
-                $query = preg_replace('/set\(([^\)]*?)\)/','varchar',$query);
-                $query = preg_replace('/enum\(([^\)]*?)\)/','varchar',$query);
-                if (preg_match("/PRIMARY KEY AUTOINCREMENT/",$query)) {
-                    $query = preg_replace('/,([\t\s ]+)PRIMARY KEY([\t\s ]+)\(`([0-9a-zA-Z]+)`\)/i','',$query);
-                }
-                $sqls[] = $query;
-            } else {
-                if (preg_match('#CREATE#i', $query)) {
-                    $sqls[] = preg_replace("#TYPE=MyISAM#i",$sql4tmp,$query);
-                } else {
-                    $sqls[] = $query;
-                }
-            }
-            $query='';
-        } else if (!preg_match("#^(\/\/|--)#", $line)) {
-            $query .= $line;
-        }
-    }
-    if (count($sqls) > 0) {
-        $result[$current_ver] = $sqls;
-    }
-    fclose($fp);
-    return $result;
-}
 /**
  * GetMimeTypeOrExtension
  *
@@ -617,173 +556,8 @@ function GetMimeTypeOrExtension($str, $t = 0) {
         foreach ($mime_types  as $key => $value) {
             if ($value == $str) return $key;
         }
-        return "dedebiz";
+        return "dedex";
     }
-}
-//用于实际请求接口并返回处理结果
-function DedeSearchDo($action, $parms=array()) {
-    if ($action === 'update') {
-        DedeSearchDo('delete', $parms);
-        return DedeSearchDo('add', $parms);
-    }
-    //生成完整请求URL
-    $url = DedeSearchAPIURL($action, $parms);
-    //初始化cURL
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url); //设置请求URL
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); //返回结果而不是直接输出
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10); //设置超时时间（秒）
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5); //设置连接超时（秒）
-    curl_setopt($ch, CURLOPT_USERAGENT, 'DedeSearchAPI/1.0'); //设置User-Agent
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //支持https连接
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); //支持https连接
-    //执行请求
-    $response = curl_exec($ch);
-    //获取HTTP状态码和错误信息
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $curlError = curl_error($ch);
-    //关闭cURL资源
-    curl_close($ch);
-    //处理HTTP错误
-    if ($response === false || $httpCode !== 200) {
-        return array(
-            'code' => -1,
-            'message' => !empty($curlError) ? $curlError : "HTTP Error: $httpCode",
-            'data' => null,
-        );
-    }
-    //解析返回的JSON数据
-    $result = json_decode($response, true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        return array(
-            'code' => -2,
-            'message' => 'Invalid JSON response',
-            'data' => null,
-        );
-    }
-    //检查返回的业务逻辑中的code
-    if (!isset($result['code']) || $result['code'] !== 0) {
-        return array(
-            'code' => isset($result['code'])? $result['code'] : -3,
-            'message' => isset($result['message'])? $result['message'] : 'Unknown error',
-            'data' => null,
-        );
-    }
-    //返回成功结果
-    return array(
-        'code' => 0,
-        'message' => 'Success',
-        'data' => isset($result['data'])? $result['data'] : null,
-    );
-}
-//获取接口地址
-function DedeSearchAPIURL($action, $parms=array())
-{
-    $baseUrl = DEDEBIZSEARCHHOST."/api/$action"; //替换为实际的API地址
-    //添加公共参数
-    $timestamp = time(); //当前时间戳
-    $parms['timestamp'] = $timestamp;
-    $parms['pageSize'] = isset($parms['pageSize'])? $parms['pageSize']:10;
-    $parms['page'] = isset($parms['page'])? $parms['page']:1;
-    $parms['q'] = isset($parms['q'])? $parms['q']:"";
-    if ($action == "delete" || $action == "add") {
-        $parms['pageSize'] = 0;
-        $parms['page'] = 0;
-        $parms['q'] = isset($parms['id'])? $parms['id']:"";
-    }
-    //生成签名字符串
-    $signBaseString = "key=".DEDEBIZSEARCHKEY."&q=".$parms['q']. "&pageSize=".$parms['pageSize']. "&page=".$parms['page']. "&timestamp=".$parms['timestamp']; 
-    $parms['sign'] = md5($signBaseString); //使用MD5生成签名
-    if ($action == "delete" || $action == "add") {
-        unset($parms['q']);
-        unset($parms['pageSize']);
-        unset($parms['page']);
-    }
-    //拼接完整URL
-    $finalQueryString = http_build_query($parms);
-    $finalUrl = $baseUrl.'?'.$finalQueryString;
-    return $finalUrl;
-}
-function ConvertMysqlToSqlite($mysqlQuery) {
-    //移除CHARACTER SET和COLLATE
-    $query = preg_replace('/character set \S+/i', '', $mysqlQuery);
-    $query = preg_replace('/collate \S+/i', '', $query);
-    //移除unsigned关键字
-    $query = str_replace('unsigned', '', $query);
-    //替换MySQL的整数类型为SQLite的INTEGER
-    $query = preg_replace('/\b(TINY|SMALL|MEDIUM|BIG)?INT\(\d+\)/i', 'INTEGER', $query);
-    //替换AUTO_INCREMENT为PRIMARY KEY AUTOINCREMENT (仅适用于INTEGER类型)
-    $query = preg_replace('/\bINTEGER\s+NOT NULL\s+PRIMARY KEY AUTOINCREMENT/i', 'INTEGER PRIMARY KEY AUTOINCREMENT', $query);
-    $query = preg_replace('/\bAUTO_INCREMENT\b/i', '', $query);
-    //移除MySQL特有的ENGINE、CHARSET、COLLATE、TYPE选项
-    $query = preg_replace('/ENGINE=\S+/i', '', $query);
-    $query = preg_replace('/DEFAULT CHARSET=\S+/i', '', $query);
-    $query = preg_replace('/COLLATE=\S+/i', '', $query);
-    $query = preg_replace('/TYPE=MyISAM;/i', '', $query);
-    //移除COMMENT语法（SQLite不支持）
-    $query = preg_replace('/COMMENT\s+\'[^\']*\'/i', '', $query);
-    //移除KEY和UNIQUE KEY定义（SQLite会自动管理索引），同时处理USING BTREE
-    $query = preg_replace('/,?\s*KEY\s+\S+\s*\([^)]*\)\s*(USING BTREE)?/i', '', $query);
-    $query = preg_replace('/,?\s*UNIQUE KEY\s+\S+\s*\([^)]*\)\s*(USING BTREE)?/i', '', $query);
-    //移除不完整的UNIQUE定义
-    $query = preg_replace('/,?\s*UNIQUE\s*(?!\()/', '', $query);
-    //替换ENUM和SET为TEXT
-    $query = preg_replace('/\b(ENUM|SET)\([^)]*\)/i', 'TEXT', $query);
-    //替换MEDIUMTEXT为TEXT
-    $query = preg_replace('/\bMEDIUMTEXT\b/i', 'TEXT', $query);
-    //处理DEFAULT CURRENT_TIMESTAMP
-    $query = preg_replace('/DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP/i', 'DEFAULT CURRENT_TIMESTAMP', $query);
-    //处理DEFAULT值
-    $query = preg_replace('/DEFAULT\s+\'([^\']+)\'/i', 'DEFAULT "$1"', $query);
-    //处理PRIMARY KEY只能用于INTEGER
-    if (preg_match('/PRIMARY KEY \(`(\w+)`\)/', $query, $matches)) {
-        $primaryKeyColumn = $matches[1];
-        $query = preg_replace('/,?\s*PRIMARY KEY\s*\(`'.$primaryKeyColumn.'`\)/i', '', $query);
-        $query = preg_replace('/(`'.$primaryKeyColumn.'`\s+INTEGER)/i', '$1 PRIMARY KEY', $query);
-    }
-    //处理CONCAT替换为SQLite兼容形式
-    if (preg_match('/CONCAT\(([^)]*?)\)/i', $query, $matches)) {
-        $query = preg_replace('/CONCAT\(([^)]*?)\)/i', str_replace(",", "||", $matches[1]), $query);
-        $query = str_replace("'||'", "','", $query);
-    }
-    //修正FIND_IN_SET替换
-    $query = preg_replace("/FIND_IN_SET\('([\w]+)', arc.flag\)>0/i", "(',' || arc.flag || ',') LIKE '%,\\1,%'", $query);
-    $query = preg_replace("/FIND_IN_SET\('([\w]+)', arc.flag\)<1/i", "(',' || arc.flag || ',') NOT LIKE '%,\\1,%'", $query);
-    //修正FIND_IN_SET替换（允许列名包含点号）
-    $query = preg_replace_callback(
-        "/FIND_IN_SET\s*\(\s*'([^']+)'\s*,\s*([a-zA-Z0-9_`\.]+)\s*\)/i",
-        function ($matches) {
-            //返回SQLite兼容的LIKE语法
-            return "(',' || ".$matches[2]." || ',' LIKE '%,".$matches[1].",%')";
-        },
-        $query
-    );
-    //替换FIELD函数为CASE表达式
-    $query = preg_replace_callback(
-        '/\bFIELD\s*\(\s*([^,]+)\s*,\s*((?:\'[^\']+\'|`[^`]+`|[^),]+(?:,\s*)?)+)\s*\)/i',
-        function ($matches) {
-            $field = trim($matches[1]);
-            $values = trim($matches[2]);
-            //更精确分割值列表（支持带引号、反引号及无空格分隔的数值）
-            preg_match_all('/\'[^\']+\'|`[^`]+`|\d+|\w+/', $values, $valueParts);
-            $cases = [];
-            $position = 1;
-            foreach ($valueParts[0] as $value) {
-                $cases[] = "WHEN $field = $value THEN $position";
-                $position++;
-            }
-            return "(CASE ".implode(' ', $cases)." ELSE 0 END)";
-        },
-        $query
-    );
-    //新增的转换逻辑
-    $query = preg_replace("/SHOW fields FROM `([\w]+)`/i", "PRAGMA table_info('\\1') ", $query);
-    $query = preg_replace("/SHOW CREATE TABLE `([\w]+)`/i", "SELECT 0,sql FROM sqlite_master WHERE name='\\1'; ", $query);
-    $query = preg_replace("/Show Tables/i", "SELECT name FROM sqlite_master WHERE type = \"table\"", $query);
-    $query = str_replace("\'", "\"", $query);
-    $query = str_replace('\t\n', "", $query);
-    $query = str_ireplace('rand', 'RANDOM', $query);
-    return trim($query);
 }
 //会员和插件引入默认主题模板
 function ThemeInclude($path)

@@ -1,6 +1,6 @@
 <?php
 namespace WeChat\Exceptions;
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 接口参数异常
  * Class InvalidArgumentException

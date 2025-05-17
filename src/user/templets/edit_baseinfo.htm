@@ -27,7 +27,7 @@
 								<input id="iptNewface" type="file" name="iptNewface" class="d-none">
 								<p class="mb-2"><img id="face" src="<?php echo empty($row['face'])? $cfg_staticurl.'/web/img/admin.png' : $row['face'];?>" class="user-img-md"></p>
 								<p class="mb-2"><?php echo $cfg_ml->M_LoginID;?></p>
-								<span class="btn btn-success btn-sm" id="btnChangeFace">修改</span>
+								<span class="btn btn-primary btn-sm" id="btnChangeFace">修改</span>
 							</div>
 							<div class="form-group row">
 								<label class="col-sm-3 col-form-label" for="iptUname">昵称：</label>
@@ -71,7 +71,7 @@
 									<label><input type="radio" name="sex" value="保密" <?php if ($row['sex']=='保密') echo 'checked';?>> 保密</label>
 								</div>
 							</div>
-							<div class="text-center"><button type="submit" class="btn btn-success btn-sm">保存</button></div>
+							<div class="text-center"><button type="submit" class="btn btn-primary btn-sm">保存</button></div>
 						</form>
 					</div>
 				</div>

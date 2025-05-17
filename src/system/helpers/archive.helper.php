@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 文档助手
  *
  * @version        $id:archive.helper.php 2 23:00 2010年7月5日 tianya $
- * @package        DedeBIZ.Helpers
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Helpers
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  *  获取单篇文档信息
@@ -168,24 +166,9 @@ if (!function_exists('UpIndexKey')) {
     {
         global $dsql, $typeid2;
         if (empty($typeid2)) $typeid2 = 0;
-        $indexedsql = '';
-        if ($arcrank == -1) {
-            //如果内容被改为待审核状态，删除索引
-            if ($dsql->IsTable('#@__search_sync')) {
-                $intime = time();
-                $insql = "INSERT INTO `#@__search_sync` (`aid`, `add_at`) VALUES ({$id}, $intime)";
-                $dsql->ExecuteNoneQuery($insql);
-                DedeSearchDo("delete", array("id" => $id));
-            }
-        } else {
-            //商业全文检索组件索引，更新索引信息
-            if (TableHasField("#@__arctiny", "indexed")) {
-                $indexedsql = ",`indexed`=2 ";
-            }
-            $query = "UPDATE `#@__arctiny` SET `arcrank`='$arcrank', `typeid`='$typeid', `typeid2`='$typeid2', `sortrank`='$sortrank'{$indexedsql} WHERE id = '$id' ";
-            DedeSearchDo("add", array("id" => $id));
-            $dsql->ExecuteNoneQuery($query);
-        }
+        $addtime = time();
+        $query = "UPDATE `#@__arctiny` SET `arcrank`='$arcrank', `typeid`='$typeid', `typeid2`='$typeid2', `sortrank`='$sortrank' WHERE id = '$id' ";
+        $dsql->ExecuteNoneQuery($query);
         //处理修改后的tag
         if ($tags != '') {
             $oldtags = GetTagsArray($id);

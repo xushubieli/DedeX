@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * Unicode编码词典的php分词器
  *
@@ -9,10 +9,8 @@ if (!defined('DEDEINC')) exit('dedebiz');
  *  4、对主词典使用特殊格式进行编码, 不需要载入词典到内存操作
  *
  * @version        $id:splitword.class.php 2 11:45 2011-2-14 itplato $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 //常量定义
 define('_SP_', chr(0xFF).chr(0xFE)); 

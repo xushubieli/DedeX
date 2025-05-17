@@ -20,9 +20,9 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
         <div class="card shadow-sm mb-3">
             <div id="imgs-topbar" class="card-body">
                 <label><input type="checkbox" name="isWater" id="isWater" <?php if ($photo_markup == '1') echo 'checked';?>> 是否水印</label>
-                <button class="btn btn-success btn-sm addfile">添加图片</button>
-                <button class="btn btn-success btn-sm removeall">清空图片</button>
-                <button class="btn btn-success btn-sm upall">全部上传</button>
+                <button class="btn btn-primary btn-sm addfile">添加图片</button>
+                <button class="btn btn-primary btn-sm removeall">清空图片</button>
+                <button class="btn btn-primary btn-sm upall">全部上传</button>
             </div>
         </div>
         <div class="card shadow-sm">

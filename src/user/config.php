@@ -3,10 +3,8 @@
  * 会员配置
  * 
  * @version        $id:config.php 8:38 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 define('DEDEUSER', true);
 require_once(dirname(__FILE__).'/../system/common.inc.php');
@@ -135,7 +133,7 @@ function CheckRank($rank = 0, $money = 0)
                     ShowMsg("邮箱地址为空，请设置一个邮箱地址", "edit_baseinfo.php");
                     exit;
                 }
-                $msg = "<p>您未进行邮件验证，发送验证邮件后请登录邮箱进行确认</p><a href='{$cfg_memberurl}/index_do.php?fmdo=sendMail' class='btn btn-success btn-sm'>发送</a><a href='javascript:history.go(-1);' class='btn btn-outline-success btn-sm'>返回</a>";
+                $msg = "<p>您未进行邮件验证，发送验证邮件后请登录邮箱进行确认</p><a href='{$cfg_memberurl}/index_do.php?fmdo=sendMail' class='btn btn-primary btn-sm'>发送</a><a href='javascript:history.go(-1);' class='btn btn-outline-primary btn-sm'>返回</a>";
                 ShowMsg($msg, "javascript:;");
                 exit;
             }

@@ -1,10 +1,8 @@
 <?php
 /**
  * @version        $id:api.php 8:38 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 define('AJAXLOGIN', TRUE);
 define('IS_DEDEAPI', TRUE);

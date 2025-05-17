@@ -3,10 +3,8 @@
  * 修改文档模型
  *
  * @version        $id:article_edit.php 14:12 2010年7月12日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('a_Edit,a_AccEdit,a_MyEdit');
@@ -22,7 +20,7 @@ if ($dopost != 'save') {
     $query = "SELECT ch.typename AS channelname,ar.membername AS rankname,arc.* FROM `#@__archives` arc LEFT JOIN `#@__channeltype` ch ON ch.id=arc.channel LEFT JOIN `#@__arcrank` ar ON ar.`rank`=arc.arcrank WHERE arc.id='$aid' ";
     $arcRow = $dsql->GetOne($query);
     if (!is_array($arcRow)) {
-        ShowMsg("读取文档信息出错", "-1");
+        ShowMsg("读取文档信息出错", "javascript:;");
         exit();
     }
     $query = "SELECT * FROM `#@__channeltype` WHERE id='".$arcRow['channel']."'";
@@ -168,7 +166,7 @@ if ($dopost != 'save') {
     }
     //返回成功信息
     $msg = "<tr>
-        <td align='center'><a href='$artUrl' target='_blank' class='btn btn-success btn-sm'>浏览文档</a><a href='article_add.php?cid=$typeid' class='btn btn-success btn-sm'>发布文档</a><a href='archives_do.php?aid=".$id."&dopost=editArchives' class='btn btn-success btn-sm'>修改文档</a><a href='catalog_do.php?cid=$typeid&dopost=listArchives' class='btn btn-success btn-sm'>返回文档列表</a></td>
+        <td align='center'><a href='$artUrl' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='article_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布文档</a><a href='archives_do.php?aid=".$id."&dopost=editArchives' class='btn btn-primary btn-sm'>修改文档</a><a href='catalog_do.php?cid=$typeid&dopost=listArchives' class='btn btn-primary btn-sm'>返回文档列表</a></td>
     </tr>";
     $wintitle = "成功修改文档";
     $win = new OxWindow();

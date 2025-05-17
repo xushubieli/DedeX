@@ -3,10 +3,8 @@
  * 发布文档模型
  * 
  * @version        $id:article_add.php 8:38 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 require_once(DEDEINC."/dedetag.class.php");
@@ -110,7 +108,7 @@ if (empty($dopost)) {
     if ($artUrl == '') $artUrl = $cfg_phpurl."/view.php?aid=$arcID";
     ClearMyAddon($arcID, $title);
     //返回成功信息
-    $msg = "<a href='$artUrl' target='_blank' class='btn btn-success btn-sm'>浏览文档</a><a href='article_add.php?cid=$typeid' class='btn btn-success btn-sm'>发布文档</a><a href='article_edit.php?channelid=$channelid&aid=$arcID' class='btn btn-success btn-sm'>修改文档</a><a href='content_list.php?channelid={$channelid}' class='btn btn-success btn-sm'>返回管理文档</a>";
+    $msg = "<a href='$artUrl' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='article_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布文档</a><a href='article_edit.php?channelid=$channelid&aid=$arcID' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid={$channelid}' class='btn btn-primary btn-sm'>返回管理文档</a>";
     $wintitle = "成功发布文档";
     $win = new WebWindow();
     $win->AddMsgItem($msg);

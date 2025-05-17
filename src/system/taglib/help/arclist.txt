@@ -16,7 +16,7 @@ typeid='1' 调用指定栏目id，多个栏目，例：typeid='1,2,3'
 notypeid='2' 排除指定栏目id，多个栏目，例：notypeid='4,5,6'
 listtype='all' 指定调用所有栏目类型
 orderby='sortrank' 排序方式：sortrank按发布时间（可用参数：hot/click按点击数、pubdate按发布时间、lastpost按评论时间、scores按得分、rand随机）
-keyword='得德' 调用指定关键词文档，多个关键词，例：keyword='DedeBIZ,得德'
+keyword='DedeX' 调用指定关键词文档，多个关键词，例：keyword='DedeX,叙述'
 limit='0,1' 从第0开始调用1篇
 aid='1' 调用指定文档id
 idlist='' 调用特定文档id

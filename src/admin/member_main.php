@@ -3,10 +3,8 @@
  * 所有会员列表
  *
  * @version        $id:member_main.php 10:49 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('member_List');
@@ -72,7 +70,7 @@ function GetMemberName($rank, $mt)
 {
     global $MemberTypes;
     if (isset($MemberTypes[$rank])) {
-        if ($mt == 'ut') return " <span class='btn btn-outline-warning btn-sm'>待升级".$MemberTypes[$rank]."</span>";
+        if ($mt == 'ut') return " <span class='btn btn-outline-secondary btn-sm'>待升级".$MemberTypes[$rank]."</span>";
         else return $MemberTypes[$rank];
     } else {
         if ($mt == 'ut') return '';

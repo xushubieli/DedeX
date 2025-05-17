@@ -3,10 +3,8 @@
  * 首页
  * 
  * @version        $id:index.php 9:23 2022-05-16 tianya $
- * @package        DedeBIZ.Site
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Site
+ * @license        GNU GPL v2 (/license.txt)
  */
 define("DEDEINDEX", true);
 if (!file_exists(dirname(__FILE__).'/data/common.inc.php')) {

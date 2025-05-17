@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 主题模板
  *
  * @version        $id:dedetag.class.php 10:33 2010年7月6日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 class DedeTag
 {
@@ -71,8 +69,7 @@ class DedeTag
  * function c____DedeTagParse();
  *
  * @package          DedeTagParse
- * @subpackage       DedeBIZ.Libraries
- * @link             https://www.dedebiz.com
+ * @subpackage       DedeX.Libraries
  */
 class DedeTagParse
 {
@@ -181,7 +178,7 @@ class DedeTagParse
             foreach ($tokens as $token) {
                 if (is_array($token)) {
                     if ($token[0] = '306' && in_array($token[1], $disabled_functions)) {
-                        $errmsg = 'DedeBIZ Error:function disabled "'.$token[1].'" <a href="https://www.dedebiz.com/help" target="_blank">more</a>';
+                        $errmsg = 'DedeX Error:function disabled "'.$token[1].'"';
                         return FALSE;
                     }
                 }

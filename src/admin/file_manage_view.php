@@ -3,10 +3,8 @@
  * 文件管理器查看
  *
  * @version        $id:file_manage_view.php 8:48 2010年7月13日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('plus_文件管理器');
@@ -82,8 +80,8 @@ else if ($fmdo == "del") {
 }
 //修改文件
 else if ($fmdo == "edit") {
-    if (DEDEBIZ_SAFE_MODE) {
-        die(DedeAlert("系统已启用安全模式，无法使用当前功能",ALERT_DANGER));
+    if (DEDEX_SAFE_MODE) {
+        die(DedeAlert("系统已启用安全模式，无法使用当前功能", ALERT_DANGER));
     }
     if (!isset($backurl)) {
         $backurl = '';

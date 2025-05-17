@@ -1,14 +1,12 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 require_once DEDEINC."/libraries/imageresize.class.php";
 /**
  * 图像处理助手
  *
  * @version        $id:image.func.php 15:59 2010年7月5日 tianya $
- * @package        DedeBIZ.Helpers
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Helpers
+ * @license        GNU GPL v2 (/license.txt)
  */
 /**
  *  缩图片自动生成函数，来源支持bmp、gif、jpg、png但生成的小图只用jpg或png格式

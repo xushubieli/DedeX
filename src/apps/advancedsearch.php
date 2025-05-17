@@ -3,10 +3,8 @@
  * 高级搜索操作
  *
  * @version        $id:advancedsearch.php 15:38 2010年7月8日 tianya $
- * @package        DedeBIZ.Site
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Site
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../system/common.inc.php");
 require_once(DEDEINC."/datalistcp.class.php");
@@ -179,8 +177,8 @@ $dlist = new DataListCP();
 $dlist->pagesize = 30;
 $dlist->SetParameter("hash", $sqlhash);
 $dlist->SetParameter("mid", $mid);
-if (file_exists(DEDEROOT."/theme/dedebiz/$template")) {
-    $templatefile = DEDEROOT."/theme/dedebiz/$template";
+if (file_exists(DEDEROOT."/theme/dedex/$template")) {
+    $templatefile = DEDEROOT."/theme/dedex/$template";
 } else {
     $templatefile = DEDEROOT."/theme/apps/advancedsearch.htm";
 }

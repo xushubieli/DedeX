@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 require_once DEDEINC."/libraries/HTMLPurifier/HTMLPurifier.auto.php";
 function SpHtml2Text($html)
 {

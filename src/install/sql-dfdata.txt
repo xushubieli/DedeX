@@ -508,12 +508,6 @@ INSERT INTO `#@__channeltype` VALUES ('1','article','文档模型','#@__archives
 ('-1','spec','专题模型','#@__archives','#@__addonspec','spec_add.php','content_s_list.php','spec_edit.php','','','','<field:note type="specialtopic" isnull="true" rename="" />','','','1','1','0','-1','','10','0','1','1','标题','0','0'),
 ('-8','infos','分类模型','#@__archives','#@__addoninfos','archives_sg_add.php','content_sg_list.php','archives_sg_edit.php','archives_sg_add.php','content_sg_list.php','archives_sg_edit.php','<field:channel itemname="栏目id" autofield="0" notsend="0" type="int" isnull="true" islist="1" default="0" maxlength="10" page=""></field:channel>\t\n<field:arcrank itemname="浏览权限" autofield="0" notsend="0" type="int" isnull="true" islist="1" default="0" maxlength="5" page=""></field:arcrank>\t\n<field:mid itemname="会员id" autofield="0" notsend="0" type="int" isnull="true" islist="1" default="0" maxlength="8" page=""></field:mid>\t\n<field:click itemname="点击" autofield="0" notsend="0" type="int" isnull="true" islist="1" default="0" maxlength="10" page=""></field:click>\t\n<field:title itemname="标题" autofield="0" notsend="0" type="text" isnull="true" islist="1" default="0" maxlength="60" page=""></field:title>\t\n<field:senddate itemname="发布时间" autofield="0" notsend="0" type="int" isnull="true" islist="1" default="0" maxlength="10" page=""></field:senddate>\t\n<field:flag itemname="推荐属性" autofield="0" notsend="0" type="checkbox" isnull="true" islist="1" default="0" maxlength="10" page=""></field:flag>\t\n<field:litpic itemname="缩略图" autofield="0" notsend="0" type="text" isnull="true" islist="1" default="0" maxlength="60" page=""></field:litpic>\t\n<field:userip itemname="会员ip" autofield="0" notsend="0" type="text" isnull="true" islist="0" default="0" maxlength="15" page=""></field:userip>\t\n<field:lastpost itemname="最后评论时间" autofield="0" notsend="0" type="int" isnull="true" islist="1" default="0" maxlength="10" page=""></field:lastpost>\t\n<field:scores itemname="评论积分" autofield="0" notsend="0" type="int" isnull="true" islist="1" default="0" maxlength="8" page=""></field:scores>\t\n<field:goodpost itemname="好评数" autofield="0" notsend="0" type="int" isnull="true" islist="1" default="0" maxlength="8" page=""></field:goodpost>\t\n<field:badpost itemname="差评数" autofield="0" notsend="0" type="int" isnull="true" islist="1" default="0" maxlength="8" page=""></field:badpost>\t\n<field:nativeplace itemname="地区" autofield="1" notsend="0" type="stepselect" isnull="true" islist="1" default="0" maxlength="255" page="">\t\n</field:nativeplace>\t\n<field:infotype itemname="信息类型" autofield="1" notsend="0" type="stepselect" isnull="true" islist="1" default="0" maxlength="255" page="">\t\n</field:infotype>\t\n<field:body itemname="信息文档" autofield="1" notsend="0" type="htmltext" isnull="true" islist="0" maxlength="255" page="">\t\n</field:body>\t\n<field:endtime itemname="截止日期" autofield="1" notsend="0" type="datetime" isnull="true" islist="1" maxlength="255" page="">\t\n</field:endtime>\t\n<field:linkman itemname="联系人" autofield="1" notsend="0" type="text" isnull="true" islist="0" maxlength="50" page="">\t\n</field:linkman>\t\n<field:tel itemname="联系电话" autofield="1" notsend="0" type="text" isnull="true" islist="0" maxlength="50" page="">\t\n</field:tel>\t\n<field:email itemname="邮箱" autofield="1" notsend="0" type="text" isnull="true" islist="0" maxlength="50" page="">\t\n</field:email>\t\n<field:address itemname="地址" autofield="1" notsend="0" type="text" isnull="true" islist="0" maxlength="100" page="">\t\n</field:address>\t\n','channel,arcrank,mid,click,title,senddate,flag,litpic,lastpost,scores,goodpost,badpost,nativeplace,infotype,endtime','','-1','1','1','-1','','0','0','0','1','信息标题','0','0');
 
-INSERT INTO `#@__flink` (`sortrank`, `url`, `webname`, `msg`, `email`, `logo`, `dtime`, `typeid`, `ischeck`) VALUES(1, 'https://www.dedebiz.com', 'DedeBIZ', '', '', '', 1226375403, 1, 2);
-INSERT INTO `#@__flink` (`sortrank`, `url`, `webname`, `msg`, `email`, `logo`, `dtime`, `typeid`, `ischeck`) VALUES(1, 'https://www.dedebiz.com/help', '帮助中心', '', '', '', 1227772717, 1, 2);
-INSERT INTO `#@__flink` (`sortrank`, `url`, `webname`, `msg`, `email`, `logo`, `dtime`, `typeid`, `ischeck`) VALUES(1, 'https://www.dedebiz.com/auth', '授权中心', '', '', '', 1227772703, 1, 2);
-INSERT INTO `#@__flink` (`sortrank`, `url`, `webname`, `msg`, `email`, `logo`, `dtime`, `typeid`, `ischeck`) VALUES(3, 'https://www.dedebiz.com/git', '代码托管', '', '', '', 1603767210, 1, 1);
-INSERT INTO `#@__flink` (`sortrank`, `url`, `webname`, `msg`, `email`, `logo`, `dtime`, `typeid`, `ischeck`) VALUES(4, 'https://www.dedebiz.com/ai', 'AI建站', '', '', '', 1742983936, 8, 2);
-
 INSERT INTO `#@__flinktype` VALUES ('1','综合网站'),
 ('2','娱乐类'),
 ('3','教育类'),
@@ -3930,9 +3924,9 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('3','cfg_indexurl','首页链接','1','string','/'),
 ('4','cfg_backup_dir','数据备份目录，存data文件夹里','2','string','backupdata'),
 ('5','cfg_indexname','首页链接名','1','string','首页'),
-('6','cfg_indexseotitle','首页SEO标题','1','string','DedeBIZ'),
+('6','cfg_indexseotitle','首页SEO标题','1','string','DedeX'),
 ('7','cfg_webname','网站名称','1','string','我的网站'),
-('8','cfg_adminemail','网站发信邮箱','2','string','support@dedebiz.com'),
+('8','cfg_adminemail','网站发信邮箱','2','string','admin@qq.com'),
 ('9','cfg_html_editor','默认CKEditor富文本，支持其它富文本','2','string','ckeditor'),
 ('10','cfg_arcdir','默认文档生成文件路径','1','string','/a'),
 ('11','cfg_medias_dir','默认图片上传文件路径','1','string','/static'),
@@ -3948,11 +3942,11 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('21','cfg_feedbackcheck','是否需审核评论及留言','5','bool','Y'),
 ('22','cfg_keyword_replace','是否使用关键词替换功能，开启影响文档更新速度','2','bool','Y'),
 ('23','cfg_rewrite','是否启用伪静态，开启后必须添加伪静态规则','1','bool','N'),
-('24','cfg_df_style','默认主题模板风格','1','string','dedebiz'),
+('24','cfg_df_style','默认主题模板风格','1','string','dedex'),
 ('25','cfg_multi_site','是否支持多站点，开启后附件栏目连接文档启用绝对网址','2','bool','N'),
 ('26','cfg_rm_remote','下载远程图片和资源','7','bool','N'),
 ('27','cfg_dede_log','是否开启管理日志','2','bool','N'),
-('28','cfg_powerby','网站版权信息','1','bstring','Copyright © 2025 DedeBIZ 版权所有'),
+('28','cfg_powerby','网站版权信息','1','bstring','Copyright © 2025 DedeX 版权所有'),
 ('29','cfg_jump_once','跳转网址是否直接跳转否则显示中转页','7','bool','Y'),
 ('30','cfg_task_pwd','系统计划任务客户端密码','7','string',''),
 ('31','cfg_arcsptitle','是否开启分页标题，开启影响文档更新速度','6','bool','N'),
@@ -4010,15 +4004,15 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('83','cfg_smtp_port','SMTP服务器端口','2','string','25'),
 ('84','cfg_sendmail_bysmtp','是否启用SMTP方式发送邮件','2','bool','Y'),
 ('85','cfg_smtp_server','SMTP服务器','2','string','smtp.qq.com'),
-('86','cfg_smtp_usermail','SMTP服务器邮箱','2','string','tianya@dedebiz.com'),
+('86','cfg_smtp_usermail','SMTP服务器邮箱','2','string','admin@qq.com'),
 ('87','cfg_smtp_user','SMTP服务器帐号','2','string','tianya'),
 ('88','cfg_smtp_password','SMTP服务器密码','2','string','tianya'),
 ('89','cfg_online_type','在线支付网关类型','2','string','nps'),
 ('90','cfg_upload_switch','删除文档同时删除相关附件文件','2','bool','Y'),
 ('91','cfg_allsearch_limit','网站全局搜索时间限制（秒）','2','string','1'),
 ('92','cfg_delete','是否开启文档回收站','2','bool','Y'),
-('93','cfg_keywords','首页关键词','1','string','dedebiz'),
-('94','cfg_description','首页描述','1','bstring','DedeBIZ系统基于PHP7版本开发，具有很强的可扩展性，并且采用GPLv2协议完全开放源代码。DedeBIZ支持采用现流行的Go语言设计开发，拥有简单易用、灵活扩展特性之外更安全、高效。模板设计制作简单，一直是系统一大特点，延续之前标签，同时采用响应式模板引擎Bootstrap作为系统模板渲染引擎，让搭建跨终端和移动端全媒体站点更简单。'),
+('93','cfg_keywords','首页关键词','1','string','DedeX'),
+('94','cfg_description','首页描述','1','bstring','DedeX系统基于PHP7开发，具有高度可扩展性，并根据GPLv2协议开源。除了支持流行的Go语言进行开发外，还具备简单易用、灵活扩展以及更高的安全性和效率。该系统的模板设计简便，延续了以往的标签系统，同时引入了响应式模板引擎Bootstrap，简化了跨终端和移动端全媒体站点的搭建过程。'),
 ('95','cfg_beian','网站备案号','1','string',''),
 ('96','cfg_need_typeid2','是否启用副栏目','6','bool','Y'),
 ('97','cfg_mb_pwdtype','前台密码验证类型32位md5（16位l16、后16位r16、中间16位m16）','4','string','32'),
@@ -4054,13 +4048,7 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('127', 'cfg_digg_update', '顶踩缓存异步更新间隔（0为不缓存）', '6', 'number', '0'),
 ('128', 'cfg_feedback_guest', '是否允许匿名评论', '5', 'bool', 'N'),
 ('129', 'cfg_feedback_msglen', '评论文档字数限定', 5, 'number', '255'),
-('130', 'cfg_auth_code', '商业版授权码', 1, 'bstring', ''),
-('131', 'cfg_bizcore_hostname', 'DedeBIZ Core地址', 1, 'string', '127.0.0.1'),
-('132', 'cfg_bizcore_port', 'DedeBIZ Core端口', 1, 'number', '8181'),
-('133', 'cfg_bizcore_appid', 'DedeBIZ Core应用ID', 1, 'string', ''),
-('134', 'cfg_bizcore_key', 'DedeBIZ Core通信密钥', 1, 'string', ''),
-('135', 'cfg_tags_dir', '标签生成目录', 7, 'string', '{cmspath}/a/tags'),
-('136', 'cfg_bizcore_api', 'DedeBIZ Core接口服务器', 1, 'string', 'http://localhost:8087');
+('135', 'cfg_tags_dir', '标签生成目录', 7, 'string', '/a/tags');
 
 INSERT INTO `#@__sys_module` VALUES(1, '1f35620fb42d452fa2bdc1dee1690f92', '文件管理器', '', '', 0, ''),
 (2, 'b437d85a7a7bc778c9c79b5ec36ab9aa', '友情链接', '', '', 0, ''),
@@ -4070,43 +4058,15 @@ INSERT INTO `#@__sys_module` VALUES(1, '1f35620fb42d452fa2bdc1dee1690f92', '文�
 
 INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (1, 'Wechat', '微信支付', '微信', 0, '{"AppID":"","MchID":"","APIv2Secret":""}', 0);
 INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (2, 'Alipay', '支付宝支付', '支付宝', 1, '{"APPID":"","PrivateKey":"","CertPublicKey":"","RootCert":"AlipayRootCert","SignType":"RSA2"}', 0);
-INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (3, 'Bank', '银行转账', '转账', 2, '{"AccountName":"泰隆商业银行上海杨浦支行","AccountNO":"31010090201000020658","Name":"上海穆云智能科技有限公司"}', 1);
+INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (3, 'Bank', '银行转账', '转账', 2, '{"AccountName":"某某银行","AccountNO":"123XXXXXXXXXXXXXX456","Name":"某某公司"}', 1);
 INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (4, 'Balance', '余额支付', '余额', 3, '{}', 1);
 INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (5, 'Cod', '货到付款', '货到付款', 4, '{}', 0);
 
 
-INSERT INTO `#@__plus` VALUES(1, '文件管理器', '<m:item name=''文件管理器'' link=''file_manage_main.php'' rank=''plus_文件管理器'' target=''main'' />', '', 'DedeBIZ', 1, ''),
-(2, '友情链接模块', '<m:item name=''友情链接'' link=''friendlink_main.php'' rank=''plus_友情链接'' target=''main'' />', '', 'DedeBIZ', 1, ''),
-(3, '广告管理', '<m:item name=''广告管理'' link=''ad_main.php'' rank=''plus_广告管理'' target=''main'' />', '', 'DedeBIZ', 1, ''),
-(4, '投票管理', '<m:item name=''投票管理'' link=''vote_main.php'' rank=''plus_投票管理'' target=''main'' />', '', 'DedeBIZ', 1, ''),
-(5, '挑错管理', '<m:item name=''挑错管理'' link=''erraddsave.php'' rank=''plus_挑错管理'' target=''main'' />', '', 'DedeBIZ', 1, '<m:item name=''挑错管理'' link=''catalog_do.php?dopost=erraddsave.php'' rank=''plus_挑错管理'' target=''main'' />');
+INSERT INTO `#@__plus` VALUES(1, '文件管理器', '<m:item name=''文件管理器'' link=''file_manage_main.php'' rank=''plus_文件管理器'' target=''main'' />', '', 'DedeX', 1, ''),
+(2, '友情链接模块', '<m:item name=''友情链接'' link=''friendlink_main.php'' rank=''plus_友情链接'' target=''main'' />', '', 'DedeX', 1, ''),
+(3, '广告管理', '<m:item name=''广告管理'' link=''ad_main.php'' rank=''plus_广告管理'' target=''main'' />', '', 'DedeX', 1, ''),
+(4, '投票管理', '<m:item name=''投票管理'' link=''vote_main.php'' rank=''plus_投票管理'' target=''main'' />', '', 'DedeX', 1, ''),
+(5, '挑错管理', '<m:item name=''挑错管理'' link=''erraddsave.php'' rank=''plus_挑错管理'' target=''main'' />', '', 'DedeX', 1, '<m:item name=''挑错管理'' link=''catalog_do.php?dopost=erraddsave.php'' rank=''plus_挑错管理'' target=''main'' />');
 
 ALTER TABLE `#@__arctiny` ADD INDEX `idx_typeid_arcrank_sortrank` (`typeid`, `arcrank`, `sortrank`);
-
-INSERT INTO `#@__ai` (`id`, `title`, `apikey`, `baseurl`, `description`, `company`, `website`) VALUES (1, 'Doubao家族模型', '', 'https://ark.cn-beijing.volces.com/api/v3', '字节跳动推出的自研AI模型，经过字节跳动内部50+业务场景实践验证，提供高质量的语言模型与多模态模型矩阵，以优质模型效果与丰富的模型组合为企业打造丰富的业务体验。', '字节跳动', 'https://www.volcengine.com/product/doubao');
-INSERT INTO `#@__ai` (`id`, `title`, `apikey`, `baseurl`, `description`, `company`, `website`) VALUES (2, 'DeepSeek模型', '', 'https://api.deepseek.com/v1', 'DeepSeek致力于探索AGI的本质，不做中庸的事，带着好奇心，用最长期的眼光去回答最大的问题。', '深度求索', 'https://www.deepseek.com/');
-INSERT INTO `#@__ai` (`id`, `title`, `apikey`, `baseurl`, `description`, `company`, `website`) VALUES (3, 'Moonshot模型', '', 'https://api.moonshot.cn/v1', 'Moonshot-v1是由Moonshot AI推出的千亿参数的语言模型，具备优秀的语义理解、指令遵循和文本生成能力。Moonshot-v1模型可以用于各种任务，包括内容或代码生成、摘要、对话、创意写作等。', '月之暗面', 'https://www.moonshot.cn/');
-INSERT INTO `#@__ai` (`id`, `title`, `apikey`, `baseurl`, `description`, `company`, `website`) VALUES (4, 'Ollama', 'Ollama', 'http://localhost:11434/v1', 'Ollama是一个开源的大型语言模型（LLM）平台，旨在让用户能够轻松地在本地运行、管理和与大型语言模型进行交互。', 'Ollama', 'https://ollama.com/');
-INSERT INTO `#@__ai` (`id`, `title`, `apikey`, `baseurl`, `description`, `company`, `website`) VALUES (5, '通义千问', '', 'https://dashscope.aliyuncs.com/compatible-mode/v1', '阿里云百炼通义AI模型企业级服务平台，助力企业轻松打造最优落地效果的AI应用。', '阿里巴巴', 'https://www.aliyun.com/product/bailian');
-
-INSERT INTO `#@__ai_model` (`id`, `aiid`, `model`, `title`, `description`, `isdefault`, `sortrank`) VALUES (1, 1, 'doubao-pro-32k-241215', 'doubao-pro-32k', 'Doubao-pro-32k全面升级，相比240828版本，整体能力显著提升，其中总结摘要、信息抽取、文本分类、复杂流程、综合任务等能力显著大幅提升。', 0, 50);
-INSERT INTO `#@__ai_model` (`id`, `aiid`, `model`, `title`, `description`, `isdefault`, `sortrank`) VALUES (2, 2, 'deepseek-chat', 'deepseek-chat', '模型已全面升级为 DeepSeek-V3，接口不变3', 0, 50);
-INSERT INTO `#@__ai_model` (`id`, `aiid`, `model`, `title`, `description`, `isdefault`, `sortrank`) VALUES (3, 3, 'moonshot-v1-32k', 'moonshot-v1-32k', '它是一个长度为 32k 的模型，适用于生成长文本', 0, 50);
-INSERT INTO `#@__ai_model` (`id`, `aiid`, `model`, `title`, `description`, `isdefault`, `sortrank`) VALUES (4, 5, 'qwen-max-latest', 'qwen-max-latest', '通义千问系列效果最好的模型，本模型是动态更新版本，模型更新不会提前通知，适合复杂、多步骤的任务，模型中英文综合能力显著提升，模型人类偏好显著提升，模型推理能力和复杂指令理解能力显著增强，困难任务上的表现更优，数学、代码能力显著提升，提升对Table、JSON等结构化数据的理解和生成能力。', 0, 50);
-INSERT INTO `#@__ai_model` (`id`, `aiid`, `model`, `title`, `description`, `isdefault`, `sortrank`) VALUES (5, 5, 'qwen-plus', 'qwen-plus', '通义千问2.5系列千亿级别超大规模语言模型，支持中文、英文等不同语言输入。随着模型的升级，qwen-max将滚动更新升级。如果希望使用固定版本，请使用历史快照版本。', 1, 50);
-INSERT INTO `#@__ai_model` (`id`, `aiid`, `model`, `title`, `description`, `isdefault`, `sortrank`) VALUES (6, 4, 'qwq:latest', 'qwq:latest', 'qwq:latest', 0, 20);
-
-INSERT INTO `#@__ai_prompt` (`id`, `pname`, `title`, `issystem`, `description`, `info`, `prompt`, `dfprompt`) VALUES (1, 'catalog_add', '创建栏目', 1, '根据用户输入的要求进行栏目的创建，包含栏目名称、关键词、描述等信息', '系统提示词，不建议修改', '用户将会提供一些栏目创建的要求，用来生成一个网站的栏目基础信息，栏目信息包含：\r\ntypename：中文名称，栏目中文名称，简明扼要不要包含空格和特殊字符\r\nenname：英文名称，栏目的英文名称，简明扼要结合中文名称需要翻译准确\r\ncnoverview：中文概述，栏目的中文概述信息，100字以内\r\nenoverview：英文概述，栏目的英文概述信息，100字以内\r\ntypedir：栏目生成目录，利于seo的栏目目录，需要支持url地址seo链接标准\r\nseotitle：SEO标题，便于栏目页面进行SEO的标题信息，seo符号，用-不是空格竖号空格，英文标题是空格减号空格，中文的就只有减号-\r\nkeywords：栏目关键词，提炼概括栏目信息的最核心的关键词，至少3个，关键词的用英文豆号隔开，不是中文大写逗号\r\ndescription：栏目描述，栏目的描述信息\r\ncontent：栏目详细介绍，500字以内，html格式\r\n\r\n需要按照参考格式返回，以满足用户需求优先\r\n\r\n参考输入 EXAMPLE INPUT:\r\n我需要一个穆云智能科技信息的栏目\r\n\r\n参考格式返回 EXAMPLE OUTPUT:\r\n{typename}穆云智能科技{/typename}\r\n{enname}Muyun Intelligent Technology{/enname}\r\n{cnoverview}穆云智能科技聚焦人工智能与大数据技术研发，提供智能化解决方案及创新产品，涵盖AI算法、数据分析、工业物联网等领域，助力企业数字化转型与技术升级。{/cnoverview}\r\n{enoverview}Muyun Intelligent Technology specializes in AI and big data R&D, delivering intelligent solutions and innovative products including AI algorithms, data analytics, and industrial IoT to empower enterprise digital transformation.{/enoverview}\r\n{typedir}muyun-intelligent-technology{/typedir}\r\n{seotitle}穆云智能科技 | 人工智能与大数据解决方案 | 创新科技企业{/seotitle}\r\n{keywords}人工智能,大数据解决方案,智能科技企业{/keywords}\r\n{description}穆云智能科技专注于人工智能与大数据技术的研发与应用，提供智能解决方案与创新产品，助力企业数字化转型，探索科技前沿发展。{/description}\r\n{content}<p>穆云智能科技专注于人工智能与大数据技术的研发与应用，致力于为企业提供智能化解决方案，推动数字化转型。公司通过深度学习、自然语言处理、计算机视觉等先进技术，提供智能客服、图像识别、数据挖掘等服务，帮助企业提升效率、优化决策。</p><p>在大数据领域，穆云智能科技通过智能数据处理与分析，帮助企业深度挖掘数据价值，优化资源配置，提升运营效率。公司为客户量身定制解决方案，确保技术与实际需求的紧密结合，为企业提供精准的业务洞察。穆云智能科技与科研机构和高校保持合作，持续关注科技前沿，推动技术创新。公司秉承“创新驱动，智能引领”的理念，致力于通过技术赋能推动行业智慧化升级，助力企业在激烈市场竞争中脱颖而出。未来，穆云智能科技将继续拓展技术应用领域，助力更多企业实现数字化和智能化转型。</p>{/content}', '我需要创建一个介绍穆云智能科技公司的栏目');
-INSERT INTO `#@__ai_prompt` (`id`, `pname`, `title`, `issystem`, `description`, `info`, `prompt`, `dfprompt`) VALUES (2, 'catalog_add_quick', '批量添加栏目', 1, '根据用户提供描述，规划站点栏目结构，批量构建站点栏目信息', '系统提示词，不建议修改', '你是专业的网站运营，用户将会提供一些网站建设思考和栏目构建的要求，根据要求进行网站栏目的策划，并生成一级栏目和二级栏目（可选），栏目名称不要包含首页、主页\r\ntoptype：一级栏目，需要简单明了，英文翻译准确\r\nsontype：二级栏目，如果存在多个，采用英文逗号\",\"进行分割，可选\r\n注意一级栏目和二级栏目后的序号：空、1、2、3、4、5等\r\n\r\n参考输入 EXAMPLE INPUT:\r\n我需要创建一个企业信息展示类站点\r\n\r\n参考格式返回 EXAMPLE OUTPUT:\r\n{toptype}关于我们{/toptype}\r\n{sontype}企业介绍,组织架构,领导致辞{/sontype}\r\n{toptype2}企业服务{/toptype2}\r\n{sontype2}商品信息,服务介绍{/sontype2}\r\n{toptype3}招聘信息{/toptype3}\r\n{toptype4}合作伙伴{/toptype4}\r\n{toptype5}企业动态{/toptype5}\r\n{sontype5}公司新闻,行业新闻{/sontype5}', '我需要创建一个企业信息展示类站点');
-INSERT INTO `#@__ai_prompt` (`id`, `pname`, `title`, `issystem`, `description`, `info`, `prompt`, `dfprompt`) VALUES (3, 'catalog_edit', '栏目修改', 1, '根据要求对栏目信息进行修改', '系统提示词变量，不建议修改。<hr>typeinfo：原栏目信息', '用户将会提供一些栏目编辑优化的要求，用来优化现有网站的栏目基础信息，栏目信息包含：\ntypename：中文名称，栏目中文名称，简明扼要不要包含空格和特殊字符\nenname：英文名称，栏目的英文名称，简明扼要结合中文名称需要翻译准确\ncnoverview：中文概述，栏目的中文概述信息，100字以内\nenoverview：英文概述，栏目的英文概述信息，100字以内\nseotitle：SEO标题，便于栏目页面进行SEO的标题信息，seo符号，用-不是空格竖号空格，英文标题是空格减号空格，中文的就只有减号-\nkeywords：栏目关键词，提炼概括栏目信息的最核心的关键词，至少3个，关键词的用英文豆号隔开，不是中文大写逗号\ndescription：栏目描述，栏目的描述信息\ncontent：栏目详细介绍，500字以内，html格式\n\n现有栏目信息如下：~typeinfo~\n\n需要按照参考格式返回，以满足用户需求优先，栏目名称不要包含首页\n\n参考输入 EXAMPLE INPUT:\n我需要一个穆云智能科技信息的栏目\n\n参考格式返回 EXAMPLE OUTPUT:\n{typename}穆云智能科技{/typename}\n{enname}Muyun Intelligent Technology{/enname}\n{cnoverview}穆云智能科技聚焦人工智能与大数据技术研发，提供智能化解决方案及创新产品，涵盖AI算法、数据分析、工业物联网等领域，助力企业数字化转型与技术升级。{/cnoverview}\n{enoverview}Muyun Intelligent Technology specializes in AI and big data R&D, delivering intelligent solutions and innovative products including AI algorithms, data analytics, and industrial IoT to empower enterprise digital transformation.{/enoverview}\n{seotitle}穆云智能科技 - 人工智能与大数据解决方案 - 创新科技企业{/seotitle}\n{keywords}人工智能,大数据解决方案,智能科技企业{/keywords}\n{description}穆云智能科技专注于人工智能与大数据技术的研发与应用，提供智能解决方案与创新产品，助力企业数字化转型，探索科技前沿发展。{/description}\n{content}<p>穆云智能科技专注于人工智能与大数据技术的研发与应用，致力于为企业提供智能化解决方案，推动数字化转型。公司通过深度学习、自然语言处理、计算机视觉等先进技术，提供智能客服、图像识别、数据挖掘等服务，帮助企业提升效率、优化决策。</p><p>在大数据领域，穆云智能科技通过智能数据处理与分析，帮助企业深度挖掘数据价值，优化资源配置，提升运营效率。公司为客户量身定制解决方案，确保技术与实际需求的紧密结合，为企业提供精准的业务洞察。穆云智能科技与科研机构和高校保持合作，持续关注科技前沿，推动技术创新。公司秉承“创新驱动，智能引领”的理念，致力于通过技术赋能推动行业智慧化升级，助力企业在激烈市场竞争中脱颖而出。未来，穆云智能科技将继续拓展技术应用领域，助力更多企业实现数字化和智能化转型。</p>{/content}', '栏目信息内容需要更丰富一些');
-INSERT INTO `#@__ai_prompt` (`id`, `pname`, `title`, `issystem`, `description`, `info`, `prompt`, `dfprompt`) VALUES (4, 'article_add', '添加文档', 1, '根据用户要求编写文档', '系统提示词变量，不建议修改。<hr>typelist：栏目列表', '用户将会提供一些文章编写的要求，用来生成一篇文章，文章信息包含：\ntitle：文章标题\nshorttitle：简略标题，文章短标题\ntags：标签，英文逗号隔开，如：DedeBIZ,得德\ntypeid：整数，隶属栏目，结合生成的内容，从下面栏目信息中选择对应的栏目ID，必须选择一个栏目ID，不能为空\nkeywords：文章关键词，提炼概括内容最核心的关键词，至少3个，关键词的用英文豆号隔开，不是中文大写逗号\ndescription：文章描述，文章的描述信息\nbody：文章详情，html格式，如果有副标题采用h2、h3\n\n~typelist~\n\n内容部分以满足用户需求优先，严格按照参考格式返回\n\n参考输入 EXAMPLE INPUT:\n帮我写一篇简短的介绍穆云智能科技的文章\n\n参考格式返回 EXAMPLE OUTPUT:\n{title}穆云智能科技公司介绍{/title}  \n{shorttitle}穆云智能科技{/shorttitle}  \n{tags}人工智能,AI技术,智能科技{/tags}  \n{typeid}5{/typeid}  \n{keywords}人工智能,智能科技,AI应用{/keywords}  \n{description}穆云智能科技致力于人工智能技术的创新与应用，提供智能解决方案，赋能企业数字化转型，推动行业智能化升级。{/description}  \n{body}<h2>公司简介</h2><p>穆云智能科技是一家专注于人工智能技术研发与应用的高科技企业，致力于为各行业提供智能化解决方案，助力企业提升效率，推动数字化转型。公司业务涵盖计算机视觉、自然语言处理、机器学习等多个AI技术领域，并广泛应用于营销、制造、金融、医疗等行业。</p><p><h2>核心技术</h2></p><ul><li>计算机视觉：提供图像识别、目标检测、视频分析等智能视觉应用。</li><li>自然语言处理：具备文本理解、智能对话、语音识别等AI能力。</li><li>机器学习与大数据：结合深度学习与数据分析，助力智能决策。</li></ul><p><h2>应用场景</h2></p><p>穆云智能科技的AI技术已经成功应用于多个领域，如：</p><ul><li><h2>智能营销</h2>：AI驱动内容生成、智能投放优化，提升营销效果。</li><li><h2>智能制造</h2>：设备预测维护、智能质检，提高生产效率。</li><li><h2>智慧金融</h2>：智能风控、自动客服，优化金融服务体验。</li><li><h2>医疗健康</h2>：辅助诊断、医学影像分析，推动智慧医疗发展。</li></ul><p><h2>企业愿景</h2></p><p>穆云智能科技秉持“智能创新，赋能未来”的理念，持续深耕AI技术，为全球企业提供高效、智能的解决方案，助力行业升级，共创智能未来。</p>{/body}', '我需要写一篇介绍穆云智能科技公司的文章');
-INSERT INTO `#@__ai_prompt` (`id`, `pname`, `title`, `issystem`, `description`, `info`, `prompt`, `dfprompt`) VALUES (5, 'article_edit', '文档修改', 1, '更具用户要求对文档进行内容优化', '系统提示词变量，不建议修改。<hr>typelist：栏目列表<br>articleinfo：原文档信息', '用户将会提供一些文章优化要求，按照要求将下面的文章内容进行优化：\n字段说明：\ntitle：文章标题\nshorttitle：简略标题，文章短标题\ntags：标签，英文逗号隔开，如：DedeBIZ,得德\ntypeid：整数，隶属栏目，结合生成的内容，从下面栏目信息中选择对应的栏目ID，必须选择一个栏目ID，不能为空\nkeywords：文章关键词，提炼概括内容最核心的关键词，至少3个，关键词的用英文豆号隔开，不是中文大写逗号\ndescription：文章描述，文章的描述信息\nbody：文章详情，html格式，如果有副标题采用h2、h3\n\n~typelist~\n\n~articleinfo~\n\n内容部分以满足用户需求优先，严格按照参考格式返回\n\n参考输入 EXAMPLE INPUT:\n我需要对当前文章就行润色，内容轻松活泼些，不要出现错别字\n\n参考原文：\n{title}穆云智能科技公司介绍{/title}  \n{shorttitle}穆云智能科技{/shorttitle}  \n{tags}人工智能,AI技术,智能科技{/tags}  \n{typeid}5{/typeid}  \n{keywords}人工智能,智能科技,AI应用{/keywords}  \n{description}穆云智能科技致力于人工智能技术的创新与应用，提供智能解决方案，赋能企业数字化转型，推动行业智能化升级。{/description}  \n{body}<h2>公司简介</h2><p>穆云智能科技是一家专注于人工智能技术研发与应用的高科技企业，致力于为各行业提供智能化解决方案，助力企业提升效率，推动数字化转型。公司业务涵盖计算机视觉、自然语言处理、机器学习等多个AI技术领域，并广泛应用于营销、制造、金融、医疗等行业。</p><p><h2>核心技术</h2></p><ul><li>计算机视觉：提供图像识别、目标检测、视频分析等智能视觉应用。</li><li>自然语言处理：具备文本理解、智能对话、语音识别等AI能力。</li><li>机器学习与大数据：结合深度学习与数据分析，助力智能决策。</li></ul><p><h2>应用场景</h2></p><p>穆云智能科技的AI技术已经成功应用于多个领域，如：</p><ul><li><h2>智能营销</h2>：AI驱动内容生成、智能投放优化，提升营销效果。</li><li><h2>智能制造</h2>：设备预测维护、智能质检，提高生产效率。</li><li><h2>智慧金融</h2>：智能风控、自动客服，优化金融服务体验。</li><li><h2>医疗健康</h2>：辅助诊断、医学影像分析，推动智慧医疗发展。</li></ul><p><h2>企业愿景</h2></p><p>穆云智能科技秉持“智能创新，赋能未来”的理念，持续深耕AI技术，为全球企业提供高效、智能的解决方案，助力行业升级，共创智能未来。</p>{/body}\n\n参考格式返回 EXAMPLE OUTPUT:\n{title}穆云智能科技：AI驱动未来，智能赋能企业{/title}  \n{shorttitle}穆云智能科技{/shorttitle}  \n{tags}人工智能,AI技术,智能科技{/tags}  \n{typeid}5{/typeid}  \n{keywords}人工智能,智能科技,AI应用{/keywords}  \n{description}穆云智能科技专注于人工智能创新，提供智能化解决方案，助力企业数字化转型，推动行业迈向智能新时代。{/description}  \n{body}<h2>公司简介</h2><p>穆云智能科技是一家充满创新活力的AI科技公司，致力于推动人工智能技术在各行业的应用，让企业拥抱智能化时代。公司专注于计算机视觉、自然语言处理、机器学习等核心AI技术，广泛应用于营销、制造、金融、医疗等多个领域，助力企业降本增效，实现智能升级。</p><p><h2>核心技术</h2></p><ul><li><h2>计算机视觉</h2>：智能图像识别、目标检测、视频分析，让机器“看得懂”。</li><li><h2>自然语言处理</h2>：文本理解、智能对话、语音识别，打造更自然的人机交互体验。</li><li><h2>机器学习与大数据</h2>：融合深度学习与数据分析，助力企业智能决策。</li></ul><p><h2>应用场景</h2></p><p>穆云智能科技的AI技术已经在多个行业落地，创造了诸多价值：</p><ul><li><h2>智能营销</h2>：AI辅助内容创作、精准广告投放，让营销更高效。</li><li><h2>智能制造</h2>：设备预测维护、智能质检，助力企业提升生产力。</li><li><h2>智慧金融</h2>：智能风控、自动客服，优化金融服务体验。</li><li><h2>医疗健康</h2>：AI辅助诊断、医学影像分析，助力智慧医疗发展。</li></ul><p><h2>企业愿景</h2></p><p>穆云智能科技秉持“智能创新，赋能未来”的理念，持续探索AI的更多可能，为企业提供更智能、更高效的解决方案，让科技真正服务于产业，共创智能新时代！</p>{/body}', '我需要对当前文章就行润色，内容轻松活泼些，不要出现错别字');
-INSERT INTO `#@__ai_prompt` (`id`, `pname`, `title`, `issystem`, `description`, `info`, `prompt`, `dfprompt`) VALUES (6, 'tools_translate', '智能翻译官', 0, '将用户输入的内容翻译成英文', NULL, '你是一个专业的英文老师，根据用户提出的要求将内容翻译为英文。', '帮我翻译下“穆云智能科技有限公司”');
-INSERT INTO `#@__ai_prompt` (`id`, `pname`, `title`, `issystem`, `description`, `info`, `prompt`, `dfprompt`) VALUES (7, 'body_edit', '编辑器内容修改', 1, '富文本编辑器中内容修改', '系统提示词变量，不建议修改。需要助手1.0.3版本以上<hr>body：富文本内容', '用户将会提供内容修改要求，根据要求对下面的内容进行处理，需要保障html的完整。严格按照参考格式返回。\r\n\r\n内容：\r\n{content}~body~{/content}\r\n\r\n参考输入 EXAMPLE INPUT:\r\n帮我加粗“穆云智能”\r\n\r\n参考格式返回 EXAMPLE OUTPUT:\r\n{content}<p>公司简介</p><p><strong>穆云智能</strong>科技是一家专注于人工智能技术研发与应用的高科技企业，致力于为各行业提供智能化解决方案，助力企业提升效率，推动数字化转型。公司业务涵盖计算机视觉、自然语言处理、机器学习等多个AI技术领域，并广泛应用于营销、制造、金融、医疗等行业。</p>{/content}', '我需要将内容润色下，希望更专业');
-
-INSERT INTO `#@__sysconfig` (`varname`, `info`, `groupid`, `type`, `value`) VALUES ('cfg_ai_server', '服务器地址', 8, 'string', 'http://localhost:8087');
-INSERT INTO `#@__sysconfig` (`varname`, `info`, `groupid`, `type`, `value`) VALUES ('cfg_ai_apikey', '通信密钥', 8, 'string', '1SYkhWQ1oew264BXof8OvlRafKHmyG');
-INSERT INTO `#@__sysconfig` (`varname`, `info`, `groupid`, `type`, `value`) VALUES ('cfg_ai_max_tokens', '最大令牌数（为空则不限，默认采用模型默认值）', 8, 'string', '');
-INSERT INTO `#@__sysconfig` (`varname`, `info`, `groupid`, `type`, `value`) VALUES ('cfg_ai_temperature', '采样温度（为空则采用模型默认值）', 8, 'string', '');
-INSERT INTO `#@__sysconfig` (`varname`, `info`, `groupid`, `type`, `value`) VALUES ('cfg_ai_top_p', '核采样（为空则采用模型默认值）', 8, 'string', '');
-INSERT INTO `#@__sysconfig` (`varname`, `info`, `groupid`, `type`, `value`) VALUES ('cfg_ai_enabled', '是否开启AI功能', 8, 'bool', 'Y');

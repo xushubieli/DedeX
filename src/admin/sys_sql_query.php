@@ -3,14 +3,12 @@
  * SQL命令工具
  *
  * @version        $id:sys_sql_query.php 22:28 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require(dirname(__FILE__)."/config.php");
-if (DEDEBIZ_SAFE_MODE) {
-    die(DedeAlert("系统已启用安全模式，无法使用当前功能",ALERT_DANGER));
+if (DEDEX_SAFE_MODE) {
+    die(DedeAlert("系统已启用安全模式，无法使用当前功能", ALERT_DANGER));
 }
 CheckPurview('sys_Data');
 if (empty($dopost)) $dopost = '';
@@ -223,7 +221,7 @@ else if ($dopost == "query") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/web/css/admin.css">
-    <title>DedeBIZ数据库文档</title>
+    <title>DedeX数据库文档</title>
 </head>
 <body>
     <div class="container-fluid">
@@ -281,7 +279,7 @@ else if ($dopost == "query") {
     </div>
     </div>';
     }
-    $output .= '<p class="text-center">版权所有 &copy; '.date('Y').' <a href="https://www.dedebiz.com/?from=dbdocs" class="text-success">DedeBIZ</a> 保留所有权利</p>
+    $output .= '<p class="text-center">版权所有 © '.date('Y').' DedeX 保留所有权利</p>
     </div>
 </body>
 </html>';

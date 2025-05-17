@@ -3,10 +3,8 @@
  * 文件管理器操作
  *
  * @version        $id:file_manage_control.php 8:48 2010年7月13日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require(dirname(__FILE__)."/config.php");
 CheckPurview('plus_文件管理器');
@@ -17,7 +15,7 @@ $activepath = preg_replace("#^\/{1,}#", "/", $activepath);
 if ($activepath == "/") $activepath = '';
 if ($activepath == "") $inpath = $cfg_basedir;
 else $inpath = $cfg_basedir.$activepath;
-if (DEDEBIZ_SAFE_MODE && !preg_match("#^/static#",$activepath)) {
+if (DEDEX_SAFE_MODE && !preg_match("#^/static#",$activepath)) {
     ShowMsg("安全模式下仅允许查看修改static目录文档", -1);
     exit;
 }
@@ -170,7 +168,7 @@ else if ($fmdo == "space") {
         </td>
     </tr>
     <tr>
-        <td align='center'><button type='button' class='btn btn-success btn-sm' onclick=\"location='file_manage_main.php';\">文件管理器</button></td>
+        <td align='center'><button type='button' class='btn btn-primary btn-sm' onclick=\"location='file_manage_main.php';\">文件管理器</button></td>
     </tr>");
     $winform = $win->GetWindow("");
     $win->Display();

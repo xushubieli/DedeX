@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
-		<script src="/static/web/js/bootstrap.min.js"></script>
+		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 	</head>
 	<body>
@@ -19,7 +19,7 @@
 				<li class="breadcrumb-item active">批量添加栏目</li>
 			</ol>
 			<div class="card shadow-sm">
-				<div class="card-header d-flex justify-content-between align-items-center"><span>批量添加栏目</span><?php if ($cfg_ai_enabled == 'Y'){;?><button type="button" id="btnAI" onclick="showAI();" class="btn btn-success btn-sm">小德AI助手</button><?php };?></div>
+				<div class="card-header">批量添加栏目</div>
 				<div class="card-body">
 					<form name="form1" action="catalog_add.php" method="post">
 						<input type="hidden" name="dopost" value="savequick">
@@ -79,7 +79,7 @@
 										<td>列表命名规则</td>
 										<td>
 											<input type="text" name="namerule2" id="namerule2" value="{typedir}/{tid}-{page}.html" class="admin-input-lg">
-											<a href="javascript:ShowHide('helpvar1');" class="btn btn-success btn-sm">说明</a>
+											<a href="javascript:ShowHide('helpvar1');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar1" class="helpinfo mt-3" style="display:none">
 												<p>静态规则</p>
 												<p>{tid} 栏目id</p>
@@ -94,7 +94,7 @@
 										<td>文档命名规则</td>
 										<td>
 											<input type="text" name="namerule" id="namerule" value="{typedir}/{aid}.html" class="admin-input-lg">
-											<a href="javascript:ShowHide('helpvar2');" class="btn btn-success btn-sm">说明</a>
+											<a href="javascript:ShowHide('helpvar2');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar2" class="helpinfo mt-3" style="display:none">
 												<p>静态规则</p>
 												<p>{Y}{M}{D} 年月日</p>
@@ -120,7 +120,7 @@
 														<td scope="col">排序</td>
 														<td scope="col">顶级栏目名称</td>
 														<td scope="col">子栏目名称（英文逗号隔开，例：栏目一,栏目二）</td>
-														<td scope="col"><button type="button" class="btn btn-success btn-sm add">添加</button></td>
+														<td scope="col"><button type="button" class="btn btn-primary btn-sm add">添加</button></td>
 													</tr>
 												</thead>
 												<tbody>
@@ -151,7 +151,7 @@
 													<tr>
 														<td scope="col">排序</td>
 														<td scope="col">栏目名称</td>
-														<td scope="col"><button type="button" class="btn btn-success btn-sm addrel">添加</button></td>
+														<td scope="col"><button type="button" class="btn btn-primary btn-sm addrel">添加</button></td>
 													</tr>
 												</thead>
 												<tbody>
@@ -179,48 +179,14 @@
 									</tr>
 									<tr>
 										<td colspan="4" align="center">
-											<button type="submit" class="btn btn-success btn-sm">保存</button>
-											<a href="catalog_main.php" class="btn btn-outline-success btn-sm">返回</a>
+											<button type="submit" class="btn btn-primary btn-sm">保存</button>
+											<a href="catalog_main.php" class="btn btn-outline-primary btn-sm">返回</a>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</form>
-				</div>
-			</div>
-		</div>
-		<div id="mdlAI" class="modal fade" tabindex="-1" aria-hidden="true">
-			<div class="modal-dialog modal-xl">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">小德AI助手：批量创建栏目</h5>
-						<button type="button" class="update-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="form-group">
-								<textarea id="prompt" class="form-control" style="height:160px" placeholder="请输入批量创建栏目要求，例：我需要创建一个企业信息展示类站点"></textarea>
-							</div>
-							<div class="form-group">
-								<label for="modelid" class="form-label">选择模型</label>
-								<select id="modelid" class="form-control">
-									<?php
-									$dsql->SetQuery("SELECT AM.*,A.title as aititle FROM `#@__ai_model` AM LEFT JOIN `#@__ai` A ON A.id = AM.aiid ORDER BY AM.sortrank ASC,AM.id DESC");
-									$dsql->Execute();
-									while ($row = $dsql->GetObject()) {
-									?>
-										<option value="<?php echo $row->id;?>" <?php echo $row->isdefault==1?' selected' : '';?>><?php echo $row->model;?> <?php echo $row->aititle;?></option>
-									<?php
-									}
-									?>
-								</select>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button id="btnAIAction" class="btn btn-success btn-sm">确定</button>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -254,10 +220,10 @@
 					$("#savetype").val('');
 				}
 			};
-			$(function($) {
+			$(document).ready(function() {
 				//添加按钮事件
 				$("#addQuick .add").click(function() {
-					var id = $("#addQuick tr").prevAll("tr").length + 2;
+					var id = $("#addQuick tr").prevAll("tr").length + 1;
 					$("#addQuick tr:eq(1)").clone(true).addClass("repeat")
 					.find(".rank input").attr("value", function() {
 						return id;
@@ -281,123 +247,6 @@
 					}).end().find(".pubinputs").attr("name", function() {
 						return this.name + id;
 					}).end().appendTo($("#addQuickRel"));
-				});
-			});
-			function showAI() {
-				$("#mdlAI").modal('show');
-			}
-			$("#btnAIAction").click(async function() {
-				let prompt = document.getElementById("prompt").value;
-				let modelid = document.getElementById("modelid").value;
-				let req = await fetch(`api.php?action=get_ai_server&pname=catalog_add_quick&modelid=${modelid}&prompt=${prompt}`);
-				let resp = await req.json();
-				if (resp.code !== 0) {
-					ShowMsg("获取服务器地址失败");
-					return
-				}
-				let eventSource = new EventSource(resp.data);
-				//新增状态跟踪变量
-				let currentKey = null;
-				let tagBuffer = "";
-				let isClosingTag = false;
-				$("#mdlAI").modal('hide');
-				$("#btnAI").attr("disabled", "disabled");
-				prompt = "";
-				let lastChar = "";
-				eventSource.onmessage = (event) => {
-					const chars = event.data.split('');
-					chars.forEach(char => {
-						if (lastChar === '\\' && char === 'r') {
-							char = '<br>';  //替换为br标签
-							lastChar = "";  //清空追踪字符
-						} else {
-							lastChar = char;  //记录当前字符
-						}
-						if (char === '\\') {
-							return; //如果是反斜杠，跳过处理
-						}
-						if (currentKey) {
-							if (char === '{') {
-								isClosingTag = true;
-								tagBuffer = '{';
-								return;
-							}
-							if (isClosingTag) {
-								tagBuffer += char;
-								if (tagBuffer === `{/${currentKey}}`) {
-									if (currentKey == "content") {
-										//CKEDITOR.instances["content"].setReadOnly(false);
-									} else {
-										const input = document.querySelector(`[name="${currentKey}"]`);
-										if (input) $(input).prop("disabled", false).removeClass("disabled"); //恢复输入状态
-									}
-									currentKey = null;
-									isClosingTag = false;
-									tagBuffer = "";
-									return;
-								}
-								if (!`{/${currentKey}}`.startsWith(tagBuffer)) {
-									if (currentKey == "content") {
-										CKEDITOR.instances["content"].insertHtml(tagBuffer);
-									} else {
-										const input = document.querySelector(`[name="${currentKey}"]`);
-										if (input) input.value += tagBuffer;
-									}
-
-									isClosingTag = false;
-									tagBuffer = "";
-								}
-							} else {
-								if (currentKey == "content") {
-									CKEDITOR.instances["content"].insertHtml(char);
-								} else {
-									const input = document.querySelector(`[name="${currentKey}"]`);
-									if (input) {
-										input.value += char;
-										input.scrollTop = input.scrollHeight; //滚动到底部
-									}
-								}
-							}
-						} else {
-							if (char === '{') {
-								tagBuffer = '{';
-							} else if (tagBuffer.startsWith('{')) {
-								tagBuffer += char;
-								if (char === '}') {
-									const match = tagBuffer.match(/{([^>]+)}/);
-									if (match) {
-										currentKey = match[1];
-										if (currentKey == "content") {
-											//CKEDITOR.instances["content"].setReadOnly(true);
-											CKEDITOR.instances["content"].setData("")
-										} else {
-											const input = document.querySelector(`[name="${currentKey}"]`);
-											if (input) {
-												$(input).prop("disabled", true).addClass("disabled"); //仅禁用当前输入框
-												input.value = "";
-											}
-										}
-									}
-									tagBuffer = "";
-								}
-							}
-						}
-					});
-				};
-				eventSource.onerror = (error) => {
-					if (error.target.readyState === EventSource.CONNECTING) {
-						ShowMsg("连接失败，请确保您已开启并正确配置了DedeBIZ小德AI助手。 <a class='text-success' href='https://www.dedebiz.com/ai?from=dedebiz' target='_blank'>如何配置？</a>");
-					} else if (typeof error.data!=="undefined" && error.data !== "" && error.target.readyState !== EventSource.CLOSED) {
-						ShowMsg(error.data);
-					}
-					$("#btnAI").prop("disabled", false);
-					eventSource.close();
-				};
-				//监听特定事件close
-				eventSource.addEventListener('close', (event) => {
-					console.log('SSE connection closed:', event.data);
-					$("#btnAI").prop("disabled", false);
-					eventSource.close(); //关闭连接
 				});
 			});
 		</script>

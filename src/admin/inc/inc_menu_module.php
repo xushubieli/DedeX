@@ -3,10 +3,8 @@
  * 模块插件
  *
  * @version        $id:inc_menu_module.php 10:32 2010年7月21日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../config.php");
 //载入模块菜单
@@ -26,7 +24,7 @@ while ($row = $dsql->GetObject()) {
 }
 $adminMenu = '';
 if ($cuserLogin->getUserType() >= 10) {
-    $adminMenu = DEDEBIZ_SAFE_MODE ? "" : "<m:top item='6_' name='模块管理' icon='fa fa-database' data-target='module'>
+    $adminMenu = DEDEX_SAFE_MODE ? "" : "<m:top item='6_' name='模块管理' icon='fa fa-database' data-target='module'>
     <m:item name='模块管理' link='module_main.php' rank='sys_module' target='main' />
     <m:item name='模块打包' link='module_make.php' rank='sys_module' target='main' />
     </m:top>";

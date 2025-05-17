@@ -3,10 +3,8 @@
  * 标签页
  * 
  * @version        $id:tags.php 2010-06-30 11:43:09 tianya $
- * @package        DedeBIZ.Site
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Site
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/../system/common.inc.php");
 require_once(DEDEINC."/archive/taglist.class.php");

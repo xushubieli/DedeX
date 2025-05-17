@@ -3,10 +3,8 @@
  * 选择多媒体
  *
  * @version        $id:select_media.php 9:43 2010年7月8日 tianya $
- * @package        DedeBIZ.Dialog
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Dialog
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 if (empty($activepath)) {
@@ -60,7 +58,7 @@ if (!empty($noeditor)) {
                     <input type="hidden" name="job" value="upload">
                     <input type="hidden" name="CKEditorFuncNum" value="<?php echo isset($CKEditorFuncNum) ? $CKEditorFuncNum : 1;?>">
                     <input type="file" name="uploadfile">
-                    <button type="submit" class="btn btn-success btn-sm">上传</button>
+                    <button type="submit" class="btn btn-primary btn-sm">上传</button>
                 </form>
             </div>
         </div>

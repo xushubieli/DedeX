@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 //手动加载入口文件
 include "../include.php";
 //准备公众号配置参数
@@ -16,9 +16,9 @@ try {
         'product_code' => 'TRANS_ACCOUNT_NO_PWD',
         'biz_scene'    => 'DIRECT_TRANSFER',
         'payee_info'   => [
-            'identity'      => 'dedebiz@qq.com',
+            'identity'      => 'DedeX@qq.com',
             'identity_type' => 'ALIPAY_LOGON_ID',
-            'name'          => '天涯',
+            'name'          => 'DedeX',
         ],
     ]);
     echo '<pre>';

@@ -24,8 +24,8 @@
 									<img src="<?php echo $cfg_ml->fields['face'];?>" title="<?php echo $cfg_ml->M_LoginID;?>" class="user-img-md">
 									<div class="my-3">
 										<h3 class="d-inline-block mr-2" style="vertical-align:middle"><?php echo $cfg_ml->M_UserName;?></h3>
-										<span class="btn btn-outline-success btn-sm"><?php echo $cfg_ml->GetMemberTypeName();?></span>
-										<span class="btn btn-outline-warning btn-sm"><?php echo $cfg_ml->M_Honor;?></span>
+										<span class="btn btn-outline-primary btn-sm"><?php echo $cfg_ml->GetMemberTypeName();?></span>
+										<span class="btn btn-outline-secondary btn-sm"><?php echo $cfg_ml->M_Honor;?></span>
 									</div>
 									<p class="mb-0">
 										<span>积分：<?php echo $cfg_ml->M_Scores;?></span>
@@ -74,7 +74,7 @@
 							<div class="media-body item-article">
 								<h3 class="mb-3 userspace">用户空间<span class="info">（<?php echo $minfos['totaluse'];?>MB/<?php echo $cfg_mb_max;?>MB）</span></h3>
 								<div class="progress">
-									<div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="<?php echo $ddsize;?>%" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $ddsize;?>%"><?php echo $ddsize;?>%</div>
+									<div class="progress-bar progress-bar-striped bg-primary" role="progressbar" aria-valuenow="<?php echo $ddsize;?>%" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $ddsize;?>%"><?php echo $ddsize;?>%</div>
 								</div>
 							</div>
 						</div>

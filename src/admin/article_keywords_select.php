@@ -3,10 +3,8 @@
  * 文档关键词选择
  *
  * @version        $id:article_keywords_select.php$
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 require_once(DEDEINC."/datalistcp.class.php");
@@ -22,12 +20,12 @@ $dlist->SetSource($sql);
 $dlist->Display();
 function GetSta($sta)
 {
-    if ($sta == 1) return " <span class='btn btn-success btn-sm'>已启用</span>";
-    else return " <span class='btn btn-outline-warning btn-sm'>禁用</span>";
+    if ($sta == 1) return " <span class='btn btn-primary btn-sm'>已启用</span>";
+    else return " <span class='btn btn-outline-secondary btn-sm'>禁用</span>";
 }
 function GetMan($sta)
 {
-    if ($sta == 1) return " <span class='btn btn-warning btn-sm'>已禁用</span>";
-    else return " <span class='btn btn-outline-success btn-sm'>启用</span>";
+    if ($sta == 1) return " <span class='btn btn-secondary btn-sm'>已禁用</span>";
+    else return " <span class='btn btn-outline-primary btn-sm'>启用</span>";
 }
 ?>

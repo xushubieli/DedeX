@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 演示标签
  *
  * @version        $id:demotag.lib.php 9:29 2010年7月6日 tianya $
- * @package        DedeBIZ.Taglib
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Taglib
+ * @license        GNU GPL v2 (/license.txt)
  */
 function lib_demotag(&$ctag, &$refObj)
 {
@@ -17,7 +15,7 @@ function lib_demotag(&$ctag, &$refObj)
     extract($ctag->CAttribute->Items, EXTR_SKIP);
     $revalue = '';
     //不能用echo之类语法，把最终返回值传给$revalue
-    $revalue = '您好，欢迎使用DedeBIZ';
+    $revalue = '您好，欢迎使用DedeX';
     return $revalue;
 }
 ?>

@@ -3,10 +3,8 @@
  * 更新文档操作
  *
  * @version        $id:makehtml_archives_action.php 9:11 2010年7月19日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('sys_MakeHtml');
@@ -79,7 +77,7 @@ $ttime = time() - $sstime;
 $ttime = number_format(($ttime / 60), 2);
 //返回提示信息
 $tjlen = $totalnum > 0 ? ceil(($tjnum / $totalnum) * 100) : 100;
-$tjsta = "<div class='progress mb-3'><div class='progress-bar progress-bar-striped bg-success' role='progressbar' aria-valuenow='".$tjlen."%' aria-valuemin='0' aria-valuemax='100' style='width:".$tjlen."%'>".$tjlen."%</div></div>";
+$tjsta = "<div class='progress mb-3'><div class='progress-bar progress-bar-striped bg-primary' role='progressbar' aria-valuenow='".$tjlen."%' aria-valuemin='0' aria-valuemax='100' style='width:".$tjlen."%'>".$tjlen."%</div></div>";
 $tjsta .= "更新文档[id：".($startdd + $pagesize)."]，用时{$ttime}分钟，完成更新文档总数".$tjlen."%";
 //速度测试
 if ($tjnum < $totalnum) {

@@ -1,9 +1,9 @@
 :root {
 	--bg:#f8fafb;
+	--primary:#4285f4;
 	--gray-300:#dee2e6;
 	--gray-500:#adb5bd;
 	--blue-300:#80bdff;
-	--success-800:#009688;
 	--b-radius:0.5rem;
 	--b-radius-sm:0.25rem
 }
@@ -194,7 +194,7 @@ textarea {
 	width:100%;
 	height:60px;
 	line-height:60px;
-	background:linear-gradient(45deg,var(--green) 15%,var(--success-800) 100%)
+	background:linear-gradient(45deg,var(--primary) 15%,var(--purple) 100%)
 }
 .admin-head .logo {
 	padding-left:1rem;
@@ -290,10 +290,10 @@ body.menu-show .admin-content {
 	line-height:40px
 }
 #open {
-	border-left:3px solid var(--green)
+	border-left:3px solid var(--primary)
 }
 #open .menu-link,#open .fa-angle-down,.side-menu .sub-item.active a {
-	color:var(--green)
+	color:var(--primary)
 }
 #open .fa-angle-down {
 	transform:rotate(180deg)
@@ -429,7 +429,7 @@ body.menu-show .admin-content {
 	line-height:16px;
 	color:var(--gray-dark);
 	text-align:left;
-	border-left:3px solid var(--yellow)
+	border-left:3px solid var(--info)
 }
 .tips-body {
 	padding:1rem;
@@ -510,7 +510,7 @@ body.menu-show .admin-content {
 	left:0;
 	font-family:'FontAwesome';
 	font-size:14px;
-	color:var(--green);
+	color:var(--primary);
 	content:'\f058';
 	z-index:1991
 }
@@ -727,7 +727,7 @@ a:hover,body.menu-hide .admin-content,body.menu-show .admin-content,.sidemenu .s
 }
 span.page-link {
 	color:var(--white);
-	background:var(--green)
+	background:var(--primary)
 }
 input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipslite,#edsta,.cke_chrome,.cke_inner,.alert,.card,.rounded,.form-control,.btn {
 	border-radius:var(--b-radius)!important
@@ -755,7 +755,7 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	border-bottom-right-radius:var(--b-radius)
 }
 .nav-pills .nav-link.active,.nav-pills .show>.nav-link {
-	background:var(--green)
+	background:var(--primary)
 }
 .nav-pills .nav-link,.btn-sm {
 	padding:0 0.5rem!important;
@@ -771,6 +771,17 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 }
 .btn+.btn {
 	margin-left:1rem
+}
+.btn-primary {
+	background-color:var(--primary);
+	border-color:var(--primary)
+}
+.bg-primary {
+	background-color:var(--primary)!important
+}
+.list-group-item.active {
+	background-color:var(--primary);
+	border-color:var(--primary)
 }
 .shadow-sm {
 	box-shadow:0 0.125rem 0.25rem rgba(0,0,0,0.015)!important

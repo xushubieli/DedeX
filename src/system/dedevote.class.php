@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 投票
  *
  * @version        $id:dedevote.class.php 10:31 2010年7月6日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC."/dedetag.class.php");
 class DedeVote
@@ -119,8 +117,8 @@ class DedeVote
                 }
             }
             $items .= "<tr><td>\r\n";
-            $items .= "<input type='submit' name='vbt1' class='btn btn-success' value='投票'>\r\n";
-            $items .= "<input type='button' name='vbt2' class='btn btn-success' value='查看结果' onclick=window.open('".$GLOBALS['cfg_phpurl']."/vote.php?dopost=view&aid=".$this->VoteID."');>";
+            $items .= "<input type='submit' name='vbt1' class='btn btn-primary' value='投票'>\r\n";
+            $items .= "<input type='button' name='vbt2' class='btn btn-primary' value='查看结果' onclick=window.open('".$GLOBALS['cfg_phpurl']."/vote.php?dopost=view&aid=".$this->VoteID."');>";
             $items .= "</td></tr>\r\n";
         }
         $items .= "</form>\r\n</table>\r\n";

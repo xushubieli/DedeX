@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
- * DedeBIZ中字符编码转换助手
+ * DedeX中字符编码转换助手
  *
  * @version        $id:charset.helper.php 2010-07-05 11:43:09 tianya $
- * @package        DedeBIZ.Helpers
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Helpers
+ * @license        GNU GPL v2 (/license.txt)
  */
 $UC2GBTABLE = $CODETABLE = $BIG5_DATA = $GB_DATA = '';
 $GbkUniDic = null;

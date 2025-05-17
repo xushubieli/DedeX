@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 动态模板memberlist标签
  *
  * @version        $id:plus_memberlist.php 13:58 2010年7月5日 tianya $
- * @package        DedeBIZ.Tpllib
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Tpllib
+ * @license        GNU GPL v2 (/license.txt)
  */
 function plus_memberlist(&$atts, &$refObj, &$fields)
 {

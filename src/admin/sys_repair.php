@@ -3,10 +3,8 @@
  * 系统修复工具
  *
  * @version        $id:sys_repair.php 22:28 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__).'/config.php');
 CheckPurview('sys_ArcBatch');
@@ -26,7 +24,7 @@ if (empty($dopost)) {
         </td>
     </tr>
     <tr>
-        <td align='center'><a href='sys_repair.php?dopost=1' class='btn btn-success btn-sm'>开始检测</a></td>
+        <td align='center'><a href='sys_repair.php?dopost=1' class='btn btn-primary btn-sm'>开始检测</a></td>
     </tr>";
     $win->AddMsgItem($msg);
     $winform = $win->GetWindow("hand", false);
@@ -48,7 +46,7 @@ else if ($dopost == 1) {
         </td>
     </tr>
     <tr>
-        <td align='center'><a href='sys_repair.php?dopost=2' class='btn btn-success btn-sm'>下一步</a></td>
+        <td align='center'><a href='sys_repair.php?dopost=2' class='btn btn-primary btn-sm'>下一步</a></td>
     </tr>";
     $win->AddMsgItem($msg);
     $winform = $win->GetWindow("hand", false);
@@ -78,7 +76,7 @@ else if ($dopost == 2) {
         }
     }
     $msg .= "<p>总有效记录数：{$allarcnum}</p>";
-    $errall = "<a href='index_body.php' class='btn btn-success btn-sm'>完成修复</a>";
+    $errall = "<a href='index_body.php' class='btn btn-primary btn-sm'>完成修复</a>";
     $row = $dsql->GetOne("SELECT COUNT(*) AS dd FROM `#@__arctiny`");
     $msg .= "<p>微统计表记录数：{$row['dd']}</p>";
     if ($row['dd'] == $allarcnum) {
@@ -101,7 +99,7 @@ else if ($dopost == 2) {
             $msg .= "<p>修复记录成功</p>";
         } else {
             $msg .= "<p>修复记录失败，建议高级检测</p>";
-            $errall = "<a href='sys_repair.php?dopost=3' class='btn btn-success btn-sm'>高级检测</a>";
+            $errall = "<a href='sys_repair.php?dopost=3' class='btn btn-primary btn-sm'>高级检测</a>";
         }
     }
     UpDateCatCache();
@@ -159,7 +157,7 @@ else if ($dopost == 3) {
         <td>完成所有修复操作，移除错误记录{$errnum}条</td>
     </tr>
     <tr>
-        <td align='center'><a href='index_body.php' class='btn btn-success btn-sm'>完成修复</a></td>
+        <td align='center'><a href='index_body.php' class='btn btn-primary btn-sm'>完成修复</a></td>
     </tr>";
     $win->AddMsgItem($msg);
     $winform = $win->GetWindow("hand", false);

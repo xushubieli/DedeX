@@ -3,10 +3,8 @@
  * 会员管理操作
  *
  * @version        $id:member_do.php 13:47 2010年7月19日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 require_once(DEDEINC."/libraries/oxwindow.class.php");
@@ -143,7 +141,7 @@ else if ($dopost == 'edituser') {
     $uname = isset($uname)? HtmlReplace($uname,1) : '';
     $spacesta = isset($spacesta)? HtmlReplace($spacesta,1) : '';
     $exptime = isset($exptime)? HtmlReplace($exptime,1) : '';
-    if (!isset($_POST['id'])) exit('dedebiz');
+    if (!isset($_POST['id'])) exit('dedex');
     $pwdsql = empty($pwd) ? '' : ",pwd='".md5($pwd)."'";
     if (function_exists('password_hash')) {
         $pwdsql = empty($pwd) ? '' : ",pwd_new='".password_hash($pwd, PASSWORD_BCRYPT)."'";

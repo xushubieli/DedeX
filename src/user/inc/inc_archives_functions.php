@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 文档操作函数
  * 
  * @version        $id:inc_archives_functions.php 13:52 2010年7月9日 tianya $
- * @package        DedeBIZ.User
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.User
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC.'/image.func.php');
 require_once(DEDEINC."/userlogin.class.php");
@@ -93,7 +91,7 @@ function GetImageMapDD($filename, $ddm, $oldname = '')
         $ddpicok = $oldname;
     } else {
         $ddn = substr($filename, -3);
-        $ddpicok = preg_replace("#\.".$ddn."$#", "-ty.".$ddn, $filename);
+        $ddpicok = preg_replace("#\.".$ddn."$#", "-X.".$ddn, $filename);
     }
     $toFile = $GLOBALS['cfg_basedir'].$ddpicok;
     ImageResize($GLOBALS['cfg_basedir'].$filename, $ddm, 300, $toFile);

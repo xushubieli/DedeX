@@ -3,10 +3,8 @@
  * 更新首页
  *
  * @version        $id:makehtml_homepage.php 2 9:30 2010-11-11 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('sys_MakeHtml');
@@ -19,45 +17,6 @@ if ($dopost == "view") {
     $pv->Display();
     exit();
 } else if ($dopost == "make") {
-    if (!empty($cfg_bizcore_appid) && !empty($cfg_bizcore_key)) {
-        $client = new DedeBizClient();
-        $data = $client->AdminPWDExists();
-        $data = json_decode($data->data);
-        if ($data) {
-            $rs = (array)($data->result);
-            if ($rs["admin_pwd_exists"] == "false") {
-                //设定dedebiz admin密码
-                if ($dedebiz_admin == "" || $dedebiz_admin !== $re_dedebiz_admin) {
-                    echo "<link rel=\"stylesheet\" href=\"/static/web/css/bootstrap.min.css\"><style>.modal {position:static}</style>";
-                    echo "<div class=\"alert alert-warning\">密码不能为空或密码输入错误</div><br>";
-                    $client->Close();
-                    exit;
-                }
-                $data = $client->AdminPWDCreate($dedebiz_admin);
-                if ($data->data != "ok") {
-                    echo "<link rel=\"stylesheet\" href=\"/static/web/css/bootstrap.min.css\"><style>.modal {position:static}</style>";
-                    echo "<div class=\"alert alert-warning\">密码失败：{${$data}}</div><br>";
-                    $client->Close();
-                    exit;
-                }
-            } else {
-                if ($dedebiz_admin == "") {
-                    echo "<link rel=\"stylesheet\" href=\"/static/web/css/bootstrap.min.css\"><style>.modal {position:static}</style>";
-                    echo "<div class=\"alert alert-warning\">密码不能为空</div><br>";
-                    $client->Close();
-                    exit;
-                }
-                $data = $client->AdminSetIndexLockState($dedebiz_admin, $lockindex);
-                if ($data->data != "ok") {
-                    echo "<link rel=\"stylesheet\" href=\"/static/web/css/bootstrap.min.css\"><style>.modal {position:static}</style>";
-                    echo "<div class=\"alert alert-warning\">密码输入错误，请填写正确密码</div><br>";
-                    $client->Close();
-                    exit;
-                }
-            }
-        }
-        $client->Close();
-    }
     $remotepos = empty($remotepos) ? '../index.html' : $remotepos;
     $serviterm = empty($serviterm) ? "" : $serviterm;
     if (preg_match('#\.(php|pl|cgi|asp|aspx|jsp|php5|php4|php3|shtm|shtml|htm)$#i', trim($position))) {

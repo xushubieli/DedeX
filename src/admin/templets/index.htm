@@ -15,10 +15,10 @@
 		<header class="admin-head navbar navbar-expand navbar-dark">
 			<div class="logo">
 				<a href="index_body.php" target="main" class="name mr-2"><?php echo cn_substr($cfg_webname, 18);?></a>
-				<?php if (DEDEBIZ_SAFE_MODE) {?>
-				<a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-primary btn-xs">安全</a>
+				<?php if (DEDEX_SAFE_MODE) {?>
+				<a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-success btn-xs">安全</a>
 				<?php } else {?>
-				<a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-warning btn-xs">开发</a>
+				<a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-light btn-xs">开发</a>
 				<?php }?>
 			</div>
 			<nav class="collapse navbar-collapse">
@@ -28,10 +28,10 @@
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="catalog_main.php" target="main" data-target="common"><i class="fa fa-navicon" title="栏目管理"></i></a></li>
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="tags_main.php" target="main" data-target="common"><i class="fa fa-tags" title="标签管理"></i></a></li>
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="statistics_list.php" target="main" data-target="common"><i class="fa fa-bar-chart" title="流量统计"></i></a></li>
-					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="file_manage_main.php<?php echo DEDEBIZ_SAFE_MODE ? '?activepath='.$cfg_medias_dir:'';?>" target="main" data-target="plus"><i class="fa fa-folder" title="文件管理"></i></a></li>
+					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="file_manage_main.php<?php echo DEDEX_SAFE_MODE ? '?activepath='.$cfg_medias_dir:'';?>" target="main" data-target="plus"><i class="fa fa-folder" title="文件管理"></i></a></li>
 					<li class="nav-item"><a class="nav-link" href="diy_main.php" target="main" data-target="channel"><i class="fa fa-wpforms" title="自定义表单"></i></a></li>
 					<?php }?>
-					<?php if (!DEDEBIZ_SAFE_MODE) {?>
+					<?php if (!DEDEX_SAFE_MODE) {?>
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="templets_main.php" target="main" data-target="templets"><i class="fa fa-cube" title="主题模板"></i></a></li>
 					<?php }?>
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="makehtml_all.php" target="main" data-target="makehtml"><i class="fa fa-repeat" title="更新整站"></i></a></li>

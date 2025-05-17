@@ -3,10 +3,8 @@
  * 投票
  *
  * @version        $id:vote.php$
- * @package        DedeBIZ.Site
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Site
+ * @license        GNU GPL v2 (/license.txt)
  */
 require(dirname(__FILE__)."/../system/common.inc.php");
 require(DEDEINC."/dedevote.class.php");
@@ -18,7 +16,7 @@ $loginurl = $cfg_basehost."/user";
 $ENV_GOBACK_URL = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 if (empty($dopost)) $dopost = '';
 $aid = (isset($aid) && is_numeric($aid)) ? $aid : 0;
-if ($aid == 0) die("dedebiz");
+if ($aid == 0) die("DedeX");
 if ($aid == 0) {
     ShowMsg("没指定投票项目的id", "-1");
     exit();

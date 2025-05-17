@@ -3,10 +3,8 @@
  * 后台登录
  *
  * @version        $id:login.php 8:48 2010年7月13日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__).'/../system/common.inc.php');
 require_once(DEDEINC.'/userlogin.class.php');
@@ -30,7 +28,7 @@ if (is_dir(dirname(__FILE__).'/../install')) {
 //检测后台目录是否更名
 $cururl = GetCurUrl();
 if (preg_match('/admin/', $cururl)) {
-    $redmsg = '<div class="alert alert-warning">检测到后台管理目录名称中包含admin，强烈建议后台管理目录修改为其它名称</div>';
+    $redmsg = '<div class="alert alert-info">检查到后台管理文件夹命名为admin，建议您修改后台管理文件夹名称</div>';
 } else {
     $redmsg = '';
 }

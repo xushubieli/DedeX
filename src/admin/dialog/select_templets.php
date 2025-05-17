@@ -3,10 +3,8 @@
  * 选择模板
  *
  * @version        $id:select_templets.php 9:43 2010年7月8日 tianya $
- * @package        DedeBIZ.Dialog
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Dialog
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(dirname(__FILE__)."/config.php");
 if (empty($activepath)) {
@@ -50,7 +48,7 @@ if (empty($comeback)) {
                     <input type="hidden" name="job" value="upload">
                     <input type="file" name="uploadfile">
                     <label>重命名：<input type="text" name="filename" class="admin-input-sm"></label>
-                    <button type="submit" class="btn btn-success btn-sm">保存</button>
+                    <button type="submit" class="btn btn-primary btn-sm">保存</button>
                 </form>
             </div>
         </div>

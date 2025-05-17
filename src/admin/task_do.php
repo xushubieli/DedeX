@@ -3,10 +3,8 @@
  * 任务操作
  *
  * @version        $id:task_do.php 23:07 2010年7月20日 tianya $
- * @package        DedeBIZ.Administrator
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Administrator
+ * @license        GNU GPL v2 (/license.txt)
  */
 require(dirname(__FILE__).'/config.php');
 $dopost = (!isset($dopost) ? '' : $dopost);
@@ -79,7 +77,7 @@ if ($dopost == 'makeindex') {
     fclose($fp);
     $tpl = $cfg_basedir.$cfg_templets_dir.'/'.$templet;
     if (!file_exists($tpl)) {
-        $tpl = $cfg_basedir.$cfg_templets_dir.'/dedebiz/index.htm';
+        $tpl = $cfg_basedir.$cfg_templets_dir.'/dedex/index.htm';
         if (!file_exists($tpl)) exit("无法找到首页模板：$tpl");
     }
     $GLOBALS['_arclistEnv'] = 'index';

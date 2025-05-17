@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 后台栏目管理
  *
  * @version        $id:typeunit.class.admin.php 15:21 2010年7月5日 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC."/channelunit.func.php");
 class TypeUnit
@@ -135,7 +133,7 @@ echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
-        <span class='btn btn-warning btn-sm'>封面</span>
+        <span class='btn btn-secondary btn-sm'>封面</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>{$typeName}</a>
@@ -247,7 +245,7 @@ echo <<<tpl
     <div class='left'>
          <span>└─{$step}</span>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
-        <span class='btn btn-warning btn-sm'>封面</span>
+        <span class='btn btn-secondary btn-sm'>封面</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>{$typeName}</a>

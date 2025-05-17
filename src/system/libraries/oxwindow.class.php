@@ -1,13 +1,11 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 后台提示对话框
  *
  * @version        $id:oxwindow.class.php 2 13:53 2010-11-11 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 require_once(DEDEINC."/dedetag.class.php");
 class OxWindow
@@ -169,8 +167,8 @@ class OxWindow
             if ($wintype != "hand") {
                 $this->myWin .= "<tr>
                     <td colspan='2' align='center'>
-                    <button type='submit' class='btn btn-success btn-sm'>$tt</button>
-                    <button type='button' class='btn btn-outline-success btn-sm' onclick='javascript:history.go(-1);'>返回</button>
+                    <button type='submit' class='btn btn-primary btn-sm'>$tt</button>
+                    <button type='button' class='btn btn-outline-primary btn-sm' onclick='javascript:history.go(-1);'>返回</button>
                     </td>
                 </tr>";
             } else {
@@ -179,7 +177,7 @@ class OxWindow
                         <td>$msg</td>
                     </tr>
                     <tr>
-                        <td colspan='2' align='center'><button type='button' class='btn btn-success btn-sm' onclick='javascript:history.go(-1);'>返回</button></td>
+                        <td colspan='2' align='center'><button type='button' class='btn btn-primary btn-sm' onclick='javascript:history.go(-1);'>返回</button></td>
                     </tr>";
                 } else {
                     $this->myWin .= '';

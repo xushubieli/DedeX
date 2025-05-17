@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /*! @mainpage
  *
  * HTML Purifier is an HTML filter that will take an arbitrary snippet of

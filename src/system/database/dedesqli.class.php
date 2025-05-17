@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedebiz');
+if (!defined('DEDEINC')) exit('dedex');
 /**
  * 系统底层数据库核心，调用这个类前，请先设定这些外部变量
  * 
@@ -10,10 +10,8 @@ if (!defined('DEDEINC')) exit('dedebiz');
  * $GLOBALS['cfg_dbprefix'];
  *
  * @version        $id:dedesqli.class.php 15:00 2011-1-21 tianya $
- * @package        DedeBIZ.Libraries
- * @copyright      Copyright (c) 2022 DedeBIZ.COM
- * @license        GNU GPL v2 (https://www.dedebiz.com/license)
- * @link           https://www.dedebiz.com
+ * @package        DedeX.Libraries
+ * @license        GNU GPL v2 (/license.txt)
  */
 @set_time_limit(0);
 //在工程所有文件中均不需要单独初始化这个类，可直接用$dsql或$db进行操作，为了防止错误，操作完后不必关闭数据库
@@ -26,8 +24,7 @@ $dsql = $dsqli = $db = new DedeSqli(FALSE);
  * Dede MySQLi数据库类
  *
  * @package        DedeSqli
- * @subpackage     DedeBIZ.Libraries
- * @link           https://www.dedebiz.com
+ * @subpackage     DedeX.Libraries
  */
 class DedeSqli
 {
@@ -475,7 +472,7 @@ class DedeSqli
     function RecordLog($runtime = 0)
     {
         global $cfg_cookie_encode;
-        $enkey = substr(md5(substr($cfg_cookie_encode.'dedebiz', 0, 5)), 0, 10);
+        $enkey = substr(md5(substr($cfg_cookie_encode.'DedeX', 0, 5)), 0, 10);
         $RecordLogFile = DEDEDATA.'/mysqli_record_log_'.$enkey.'.inc';
         $url = $this->GetCurUrl();
         $savemsg = <<<EOT
@@ -493,7 +490,7 @@ EOT;
     function DisplayError($msg)
     {
         global $cfg_cookie_encode;
-        $enkey = substr(md5(substr($cfg_cookie_encode.'dedebiz', 0, 5)), 0, 10);
+        $enkey = substr(md5(substr($cfg_cookie_encode.'DedeX', 0, 5)), 0, 10);
         $errorTrackFile = DEDEDATA.'/mysqli_error_trace_'.$enkey.'.inc';
         if ($this->showError) {
             $msg = str_replace(array("\r","\n"),"",addslashes($msg));
