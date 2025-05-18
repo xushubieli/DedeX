@@ -688,8 +688,8 @@ class Archives
                 $this->PreNext['diy']['pre']['title'] = $preRow['title'];
                 $this->PreNext['diy']['pre']['litpic'] = $preRow['litpic'];
                 $this->PreNext['diy']['pre']['pubdate'] = $preRow['senddate'];
-                $this->PreNext['pre'] = "上篇：<a href='$mlink'>{$preRow['title']}</a>";
-                $this->PreNext['preimg'] = "<a href='$mlink'><img src=\"{$preRow['litpic']}\" alt=\"{$preRow['title']}\" title=\"{$preRow['title']}\"></a> ";
+                $this->PreNext['pre'] = "上篇：<a href='{$mlink}'>{$preRow['title']}</a>";
+                $this->PreNext['preimg'] = "<a href='{$mlink}'><img src=\"{$preRow['litpic']}\" alt=\"{$preRow['title']}\" title=\"{$preRow['title']}\"></a> ";
             } else {
                 $this->PreNext['pre'] = "上篇：暂无";
                 $this->PreNext['preimg'] = '';
@@ -716,8 +716,8 @@ class Archives
                 $this->PreNext['diy']['next']['title'] = $nextRow['title'];
                 $this->PreNext['diy']['next']['litpic'] = $nextRow['litpic'];
                 $this->PreNext['diy']['next']['pubdate'] = $nextRow['senddate'];
-                $this->PreNext['next'] = "下篇：<a href='$mlink'>{$nextRow['title']}</a> ";
-                $this->PreNext['nextimg'] = "<a href='$mlink'><img src=\"{$nextRow['litpic']}\" alt=\"{$nextRow['title']}\" title=\"{$nextRow['title']}\"></a> ";
+                $this->PreNext['next'] = "下篇：<a href='{$mlink}'>{$nextRow['title']}</a> ";
+                $this->PreNext['nextimg'] = "<a href='{$mlink}'><img src=\"{$nextRow['litpic']}\" alt=\"{$nextRow['title']}\" title=\"{$nextRow['title']}\"></a> ";
             } else {
                 $this->PreNext['next'] = "下篇：暂无";
                 $this->PreNext['nextimg'] = '';
@@ -1033,7 +1033,7 @@ class Archives
             $key = trim($row['keyword']);
             $key_url = trim($row['rpurl']);
             $karr[] = $key;
-            $kaarr[] = "<a href='$key_url' target='_blank'>$key</a>";
+            $kaarr[] = "<a href='{$key_url}' target='_blank'>{$key}</a>";
         }
         $GLOBALS['_dd_karr'] = $karr;
         $GLOBALS['_dd_kaarr'] = $kaarr;

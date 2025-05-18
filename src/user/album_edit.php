@@ -119,7 +119,7 @@ if (empty($dopost)) {
     $artUrl = MakeArt($aid, TRUE);
     if ($artUrl == '') $artUrl = $cfg_phpurl."/view.php?aid=$aid";
     //返回成功信息
-    $msg = "<a href='$artUrl' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='album_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布文档</a><a href='archives_do.php?channelid=$channelid&aid=".$aid."&dopost=edit' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid=$channelid' class='btn btn-primary btn-sm'>返回文档列表</a>";
+    $msg = "<a href='{$artUrl}' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='album_add.php?cid={$typeid}' class='btn btn-primary btn-sm'>发布文档</a><a href='archives_do.php?channelid={$channelid}&aid={$aid}&dopost=edit' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid={$channelid}' class='btn btn-primary btn-sm'>返回文档列表</a>";
     //提交后返回提交页面
     $wintitle = "成功修改图片文档";
     $win = new WebWindow();

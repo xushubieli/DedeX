@@ -53,14 +53,14 @@ else if ($dopost == "opimize") {
         if ($cfg_dbtype == 'sqlite') {
             $rs = $dsql->ExecuteNoneQuery("VACUUM");
             if ($rs) {
-                echo "执行优化表 {$tablename} 完成<br>";
+                echo "执行优化表{$tablename}完成<br>";
             } else {
-                echo "执行优化表 {$tablename} 失败，原因是：".$dsql->GetError();
+                echo "执行优化表{$tablename}失败，原因：".$dsql->GetError();
             }
         }  else { 
             $rs = $dsql->ExecuteNoneQuery("OPTIMIZE TABLE `$tablename`");
-            if ($rs)  echo "执行优化表".$tablename."完成<br>";
-            else echo "执行优化表".$tablename."失败，原因是：".$dsql->GetError();
+            if ($rs)  echo "执行优化表{$tablename}完成<br>";
+            else echo "执行优化表{$tablename}失败，原因：".$dsql->GetError();
         }
     }
     exit();
@@ -75,7 +75,7 @@ else if ($dopost == "opimizeAll") {
         if ($rs) {
             echo "执行数据库完成<br>";
         } else {
-            echo "执行数据库失败，原因是：".$dsql->GetError();
+            echo "执行数据库失败，原因：".$dsql->GetError();
         }
     } else {
         while ($row = $dsql->GetArray('t', MYSQL_BOTH)) {
@@ -83,7 +83,7 @@ else if ($dopost == "opimizeAll") {
             if ($rs) {
                 echo "优化表{$row[0]}完成<br>";
             } else {
-                echo "优化表{$row[0]}失败，原因是: ".$dsql->GetError();
+                echo "优化表{$row[0]}失败，原因：".$dsql->GetError();
             }
         }
     }
@@ -99,17 +99,17 @@ else if ($dopost == "repair") {
             //SQLite数据库使用VACUUM尝试修复和优化
             $rs = $dsql->ExecuteNoneQuery("VACUUM");
             if ($rs) {
-                echo "对表 {$tablename} 尝试修复和优化完成<br>";
+                echo "对表{$tablename}尝试修复和优化完成<br>";
             } else {
-                echo "对表 {$tablename} 尝试修复和优化失败，原因是：".$dsql->GetError();
+                echo "对表{$tablename}尝试修复和优化失败，原因：".$dsql->GetError();
             }
         } else {
             //非SQLite数据库（如 MySQL）使用REPAIR TABLE语句
             $rs = $dsql->ExecuteNoneQuery("REPAIR TABLE `{$tablename}`");
             if ($rs) {
-                echo "修复表 {$tablename} 完成<br>";
+                echo "修复表{$tablename}完成<br>";
             } else {
-                echo "修复表 {$tablename} 失败，原因是：".$dsql->GetError();
+                echo "修复表{$tablename}失败，原因：".$dsql->GetError();
             }
         }
     }
@@ -124,7 +124,7 @@ else if ($dopost == "repairAll") {
         if ($rs) {
             echo "对所有表尝试修复和优化完成<br>";
         } else {
-            echo "对所有表尝试修复和优化失败，原因是：".$dsql->GetError();
+            echo "对所有表尝试修复和优化失败，原因：".$dsql->GetError();
         }
     } else {
         $dsql->SetQuery("Show Tables");
@@ -132,9 +132,9 @@ else if ($dopost == "repairAll") {
         while ($row = $dsql->GetArray('t', MYSQL_BOTH)) {
             $rs = $dsql->ExecuteNoneQuery("REPAIR TABLE `{$row[0]}`");
             if ($rs) {
-                echo "修复表 {$row[0]} 完成<br>";
+                echo "修复表{$row[0]}完成<br>";
             } else {
-                echo "修复表 {$row[0]} 失败，原因是: ".$dsql->GetError();
+                echo "修复表{$row[0]}失败，原因：".$dsql->GetError();
             }
         }
     }
@@ -195,7 +195,7 @@ else if ($dopost == "query") {
             if ($errCode == "") {
                 $i++;
             } else {
-                $nerrCode .= "执行".$q."出错，错误提示：".$errCode."";
+                $nerrCode .= "执行{$q}出错，错误提示：{$errCode};
             }
         }
         echo "成功执行{$i}个SQL语句";

@@ -40,11 +40,11 @@ if ($dopost == "view") {
         $GLOBALS['_arclistEnv'] = 'index';
         $pv->SetTemplet($cfg_basedir.$cfg_templets_dir."/".$templet);
         $pv->SaveToHtml($homeFile);
-        ShowMsg("更新静态首页，<a href='{$position}' target='_blank'>点击浏览</a>", "javascript:;");
+        ShowMsg("完成静态首页更新，<a href='{$position}' target='_blank'>点击浏览</a>", "javascript:;");
     } else {
         //动态浏览
         if (file_exists($homeFile)) @unlink($homeFile);
-        ShowMsg("更新动态首页，<a href='/index.php' target='_blank'>点击浏览</a>", "javascript:;");
+        ShowMsg("完成动态首页更新，<a href='/index.php' target='_blank'>点击浏览</a>", "javascript:;");
     }
     $iquery = "UPDATE `#@__homepageset` SET showmod='$showmod'";
     $dsql->ExecuteNoneQuery($iquery);

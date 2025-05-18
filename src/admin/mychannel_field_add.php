@@ -47,7 +47,7 @@ if ($action == 'save') {
     $rs = $dsql->ExecuteNoneQuery("ALTER TABLE `$trueTable` ADD $ntabsql ");
     if (!$rs) {
         $gerr = $dsql->GetError();
-        ShowMsg("添加字段失败，错误提示为：".$gerr, "javascript:;");
+        ShowMsg("添加字段失败，错误提示：".$gerr, "javascript:;");
         exit();
     }
     //检测旧配置信息，并替换为新配置

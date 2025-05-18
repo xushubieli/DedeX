@@ -26,7 +26,7 @@ function GetOptionList($selid = 0, $userCatalog = 0, $channeltype = 0)
     //当前选中的栏目
     if ($selid > 0) {
         $row = $dsql->GetOne("SELECT id,typename,ispart,channeltype FROM `#@__arctype` WHERE id='$selid'");
-        if ($row['ispart'] == 1) $OptionArrayList .= "<option value='".$row['id']."' class='opt-bg1' selected='selected'>".$row['typename']."(封面栏目)</option>";
+        if ($row['ispart'] == 1) $OptionArrayList .= "<option value='".$row['id']."' class='opt-bg1' selected='selected'>".$row['typename']."[封面栏目]</option>";
         else $OptionArrayList .= "<option value='".$row['id']."' selected='selected'>".$row['typename']."</option>";
     }
     //是否限定会员管理的栏目

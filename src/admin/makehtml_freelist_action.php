@@ -53,10 +53,10 @@ if ($nextpage == $totalpage) {
 } else {
     if ($finishType) {
         $gourl = "makehtml_freelist_action.php?maxpagesize={$maxpagesize}&startid={$startid}&endid={$endid}&pageno={$nextpage}";
-        ShowMsg("更新列表[id：{$tid}]，继续更新列表", $gourl, 0, 100);
+        ShowMsg("正在更新id：{$tid}的列表，继续更新列表", $gourl, 0, 100);
     } else {
         $gourl = "makehtml_freelist_action.php?mkpage={$mkpage}&maxpagesize={$maxpagesize}&startid={$startid}&endid={$endid}&pageno={$pageno}";
-        ShowMsg("更新列表[id：{$tid}]，继续更新列表", $gourl, 0, 100);
+        ShowMsg("正在更新id：{$tid}的列表，继续更新列表", $gourl, 0, 100);
     }
 }
 $dsql->ExecuteNoneQuery("UPDATE `#@__freelist` SET nodefault='1' WHERE aid='$startid';");

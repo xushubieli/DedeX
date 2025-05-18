@@ -87,7 +87,7 @@ if (empty($dopost)) {
     $artUrl = MakeArt($aid, TRUE);
     if ($artUrl == '') $artUrl = $cfg_phpurl."/view.php?aid=$aid";
     //返回成功信息
-    $msg = "<a class='btn btn-primary btn-sm' href='$artUrl' target='_blank'>浏览文档</a><a href='archives_add.php?cid=$typeid&channelid=$channelid' class='btn btn-primary btn-sm'>发布文档</a><a href='archives_edit.php?channelid=$channelid&aid=".$aid."' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid=$channelid' class='btn btn-primary btn-sm'>返回文档列表</a>";
+    $msg = "<a href='{$artUrl}' class='btn btn-primary btn-sm' target='_blank'>浏览文档</a><a href='archives_add.php?cid={$typeid}&channelid={$channelid}' class='btn btn-primary btn-sm'>发布文档</a><a href='archives_edit.php?channelid={$channelid}&aid={$aid}' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid={$channelid}' class='btn btn-primary btn-sm'>返回文档列表</a>";
     $wintitle = "成功修改自定义文档";
     $win = new WebWindow();
     $win->AddMsgItem($msg);

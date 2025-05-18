@@ -82,7 +82,7 @@ if (empty($dopost)) {
         $artUrl = $cfg_phpurl."/view.php?aid=$aid";
     }
     //返回成功信息
-    $msg = "<a href='$artUrl' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='article_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布文档</a><a href='archives_do.php?channelid=$channelid&aid=".$aid."&dopost=edit' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid=$channelid' class='btn btn-primary btn-sm'>返回管理文档</a>";
+    $msg = "<a href='{$artUrl}' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='article_add.php?cid={$typeid}' class='btn btn-primary btn-sm'>发布文档</a><a href='archives_do.php?channelid={$channelid}&aid={$aid}&dopost=edit' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid={$channelid}' class='btn btn-primary btn-sm'>返回管理文档</a>";
     $wintitle = "成功修改文档";
     $win = new WebWindow();
     $win->AddMsgItem($msg);

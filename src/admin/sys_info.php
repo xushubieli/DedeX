@@ -84,7 +84,7 @@ else if ($dopost == 'add') {
         exit();
     }
     if (!is_writeable($configfile)) {
-        ShowMsg("成功保存变量，由于".$configfile."无法写入，更新配置文件失败", "sys_info.php?gp=$vargroup");
+        ShowMsg("成功保存变量，由于{$configfile}无法写入，更新配置文件失败", "sys_info.php?gp={$vargroup}");
         exit();
     } else {
         ReWriteConfig();

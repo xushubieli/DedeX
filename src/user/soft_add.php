@@ -156,7 +156,7 @@ if (empty($dopost)) {
     }
     ClearMyAddon($arcID, $title);
     //返回成功信息
-    $msg = "<a href='$artUrl' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='soft_add.php?cid=$typeid' class='btn btn-primary btn-sm'>发布文档</a><a href='soft_edit.php?channelid=$channelid&aid=$arcID' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid={$channelid}' class='btn btn-primary btn-sm'>返回文档列表</a>";
+    $msg = "<a href='{$artUrl}' target='_blank' class='btn btn-primary btn-sm'>浏览文档</a><a href='soft_add.php?cid={$typeid}' class='btn btn-primary btn-sm'>发布文档</a><a href='soft_edit.php?channelid={$channelid}&aid={$arcID}' class='btn btn-primary btn-sm'>修改文档</a><a href='content_list.php?channelid={$channelid}' class='btn btn-primary btn-sm'>返回文档列表</a>";
     $wintitle = "成功发布文档";
     $win = new WebWindow();
     $win->AddMsgItem($msg);

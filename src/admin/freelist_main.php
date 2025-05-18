@@ -75,14 +75,14 @@ function GetTagList($dsql,$pageno,$pagesize,$orderby='aid')
         $line = "<tbody>
             <tr>
             <td>{$row['aid']}</td>
-            <td><a href='$listurl' target='_blank'>{$row['title']}</a></td>
+            <td><a href='{$listurl}' target='_blank'>{$row['title']}</a></td>
             <td>{$row['templet']}</td>
             <td>{$row['click']}</td>
             <td>".MyDate("y-m-d",$row['edtime'])."</td>
             <td>
                 <a href=\"javascript:CreateNote({$row['aid']});\" class='btn btn-light btn-sm'><i class='fa fa-repeat' title='更新'></i></a>
                 <a href=\"javascript:EditNote({$row['aid']});\" class='btn btn-light btn-sm'><i class='fa fa-pencil-square' title='修改'></i></a>
-                <a href='$listurl' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='预览'></i></a>
+                <a href='{$listurl}' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='预览'></i></a>
                 <a href=\"javascript:DelNote({$row['aid']});\" class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
             </td>
         </tr>

@@ -101,17 +101,17 @@ if (!empty($noeditor)) {
                                     if ($activepath == "") continue;
                                     $tmp = preg_replace("#[\/][^\/]*$#i", "", $activepath);
                                     $line = "<tr>
-                                        <td colspan='2'>当前目录：$activepath</td>
-                                        <td align='right'><a href='select_media.php?f=$f&activepath=".urlencode($tmp).$addparm."'><img src='/static/web/img/icon_dir2.png'> 返回上级</a></td>
+                                        <td colspan='2'>当前目录：{$activepath}</td>
+                                        <td align='right'><a href='select_media.php?f={$f}&activepath=".urlencode($tmp).$addparm."'><img src='/static/web/img/icon_dir2.png'> 返回上级</a></td>
                                     </tr>";
                                     echo $line;
                                 } else if (is_dir("$inpath/$file")) {
                                     if (preg_match("#^_(.*)$#i", $file)) continue;
                                     if (preg_match("#^\.(.*)$#i", $file)) continue;
                                     $line = "<tr>
-                                        <td colspan='3'><a href=select_media.php?f=$f&activepath=".urlencode("$activepath/$file").$addparm."><img src='/static/web/img/icon_dir.png'> $file</a></td>
+                                        <td colspan='3'><a href=select_media.php?f={$f}&activepath=".urlencode("$activepath/$file").$addparm."><img src='/static/web/img/icon_dir.png'> {$file}</a></td>
                                     </tr>";
-                                    echo "$line";
+                                    echo $line;
                                 } else if (preg_match("#\.(swf|fly|fla|flv)#i", $file)) {
                                     $reurl = "$activeurl/$file";
                                     $reurl = preg_replace("#^\.\.#", "", $reurl);
@@ -121,11 +121,11 @@ if (!empty($noeditor)) {
                                     if ($file == $comeback) $lstyle = "class='text-danger'";
                                     else $lstyle = '';
                                     $line = "<tr>
-                                        <td><a href=\"javascript:ReturnValue('$reurl');\" $lstyle><img src='/static/web/img/icon_flash.png'> $file</a></td>
-                                        <td>$filesize KB</td>
-                                        <td align='center'>$filetime</td>
+                                        <td><a href=\"javascript:ReturnValue('{$reurl}');\" {$lstyle}><img src='/static/web/img/icon_flash.png'> {$file}</a></td>
+                                        <td>{$filesize} KB</td>
+                                        <td>{$filetime}</td>
                                     </tr>";
-                                    echo "$line";
+                                    echo $line;
                                 } else if (preg_match("#\.(wmv|avi)#i", $file)) {
                                     $reurl = "$activeurl/$file";
                                     $reurl = preg_replace("#^\.\.#", "", $reurl);
@@ -135,11 +135,11 @@ if (!empty($noeditor)) {
                                     if ($file == $comeback) $lstyle = "class='text-danger'";
                                     else $lstyle = '';
                                     $line = "<tr>
-                                        <td><a href=\"javascript:ReturnValue('$reurl');\" $lstyle><img src='/static/web/img/icon_video.png'> $file</a></td>
-                                        <td>$filesize KB</td>
-                                        <td align='center'>$filetime</td>
+                                        <td><a href=\"javascript:ReturnValue('{$reurl}');\" {$lstyle}><img src='/static/web/img/icon_video.png'> {$file}</a></td>
+                                        <td>{$filesize} KB</td>
+                                        <td>{$filetime}</td>
                                     </tr>";
-                                    echo "$line";
+                                    echo $line;
                                 } else if (preg_match("#\.(rm|rmvb|mp3|mp4)#i", $file)) {
                                     $reurl = "$activeurl/$file";
                                     $reurl = preg_replace("#^\.\.#", "", $reurl);
@@ -149,11 +149,11 @@ if (!empty($noeditor)) {
                                     if ($file == $comeback) $lstyle = "class='text-danger'";
                                     else $lstyle = '';
                                     $line = "<tr>
-                                        <td><a href=\"javascript:ReturnValue('$reurl');\" $lstyle><img src='/static/web/img/icon_rm.png'> $file</a></td>
-                                        <td>$filesize KB</td>
-                                        <td align='center'>$filetime</td>
+                                        <td><a href=\"javascript:ReturnValue('{$reurl}');\" {$lstyle}><img src='/static/web/img/icon_rm.png'> {$file}</a></td>
+                                        <td>{$filesize} KB</td>
+                                        <td>{$filetime}</td>
                                     </tr>";
-                                    echo "$line";
+                                    echo $line;
                                 } else if (preg_match("#\.(mp3|wma)#", $file)) {
                                     $reurl = "$activeurl/$file";
                                     $reurl = preg_replace("#^\.\.#", "", $reurl);
@@ -163,11 +163,11 @@ if (!empty($noeditor)) {
                                     if ($file == $comeback) $lstyle = "class='text-danger'";
                                     else $lstyle = '';
                                     $line = "<tr>
-                                        <td><a href=\"javascript:ReturnValue('$reurl');\" $lstyle><img src='/static/web/img/icon_music.png'> $file</a></td>
-                                        <td>$filesize KB</td>
-                                        <td align='center'>$filetime</td>
+                                        <td><a href=\"javascript:ReturnValue('{$reurl}');\" {$lstyle}><img src='/static/web/img/icon_music.png'> {$file}</a></td>
+                                        <td>{$filesize} KB</td>
+                                        <td>{$filetime}</td>
                                     </tr>";
-                                    echo "$line";
+                                   echo $line;
                                 }
                             }
                             ?>

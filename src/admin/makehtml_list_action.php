@@ -97,7 +97,7 @@ if ($nextpage >= $totalpage && $finishType) {
         if (empty($reurl)) {
             $reurl = '/apps/list.php?tid='.$tid;
         }
-        ShowMsg("完成所有栏目更新，<a href='$reurl' target='_blank'>点击浏览</a>", "javascript:;");
+        ShowMsg("完成所有栏目更新，<a href='{$reurl}' target='_blank'>点击浏览</a>", "javascript:;");
         exit();
     } else if ($gotype == 'mkall' || $gotype == 'mkallct') {
         ShowMsg("完成所有栏目更新，数据已优化", "makehtml_all.php?action=make&step=10");
@@ -107,11 +107,11 @@ if ($nextpage >= $totalpage && $finishType) {
     $typename = isset($cfg_Cs[$tid][3])? base64_decode($cfg_Cs[$tid][3]) : "";
     if ($finishType) {
         $gourl = "makehtml_list_action.php?gotype={$gotype}&uppage={$uppage}&maxpagesize={$maxpagesize}&typeid={$typeid}&pageno={$nextpage}";
-        ShowMsg("更新{$typename}栏目[id：{$tid}]，继续更新栏目", $gourl, 0, 100);
+        ShowMsg("正在更新id：{$tid}的栏目[{$typename}]，继续更新栏目", $gourl, 0, 100);
         exit();
     } else {
         $gourl = "makehtml_list_action.php?gotype={$gotype}&uppage={$uppage}&mkpage={$mkpage}&maxpagesize={$maxpagesize}&typeid={$typeid}&pageno={$pageno}";
-        ShowMsg("更新{$typename}栏目[id：{$tid}]，继续更新栏目", $gourl, 0, 100);
+        ShowMsg("正在更新id：{$tid}的栏目[{$typename}]，继续更新栏目", $gourl, 0, 100);
         exit();
     }
 }

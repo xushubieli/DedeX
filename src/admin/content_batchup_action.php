@@ -79,7 +79,7 @@ else if ($action == 'del') {
     while ($row = $dsql->GetObject('x')) {
         if (DelArc($row->id)) $tdd++;
     }
-    ShowMsg("成功删除".$tdd."条记录", "javascript:;");
+    ShowMsg("成功删除{$tdd}条记录", "javascript:;");
     exit();
 }
 //删除空标题文档
@@ -90,18 +90,18 @@ else if ($action == 'delnulltitle') {
     while ($row = $dsql->GetObject('x')) {
         if (DelArc($row->id)) $tdd++;
     }
-    ShowMsg("成功删除".$tdd."条记录", "javascript:;");
+    ShowMsg("成功删除{$tdd}条记录", "javascript:;");
     exit();
 }
 //删除空文档
 else if ($action == 'delnullbody') {
-    $dsql->SetQuery("SELECT aid FROM `#@__addonarticle` WHERE LENGTH(body) < 10 ");
+    $dsql->SetQuery("SELECT aid FROM `#@__addonarticle` WHERE LENGTH(body) < 100 ");
     $dsql->Execute('x');
     $tdd = 0;
     while ($row = $dsql->GetObject('x')) {
         if (DelArc($row->aid)) $tdd++;
     }
-    ShowMsg("成功删除".$tdd."条记录", "javascript:;");
+    ShowMsg("成功删除{$tdd}条记录", "javascript:;");
     exit();
 }
 //修正缩略图错误
@@ -150,7 +150,7 @@ else if ($action == 'move') {
         $jumpurl  = "makehtml_archives_action.php?endid=$endid&startid=$startid";
         $jumpurl .= "&typeid=$newtypeid&pagesize=20&seltime=$seltime";
         $jumpurl .= "&stime=".urlencode($starttime)."&etime=".urlencode($endtime);
-        ShowMsg("成功移动 $tdd 条记录，准备重新生成网页", $jumpurl);
+        ShowMsg("成功移动{$tdd}条记录，准备重新生成网页", $jumpurl);
     } else {
         ShowMsg("完成操作，没移动任何数据", "javascript:;");
     }
@@ -163,7 +163,7 @@ else if ($action == 'delnulltitle') {
     while ($row = $dsql->GetObject('x')) {
         if (DelArc($row->id)) $tdd++;
     }
-    ShowMsg("成功删除".$tdd."条记录", "javascript:;");
+    ShowMsg("成功删除{$tdd}条记录", "javascript:;");
     exit();
 }
 //修正缩略图错误

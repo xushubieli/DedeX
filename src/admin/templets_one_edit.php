@@ -86,7 +86,7 @@ if ($dopost == "saveedit") {
         $sg->SaveToHtml();
         $i++;
     }
-    ShowMsg("成功更新".$i."个页面", '-1');
+    ShowMsg("成功更新{$i}个页面", '-1');
     exit();
 } else if ($dopost == "mksel") {
     if (empty($ids)) {
@@ -103,7 +103,7 @@ if ($dopost == "saveedit") {
             $sg->SaveToHtml();
             $i++;
         }
-        ShowMsg("成功更新".$i."个页面", '-1');
+        ShowMsg("成功更新{$i}个页面", '-1');
         exit();
     }
 } else if ($dopost == "view") {

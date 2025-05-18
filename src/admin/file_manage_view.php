@@ -24,7 +24,7 @@ if ($fmdo == "rename") {
     $win->AddHidden("fmdo", $fmdo);
     $win->AddHidden("activepath", $activepath);
     $win->AddHidden("filename", $filename);
-    $win->AddTitle("修改文件名，当前位置：".$ndirstring."");
+    $win->AddTitle("修改文件名，当前位置：{$ndirstring}");
     $win->AddItem("旧名称", "<input type='input' name='oldfilename' id='oldfilename' class='admin-input-md' value='$filename'>");
     $win->AddItem("新名称", "<input type='input' name='newfilename' id='newfilename' class='admin-input-md'>");
     $winform = $win->GetWindow("ok");
@@ -40,7 +40,7 @@ else if ($fmdo == "newdir") {
     $win->AddHidden("fmdo", $fmdo);
     $win->AddHidden("activepath", $activepath);
     $win->AddHidden("token", make_hash());
-    $win->AddTitle("当前目录：".$activepathname."");
+    $win->AddTitle("当前目录：{$activepathname}");
     $win->AddItem("新目录", "<input type='input' name='newpath' id='newpath' class='admin-input-md'>");
     $winform = $win->GetWindow("ok");
     $win->Display();
@@ -69,9 +69,9 @@ else if ($fmdo == "del") {
     $win->AddHidden("activepath", $activepath);
     $win->AddHidden("filename", $filename);
     if (@is_dir($cfg_basedir.$activepath."/$filename")) {
-        $msg = "<tr><td>您确定要删除".$filename."目录吗</td></tr>";
+        $msg = "<tr><td>您确定要删除{$filename}目录吗</td></tr>";
     } else {
-        $msg = "<tr><td>您确定要删除".$filename."文件吗</td></tr>";
+        $msg = "<tr><td>您确定要删除{$filename}文件吗</td></tr>";
     }
     $win->AddTitle("删除文件确认");
     $win->AddMsgItem($msg);

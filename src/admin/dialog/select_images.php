@@ -109,20 +109,18 @@ if (!empty($iseditor)) {
                         if ($activepath == "") continue;
                         $tmp = preg_replace("#[\/][^\/]*$#i", "", $activepath);
                         $line = "<div class='d-flex justify-content-between align-items-center mb-3'>
-                            <span>当前目录：$activepath</span>
-                            <a href='select_images.php?imgstick=$imgstick&v=$v&f=$f&activepath=".urlencode($tmp).$addparm."' class='btn btn-primary btn-sm'>返回上级</a>
+                            <span>当前目录：{$activepath}</span>
+                            <a href='select_images.php?imgstick={$imgstick}&v={$v}&f={$f}&activepath=".urlencode($tmp).$addparm."' class='btn btn-primary btn-sm'>返回上级</a>
                         </div>";
                         echo $line;
                     } else if (is_dir("$inpath/$file")) {
                         if (preg_match("#^_(.*)$#i", $file)) continue;
                         if (preg_match("#^\.(.*)$#i", $file)) continue;
                         $line = "<div class='list dir'>
-                            <a href='select_images.php?imgstick=$imgstick&v=$v&f=$f&activepath=".urlencode("$activepath/$file").$addparm."'>
-                                <img src='/static/web/img/icon_dir.png'>
-                            </a>
-                            <span>$file</span>
+                            <a href='select_images.php?imgstick={$imgstick}&v={$v}&f={$f}&activepath=".urlencode("$activepath/$file").$addparm."'><img src='/static/web/img/icon_dir.png'></a>
+                            <span>{$file}</span>
                         </div>";
-                        echo "$line";
+                        echo $line;
                     } else if (preg_match("#\.(".$cfg_imgtype.")#i", $file)) {
                         $reurl = "$activeurl/$file";
                         $reurl = preg_replace("#^\.\.#", "", $reurl);
@@ -132,12 +130,10 @@ if (!empty($iseditor)) {
                         if ($file == $comeback) $lstyle = "class='text-danger'";
                         else $lstyle = '';
                         $line = "<div class='list'>
-                            <a href='$reurl' onclick=\"ReturnImg('$reurl');\">
-                                <img src='$reurl' title='$file'>
-                            </a>
-                            <span $lstyle>$file</span>
+                            <a href='{$reurl}' onclick=\"ReturnImg('{$reurl}');\"><img src='{$reurl}' title='{$file}'></a>
+                            <span {$lstyle}>{$file}</span>
                         </div>";
-                        echo "$line";
+                        echo $line;
                     } else if (preg_match("#\.(jpg)#i", $file)) {
                         $reurl = "$activeurl/$file";
                         $reurl = preg_replace("#^\.\.#", "", $reurl);
@@ -147,12 +143,10 @@ if (!empty($iseditor)) {
                         if ($file == $comeback) $lstyle = "class='text-danger'";
                         else $lstyle = '';
                         $line = "<div class='list'>
-                            <a href='$reurl' onclick=\"ReturnImg('$reurl');\">
-                                <img src='$reurl' title='$file'>
-                            </a>
-                            <span $lstyle>$file</span>
+                            <a href='{$reurl}' onclick=\"ReturnImg('{$reurl}');\"><img src='{$reurl}' title='{$file}'></a>
+                            <span {$lstyle}>{$file}</span>
                         </div>";
-                        echo "$line";
+                        echo $line;
                     }
                 }
                 ?>

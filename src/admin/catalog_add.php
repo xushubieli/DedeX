@@ -146,18 +146,18 @@ if ($dopost == 'quick') {
         $typedir = $nextdir.'/'.$typedir;
         $typedir = preg_replace("#\/{1,}#", "/", $typedir);
     }
-    //开启多站点时的设置(仅针对顶级栏目)
+    //开启多站点时的设置，仅针对顶级栏目
     if ($reid == 0 && $moresite == 1) {
         $sitepath = $typedir;
         //检测二级网址
         if ($siteurl != '') {
             $siteurl = preg_replace("#\/$#", "", $siteurl);
             if (!preg_match("#http:\/\/#i", $siteurl)) {
-                ShowMsg("您绑定的二级域名无效，请输入绑定域名http开头", "-1");
+                ShowMsg("您输入的网址无效，请重新输入", "-1");
                 exit();
             }
             if (preg_match("#".$cfg_basehost."#i", $siteurl)) {
-                ShowMsg("您绑定的二级域名与当前站点是同一个域，不需要绑定", "-1");
+                ShowMsg("您输入的网址与当前站点一致，请重新输入", "-1");
                 exit();
             }
         }

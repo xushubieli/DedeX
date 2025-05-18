@@ -13,7 +13,7 @@ if (DEDEX_SAFE_MODE) {
 CheckPurview('sys_Data');
 if (empty($dopost)) $dopost = '';
 if ($cfg_dbtype == 'sqlite') {
-    showMsg("系统使用SQLite数据库，备份系统根目录下/data/".$cfg_dbname.".db文件即可", "javascript:;");
+    showMsg("系统使用SQLite数据库，备份系统根目录下/data/{$cfg_dbname}.db文件即可", "javascript:;");
     exit();
 }
 //查看表结构
@@ -29,7 +29,7 @@ if ($dopost == "viewinfo") {
             $row = $dsql->GetArray('me', SQLITE3_ASSOC);
             if ($row) {
                 $createTableSql = $row['sql'];
-                echo "创建表的 SQL 语句:\n";
+                echo "创建表的SQL语句:\n";
                 echo trim($createTableSql)."\n\n";
             }
             //获取表的列信息
@@ -66,16 +66,16 @@ else if ($dopost == "opimize") {
         if ($cfg_dbtype == 'sqlite') {
             $rs = $dsql->ExecuteNoneQuery("VACUUM");
             if ($rs) {
-                echo "执行优化表 {$tablename} 完成<br>";
+                echo "执行优化表{$tablename}完成<br>";
             } else {
-                echo "执行优化表 {$tablename} 失败，原因是：".$dsql->GetError();
+                echo "执行优化表{$tablename}失败，原因：".$dsql->GetError();
             }
         } else {
             $rs = $dsql->ExecuteNoneQuery("OPTIMIZE TABLE `$tablename`");
             if ($rs) {
-                echo "执行优化表".$tablename."完成<br>";
+                echo "执行优化表{$tablename}完成<br>";
             } else {
-                echo "执行优化表".$tablename."失败，原因是：".$dsql->GetError();
+                echo "执行优化表{$tablename}失败，原因：".$dsql->GetError();
             }
         }
     }
@@ -90,9 +90,9 @@ else if ($dopost == "repair") {
     } else {
         $rs = $dsql->ExecuteNoneQuery("REPAIR TABLE `$tablename`");
         if ($rs) {
-            echo "修复表".$tablename."完成<br>";
+            echo "修复表{$tablename}完成<br>";
         } else {
-            echo "修复表".$tablename."失败，原因是：".$dsql->GetError();
+            echo "修复表{$tablename}失败，原因：".$dsql->GetError();
         }
     }
     echo '</xmp>';

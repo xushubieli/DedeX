@@ -28,7 +28,7 @@ if ($dopost == "show") {
         $win->AddHidden("job", "yes");
         $win->AddHidden("dopost", $dopost);
         $win->AddHidden("aid", $aid);
-        $win->AddTitle("您确定要删除".$title."插件吗");
+        $win->AddTitle("您确定要删除{$title}插件吗");
         $win->AddMsgItem("<tr><td>提示：仅删除插件导航，前往<a href='module_main.php?moduletype=plus'>模块管理</a>卸载删除</td></tr>");
         $winform = $win->GetWindow("ok");
         $win->Display();

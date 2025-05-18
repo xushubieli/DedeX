@@ -21,7 +21,7 @@ if (empty($imgfile)) {
     $imgfile = '';
 }
 if (!is_uploaded_file($imgfile)) {
-    ShowMsg("您没有选择上传文件".$imgfile, "-1");
+    ShowMsg("您没有选择上传文件{$imgfile}", "-1");
     exit();
 }
 $CKEditorFuncNum = (isset($CKEditorFuncNum)) ? $CKEditorFuncNum : 1;

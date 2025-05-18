@@ -206,7 +206,7 @@ else if ($dopost == "makeArchives") {
         $i++;
         $pageurl = MakeArt($aid, false);
     }
-    ShowMsg("成功更新指定".$i."个文档", $ENV_GOBACK_URL);
+    ShowMsg("成功更新指定{$i}个文档", $ENV_GOBACK_URL);
     exit();
 }
 //审核文档
@@ -320,7 +320,7 @@ else if ($dopost == "checkArchives") {
             DedeSearchDo("update", array("id" => $aid));
             $arc->MakeHtml();
         }
-        ShowMsg("成功移动".$j."个文档", $ENV_GOBACK_URL);
+        ShowMsg("成功移动{$j}个文档", $ENV_GOBACK_URL);
         exit();
     }
 }
@@ -376,7 +376,7 @@ else if ($dopost == "delArchives") {
         $win->AddHidden("dopost", $dopost);
         $win->AddHidden("qstr", $qstr);
         $win->AddHidden("aid", $aid);
-        $win->AddTitle("您确定删除，序号".$qstr."文档吗");
+        $win->AddTitle("您确定删除，序号{$qstr}文档吗");
         $winform = $win->GetWindow("ok");
         $win->Display();
     }
@@ -426,7 +426,7 @@ else if ($dopost == 'clear') {
         $win->AddHidden("qstr", $qstr);
         $win->AddHidden("aid", $aid);
         $win->AddHidden("recycle", $recycle);
-        $win->AddTitle("您确定删除".$num."篇文档，序号".$qstr."文档吗");
+        $win->AddTitle("您确定删除{$num}篇文档，序号{$qstr}文档吗");
         $winform = $win->GetWindow("ok");
         $win->Display();
     }
@@ -463,7 +463,7 @@ else if ($dopost == 'del') {
         $win->AddHidden("qstr", $qstr);
         $win->AddHidden("aid", $aid);
         $win->AddHidden("recycle", $recycle);
-        $win->AddTitle("您确要删除，序号".$qstr."文档吗");
+        $win->AddTitle("您确要删除，序号{$qstr}文档吗");
         $winform = $win->GetWindow("ok");
         $win->Display();
     }
