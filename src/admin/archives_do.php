@@ -317,7 +317,6 @@ else if ($dopost == "checkArchives") {
         //更新网页
         foreach ($okids as $aid) {
             $arc = new Archives($aid);
-            DedeSearchDo("update", array("id" => $aid));
             $arc->MakeHtml();
         }
         ShowMsg("成功移动{$j}个文档", $ENV_GOBACK_URL);
@@ -338,8 +337,7 @@ else if ($dopost == 'return') {
     $qstrs = explode('`', $qstr);
     foreach ($qstrs as $aid) {
         $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET arcrank='-1',ismake='0' WHERE id='$aid'");
-        $dsql->ExecuteNoneQuery("UPDATE `#@__arctiny` SET `arcrank` = '-1' WHERE id = '$aid';");
-        DedeSearchDo("add", array("id" => $aid));
+        $dsql->ExecuteNoneQuery("UPDATE `#@__arctiny` SET `arcrank`='-1' WHERE id='$aid';");
     }
     ShowMsg("成功还原指定文档", "recycling.php");
     exit();
