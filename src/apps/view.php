@@ -13,7 +13,7 @@ if (empty($okview)) $okview = '';
 if (isset($arcID)) $aid = $arcID;
 if (!isset($dopost)) $dopost = '';
 $arcID = $aid = (isset($aid) && is_numeric($aid)) ? $aid : 0;
-if ($aid == 0) die("DedeX");
+if ($aid == 0) die("dedex");
 $arc = new Archives($aid);
 if ($arc->IsError) ParamError();
 //检查阅读权限

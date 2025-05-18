@@ -16,7 +16,7 @@ $loginurl = $cfg_basehost."/user";
 $ENV_GOBACK_URL = empty($_SERVER['HTTP_REFERER']) ? '' : $_SERVER['HTTP_REFERER'];
 if (empty($dopost)) $dopost = '';
 $aid = (isset($aid) && is_numeric($aid)) ? $aid : 0;
-if ($aid == 0) die("DedeX");
+if ($aid == 0) die("dedex");
 if ($aid == 0) {
     ShowMsg("没指定投票项目的id", "-1");
     exit();

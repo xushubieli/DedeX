@@ -11,7 +11,7 @@ $t1 = ExecTime();
 $tid = (isset($tid) && is_numeric($tid) ? $tid : 0);
 $mod = (isset($mod) && is_numeric($mod) ? $mod : 0);
 $channelid = (isset($channelid) && is_numeric($channelid) ? $channelid : 0);
-if ($tid == 0 && $channelid == 0) die("DedeX");
+if ($tid == 0 && $channelid == 0) die("dedex");
 if (isset($TotalResult)) $TotalResult = intval(preg_replace("/[^\d]/", '', $TotalResult));
 //如果指定了文档模型id但没有指定栏目id，那么自动获得为这个文档模型的第一个顶级栏目作为栏目默认栏目
 if (!empty($channelid) && empty($tid)) {
