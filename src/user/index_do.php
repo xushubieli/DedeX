@@ -23,7 +23,7 @@ if ($fmdo == 'sendMail') {
     $mailtitle = "来自{$cfg_webname}：邮件验证通知";
     $mailbody = '';
     $mailbody .= "尊敬的{$cfg_ml->fields['uname']}会员，欢迎成为{$cfg_webname}会员！\r\n通过注册还须进行最后一步操作，请点击链接或复制链接到地址栏访问：{$url}";
-    $headers = "From: ".$cfg_adminemail."\r\nReply-To: ".$cfg_adminemail;    
+    $headers = "From: ".$cfg_adminemail."\r\nReply-To: ".$cfg_adminemail;
     if ($cfg_sendmail_bysmtp == 'Y' && !empty($cfg_smtp_server)) {
         $mailtype = 'HTML';
         require_once(DEDEINC.'/libraries/mail.class.php');

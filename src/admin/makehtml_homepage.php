@@ -40,7 +40,7 @@ if ($dopost == "view") {
         $GLOBALS['_arclistEnv'] = 'index';
         $pv->SetTemplet($cfg_basedir.$cfg_templets_dir."/".$templet);
         $pv->SaveToHtml($homeFile);
-        ShowMsg("更新静态首页，<a href='$position' target='_blank'>点击浏览</a>", "javascript:;");
+        ShowMsg("更新静态首页，<a href='{$position}' target='_blank'>点击浏览</a>", "javascript:;");
     } else {
         //动态浏览
         if (file_exists($homeFile)) @unlink($homeFile);

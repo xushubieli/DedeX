@@ -45,7 +45,7 @@ if (isset($dopost) && $dopost == "delete") {
     if ($dquery != "") $dquery = " WHERE ".$dquery;
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__statistics_detail` $dquery");
     ShowMsg("成功删除指定的记录", "statistics_list.php");
-    exit();    
+    exit();
 } else {
     $addsql = " WHERE ip LIKE '%$ip%' ";
     if ($url_type === -1) {

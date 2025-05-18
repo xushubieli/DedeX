@@ -43,7 +43,7 @@ if ($ctagid == 0 && $allfinish) {
     $dlist->SetTagsDir($tagsdir);
     $dlist->MakeHtml(1, 10);
     $reurl = '..'.$tagsdir;
-    ShowMsg("完成所有标签更新，<a href='$reurl' target='_blank'>点击浏览</a>", "javascript:;");
+    ShowMsg("完成所有标签更新，<a href='{$reurl}' target='_blank'>点击浏览</a>", "javascript:;");
     exit;
 }
 $tag = $dsql->GetOne("SELECT * FROM `#@__tagindex` WHERE id='$ctagid' LIMIT 0,1;");
@@ -73,12 +73,12 @@ if (is_array($tag) && count($tag) > 0) {
         $dlist->MakeHtml(1, 10);
         $reurl = '..'.$tagsdir;
         if ($upall == 1) {
-            ShowMsg("完成所有标签更新，<a href='$reurl' target='_blank'>点击浏览</a>", "javascript:;");
+            ShowMsg("完成所有标签更新，<a href='{$reurl}' target='_blank'>点击浏览</a>", "javascript:;");
         } else {
             $query = "UPDATE `#@__tagindex` SET mktime=uptime WHERE id='$ctagid' ";
             $dsql->ExecuteNoneQuery($query);
             $reurl .= '/'.$ctagid;
-            ShowMsg("更新标签".$tag['tag']."，<a href='$reurl' target='_blank'>点击浏览</a>", "javascript:;");
+            ShowMsg("更新标签".$tag['tag']."，<a href='{$reurl}' target='_blank'>点击浏览</a>", "javascript:;");
         }
         exit();
     } else {
@@ -90,12 +90,12 @@ if (is_array($tag) && count($tag) > 0) {
                 $ctagid = 0;
                 $nextpage = 0;
             }
-            $gourl = "makehtml_taglist_action.php?maxpagesize=$maxpagesize&tagid=$tagid&pageno=$nextpage&upall=$upall&ctagid=$ctagid&startid=$startid&endid=$endid&mktime=$mktime";
+            $gourl = "makehtml_taglist_action.php?maxpagesize={$maxpagesize}&tagid={$tagid}&pageno={$nextpage}&upall={$upall}&ctagid={$ctagid}&startid={$startid}&endid={$endid}&mktime={$mktime}";
             ShowMsg("更新标签".$tag['tag']."，继续更新标签", $gourl, 0, 100);
             exit();
         } else {
             //继续当前这个
-            $gourl = "makehtml_taglist_action.php?mkpage=$mkpage&maxpagesize=$maxpagesize&tagid=$tagid&pageno=$pageno&upall=$upall&ctagid=$ctagid&startid=$startid&endid=$endid&mktime=$mktime";
+            $gourl = "makehtml_taglist_action.php?mkpage={$mkpage}&maxpagesize={$maxpagesize}&tagid={$tagid}&pageno={$pageno}&upall={$upall}&ctagid={$ctagid}&startid={$startid}&endid={$endid}&mktime={$mktime}";
             ShowMsg("更新标签".$tag['tag']."，继续更新标签", $gourl, 0, 100);
             exit();
         }

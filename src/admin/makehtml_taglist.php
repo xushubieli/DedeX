@@ -16,7 +16,7 @@ if ($action == "search") {
         $dsql->Execute('al',$sql);
         $result = array();
         while($row=$dsql->GetObject('al')){ 
-            $row->text= $row->tag;    
+            $row->text= $row->tag;
             $result[] = $row;
         }
         $result = array(

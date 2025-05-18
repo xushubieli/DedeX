@@ -10,6 +10,6 @@ if (!defined('DEDEINC')) exit('dedex');
 //只是用于进行注释
 function lib_comment(&$ctag, &$refObj)
 {
-    return "";   
+    return "";
 }
 ?>

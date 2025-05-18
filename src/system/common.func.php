@@ -438,7 +438,7 @@ function HideEmail($email)
     $em   = explode("@",$email);
     $name = implode('@', array_slice($em, 0, count($em)-1));
     $len  = floor(strlen($name)/2);
-    return substr($name,0, $len).str_repeat('*', $len)."@".end($em);   
+    return substr($name,0, $len).str_repeat('*', $len)."@".end($em);
 }
 //用来返回index的active
 function IndexActive($idx)

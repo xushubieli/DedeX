@@ -109,7 +109,7 @@ $adminMenu1
     <m:item name='积分头衔设置' link='member_scores.php' rank='member_Type' target='main' />
 </m:top>
 $adminMenu2
-<m:top item='12_' name='系统帮助' icon='fa fa-question-circle'>
-    <m:item name='GitHub托管' link='https://github.com/xushubieli/DedeX' rank='' target='_blank' />
+<m:top item='12_' name='关于我们' icon='fa fa-info-circle'>
+    <m:item name='GitHub' link='https://github.com/xushubieli/DedeX' rank='' target='_blank' />
 </m:top>";
 ?>
