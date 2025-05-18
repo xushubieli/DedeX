@@ -112,34 +112,30 @@ EOT;
         $dsql->SetQuery("SELECT * FROM `#@__sysconfig` WHERE info LIKE '%$keywords%' OR varname LIKE '%$keywords%' ORDER BY aid ASC");
         $dsql->Execute();
         while ($row = $dsql->GetArray()) {
-            $row['info'] = preg_replace("#{$keywords}#", '<b class="text-danger">'.$keywords.'</b>', $row['info']);
-            $row['varname'] = preg_replace("#{$keywords}#", '<b class="text-danger">'.$keywords.'</b>', $row['varname']);
-    ?>
-<tr>
-    <td><?php echo $row['info'];?></td>
-    <td>
-        <?php
-        if ($row['type'] == 'bool') {
-            $c1 = '';
-            $c2 = '';
-            $row['value'] == 'Y' ? $c1 = "checked" : $c2 = "checked";
-            echo "<label><input type='radio' name='edit___{$row['varname']}' value='Y' $c1> 是</label> ";
-            echo "<label><input type='radio' name='edit___{$row['varname']}' value='N' $c2> 否</label> ";
-        } else if ($row['type'] == 'bstring') {
-            echo "<textarea name='edit___{$row['varname']}' row='4' id='edit___{$row['varname']}' class='admin-textarea-xl'>".dede_htmlspecialchars($row['value'])."</textarea>";
-        } else if ($row['type'] == 'number') {
-            echo "<input type='text' name='edit___{$row['varname']}' id='edit___{$row['varname']}' value='{$row['value']}' class='w-65'>";
-        } else {
-            echo "<input type='text' name='edit___{$row['varname']}' id='edit___{$row['varname']}' value=\"".dede_htmlspecialchars($row['value'])."\" class='w-65'>";
-        }
         ?>
-    </td>
-    <td><?php echo $row['varname'] ?></td>
-</tr>
-<?php
-}
-?>
-</tbody>
+        <tr>
+            <td><?php echo $row['info'];?></td>
+            <td>
+                <?php
+                if ($row['type'] == 'bool') {
+                    $c1 = '';
+                    $c2 = '';
+                    $row['value'] == 'Y' ? $c1 = "checked" : $c2 = "checked";
+                    echo "<label><input type='radio' name='edit___{$row['varname']}' value='Y' $c1> 是</label> ";
+                    echo "<label><input type='radio' name='edit___{$row['varname']}' value='N' $c2> 否</label> ";
+                } else if ($row['type'] == 'bstring') {
+                    echo "<textarea name='edit___{$row['varname']}' row='4' id='edit___{$row['varname']}' class='admin-textarea-xl'>".dede_htmlspecialchars($row['value'])."</textarea>";
+                } else if ($row['type'] == 'number') {
+                    echo "<input type='text' name='edit___{$row['varname']}' id='edit___{$row['varname']}' value='{$row['value']}' class='w-65'>";
+                } else {
+                    echo "<input type='text' name='edit___{$row['varname']}' id='edit___{$row['varname']}' value=\"".dede_htmlspecialchars($row['value'])."\" class='w-65'>";
+                }
+                ?>
+            </td>
+            <td><?php echo $row['varname'] ?></td>
+        </tr>
+        <?php }?>
+    </tbody>
 </table>
 <?php
 exit;
@@ -157,35 +153,6 @@ exit;
         $hash .= $chars[mt_rand(0, $max)];
     }
     echo $hash;
-    exit();
-} else if($dopost == 'ping_ai_server'){
-    $server = isset($server) ? $server : '';
-    $apikey = isset($apikey) ? $apikey : '';
-    if (empty($server) || empty($apikey)) {
-        echo 'error';
-    } else {
-        require_once(DEDEINC.'/libraries/dedehttpdown.class.php');
-        $params = $_GET;
-        unset($params['dopost']);
-        unset($params['apikey']);
-        unset($params['server']);
-        $params['timestamp'] = time(); //加入时间戳
-        $cuserLogin = new userLogin();
-        $params['adminid'] = $cuserLogin->getUserID(); //加入时间戳
-        $params['ip'] = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1'; //获取客户端IP
-        ksort($params); //按字典序排序
-        $queryString = http_build_query($params); //生成查询字符串
-        $params['sign'] = md5($queryString.$apikey); //计算MD5签名
-        $url = $server.'/api/ping?'.http_build_query($params);
-        $dhd = new DedeHttpDown();
-        $dhd->OpenUrl($url);
-        $data = $dhd->GetJSON();
-        if (isset($data->code) && $data->code == 0) {
-            echo 'ok';
-        } else {
-            echo 'error';
-        }
-    }
     exit();
 }
 include DedeInclude('templets/sys_info.htm');

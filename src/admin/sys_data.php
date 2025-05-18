@@ -13,7 +13,7 @@ if (DEDEX_SAFE_MODE) {
 CheckPurview('sys_Data');
 if (empty($dopost)) $dopost = '';
 if ($cfg_dbtype == 'sqlite') {
-    showMsg("系统使用SQLite数据库，备份系统根目录下/data/{$cfg_dbname}.db文件即可", "javascript:;");
+    showMsg("系统使用SQLite数据库，备份根目录/data/{$cfg_dbname}.db文件即可", "javascript:;");
     exit();
 }
 //查看表结构

@@ -12,6 +12,7 @@ $errmsg = '';
 if (version_compare(PHP_VERSION, '8.0.0', '>=') && function_exists("mysqli_report")) {
     mysqli_report(MYSQLI_REPORT_OFF);
 }
+define('INSTALL_DEMO_DEDEX', 'dedexdemo.txt');
 define('DEDEINC',dirname(__FILE__).'/../system');
 define('DEDEDATA',dirname(__FILE__).'/../data');
 define('DEDEROOT',preg_replace("#[\\\\\/]install#", '', dirname(__FILE__)));
@@ -24,14 +25,14 @@ foreach(Array('_GET','_POST','_COOKIE') as $_request)
 require_once(DEDEINC.'/dedealert.func.php');
 require_once(DEDEINC.'/common.func.php');
 if (file_exists(INSLOCKFILE)) {
-    die(DedeAlert("完成软件安装，如果您要重新安装，安装目录找到install文件夹，然后删除install_lock.txt文件",ALERT_DANGER));
+    die(DedeAlert("完成软件安装，重新安装，根目录/install文件夹，删除里面install_lock.txt文件",ALERT_DANGER));
 }
 if (empty($step)) {
     $step = 1;
 }
 $proto = IsSSL()? "https://" : "http://";
 //使用协议书
-if ($step==1) {
+if ($step == 1) {
     $arrMsg = array();
     if (version_compare(PHP_VERSION, '5.3.0', '<')) {
         $arrMsg[] = "PHP请升级到5.3及以上版本，低版本PHP环境无法正常使用本系统";
@@ -72,7 +73,7 @@ if ($step==1) {
     exit();
 }
 //普通安装
-else if ($step==2) {
+else if ($step == 2) {
     $dbtype = empty($dbtype)? "mysql" : $dbtype;
     $dblang = "utf8";
     if (!in_array($dbtype,array("mysql", "sqlite"))) {
@@ -113,7 +114,6 @@ else if ($step==2) {
     $fp = fopen(dirname(__FILE__)."/config.cache.inc.php","r");
     $configStr2 = fread($fp,filesize(dirname(__FILE__)."/config.cache.inc.php"));
     fclose($fp);
-    //common.inc.php
     $configStr1 = str_replace("~dbtype~", $dbtype, $configStr1);
     $configStr1 = str_replace("~dbhost~", $dbhost, $configStr1);
     $configStr1 = str_replace("~dbname~", $dbname, $configStr1);
@@ -125,7 +125,6 @@ else if ($step==2) {
     $fp = fopen(DEDEDATA."/common.inc.php","w") or die("<script>alert('写入配置失败，请检查/data目录是否可写入');javascript:history.go(-1);</script>");
     fwrite($fp, $configStr1);
     fclose($fp);
-    //config.cache.inc.php
     $cmspath = trim(preg_replace("#\/{1,}#", '/', $cmspath));
     if ($cmspath!='' && !preg_match("#^\/#", $cmspath)) $cmspath = '/'.$cmspath;
     if ($cmspath=='') $indexUrl = '/';
@@ -180,7 +179,7 @@ else if ($step==2) {
     fclose($fp);
     //导入默认数据
     $query = '';
-    $fp = fopen(dirname(__FILE__).'/sql-dfdata.txt','r');
+    $fp = fopen(dirname(__FILE__).'/sql-dfdata.txt', 'r');
     while(!feof($fp))
     {
         $line = rtrim(fgets($fp, 1024));
@@ -233,6 +232,26 @@ else if ($step==2) {
     $dbtype == 'sqlite'? $db->exec($adminquery): mysql_query($adminquery, $conn);
     $adminquery = "INSERT INTO `{$dbprefix}member_space` (`mid`,`pagesize`,`matt`,`spacename`,`spacelogo`,`spacestyle`,`sign`,`spacenews`) VALUES ('1','10','0','{$adminuser}的个人主页','','person','',''); ";
     $dbtype == 'sqlite'? $db->exec($adminquery) : mysql_query($adminquery, $conn);
+    //安装演示数据
+    if ($installdemo == 1) {
+        if ($setupsql = file_get_contents(INSTALL_DEMO_DEDEX)) {
+            $setupsql = preg_replace("#ENGINE=MyISAM#i", 'TYPE=MyISAM', $setupsql);
+            $sql41tmp = 'ENGINE=MyISAM DEFAULT CHARSET='.$cfg_db_language;
+            if ($mysql_version >= 4.1) {
+                $setupsql = preg_replace("#TYPE=MyISAM#i", $sql41tmp, $setupsql);
+            }
+            $setupsql = preg_replace("#_ROOTURL_#i", $rooturl, $setupsql);
+            $setupsql = preg_replace("#[\r\n]{1,}#", "\n", $setupsql);
+            $setupsql = preg_replace('/#@__/i', $dbprefix, $setupsql);
+            $sqls = preg_split("#;[ \t]{0,}\n#", $setupsql);
+            foreach($sqls as $sql) {
+                if(trim($sql)!='') mysql_query($sql, $conn);
+            }
+            UpDateCatCache();
+        } else {
+            die("<script>alert('检查到演示数据文件不存在');javascript:history.go(-1);</script>");
+        }
+    }
     //锁定程序安装
     $fp = fopen(INSLOCKFILE,'w');
     fwrite($fp,'ok');
@@ -241,7 +260,7 @@ else if ($step==2) {
     exit();
 }
 //检测数据库是否有效
-else if ($step==10) {
+else if ($step == 10) {
     header("Pragma:no-cache\r\n");
     header("Cache-Control:no-cache\r\n");
     header("Expires:0\r\n");

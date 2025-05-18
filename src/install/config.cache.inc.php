@@ -133,10 +133,4 @@ $cfg_mb_msgischeck = 'N';
 $cfg_mb_reginfo = 'Y';
 $cfg_title_site = 'N';
 $cfg_memcache_enable = 'N';
-$cfg_ai_enabled = 'Y';
-$cfg_ai_server = 'http://localhost:8087';
-$cfg_ai_apikey = '~apiKey~';
-$cfg_ai_max_tokens = '';
-$cfg_ai_temperature = '';
-$cfg_ai_top_p = '';
 ?>

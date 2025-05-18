@@ -171,7 +171,7 @@ else if ($dopost == "query") {
                 break;
             }
             echo "<hr>";
-            echo "记录：$j";
+            echo "记录：{$j}";
             echo "<hr>";
             foreach ($row as $k => $v) {
                 echo "{$k}：{$v}<br>\r\n";
@@ -195,7 +195,7 @@ else if ($dopost == "query") {
             if ($errCode == "") {
                 $i++;
             } else {
-                $nerrCode .= "执行{$q}出错，错误提示：{$errCode};
+                $nerrCode .= "执行{$q}出错，错误提示：{$errCode}";
             }
         }
         echo "成功执行{$i}个SQL语句";
