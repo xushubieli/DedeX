@@ -65,15 +65,14 @@ function GetTagList($dsql,$pageno,$pagesize,$orderby='aid')
             <td scope='col'>创建时间</td>
             <td scope='col'>操作</td>
         </tr>
-    </thead>";
+    </thead><tbody>";
     echo $printhead;
     $dsql->SetQuery("SELECT aid,title,templet,click,edtime,namerule,listdir,defaultpage,nodefault FROM `#@__freelist` $addsql ORDER BY $orderby DESC LIMIT $start,$pagesize");
     $dsql->Execute();
     while($row = $dsql->GetArray())
     {
         $listurl = GetFreeListUrl($row['aid'],$row['namerule'],$row['listdir'],$row['defaultpage'],$row['nodefault']);
-        $line = "<tbody>
-            <tr>
+        $line = "<tr>
             <td>{$row['aid']}</td>
             <td><a href='{$listurl}' target='_blank'>{$row['title']}</a></td>
             <td>{$row['templet']}</td>
@@ -85,10 +84,9 @@ function GetTagList($dsql,$pageno,$pagesize,$orderby='aid')
                 <a href='{$listurl}' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='预览'></i></a>
                 <a href=\"javascript:DelNote({$row['aid']});\" class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
             </td>
-        </tr>
-    </tbody>";
+        </tr>";
         echo $line;
     }
-    echo "</table></div>";
+    echo "</tbody></table></div>";
 }
 ?>
