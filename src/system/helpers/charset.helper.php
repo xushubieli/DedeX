@@ -307,12 +307,12 @@ if (!function_exists('AutoCharset')) {
         if (is_string($fContents)) {
             if (function_exists('mb_convert_encoding')) {
                 return mb_convert_encoding($fContents, $to, $from);
-            } elseif (function_exists('iconv')) {
+            } else if (function_exists('iconv')) {
                 return iconv($from, $to, $fContents);
             } else {
                 return $fContents;
             }
-        } elseif (is_array($fContents)) {
+        } else if (is_array($fContents)) {
             foreach ($fContents as $key => $val) {
                 $_key =     AutoCharset($key, $from, $to);
                 $fContents[$_key] = AutoCharset($val, $from, $to);

@@ -191,7 +191,7 @@ class HTMLPurifier_Lexer_DOMLex extends HTMLPurifier_Lexer
               $tokens[] = $this->factory->createText($data);
             }
             return false;
-        } elseif ($node->nodeType === XML_CDATA_SECTION_NODE) {
+        } else if ($node->nodeType === XML_CDATA_SECTION_NODE) {
             // undo libxml's special treatment of <script> and <style> tags
             $last = end($tokens);
             $data = $node->data;
@@ -209,13 +209,13 @@ class HTMLPurifier_Lexer_DOMLex extends HTMLPurifier_Lexer
             }
             $tokens[] = $this->factory->createText($this->parseText($data, $config));
             return false;
-        } elseif ($node->nodeType === XML_COMMENT_NODE) {
+        } else if ($node->nodeType === XML_COMMENT_NODE) {
             // this is code is only invoked for comments in script/style in versions
             // of libxml pre-2.6.28 (regular comments, of course, are still
             // handled regularly)
             $tokens[] = $this->factory->createComment($node->data);
             return false;
-        } elseif ($node->nodeType !== XML_ELEMENT_NODE) {
+        } else if ($node->nodeType !== XML_ELEMENT_NODE) {
             // not-well tested: there may be other nodes we have to grab
             return false;
         }

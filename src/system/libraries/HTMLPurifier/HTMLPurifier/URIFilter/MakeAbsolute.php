@@ -82,7 +82,7 @@ class HTMLPurifier_URIFilter_MakeAbsolute extends HTMLPurifier_URIFilter
         }
         if ($uri->path === '') {
             $uri->path = $this->base->path;
-        } elseif ($uri->path[0] !== '/') {
+        } else if ($uri->path[0] !== '/') {
             // relative path, needs more complicated processing
             $stack = explode('/', $uri->path);
             $new_stack = array_merge($this->basePathStack, $stack);
@@ -131,7 +131,7 @@ class HTMLPurifier_URIFilter_MakeAbsolute extends HTMLPurifier_URIFilter
                         // error case: attempted to back out too far:
                         // restore the leading slash
                         $result[] = '';
-                    } elseif ($segment === '..') {
+                    } else if ($segment === '..') {
                         $result[] = '..'; // cannot remove .. with ..
                     }
                 } else {

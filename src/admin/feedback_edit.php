@@ -26,7 +26,7 @@ if ($dopost == 'edit') {
     $dsql->ExecuteNoneQuery($query);
     ShowMsg("成功回复一则留言", $ENV_GOBACK_URL);
     exit();
-} elseif ($dopost === 'makehtml') {
+} else if ($dopost === 'makehtml') {
     require_once(DEDEADMIN.'/inc/inc_archives_functions.php');
     $query = "SELECT * FROM `#@__feedback` WHERE id=$id";
     $row = $dsql->GetOne($query);

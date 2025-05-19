@@ -211,7 +211,7 @@ if ($paytype === 0) {
             ShowMsg("生成微信支付信息失败，请联系网站管理员", "buy.php");
             exit;
         }
-    } elseif ($paytype === 2) {
+    } else if ($paytype === 2) {
         include_once(DEDEINC.'/libraries/webwindow.class.php');
         $pInfo = $dsql->GetOne("SELECT * FROM `#@__sys_payment` WHERE id = $paytype");
         $pData = (array)json_decode($pInfo['config']);
@@ -238,7 +238,7 @@ if ($paytype === 0) {
             ShowMsg("生成微信支付信息失败，请联系网站管理员", "buy.php");
             exit;
         }
-    }  elseif ($paytype === 3) {
+    }  else if ($paytype === 3) {
         include_once(DEDEINC.'/libraries/webwindow.class.php');
         //银行转账
         $pInfo = $dsql->GetOne("SELECT * FROM `#@__sys_payment` WHERE id = $paytype");
@@ -249,7 +249,7 @@ if ($paytype === 0) {
         $win->AddMsgItem($msg);
         $winform = $win->GetWindow("hand", false);
         $win->Display(DEDEMEMBER."/templets/win_templet.htm");
-    } elseif ($paytype === 4) {
+    } else if ($paytype === 4) {
         //余额付款
         if ($cfg_ml->M_UserMoney < $row['money']) {
             ShowMsg("余额不足，请确保当前账户有足够金币支付", "buy.php");
@@ -282,7 +282,7 @@ if ($paytype === 0) {
         }
         ShowMsg("成功使用余额付款", "buy.php");
         exit;
-    } elseif ($paytype === 5) {
+    } else if ($paytype === 5) {
         //货到付款
         ShowMsg("虚拟物品，不支持货到付款", "buy.php");
         exit;

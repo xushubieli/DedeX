@@ -86,7 +86,7 @@ class BasicPushEvent
                 list($this->postxml, $this->appid) = [$array[1], $array[2]];
             }
             $this->receive = new DataArray(Tools::xml2arr($this->postxml));
-        } elseif ($_SERVER['REQUEST_METHOD'] == "GET" && $this->checkSignature()) {
+        } else if ($_SERVER['REQUEST_METHOD'] == "GET" && $this->checkSignature()) {
             @ob_clean();
             exit($this->input->get('echostr'));
         } else {

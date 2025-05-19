@@ -11,7 +11,7 @@ CheckPurview('member_Card');
 if (empty($dopost)) $dopost = '';
 if ($dopost == '') include(DEDEADMIN."/templets/cards_make.htm");
 //生成积分
-elseif ($dopost == 'make') {
+else if ($dopost == 'make') {
     $row = $dsql->GetOne("SELECT * FROM `#@__moneycard_record` ORDER BY aid DESC");
     !is_array($row) ? $startid = 100000 : $startid = $row['aid'] + 100000;
     $row = $dsql->GetOne("SELECT * FROM `#@__moneycard_type` WHERE tid='$cardtype'");

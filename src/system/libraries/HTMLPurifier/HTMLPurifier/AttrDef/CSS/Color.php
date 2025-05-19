@@ -129,7 +129,7 @@ class HTMLPurifier_AttrDef_CSS_Color extends HTMLPurifier_AttrDef
                 if ($current_type == 'integer') {
                     // Return value between range 0 -> $max_value
                     $new_parts[] = (int)max(min($part, $max_value), 0);
-                } elseif ($current_type == 'percentage') {
+                } else if ($current_type == 'percentage') {
                     $new_parts[] = (float)max(min(rtrim($part, '%'), $max_value), 0) . '%';
                 }
             }

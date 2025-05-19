@@ -360,7 +360,7 @@ class HTMLPurifier_Printer_ConfigForm_default extends HTMLPurifier_Printer
                 $ret .= $this->element('option', $val, $attr);
             }
             $ret .= $this->end('select');
-        } elseif ($type === HTMLPurifier_VarParser::TEXT ||
+        } else if ($type === HTMLPurifier_VarParser::TEXT ||
                 $type === HTMLPurifier_VarParser::ITEXT ||
                 $type === HTMLPurifier_VarParser::ALIST ||
                 $type === HTMLPurifier_VarParser::HASH ||

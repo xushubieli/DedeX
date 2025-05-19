@@ -121,7 +121,7 @@ class HTMLPurifier_EntityParser
         $named_part = empty($matches[3]) ? (empty($matches[4]) ? "" : $matches[4]) : $matches[3];
         if ($hex_part !== NULL && $hex_part !== "") {
             return HTMLPurifier_Encoder::unichr(hexdec($hex_part));
-        } elseif ($dec_part !== NULL && $dec_part !== "") {
+        } else if ($dec_part !== NULL && $dec_part !== "") {
             return HTMLPurifier_Encoder::unichr((int) $dec_part);
         } else {
             if (!$this->_entity_lookup) {

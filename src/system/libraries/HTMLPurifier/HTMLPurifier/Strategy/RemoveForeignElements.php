@@ -38,7 +38,7 @@ class HTMLPurifier_Strategy_RemoveForeignElements extends HTMLPurifier_Strategy
         // remove script contents compatibility
         if ($remove_script_contents === true) {
             $hidden_elements['script'] = true;
-        } elseif ($remove_script_contents === false && isset($hidden_elements['script'])) {
+        } else if ($remove_script_contents === false && isset($hidden_elements['script'])) {
             unset($hidden_elements['script']);
         }
 
@@ -109,11 +109,11 @@ class HTMLPurifier_Strategy_RemoveForeignElements extends HTMLPurifier_Strategy
 
                     if (isset($hidden_elements[$token->name]) && $token instanceof HTMLPurifier_Token_Start) {
                         $textify_comments = $token->name;
-                    } elseif ($token->name === $textify_comments && $token instanceof HTMLPurifier_Token_End) {
+                    } else if ($token->name === $textify_comments && $token instanceof HTMLPurifier_Token_End) {
                         $textify_comments = false;
                     }
 
-                } elseif ($escape_invalid_tags) {
+                } else if ($escape_invalid_tags) {
                     // invalid tag, generate HTML representation and insert in
                     if ($e) {
                         $e->send(E_WARNING, 'Strategy_RemoveForeignElements: Foreign element to text');
@@ -127,7 +127,7 @@ class HTMLPurifier_Strategy_RemoveForeignElements extends HTMLPurifier_Strategy
                     if (isset($hidden_elements[$token->name])) {
                         if ($token instanceof HTMLPurifier_Token_Start) {
                             $remove_until = $token->name;
-                        } elseif ($token instanceof HTMLPurifier_Token_Empty) {
+                        } else if ($token instanceof HTMLPurifier_Token_Empty) {
                             // do nothing: we're still looking
                         } else {
                             $remove_until = false;
@@ -142,12 +142,12 @@ class HTMLPurifier_Strategy_RemoveForeignElements extends HTMLPurifier_Strategy
                     }
                     continue;
                 }
-            } elseif ($token instanceof HTMLPurifier_Token_Comment) {
+            } else if ($token instanceof HTMLPurifier_Token_Comment) {
                 // textify comments in script tags when they are allowed
                 if ($textify_comments !== false) {
                     $data = $token->data;
                     $token = new HTMLPurifier_Token_Text($data);
-                } elseif ($trusted || $check_comments) {
+                } else if ($trusted || $check_comments) {
                     // always cleanup comments
                     $trailing_hyphen = false;
                     if ($e) {
@@ -189,7 +189,7 @@ class HTMLPurifier_Strategy_RemoveForeignElements extends HTMLPurifier_Strategy
                     }
                     continue;
                 }
-            } elseif ($token instanceof HTMLPurifier_Token_Text) {
+            } else if ($token instanceof HTMLPurifier_Token_Text) {
             } else {
                 continue;
             }

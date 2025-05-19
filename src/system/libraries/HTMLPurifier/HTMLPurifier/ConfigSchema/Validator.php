@@ -174,7 +174,7 @@ class HTMLPurifier_ConfigSchema_Validator
             foreach ($d->valueAliases as $alias => $real) {
                 if (isset($d->allowed[$alias])) {
                     $this->error("alias '$alias'", 'must not be an allowed value');
-                } elseif (!isset($d->allowed[$real])) {
+                } else if (!isset($d->allowed[$real])) {
                     $this->error("alias '$alias'", 'must be an alias to an allowed value');
                 }
             }

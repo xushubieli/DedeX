@@ -313,7 +313,7 @@ $GLOBALS['allowedTokens'] = array(
     'T_DOUBLE_ARROW',
     'T_DOUBLE_CAST',
     'T_ELSE',
-    'T_ELSEIF',
+    'T_else if',
     'T_EMPTY',
     'T_ENCAPSED_AND_WHITESPACE',
     'T_ENDDECLARE',

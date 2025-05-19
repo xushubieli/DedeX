@@ -249,16 +249,16 @@ class HTMLPurifier_Filter_ExtractStyleBlocks extends HTMLPurifier_Filter
                                         // in which case we ignore the
                                         // outer $delim
                                     }
-                                } elseif ($j % 2) {
+                                } else if ($j % 2) {
                                     // set delimiter
                                     $sdelim = $y;
                                 } else {
                                     $attrdef = null;
                                     if ($sdelim === '#') {
                                         $attrdef = $this->_id_attrdef;
-                                    } elseif ($sdelim === '.') {
+                                    } else if ($sdelim === '.') {
                                         $attrdef = $this->_class_attrdef;
-                                    } elseif ($sdelim === ':') {
+                                    } else if ($sdelim === ':') {
                                         $attrdef = $this->_enum_attrdef;
                                     } else {
                                         throw new HTMLPurifier_Exception('broken invariant sdelim and preg_split');

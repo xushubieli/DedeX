@@ -26,7 +26,7 @@ if ($dopost == 'save') {
     $dsql->ExecuteNoneQuery($query);
     ShowMsg('成功添加一个链接，但需要审核后才能显示', 'flink.php');
     exit;
-} elseif ($dopost == 'add') {
+} else if ($dopost == 'add') {
     //显示模板简单PHP文件
     include_once(DEDETEMPLATE.'/apps/flink_add.htm');
     exit;

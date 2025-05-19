@@ -170,7 +170,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
                         $token->rewind = $i;
                         if ($token instanceof HTMLPurifier_Token_Start) {
                             array_pop($this->stack);
-                        } elseif ($token instanceof HTMLPurifier_Token_End) {
+                        } else if ($token instanceof HTMLPurifier_Token_End) {
                             $this->stack[] = $token->start;
                         }
                     }
@@ -246,7 +246,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
                     $token->armor
                 );
                 $ok = true;
-            } elseif ($type && $type !== 'empty' && $token instanceof HTMLPurifier_Token_Empty) {
+            } else if ($type && $type !== 'empty' && $token instanceof HTMLPurifier_Token_Empty) {
                 // claims to be empty but really is a start tag
                 // NB: this assignment is required
                 $old_token = $token;
@@ -257,10 +257,10 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
                 // punt (since we had to modify the input stream in a non-trivial way)
                 $reprocess = true;
                 continue;
-            } elseif ($token instanceof HTMLPurifier_Token_Empty) {
+            } else if ($token instanceof HTMLPurifier_Token_Empty) {
                 // real empty token
                 $ok = true;
-            } elseif ($token instanceof HTMLPurifier_Token_Start) {
+            } else if ($token instanceof HTMLPurifier_Token_Start) {
                 // start tag
 
                 // ...unless they also have to close their parent
@@ -384,7 +384,7 @@ class HTMLPurifier_Strategy_MakeWellFormed extends HTMLPurifier_Strategy
                     // ah, nothing interesting happened; do normal processing
                     if ($token instanceof HTMLPurifier_Token_Start) {
                         $this->stack[] = $token;
-                    } elseif ($token instanceof HTMLPurifier_Token_End) {
+                    } else if ($token instanceof HTMLPurifier_Token_End) {
                         throw new HTMLPurifier_Exception(
                             'Improper handling of end tag in start code; possible error in MakeWellFormed'
                         );

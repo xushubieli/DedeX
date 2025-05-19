@@ -298,11 +298,11 @@ class DedeHttpDown
     {
         if ($_SERVER['HTTPS'] && ('1' == $_SERVER['HTTPS'] || 'on' == strtolower($_SERVER['HTTPS']))) {
             return true;
-        } elseif ('https' == $_SERVER['REQUEST_SCHEME']) {
+        } else if ('https' == $_SERVER['REQUEST_SCHEME']) {
             return true;
-        } elseif ('443' == $_SERVER['SERVER_PORT']) {
+        } else if ('443' == $_SERVER['SERVER_PORT']) {
             return true;
-        } elseif ('https' == $_SERVER['HTTP_X_FORWARDED_PROTO']) {
+        } else if ('https' == $_SERVER['HTTP_X_FORWARDED_PROTO']) {
             return true;
         }
         return false;

@@ -411,7 +411,7 @@ class HTMLPurifier_HTMLDefinition extends HTMLPurifier_Definition
                 ) {
                     unset($this->info[$tag]->attr[$attr]);
                     continue;
-                } elseif (isset($forbidden_attributes["$tag.$attr"])) { // this segment might get removed eventually
+                } else if (isset($forbidden_attributes["$tag.$attr"])) { // this segment might get removed eventually
                     // $tag.$attr are not user supplied, so no worries!
                     trigger_error(
                         "Error with $tag.$attr: tag.attr syntax not supported for " .

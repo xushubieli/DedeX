@@ -41,7 +41,7 @@ class HTMLPurifier_AttrDef_Lang extends HTMLPurifier_AttrDef
             case 3:
                 if (!ctype_alpha($subtags[0])) {
                     return false;
-                } elseif (!ctype_lower($subtags[0])) {
+                } else if (!ctype_lower($subtags[0])) {
                     $subtags[0] = strtolower($subtags[0]);
                 }
                 break;

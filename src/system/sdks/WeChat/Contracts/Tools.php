@@ -119,7 +119,7 @@ class Tools
             $content .= "<{$key}>";
             if (is_array($val) || is_object($val)) {
                 $content .= self::_arr2xml($val);
-            } elseif (is_string($val)) {
+            } else if (is_string($val)) {
                 $content .= '<![CDATA['.preg_replace("/[\\x00-\\x08\\x0b-\\x0c\\x0e-\\x1f]/", '', $val).']]>';
             } else {
                 $content .= $val;
@@ -174,7 +174,7 @@ class Tools
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $data[$key] = self::buildEnEmojiData($value);
-            } elseif (is_string($value)) {
+            } else if (is_string($value)) {
                 $data[$key] = self::emojiEncode($value);
             } else {
                 $data[$key] = $value;
@@ -192,7 +192,7 @@ class Tools
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $data[$key] = self::buildDeEmojiData($value);
-            } elseif (is_string($value)) {
+            } else if (is_string($value)) {
                 $data[$key] = self::emojiDecode($value);
             } else {
                 $data[$key] = $value;
@@ -325,17 +325,17 @@ class Tools
         if (!is_array($data)) return $data;
         foreach ($data as $key => $value) if ($value instanceof \CURLFile) {
             $build = false;
-        } elseif (is_object($value) && isset($value->datatype) && $value->datatype === 'MY_CURL_FILE') {
+        } else if (is_object($value) && isset($value->datatype) && $value->datatype === 'MY_CURL_FILE') {
             $build = false;
             $mycurl = new MyCurlFile((array)$value);
             $data[$key] = $mycurl->get();
             self::$cache_curl[] = $mycurl->tempname;
-        } elseif (is_array($value) && isset($value['datatype']) && $value['datatype'] === 'MY_CURL_FILE') {
+        } else if (is_array($value) && isset($value['datatype']) && $value['datatype'] === 'MY_CURL_FILE') {
             $build = false;
             $mycurl = new MyCurlFile($value);
             $data[$key] = $mycurl->get();
             self::$cache_curl[] = $mycurl->tempname;
-        } elseif (is_string($value) && class_exists('CURLFile', false) && stripos($value, '@') === 0) {
+        } else if (is_string($value) && class_exists('CURLFile', false) && stripos($value, '@') === 0) {
             if (($filename = realpath(trim($value, '@'))) && file_exists($filename)) {
                 $build = false;
                 $data[$key] = self::createCurlFile($filename);

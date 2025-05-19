@@ -145,7 +145,7 @@ class HTMLPurifier_Lexer_DirectLex extends HTMLPurifier_Lexer
                 $cursor = $position_next_lt + 1;
                 $inside_tag = true;
                 continue;
-            } elseif (!$inside_tag) {
+            } else if (!$inside_tag) {
                 // We are not inside tag but there are no more tags
                 // If we're already at the end, break
                 if ($cursor === strlen($html)) {
@@ -166,7 +166,7 @@ class HTMLPurifier_Lexer_DirectLex extends HTMLPurifier_Lexer
                 }
                 $array[] = $token;
                 break;
-            } elseif ($inside_tag && $position_next_gt !== false) {
+            } else if ($inside_tag && $position_next_gt !== false) {
                 // We are in tag and it is well formed
                 // Grab the internals of the tag
                 $strlen_segment = $position_next_gt - $cursor;
@@ -393,7 +393,7 @@ class HTMLPurifier_Lexer_DirectLex extends HTMLPurifier_Lexer
         if ($num_equal === 0 && !$has_space) {
             // bool attribute
             return array($string => $string);
-        } elseif ($num_equal === 1 && !$has_space) {
+        } else if ($num_equal === 1 && !$has_space) {
             // only one attribute
             list($key, $quoted_value) = explode('=', $string);
             $quoted_value = trim($quoted_value);

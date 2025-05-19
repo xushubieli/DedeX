@@ -86,7 +86,7 @@ class HTMLPurifier_ConfigSchema
     {
         if ($prototype !== null) {
             HTMLPurifier_ConfigSchema::$singleton = $prototype;
-        } elseif (HTMLPurifier_ConfigSchema::$singleton === null || $prototype === true) {
+        } else if (HTMLPurifier_ConfigSchema::$singleton === null || $prototype === true) {
             HTMLPurifier_ConfigSchema::$singleton = HTMLPurifier_ConfigSchema::makeFromSerial();
         }
         return HTMLPurifier_ConfigSchema::$singleton;
@@ -166,7 +166,7 @@ class HTMLPurifier_ConfigSchema
         foreach ($this->info as $key => $v) {
             if (count((array) $v) == 1) {
                 $this->info[$key] = $v->type;
-            } elseif (count((array) $v) == 2 && isset($v->allow_null)) {
+            } else if (count((array) $v) == 2 && isset($v->allow_null)) {
                 $this->info[$key] = -$v->type;
             }
         }

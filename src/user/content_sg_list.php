@@ -35,7 +35,7 @@ if ($cInfos['usertype'] != '' && $cInfos['usertype'] != $cfg_ml->M_MbType) {
 if ($cid == 0) {
     $positionname = $cInfos['typename'];
 } else {
-    $positionname = str_replace('>', " / ", $tl->GetPositionName());
+    $positionname = str_replace('/', ' > ', $tl->GetPositionName());
 }
 $whereSql = " WHERE arc.channel = '$channelid' AND arc.mid='$mid' ";
 if ($keyword != '') {

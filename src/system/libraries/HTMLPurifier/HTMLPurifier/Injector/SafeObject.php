@@ -70,7 +70,7 @@ class HTMLPurifier_Injector_SafeObject extends HTMLPurifier_Injector
                 $new[] = new HTMLPurifier_Token_Empty('param', array('name' => $name, 'value' => $value));
             }
             $token = $new;
-        } elseif ($token->name == 'param') {
+        } else if ($token->name == 'param') {
             $nest = count($this->currentNesting) - 1;
             if ($nest >= 0 && $this->currentNesting[$nest]->name === 'object') {
                 $i = count($this->objectStack) - 1;
@@ -94,7 +94,7 @@ class HTMLPurifier_Injector_SafeObject extends HTMLPurifier_Injector
                     $token->attr['name'] === $this->addParam[$n]) {
                     // keep token, and add to param stack
                     $this->paramStack[$i][$n] = true;
-                } elseif (isset($this->allowedParam[strtolower($n)])) {
+                } else if (isset($this->allowedParam[strtolower($n)])) {
                     // keep token, don't do anything to it
                     // (could possibly check for duplicates here)
                     // Note: In principle, parameters should be case sensitive.

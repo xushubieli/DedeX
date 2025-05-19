@@ -41,11 +41,11 @@ if (!function_exists('HtmlReplace')) {
         if ($rptype == 0) {
             //仅替换网页标记
             $str = $purifier->purify($str);
-        } elseif ($rptype == 1) {
+        } else if ($rptype == 1) {
             //替换网页标记，去除连续空白字符
             $str = $purifier->purify($str);
             $str = preg_replace("/[\r\n\t ]+/", ' ', $str); //合并多余空格
-        } elseif ($rptype == 2) {
+        } else if ($rptype == 2) {
             //替换网页标记，去除所有空白字符
             $str = $purifier->purify($str);
             $str = preg_replace("/\s+/", '', $str);

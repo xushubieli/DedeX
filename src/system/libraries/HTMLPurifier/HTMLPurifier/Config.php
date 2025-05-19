@@ -133,7 +133,7 @@ class HTMLPurifier_Config
         }
         if (is_string($config)) {
             $ret->loadIni($config);
-        } elseif (is_array($config)) $ret->loadArray($config);
+        } else if (is_array($config)) $ret->loadArray($config);
         return $ret;
     }
 
@@ -628,9 +628,9 @@ class HTMLPurifier_Config
         // quick checks failed, let's create the object
         if ($type == 'HTML') {
             $def = new HTMLPurifier_HTMLDefinition();
-        } elseif ($type == 'CSS') {
+        } else if ($type == 'CSS') {
             $def = new HTMLPurifier_CSSDefinition();
-        } elseif ($type == 'URI') {
+        } else if ($type == 'URI') {
             $def = new HTMLPurifier_URIDefinition();
         } else {
             throw new HTMLPurifier_Exception(

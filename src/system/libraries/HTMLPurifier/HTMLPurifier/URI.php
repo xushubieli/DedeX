@@ -161,7 +161,7 @@ class HTMLPurifier_URI
             // file:///my/path
             // ///my/path
             $this->path = $segments_encoder->encode($this->path);
-        } elseif ($this->path !== '') {
+        } else if ($this->path !== '') {
             if ($this->path[0] === '/') {
                 // path-absolute (hier and relative)
                 // http:/my/path
@@ -175,7 +175,7 @@ class HTMLPurifier_URI
                 } else {
                     $this->path = $segments_encoder->encode($this->path);
                 }
-            } elseif (!is_null($this->scheme)) {
+            } else if (!is_null($this->scheme)) {
                 // path-rootless (hier)
                 // http:my/path
                 // Short circuit evaluation means we don't need to check nz

@@ -146,7 +146,7 @@ class HTMLPurifier_Strategy_FixNesting extends HTMLPurifier_Strategy
                 if ($result === true) {
                     // nop
                     $node->children = $children;
-                } elseif ($result === false) {
+                } else if ($result === false) {
                     $node->dead = true;
                     if ($e) $e->send(E_ERROR, 'Strategy_FixNesting: Node removed');
                 } else {

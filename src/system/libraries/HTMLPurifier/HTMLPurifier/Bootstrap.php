@@ -81,7 +81,7 @@ class HTMLPurifier_Bootstrap
         $autoload = array('HTMLPurifier_Bootstrap', 'autoload');
         if (($funcs = spl_autoload_functions()) === false) {
             spl_autoload_register($autoload);
-        } elseif (function_exists('spl_autoload_unregister')) {
+        } else if (function_exists('spl_autoload_unregister')) {
             if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
                 // prepend flag exists, no need for shenanigans
                 spl_autoload_register($autoload, true, true);

@@ -76,7 +76,7 @@ class TypeLink
             return $this->TypeInfos['typedir'];
         }
     }
-    //获得某栏目的链接列表：栏目一>栏目二>形式，islink表示返回的列表是否带连接
+    //获得某栏目的链接列表：栏目一/栏目二/形式，islink表示返回的列表是否带连接
     function GetPositionLink($islink = true)
     {
         $indexpage = "<li class='breadcrumb-item'><a href='".$this->indexUrl."'>".$this->indexName."</a></li>";
@@ -100,13 +100,13 @@ class TypeLink
                 $this->valuePosition = $indexpage.$this->valuePosition;
                 return $this->valuePosition;
             } else {
-                $currentTypeName = $this->TypeInfos['typename'];
+                $currentTypeName = '/'.$this->TypeInfos['typename'];
                 if ($this->TypeInfos['reid'] != 0) {
                     //调用递归逻辑
                     $this->LogicGetPosition($this->TypeInfos['reid'], false);
                 }
-                $this->valuePositionName .= ($this->valuePositionName ? '>' : '').$currentTypeName;
-                return $this->valuePositionName;
+                $this->valuePositionName .= $currentTypeName;
+                return trim($this->valuePositionName, '/');
             }
         }
     }
@@ -118,17 +118,16 @@ class TypeLink
     //获得某栏目的链接列表，递归逻辑部分
     function LogicGetPosition($id, $islink)
     {
-        $this->dsql->SetQuery("SELECT id,reid,typename,typedir,isdefault,ispart,defaultname,namerule2,moresite,siteurl,sitepath FROM `#@__arctype` WHERE id='".$id."'");
+        $this->dsql->SetQuery("SELECT id,reid,typename,typedir,isdefault,ispart,defaultname,namerule2,moresite,siteurl,sitepath FROM `#@__arctype` WHERE id='$id'");
         $tinfos = $this->dsql->GetOne();
         if ($islink) {
             $this->valuePosition = $this->GetOneTypeLink($tinfos).$this->valuePosition;
         } else {
-            $this->valuePositionName = $tinfos['typename'].$this->valuePositionName;
+            $currentTypeName = '/'.$tinfos['typename'];
+            $this->valuePositionName = $currentTypeName.$this->valuePositionName;
         }
         if ($tinfos['reid'] > 0) {
             $this->LogicGetPosition($tinfos['reid'], $islink);
-        } else {
-            return 0;
         }
     }
     //获得某个栏目的超链接信息

@@ -1177,12 +1177,12 @@ function private_rt($str)
     $rs = '$GLOBALS[\'';
     if ($arr[0] == 'cfg') {
         return $rs.'cfg_'.$arr[1]."']";
-    } elseif ($arr[0] == 'var') {
+    } else if ($arr[0] == 'var') {
         $arr[0] = '_vars';
         $rs .= implode('\'][\'', $arr);
         $rs .= "']";
         return $rs;
-    } elseif ($arr[0] == 'global') {
+    } else if ($arr[0] == 'global') {
         unset($arr[0]);
         $rs .= implode('\'][\'', $arr);
         $rs .= "']";

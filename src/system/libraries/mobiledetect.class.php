@@ -969,7 +969,7 @@ class Mobile_Detect
         //Test both the regular and the HTTP_ prefix
         if (isset($this->httpHeaders[$header])) {
             return $this->httpHeaders[$header];
-        } elseif (isset($this->httpHeaders[$altHeader])) {
+        } else if (isset($this->httpHeaders[$altHeader])) {
             return $this->httpHeaders[$altHeader];
         }
 

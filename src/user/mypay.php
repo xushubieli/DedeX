@@ -20,7 +20,7 @@ if ($dopost == '') {
     $dlist->SetTemplate(DEDEMEMBER.'/templets/mypay.htm');
     $dlist->SetSource($query);
     $dlist->Display();
-} elseif ($dopost == 'del') {
+} else if ($dopost == 'del') {
     $ids = preg_replace("#[^0-9,]#", "", $ids);
     $query = "DELETE FROM `#@__member_operation` WHERE aid in($ids) And mid='{$cfg_ml->M_ID}' And product='archive'";
     $dsql->ExecuteNoneQuery($query);

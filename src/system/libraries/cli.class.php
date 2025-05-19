@@ -240,7 +240,7 @@ class DedeCli
                     list($output, $options) = $args;
                 }
                 //E.g: $color = DedeCli::prompt('What is your favourite color?', 'white');
-                elseif (is_string($args[1]))
+                else if (is_string($args[1]))
                 {
                     list($output, $default) = $args;
                 }
@@ -252,7 +252,7 @@ class DedeCli
                     $options = $args[0];
                 }
                 //E.g: $ready = DedeCli::prompt('What did you do today?');
-                elseif (is_string($args[0]))
+                else if (is_string($args[0]))
                 {
                     $output = $args[0];
                 }
@@ -261,7 +261,7 @@ class DedeCli
             $extra_output = '';
             if ($default !== null) {
                 $extra_output = ' [ Default: "'.$default.'" ]';
-            } elseif ($options !== []) {
+            } else if ($options !== []) {
                 $extra_output = ' [ '.implode(', ', $options).' ]';
             }
             fwrite(STDOUT, $output.$extra_output.': ');

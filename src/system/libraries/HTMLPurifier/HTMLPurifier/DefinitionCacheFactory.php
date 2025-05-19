@@ -38,7 +38,7 @@ class HTMLPurifier_DefinitionCacheFactory
         static $instance;
         if ($prototype !== null) {
             $instance = $prototype;
-        } elseif ($instance === null || $prototype === true) {
+        } else if ($instance === null || $prototype === true) {
             $instance = new HTMLPurifier_DefinitionCacheFactory();
             $instance->setup();
         }

@@ -110,13 +110,13 @@ class We
     {
         if (substr($name, 0, 6) === 'WeChat') {
             $class = 'WeChat\\'.substr($name, 6);
-        } elseif (substr($name, 0, 6) === 'WeMini') {
+        } else if (substr($name, 0, 6) === 'WeMini') {
             $class = 'WeMini\\'.substr($name, 6);
-        } elseif (substr($name, 0, 6) === 'AliPay') {
+        } else if (substr($name, 0, 6) === 'AliPay') {
             $class = 'AliPay\\'.substr($name, 6);
-        } elseif (substr($name, 0, 7) === 'WePayV3') {
+        } else if (substr($name, 0, 7) === 'WePayV3') {
             $class = 'WePayV3\\'.substr($name, 7);
-        } elseif (substr($name, 0, 5) === 'WePay') {
+        } else if (substr($name, 0, 5) === 'WePay') {
             $class = 'WePay\\'.substr($name, 5);
         }
         if (!empty($class) && class_exists($class)) {

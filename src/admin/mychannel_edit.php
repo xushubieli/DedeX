@@ -477,7 +477,7 @@ if ($dopost == "show") {
                     $forms .= "</select><br>";
                     $forms .= "<label><input type=\"checkbox\" name=\"includesons\" value=\"1\"> 包含子栏目</label><br>";
                     $addonstring .= 'typeid:int,';
-                } elseif ($addonfield == 'senddate') {
+                } else if ($addonfield == 'senddate') {
                     $forms .= "<label>开始时间：<input type=\"text\" name=\"startdate\" value=\"\"></label><br>";
                     $forms .= "<label>结束时间：<input type=\"text\" name=\"enddate\" value=\"\"></label><br>";
                     $addonstring .= 'senddate:datetime,';
@@ -536,7 +536,7 @@ if ($dopost == "show") {
                             $forms .= "<label><input type=\"checkbox\" name=\"".$name."[]\" value=\"$value\"> $value</label><br>";
                         }
                     }
-                } elseif ($type == 'datetime') {
+                } else if ($type == 'datetime') {
                     $forms .= "<label>开始时间：<input type=\"text\" name=\"startdate\" value=\"\"></label><br>";
                     $forms .= "<label>结束时间：<input type=\"text\" name=\"enddate\" value=\"\"></label><br>";
                 } else {

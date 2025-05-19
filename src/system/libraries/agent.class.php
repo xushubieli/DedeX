@@ -282,11 +282,11 @@ class Agent extends Mobile_Detect
     {
         if ($this->isDesktop($userAgent, $httpHeaders)) {
             return "desktop";
-        } elseif ($this->isPhone($userAgent, $httpHeaders)) {
+        } else if ($this->isPhone($userAgent, $httpHeaders)) {
             return "phone";
-        } elseif ($this->isTablet($userAgent, $httpHeaders)) {
+        } else if ($this->isTablet($userAgent, $httpHeaders)) {
             return "tablet";
-        } elseif ($this->isRobot($userAgent)) {
+        } else if ($this->isRobot($userAgent)) {
             return "robot";
         }
         return "other";
@@ -333,7 +333,7 @@ class Agent extends Mobile_Detect
             foreach ($rules as $key => $value) {
                 if (empty($merged[$key])) {
                     $merged[$key] = $value;
-                } elseif (is_array($merged[$key])) {
+                } else if (is_array($merged[$key])) {
                     $merged[$key][] = $value;
                 } else {
                     $merged[$key] .= '|'.$value;

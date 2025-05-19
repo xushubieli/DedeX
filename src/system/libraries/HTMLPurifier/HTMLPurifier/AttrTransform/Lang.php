@@ -21,7 +21,7 @@ class HTMLPurifier_AttrTransform_Lang extends HTMLPurifier_AttrTransform
 
         if ($lang !== false && $xml_lang === false) {
             $attr['xml:lang'] = $lang;
-        } elseif ($xml_lang !== false) {
+        } else if ($xml_lang !== false) {
             $attr['lang'] = $xml_lang;
         }
         return $attr;

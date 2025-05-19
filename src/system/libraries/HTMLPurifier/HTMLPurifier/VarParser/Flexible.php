@@ -42,10 +42,10 @@ class HTMLPurifier_VarParser_Flexible extends HTMLPurifier_VarParser
             case self::C_BOOL:
                 if (is_int($var) && ($var === 0 || $var === 1)) {
                     $var = (bool)$var;
-                } elseif (is_string($var)) {
+                } else if (is_string($var)) {
                     if ($var == 'on' || $var == 'true' || $var == '1') {
                         $var = true;
-                    } elseif ($var == 'off' || $var == 'false' || $var == '0') {
+                    } else if ($var == 'off' || $var == 'false' || $var == '0') {
                         $var = false;
                     } else {
                         throw new HTMLPurifier_VarParserException("Unrecognized value '$var' for $type");
@@ -93,7 +93,7 @@ class HTMLPurifier_VarParser_Flexible extends HTMLPurifier_VarParser
                 if ($keys === array_keys($keys)) {
                     if ($type == self::ALIST) {
                         return $var;
-                    } elseif ($type == self::LOOKUP) {
+                    } else if ($type == self::LOOKUP) {
                         $new = array();
                         foreach ($var as $key) {
                             $new[$key] = true;

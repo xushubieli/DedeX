@@ -92,7 +92,7 @@ if ($cid == 0) {
         $channelid = $row['id'];
     }
 } else {
-    $positionname = str_replace('>', " / ", $tl->GetPositionName());
+    $positionname = str_replace('/', ' > ', $tl->GetPositionName());
 }
 //当选择的是自定义模型栏目时，直接跳转自定义模型管理区
 if (empty($channelid) && isset($tl->TypeInfos['channeltype'])) {

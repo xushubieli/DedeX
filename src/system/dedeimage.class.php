@@ -228,7 +228,7 @@ class DedeImage
                 imagecopy($dst_photo, $target_photo, 0, 0, 0, 0, $imagewidth, $imageheight);
                 if ($this->watermarktype == 1) {
                     imagecopy($dst_photo, $watermark_logo, $x, $y, 0, 0, $logowidth, $logoheight);
-                } elseif ($this->watermarktype == 2) {
+                } else if ($this->watermarktype == 2) {
                     if (($this->watermarktext['shadowx'] || $this->watermarktext['shadowy']) && $this->watermarktext['shadowcolor']) {
                         $shadowcolorrgb = explode(',', $this->watermarktext['shadowcolor']);
                         $shadowcolor = imagecolorallocate($dst_photo, $shadowcolorrgb[0], $shadowcolorrgb[1], $shadowcolorrgb[2]);

@@ -29,7 +29,7 @@ if (!function_exists('IsWritable')) {
             if (is_dir($pathfile)) {
                 mt_srand((float)microtime() * 1000000);
                 $pathfile = $pathfile.'x_'.uniqid(mt_rand()).'.tmp';
-            } elseif (@mkdir($pathfile)) {
+            } else if (@mkdir($pathfile)) {
                 return IsWritable($pathfile);
             } else {
                 return false;

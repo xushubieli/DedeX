@@ -142,7 +142,7 @@ class HTMLPurifier_Generator
             trigger_error('Cannot generate HTML from non-HTMLPurifier_Token object', E_USER_WARNING);
             return '';
 
-        } elseif ($token instanceof HTMLPurifier_Token_Start) {
+        } else if ($token instanceof HTMLPurifier_Token_Start) {
             $attr = $this->generateAttributes($token->attr, $token->name);
             if ($this->_flashCompat) {
                 if ($token->name == "object") {
@@ -154,7 +154,7 @@ class HTMLPurifier_Generator
             }
             return '<' . $token->name . ($attr ? ' ' : '') . $attr . '>';
 
-        } elseif ($token instanceof HTMLPurifier_Token_End) {
+        } else if ($token instanceof HTMLPurifier_Token_End) {
             $_extra = '';
             if ($this->_flashCompat) {
                 if ($token->name == "object" && !empty($this->_flashStack)) {
@@ -163,7 +163,7 @@ class HTMLPurifier_Generator
             }
             return $_extra . '</' . $token->name . '>';
 
-        } elseif ($token instanceof HTMLPurifier_Token_Empty) {
+        } else if ($token instanceof HTMLPurifier_Token_Empty) {
             if ($this->_flashCompat && $token->name == "param" && !empty($this->_flashStack)) {
                 $this->_flashStack[count($this->_flashStack)-1]->param[$token->attr['name']] = $token->attr['value'];
             }
@@ -172,10 +172,10 @@ class HTMLPurifier_Generator
                 ( $this->_xhtml ? ' /': '' ) // <br /> v. <br>
                 . '>';
 
-        } elseif ($token instanceof HTMLPurifier_Token_Text) {
+        } else if ($token instanceof HTMLPurifier_Token_Text) {
             return $this->escape($token->data, ENT_NOQUOTES);
 
-        } elseif ($token instanceof HTMLPurifier_Token_Comment) {
+        } else if ($token instanceof HTMLPurifier_Token_Comment) {
             return '<!--' . $token->data . '-->';
         } else {
             return '';

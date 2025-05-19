@@ -268,7 +268,7 @@ class HTMLPurifier
         if (!self::$instance || $prototype) {
             if ($prototype instanceof HTMLPurifier) {
                 self::$instance = $prototype;
-            } elseif ($prototype) {
+            } else if ($prototype) {
                 self::$instance = new HTMLPurifier($prototype);
             } else {
                 self::$instance = new HTMLPurifier();

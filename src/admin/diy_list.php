@@ -139,7 +139,7 @@ if ($action == 'post') {
             showmsg('修改成功', '-1');
         }
     }
-} elseif ($action == 'check') {
+} else if ($action == 'check') {
     if (is_array($id) && is_all_numeric($id)) {
         $ids = implode(',', $id);
     } else {
@@ -152,7 +152,7 @@ if ($action == 'post') {
     } else {
         showmsg('审核失败', "diy_list.php?action=list&diyid={$diy->diyid}");
     }
-} elseif ($action == 'delete') {
+} else if ($action == 'delete') {
     if (empty($do)) {
         if (is_array($id)) {
             $ids = array_map('intval', $id);
@@ -177,7 +177,7 @@ if ($action == 'post') {
             showmsg('删除失败', '-1');
         }
     }
-} elseif ($action == 'excel') {
+} else if ($action == 'excel') {
     ob_end_clean();//清除缓冲区，避免乱码
     header("Content-type:application/vnd.ms-excel");
     header("Content-Disposition:attachment;filename={$diy->name}".date("Y-m-d").".xls");

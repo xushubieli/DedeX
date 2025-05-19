@@ -112,7 +112,7 @@ class HTMLPurifier_VarParser
                             $this->error('Lookup table contains value other than true');
                         }
                     }
-                } elseif ($type === self::ALIST) {
+                } else if ($type === self::ALIST) {
                     $keys = array_keys($var);
                     if (array_keys($keys) !== $keys) {
                         $this->error('Indices for list are not uniform');

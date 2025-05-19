@@ -160,7 +160,7 @@ if (!function_exists('CheckSql')) {
                 $pos2 = strpos($db_string, '\\', $pos + 1);
                 if ($pos1 === FALSE) {
                     break;
-                } elseif ($pos2 == FALSE || $pos2 > $pos1) {
+                } else if ($pos2 == FALSE || $pos2 > $pos1) {
                     $pos = $pos1;
                     break;
                 }
@@ -185,26 +185,26 @@ if (!function_exists('CheckSql')) {
             $error = "union detect";
         }
         //发布版本的程序比较少包括--,#这样的注释，但黑客经常使用它们
-        elseif (strpos($clean, '/*') > 2 || strpos($clean, '--') !== FALSE || strpos($clean, '#') !== FALSE) {
+        else if (strpos($clean, '/*') > 2 || strpos($clean, '--') !== FALSE || strpos($clean, '#') !== FALSE) {
             $fail = TRUE;
             $error = "comment detect";
         }
         //这些函数不会被使用，但是黑客会用它来操作文件，down掉数据库
-        elseif (strpos($clean, 'sleep') !== FALSE && preg_match('~(^|[^a-z])sleep($|[^[a-z])~s', $clean) != 0) {
+        else if (strpos($clean, 'sleep') !== FALSE && preg_match('~(^|[^a-z])sleep($|[^[a-z])~s', $clean) != 0) {
             $fail = TRUE;
             $error = "slown down detect";
-        } elseif (strpos($clean, 'benchmark') !== FALSE && preg_match('~(^|[^a-z])benchmark($|[^[a-z])~s', $clean) != 0) {
+        } else if (strpos($clean, 'benchmark') !== FALSE && preg_match('~(^|[^a-z])benchmark($|[^[a-z])~s', $clean) != 0) {
             $fail = TRUE;
             $error = "slown down detect";
-        } elseif (strpos($clean, 'load_file') !== FALSE && preg_match('~(^|[^a-z])load_file($|[^[a-z])~s', $clean) != 0) {
+        } else if (strpos($clean, 'load_file') !== FALSE && preg_match('~(^|[^a-z])load_file($|[^[a-z])~s', $clean) != 0) {
             $fail = TRUE;
             $error = "file fun detect";
-        } elseif (strpos($clean, 'into outfile') !== FALSE && preg_match('~(^|[^a-z])into\s+outfile($|[^[a-z])~s', $clean) != 0) {
+        } else if (strpos($clean, 'into outfile') !== FALSE && preg_match('~(^|[^a-z])into\s+outfile($|[^[a-z])~s', $clean) != 0) {
             $fail = TRUE;
             $error = "file fun detect";
         }
         //老版本数据库不支持子查询，该功能也用得少，但黑客可以使用它来查询数据库敏感信息
-        elseif (preg_match('~\([^)]*?select~s', $clean) != 0) {
+        else if (preg_match('~\([^)]*?select~s', $clean) != 0) {
             $fail = TRUE;
             $error = "sub select detect";
         }
@@ -373,7 +373,7 @@ function TableHasField($tablename, $field)
             }
         }
         return false;
-    } elseif ($cfg_dbtype === 'sqlite') {
+    } else if ($cfg_dbtype === 'sqlite') {
         $k = $dsql->GetTableFields($tablename);
         while ($r = $dsql->GetFieldObject($k)) {
             if ($r->name === $field) {
@@ -454,11 +454,11 @@ function IsSSL()
 {
     if (@$_SERVER['HTTPS'] && ('1' == $_SERVER['HTTPS'] || 'on' == strtolower($_SERVER['HTTPS']))) {
         return true;
-    } elseif ('https' == @$_SERVER['REQUEST_SCHEME']) {
+    } else if ('https' == @$_SERVER['REQUEST_SCHEME']) {
         return true;
-    } elseif ('443' == $_SERVER['SERVER_PORT']) {
+    } else if ('443' == $_SERVER['SERVER_PORT']) {
         return true;
-    } elseif ('https' == @$_SERVER['HTTP_X_FORWARDED_PROTO']) {
+    } else if ('https' == @$_SERVER['HTTP_X_FORWARDED_PROTO']) {
         return true;
     }
     return false;

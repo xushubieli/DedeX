@@ -107,11 +107,11 @@ if ($dopost != 'save') {
                 $ext = ".png";
                 if (strpos($data[0], "data:image/jpeg") === 0){
                     $ext = ".jpg";
-                } elseif (strpos($data[0], "data:image/gif") === 0) {
+                } else if (strpos($data[0], "data:image/gif") === 0) {
                     $ext = ".gif";
-                } elseif (strpos($data[0], "data:image/webp") === 0) {
+                } else if (strpos($data[0], "data:image/webp") === 0) {
                     $ext = ".webp";
-                } elseif (strpos($data[0], "data:image/bmp") === 0) {
+                } else if (strpos($data[0], "data:image/bmp") === 0) {
                     $ext = ".bmp";
                 }
                 $ntime = time();

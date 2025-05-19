@@ -44,7 +44,7 @@ if ($cid == 0) {
     $positionname = $row['typename'];
     $listtable = $row['addtable'];
 } else {
-    $positionname = str_replace('>', " / ", $tl->GetPositionName());
+    $positionname = str_replace('/', ' > ', $tl->GetPositionName());
 }
 $optionarr = $tl->GetOptionArray($cid, $admin_catalogs, $channelid);
 $whereSql = $channelid == 0 ? " WHERE arc.channel < -1 " : " WHERE arc.channel = '$channelid' ";

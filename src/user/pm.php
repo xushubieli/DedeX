@@ -80,7 +80,7 @@ if ($dopost == 'read') {
     if ($folder == 'outbox') {
         $wsql = " `fromid`='{$cfg_ml->M_ID}' AND folder LIKE 'outbox' ";
         $tname = "发件箱";
-    } elseif ($folder == 'inbox') {
+    } else if ($folder == 'inbox') {
         if ($state === 1) {
             $wsql = " toid='{$cfg_ml->M_ID}' AND folder='inbox' AND writetime!=0 and hasview=1";
             $tname = "收件箱";

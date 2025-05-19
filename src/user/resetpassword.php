@@ -12,7 +12,7 @@ if (empty($dopost)) $dopost = '';
 $id = isset($id) ? intval($id) : 0;
 if ($dopost == "") {
     include(dirname(__FILE__)."/templets/resetpassword.htm");
-} elseif ($dopost == "getpwd") {
+} else if ($dopost == "getpwd") {
     //验证验证码
     if (!isset($vdcode)) $vdcode = '';
     $svali = GetCkVdValue();
@@ -87,7 +87,7 @@ if ($dopost == "") {
             exit();
         }
         require_once(dirname(__FILE__)."/templets/resetpassword2.htm");
-    } elseif ($setp == 2) {
+    } else if ($setp == 2) {
         if (isset($key)) $pwdtmp = $key;
         $sn = md5(trim($pwdtmp));
         if ($row['pwd'] == $sn) {

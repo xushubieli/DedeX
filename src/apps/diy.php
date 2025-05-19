@@ -21,7 +21,7 @@ if ($action == 'post') {
         $postform = $diy->getForm(true);
         include DEDEROOT."/theme/apps/{$diy->postTemplate}";
         exit();
-    } elseif ($do == 2) {
+    } else if ($do == 2) {
         $dede_fields = empty($dede_fields) ? '' : trim($dede_fields);
         $dede_fieldshash = empty($dede_fieldshash) ? '' : trim($dede_fieldshash);
         if (!empty($dede_fields)) {

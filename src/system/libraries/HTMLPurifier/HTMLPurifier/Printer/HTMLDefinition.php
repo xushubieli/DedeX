@@ -196,9 +196,9 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
         }
         if ($def->type == 'chameleon') {
             $attr['rowspan'] = 2;
-        } elseif ($def->type == 'empty') {
+        } else if ($def->type == 'empty') {
             $elements = array();
-        } elseif ($def->type == 'table') {
+        } else if ($def->type == 'table') {
             $elements = array_flip(
                 array(
                     'col',
@@ -232,7 +232,7 @@ class HTMLPurifier_Printer_HTMLDefinition extends HTMLPurifier_Printer
                 0
             );
 
-        } elseif ($def->type == 'custom') {
+        } else if ($def->type == 'custom') {
 
             $ret .= $this->element(
                 'td',

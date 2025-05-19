@@ -82,14 +82,14 @@ function newmail($mid, $userid, $mailto, $type, $send)
         } else {
             return ShowMsg('修改失败，请联系管理员', 'login.php');
         }
-    } elseif ($type == 'UPDATE') {
+    } else if ($type == 'UPDATE') {
         $key = md5($randval);
         $sql = "UPDATE `#@__pwd_tmp` SET `pwd` = '$key',mailtime = '$mailtime' WHERE `mid` ='$mid';";
         if ($db->ExecuteNoneQuery($sql)) {
             if ($send === 'Y') {
                 sendmail($mailto, $mailtitle, $mailbody, $headers);
                 ShowMsg('临时验证码已经发送到原来的邮箱请查收', 'login.php');
-            } elseif ($send === 'N') {
+            } else if ($send === 'N') {
                 return ShowMsg('正在前往密码修改', $cfg_basehost.$cfg_memberurl."/resetpassword.php?dopost=getpasswd&id=".$mid."&key=".$randval);
             }
         } else {
@@ -138,7 +138,7 @@ function sn($mid, $userid, $mailto, $send = 'Y')
         newmail($mid, $userid, $mailto, 'INSERT', $send);
     }
     //10分钟后可以再次发送新验证码
-    elseif ($dtime - $tptim > $row['mailtime']) {
+    else if ($dtime - $tptim > $row['mailtime']) {
         newmail($mid, $userid, $mailto, 'UPDATE', $send);
     }
     //重新发送新的验证码确认邮件

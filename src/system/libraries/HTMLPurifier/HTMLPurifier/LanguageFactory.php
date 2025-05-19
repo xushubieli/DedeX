@@ -61,7 +61,7 @@ class HTMLPurifier_LanguageFactory
         static $instance = null;
         if ($prototype !== null) {
             $instance = $prototype;
-        } elseif ($instance === null || $prototype == true) {
+        } else if ($instance === null || $prototype == true) {
             $instance = new HTMLPurifier_LanguageFactory();
             $instance->setup();
         }
@@ -191,7 +191,7 @@ class HTMLPurifier_LanguageFactory
                 if (isset($cache[$key]) && isset($fallback_cache[$key])) {
                     if (isset($this->mergeable_keys_map[$key])) {
                         $cache[$key] = $cache[$key] + $fallback_cache[$key];
-                    } elseif (isset($this->mergeable_keys_list[$key])) {
+                    } else if (isset($this->mergeable_keys_list[$key])) {
                         $cache[$key] = array_merge($fallback_cache[$key], $cache[$key]);
                     }
                 } else {

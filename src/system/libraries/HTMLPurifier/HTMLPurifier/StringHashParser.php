@@ -103,14 +103,14 @@ class HTMLPurifier_StringHashParser
             if (strncmp('--#', $line, 3) === 0) {
                 // Comment
                 continue;
-            } elseif (strncmp('--', $line, 2) === 0) {
+            } else if (strncmp('--', $line, 2) === 0) {
                 // Multiline declaration
                 $state = trim($line, '- ');
                 if (!isset($ret[$state])) {
                     $ret[$state] = '';
                 }
                 continue;
-            } elseif (!$state) {
+            } else if (!$state) {
                 $single = true;
                 if (strpos($line, ':') !== false) {
                     // Single-line declaration

@@ -32,7 +32,7 @@ class HTMLPurifier_ChildDef_Optional extends HTMLPurifier_ChildDef_Required
         if ($result === false) {
             if (empty($children)) {
                 return true;
-            } elseif ($this->whitespace) {
+            } else if ($this->whitespace) {
                 return $children;
             } else {
                 return array();

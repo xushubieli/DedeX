@@ -127,7 +127,7 @@ class HTMLPurifier_Language
         $ret = '';
         for ($i = 0, $c = count($array); $i < $c; $i++) {
             if ($i == 0) {
-            } elseif ($i + 1 < $c) {
+            } else if ($i + 1 < $c) {
                 $ret .= $sep;
             } else {
                 $ret .= $sep_last;
@@ -182,7 +182,7 @@ class HTMLPurifier_Language
                     $subst['$'.$i.'.Line'] = $value->line ? $value->line : 'unknown';
                 }
                 continue;
-            } elseif (is_array($value)) {
+            } else if (is_array($value)) {
                 $keys = array_keys($value);
                 if (array_keys($keys) === $keys) {
                     // list

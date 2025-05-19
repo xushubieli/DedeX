@@ -45,7 +45,7 @@ class Order extends BasicWePay
             if ($type === 'app') {
                 $sign = $this->signBuild(join("\n", [$appid, $time, $nonceStr, $prepayId, '']));
                 return ['partnerId' => $this->config['mch_id'], 'prepayId' => $prepayId, 'package' => 'Sign=WXPay', 'nonceStr' => $nonceStr, 'timeStamp' => $time, 'sign' => $sign];
-            } elseif ($type === 'jsapi') {
+            } else if ($type === 'jsapi') {
                 $sign = $this->signBuild(join("\n", [$appid, $time, $nonceStr, "prepay_id={$prepayId}", '']));
                 return ['appId' => $appid, 'timeStamp' => $time, 'nonceStr' => $nonceStr, 'package' => "prepay_id={$prepayId}", 'signType' => 'RSA', 'paySign' => $sign];
             } else {

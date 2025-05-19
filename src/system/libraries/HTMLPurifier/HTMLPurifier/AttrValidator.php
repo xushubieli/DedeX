@@ -98,7 +98,7 @@ class HTMLPurifier_AttrValidator
                         $context
                     );
                 }
-            } elseif (isset($d_defs[$attr_key])) {
+            } else if (isset($d_defs[$attr_key])) {
                 // there is a global definition defined, validate according
                 // to the global definition
                 $result = $d_defs[$attr_key]->validate(
@@ -121,7 +121,7 @@ class HTMLPurifier_AttrValidator
 
                 // remove the attribute
                 unset($attr[$attr_key]);
-            } elseif (is_string($result)) {
+            } else if (is_string($result)) {
                 // generally, if a substitution is happening, there
                 // was some sort of implicit correction going on. We'll
                 // delegate it to the attribute classes to say exactly what.

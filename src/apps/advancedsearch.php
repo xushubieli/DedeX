@@ -108,28 +108,28 @@ if (empty($sql)) {
                 ${'end'.$var} = intval(${'end'.$var});
                 $where .= " AND addon.$var<{${'end' .$var}} ";
             }
-        } elseif (in_array($type, $textarr)) {
+        } else if (in_array($type, $textarr)) {
             if (isset(${$var}) && trim(${$var}) != '') {
                 ${$var} = stripslashes(${$var});
                 ${$var} = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim(${$var}));
                 ${$var} = addslashes(${$var});
                 $where .= " AND addon.$var LIKE '%{${$var}}%'";
             }
-        } elseif ($type == 'select') {
+        } else if ($type == 'select') {
             ${$var} = stripslashes(${$var});
             ${$var} = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim(${$var}));
             ${$var} = addslashes(${$var});
             if (${$var} != '') {
                 $where .= " AND addon.$var LIKE '{${$var}}'";
             }
-        } elseif ($type == 'radio') {
+        } else if ($type == 'radio') {
             ${$var} = stripslashes(${$var});
             ${$var} = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim(${$var}));
             ${$var} = addslashes(${$var});
             if (${$var} != '') {
                 $where .= " AND addon.$var LIKE '{${$var}}'";
             }
-        } elseif ($type == 'checkbox') {
+        } else if ($type == 'checkbox') {
             if (is_array(${$var}) && !empty(${$var})) {
                 foreach (${$var} as $tmpvar) {
                     $tmpvar = trim($tmpvar);
@@ -141,7 +141,7 @@ if (empty($sql)) {
                     }
                 }
             }
-        } elseif ($type == 'datetime') {
+        } else if ($type == 'datetime') {
             ${'start'.$var} = trim(${'start'.$var});
             if (${'start'.$var} != '') {
                 ${'start'.$var} = strtotime(${'start'.$var});

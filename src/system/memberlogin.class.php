@@ -538,7 +538,7 @@ class MemberLogin
             $rs = $this->dsql->GetOne("SELECT id FROM `#@__admin` WHERE userid='".$this->M_LoginID."'");
             if (!is_array($rs)) {
                 if ($this->M_Rank > 10 && $this->M_HasDay > 0) $sta .= "，剩余".$this->M_HasDay."天";
-                elseif ($this->M_Rank > 10) $sta .= "，<span class='text-danger'>会员已到期</span>";
+                else if ($this->M_Rank > 10) $sta .= "，<span class='text-danger'>会员已到期</span>";
             }
         }
         $sta .= "，积分{$this->M_Scores}分，金币{$this->M_Money}个，余额{$this->M_UserMoney}元";

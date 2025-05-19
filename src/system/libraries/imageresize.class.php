@@ -111,7 +111,7 @@ class ImageResize
             } else {
                 throw new ImageResizeException('Unsupported file type');
             }
-        } elseif(strstr(finfo_file($finfo, $filename), 'image/webp') !== false) {
+        } else if(strstr(finfo_file($finfo, $filename), 'image/webp') !== false) {
           $checkWebp = true;
           $this->source_type = IMAGETYPE_WEBP;
         }
@@ -179,9 +179,9 @@ class ImageResize
         $orientation = $exif['Orientation'];
         if ($orientation === 6 || $orientation === 5) {
             $img = imagerotate($img, 270, 0);
-        } elseif ($orientation === 3 || $orientation === 4) {
+        } else if ($orientation === 3 || $orientation === 4) {
             $img = imagerotate($img, 180, 0);
-        } elseif ($orientation === 8 || $orientation === 7) {
+        } else if ($orientation === 8 || $orientation === 7) {
             $img = imagerotate($img, 90, 0);
         }
         if ($orientation === 5 || $orientation === 4 || $orientation === 7) {
