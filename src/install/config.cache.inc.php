@@ -17,7 +17,6 @@ $cfg_imgtype = 'jpeg|jpg|gif|png|webp|bmp';
 $cfg_softtype = 'zip|gz|rar|iso|doc|xsl|ppt|wps';
 $cfg_mediatype = 'swf|rm|rmvb|mpg|mp3|mp4|wmv|wma|wav|mid|mov';
 $cfg_specnote = 10;
-$cfg_list_symbol = '';
 $cfg_notallowstr = '草泥马|煞笔|神经病|无语';
 $cfg_replacestr = '草泥马|煞笔|神经病|无语';
 $cfg_feedbackcheck = 'N';

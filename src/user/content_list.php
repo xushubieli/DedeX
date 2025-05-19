@@ -40,9 +40,9 @@ if ($cid == 0) {
         $positionname = $row['typename'];
     }
 } else {
-    $positionname = str_replace($cfg_list_symbol, " - ", $tl->GetPositionName())." ";
+    $positionname = str_replace('>', " / ", $tl->GetPositionName());
 }
-$whereSql = " where arc.channel = '$channelid' And arc.mid='$mid' ";
+$whereSql = " WHERE arc.channel = '$channelid' And arc.mid='$mid' ";
 if ($keyword != '') {
     $keyword = cn_substr(trim(preg_replace("#[><\|\"\r\n\t%\*\.\?\(\)\$ ;,'%-]#", "", stripslashes($keyword))), 30);
     $keyword = addslashes($keyword);

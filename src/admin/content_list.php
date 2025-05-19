@@ -84,15 +84,15 @@ if (empty($totalresult) && empty($keyword) && empty($orderby) && empty($flag)) {
 }
 if ($cid == 0) {
     if ($channelid == 0) {
-        $positionname = '所有栏目 - ';
+        $positionname = '所有栏目';
     } else {
         $row = $tl->dsql->GetOne("SELECT id,typename,maintable FROM `#@__channeltype` WHERE id='$channelid'");
-        $positionname = $row['typename']." - ";
+        $positionname = $row['typename'];
         $maintable = $row['maintable'];
         $channelid = $row['id'];
     }
 } else {
-    $positionname = str_replace($cfg_list_symbol, " - ", $tl->GetPositionName())." - ";
+    $positionname = str_replace('>', " / ", $tl->GetPositionName());
 }
 //当选择的是自定义模型栏目时，直接跳转自定义模型管理区
 if (empty($channelid) && isset($tl->TypeInfos['channeltype'])) {

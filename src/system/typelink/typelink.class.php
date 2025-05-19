@@ -18,7 +18,6 @@ class TypeLink
     var $indexUrl;
     var $indexName;
     var $TypeInfos;
-    var $SplitSymbol;
     var $valuePosition;
     var $valuePositionName;
     var $OptionArrayList;
@@ -29,7 +28,6 @@ class TypeLink
         $this->indexName = $GLOBALS['cfg_indexname'];
         $this->baseDir = $GLOBALS['cfg_basedir'];
         $this->modDir = $GLOBALS['cfg_templets_dir'];
-        $this->SplitSymbol = $GLOBALS['cfg_list_symbol'] === " > " ? "" : $GLOBALS['cfg_list_symbol'];
         $this->dsql = $GLOBALS['dsql'];
         $this->TypeID = $typeid;
         $this->valuePosition = '';
@@ -99,14 +97,15 @@ class TypeLink
                     //调用递归逻辑
                     $this->LogicGetPosition($this->TypeInfos['reid'], true);
                 }
-                $this->valuePosition = $indexpage.$this->SplitSymbol.$this->valuePosition;
+                $this->valuePosition = $indexpage.$this->valuePosition;
                 return $this->valuePosition;
             } else {
-                $this->valuePositionName = $this->TypeInfos['typename'];
+                $currentTypeName = $this->TypeInfos['typename'];
                 if ($this->TypeInfos['reid'] != 0) {
                     //调用递归逻辑
                     $this->LogicGetPosition($this->TypeInfos['reid'], false);
                 }
+                $this->valuePositionName .= ($this->valuePositionName ? '>' : '').$currentTypeName;
                 return $this->valuePositionName;
             }
         }
@@ -122,9 +121,9 @@ class TypeLink
         $this->dsql->SetQuery("SELECT id,reid,typename,typedir,isdefault,ispart,defaultname,namerule2,moresite,siteurl,sitepath FROM `#@__arctype` WHERE id='".$id."'");
         $tinfos = $this->dsql->GetOne();
         if ($islink) {
-            $this->valuePosition = $this->GetOneTypeLink($tinfos).$this->SplitSymbol.$this->valuePosition;
+            $this->valuePosition = $this->GetOneTypeLink($tinfos).$this->valuePosition;
         } else {
-            $this->valuePositionName = $tinfos['typename'].$this->SplitSymbol.$this->valuePositionName;
+            $this->valuePositionName = $tinfos['typename'].$this->valuePositionName;
         }
         if ($tinfos['reid'] > 0) {
             $this->LogicGetPosition($tinfos['reid'], $islink);
