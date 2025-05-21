@@ -70,7 +70,7 @@ if ($action == 'post') {
             exit();
         }*/
         //判断$message是否大于70字符则提交失败，$message改成您表单字段标识，恢复注释代码使用
-        /*if ($message === '' || strlen($message) > 70) {
+        /*if (strlen($message) > 70) {
             showmsg('您输入的信息太多了，请重新填写', '-1');
             exit();
         }*/

@@ -47,11 +47,11 @@ function TestSafe($tdir)
     }
 }
 //检测
-if ($action=='test') {
+if ($action == 'test') {
     $message = '';
     AjaxHead();
     TestSafe(DEDEROOT);
-    if ($message=='') $message = "没发现可疑文件";
+    if ($message == '') $message = "没发现可疑文件";
     echo $message;
     exit();
 }

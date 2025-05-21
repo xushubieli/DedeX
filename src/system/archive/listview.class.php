@@ -1136,7 +1136,7 @@ class ListView
         //伪静态栏目分页
         if ($cfg_rewrite == 'Y') {
             $plist = str_replace("?tid=", "", $plist);
-            $plist = preg_replace("/&pageno=(\d+)/i", "-\\1", $plist);
+            $plist = preg_replace("/&PageNo=(\d+)/i", "-\\1", $plist);
             $plist = preg_replace("/&TotalResult=(\d+)/i", "", $plist);//去掉分页数值
         }
         return $plist;
