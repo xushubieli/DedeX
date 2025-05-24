@@ -87,36 +87,36 @@
 											$pardir = preg_replace("#\/{1,}#", '/', $pardir);
 											echo $pardir;
 											?>
-											<input type="hidden" name="nextdir" id="nextdir" value="<?php echo $pardir?>">
+											<input type="hidden" name="nextdir" id="nextdir" value="<?php echo $pardir;?>">
 										</td>
 									</tr>
 									<tr>
 										<td>中文名称</td>
-										<td><input type="text" name="typename" value="<?php echo $myrow['typename']?>" class="admin-input-lg" required></td>
+										<td><input type="text" name="typename" value="<?php echo $myrow['typename'];?>" class="admin-input-lg" required></td>
 										<td>中文概述</td>
-										<td><input type="text" name="cnoverview" value="<?php echo $myrow['cnoverview']?>" class="admin-input-lg"></td>
+										<td><input type="text" name="cnoverview" value="<?php echo $myrow['cnoverview'];?>" class="admin-input-lg"></td>
 									</tr>
 									<tr>
 										<td>英文名称</td>
-										<td><input type="text" name="enname" value="<?php echo $myrow['enname']?>" class="admin-input-lg"></td>
+										<td><input type="text" name="enname" value="<?php echo $myrow['enname'];?>" class="admin-input-lg"></td>
 										<td>英文概述</td>
-										<td><input type="text" name="enoverview" value="<?php echo $myrow['enoverview']?>" class="admin-input-lg"></td>
+										<td><input type="text" name="enoverview" value="<?php echo $myrow['enoverview'];?>" class="admin-input-lg"></td>
 									</tr>
 									<tr>
 										<td>栏目大图</td>
 										<td>
-											<input type="text" name="bigpic" value="<?php echo $myrow['bigpic']?>" class="admin-input-lg">
+											<input type="text" name="bigpic" value="<?php echo $myrow['bigpic'];?>" class="admin-input-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectImage('form1.bigpic');">选择</button>
 										</td>
 										<td>栏目小图</td>
 										<td>
-											<input type="text" name="litimg" value="<?php echo $myrow['litimg']?>" class="admin-input-lg">
+											<input type="text" name="litimg" value="<?php echo $myrow['litimg'];?>" class="admin-input-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectImage('form1.litimg');">选择</button>
 										</td>
 									</tr>
 									<tr>
 										<td>排列顺序</td>
-										<td><input type="text" name="sortrank" value="<?php echo $myrow['sortrank']?>" class="admin-input-sm">（由低到高）</td>
+										<td><input type="text" name="sortrank" value="<?php echo $myrow['sortrank'];?>" class="admin-input-sm">（由低到高）</td>
 										<td>浏览权限</td>
 										<td>
 											<select name="corank" id="corank" class="admin-input-sm">
@@ -137,7 +137,7 @@
 									</tr>
 									<tr>
 										<td>栏目生成目录</td>
-										<td><input type="text" name="typedir" id="typedir" value="<?php echo $myrow['typedir']?>" class="admin-input-lg"></td>
+										<td><input type="text" name="typedir" id="typedir" value="<?php echo $myrow['typedir'];?>" class="admin-input-lg"></td>
 										<td>是否继承选项</td>
 										<td><label><input type="checkbox" name="upnext" id="upnext" value="1"> 子类栏目继承顶级栏目的浏览权限、文档类型、模板风格等属性</label></td>
 									</tr>
@@ -149,7 +149,7 @@
 											<label><input type="radio" name="isdefault" value="0" <?php if ($myrow['isdefault']==0) echo 'checked';?>> 列表第一页浏览</label>
 										</td>
 										<td>默认页的名称</td>
-										<td><input type="text" name="defaultname" value="<?php echo $myrow['defaultname']?>" class="admin-input-lg"></td>
+										<td><input type="text" name="defaultname" value="<?php echo $myrow['defaultname'];?>" class="admin-input-lg"></td>
 									</tr>
 									<tr>
 										<td>栏目属性</td>
@@ -176,17 +176,17 @@
 											<span>（仅顶级栏目启用，子类栏目无效）</span>
 										</td>
 										<td>绑定域名</td>
-										<td><input type="text" name="siteurl" id="siteurl" value="<?php echo $myrow['siteurl']?>" class="admin-input-lg">（请输入网址，在系统设置开启多站点功能）</td>
+										<td><input type="text" name="siteurl" id="siteurl" value="<?php echo $myrow['siteurl'];?>" class="admin-input-lg">（请输入网址，在系统设置开启多站点功能）</td>
 									</tr>
 									<tr>
 										<td>列表模板</td>
 										<td>
-											<input type="text" name="templist" value="<?php echo $myrow['templist']?>" class="admin-input-lg">
+											<input type="text" name="templist" value="<?php echo $myrow['templist'];?>" class="admin-input-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.templist')">选择</button>
 										</td>
 										<td>封面模板</td>
 										<td>
-											<input type="text" name="tempindex" value="<?php echo $myrow['tempindex']?>" class="admin-input-lg">
+											<input type="text" name="tempindex" value="<?php echo $myrow['tempindex'];?>" class="admin-input-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.tempindex')">选择</button>
 											<a href="javascript:ShowHide('helpvar1');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar1" class="helpinfo mt-3" style="display:none">
@@ -198,12 +198,12 @@
 									<tr>
 										<td>文档模板</td>
 										<td>
-											<input type="text" name="temparticle" value="<?php echo $myrow['temparticle']?>" class="admin-input-lg">
+											<input type="text" name="temparticle" value="<?php echo $myrow['temparticle'];?>" class="admin-input-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.temparticle')">选择</button>
 										</td>
 										<td>列表命名规则</td>
 										<td>
-											<input type="text" name="namerule2" id="namerule2" value="<?php echo $myrow['namerule2']?>" class="admin-input-lg">
+											<input type="text" name="namerule2" id="namerule2" value="<?php echo $myrow['namerule2'];?>" class="admin-input-lg">
 											<a href="javascript:ShowHide('helpvar2');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar2" class="helpinfo mt-3" style="display:none">
 												<p>静态规则</p>
@@ -218,7 +218,7 @@
 									<tr>
 										<td>文档命名规则</td>
 										<td>
-											<input type="text" name="namerule" id="namerule" value="<?php echo $myrow['namerule']?>" class="admin-input-lg">
+											<input type="text" name="namerule" id="namerule" value="<?php echo $myrow['namerule'];?>" class="admin-input-lg">
 											<a href="javascript:ShowHide('helpvar3');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar3" class="helpinfo mt-3" style="display:none">
 												<p>静态规则</p>
@@ -235,19 +235,19 @@
 											</div>
 										</td>
 										<td>SEO标题</td>
-										<td><input type="text" name="seotitle" id="seotitle" value="<?php echo $myrow['seotitle']?>" class="admin-input-lg"></td>
+										<td><input type="text" name="seotitle" id="seotitle" value="<?php echo $myrow['seotitle'];?>" class="admin-input-lg"></td>
 									</tr>
 									<tr>
 										<td>关键词</td>
-										<td><textarea name="keywords" cid="keywords" class="admin-textarea-sm"><?php echo $myrow['keywords']?></textarea></td>
+										<td><textarea name="keywords" cid="keywords" class="admin-textarea-sm"><?php echo $myrow['keywords'];?></textarea></td>
 										<td>描述</td>
-										<td><textarea name="description" id="description" class="admin-textarea-sm"><?php echo $myrow['description']?></textarea></td>
+										<td><textarea name="description" id="description" class="admin-textarea-sm"><?php echo $myrow['description'];?></textarea></td>
 									</tr>
 									<tr>
 										<td colspan="2">栏目文档</td>
 										<td>是否支持跨站调用</td>
 										<td>
-											<input value="<?php echo $myrow['apikey']?>" type="text" name="apikey" id="apikey" class="admin-input-lg" placeholder="请输入跨站调用秘钥">
+											<input value="<?php echo $myrow['apikey'];?>" type="text" name="apikey" id="apikey" class="admin-input-lg" placeholder="请输入跨站调用秘钥">
 											<label><input type="radio" name="apienabled" value="1" <?php if ($myrow['apienabled']=="1") echo 'checked';?>> 支持</label>
 											<label><input type="radio" name="apienabled" value="0" <?php if ($myrow['apienabled']=="0") echo 'checked';?>> 不支持</label>
 											<a href="javascript:makeAPIKey();" class="btn btn-primary btn-sm">更新</i></a>
@@ -325,10 +325,6 @@
 				echo "channelArray[$k] = \"{$arr['nid']}\";";
 			}
 			?>
-			function Nav() {
-				if (window.navigator.userAgent.indexOf("Firefox") >= 1) return 'FF';
-				else return "OT";
-			}
 			function SelectTemplets(fname) {
 				var pos = GetWinPos(800,600);
 				window.open("./dialog/select_templets.php?f=" + fname, "poptempWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);

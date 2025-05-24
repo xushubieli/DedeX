@@ -13,7 +13,7 @@
 			<div class="card shadow-sm">
 				<div class="card-header">文档重复检测记录</div>
 				<div class="card-body">
-					<form name="form2" method="POST" action="article_test_same.php">
+					<form name="form2" action="article_test_same.php" method="post">
 						<input type="hidden" name="deltype" value="<?php echo $deltype;?>">
 						<input type="hidden" name="dopost" value="delsel">
 						<input type="hidden" name="pagesize" value="<?php echo $pagesize;?>">
@@ -36,7 +36,7 @@
 									   if ($row['dd']==1 ) break;
 									?>
 									<tr>
-										<td><input type="checkbox" name="arcTitles" id="arcTitle" value="<?php echo urlencode($row['title'])?>"></td>
+										<td><input type="checkbox" name="arcTitles" id="arcTitle" value="<?php echo urlencode($row['title']);?>"></td>
 										<td>
 											<?php
 											$allarc += $row['dd'];

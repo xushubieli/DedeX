@@ -18,27 +18,27 @@
 			<div class="card shadow-sm">
 				<div class="card-header">修改友情链接</div>
 				<div class="card-body">
-					<form action="friendlink_edit.php" method="post" enctype="multipart/form-data" name="form1">
-						<input type="hidden" name="id" value="<?php echo $myLink['id']?>">
+					<form name="form1" action="friendlink_edit.php" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="id" value="<?php echo $myLink['id'];?>">
 						<input type="hidden" name="dopost" value="saveedit">
 						<div class="table-responsive">
 							<table class="table table-borderless">
 								<tbody>
 									<tr>
 										<td width="260">网址</td>
-										<td><input type="text" name="url" id="url" value="<?php echo $myLink['url']?>" class="admin-input-lg" required></td>
+										<td><input type="text" name="url" id="url" value="<?php echo $myLink['url'];?>" class="admin-input-lg" required></td>
 									</tr>
 									<tr>
 										<td>网站名称</td>
-										<td><input type="text" name="webname" id="webname" value="<?php echo $myLink['webname']?>" class="admin-input-lg" required></td>
+										<td><input type="text" name="webname" id="webname" value="<?php echo $myLink['webname'];?>" class="admin-input-lg" required></td>
 									</tr>
 									<tr>
 										<td width="260">排列位置</td>
-										<td><input type="text" name="sortrank" id="sortrank" value="<?php echo $myLink['sortrank']?>" class="admin-input-sm">（由小到大排列）</td>
+										<td><input type="text" name="sortrank" id="sortrank" value="<?php echo $myLink['sortrank'];?>" class="admin-input-sm">（由小到大排列）</td>
 									</tr>
 									<tr>
 										<td>网站Logo</td>
-										<td><input type="text" name="logo" id="logo" value="<?php echo $myLink['logo']?>" class="admin-input-lg">（88*31 gif或jpg）</td>
+										<td><input type="text" name="logo" id="logo" value="<?php echo $myLink['logo'];?>" class="admin-input-lg">（88*31 gif或jpg）</td>
 									</tr>
 									<tr>
 										<td>上传Logo</td>
@@ -46,11 +46,11 @@
 									</tr>
 									<tr>
 										<td>网站简况</td>
-										<td><textarea name="msg" id="msg" class="admin-textarea-sm"><?php echo dede_htmlspecialchars($myLink['msg'])?></textarea></td>
+										<td><textarea name="msg" id="msg" class="admin-textarea-sm"><?php echo dede_htmlspecialchars($myLink['msg']);?></textarea></td>
 									</tr>
 									<tr>
 										<td>邮箱</td>
-										<td><input type="text" name="email" id="email" autocomplete="off" value="<?php echo $myLink['email']?>" class="admin-input-lg"></td>
+										<td><input type="text" name="email" id="email" autocomplete="off" value="<?php echo $myLink['email'];?>" class="admin-input-lg"></td>
 									</tr>
 									<tr>
 										<td>链接位置</td>

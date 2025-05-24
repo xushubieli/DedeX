@@ -18,7 +18,7 @@ function SetCookie(c_name, value, expiredays) {
 	exdate.setDate(exdate.getDate() + expiredays);
 	document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
 }
-//全局消息提示框，生成一个随机id
+//全局消息提示框
 function guid() {
 	function S4() {
 		return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -54,10 +54,9 @@ function DedeConfirm(content = "", title = "确认提示") {
 		});
 		$("#DedeModal" + modalID).on('hidden.bs.modal', function(e) {
 			$("#DedeModal" + modalID).remove();
-		})
-	})
+		});
+	});
 }
-//函数会返回一个modalID，通过这个id可自已定义一些方法，这里用到了一个展开语法：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 function ShowMsg(content, ...args) {
 	title = "系统提示";
 	if (typeof content == "undefined") content = '';
@@ -93,23 +92,20 @@ function ShowMsg(content, ...args) {
 	});
 	$("#DedeModal" + modalID).on('hidden.bs.modal', function(e) {
 		$("#DedeModal" + modalID).remove();
-	})
+	});
 	return modalID;
 }
-//隐藏并销毁modal
 function CloseModal(modalID) {
 	$("#" + modalID).modal('hide');
 	$("#" + modalID).on('hidden.bs.modal', function(e) {
 		if ($("#" + modalID).length > 0) {
 			$("#" + modalID).remove();
 		}
-	})
+	});
 }
 //在某个元素内显示alert信息
 function ShowAlert(ele, content, type, showtime = 3000) {
-	let msg = `<div class="alert alert-${type}" role="alert">
-		${content}
-	</div>`;
+	let msg = `<div class="alert alert-${type}" role="alert">${content}</div>`;
 	$(ele).html(msg);
 	$(ele).show();
 	setTimeout(() => {

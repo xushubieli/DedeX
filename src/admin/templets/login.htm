@@ -29,7 +29,7 @@
 						<?php if (preg_match('/MSIE/i',$_SERVER['HTTP_USER_AGENT']) || preg_match('/Trident/i',$_SERVER['HTTP_USER_AGENT'])) {?><div class="alert alert-danger">您使用的浏览器已过时，请更换浏览器，提高后台操作体验</div><?php }?>
 						<?php echo $redmsg;?>
 						<div class="login-from">
-							<form name="form1" method="post" action="login.php">
+							<form name="form1" action="login.php" method="post">
 								<input type="hidden" name="gotopage" value="<?php if (!empty($gotopage)) echo RemoveXSS($gotopage);?>">
 								<input type="hidden" name="dopost" value="login">
 								<input type="hidden" name="adminstyle" value="newDedeX">

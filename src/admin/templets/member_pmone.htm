@@ -35,14 +35,14 @@
 			<div class="card shadow-sm">
 				<div class="card-header">会员单独短信</div>
 				<div class="card-body">
-					<form id="postall" action="member_pmone.php" method="post">
+					<form action="member_pmone.php" method="post">
 						<input type="hidden" name="action" value="post">
 						<div class="table-responsive">
 							<table class="table table-borderless">
 								<tbody>
 									<tr>
 										<td width="260">会员登录id</td>
-										<td><input type="text" name="msgtoid" value="<?php echo empty($touid)? '' : $touid?>" class="admin-input-sm" required>（网址uid=后面跟的id）</td>
+										<td><input type="text" name="msgtoid" value="<?php echo empty($touid)? '' : $touid;?>" class="admin-input-sm" required>（网址uid=后面跟的id）</td>
 									</tr>
 									<tr>
 										<td>标题</td>

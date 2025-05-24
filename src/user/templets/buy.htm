@@ -15,7 +15,7 @@
 				<?php include(DEDEMEMBER."/templets/menu.htm");?>
 				<div class="col-md-9">
 					<div class="pannel-main-container shadow-sm rounded">
-						<div class="alert alert-success"><?php echo $cfg_ml->GetSta();?></div>
+						<div class="alert alert-info"><?php echo $cfg_ml->GetSta();?></div>
 						<?php if ($cfg_money_scores > 0) {?>
 						<?php $canCav = floor($cfg_ml->fields['scores'] / $cfg_money_scores);?>
 						<div class="change pb-3">

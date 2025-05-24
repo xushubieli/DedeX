@@ -39,11 +39,11 @@
 									{
 									$k++;
 									?>
-									<input type="hidden" name="ID_<?php echo $k?>" value="<?php echo $row->aid?>">
+									<input type="hidden" name="ID_<?php echo $k;?>" value="<?php echo $row->aid;?>">
 									<tr>
-										<td><input type="text" name="pname_<?php echo $k?>" value="<?php echo $row->pname?>" id="pname_<?php echo $k?>" class="admin-input-lg"></td>
+										<td><input type="text" name="pname_<?php echo $k;?>" value="<?php echo $row->pname;?>" id="pname_<?php echo $k;?>" class="admin-input-lg"></td>
 										<td>
-											<select name="rank_<?php echo $k?>" id="rank_<?php echo $k?>" class="admin-input-sm">
+											<select name="rank_<?php echo $k;?>" id="rank_<?php echo $k;?>" class="admin-input-sm">
 												<?php
 												foreach($arcranks as $kkk=>$vvv){
 													if ($row->rank==$kkk) echo "<option value='{$kkk}' selected>{$vvv}</option>";
@@ -52,9 +52,9 @@
 												?>
 											</select>
 										</td>
-										<td><input type="text" name="money_<?php echo $k?>" value="<?php echo $row->money?>" id="money_<?php echo $k?>" class="admin-input-sm"></td>
+										<td><input type="text" name="money_<?php echo $k;?>" value="<?php echo $row->money;?>" id="money_<?php echo $k;?>" class="admin-input-sm"></td>
 										<td>
-											<select name="exptime_<?php echo $k?>" id="exptime_<?php echo $k?>" class="admin-input-sm">
+											<select name="exptime_<?php echo $k;?>" id="exptime_<?php echo $k;?>" class="admin-input-sm">
 												<?php
 												foreach($times as $kkk=>$vvv){
 													if ($row->exptime==$kkk) echo "<option value='{$kkk}' selected>{$vvv}</option>";
@@ -63,10 +63,10 @@
 												?>
 											</select>
 										</td>
-										<td><input type="checkbox" name="check_<?php echo $k?>" id="check_<?php echo $k?>" value="1" checked> 保留</td>
+										<td><input type="checkbox" name="check_<?php echo $k;?>" id="check_<?php echo $k;?>" value="1" checked> 保留</td>
 									</tr>
 									<?php }?>
-									<input type="hidden" name="idend" value="<?php echo $k?>">
+									<input type="hidden" name="idend" value="<?php echo $k;?>">
 									<tr>
 										<td><input type="text" name="pname_new" id="pname_new" class="admin-input-lg"></td>
 										<td>

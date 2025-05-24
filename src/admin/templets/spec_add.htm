@@ -15,6 +15,7 @@
 		<script src="/static/web/js/webajax.js"></script>
 		<script src="/static/web/js/moment.min.js"></script>
 		<script src="/static/web/js/daterangepicker.js"></script>
+		<script src="/static/web/js/cropper.min.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 		<script>
 			function checkSubmit() {
@@ -67,7 +68,7 @@
 					<div class="alert alert-info">专题在主分类栏目显示，专题列表{dede:arclist typeid='' type='spec'}标签调用</div>
 					<form name="form1" action="spec_add.php" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="dopost" value="save">
-						<input type="hidden" name="channelid" value="<?php echo $channelid?>">
+						<input type="hidden" name="channelid" value="<?php echo $channelid;?>">
 						<input type="hidden" name="arcrank" value="0">
 						<input type="hidden" name="source" value="本站">
 						<div class="table-responsive">
@@ -154,46 +155,46 @@
 													<tr>
 														<td>节点<?php echo $i?>名称</td>
 														<td>
-															<input type="text" name="notename<?php echo $i?>" value="<?php echo $nodename;?>" id="notename<?php echo $i?>" class="admin-input-lg">
-															<label>节点标识：<input type="text" name="noteid<?php echo $i?>" alue="<?php echo $nodeid;?>" id="noteid<?php echo $i?>" class="admin-input-sm"></label>
+															<input type="text" name="notename<?php echo $i;?>" value="<?php echo $nodename;?>" id="notename<?php echo $i;?>" class="admin-input-lg">
+															<label>节点标识：<input type="text" name="noteid<?php echo $i;?>" alue="<?php echo $nodeid;?>" id="noteid<?php echo $i;?>" class="admin-input-sm"></label>
 														</td>
 													</tr>
 													<tr>
 														<td>文档列表</td>
 														<td>
-															<textarea name="arcid<?php echo $i?>" onblur='CheckVal(<?php echo $i ?>)' id="arcid<?php echo $i?>" class="admin-textarea-sm"></textarea>
-															<button name="selarc<?php echo $i?>" type="button" id="selarc<?php echo $i?>2" class="btn btn-primary btn-sm" onclick="SelectArcList('form1.arcid<?php echo $i?>');">选择节点文档</button>
+															<textarea name="arcid<?php echo $i;?>" onblur='CheckVal(<?php echo $i ?>)' id="arcid<?php echo $i;?>" class="admin-textarea-sm"></textarea>
+															<button name="selarc<?php echo $i;?>" type="button" id="selarc<?php echo $i?>2" class="btn btn-primary btn-sm" onclick="SelectArcList('form1.arcid<?php echo $i;?>');">选择节点文档</button>
 														</td>
 													</tr>
 													<tr>
 														<td>文档来源</td>
 														<td>
-															<label>栏目id：<input type="text" name="typeid<?php echo $i?>" id="_typeid<?php echo $i?>" value="0" class="admin-input-sm"></label>
-															<label>关键词：<input type="text" name="keywords<?php echo $i?>" id="keywords<?php echo $i?>" class="admin-input-lg">（英文逗号隔开）</label>
-															<label><input type="radio" name="isauto<?php echo $i?>" id="isauto<?php echo $i?>" value="0" checked> 按文档列表</label>
-															<label><input type="radio" name="isauto<?php echo $i?>" id="isauto<?php echo $i?>" value="1"> 自动获取文档</label>
+															<label>栏目id：<input type="text" name="typeid<?php echo $i;?>" id="_typeid<?php echo $i;?>" value="0" class="admin-input-sm"></label>
+															<label>关键词：<input type="text" name="keywords<?php echo $i;?>" id="keywords<?php echo $i;?>" class="admin-input-lg">（英文逗号隔开）</label>
+															<label><input type="radio" name="isauto<?php echo $i;?>" id="isauto<?php echo $i;?>" value="0" checked> 按文档列表</label>
+															<label><input type="radio" name="isauto<?php echo $i;?>" id="isauto<?php echo $i;?>" value="1"> 自动获取文档</label>
 														</td>
 													</tr>
 													<tr>
 														<td>节点布局</td>
 														<td>
-															<label>列数：<input type="text" name="col<?php echo $i?>" id="col<?php echo $i?>" value="1" class="admin-input-sm"></label>
-															<label>图片宽：<input type="text" name="imgwidth<?php echo $i?>" id="imgwidth<?php echo $i?>" value="120" class="admin-input-sm"></label>
-															<label>图片高：<input type="text" name="imgheight<?php echo $i?>" id="imgheight<?php echo $i?>" value="90" class="admin-input-sm"></label>
-															<label>标题长：<input type="text" name="titlelen<?php echo $i?>" id="titlelen<?php echo $i?>" value="60" class="admin-input-sm"></label>
-															<label>简介长：<input type="text" name="infolen<?php echo $i?>" id="infolen<?php echo $i?>" value="160" class="admin-input-sm"></label>
-															<label>文档数：<input type="text" name="rownum<?php echo $i?>" id="rownum<?php echo $i?>" value="10" class="admin-input-sm"></label>
+															<label>列数：<input type="text" name="col<?php echo $i;?>" id="col<?php echo $i;?>" value="1" class="admin-input-sm"></label>
+															<label>图片宽：<input type="text" name="imgwidth<?php echo $i;?>" id="imgwidth<?php echo $i;?>" value="120" class="admin-input-sm"></label>
+															<label>图片高：<input type="text" name="imgheight<?php echo $i;?>" id="imgheight<?php echo $i;?>" value="90" class="admin-input-sm"></label>
+															<label>标题长：<input type="text" name="titlelen<?php echo $i;?>" id="titlelen<?php echo $i;?>" value="60" class="admin-input-sm"></label>
+															<label>简介长：<input type="text" name="infolen<?php echo $i;?>" id="infolen<?php echo $i;?>" value="160" class="admin-input-sm"></label>
+															<label>文档数：<input type="text" name="rownum<?php echo $i;?>" id="rownum<?php echo $i;?>" value="10" class="admin-input-sm"></label>
 														</td>
 													</tr>
 													<tr>
 														<td>应用样式</td>
-														<td><textarea name="listtmp<?php echo $i?>" id="listtmp<?php echo $i?>" class="admin-textarea-xl"><?php echo $speclisttmp?></textarea></td>
+														<td><textarea name="listtmp<?php echo $i;?>" id="listtmp<?php echo $i;?>" class="admin-textarea-xl"><?php echo $speclisttmp;?></textarea></td>
 													</tr>
 													<tr>
 														<td>应用模板</td>
 														<td>
-															<input type="text" name="notetemplet<?php echo $i?>" id="notetemplet<?php echo $i?>" value="system/channel_spec_note.htm" class="admin-input-lg">
-															<button type="button" name="selno<?php echo $i?>" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.notetemplet<?php echo $i?>');">选择</button>
+															<input type="text" name="notetemplet<?php echo $i;?>" id="notetemplet<?php echo $i;?>" value="system/channel_spec_note.htm" class="admin-input-lg">
+															<button type="button" name="selno<?php echo $i;?>" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.notetemplet<?php echo $i;?>');">选择</button>
 														</td>
 													</tr>
 													<?php }?>

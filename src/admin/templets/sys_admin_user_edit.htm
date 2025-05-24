@@ -23,18 +23,18 @@
 					<form name="form1" action="sys_admin_user_edit.php" method="post">
 						<input type="hidden" name="dopost" value="saveedit">
 						<input type="hidden" name="_csrf_token" value="<?php echo $GLOBALS['csrf_token'];?>">
-						<input type="hidden" name="id" value="<?php echo $row['id']?>">
-						<input type="hidden" name="olduserid" value="<?php echo $row['userid']?>">
+						<input type="hidden" name="id" value="<?php echo $row['id'];?>">
+						<input type="hidden" name="olduserid" value="<?php echo $row['userid'];?>">
 						<div class="table-responsive">
 							<table class="table table-borderless">
 								<tbody>
 									<tr>
 										<td width="260">账号</td>
-										<td><input type="text" name="userid" id="userid" value="<?php echo $row['userid']?>" class="admin-input-sm" required></td>
+										<td><input type="text" name="userid" id="userid" value="<?php echo $row['userid'];?>" class="admin-input-sm" required></td>
 									</tr>
 									<tr>
 										<td>昵称</td>
-										<td><input type="text" name="uname" id="uname" value="<?php echo $row['uname']?>" class="admin-input-sm" required>（前后台显示文档作者的名称）</td>
+										<td><input type="text" name="uname" id="uname" value="<?php echo $row['uname'];?>" class="admin-input-sm" required>（前后台显示文档作者的名称）</td>
 									</tr>
 									<tr>
 										<td>密码</td>
@@ -86,11 +86,11 @@
 									<?php }?>
 									<tr>
 										<td>姓名</td>
-										<td><input type="text" name="tname" id="tname" value="<?php echo $row['tname']?>" class="admin-input-sm"></td>
+										<td><input type="text" name="tname" id="tname" value="<?php echo $row['tname'];?>" class="admin-input-sm"></td>
 									</tr>
 									<tr>
 										<td>邮箱</td>
-										<td><input type="text" name="email" id="email" autocomplete="off" value="<?php echo $row['email']?>" class="admin-input-sm"></td>
+										<td><input type="text" name="email" id="email" autocomplete="off" value="<?php echo $row['email'];?>" class="admin-input-sm"></td>
 									</tr>
 									<tr>
 										<td>验证安全码</td>

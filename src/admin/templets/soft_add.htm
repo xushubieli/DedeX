@@ -15,6 +15,7 @@
 		<script src="/static/web/js/webajax.js"></script>
 		<script src="/static/web/js/moment.min.js"></script>
 		<script src="/static/web/js/daterangepicker.js"></script>
+		<script src="/static/web/js/cropper.min.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 		<script>
 			var startNum = 2;
@@ -37,7 +38,7 @@
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<li class="breadcrumb-item"><a href="catalog_do.php?cid=<?php echo $cid?>&channelid=<?php echo $channelid?>&dopost=listArchives">文档列表</a></li>
+				<li class="breadcrumb-item"><a href="catalog_do.php?cid=<?php echo $cid;?>&channelid=<?php echo $channelid;?>&dopost=listArchives">文档列表</a></li>
 				<li class="breadcrumb-item active">发布软件文档</li>
 			</ol>
 			<div class="card shadow-sm">
@@ -45,7 +46,7 @@
 				<div class="card-body">
 					<form name="form1" action="soft_add.php" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="dopost" value="save">
-						<input type="hidden" name="channelid" value="<?php echo $channelid?>">
+						<input type="hidden" name="channelid" value="<?php echo $channelid;?>">
 						<input type="hidden" name="cid" value="<?php echo $cid;?>">
 						<div class="table-responsive">
 							<table class="table table-borderless">

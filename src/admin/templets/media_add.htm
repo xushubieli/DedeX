@@ -86,7 +86,7 @@
 				var endNum = Number(document.form1.picnum.value) + startNum;
 				if (endNum > 30) endNum = 30;
 				for (startNum; startNum <= endNum; startNum++) {
-					upfield.innerHTML += "<div class='mb-3'><label>附件" + startNum + "：<input type='file' name='upfile" + startNum + "' class='admin-input-lg'></label></div>";
+					upfield.innerHTML += "<p><label>附件" + startNum + "：<input type='file' name='upfile" + startNum + "' class='admin-input-lg'></label></p>";
 				}
 			}
 			function ResetUpload() {

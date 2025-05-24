@@ -18,7 +18,7 @@
 			<div class="card shadow-sm">
 				<div class="card-header">文件上传</div>
 				<div class="card-body">
-					<form method="POST" enctype="multipart/form-data" action="file_manage_control.php" name="form1">
+					<form name="form1" action="file_manage_control.php" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="activepath" value="{dede:global name='activepath'/}">
 						<input type="hidden" name="fmdo" value="upload">
 						<div class="table-responsive">

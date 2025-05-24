@@ -29,29 +29,29 @@
 				<div class="card-body">
 					<form name="form1" action="freelist_edit.php" method="post">
 						<input type="hidden" name="dopost" value="save">
-						<input type="hidden" name="aid" value="<?php echo $row['aid']?>">
+						<input type="hidden" name="aid" value="<?php echo $row['aid'];?>">
 						<div class="table-responsive">
 							<table class="table table-borderless">
 								<tbody>
 									<tr>
 										<td width="160">自由列表标题</td>
-										<td width="550"><input type="text" name="title" id="title" value="<?php echo $row['title']?>" class="admin-input-lg"></td>
+										<td width="550"><input type="text" name="title" id="title" value="<?php echo $row['title'];?>" class="admin-input-lg"></td>
 										<td width="160">列表生成目录</td>
-										<td><input type="text" name="listdir" id="listdir" value="<?php echo $row['listdir']?>" class="admin-input-lg"></td>
+										<td><input type="text" name="listdir" id="listdir" value="<?php echo $row['listdir'];?>" class="admin-input-lg"></td>
 									</tr>
 									<tr>
 										<td>默认页名称</td>
 										<td>
-											<input type="text" name="defaultpage" id="defaultpage" value="<?php echo $row['defaultpage']?>" class="admin-input-lg">
+											<input type="text" name="defaultpage" id="defaultpage" value="<?php echo $row['defaultpage'];?>" class="admin-input-lg">
 											<label><input type="checkbox" name="nodefault" id="nodefault" value="1" <?php if ($row['nodefault']==1) echo 'checked';?>> 不使用默认首页</label>
 										</td>
 										<td>命名规则</td>
-										<td><input type="text" name="namerule" id="namerule" value="<?php echo $row['namerule']?>" class="admin-input-lg">（{listdir}列表存放目录）</td>
+										<td><input type="text" name="namerule" id="namerule" value="<?php echo $row['namerule'];?>" class="admin-input-lg">（{listdir}列表存放目录）</td>
 									</tr>
 									<tr>
 										<td>列表模板</td>
 										<td>
-											<input type="text" name="templet" id="templet" value="<?php echo $row['templet']?>" class="admin-input-lg">
+											<input type="text" name="templet" id="templet" value="<?php echo $row['templet'];?>" class="admin-input-lg">
 											<button type="button" onclick="SelectTemplets('form1.templet');" class="btn btn-primary btn-sm">选择</button>
 										</td>
 										<td>最大列出页数</td>
@@ -61,7 +61,7 @@
 										<td>列表关键词</td>
 										<td><input type="text" name="keywords" id="keywords" value="<?php echo $row['keywords'];?>" class="admin-input-lg"></td>
 										<td>列表描述</td>
-										<td><textarea name="description" id="description" class="admin-textarea-sm"><?php echo $row['description']?></textarea></td>
+										<td><textarea name="description" id="description" class="admin-textarea-sm"><?php echo $row['description'];?></textarea></td>
 									</tr>
 									<tr>
 										<td>调用栏目</td>
@@ -122,20 +122,20 @@
 											?>
 										</td>
 										<td>发布天数</td>
-										<td><input type="text" name="subday" id="subday" class="admin-input-sm" value="<?php echo $ctag->GetAtt('subday')?>">（0表示不限）</td>
+										<td><input type="text" name="subday" id="subday" class="admin-input-sm" value="<?php echo $ctag->GetAtt('subday');?>">（0表示不限）</td>
 										
 
 									</tr>
 									<tr>
 										<td>每页记录数</td>
-										<td><input type="text" name="pagesize" id="pagesize" value="<?php echo $ctag->GetAtt('pagesize')?>" class="admin-input-sm"></td>
+										<td><input type="text" name="pagesize" id="pagesize" value="<?php echo $ctag->GetAtt('pagesize');?>" class="admin-input-sm"></td>
 										<td>显示列数</td>
 										<td><input type="text" name="col" id="col" value="<?php  $col = $ctag->GetAtt('col'); $v = ( empty($col) ? '1' :  $col ); echo $v;?>" class="admin-input-sm"></td>
 
 									</tr>
 									<tr>
 										<td>标题长度</td>
-										<td><input type="text" name="titlelen" id="titlelen" value="<?php echo $ctag->GetAtt('titlelen')?>" class="admin-input-sm">（1字节=0.5个中文字）</td>
+										<td><input type="text" name="titlelen" id="titlelen" value="<?php echo $ctag->GetAtt('titlelen');?>" class="admin-input-sm">（1字节=0.5个中文字）</td>
 										<td>
 											<?php
 											$setype = $ctag->GetAtt('type');
@@ -151,7 +151,7 @@
 									</tr>
 									<tr>
 										<td>关键词</td>
-										<td><input type="text" name="keywordarc" id="keywordarc" value="<?php echo $ctag->GetAtt('keyword')?>">（英文逗号隔开）</td>
+										<td><input type="text" name="keywordarc" id="keywordarc" value="<?php echo $ctag->GetAtt('keyword');?>">（英文逗号隔开）</td>
 										<td>排列顺序</td>
 										<td>
 											<?php
@@ -180,7 +180,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td colspan="4"><textarea name="innertext" id="myinnertext" class="admin-textarea-xl"><?php echo $ctag->GetInnerText()?></textarea></td>
+										<td colspan="4"><textarea name="innertext" id="myinnertext" class="admin-textarea-xl"><?php echo $ctag->GetInnerText();?></textarea></td>
 									</tr>
 									<tr>
 										<td colspan="4" align="center">
@@ -215,14 +215,12 @@
 			}
 			function ShowHide(objname) {
 				var obj = document.getElementById(objname);
-				if (obj.style.display == "block" || obj.style.display == "")
-					obj.style.display = "none";
-				else
-					obj.style.display = "block";
+				if (obj.style.display == "block" || obj.style.display == "") obj.style.display = "none";
+				else obj.style.display = "block";
 			}
 			function SelectTemplets(fname) {
 				var pos = GetWinPos(800,600);
-				window.open("./dialog/select_templets.php?&activepath=<?php echo urlencode($cfg_templets_dir)?>&f=" + fname, "poptempWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
+				window.open("./dialog/select_templets.php?&activepath=<?php echo urlencode($cfg_templets_dir);?>&f=" + fname, "poptempWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
 			}
 			var editor = CodeMirror.fromTextArea(document.getElementById("myinnertext"), {
 				lineNumbers: true,

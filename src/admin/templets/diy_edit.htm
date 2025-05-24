@@ -33,7 +33,7 @@
 									</tr>
 									<tr>
 										<td>表单名称</td>
-										<td><input type="text" name="name" id="name" class="admin-input-sm" value="<?php echo $row['name']?>" required>（前后台显示表单的名称）</td>
+										<td><input type="text" name="name" id="name" class="admin-input-sm" value="<?php echo $row['name'];?>" required>（前后台显示表单的名称）</td>
 									</tr>
 									<tr>
 										<td>数据表名</td>
@@ -94,7 +94,7 @@
 															else echo $itname;
 															?>
 														</td>
-														<td><?php echo $ctag->GetTagName()?></td>
+														<td><?php echo $ctag->GetTagName();?></td>
 														<td>
 															<?php 
 															$ft = $ctag->GetAtt('type');
@@ -110,8 +110,8 @@
 															?>
 														</td>
 														<td>
-															<a href="diy_field_edit.php?diyid=<?php echo $diyid;?>&fname=<?php echo $ctag->GetTagName()?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
-															<a href="diy_field_edit.php?diyid=<?php echo $diyid;?>&action=delete&fname=<?php echo $ctag->GetTagName()?>" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+															<a href="diy_field_edit.php?diyid=<?php echo $diyid;?>&fname=<?php echo $ctag->GetTagName();?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
+															<a href="diy_field_edit.php?diyid=<?php echo $diyid;?>&action=delete&fname=<?php echo $ctag->GetTagName();?>" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
 														</td>
 													</tr>
 													<?php }}?>

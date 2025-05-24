@@ -24,8 +24,8 @@
 					<?php if ($row['matt']==10) {echo '<div class="alert alert-info">您已经是管理员，不要提升了</div>';} else {?>
 					<form name="form2" action="member_toadmin.php" method="post">
 						<input type="hidden" name="dopost" value="toadmin">
-						<input type="hidden" name="userid" value="<?php echo $row['userid']?>">
-						<input type="hidden" name="id" value="<?php echo $id?>">
+						<input type="hidden" name="userid" value="<?php echo $row['userid'];?>">
+						<input type="hidden" name="id" value="<?php echo $id;?>">
 						<div class="table-responsive">
 							<table class="table table-borderless">
 								<tbody>
@@ -35,7 +35,7 @@
 									</tr>
 									<tr>
 										<td>昵称</td>
-										<td><input type="text" name="uname" id="uname" value="<?php echo $row['uname']?>" class="admin-input-sm" required>（发布文档后显示作者的名字）</td>
+										<td><input type="text" name="uname" id="uname" value="<?php echo $row['uname'];?>" class="admin-input-sm" required>（发布文档后显示作者的名字）</td>
 									</tr>
 									<tr>
 										<td>密码</td>
@@ -73,7 +73,7 @@
 									</tr>
 									<tr>
 										<td>邮箱</td>
-										<td><input type="text" name="email" id="email" autocomplete="off" class="admin-input-sm" value="<?php echo $row['email']?>" required></td>
+										<td><input type="text" name="email" id="email" autocomplete="off" class="admin-input-sm" value="<?php echo $row['email'];?>" required></td>
 									</tr>
 									<tr>
 										<td>验证安全码</td>

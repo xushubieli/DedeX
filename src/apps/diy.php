@@ -11,7 +11,7 @@ $diyid = isset($diyid) && is_numeric($diyid) ? $diyid : 0;
 $action = isset($action) && in_array($action, array('post', 'list', 'view')) ? $action : 'post';
 $id = isset($id) && is_numeric($id) ? $id : 0;
 if (empty($diyid)) {
-    showMsg('操作失败', '/');
+    header("Location: /");
     exit();
 }
 require_once DEDEINC.'/diyform.class.php';
@@ -70,7 +70,7 @@ if ($action == 'post') {
             exit();
         }*/
         //判断$message是否大于70字符则提交失败，$message改成您表单字段标识，恢复注释代码使用
-        /*if (strlen($message) > 70) {
+        /*if (strlen($message) > 190) {
             showmsg('您输入的信息太多了，请重新填写', '-1');
             exit();
         }*/

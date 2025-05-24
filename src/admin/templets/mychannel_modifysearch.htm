@@ -22,10 +22,10 @@
 				<div class="card-header">自定义搜索管理</div>
 				<div class="card-body">
 					<form name="form1" action="mychannel_edit.php" method="post" target="stafrm">
-						<input type="hidden" name="mid" value="<?php echo $mid?>">
-						<input type="hidden" name="maintable" value="<?php echo $channel['maintable']?>">
+						<input type="hidden" name="mid" value="<?php echo $mid;?>">
+						<input type="hidden" name="maintable" value="<?php echo $channel['maintable'];?>">
 						<input type="hidden" name="addontable" value="<?php echo $channel['addtable'];?>">
-						<input type="hidden" name="step" value="<?php echo $step?>">
+						<input type="hidden" name="step" value="<?php echo $step;?>">
 						<input type="hidden" name="dopost" value="modifysearch">
 						<div class="table-responsive">
 							<table class="table table-borderless">
@@ -36,7 +36,7 @@
 									</tr>
 									<tr>
 										<td>栏目名称</td>
-										<td><?php echo $channel['typename']?></td>
+										<td><?php echo $channel['typename'];?></td>
 									</tr>
 									<?php if ($channel['issystem'] >= 0) {?>
 									<tr>

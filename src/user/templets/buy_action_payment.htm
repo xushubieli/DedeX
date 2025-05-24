@@ -15,7 +15,7 @@
 				<?php include(DEDEMEMBER."/templets/menu.htm");?>
 				<div class="col-md-9">
 					<div class="pannel-main-container shadow-sm rounded">
-						<div class="alert alert-success">您申请购买的产品如下，确认无误后请点击购买并支付按钮，进行网上支付，如果支付失败，请与管理员联系其它支付方式</div>
+						<div class="alert alert-info">您申请购买的产品如下，确认无误后请点击购买并支付按钮，进行网上支付，如果支付失败，请与管理员联系其它支付方式</div>
 						<h3 class="py-3">订单确认</h3>
 						<form name="E_FORM" action="<?php echo $cfg_memberurl;?>/buy_action.php" method="post">
 							<input type="hidden" name="pd_encode" value="<?php echo $pr_encode;?>">
@@ -46,7 +46,7 @@
 											<div class="form-check mb-2">
 												<input class="form-check-input" id="iptPayment{dede:value.id/}" type="radio" name="paytype" value="{dede:value.id/}">
 												<label class="form-check-label" for="iptPayment{dede:value.id/}">
-													{dede:value.name/}<?php echo intval($value['id'])=== 4? '(余额：'.$cfg_ml->M_UserMoney.')' : '' ;?>
+													{dede:value.name/}<?php echo intval($value['id']) === 4? '(余额：'.$cfg_ml->M_UserMoney.')' : '' ;?>
 												</label>
 											</div>
 											{/dede:array}

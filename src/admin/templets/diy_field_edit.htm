@@ -23,16 +23,16 @@
 				<div class="card-body">
 					<form name="form1" action="diy_field_edit.php" method="post" onSubmit="return GetFields();">
 						<input type="hidden" name="action" value="save">
-						<input type="hidden" name="diyid" value="<?php echo $diyid?>">
-						<input type="hidden" name="fname" value="<?php echo $fname?>">
-						<input type="hidden" name="issystem" value="<?php echo $issystem?>">
+						<input type="hidden" name="diyid" value="<?php echo $diyid;?>">
+						<input type="hidden" name="fname" value="<?php echo $fname;?>">
+						<input type="hidden" name="issystem" value="<?php echo $issystem;?>">
 						<input type="hidden" name="fieldstring">
 						<div class="table-responsive">
 							<table class="table table-borderless">
 								<tbody>
 									<tr>
 										<td>字段名称</td>
-										<td><input type="text" name="itemname" id="itemname" class="admin-input-sm" value="<?php echo $ctag->GetAtt('itemname')?>" required>（前后台显示字段的名称）</td>
+										<td><input type="text" name="itemname" id="itemname" class="admin-input-sm" value="<?php echo $ctag->GetAtt('itemname');?>" required>（前后台显示字段的名称）</td>
 									</tr>
 									<tr>
 										<td width="260">字段标识</td>
@@ -92,7 +92,7 @@
 									</tr>
 									<tr>
 										<td>最大长度</td>
-										<td><input type="text" name="maxlength" id="maxlength" class="admin-input-sm" value="<?php echo $ctag->GetAtt('maxlength')?>">（文本数据必须填写，大于255为text类型）</td>
+										<td><input type="text" name="maxlength" id="maxlength" class="admin-input-sm" value="<?php echo $ctag->GetAtt('maxlength');?>">（文本数据必须填写，大于255为text类型）</td>
 									</tr>
 									<tr>
 										<td colspan="2" align="center">

@@ -115,9 +115,6 @@ if (!empty($noeditor)) {
                                 } else if (preg_match("#\.(zip|rar|tgr.gz)#i", $file)) {
                                     $reurl = "$activeurl/$file";
                                     $reurl = preg_replace("#^\.\.#", "", $reurl);
-                                    if ($cfg_remote_site == 'Y' && $remoteuploads == 1) {
-                                       $reurl = $remoteupUrl.$reurl;
-                                    }
                                     if ($file == $comeback) $lstyle = "class='text-danger'";
                                     else $lstyle = '';
                                     $line = "<tr>
@@ -129,9 +126,6 @@ if (!empty($noeditor)) {
                                 } else {
                                     $reurl = "$activeurl/$file";
                                     $reurl = preg_replace("#^\.\.#", "", $reurl);
-                                    if ($cfg_remote_site == 'Y' && $remoteuploads == 1) {
-                                       $reurl = $remoteupUrl.$reurl;
-                                    }
                                     if ($file == $comeback) $lstyle = "class='text-danger'";
                                     else $lstyle = '';
                                     $line = "<tr>

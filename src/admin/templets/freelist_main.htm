@@ -11,12 +11,39 @@
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
+				<li class="breadcrumb-item active">自由列表管理</li>
+			</ol>
+			<div class="card shadow-sm mb-3">
+				<div class="card-body">
+					<div class="admin-btns">
+						<form name="form1" id="form1" action="freelist_main.php">
+							<input type="text" name="keyword" id="keyword" value="<?php echo $keyword;?>" class="admin-input-lg" placeholder="请输入关键词">
+							<button type="submit" class="btn btn-primary btn-sm">搜索</button>
+							<a href="freelist_add.php" class="btn btn-primary btn-sm">添加自由列表</a>
+							<a href="makehtml_freelist.php" class="btn btn-primary btn-sm">更新所有列表</a>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="card shadow-sm">
+				<div class="card-header">自由列表管理</div>
+				<div class="card-body">
+					<div id="rslist"><?php GetTagList($dsql,$pageno,$pagesize,$orderby);?></div>
+					<div id="pagelist" class="d-flex justify-content-end"></div>
+				</div>
+			</div>
+		</div>
 		<script>
 			var pageno = 1;
 			var totalrow = parseInt('<?php echo $totalRow;?>');
 			var pagesize = parseInt('<?php echo $pagesize;?>');
-			var orderby = "<?php echo $orderby?>";
-			var addget = "<?php echo $addget?>";
+			var orderby = "<?php echo $orderby;?>";
+			var addget = "<?php echo $addget;?>";
 			//加载列表
 			function ReloadPage(ordertype) {
 				orderby = ordertype;
@@ -98,34 +125,7 @@
 				if (pageno != pagenum && pagenum > 1) ahtml += "<li class='page-item'><a class='page-link' href='javascript:;' onclick='LoadPage(" + pagenum + ")'>末页</a></li>";
 				ListArea.innerHTML = ahtml+"</ul>";
 			}
+			ReloadPageNum(1);
 		</script>
-	</head>
-	<body>
-		<div class="container-fluid">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<li class="breadcrumb-item active">自由列表管理</li>
-			</ol>
-			<div class="card shadow-sm mb-3">
-				<div class="card-body">
-					<div class="admin-btns">
-						<form action="freelist_main.php" name="form1" id="form1">
-							<input type="text" name="keyword" id="keyword" value="<?php echo $keyword?>" class="admin-input-lg" placeholder="请输入关键词">
-							<button type="submit" class="btn btn-primary btn-sm">搜索</button>
-							<a href="freelist_add.php" class="btn btn-primary btn-sm">添加自由列表</a>
-							<a href="makehtml_freelist.php" class="btn btn-primary btn-sm">更新所有列表</a>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="card shadow-sm">
-				<div class="card-header">自由列表管理</div>
-				<div class="card-body">
-					<div id="rslist"><?php GetTagList($dsql,$pageno,$pagesize,$orderby);?></div>
-					<div id="pagelist" class="d-flex justify-content-end"></div>
-					<script>ReloadPageNum(1);</script>
-				</div>
-			</div>
-		</div>
 	</body>
 </html>

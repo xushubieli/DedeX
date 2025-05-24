@@ -29,10 +29,10 @@
 								<thead>
 									<tr>
 										<th scope="col">#</th>
-										<th scope="col">文档标题</th>
+										<th width="30%">标题</th>
 										<th scope="col">栏目</th>
 										<th scope="col">状态</th>
-										<th scope="col">更新时间</th>
+										<th scope="col">时间</th>
 										<th scope="col">操作</th>
 									</tr>
 								</thead>
@@ -51,9 +51,11 @@
 										</td>
 										<td><?php echo GetDateMk($fields['senddate']);?></td>
 										<td>
-											<a href="javascript:viewArc(<?php echo $fields['aid'];?>);" class="btn btn-primary btn-sm">预览</a>
-											<a href="javascript:editArc(<?php echo $fields['aid']?>,<?php echo $fields['channel']?>);" class="btn btn-primary btn-sm">修改</a>
-											<a href="javascript:delArc(<?php echo $fields['aid']?>);" class="btn btn-danger btn-sm">删除</a>
+											<a href="{dede:global.cfg_phpurl/}/view.php?aid={dede:field.id/}" target="_blank" class="btn btn-primary btn-sm"><i class="fa fa-eye" title="查看"></i></a>
+											<?php if ($fields['arcrank']<0 || $dtime - $fields['senddate'] < $maxtime) {?>
+											<a href="<?php echo $cfg_memberurl?>/archives_do.php?dopost=edit&channelid=<?php echo $channelid;?>&aid={dede:field.id/}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square" title="编辑"></i></a>
+											<a href="<?php echo $cfg_memberurl?>/archives_do.php?aid={dede:field.id/}&dopost=delArc" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+											<?php }?>
 										</td>
 									</tr>
 									{/dede:datalist}
@@ -66,20 +68,5 @@
 			</div>
 		</main>
 		<?php ThemeInclude('foot.htm');?>
-		<script>
-			function viewArc(aid) {
-				window.open("{dede:global.cfg_phpurl/}/view.php?aid=" + aid);
-			}
-			function editArc(aid, channelid) {
-				location = "archives_do.php?dopost=edit&channelid=" + channelid + "&aid=" + aid;
-			}
-			function delArc(aid) {
-				DedeConfirm("您确定要删除这篇文档吗").then((v)=>{
-					location = "archives_do.php?aid=" + aid + "&dopost=delArc";
-				}).catch((e)=>{
-					console.log(e)
-				});
-			}
-		</script>
 	</body>
 </html>

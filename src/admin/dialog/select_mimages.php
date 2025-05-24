@@ -72,7 +72,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
             function addList(files) {
                 var files_sum = files.length;
                 var vDom = document.createDocumentFragment();
-                for (let i=0;i<files_sum;i++) {
+                for (let i=0; i<files_sum; i++) {
                     let file = files[i];
                     if (!isFileImage(file)) {
                         alert("选择非图片文件无法上传")

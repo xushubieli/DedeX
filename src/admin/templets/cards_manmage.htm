@@ -48,7 +48,7 @@
 									<tr>
 										<td><input type="checkbox" name="aids" value="{dede:field.aid/}"></td>
 										<td>{dede:field.cardid/}</td>
-										<td><?php echo $TypeNames[$fields['ctid']]?></td>
+										<td><?php echo $TypeNames[$fields['ctid']];?></td>
 										<td>{dede:field.mtime function='GetDateMk(@me)'/}</td>
 										<td>{dede:field.utime function='GetUseDate(@me)'/}</td>
 										<td>{dede:field.isexp function='GetSta(@me)'/}</td>
@@ -70,7 +70,6 @@
 			</div>
 		</div>
 		<script>
-			//获得选中项
 			function getCheckboxItem() {
 				var allSel = '';
 				if (document.form1.aids.value) return document.form1.aids.value;
@@ -93,7 +92,7 @@
 			function DelSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					alert("请选择要删除的卡");
+					showMsg('请选择要删除的选项');
 					return;
 				}
 				 location.href = "cards_manage.php?dopost=delete&aids=" + nid;

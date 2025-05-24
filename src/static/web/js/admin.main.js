@@ -219,7 +219,7 @@ function getSelCat(targetId) {
 			}
 		}
 		if (selvalue == '') {
-			alert("您没有选中任何栏目");
+			showMsg('您没有选中任何栏目');
 			return;
 		}
 		if (targetObj) {
@@ -232,7 +232,7 @@ function getSelCat(targetId) {
 	HideObj("getCatMap");
 	ChangeFullDiv("hide");
 }
-//生成一个随机id
+//全局消息提示框
 function guid() {
 	function S4() {
 		return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -269,10 +269,9 @@ function DedeConfirm(content = "", title = "确认提示") {
 		});
 		$("#DedeModal" + modalID).on('hidden.bs.modal', function(e) {
 			$("#DedeModal" + modalID).remove();
-		})
-	})
+		});
+	});
 }
-//函数会返回一个modalID，通过这个id可自已定义一些方法，这里用到了一个展开语法：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 function ShowMsg(content, ...args) {
 	title = "系统提示";
 	size = '';
@@ -309,17 +308,16 @@ function ShowMsg(content, ...args) {
 	});
 	$("#GKModal" + modalID).on('hidden.bs.modal', function(e) {
 		$("#GKModal" + modalID).remove();
-	})
+	});
 	return modalID;
 }
-//隐藏并销毁modal
 function CloseModal(modalID) {
 	$("#" + modalID).modal('hide');
 	$("#" + modalID).on('hidden.bs.modal', function(e) {
 		if ($("#" + modalID).length > 0) {
 			$("#" + modalID).remove();
 		}
-	})
+	});
 }
 //获取缩略图
 var litpicImgSrc = '';
@@ -372,14 +370,12 @@ function uploadImage(litpicImgSrc) {
 	fetch("archives_do.php?dopost=upload_base64_image", {
 		method: 'POST',
 		body: formData
-	})
-	.then(r => {
+	}).then(r => {
 		if (r.ok) {
 			return r.json()
 		}
 		throw new Error(errMsg);
-	})
-	.then(d => {
+	}).then(d => {
 		if (d.code == 200) {
 			$("#picname").val(d.data.image_url);
 		}

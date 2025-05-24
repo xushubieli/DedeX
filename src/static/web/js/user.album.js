@@ -39,14 +39,3 @@ function CheckSelTable(nnum) {
 	if (!cbox.checked) seltb.style.display = "none";
 	else seltb.style.display = "block";
 }
-function checkSubmit() {
-	if (document.form1.title.value == '') {
-		alert("文档标题不能为空");
-		document.form1.title.focus();
-		return false;
-	}
-	if (document.form1.typeid.value == 0) {
-		alert("请您选择文档所属栏目");
-		return false;
-	}
-}

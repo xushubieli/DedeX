@@ -24,7 +24,7 @@
 					<div class="alert alert-info">不支持字段输入单引号和双引号</div>
 					<form name="form1" action="diy_field_add.php" method="post" onSubmit="return GetFields();">
 						<input type="hidden" name="action" value="save">
-						<input type="hidden" name="diyid" value="<?php echo $diyid?>">
+						<input type="hidden" name="diyid" value="<?php echo $diyid;?>">
 						<input type="hidden" name="fieldstring">
 						<div class="table-responsive">
 							<table class="table table-borderless">
@@ -102,7 +102,7 @@
 				var itemname = theform.itemname.value;
 				var dtype = 'text';
 				var enums = document.getElementsByName('dtype');
-				for (i=0;i<enums.length;i++)
+				for (i=0; i<enums.length; i++)
 				{
 					if (enums[i].checked) dtype = enums[i].value;
 				}

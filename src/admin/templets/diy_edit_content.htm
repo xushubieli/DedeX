@@ -18,7 +18,7 @@
 			<div class="card shadow-sm">
 				<div class="card-header">修改<?php echo $diy->name;?></div>
 				<div class="card-body">
-					<form name="form1" method="post" enctype="multipart/form-data" action="diy_list.php?action=edit&diyid=<?php echo $diy->diyid ?>&id=<?php echo $row['id'] ?>&do=2">
+					<form name="form1" action="diy_list.php?action=edit&diyid=<?php echo $diy->diyid;?>&id=<?php echo $row['id'];?>&do=2" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="dopost" value="edit">
 						<input type="hidden" name="id" value="<?php echo $row['id'];?>">
 						<div class="table-responsive">

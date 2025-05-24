@@ -23,7 +23,7 @@
 				<div class="card-header">修改广告</div>
 				<div class="card-body">
 					<form name="form1" action="ad_edit.php" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="aid" value="<?php echo $aid?>">
+						<input type="hidden" name="aid" value="<?php echo $aid;?>">
 						<input type="hidden" name="dopost" value="saveedit">
 						<input type="hidden" name="_csrf_token" value="<?php echo $GLOBALS['csrf_token'];?>">
 						<div class="table-responsive">
@@ -31,7 +31,7 @@
 								<tbody>
 									<tr>
 										<td width="260">广告名称</td>
-										<td><input type="text" name="adname" id="adname" value="<?php echo $row['adname']?>" class="admin-input-lg" required></td>
+										<td><input type="text" name="adname" id="adname" value="<?php echo $row['adname'];?>" class="admin-input-lg" required></td>
 									</tr>
 									<tr>
 										<td>广告标记</td>
@@ -70,17 +70,17 @@
 									<tr>
 										<td>投放时间</td>
 										<td>
-											<label>从：<input type="text" name="starttime" id="starttime" value="<?php echo GetDateTimeMk($row['starttime'])?>" class="datepicker admin-input-sm"></label>
-											<label>到：<input type="text" name="endtime" id="endtime" value="<?php echo GetDateTimeMk($row['endtime'])?>" class="datepicker admin-input-sm"></label>
+											<label>从：<input type="text" name="starttime" id="starttime" value="<?php echo GetDateTimeMk($row['starttime']);?>" class="datepicker admin-input-sm"></label>
+											<label>到：<input type="text" name="endtime" id="endtime" value="<?php echo GetDateTimeMk($row['endtime']);?>" class="datepicker admin-input-sm"></label>
 										</td>
 									</tr>
 									<tr>
 										<td>广告内容</td>
-										<td><textarea name="normbody" id="normbody" class="admin-textarea-xl"><?php echo dede_htmlspecialchars(stripslashes($row['normbody']))?></textarea></td>
+										<td><textarea name="normbody" id="normbody" class="admin-textarea-xl"><?php echo dede_htmlspecialchars(stripslashes($row['normbody']));?></textarea></td>
 									</tr>
 									<tr>
 										<td>过期内容</td>
-										<td><textarea name="expbody" id="expbody" class="admin-textarea-xl"><?php echo dede_htmlspecialchars($row['expbody'])?></textarea></td>
+										<td><textarea name="expbody" id="expbody" class="admin-textarea-xl"><?php echo dede_htmlspecialchars($row['expbody']);?></textarea></td>
 									</tr>
 									<tr>
 										<td colspan="2" align="center">

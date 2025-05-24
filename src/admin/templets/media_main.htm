@@ -18,7 +18,7 @@
 				<div class="card-body">
 					<div class="admin-btns">
 						<form name="forms" action="media_main.php" method="post">
-							<input type="text" name="keyword" id="keyword" placeholder="请输入关键词" value="<?php echo $keyword?>" class="admin-input-lg">
+							<input type="text" name="keyword" id="keyword" placeholder="请输入关键词" value="<?php echo $keyword;?>" class="admin-input-lg">
 							<select name="mediatype" class="admin-input-sm">
 								<option value="0">文件类型</option>
 								<option value="1" <?php if ($mediatype==1) echo "selected"?>>图片</option>
@@ -111,7 +111,7 @@
 			function DelSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					alert("请选择项目");
+					showMsg('请选择要删除的选项');
 					return;
 				}
 				location.href = "media_edit.php?dopost=del&ids=" + nid;

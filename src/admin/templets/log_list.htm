@@ -102,7 +102,7 @@
 			function DelSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					alert("请选择项目");
+					showMsg('请选择要删除的选项');
 					return;
 				}
 				location.href = "log_edit.php?dopost=del&ids=" + nid;

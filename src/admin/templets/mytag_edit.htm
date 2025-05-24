@@ -18,8 +18,8 @@
 			<div class="card shadow-sm">
 				<div class="card-header">修改自定义宏标签</div>
 				<div class="card-body">
-					<form action="mytag_edit.php" method="post" enctype="multipart/form-data" name="form1">
-						<input type="hidden" name="aid" value="<?php echo $aid?>">
+					<form name="form1" action="mytag_edit.php" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="aid" value="<?php echo $aid;?>">
 						<input type="hidden" name="dopost" value="saveedit">
 						<input type="hidden" name="_csrf_token" value="<?php echo $GLOBALS['csrf_token'];?>">
 						<div class="table-responsive">
@@ -27,7 +27,7 @@
 								<tbody>
 									<tr>
 										<td>标记名称</td>
-										<td><?php echo $row['tagname']?></td>
+										<td><?php echo $row['tagname'];?></td>
 									</tr>
 									<tr>
 										<td width="260">所属栏目</td>
@@ -51,19 +51,19 @@
 									</tr>
 									<tr>
 										<td>开始时间</td>
-										<td><input type="text" name="starttime" id="starttime" value="<?php echo GetDateTimeMk($row['starttime'])?>" class="admin-input-md"></td>
+										<td><input type="text" name="starttime" id="starttime" value="<?php echo GetDateTimeMk($row['starttime']);?>" class="admin-input-md"></td>
 									</tr>
 									<tr>
 										<td>结束时间</td>
-										<td><input type="text" name="endtime" id="endtime" value="<?php echo GetDateTimeMk($row['endtime'])?>" class="admin-input-md"></td>
+										<td><input type="text" name="endtime" id="endtime" value="<?php echo GetDateTimeMk($row['endtime']);?>" class="admin-input-md"></td>
 									</tr>
 									<tr>
 										<td>标记内容</td>
-										<td><textarea name="normbody" id="normbody" class="admin-textarea-xl"><?php echo $row['normbody']?></textarea></td>
+										<td><textarea name="normbody" id="normbody" class="admin-textarea-xl"><?php echo $row['normbody'];?></textarea></td>
 									</tr>
 									<tr>
 										<td>过期内容</td>
-										<td><textarea name="expbody" id="expbody" class="admin-textarea-xl"><?php echo $row['expbody']?></textarea> </td>
+										<td><textarea name="expbody" id="expbody" class="admin-textarea-xl"><?php echo $row['expbody'];?></textarea> </td>
 									</tr>
 									<tr>
 										<td colspan="2" align="center">

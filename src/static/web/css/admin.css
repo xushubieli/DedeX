@@ -310,18 +310,8 @@ body.menu-show .admin-content {
 	border:0
 }
 .update-close {
-	background:var(--white);
+	background:transparent;
 	border:0
-}
-.updates-dot {
-	display:none;
-	position:absolute;
-	top:1rem;
-	right:0.35rem;
-	width:8px;
-	height:8px;
-	background:var(--danger);
-	border-radius:50%
 }
 .spinner-border {
 	width:20px;

@@ -22,11 +22,11 @@
 							<tbody>
 								<?php foreach ($asresult as $row) {?>
 								<tr>
-									<td><?php echo $row['title'] ?></td>
+									<td><?php echo $row['title'];?></td>
 								</tr>
 								<?php foreach ($row['soniterm'] as $rows) {?>
 								<tr>
-									<td><a href="<?php echo $rows['linkurl'] ?>" target="main"><?php echo $rows['title'] ?></a></td>
+									<td><a href="<?php echo $rows['linkurl'];?>" target="main"><?php echo $rows['title'];?></a></td>
 								</tr>
 								<?php }?>
 								<?php }?>

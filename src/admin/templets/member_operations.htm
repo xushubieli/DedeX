@@ -17,7 +17,7 @@
 			<div class="card shadow-sm mb-3">
 				<div class="card-body">
 					<div class="admin-btns">
-						<form name="form2" method="get" action="member_operations.php">
+						<form name="form2" action="member_operations.php" method="get">
 							<input type="text" name="buyid" id="buyid" placeholder="请输入订单号" class="admin-input-lg">
 							<button type="submit" class="btn btn-primary btn-sm">搜索</button>
 							<a href="member_operations.php?sta=0" class="btn btn-primary btn-sm">未付款</a>
@@ -49,14 +49,14 @@
 								<tbody>
 									{dede:datalist}
 									<tr>
-										<td><input type="checkbox" name="aids" value="<?php echo $fields['aid']?>"></td>
-										<td><?php echo $fields['buyid']?></td>
+										<td><input type="checkbox" name="aids" value="<?php echo $fields['aid'];?>"></td>
+										<td><?php echo $fields['buyid'];?></td>
 										<td><?php echo $fields['pname'].'（'.$fields['oldinfo'].'）';?></td>
-										<td><?php echo GetPType($fields['product'])?></td>
+										<td><?php echo GetPType($fields['product']);?></td>
 										<td><?php echo GetDateTimeMk($fields['mtime'])?>（{dede:field.mtime function="floorTime(time()-@me,@me)"/}）</td>
-										<td><?php echo $fields['money']?></td>
-										<td><?php echo GetSta($fields['sta'])?></td>
-										<td><?php echo GetMemberID($fields['mid'])?></td>
+										<td><?php echo $fields['money'];?></td>
+										<td><?php echo GetSta($fields['sta']);?></td>
+										<td><?php echo GetMemberID($fields['mid']);?></td>
 									</tr>
 									{/dede:datalist}
 									<tr>
@@ -98,7 +98,7 @@
 			function DelSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					alert("请选择要删除消费记录");
+					showMsg('请选择要删除消费记录');
 					return;
 				}
 				location.href = "member_do.php?dopost=deoperations&nid=" + nid;
@@ -106,7 +106,7 @@
 			function UpSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					alert("请选择要修改消费记录");
+					showMsg('请选择要修改消费记录');
 					return;
 				}
 				location.href = "member_do.php?dopost=upoperations&nid=" + nid;
@@ -114,7 +114,7 @@
 			function OkSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					alert("请选择要修改消费记录");
+					showMsg('请选择要修改消费记录');
 					return;
 				}
 				location.href = "member_do.php?dopost=okoperations&nid=" + nid;

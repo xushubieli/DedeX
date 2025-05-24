@@ -112,7 +112,7 @@
 									$dls = explode(',',$dl);
 									$n++;
 								?>
-								<table id="tables<?php echo $n?>" class="table table-borderless" style="<?php if ($n!=$gp) echo 'display:none';?>">
+								<table id="tables<?php echo $n;?>" class="table table-borderless" style="<?php if ($n!=$gp) echo 'display:none';?>">
 									<thead>
 										<tr>
 											<td width="25%">变量说明</td>
@@ -159,7 +159,7 @@
 												}
 												?>
 											</td>
-											<td><?php echo $row['varname']?></td>
+											<td><?php echo $row['varname'];?></td>
 										</tr>
 										<?php }?>
 									</tbody>
@@ -177,10 +177,6 @@
 		</div>
 		<script>
 			var searchconfig = false;
-			function Nav() {
-				if (window.navigator.userAgent.indexOf("Firefox") >= 1) return "FF";
-				else return "OT";
-			}
 			function $Obj(objname) {
 				return document.getElementById(objname);
 			}

@@ -37,14 +37,14 @@
 									{
 										$k++;
 									?>
-									<input type="hidden" name="att_<?php echo $k?>" value="<?php echo $row->att?>">
+									<input type="hidden" name="att_<?php echo $k;?>" value="<?php echo $row->att;?>">
 									<tr>
 										<td><?php echo $row->att;?></td>
-										<td><input type="text" name="sortid_<?php echo $k?>" value="<?php echo $row->sortid;?>"  id="sortid_<?php echo $k?>" class="admin-input-sm"></td>
-										<td align="left"><input type="text" name="attname_<?php echo $k?>" value="<?php echo $row->attname;?>" id="attname_<?php echo $k?>" class="admin-input-lg"></td>
+										<td><input type="text" name="sortid_<?php echo $k;?>" value="<?php echo $row->sortid;?>"  id="sortid_<?php echo $k;?>" class="admin-input-sm"></td>
+										<td align="left"><input type="text" name="attname_<?php echo $k;?>" value="<?php echo $row->attname;?>" id="attname_<?php echo $k;?>" class="admin-input-lg"></td>
 									</tr>
 									<?php }?>
-									<input type="hidden" name="idend" value="<?php echo $k?>">
+									<input type="hidden" name="idend" value="<?php echo $k;?>">
 									<tr>
 										<td colspan="3" align="center">
 											<button type="submit" class="btn btn-primary btn-sm">保存</button>

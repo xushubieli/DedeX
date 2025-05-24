@@ -24,7 +24,7 @@
 					<?php if ($row['matt']==10) echo '<div class="alert alert-info">该会员关联网站管理员，请谨慎修改</div>';?>
 					<form name="form2" action="member_do.php" method="post">
 						<input type="hidden" name="dopost" value="edituser">
-						<input type="hidden" name="id" value="<?php echo $id?>">
+						<input type="hidden" name="id" value="<?php echo $id;?>">
 						<div class="table-responsive">
 							<table class="table table-borderless">
 								<tbody>
@@ -39,7 +39,7 @@
 									</tr>
 									<tr>
 										<td width="260">昵称</td>
-										<td><input type="text" name="uname" id="uname" class="admin-input-sm" value="<?php echo $row['uname']?>" required></td>
+										<td><input type="text" name="uname" id="uname" class="admin-input-sm" value="<?php echo $row['uname'];?>" required></td>
 									</tr>
 									<tr>
 										<td>密码</td>
@@ -47,7 +47,7 @@
 									</tr>
 									<tr>
 										<td>邮箱</td>
-										<td><input type="text" name="email" id="email" autocomplete="off" class="admin-input-sm" value="<?php echo $row['email']?>" required></td>
+										<td><input type="text" name="email" id="email" autocomplete="off" class="admin-input-sm" value="<?php echo $row['email'];?>" required></td>
 									</tr>
 									<tr>
 										<td>性别</td>
@@ -93,7 +93,7 @@
 									</tr>
 									<tr>
 										<td>会员天数</td>
-										<td><input type="text" name="exptime" id="exptime" class="admin-input-sm" value="<?php echo $row['exptime']?>">（如果您要升级会员，会员天数必须大于0）</td>
+										<td><input type="text" name="exptime" id="exptime" class="admin-input-sm" value="<?php echo $row['exptime'];?>">（如果您要升级会员，会员天数必须大于0）</td>
 									</tr>
 									<?php if ($mhasDay!=0) {$mhasDay=($mhasDay>0)? $mhasDay : '<tr><td colspan="2"><span class="text-danger">会员已经到期</span></td></tr>';?>
 									<tr>
@@ -104,14 +104,14 @@
 									<tr>
 										<td>推荐级别</td>
 										<td>
-											<input type="hidden" name="oldmatt" id="oldmatt" class="admin-input-sm" value="<?php echo $row['matt']?>">
-											<input name="matt" type="text" id="matt" class="admin-input-sm" value="<?php echo $row['matt']?>">
+											<input type="hidden" name="oldmatt" id="oldmatt" class="admin-input-sm" value="<?php echo $row['matt'];?>">
+											<input name="matt" type="text" id="matt" class="admin-input-sm" value="<?php echo $row['matt'];?>">
 											<span>（0普通、1推荐、10管理员）</span>
 										</td>
 									</tr>
 									<tr>
 										<td>投稿限制</td>
-										<td><input type="text" name="send_max" class="admin-input-sm" value="<?php echo $row['send_max']?>">（0不能投稿、-1无限次）</td>
+										<td><input type="text" name="send_max" class="admin-input-sm" value="<?php echo $row['send_max'];?>">（0不能投稿、-1无限次）</td>
 									</tr>
 									<tr>
 										<td>投稿剩余次数</td>
@@ -143,15 +143,15 @@
 									<tr>
 										<td>注册时间/地址</td>
 										<td>
-											<span><?php echo GetDateTimeMk($row['jointime'])?></span>
-											<span><?php echo $row['joinip']?></span>
+											<span><?php echo GetDateTimeMk($row['jointime']);?></span>
+											<span><?php echo $row['joinip'];?></span>
 										</td>
 									</tr>
 									<tr>
 										<td>最近时间/地址</td>
 										<td>
-											<span><?php echo GetDateTimeMk($row['logintime'])?></span>
-											<span><?php echo $row['loginip']?></span>
+											<span><?php echo GetDateTimeMk($row['logintime']);?></span>
+											<span><?php echo $row['loginip'];?></span>
 										</td>
 									</tr>
 									<tr>

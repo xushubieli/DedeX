@@ -15,13 +15,14 @@
 		<script src="/static/web/js/webajax.js"></script>
 		<script src="/static/web/js/moment.min.js"></script>
 		<script src="/static/web/js/daterangepicker.js"></script>
+		<script src="/static/web/js/cropper.min.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 	</head>
 	<body>
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<?php $cid=isset($cid) ? $cid : '';$channelid=isset($channelid) ? $channelid : '';?><li class="breadcrumb-item"><a href="content_sg_list.php?cid=<?php echo $cid?>&channelid=<?php echo $channelid?>&dopost=listArchives">文档列表</a></li>、
+				<li class="breadcrumb-item"><a href="content_sg_list.php?cid=<?php echo $cid;?>&channelid=<?php echo $channelid;?>&dopost=listArchives">文档列表</a></li>、
 				<li class="breadcrumb-item active">修改文档</li>
 			</ol>
 			<div class="card shadow-sm">
@@ -60,7 +61,7 @@
 									<tr id="pictable" style="<?php if ($cInfos['needpic']==0) echo 'display:none';?>">
 										<td>缩略图</td>
 										<td colspan="3">
-											<input type="text" name="picname" id="picname" class="admin-input-lg" value="<?php echo $addRow['litpic']?>">
+											<input type="text" name="picname" id="picname" class="admin-input-lg" value="<?php echo $addRow['litpic'];?>">
 											<label><input type="checkbox" name="ddisremote" value="1" id="ddisremote"> 远程图片</label>
 											<span class="btn btn-primary btn-sm opt-button">上传<input type="file" name="files[]" id="iptAddImages"></span>
 											<button type="button" onclick="SelectImage('form1.picname','');" class="btn btn-primary btn-sm">选择</button>

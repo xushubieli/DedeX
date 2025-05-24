@@ -124,9 +124,6 @@ if (!empty($iseditor)) {
                     } else if (preg_match("#\.(".$cfg_imgtype.")#i", $file)) {
                         $reurl = "$activeurl/$file";
                         $reurl = preg_replace("#^\.\.#", "", $reurl);
-                        if ($cfg_remote_site == 'Y' && $remoteuploads == 1) {
-                           $reurl = $remoteupUrl.$reurl;
-                        }
                         if ($file == $comeback) $lstyle = "class='text-danger'";
                         else $lstyle = '';
                         $line = "<div class='list'>
@@ -137,9 +134,6 @@ if (!empty($iseditor)) {
                     } else if (preg_match("#\.(jpg)#i", $file)) {
                         $reurl = "$activeurl/$file";
                         $reurl = preg_replace("#^\.\.#", "", $reurl);
-                        if ($cfg_remote_site == 'Y' && $remoteuploads == 1) {
-                           $reurl = $remoteupUrl.$reurl;
-                        }
                         if ($file == $comeback) $lstyle = "class='text-danger'";
                         else $lstyle = '';
                         $line = "<div class='list'>
