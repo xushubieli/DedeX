@@ -90,7 +90,7 @@ if ($dopost == 'bak') {
             fclose($fp);
         }
         $tmsg .= "正在进行数据备份初始化工作，请稍后";
-        $doneForm = "<form name='gonext' method='post' action='sys_data_done.php'>
+        $doneForm = "<form name='gonext' action='sys_data_done.php' method='post'>
            <input type='hidden' name='isstruct' value='$isstruct'>
            <input type='hidden' name='dopost' value='bak'>
            <input type='hidden' name='fsize' value='$fsize'>
@@ -135,7 +135,7 @@ if ($dopost == 'bak') {
                 fwrite($fp, $bakStr);
                 fclose($fp);
                 $tmsg = "正在备份{$m}条数据，继续备份{$nowtable}";
-                $doneForm = "<form name='gonext' method='post' action='sys_data_done.php'>
+                $doneForm = "<form name='gonext' action='sys_data_done.php' method='post'>
                 <input type='hidden' name='isstruct' value='$isstruct'>
                 <input type='hidden' name='dopost' value='bak'>
                 <input type='hidden' name='fsize' value='$fsize'>
@@ -150,7 +150,7 @@ if ($dopost == 'bak') {
             $line = $intable;
             for ($j = 0; $j <= $fsd; $j++) {
                 if ($j < $fsd) {
-                    $line .= "'".RpLine(addslashes($row2[$fs[$j]]))."',";
+                    $line .= "'".RpLine(addslashes($row2[$fs[$j]]))."', ";
                 } else {
                     $line .= "'".RpLine(addslashes($row2[$fs[$j]]))."');\r\n";
                 }
@@ -177,7 +177,7 @@ if ($dopost == 'bak') {
             }
         }
         $tmsg = "正在备份{$m}条数据，继续备份{$nowtable}";
-        $doneForm = "<form name='gonext' method='post' action='sys_data_done.php?dopost=bak'>
+        $doneForm = "<form name='gonext' action='sys_data_done.php?dopost=bak' method='post'>
           <input type='hidden' name='isstruct' value='$isstruct'>
           <input type='hidden' name='fsize' value='$fsize'>
           <input type='hidden' name='tablearr' value='$tablearr'>
@@ -214,14 +214,17 @@ else if ($dopost == 'redat') {
         fclose($fp);
         $querys = explode(';', $tbdata);
         foreach ($querys as $q) {
-            $q = preg_replace("#TYPE=MyISAM#i","ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language, $q);
+            $q = preg_replace("#TYPE=MyISAM#i", "ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language, $q);
+            if (empty(trim($q))) {
+                continue;
+            }
             $rs = $dsql->ExecuteNoneQuery(trim($q).';');
         }
         if ($delfile == 1) {
             @unlink("$bkdir/$structfile");
         }
         $tmsg = "成功完成数据表还原，继续还原其它数据";
-        $doneForm = "<form name='gonext' method='post' action='sys_data_done.php?dopost=redat'>
+        $doneForm = "<form name='gonext' action='sys_data_done.php?dopost=redat' method='post'>
         <input type='hidden' name='startgo' value='1'>
         <input type='hidden' name='delfile' value='$delfile'>
         <input type='hidden' name='bakfiles' value='$bakfilesTmp'>
@@ -250,7 +253,7 @@ else if ($dopost == 'redat') {
             exit();
         }
         $tmsg = "正在还原{$nowfile}文件{$oknum}条数据，继续还原其它数据";
-        $doneForm = "<form name='gonext' method='post' action='sys_data_done.php?dopost=redat'>
+        $doneForm = "<form name='gonext' action='sys_data_done.php?dopost=redat' method='post'>
         <input type='hidden' name='startgo' value='1'>
         <input type='hidden' name='delfile' value='$delfile'>
         <input type='hidden' name='bakfiles' value='$bakfilesTmp'>
@@ -261,7 +264,6 @@ else if ($dopost == 'redat') {
 }
 function PutInfo($msg1, $msg2)
 {
-    global $cfg_soft_lang;
     $msginfo = "<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1'><meta name='viewport' content='width=device-width,initial-scale=1'><title>系统提示</title><link rel='stylesheet' href='/static/web/css/bootstrap.min.css'><link rel='stylesheet' href='/static/web/css/admin.css'></head><base target='_self'><body><div class='tips'><div class='tips-box'><div class='tips-head'><p>系统提示</p></div><div class='tips-body'>{$msg1}{$msg2}</div></div></div>";
     echo $msginfo."</body></html>";
 }

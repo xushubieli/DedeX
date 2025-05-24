@@ -3934,7 +3934,7 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('13','cfg_ddimg_height','缩略图默认高度','3','number','300'),
 ('14','cfg_album_width','图集默认显示图片的大小','3','number','800'),
 ('15','cfg_imgtype','允许图片浏览文件类型','3','string','jpeg|jpg|gif|png|webp|bmp'),
-('16','cfg_softtype','允许软件上传文件类型','3','bstring','zip|gz|rar|iso|doc|xsl|ppt|wps'),
+('16','cfg_softtype','允许软件上传文件类型','3','bstring','gz|7z|zip|rar|iso|wps|txt|doc|docx|xls|xlsx|ppt|pptx|pdf'),
 ('17','cfg_mediatype','允许多媒体上传文件类型','3','bstring','swf|rm|rmvb|mpg|mp3|mp4|wmv|wma|wav|mid|mov'),
 ('18','cfg_specnote','专题最大节点数','2','number','10'),
 ('19','cfg_notallowstr','禁用关键词，支持正则匹配，用|隔开，结尾不要加|','5','bstring','草泥马|煞笔|神经病|无语'),
