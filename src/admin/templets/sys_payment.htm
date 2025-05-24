@@ -20,7 +20,7 @@
 			<div class="card shadow-sm mb-3">
 				<div class="card-header">支付接口设置</div>
 				<div class="card-body">
-					<ul class="nav nav-pills mb-3" id="pay-tab" role="tablist">
+					<ul id="pay-tab" class="nav nav-pills mb-3" role="tablist">
 						<li class="nav-item" role="presentation">
 							<button type="button" id="wechat-tab" class="nav-link active" data-toggle="tab" data-target="#wechat" role="tab" aria-controls="wechat" aria-selected="true">微信支付</button>
 						</li>
@@ -37,7 +37,7 @@
 							<button type="button" id="cod-tab" class="nav-link" data-toggle="tab" data-target="#cod" role="tab" aria-controls="cod" aria-selected="false">货到付款</button>
 						</li>
 					</ul>
-					<div class="tab-content" id="pay-tabContent">
+					<div id="pay-tabContent" class="tab-content">
 						<div class="tab-pane fade show active" id="wechat" role="tabpanel" aria-labelledby="wechat-tab">
 							<form>
 								<div class="form-group">
@@ -62,7 +62,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="tab-pane fade" id="alipay" role="tabpanel" aria-labelledby="alipay-tab">
+						<div id="alipay" class="tab-pane fade" role="tabpanel" aria-labelledby="alipay-tab">
 							<form>
 								<div class="form-group">
 									<input type="checkbox" id="iptAlipayEnabled">
@@ -90,7 +90,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="bank-tab">
+						<div id="bank" class="tab-pane fade" role="tabpanel" aria-labelledby="bank-tab">
 							<form>
 								<div class="form-group">
 									<input type="checkbox" id="iptBankEnabled">
@@ -115,7 +115,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="tab-pane fade" id="balance" role="tabpanel" aria-labelledby="balance-tab">
+						<div id="balance" class="tab-pane fade" role="tabpanel" aria-labelledby="balance-tab">
 							<form>
 								<div class="form-group">
 									<input type="checkbox" id="iptBalanceEnabled">
@@ -128,7 +128,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="tab-pane fade" id="cod" role="tabpanel" aria-labelledby="cod-tab">
+						<div id="cod" class="tab-pane fade" role="tabpanel" aria-labelledby="cod-tab">
 							<form>
 								<div class="form-group">
 									<input type="checkbox" id="iptCodEnabled">
@@ -147,10 +147,6 @@
 			</div>
 		</div>
 		<script>
-		$('.custom-file-input').on('change', function() {
-			let fileName = $(this).val().split('\\').pop();
-			$(this).siblings('.custom-file-label').addClass("selected").html(fileName);
-		});
 		let config = {
 			Wechat: {
 				AppID: '',
@@ -183,7 +179,10 @@
 				Enabled: true,
 			}
 		}
-		//加载系统config
+		$('.custom-file-input').on('change', function() {
+			let fileName = $(this).val().split('\\').pop();
+			$(this).siblings('.custom-file-label').addClass("selected").html(fileName);
+		});
 		function getPayments() {
 			$.get("sys_payment.php?dopost=get_payments", function(data) {
 				if (data.code === 0) {
@@ -222,7 +221,6 @@
 				}
 			});
 		}
-		//更新config
 		function updateConfig() {
 			for (const key in config) {
 				if (Object.hasOwnProperty.call(config, key)) {
@@ -244,7 +242,6 @@
 				}
 			}
 		}
-		//保存配置信息
 		function saveConfig() {
 			$.ajax({
 				type: "post",

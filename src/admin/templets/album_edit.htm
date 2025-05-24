@@ -56,8 +56,7 @@
 											else $jumpclick = '';
 											if (preg_match("#".$trow->att."#", $arcRow['flag'])) {
 												echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' {$jumpclick} checked> {$trow->attname}[{$trow->att}]</label> ";
-											}
-											else {
+											} else {
 												echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' {$jumpclick}> {$trow->attname}[{$trow->att}]</label> ";
 											}
 										}
