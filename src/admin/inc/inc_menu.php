@@ -103,7 +103,7 @@ $adminMenu1
 </m:top>
 <m:top item='9_' name='会员管理' rank='member_List,member_Type' icon='fa fa-user-circle'>
     <m:item name='所有会员列表' link='member_main.php' rank='member_List' target='main' />
-    <m:item name='会员短信管理' link='member_pm.php' rank='member_Type' target='main' />
+    <m:item name='会员消息管理' link='member_pm.php' rank='member_Type' target='main' />
     <m:item name='会员级别设置' link='member_rank.php' rank='member_Type' target='main' />
     <m:item name='会员等级分类' link='member_type.php' rank='sys_Data' target='main' />
     <m:item name='积分头衔设置' link='member_scores.php' rank='member_Type' target='main' />

@@ -9,32 +9,32 @@ function GetWinPos(w, h) {
 	return { left: left, top: top };
 }
 function SelectMedia(fname) {
-	var pos = GetWinPos(800,600);
+	var pos = GetWinPos(800, 600);
 	window.open("./dialog/select_media.php?f=" + fname + "&noeditor=yes", "popUpFlashWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
 }
 function SelectSoft(fname) {
-	var pos = GetWinPos(800,600);
+	var pos = GetWinPos(800, 600);
 	window.open("./dialog/select_soft.php?f=" + fname+ "&noeditor=yes", "popUpImagesWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
 }
 function SelectImage(fname, stype, imgsel="") {
-	var pos = GetWinPos(800,600);
+	var pos = GetWinPos(800, 600);
 	if (!fname) fname = "form1.picname";
 	if (imgsel) imgsel = "&noeditor=yes";
 	if (!stype) stype = "small";
 	window.open("./dialog/select_images.php?f=" + fname + "&noeditor=yes&imgstick=" + stype + imgsel, "popUpImagesWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
 }
 function SelectImageN(fname, stype, vname) {
-	var pos = GetWinPos(800,600);
+	var pos = GetWinPos(800, 600);
 	if (!fname) fname = "form1.picname";
 	if (!stype) stype = '';
 	window.open("./dialog/select_images.php?f=" + fname + "&imgstick=" + stype + "&v=" + vname, "popUpImagesWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
 }
 function SelectKeywords(f) {
-	var pos = GetWinPos(800,600);
+	var pos = GetWinPos(800, 600);
 	window.open("article_keywords_select.php?f=" + f, "popUpkwWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
 }
 function OpenMyWin(surl) {
-	var pos = GetWinPos(800,600);
+	var pos = GetWinPos(800, 600);
 	window.open(surl, "popUpMyWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
 }
 function $Obj(objname) {

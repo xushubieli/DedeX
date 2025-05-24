@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-		<title>会员短信管理</title>
+		<title>会员消息管理</title>
 		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
@@ -13,7 +13,7 @@
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<li class="breadcrumb-item active">会员短信管理</li>
+				<li class="breadcrumb-item active">会员消息管理</li>
 			</ol>
 			<div class="card shadow-sm mb-3">
 				<div class="card-body">
@@ -34,30 +34,30 @@
 				</div>
 			</div>
 			<div class="card shadow-sm">
-				<div class="card-header">会员短信列表</div>
+				<div class="card-header">会员消息列表</div>
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-borderless table-hover">
 							<thead>
 								<tr>
-									<td scope="col">发送时间</td>
 									<td scope="col">标题</td>
 									<td scope="col">已读</td>
 									<td scope="col">{dede:global name='postuser'/}</td>
 									<td scope="col">内容</td>
 									<td scope="col">文件夹</td>
+									<td scope="col">发送时间</td>
 									<td scope="col">操作</td>
 								</tr>
 							</thead>
 							<tbody>
 								{dede:datalist}
 								<tr>
-									<td>{dede:field.sendtime function='GetDateMk(@me)'/}</td>
 									<td>{dede:field.subject function='dede_htmlspecialchars(@me)'/}</td>
 									<td>{dede:field.hasview function='IsReader(@me)'/}</td>
 									<td>{dede:field.floginid/}</td>
 									<td>{dede:field.message function='cn_substr(HtmlReplace(@me),60)'/}</td>
 									<td>{dede:field.folder function='GetFolders(@me)'/}</td>
+									<td>{dede:field.sendtime function='GetDateMk(@me)'/}</td>
 									<td><a href="member_pm.php?ID={dede:field.id/}&dopost=del" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a></td>
 								</tr>
 								{/dede:datalist}

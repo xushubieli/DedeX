@@ -144,7 +144,7 @@ $actionSearch[4] = array(
             'linkurl' => 'member_main.php'
         ),
         1  =>  array(
-            'title' => '会员短信管理',
+            'title' => '会员消息管理',
             'purview' => 'member_Type',
             'linkurl' => 'member_pm.php'
         ),
