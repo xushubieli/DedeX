@@ -48,12 +48,13 @@
 												<?php	
 												foreach($channelArray as $k=>$arr)
 												{
-													if ($k==$channelid) echo " <option value='{$k}' selected>{$arr['typename']} {$arr['nid']}</option>";
-													else  echo " <option value='{$k}'>{$arr['typename']} {$arr['nid']}</option>";
+													if ($k==$channelid) echo "<option value='{$k}' selected>{$arr['typename']} {$arr['nid']}</option>";
+													else  echo "<option value='{$k}'>{$arr['typename']} {$arr['nid']}</option>";
 												}
 												?>
 											</select>
-											<div id="smclass" class="mt-2" style="<?php echo ($channelid<0 ? '' : 'display:none');?>">
+											<span>（更换模型前，若栏目有文档，请先移至同模型栏目）</span>
+											<div id="smclass" class="mt-3" style="<?php echo ($channelid<0 ? '' : 'display:none');?>">
 												<select name="smalltype[]" multiple="yes" class="admin-input-lg">
 													<?php
 													$smtypes = explode(',',trim($myrow['smalltypes']));
@@ -139,7 +140,7 @@
 										<td>栏目生成目录</td>
 										<td><input type="text" name="typedir" id="typedir" value="<?php echo $myrow['typedir'];?>" class="admin-input-lg"></td>
 										<td>是否继承选项</td>
-										<td><label><input type="checkbox" name="upnext" id="upnext" value="1"> 子类栏目继承顶级栏目的浏览权限、文档类型、模板风格等属性</label></td>
+										<td><label><input type="checkbox" name="upnext" id="upnext" value="1"> 子类栏目将继承顶级栏目的浏览权限、文档类型、模板风格等</label></td>
 									</tr>
 									<tr>
 										<td>栏目列表选项</td>
