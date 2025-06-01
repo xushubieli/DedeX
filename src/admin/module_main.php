@@ -221,7 +221,6 @@ if ($action == '') {
     $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '<br>该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
     $win = new OxWindow();
     $win->Init("module_main.php", "/static/web/js/admin.blank.js", "post");
-    $wecome_info = "模块管理";
     $wintitle = "删除{$infos['name']}";
     $win->AddHidden('hash', $hash);
     $win->AddHidden('action', 'delok');
