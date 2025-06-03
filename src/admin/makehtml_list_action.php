@@ -57,8 +57,8 @@ if (isset($idArray[$pageno])) {
         exit();
     }
 }
-if ($pageno == 0 && $mkpage == 1) //清空缓存
-{
+//清空缓存
+if ($pageno == 0 && $mkpage == 1) {
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__arccache`");
 }
 $reurl = '';
@@ -110,8 +110,10 @@ if ($nextpage >= $totalpage && $finishType) {
         ShowMsg("正在更新栏目id：{$tid}{$typename}，继续更新栏目", $gourl, 0, 100);
         exit();
     } else {
+        $startpage = ceil(($mkpage - 1) / $maxpagesize) + 1;
+        $endpage = ceil($ntotalpage / $maxpagesize);
         $gourl = "makehtml_list_action.php?gotype={$gotype}&uppage={$uppage}&mkpage={$mkpage}&maxpagesize={$maxpagesize}&typeid={$typeid}&pageno={$pageno}";
-        ShowMsg("正在更新栏目id：{$tid}{$typename}，继续更新栏目", $gourl, 0, 100);
+        ShowMsg("正在更新栏目id：{$tid}{$typename}，继续更新{$startpage}/{$endpage}页，每页{$maxpagesize}页", $gourl, 0, 100);
         exit();
     }
 }

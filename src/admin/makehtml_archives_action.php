@@ -78,7 +78,7 @@ $ttime = number_format(($ttime / 60), 2);
 //返回提示信息
 $tjlen = $totalnum > 0 ? ceil(($tjnum / $totalnum) * 100) : 100;
 $tjsta = "<div class='progress mb-3'><div class='progress-bar progress-bar-striped bg-primary' role='progressbar' aria-valuenow='{$tjlen}%' aria-valuemin='0' aria-valuemax='100' style='width:{$tjlen}%'>{$tjlen}%</div></div>";
-$tjsta .= "正在更新".($startdd + $pagesize)."页文档，用时{$ttime}分钟，完成更新文档总数{$tjlen}%";
+$tjsta .= "正在更新文档id：{$id}，更新进度{$tjlen}%，用时{$ttime}分钟";
 //速度测试
 if ($tjnum < $totalnum) {
     $nurl  = "makehtml_archives_action.php?endid={$endid}&startid={$startid}&typeid={$typeid}";
@@ -88,10 +88,10 @@ if ($tjnum < $totalnum) {
     exit();
 } else {
     if ($typeid != '') {
-        ShowMsg("更新文档{$totalnum}，用时{$ttime}分钟，开始更新栏目", "makehtml_list_action.php?typeid={$typeid}&uptype=all&maxpagesize=50&upnext=1");
+        ShowMsg("正在更新文档，用时{$ttime}分钟，开始更新栏目", "makehtml_list_action.php?typeid={$typeid}&uptype=all&maxpagesize=50&upnext=1");
     } else {
         if ($uptype == '') {
-            ShowMsg("更新文档{$totalnum}，用时{$ttime}分钟，完成所有文档更新", "javascript:;");
+            ShowMsg("正在更新文档，用时{$ttime}分钟，完成所有文档更新", "javascript:;");
         } else {
             ShowMsg("完成所有文档更新，开始更新首页", "makehtml_all.php?action=make&step=3&uptype={$uptype}&mkvalue={$mkvalue}");
         }

@@ -19,7 +19,6 @@ $startid = isset($startid) ? intval($startid) : 0;
 $endid = isset($endid) ? intval($endid) : 0;
 $tagid = isset($tagid) ? intval($tagid) : 0;
 $tagsdir = str_replace("{cmspath}", $cfg_cmspath, $cfg_tags_dir);
-//生成
 if ($tagid > 0) {
     $upall = 0; //更新单个模式
     $ctagid = $tagid;
@@ -55,7 +54,6 @@ if (is_array($tag) && count($tag) > 0) {
     $dlist->CountRecord();
     $dlist->SetTagsDir($tagsdir);
     $ntotalpage = $dlist->TotalPage;
-
     if ($ntotalpage <= $maxpagesize) {
         $dlist->MakeHtml();
         $finishType = TRUE; //生成一个标签完成
