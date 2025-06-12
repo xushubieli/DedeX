@@ -49,9 +49,9 @@ function GetFormItem($ctag, $admintype = 'admin')
         }
         $myformItem .= "<script>
         var em_{$fieldname}s = [];
-        fetch('{$cmspath}static/enums/{$fieldname}.json').then((resp)=>resp.json()).then((d)=>{
-            Object.entries(d).forEach(v=>{
-                em_{$fieldname}s[parseFloat(v[0])]= v[1];
+        fetch('{$cmspath}static/enums/{$fieldname}.json').then((resp) => resp.json()).then((d) => {
+            Object.entries(d).forEach(v => {
+                em_{$fieldname}s[parseFloat(v[0])] = v[1];
             });
             MakeTopSelect('$fieldname', 0);
         })
@@ -124,9 +124,9 @@ function GetFormItem($ctag, $admintype = 'admin')
 <script>
 if (typeof SelectArcList === "undefined") {
     function SelectArcList(fname,cid) {
-    var posLeft = 10;
-    var posTop = 10;
-    window.open("content_select_list.php?f=" + fname+"&channelid="+cid, "selArcList", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=500,left=" + posLeft + ", top=" + posTop);
+        var posLeft = 16;
+        var posTop = 16;
+        window.open("content_select_list.php?f=" + fname+"&channelid="+cid, "selArcList", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + posLeft + ", top=" + posTop);
     }
 }
 </script>
@@ -279,9 +279,9 @@ function GetFormItemValue($ctag, $fvalue, $admintype = 'admin', $fieldname = '')
         }
         $myformItem .= "<script>
         var em_{$fieldname}s = [];
-        fetch('{$cmspath}static/enums/{$fieldname}.json').then((resp)=>resp.json()).then((d)=>{
-            Object.entries(d).forEach(v=>{
-                em_{$fieldname}s[parseFloat(v[0])]= v[1];
+        fetch('{$cmspath}static/enums/{$fieldname}.json').then((resp) => resp.json()).then((d) => {
+            Object.entries(d).forEach(v => {
+                em_{$fieldname}s[parseFloat(v[0])] = v[1];
             });
             MakeTopSelect('$fieldname', $fvalue);
         })
@@ -347,7 +347,7 @@ function GetFormItemValue($ctag, $fvalue, $admintype = 'admin', $fieldname = '')
         $innertext = "<textarea name='$fieldname' id='$fieldname' class='form-control admin-textarea-sm'>$fvalue</textarea>";
     } else if ($ftype == "datetime") {
         $nowtime = GetDateTimeMk($fvalue);
-        $innertext = "<input type='text' name='$fieldname' value='$nowtime' id='$fieldname' class='form-control admin-input-lg'>";
+        $innertext = "<input type='text' name='$fieldname' value='$nowtime' id='$fieldname' class='form-control admin-input-lg datepicker'>";
     } else if ($ftype == "img") {
         $tmpValue = $fvalue;
         $ndtp = new DedeTagParse();
@@ -387,10 +387,10 @@ function GetFormItemValue($ctag, $fvalue, $admintype = 'admin', $fieldname = '')
         $innertext .= <<<EOT
 <script>
 if (typeof SelectArcList === "undefined") {
-    function SelectArcList(fname,cid) {
-    var posLeft = 10;
-    var posTop = 10;
-    window.open("content_select_list.php?f=" + fname+"&channelid="+cid, "selArcList", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=500,left=" + posLeft + ", top=" + posTop);
+    function SelectArcList(fname, cid) {
+        var posLeft = 16;
+        var posTop = 16;
+        window.open("content_select_list.php?f=" + fname+"&channelid="+cid, "selArcList", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + posLeft + ", top=" + posTop);
     }
 }
 </script>

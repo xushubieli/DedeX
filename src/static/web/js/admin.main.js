@@ -6,7 +6,10 @@ function GetWinPos(w, h) {
 	var systemZoom = width / window.screen.availWidth;
 	var left = (width - w) / 2 / systemZoom + dualScreenLeft;
 	var top = (height - h) / 2 / systemZoom + dualScreenTop;
-	return { left: left, top: top };
+	return {
+		left: left,
+		top: top
+	};
 }
 function SelectMedia(fname) {
 	var pos = GetWinPos(800, 600);
@@ -140,7 +143,6 @@ function ChangeFullDiv(showhide, screenheigt) {
 			newobj.id = "adminmodalbg";
 			newobj.style.position = "fixed";
 			newobj.className = "adminmodalbg";
-			//newobj.style.height = document.body.clientHeight + "px";
 			document.body.appendChild(newobj);
 		} else {
 			newobj.style.display = "block";
@@ -153,8 +155,8 @@ function ChangeFullDiv(showhide, screenheigt) {
 }
 function LoadNewDiv(e, surl, oname) {
 	var pxStr = '';
-	var posLeft = e.pageX - 18;
-	var posTop = e.pageY - 18;
+	var posLeft = e.pageX - 16;
+	var posTop = e.pageY - 16;
 	pxStr = 'px';
 	var newobj = $Obj(oname);
 	if (!newobj) {
@@ -182,20 +184,17 @@ function LoadQuickDiv(e, surl, oname, w, h) {
 		newobj.id = oname;
 		newobj.style.position = "fixed";
 		newobj.className = "adminmodal";
-		//newobj.style.width = w;
-		//newobj.style.height = h + 30;
 		document.body.appendChild(newobj);
 	}
 	newobj.style.top = "0";
 	newobj.style.left = "0";
 	newobj.style.display = "block";
-	//newobj.style.transform = "translate(-50%, -50%)";
 	fetch(surl).then(resp => resp.text()).then((d) => {
 		newobj.innerHTML = d;
 	});
 }
 function ShowCatMap(e, obj, cid, targetId, oldvalue) {
-	LoadQuickDiv(e, "archives_do.php?dopost=getCatMap&targetid=" + targetId + "&channelid=" + cid + "&oldvalue=" + oldvalue + "&rnd=" + Math.random(), "getCatMap", "700px", "500px");
+	LoadQuickDiv(e, "archives_do.php?dopost=getCatMap&targetid=" + targetId + "&channelid=" + cid + "&oldvalue=" + oldvalue + "&rnd=" + Math.random(), "getCatMap", "800px", "600px");
 	ChangeFullDiv("show");
 }
 function getSelCat(targetId) {
