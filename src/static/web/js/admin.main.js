@@ -396,7 +396,8 @@ function SetThumb(srcURL) {
 }
 $(function($) {
 	$("#togglemenu").click(function() {
-		if ($("body").attr("class") == "menu-show") {
+		var bodyClass = $("body").attr("class");
+		if (bodyClass === "menu-show") {
 			$("body").attr("class", "menu-hide");
 			$(this).html('<i class="fa fa-indent"></i>');
 		} else {
@@ -404,34 +405,32 @@ $(function($) {
 			$(this).html('<i class="fa fa-dedent"></i>');
 		}
 	});
-	$(function() {
-		$(".menu-item").on("click",function() {
-			$(".menu-sub").stop();
-			$(this).siblings(".menu-item").removeAttr("id");
-			if ($(this).attr("id") == "open") {
-				$(this).removeAttr("id").siblings(".menu-sub").slideUp();
-			} else {
-				$(this).attr("id","open").next().slideDown().siblings(".menu-sub").slideUp();
-			}
-		});
-		$(".sub-item").click(function() {
-			$(".sub-item").removeClass("active");
-			$(this).addClass("active");
-		});
+	$(".menu-item").on("click", function() {
+		var $this = $(this);
+		$(".menu-sub").stop().slideUp();
+		$this.siblings(".menu-item").removeAttr("id");
+		if ($this.attr("id") === "open") {
+			$this.removeAttr("id");
+		} else {
+			$this.attr("id", "open").next().slideDown();
+		}
 	});
-	$('.navbar-nav .nav-link').click(function () {
+	$(".sub-item").click(function() {
+		$(".sub-item").removeClass("active");
+		$(this).addClass("active");
+	});
+	$('.navbar-nav .nav-link').click(function() {
 		var target = $(this).data('target');
 		if (target) {
 			$(".menu-item").removeAttr("id");
 			$(".menu-sub").slideUp();
-			var targetMenuItem = $('.side-menu .menu-item[data-target="' + target + '"]');
-			targetMenuItem.attr("id", "open").next(`.menu-sub[data-target="${target}"]`).slideDown();
+			var $targetMenuItem = $('.side-menu .menu-item[data-target="' + target + '"]');
+			$targetMenuItem.attr("id", "open").next(`.menu-sub[data-target="${target}"]`).slideDown();
 			var currentIframeSrc = $(this).attr('href');
-			targetMenuItem.next(`.menu-sub[data-target="${target}"]`).find(".sub-item a").each(function () {
+			$targetMenuItem.next(`.menu-sub[data-target="${target}"]`).find(".sub-item a").each(function() {
 				var subItemHref = $(this).attr('href');
 				var isIcon = $(this).hasClass('submenu-right');
-				if (isIcon) return
-				if (subItemHref === currentIframeSrc) {
+				if (!isIcon && subItemHref === currentIframeSrc) {
 					$(this).parent().addClass('active');
 				} else {
 					$(this).parent().removeClass('active');
