@@ -79,8 +79,8 @@ class diyform
                 }
             }
         }
-        $formstring .= "<input type=\"hidden\" name=\"dede_fields\" value=\"".$formfields."\" />\n";
-        $formstring .= "<input type=\"hidden\" name=\"dede_fieldshash\" value=\"".md5($formfields.$cfg_cookie_encode)."\" />";
+        $formstring .= "<input type=\"hidden\" name=\"form_fields\" value=\"".$formfields."\">\n";
+        $formstring .= "<input type=\"hidden\" name=\"form_fieldshash\" value=\"".md5($formfields.$cfg_cookie_encode)."\">";
         return $formstring;
     }
     /**

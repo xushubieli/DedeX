@@ -22,10 +22,10 @@ if ($action == 'post') {
         include DEDEROOT."/theme/apps/{$diy->postTemplate}";
         exit();
     } else if ($do == 2) {
-        $dede_fields = empty($dede_fields) ? '' : trim($dede_fields);
-        $dede_fieldshash = empty($dede_fieldshash) ? '' : trim($dede_fieldshash);
-        if (!empty($dede_fields)) {
-            if ($dede_fieldshash != md5($dede_fields.$cfg_cookie_encode)) {
+        $form_fields = empty($form_fields) ? '' : trim($form_fields);
+        $form_fieldshash = empty($form_fieldshash) ? '' : trim($form_fieldshash);
+        if (!empty($form_fields)) {
+            if ($form_fieldshash != md5($form_fields.$cfg_cookie_encode)) {
                 showMsg('表单校验失败', '-1');
                 exit();
             }
@@ -44,11 +44,11 @@ if ($action == 'post') {
             ShowMsg('验证码不正确', '-1');
             exit();
         }
-        if (!empty($dede_fields)) {
+        if (!empty($form_fields)) {
             $link = $_SERVER['HTTP_REFERER'];
             $date = GetDateTimeMk(time());
             $ip = GetIP();
-            $fieldarr = explode(';', $dede_fields);
+            $fieldarr = explode(';', $form_fields);
             if (is_array($fieldarr)) {
                 foreach ($fieldarr as $field) {
                     if ($field == '') continue;
@@ -64,20 +64,25 @@ if ($action == 'post') {
                 }
             }
         }
-        //判断$name是否输入违禁词，在后台-系统设置：禁用关键词添加，$name改成您表单字段标识，恢复注释代码使用
-        /*if ($name === '' || preg_match("#".$cfg_notallowstr."#i", $name)) {
-            ShowMsg("您输入的信息存在违禁，请重新填写", "-1");
+        //判断$link、$date、$ip是否输入为空，恢复注释代码使用
+        /*if (empty($link) || empty($date) || empty($ip)) {
+            ShowMsg('提交失败，请重新填写', '-1');
             exit();
         }*/
-        //判断$message是否大于70字符则提交失败，$message改成您表单字段标识，恢复注释代码使用
+        //判断$name是否输入违禁词，在后台-系统设置：禁用关键词添加，$name改成您表单字段标识，恢复注释代码使用
+        /*if ($name === '' || preg_match("#".$cfg_notallowstr."#i", $name)) {
+            ShowMsg('您输入的信息存在违禁，请重新填写', '-1');
+            exit();
+        }*/
+        //判断$message是否大于190字符，$message改成您表单字段标识，恢复注释代码使用
         /*if (strlen($message) > 190) {
             showmsg('您输入的信息太多了，请重新填写', '-1');
             exit();
         }*/
-        //获取表单提交的链接、时间、ip，字段标识默认为link、date、ip，前台表单可以不用出现该输入框，但是x_fields和x_fieldshash的值要最新，下面是重复提交表单限制，恢复注释代码使用
+        //判断是否重复提交表单，根据提交的链接、时间、ip，前台表单可以不用出现该输入框，恢复注释代码使用
         /*$result = $dsql->getOne("SELECT count(*) AS dd FROM `{$diy->table}` WHERE ip='$ip' AND date_format(date,'Y-m-d') = date_format(now(),'Y-m-d')");
         if ($result['dd'] >= 3) {
-            showmsg('您已重复提交太多次了，请等待平台联系', '-1');
+            showmsg('您已重复提交太多次了，稍后我们会主动联系您', '-1', 0, 5000);
             exit();
         }*/
         $query = "INSERT INTO `{$diy->table}` (`id`, `ifcheck` $addvar) VALUES (NULL, 0 $addvalue); ";
@@ -85,8 +90,7 @@ if ($action == 'post') {
             $id = $dsql->GetLastID();
             $mailtitle = "{$diy->name}通知";
             $mailbody = '';
-            foreach($diy->getFieldList() as $field=>$fieldvalue)
-            {
+            foreach ($diy->getFieldList() as $field=>$fieldvalue) {
                 $mailbody .= "{$fieldvalue[0]}：{${$field}}\r\n";
             }
             $headers = "From: ".$cfg_adminemail."Reply-To: ".$cfg_adminemail;
@@ -105,9 +109,9 @@ if ($action == 'post') {
                 $bkmsg = '提交成功，正在前往表单列表';
             } else {
                 $goto = 'javascript:history.go(-1);';
-                $bkmsg = '提交成功，请等待平台联系';
+                $bkmsg = '提交成功，马上安排业务经理联系您，请留意并通过验证';
             }
-            ShowMsg($bkmsg, $goto);
+            ShowMsg($bkmsg, $goto, 0, 5000);
         }
     }
 } else if ($action == 'list') {
@@ -135,7 +139,7 @@ if ($action == 'post') {
         exit();
     }
     if (empty($id)) {
-        showMsg('操作失败，未指定id', '/');
+        header("Location: /");
         exit();
     }
     if ($diy->public == 2) {
