@@ -189,10 +189,10 @@ class DataListCP
         //echo " {$totalpage}=={$this->totalResult}=={$this->pagesize}";
         //无结果或只有一页的情况
         if ($totalpage <= 1 && $this->totalResult > 0) {
-            return "<ul class='pagination justify-content-end'><li class='page-item disabled'><span class='page-link'>1{$lang_page}".$this->totalResult.$lang_record_number."</span></li></ul>";
+            return "<ul class='pagination justify-content-end'><li class='page-item disabled'><span class='page-link'>1{$lang_page}{$this->totalResult}{$lang_record_number}</span></li></ul>";
         }
         if ($this->totalResult == 0) {
-            return "<ul class='pagination justify-content-end'><li class='page-item disabled'><span class='page-link'>0{$lang_page}".$this->totalResult.$lang_record_number."</span></li></ul>";
+            return "<ul class='pagination justify-content-end'><li class='page-item disabled'><span class='page-link'>0{$lang_page}{$this->totalResult}{$lang_record_number}</span></li></ul>";
         }
         $infos = "<li class='page-item disabled'><span class='page-link'>{$totalpage}{$lang_page}/{$this->totalResult}{$lang_record_number}</span></li>";
         if ($this->totalResult != 0) {
@@ -208,16 +208,16 @@ class DataListCP
         $purl .= "?".$geturl;
         //获得上页和下页的链接
         if ($this->pageNO != 1) {
-            $prepage .= "<li class='page-item'><a class='page-link' href='".$purl."pageno=$prepagenum'>$lang_pre_page</a></li>\r\n";
-            $indexpage = "<li class='page-item'><a class='page-link' href='".$purl."pageno=1'>$lang_index_page</a></li>\r\n";
+            $prepage .= "<li class='page-item'><a class='page-link' href='{$purl}pageno={$prepagenum}'>{$lang_pre_page}</a></li>\r\n";
+            $indexpage = "<li class='page-item'><a class='page-link' href='{$purl}pageno=1'>{$lang_index_page}</a></li>\r\n";
         } else {
-            $indexpage = "<li class='page-item disabled'><span class='page-link'>"."$lang_index_page \n"."</span></li>";
+            $indexpage = "<li class='page-item'><span class='page-link'>{$lang_index_page}</span></li>";
         }
         if ($this->pageNO != $totalpage && $totalpage > 1) {
-            $nextpage .= "<li class='page-item'><a class='page-link' href='".$purl."pageno=$nextpagenum'>$lang_next_page</a></li>\r\n";
-            $endpage = "<li class='page-item'><a class='page-link' href='".$purl."pageno=$totalpage'>$lang_end_page</a></li>\r\n";
+            $nextpage .= "<li class='page-item'><a class='page-link' href='{$purl}pageno={$nextpagenum}'>{$lang_next_page}</a></li>\r\n";
+            $endpage = "<li class='page-item'><a class='page-link' href='{$purl}pageno={$totalpage}'>{$lang_end_page}</a></li>\r\n";
         } else {
-            $endpage = " <li class='page-item disabled'><span class='page-link'>$lang_end_page</span></li>\r\n";
+            $endpage = " <li class='page-item'><span class='page-link'>{$lang_end_page}</span></li>\r\n";
         }
         //获得数字链接
         $listdd = '';
@@ -235,7 +235,7 @@ class DataListCP
             }
         }
         for ($j; $j <= $total_list; $j++) {
-            $listdd .= $j == $this->pageNO ? "<li class='page-item'><span class='page-link'>$j</span></li>\r\n" : "<li class='page-item'><a class='page-link' href='".$purl."pageno=$j'>".$j."</a></li>\r\n";
+            $listdd .= $j == $this->pageNO ? "<li class='page-item active'><span class='page-link'>{$j}</span></li>\r\n" : "<li class='page-item'><a class='page-link' href='{$purl}pageno={$j}'>{$j}</a></li>\r\n";
         }
         $plist = "<div class='d-flex justify-content-end'>\r\n";
         $sizesel = "<select name='pagesize' id='dedepagesize' class='form-control mr-3' style='width:120px'>\r\n";

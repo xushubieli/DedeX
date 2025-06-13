@@ -707,17 +707,15 @@ body.menu-show .admin-content {
 	vertical-align:middle
 }
 .form-control {
-	display:inline-block
+	display:inline-block;
+	padding:0.25rem 0.5rem;
+	height:30px
 }
 .form-control,.btn,.fa {
 	font-size:14px!important
 }
 a:hover,body.menu-hide .admin-content,body.menu-show .admin-content,.sidemenu .submenu li:hover,.column:hover,.table-hover tbody tr:hover {
 	transition:all 0.5s
-}
-span.page-link {
-	color:var(--white);
-	background:var(--primary)
 }
 input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipslite,#edsta,.cke_chrome,.cke_inner,.alert,.card,.rounded,.form-control,.btn {
 	border-radius:var(--b-radius)!important
@@ -743,6 +741,11 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 .page-item:last-child .page-link {
 	border-top-right-radius:var(--b-radius);
 	border-bottom-right-radius:var(--b-radius)
+}
+.page-link {
+	padding:0.25rem 0.5rem;
+	height:30px;
+	line-height:1.5
 }
 .nav-pills .nav-link.active,.nav-pills .show>.nav-link {
 	background:var(--primary)

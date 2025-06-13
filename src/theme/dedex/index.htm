@@ -59,7 +59,7 @@
 			</div>
 		</section>
 		<section class="container py-3">
-			<div class="row biz-mb">{dede:channelartlist typeid='1,1'}
+			<div class="row biz-mb">{dede:channelartlist typeid='2,2'}
 				<div class="col-md-12 mb-3">
 					<div class="item-title text-left">
 						<h2>{dede:field.typename/}</h2>
@@ -86,7 +86,7 @@
 			</div>
 		</section><!--该布局适用于软件模型-->
 		<section class="container py-3">
-			<div class="row biz-mb">{dede:channelartlist typeid='2,2'}
+			<div class="row biz-mb">{dede:channelartlist typeid='3,3'}
 				<div class="col-md-12 mb-3">
 					<div class="item-title text-left">
 						<h2>{dede:field.typename/}</h2>
@@ -106,15 +106,7 @@
 			</div>
 		</section><!--该布局适用于文档和图片模型-->
 		<section class="container py-3">
-			<div class="row">{dede:channelartlist typeid='3,3'}
-				<div class="col-md-4 pb-m-3">
-					<article class="item-article bg-white shadow-sm rounded p-3">
-						<h2 class="mb-3">{dede:field.typename/}</h2>
-						<ul>{dede:arclist row='10' titlelen='110' orderby='id'}
-							<li>[field:global.autoindex/].<a title="[field:fulltitle/]" href="[field:arcurl/]">[field:title/]</a></li>{/dede:arclist}
-						</ul>
-					</article>
-				</div>{/dede:channelartlist}{dede:channelartlist typeid='4,4'}
+			<div class="row">{dede:channelartlist typeid='4,4'}
 				<div class="col-md-4 pb-m-3">
 					<article class="item-article bg-white shadow-sm rounded p-3">
 						<h2 class="mb-3">{dede:field.typename/}</h2>
@@ -123,10 +115,18 @@
 						</ul>
 					</article>
 				</div>{/dede:channelartlist}{dede:channelartlist typeid='5,5'}
+				<div class="col-md-4 pb-m-3">
+					<article class="item-article bg-white shadow-sm rounded p-3">
+						<h2 class="mb-3">{dede:field.typename/}</h2>
+						<ul>{dede:arclist row='10' titlelen='110' orderby='senddate'}
+							<li>[field:global.autoindex/].<a title="[field:fulltitle/]" href="[field:arcurl/]">[field:title/]</a></li>{/dede:arclist}
+						</ul>
+					</article>
+				</div>{/dede:channelartlist}{dede:channelartlist typeid='6,6'}
 				<div class="col-md-4">
 					<article class="item-article bg-white shadow-sm rounded p-3">
 						<h2 class="mb-3">{dede:field.typename/}</h2>
-						<ul>{dede:arclist row='10' titlelen='110' orderby='id'}
+						<ul>{dede:arclist row='10' titlelen='110' orderby='rand'}
 							<li>[field:global.autoindex/].<a title="[field:fulltitle/]" href="[field:arcurl/]">[field:title/]</a></li>{/dede:arclist}
 						</ul>
 					</article>

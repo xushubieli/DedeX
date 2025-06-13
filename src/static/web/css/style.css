@@ -411,7 +411,8 @@ input[type=radio],input[type=checkbox],input[type=radio]:focus,input[type=checkb
 }
 .form-control {
 	display:inline-block;
-	height:36px
+	padding:0.25rem 0.5rem;
+	height:30px
 }
 .form-control,.fa,.btn,.dropdown-menu {
 	font-size:14px!important
