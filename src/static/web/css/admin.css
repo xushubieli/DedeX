@@ -111,11 +111,11 @@ textarea {
 }
 .install-head .logo img,.login-box .logo img {
 	margin-right:0.5rem;
-	height:36px
+	height:32px
 }
 .install-box {
 	margin:0 auto;
-	width:750px
+	width:768px
 }
 .install-box .card-header,.install-box .card-body {
 	padding:1.25rem
@@ -128,9 +128,6 @@ textarea {
 }
 .install-box label {
 	margin-bottom:0.5rem
-}
-.install-box .form-control {
-	height:36px
 }
 .login-step {
 	height:100vh;
