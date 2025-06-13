@@ -40,7 +40,7 @@ if ($cid == 0) {
         $positionname = $row['typename'];
     }
 } else {
-    $positionname = str_replace('/', ' > ', $tl->GetPositionName());
+    $positionname = str_replace('-', ' > ', $tl->GetPositionName());
 }
 $whereSql = " WHERE arc.channel = '$channelid' And arc.mid='$mid' ";
 if ($keyword != '') {

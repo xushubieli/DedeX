@@ -121,7 +121,7 @@ class ListView
                     }
                 }
             }
-        }//!error
+        }
     }
     //php4构造函数
     function ListView($typeid, $uppage = 0, $mod = 0)

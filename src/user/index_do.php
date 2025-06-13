@@ -81,7 +81,7 @@ if ($fmdo == 'sendMail') {
         exit();
     }
     //检查邮箱是否存在
-    else  if ($dopost == "checkmail") {
+    else if ($dopost == "checkmail") {
         AjaxHead();
         if ($cfg_md_mailtest == 'N') {
             $msg = "可以使用";
