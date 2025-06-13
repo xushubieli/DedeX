@@ -59,7 +59,8 @@ if ($action == "save") {
     $fp = fopen($ImageWaterConfigFile, "w") or die("写入文件".$ImageWaterConfigFile."失败，请检查权限");
     fwrite($fp, $configstr);
     fclose($fp);
-    echo "<script>alert('修改配置成功');</script>\r\n";
+    ShowMsg('成功更新图片水印设置', '-1');
+    exit();
 }
 require_once($ImageWaterConfigFile);
 include DedeInclude('templets/sys_info_mark.htm');

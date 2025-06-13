@@ -19,7 +19,8 @@ if ($dopost == 'save') {
     flock($fp, 3);
     fwrite($fp, $allsource);
     fclose($fp);
-    echo "<script>alert('成功保存文档来源');</script>";
+    ShowMsg('成功保存文档来源', '-1');
+    exit();
 }
 //读出
 if (empty($allsource) && filesize($m_file) > 0) {

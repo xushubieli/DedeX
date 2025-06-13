@@ -32,8 +32,8 @@ if ($dopost == "save") {
         $query = "INSERT INTO `#@__flinktype` (typename) VALUES ('{$pname_new}');";
         $dsql->ExecuteNoneQuery($query);
     }
-    header("Content-Type:text/html; charset={$cfg_soft_lang}");
-    echo "<script>alert('成功更新友情链接类型');</script>";
+    ShowMsg('成功更新友情链接类型', '-1');
+    exit();
 }
 include DedeInclude('templets/friendlink_type.htm');
 ?>

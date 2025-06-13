@@ -90,7 +90,6 @@ else if ($action == 'send') {
     //如果没有登录，则需要检查验证码
     if (!$cfg_ml->IsLogin()) {
         if ($feedbacktype === 'good') {
-
             //未登录点good不进行数据库记录
             echo json_encode(array(
                 "code" => 200,

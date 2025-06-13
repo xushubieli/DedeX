@@ -36,8 +36,8 @@ if ($dopost == "save") {
         $query = "INSERT INTO `#@__member_type` (`rank`,pname,money,exptime) VALUES ('{$rank_new}','{$pname_new}','{$money_new}','{$exptime_new}');";
         $dsql->ExecuteNoneQuery($query);
     }
-    header("Content-Type:text/html; charset={$cfg_soft_lang}");
-    echo "<script>alert('成功更新会员等级分类');</script>";
+    ShowMsg('成功更新会员等级分类', '-1');
+    exit();
 }
 $arcranks = array();
 $dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE `rank`>10 ");

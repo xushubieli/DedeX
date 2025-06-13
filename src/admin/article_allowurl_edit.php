@@ -19,7 +19,8 @@ if ($dopost == 'save') {
     flock($fp, 3);
     fwrite($fp, $allurls);
     fclose($fp);
-    echo "<script>alert('成功保存站内链接');</script>";
+    ShowMsg('成功保存站内链接', '-1');
+    exit();
 }
 //读出
 if (empty($allurls) && filesize($m_file) > 0) {

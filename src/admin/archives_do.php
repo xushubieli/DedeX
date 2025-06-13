@@ -565,8 +565,8 @@ else if ($dopost == 'quickEditSave') {
         CheckCatalog($typeid, "您没有操作栏目{$typeid}文档权限");
     }
     $title = dede_htmlspecialchars(cn_substrR($title, $cfg_title_maxlen));
-    $shorttitle = cn_substrR($shorttitle, 36);
-    $keywords = trim(cn_substrR($keywords, 60));
+    $shorttitle = cn_substrR($shorttitle, 255);
+    $keywords = trim(cn_substrR($keywords, 255));
     if (!TestPurview('a_Check,a_AccCheck,a_MyCheck')) $arcrank = -1;
     $adminid = $cuserLogin->getUserID();
     //属性处理

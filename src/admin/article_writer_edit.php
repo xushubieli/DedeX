@@ -19,7 +19,8 @@ if ($dopost == "save") {
     flock($fp, 3);
     fwrite($fp, $allwriter);
     fclose($fp);
-    echo "<script>alert('成功保存文档作者');</script>";
+    ShowMsg('成功保存文档作者', '-1');
+    exit();
 }
 //读出
 if (empty($allwriter) && filesize($m_file) > 0) {

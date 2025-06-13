@@ -20,7 +20,8 @@ if ($dopost == "save") {
         $query = "UPDATE `#@__arcatt` SET `attname`='$attname',`sortid`='$sortid' WHERE att='$att' ";
         $dsql->ExecuteNoneQuery($query);
     }
-    echo "<script>alert('成功更新文档自定义属性');</script>";
+    ShowMsg('成功更新文档自定义属性', '-1');
+    exit();
 }
 include DedeInclude('templets/content_att.htm');
 ?>

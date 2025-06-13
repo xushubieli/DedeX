@@ -3951,7 +3951,7 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('30','cfg_arcsptitle','是否开启分页标题，开启影响文档更新速度','6','bool','N'),
 ('31','cfg_arcautosp','是否开启长文档自动分页','6','bool','N'),
 ('32','cfg_arcautosp_size','文档自动分页大小','6','number','5'),
-('33','cfg_auot_description','自动摘要长度（0-255，0表示不启用）','7','number','255'),
+('33','cfg_auot_description','自动摘要长度（0-255，-1表示不启用）','7','number','255'),
 ('34','cfg_list_son','是否包含上级列表子类文档','6','bool','Y'),
 ('35','cfg_mb_open','是否开启会员功能','4','bool','N'),
 ('36','cfg_mb_album','是否开启会员图集功能','4','bool','Y'),

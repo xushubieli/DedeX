@@ -11,9 +11,9 @@ require_once(DEDEDATA.'/config.cache.inc.php');
 //安全提示
 $config = array(
     'font_size'      => 20,
-    'img_height'     => '36',
+    'img_height'     => '30',
     'word_type'      => 3,
-    'img_width'      => '80',
+    'img_width'      => '90',
     'use_boder'      => TRUE,
     'font_file'      => DEDEINC.'/data/fonts/'.mt_rand(1, 6).'.ttf',
     'wordlist_file'  => DEDEINC.'/data/words/words.txt',
@@ -57,8 +57,8 @@ function echo_validate_image($config = array())
     }
     //主要参数
     $font_size   = isset($config['font_size']) ? $config['font_size'] : 14;
-    $img_height  = isset($config['img_height']) ? $config['img_height'] : 38;
-    $img_width   = isset($config['img_width']) ? $config['img_width'] : 68;
+    $img_height  = isset($config['img_height']) ? $config['img_height'] : 36;
+    $img_width   = isset($config['img_width']) ? $config['img_width'] : 90;
     $font_file   = isset($config['font_file']) ? $config['font_file'] : DEDEINC.'/data/font/'.mt_rand(1, 6).'.ttf';
     $use_boder   = isset($config['use_boder']) ? $config['use_boder'] : TRUE;
     $filter_type = isset($config['filter_type']) ? $config['filter_type'] : 0;

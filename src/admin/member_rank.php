@@ -35,11 +35,12 @@ if ($dopost == 'save') {
             $dsql->ExecuteNoneQuery($inquery);
         }
     }
-    echo "<script>alert('成功更新会员等级表');</script>";
+    ShowMsg('成功更新会员级别设置', '-1');
+    exit();
 }
 if ($dopost == 'del') {
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__arcrank` WHERE id='$id' AND `rank`<>10");
-    ShowMsg("删除成功", "member_rank.php");
+    ShowMsg('删除成功', 'member_rank.php');
     exit();
 }
 $dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE `rank`>0 ORDER BY `rank`");
