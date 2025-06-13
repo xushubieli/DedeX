@@ -124,7 +124,7 @@ class SgListView
                     }
                 }
             }
-        } //!error
+        }
     }
     //php4构造函数
     function SgListView($typeid, $searchArr = array(), $mod = 0)

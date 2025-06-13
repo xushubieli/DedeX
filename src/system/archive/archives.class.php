@@ -121,7 +121,7 @@ class Archives
             }
             $this->Fields['face'] = empty($this->Fields['face'])? $GLOBALS['cfg_mainsite'].'/static/web/img/admin.png' : $this->Fields['face'];
             $this->Fields['userurl'] = $GLOBALS['cfg_memberurl'].'/index.php?uid='.$this->Fields['userid'];
-        } //!error
+        }
     }
     //php4构造函数
     function Archives($aid)
