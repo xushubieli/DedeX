@@ -1,7 +1,7 @@
 <?php
 if (!defined('DEDEINC')) exit('dedex');
 /**
- * 面包屑
+ * 当前位置管理
  *
  * @version        $id:typelink.class.php 15:21 2010年7月5日 tianya $
  * @package        DedeX.Libraries
@@ -76,7 +76,7 @@ class TypeLink
             return $this->TypeInfos['typedir'];
         }
     }
-    //获得某栏目的链接列表：栏目一/栏目二/形式，islink表示返回的列表是否带连接
+    //获得某栏目的链接列表：栏目一-栏目二--栏目三，islink表示返回的列表是否带连接
     function GetPositionLink($islink = true)
     {
         $indexpage = "<li class='breadcrumb-item'><a href='".$this->indexUrl."'>".$this->indexName."</a></li>";
