@@ -97,18 +97,18 @@
 				var startloop = 1;
 				var endnum = 0;
 				ahtml += "<li class='page-item disabled'><span class='page-link'>" + pagenum + "页" + totalrow + "条</span></li>";
-				if (pageno > 1 && pageno != 1) ahtml += "<li class='page-item disabled'><a href='javascript:;' class='page-link' onclick='LoadPage(1)'>首页</a></li>";
+				if (pageno > 1 && pageno != 1) ahtml += "<li class='page-item'><a href='javascript:;' class='page-link' onclick='LoadPage(1)'>首页</a></li>";
 				if (pageno > 1) ahtml += "<li class='page-item'><a href='javascript:;' class='page-link' onclick='LoadPage(" + (pageno - 1) + ")'>上页</a></li>";
 				if (startnum >= pagenum - listsize) {
 					startloop = pagenum - (listsize * 2);
 					if (startloop < 1) startloop = 1;
 					for (i = startloop; i <= pagenum; i++) {
-						if (i == pageno) ahtml += "<li class='page-item disabled'><span class='page-link'>" + i + "</span></li>";
+						if (i == pageno) ahtml += "<li class='page-item active'><span class='page-link'>" + i + "</span></li>";
 						else ahtml += "<li class='page-item'><a class='page-link' href='javascript:;' onclick='LoadPage(" + i + ")'>" + i + "</a></li>";
 					}
 				} else if (pagenum < listsize) {
 					for (i = 1; i <= pagenum; i++) {
-						if (i == pageno) ahtml += "<li class='page-item disabled'><span class='page-link'>" + i + "</span></li>";
+						if (i == pageno) ahtml += "<li class='page-item active'><span class='page-link'>" + i + "</span></li>";
 						else ahtml += "<li class='page-item'><a class='page-link' href='javascript:;' onclick='LoadPage(" + i + ")'>" + i + "</a></li>";
 					}
 				} else {
@@ -117,7 +117,7 @@
 					else { endnum = startnum + listsize; }
 					if (endnum >= pagenum) endnum = pagenum;
 					for (i = startloop; i <= endnum; i++) {
-						if (i == pageno) ahtml += "<li class='page-item disabled'><span class='page-link'>" + i + "</span></li>";
+						if (i == pageno) ahtml += "<li class='page-item active'><span class='page-link'>" + i + "</span></li>";
 						else ahtml += "<li class='page-item'><a class='page-link' href='javascript:;' onclick='LoadPage(" + i + ")'>" + i + "</a></li>";
 					}
 				}
