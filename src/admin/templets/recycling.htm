@@ -22,8 +22,8 @@
 							<table class="table table-borderless table-hover">
 								<thead>
 									<tr>
-										<td scope="col">id</td>
 										<td scope="col">选择</td>
+										<td scope="col">id</td>
 										<td scope="col">文档标题</td>
 										<td scope="col">栏目</td>
 										<td scope="col">更新时间</td>
@@ -34,8 +34,8 @@
 								<tbody>
 									{dede:datalist}
 									<tr>
-										<td>{dede:field.id/}</td>
 										<td><input type="checkbox" name="arcID" value="{dede:field.id/}"></td>
+										<td>{dede:field.id/}</td>
 										<td align="left"><a href="archives_do.php?aid={dede:field.id/}&dopost=editArchives">{dede:field.title/}</a></td>
 										<td>{dede:field.typename/}</td>
 										<td>{dede:field.senddate function='GetDateMk(@me)'/}</td>
