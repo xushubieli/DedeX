@@ -45,7 +45,7 @@ else if ($dopost == "addArc") {
         }
         $addcon = $addcon."?channelid=$channelid";
     }
-    header("Location:$addcon");
+    header("Location: {$addcon}");
     exit();
 }
 //修改投稿
@@ -68,7 +68,7 @@ else if ($dopost == "edit") {
         }
         $edit = $edit."?channelid=$channelid";
     }
-    header("Location:$edit"."&aid=$aid");
+    header("Location: {$edit}&aid={$aid}");
     exit();
 }
 //删除文档
@@ -129,9 +129,7 @@ else if ($dopost == "delArc") {
 //查看文档
 else if ($dopost == "viewArchives") {
     if ($type == "") {
-        header("location:".$cfg_phpurl."/view.php?aid=".$aid);
-    } else {
-        header("location:/book/book.php?bid=".$aid);
+        header("Location: {$cfg_phpurl}/view.php?aid={$aid}");
     }
 }
 ?>

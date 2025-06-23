@@ -23,7 +23,7 @@ if ($dopost == 'editArchives') {
     $row = $dsql->GetOne($query);
     $gurl = $row['editcon'];
     if ($gurl == '') $gurl = 'article_edit.php';
-    header("location:{$gurl}?aid=$aid");
+    header("Location: {$gurl}?aid={$aid}");
     exit();
 } else if ($dopost == 'upload_base64_image') {
     if ($litpic_b64 != "") {

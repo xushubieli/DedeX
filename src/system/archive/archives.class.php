@@ -475,13 +475,12 @@ class Archives
         //跳转网址
         $this->Fields['flag'] = empty($this->Fields['flag']) ? "" : $this->Fields['flag'];
         if (preg_match("#j#", $this->Fields['flag']) && $this->Fields['redirecturl'] != '') {
-            if ($GLOBALS['cfg_jump_once'] == 'N') {
-                $pageHtml = "<html>\r\n<head>\r\n<meta charset=".$GLOBALS['cfg_soft_lang']."\">\r\n<title>".$this->Fields['title']."</title>\r\n";
-                $pageHtml .= "<meta http-equiv=\"refresh\" content=\"3;URL=".$this->Fields['redirecturl']."\">\r\n</head>\r\n<body>\r\n";
-                $pageHtml .= "<p>正在前往文档：".$this->Fields['title']."<p>\r\n<p>文档描述：".$this->Fields['description']."</p>\r\n</body>\r\n</html>";
-                echo $pageHtml;
+            header("X-Robots-Tag: nofollow");
+            if ($GLOBALS['cfg_jump_once'] == 'Y') {
+                showmsg("正在前往文档：{$this->Fields['title']}", "{$this->Fields['redirecturl']}");
+                exit();
             } else {
-                header("location:{$this->Fields['redirecturl']}");
+                header("Location: {$this->Fields['redirecturl']}", true, 302);
             }
             exit();
         }
@@ -500,7 +499,7 @@ class Archives
         if ($this->TempSource == '') {
             $tempfile = $this->GetTempletFile();
             if (!file_exists($tempfile) || !is_file($tempfile)) {
-                echo "文档id：{$this->Fields['id']}，标题：{$this->Fields['title']}，主题模板文件不存在，无法更新文档";
+                showmsg("{$this->Fields['title']}文档，主题模板htm文件不存在", "javascript:;");
                 exit();
             }
             $this->dtp->LoadTemplate($tempfile);

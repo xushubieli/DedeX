@@ -11,7 +11,7 @@ require_once(DEDEINC.'/userlogin.class.php');
 $cuserLogin = new userLogin();
 $cuserLogin->exitUser();
 if (empty($needclose)) {
-    header('location:index.php');
+    header('Location: index.php');
 } else {
     $msg = "<script>
     if (document.all) window.opener=true;

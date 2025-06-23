@@ -122,7 +122,7 @@ function CheckRank($rank = 0, $money = 0)
 {
     global $cfg_ml, $cfg_memberurl, $cfg_mb_spacesta,$dsql;
     if (!$cfg_ml->IsLogin()) {
-        header("Location:{$cfg_memberurl}/login.php?gourl=".urlencode(GetCurUrl()));
+        header("Location: {$cfg_memberurl}/login.php?gourl=".urlencode(GetCurUrl()));
         exit();
     } else {
         if ($cfg_mb_spacesta == '-10') {

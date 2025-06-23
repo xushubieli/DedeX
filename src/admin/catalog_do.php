@@ -18,7 +18,7 @@ $channelid = empty($channelid) ? 0 : intval($channelid);
 if ($dopost == "addArchives") {
     //默认文档调用发布表单
     if (empty($cid) && empty($channelid)) {
-        header("location:article_add.php");
+        header("Location: article_add.php");
         exit();
     }
     if (!empty($channelid)) {
@@ -34,7 +34,7 @@ if ($dopost == "addArchives") {
         exit();
     }
     //跳转并传递参数
-    header("location:{$gurl}?channelid={$channelid}&cid={$cid}");
+    header("Location: {$gurl}?channelid={$channelid}&cid={$cid}");
     exit();
 }
 //管理文档
@@ -44,7 +44,7 @@ else if ($dopost == "listArchives") {
             $arcrank = '';
         }
         $gurl = str_replace('..', '', $gurl);
-        header("location:{$gurl}?arcrank={$arcrank}&cid={$cid}");
+        header("Location: {$gurl}?arcrank={$arcrank}&cid={$cid}");
         exit();
     }
     if ($cid > 0) {
@@ -65,12 +65,12 @@ else if ($dopost == "listArchives") {
         $channelname = $row["typename"];
     }
     if (empty($gurl)) $gurl = 'content_list.php';
-    header("location:{$gurl}?channelid={$channelid}&cid={$cid}");
+    header("Location: {$gurl}?channelid={$channelid}&cid={$cid}");
     exit();
 }
 //浏览通用模板目录
 else if ($dopost == "viewTemplet") {
-    header("location:tpl.php?path=/".$cfg_df_style);
+    header("Location: tpl.php?path=/".$cfg_df_style);
     exit();
 }
 //浏览单个页面的栏目

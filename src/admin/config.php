@@ -8,7 +8,7 @@
 define('DEDEADMIN', str_replace("\\", '/', dirname(__FILE__)));
 require_once(DEDEADMIN.'/../system/common.inc.php');
 if (!file_exists(DEDEDATA.'/common.inc.php')) {
-    header('Location:../install/index.php');
+    header('Location: ../install/index.php');
     exit();
 }
 require_once(DEDEINC.'/userlogin.class.php');
@@ -47,9 +47,9 @@ $cuserLogin = new userLogin();
 if ($cuserLogin->getUserID() == -1) {
     if (preg_match("#PHP (.*) Development Server#", $_SERVER['SERVER_SOFTWARE'])) {
         $dirname = dirname($_SERVER['SCRIPT_NAME']);
-        header("location:{$dirname}/login.php?gotopage=".urlencode($dedeNowurl));
+        header("Location: {$dirname}/login.php?gotopage=".urlencode($dedeNowurl));
     } else {
-        header("location:login.php?gotopage=".urlencode($dedeNowurl));
+        header("Location: login.php?gotopage=".urlencode($dedeNowurl));
     }
     exit();
 }

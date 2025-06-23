@@ -112,7 +112,7 @@ class SearchView
         $this->CountRecord();
         $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/".$GLOBALS['cfg_df_style']."/search.htm";
         if (!file_exists($tempfile) || !is_file($tempfile)) {
-            echo "搜索模板文件不存在，无法更新搜索";
+            showmsg("模板主题模板htm文件不存在", "javascript:;");
             exit();
         }
         $this->dtp->LoadTemplate($tempfile);

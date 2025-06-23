@@ -27,7 +27,7 @@ if (preg_match("#^http#", $url)) {
         $win->Display();
     } else {
         header('HTTP/1.1 301 Moved Permanently');
-        header('Location:'.$url);
+        header("Location: {$url}");
     }
 } else {
     ShowMsg("地址错误", "javascript:;");

@@ -335,16 +335,16 @@ function ShowMsg($msg, $gourl, $onlymsg = 0, $limittime = 0)
             $gourl = 'javascript:;';
             $func .= "<script>window.parent.document.getElementById('{$tgobj}').style.display='none';</script>";
         }
-        $func .= "<script>var pgo=0;function JumpUrl(){if (pgo==0) {location='$gourl'; pgo=1;}}</script>";
+        $func .= "<script>var pgo=0;function JumpUrl(){if (pgo==0) {location='{$gourl}'; pgo=1;}}</script>";
         $rmsg = $func;
         $rmsg .= "<div class='tips'><div class='tips-box shadow-sm'><div class='tips-head'><p>系统提示</p></div>";
         $rmsg .= "<div class='tips-body'>";
-        $rmsg .= "".str_replace("\"", "“", $msg)."";
+        $rmsg .= "<p class='mb-3'>".str_replace("\"", "“", $msg)."</p>";
         $rmsg .= "";
         if ($onlymsg == 0) {
             if ($gourl != 'javascript:;' && $gourl != '') {
-                $rmsg .= "<div class='text-center mt-3'><a href='{$gourl}' class='btn btn-primary btn-sm'>点击反应</a></div>";
-                $rmsg .= "<script>setTimeout('JumpUrl()', $litime);</script>";
+                $rmsg .= "<div class='text-center'><a href='{$gourl}' class='btn btn-primary btn-sm'>点击反应</a></div>";
+                $rmsg .= "<script>setTimeout('JumpUrl()', {$litime});</script>";
             } else {
                 $rmsg .= "</div>";
             }

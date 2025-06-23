@@ -8,7 +8,7 @@
  */
 define("DEDEINDEX", true);
 if (!file_exists(dirname(__FILE__).'/data/common.inc.php')) {
-    header('Location:install/index.php');
+    header('Location: install/index.php');
     exit();
 }
 if (isset($_GET['upcache']) || !file_exists('index.html')) {
@@ -49,6 +49,6 @@ if (isset($_GET['upcache']) || !file_exists('index.html')) {
     }
 } else {
     header('HTTP/1.1 301 Moved Permanently');
-    header('Location:index.html');
+    header('Location: index.html');
 }
 ?>

@@ -14,7 +14,7 @@ if (empty($dopost)) $dopost = '';
 //文件管理器
 if ($dopost == 'filemanager') {
     if (file_exists('./file_manage_main.php')) {
-        header("location:file_manage_main.php?activepath=$cfg_medias_dir");
+        header("Location: file_manage_main.php?activepath={$cfg_medias_dir}");
     } else {
         ShowMsg("找不到文件管理器", "-1");
     }

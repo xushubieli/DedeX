@@ -68,7 +68,7 @@ else if ($open == 1) {
         ShowMsg('非下载地址，禁止浏览', 'javascript:;');
         exit;
     }
-    header("location:$link");
+    header("Location: {$link}");
     exit();
 }
 //提供软件给会员下载新模式
@@ -199,7 +199,7 @@ else if ($open == 2) {
         $query = "INSERT INTO `#@__downloads` (`hash`, `id`, `downloads`) VALUES ('$hash', '$id', 1); ";
         $dsql->ExecNoneQuery($query);
     }
-    header("location:{$softUrl}");
+    header("Location: {$softUrl}");
     exit();
 }//opentype=2
 ?>

@@ -25,8 +25,8 @@ function dede_autoloader($classname)
             echo '</pre>';
             exit();
         } else {
-            header ("location:/404.html");
-            die ();
+            header ("Location: /404.html");
+            die();
         }
     }
 }

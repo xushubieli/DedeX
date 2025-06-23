@@ -73,7 +73,7 @@ class TagList
         //初始化模板
         $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/".$GLOBALS['cfg_df_style'].'/'.$this->Templet;
         if (!file_exists($tempfile) || !is_file($tempfile)) {
-            echo "标签主题模板文件不存在，无法更新标签";
+            showmsg("标签主题模板htm文件不存在", "javascript:;");
             exit();
         }
         $this->dtp->LoadTemplate($tempfile);

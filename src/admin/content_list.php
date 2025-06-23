@@ -99,7 +99,7 @@ if (empty($channelid) && isset($tl->TypeInfos['channeltype'])) {
     $channelid = $tl->TypeInfos['channeltype'];
 }
 if ($channelid < -1) {
-    header("location:content_sg_list.php?f=$f&cid=$cid&channelid=$channelid&keyword=$keyword");
+    header("Location: content_sg_list.php?f={$f}&cid={$cid}&channelid={$channelid}&keyword={$keyword}");
     exit();
 }
 //栏目大于800则需要缓存数据
