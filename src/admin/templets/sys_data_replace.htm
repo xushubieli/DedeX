@@ -33,12 +33,13 @@
 											<?php
 											$dsql->SetQuery("Show Tables");
 											$dsql->Execute('t');
-											if ($dsql->GetError()!=''){
-												echo "找不到您所指定的数据库".$dbname."";
+											if ($dsql->GetError()!='') {
+												echo "找不到您所指定的数据库{$dbname}";
 												echo $qbutton;
 											}
 											echo "<select name='exptable' multiple='yes' onchange='ShowFields();' id='exptable' class='admin-input-lg mb-3'>";
-											while($row = $dsql->GetArray('t',MYSQL_BOTH)){
+											while($row = $dsql->GetArray('t',MYSQL_BOTH))
+											{
 												echo "<option value='{$row[0]}'>{$row[0]}</option>";
 											}
 											echo "</select>";

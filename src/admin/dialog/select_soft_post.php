@@ -95,7 +95,7 @@ if ($ck == 1) {
     );
     echo json_encode($arr);
 } else {
-    ShowMsg("成功上传文件", $bkurl."?comeback=".urlencode($filename)."&f=$f&CKEditorFuncNum=$CKEditorFuncNum&activepath=".urlencode($activepath)."&d=".time());
+    ShowMsg("成功上传文件", "{$bkurl}?comeback=".urlencode($filename)."&f={$f}&CKEditorFuncNum={$CKEditorFuncNum}&activepath=".urlencode($activepath)."&d=".time());
     exit();
 }
 ?>

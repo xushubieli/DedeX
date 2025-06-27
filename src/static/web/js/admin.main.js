@@ -405,6 +405,22 @@ $(function($) {
 			$(this).html('<i class="fa fa-dedent"></i>');
 		}
 	});
+	function headColour() {
+		const hour = new Date().getHours();
+		if (hour >= 5 && hour < 7) {
+			$('.admin-head').css('background', 'linear-gradient(45deg, #6f00b3, #deb5ff)');
+		} else if (hour >= 7 && hour < 9) {
+			$('.admin-head').css('background', 'linear-gradient(45deg, #d079ee, #8a88fb)');
+		} else if (hour >= 9 && hour < 17) {
+			$('.admin-head').css('background', 'linear-gradient(45deg, #4b73ff, #7cf7ff)');
+		} else if (hour >= 17 && hour < 19) {
+			$('.admin-head').css('background', 'linear-gradient(45deg, #0e2c5e, #5d85a6)');
+		} else {
+			$('.admin-head').css('background', 'linear-gradient(45deg, #181818, #565656)');
+		}
+	}
+	headColour();
+	//setInterval(headColour, 3600000);
 	$(".menu-item").on("click", function() {
 		var $this = $(this);
 		$(".menu-sub").stop().slideUp();

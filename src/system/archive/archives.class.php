@@ -480,9 +480,9 @@ class Archives
                 showmsg("正在前往文档：{$this->Fields['title']}", "{$this->Fields['redirecturl']}");
                 exit();
             } else {
-                header("Location: {$this->Fields['redirecturl']}", true, 302);
+                header("Location: {$this->Fields['redirecturl']}");
+                exit();
             }
-            exit();
         }
         $pageCount = $this->NowPage;
         $this->ParseDMFields($pageCount, 0);

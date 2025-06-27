@@ -182,9 +182,9 @@ else if ($dopost == 'unitCatalog') {
         $win->AddHidden('typeid', $typeid);
         $win->AddHidden('channelid', $channelid);
         $win->AddHidden('nextjob', 'unitok');
-        $win->AddTitle("合并目录时不会删除原来的栏目目录，合并后需手动更新目标栏目的文档网页和列表网页，栏目不能有下级子栏目，只允许子级到更高级或同级或不同父级的情况");
-        $win->AddItem('您选择的栏目是：', "$typename");
-        $win->AddItem('您希望合并到那个栏目', "<select name='unittype'>{$typeOptions}</select>");
+        $win->AddTitle("合并指定栏目时不会删除原来已创建文件，需重重新更新栏目，栏目不能有子级，只允许子级到更高级或同级或不同父级的情况");
+        $win->AddItem('已选栏目', $typename);
+        $win->AddItem('合并栏目', "<select name='unittype'>{$typeOptions}</select>");
         $winform = $win->GetWindow('ok');
         $win->Display();
         exit();
@@ -230,9 +230,9 @@ else if ($dopost == 'moveCatalog') {
         $win->AddHidden('typeid', $typeid);
         $win->AddHidden('channelid', $channelid);
         $win->AddHidden('nextjob', 'unitok');
-        $win->AddTitle("移动目录时不会删除原来已创建的列表，移动后需重新对栏目创建网页，不允许从父级移动到子级目录，只允许子级到更高级或同级或不同父级的情况");
-        $win->AddItem('您选择的栏目是：', "$typename");
-        $win->AddItem('您希望移动到那个栏目', "<select name='movetype'>\r\n<option value='0'>移动为顶级栏目</option>\r\n$typeOptions\r\n</select>");
+        $win->AddTitle("移动指定栏目时不会删除原来已创建文件，需重重新更新栏目，不允许从父级移动到子级，只允许子级到更高级或同级或不同父级的情况");
+        $win->AddItem('已选栏目', $typename);
+        $win->AddItem('移动栏目', "<select name='movetype'>\r\n<option value='0'>移动为顶级栏目</option>{$typeOptions}</select>");
         $winform = $win->GetWindow('ok');
         $win->Display();
         exit();

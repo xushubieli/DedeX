@@ -176,7 +176,7 @@ $cfg_medias_dir = $cfg_cmspath.$cfg_medias_dir;
 $cfg_mediasurl = $cfg_mainsite.$cfg_medias_dir;
 //程序信息摘要
 $cfg_version = '1';
-$cfg_version_detail = '1.0.3';//详细版本号
+$cfg_version_detail = '1.0.5';//详细版本号
 $cfg_soft_lang = 'utf-8';
 $cfg_soft_public = 'base';
 $cfg_softname = '得德未来';

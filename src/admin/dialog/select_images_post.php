@@ -94,9 +94,9 @@ if ($GLOBALS['cfg_html_editor'] == 'ckeditor' && $CKUpload) {
     exit;
 }
 if (!empty($noeditor)) {
-    ShowMsg("成功上传一张图片", "select_images.php?iseditor=$iseditor&imgstick=$imgstick&comeback=".urlencode($filename_name)."&v=$v&f=$f&CKEditorFuncNum=$CKEditorFuncNum&noeditor=yes&activepath=".urlencode($activepath)."/$mdir&d=".time());
+    ShowMsg("成功上传一张图片", "select_images.php?iseditor={$iseditor}&imgstick={$imgstick}&comeback=".urlencode($filename_name)."&v={$v}&f={$f}&CKEditorFuncNum={$CKEditorFuncNum}&noeditor=yes&activepath=".urlencode($activepath)."/{$mdir}&d=".time());
 } else {
-    ShowMsg("成功上传一张图片", "select_images.php?iseditor=$iseditor&imgstick=$imgstick&comeback=".urlencode($filename_name)."&v=$v&f=$f&CKEditorFuncNum=$CKEditorFuncNum&activepath=".urlencode($activepath)."/$mdir&d=".time());
+    ShowMsg("成功上传一张图片", "select_images.php?iseditor={$iseditor}&imgstick={$imgstick}&comeback=".urlencode($filename_name)."&v={$v}&f={$f}&CKEditorFuncNum={$CKEditorFuncNum}&activepath=".urlencode($activepath)."/{$mdir}&d=".time());
 }
 exit();
 ?>

@@ -134,7 +134,7 @@ textarea {
 	overflow-x:hidden
 }
 .login-step .login-bg {
-	height:100%;
+	height:100vh;
 	background:var(--gray-300) url(../img/login_bg.jpg)no-repeat top center;
 	background-size:cover
 }
@@ -191,7 +191,7 @@ textarea {
 	width:100%;
 	height:60px;
 	line-height:60px;
-	background:linear-gradient(45deg,var(--primary) 15%,var(--purple) 100%)
+	background:linear-gradient(45deg,var(--primary),var(--cyan))
 }
 .admin-head .logo {
 	padding-left:1rem;
@@ -711,7 +711,7 @@ body.menu-show .admin-content {
 .form-control,.btn,.fa {
 	font-size:14px!important
 }
-a:hover,body.menu-hide .admin-content,body.menu-show .admin-content,.sidemenu .submenu li:hover,.column:hover,.table-hover tbody tr:hover {
+a:hover,body.menu-hide .admin-content,body.menu-show .admin-content,.sidemenu .submenu li:hover,.admin-head,.column:hover,.table-hover tbody tr:hover {
 	transition:all 0.5s
 }
 input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipslite,#edsta,.cke_chrome,.cke_inner,.alert,.card,.rounded,.form-control,.btn {

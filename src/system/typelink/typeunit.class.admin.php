@@ -110,7 +110,7 @@ echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
-        <span class='btn btn-success btn-sm'>列表</span>
+        <span class='btn btn-primary btn-sm'>列表</span>
         {$nss}
         <span class='btn btn-sm'>id：{$id}</span>
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>{$typeName}</a>
@@ -133,7 +133,7 @@ echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
-        <span class='btn btn-secondary btn-sm'>封面</span>
+        <span class='btn btn-info btn-sm'>封面</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>{$typeName}</a>
@@ -155,7 +155,7 @@ echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
-        <span class='btn btn-primary btn-sm'>外部</span>
+        <span class='btn btn-outline-primary btn-sm'>外部</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}<a>
         <a href='{$typeDir}' target='_blank' class='btn btn-sm'>{$typeName}</a>
@@ -221,7 +221,7 @@ echo <<<tpl
     <div class='left'>
         <span>└─{$step}</span>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
-        <span class='btn btn-success btn-sm'>列表</span>
+        <span class='btn btn-primary btn-sm'>列表</span>
         {$nss}
         <span class='btn btn-sm'>id：{$id}</span>
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>{$typeName}</a>
@@ -245,7 +245,7 @@ echo <<<tpl
     <div class='left'>
          <span>└─{$step}</span>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
-        <span class='btn btn-secondary btn-sm'>封面</span>
+        <span class='btn btn-info btn-sm'>封面</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>{$typeName}</a>
@@ -268,7 +268,7 @@ echo <<<tpl
     <div class='left'>
          <span>└─{$step}</span>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
-        <span class='btn btn-primary btn-sm'>外部</span>
+        <span class='btn btn-outline-primary btn-sm'>外部</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}</a>
         <a href='{$typeDir}' target='_blank' class='btn btn-sm'>{$typeName}</a>
