@@ -19,12 +19,12 @@ if ($dopost == "ok") {
     } else if ($step == 1) {
         UpDateCatCache();
         ClearOptCache();
-        ShowMsg("完成所有栏目缓存清理，开始清理枚举缓存", "sys_cache_up.php?dopost=ok&step=2&uparc=$uparc");
+        ShowMsg("完成所有栏目缓存清理，开始清理枚举缓存", "sys_cache_up.php?dopost=ok&step=2&uparc={$uparc}");
         exit();
     } else if ($step == 2) {
         include_once(DEDEINC."/enums.func.php");
         WriteEnumsCache();
-        ShowMsg("正在清理枚举缓存，继续清理文档调用缓存", "sys_cache_up.php?dopost=ok&step=3&uparc=$uparc");
+        ShowMsg("正在清理枚举缓存，继续清理文档调用缓存", "sys_cache_up.php?dopost=ok&step=3&uparc={$uparc}");
         exit();
     } else if ($step == 3) {
         echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=$cfg_soft_lang\">";
@@ -37,7 +37,7 @@ if ($dopost == "ok") {
         $limit = date('Ymd', strtotime('-15 days'));
         $dsql->ExecuteNoneQuery("DELETE FROM `#@__statistics_detail` WHERE created_date<'$limit' ");
         $msg[] = "过期流量统计等缓存";
-        $url = "sys_cache_up.php?dopost=ok&step=-1&uparc=$uparc";
+        $url = "sys_cache_up.php?dopost=ok&step=-1&uparc={$uparc}";
         if ($uparc == 1) {
             $url = "sys_cache_up.php?dopost=ok&step=9";
         }

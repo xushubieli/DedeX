@@ -1,6 +1,6 @@
 <?php
 /**
- * 检测重复文档
+ * 文档重复检测
  *
  * @version        $id:article_test_same.php 14:31 2010年7月12日 tianya $
  * @package        DedeX.Administrator
@@ -25,14 +25,12 @@ if ($dopost == 'analyse') {
     include DedeInclude('templets/article_result_same.htm');
     exit();
 }
-//删除选中的文档（只保留一条）
+//删除选中的文档，只保留一条
 else if ($dopost == 'delsel') {
     require_once(DEDEINC."/typelink/typelink.class.php");
     require_once(dirname(__FILE__)."/inc/inc_batchup.php");
     if (empty($titles)) {
-        header("Content-Type: text/html; charset={$cfg_ver_lang}");
-        echo "<meta charset={$cfg_ver_lang}\">\r\n";
-        echo "没有指定删除的文档";
+        ShowMsg("请选择需要删除的文档", "javascript:;");
         exit();
     }
     if (!$dsql->IsTable($maintable)) {

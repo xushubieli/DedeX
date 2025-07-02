@@ -80,7 +80,7 @@ else if ($dopost == 'add') {
     $inquery = "INSERT INTO `#@__sysconfig` (`aid`,`varname`,`info`,`value`,`type`,`groupid`) VALUES ('$aid','$nvarname','$varmsg','$nvarvalue','$vartype','$vargroup')";
     $rs = $dsql->ExecuteNoneQuery($inquery);
     if (!$rs) {
-        ShowMsg("新增变量失败，有非法字符", "sys_info.php?gp=$vargroup");
+        ShowMsg("新增变量失败，有非法字符", "sys_info.php?gp={$vargroup}");
         exit();
     }
     if (!is_writeable($configfile)) {
@@ -88,7 +88,7 @@ else if ($dopost == 'add') {
         exit();
     } else {
         ReWriteConfig();
-        ShowMsg("成功添加一则变量", "sys_info.php?gp=$vargroup");
+        ShowMsg("成功添加一则变量", "sys_info.php?gp={$vargroup}");
         exit();
     }
 }

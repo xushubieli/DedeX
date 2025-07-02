@@ -79,10 +79,10 @@ class FileManagement
                     copy($oldfile, $truepath."/$mfile");
                 }
                 unlink($oldfile);
-                ShowMsg("成功移动文件", "file_manage_main.php?activepath=$mpath");
+                ShowMsg("成功移动文件", "file_manage_main.php?activepath={$mpath}");
                 return 1;
             } else {
-                ShowMsg("移动文件{$oldfile}-{$truepath}/{$mfile}失败", "file_manage_main.php?activepath=$mpath");
+                ShowMsg("移动文件{$oldfile}-{$truepath}/{$mfile}失败", "file_manage_main.php?activepath={$mpath}");
                 return 0;
             }
         } else {

@@ -29,7 +29,7 @@ if ($dopost == 'delete') {
     exit();
 } else if ($dopost == "getjs") {
     require_once(DEDEINC."/libraries/oxwindow.class.php");
-    $jscode = "<script src='{$cfg_phpurl}/mytag_js.php?aid=$aid'></script>";
+    $jscode = "<script src='{$cfg_phpurl}/mytag_js.php?aid={$aid}'></script>";
     $showhtml = "<xmp>\r\n\r\n$jscode\r\n\r\n</xmp>";
     $showhtml .= "<iframe name='testfrm' frameborder='0' id='testfrm' src='mytag_edit.php?aid={$aid}&dopost=testjs'></iframe>";
     $wintitle = "获取自定义标记标签";
@@ -40,7 +40,7 @@ if ($dopost == 'delete') {
     exit();
 } else if ($dopost == "testjs") {
     echo "<body>";
-    echo "<script src='{$cfg_phpurl}/mytag_js.php?aid=$aid&nocache=1'></script>";
+    echo "<script src='{$cfg_phpurl}/mytag_js.php?aid={$aid}&nocache=1'></script>";
     exit();
 }
 $row = $dsql->GetOne("SELECT * FROM `#@__mytag` WHERE aid='$aid'");

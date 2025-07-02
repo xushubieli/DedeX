@@ -142,7 +142,7 @@ else if ($action == 'uploadok') {
         }
         move_uploaded_file($upfile, $templetdird.'/'.$upfile_name);
         @unlink($upfile);
-        ShowMsg("成功上传一个模板", "templets_main.php?acdir=$acdir");
+        ShowMsg("成功上传一个模板", "templets_main.php?acdir={$acdir}");
         exit();
     }
     exit();

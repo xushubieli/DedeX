@@ -128,7 +128,7 @@ if (empty($action)) {
         exit();
     }
     $start = $start + 100;
-    $goto = "tags_main.php?action=fetch&startaid=$startaid&endaid=$endaid&start=$start";
+    $goto = "tags_main.php?action=fetch&startaid={$startaid}&endaid={$endaid}&start={$start}";
     ShowMsg('正在获取标签', $goto);
     exit();
 }

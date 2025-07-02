@@ -38,7 +38,6 @@ if ($dopost == "save") {
         $query = "INSERT INTO `#@__moneycard_type` (num,pname,money) VALUES ('{$num_new}','{$pname_new}','{$money_new}');";
         $dsql->ExecuteNoneQuery($query);
     }
-    header("Content-Type:text/html; charset={$cfg_soft_lang}");
     ShowMsg("成功更新积分产品分类表","cards_type.php");
     exit();
 }

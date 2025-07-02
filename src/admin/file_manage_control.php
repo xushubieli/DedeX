@@ -102,7 +102,7 @@ else if ($fmdo == "edit") {
     fputs($fp, $str);
     fclose($fp);
     if (empty($backurl)) {
-        ShowMsg("成功保存一个文件", "file_manage_main.php?activepath=$activepath");
+        ShowMsg("成功保存一个文件", "file_manage_main.php?activepath={$activepath}");
     } else {
         ShowMsg("成功保存一个文件", $backurl);
     }

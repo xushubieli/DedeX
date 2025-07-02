@@ -19,7 +19,7 @@ if ($dopost == 'delete') {
 } else if ($dopost == "gettag") {
     require_once(DEDEINC.'/libraries/oxwindow.class.php');
     $row = $dsql->GetOne("SELECT tagname FROM `#@__myad` WHERE aid='$aid' ");
-    $tagcode = "{dede:myad name='{$row['tagname']}'/} <script src='{$cfg_phpurl}/ad_js.php?aid=$aid'></script>";
+    $tagcode = "{dede:myad name='{$row['tagname']}'/} <script src='{$cfg_phpurl}/ad_js.php?aid={$aid}'></script>";
     $showhtml = "<xmp>$tagcode</xmp>";
     $showhtml .= "<iframe name='testfrm' frameborder='0' src='ad_edit.php?aid={$aid}&dopost=testjs' id='testfrm' width='100%' height='350'></iframe>";
     $wintitle = "广告调用";
@@ -28,7 +28,7 @@ if ($dopost == 'delete') {
     $win->Display();
     exit();
 } else if ($dopost == 'testjs') {
-    echo "<script src='{$cfg_phpurl}/ad_js.php?aid=$aid&nocache=1'></script>";
+    echo "<script src='{$cfg_phpurl}/ad_js.php?aid={$aid}&nocache=1'></script>";
     exit();
 } else if ($dopost == 'saveedit') {
     CheckCSRF();

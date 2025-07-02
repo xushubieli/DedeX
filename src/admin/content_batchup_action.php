@@ -19,10 +19,10 @@ $typeid = empty($typeid)? 0 : intval($typeid);
 $userid = empty($userid)? '' : HtmlReplace($userid);
 //生成网页操作由其它页面处理
 if ($action == "makehtml") {
-    $jumpurl  = "makehtml_archives_action.php?endid=$endid&startid=$startid";
-    $jumpurl .= "&typeid=$typeid&pagesize=20&seltime=$seltime";
+    $jumpurl  = "makehtml_archives_action.php?endid={$endid}&startid={$startid}";
+    $jumpurl .= "&typeid={$typeid}&pagesize=20&seltime={$seltime}";
     $jumpurl .= "&stime=".urlencode($starttime)."&etime=".urlencode($endtime);
-    header("Location: $jumpurl");
+    header("Location: {$jumpurl}");
     exit();
 }
 $gwhere = " WHERE 1 ";
@@ -47,14 +47,14 @@ if (!empty($userid)) {
 }
 //特殊操作
 if (!empty($heightdone)) $action = $heightdone;
-//指量审核
+//批量审核
 if ($action == 'check') {
     if (empty($startid) || empty($endid) || $endid < $startid) {
         ShowMsg('该操作必须指定起始id', 'javascript:;');
         exit();
     }
-    $jumpurl  = "makehtml_archives_action.php?endid=$endid&startid=$startid";
-    $jumpurl .= "&typeid=$typeid&pagesize=20&seltime=$seltime";
+    $jumpurl  = "makehtml_archives_action.php?endid={$endid}&startid={$startid}";
+    $jumpurl .= "&typeid={$typeid}&pagesize=20&seltime={$seltime}";
     $jumpurl .= "&stime=".urlencode($starttime)."&etime=".urlencode($endtime);
     $dsql->SetQuery("SELECT id,arcrank FROM `#@__arctiny` $gwhere");
     $dsql->Execute('c');
@@ -64,10 +64,10 @@ if ($action == 'check') {
             $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET arcrank=0 WHERE id='{$row->id}'");
         }
     }
-    ShowMsg("完成数据库的审核处理，准备更新网页", $jumpurl);
+    ShowMsg("成功批量审核，准备更新网页", $jumpurl);
     exit();
 }
-//批量删除
+//批量删除文档
 else if ($action == 'del') {
     if (empty($startid) || empty($endid) || $endid < $startid) {
         ShowMsg('该操作必须指定起始id', 'javascript:;');
@@ -93,7 +93,7 @@ else if ($action == 'delnulltitle') {
     ShowMsg("成功删除{$tdd}条记录", "javascript:;");
     exit();
 }
-//删除空文档
+//删除小于100字符文档
 else if ($action == 'delnullbody') {
     $dsql->SetQuery("SELECT aid FROM `#@__addonarticle` WHERE LENGTH(body) < 100 ");
     $dsql->Execute('x');
@@ -104,13 +104,13 @@ else if ($action == 'delnullbody') {
     ShowMsg("成功删除{$tdd}条记录", "javascript:;");
     exit();
 }
-//修正缩略图错误
+//批量修正缩略图
 else if ($action == 'modddpic') {
     $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET litpic='' WHERE trim(litpic)='litpic' ");
     ShowMsg("成功修正缩略图错误", "javascript:;");
     exit();
 }
-//批量移动
+//批量移动文档
 else if ($action == 'move') {
     if (empty($typeid)) {
         ShowMsg('该操作必须指定栏目', 'javascript:;');
@@ -130,11 +130,9 @@ else if ($action == 'move') {
         ShowMsg("不能把数据移动到文档类型不同的栏目", "javascript:;");
         exit();
     }
-    $gwhere .= " And channel='".$typenew['channeltype']."' And title like '%$keyword%'";
-
+    $gwhere .= " AND channel='".$typenew['channeltype']."' AND title like '%$keyword%'";
     $ch = $dsql->GetOne("SELECT addtable FROM `#@__channeltype` WHERE id={$typenew['channeltype']} ");
     $addtable = $ch['addtable'];
-
     $dsql->SetQuery("SELECT id FROM `#@__archives` $gwhere");
     $dsql->Execute('m');
     $tdd = 0;
@@ -147,8 +145,8 @@ else if ($action == 'move') {
         if ($rs) $tdd++;
     }
     if ($tdd > 0) {
-        $jumpurl  = "makehtml_archives_action.php?endid=$endid&startid=$startid";
-        $jumpurl .= "&typeid=$newtypeid&pagesize=20&seltime=$seltime";
+        $jumpurl  = "makehtml_archives_action.php?endid={$endid}&startid={$startid}";
+        $jumpurl .= "&typeid={$newtypeid}&pagesize=20&seltime={$seltime}";
         $jumpurl .= "&stime=".urlencode($starttime)."&etime=".urlencode($endtime);
         ShowMsg("成功移动{$tdd}条记录，准备重新生成网页", $jumpurl);
     } else {
@@ -164,12 +162,6 @@ else if ($action == 'delnulltitle') {
         if (DelArc($row->id)) $tdd++;
     }
     ShowMsg("成功删除{$tdd}条记录", "javascript:;");
-    exit();
-}
-//修正缩略图错误
-else if ($action == 'modddpic') {
-    $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET litpic='' WHERE trim(litpic)='litpic' ");
-    ShowMsg("成功修正缩略图错误", "javascript:;");
     exit();
 }
 ?>

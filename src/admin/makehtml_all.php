@@ -20,7 +20,7 @@ if ($action == '') {
         $starttime = GetMkTime($starttime);
         $mkvalue = ($uptype == 'time' ? $starttime : $startid);
         OptimizeData($dsql);
-        ShowMsg("完成数据优化，开始更新文档", "makehtml_all.php?action=make&step=2&uptype=$uptype&mkvalue=$mkvalue");
+        ShowMsg("完成数据优化，开始更新文档", "makehtml_all.php?action=make&step=2&uptype={$uptype}&mkvalue={$mkvalue}");
         exit();
     }
     //更新文档
@@ -44,7 +44,7 @@ if ($action == '') {
         } else {
             if (file_exists($homeFile)) echo "启用静态更新，建议删除".$homeFile;
         }
-        ShowMsg("完成所有文档更新，开始更新所有栏目", "makehtml_all.php?action=make&step=4&uptype=$uptype&mkvalue=$mkvalue");
+        ShowMsg("完成所有文档更新，开始更新所有栏目", "makehtml_all.php?action=make&step=4&uptype={$uptype}&mkvalue={$mkvalue}");
         exit();
     }
     //更新栏目
