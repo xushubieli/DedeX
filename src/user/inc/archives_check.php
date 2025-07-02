@@ -63,7 +63,7 @@ $keywords = cn_substrR(HtmlReplace($tags, 1), 255);
 $mid = $cfg_ml->M_ID;
 //检测文档是否重复
 if ($cfg_mb_cktitle == 'Y') {
-    $row = $dsql->GetOne("SELECT * FROM `#@__archives` WHERE title LIKE '$title' ");
+    $row = $dsql->GetOne("SELECT * FROM `#@__archives` WHERE title = '$title' ");
     if (is_array($row)) {
         ShowMsg("请不要发布重复文档", "-1");
         exit();

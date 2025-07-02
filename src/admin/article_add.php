@@ -48,7 +48,7 @@ if ($dopost != 'save') {
     if (empty($click)) $click = ($cfg_arc_click == '-1' ? mt_rand(1000, 6000) : $cfg_arc_click);
     //检测文档是否重复
     if ($cfg_mb_cktitle == 'Y') {
-        $row = $dsql->GetOne("SELECT * FROM `#@__archives` WHERE title LIKE '$title' ");
+        $row = $dsql->GetOne("SELECT * FROM `#@__archives` WHERE title = '$title' ");
         if (is_array($row)) {
             ShowMsg("请不要发布重复文档", "-1");
             exit();
