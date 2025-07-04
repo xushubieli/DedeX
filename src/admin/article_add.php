@@ -46,11 +46,12 @@ if ($dopost != 'save') {
     if (!isset($dellink)) $dellink = 0;
     if (!isset($autolitpic)) $autolitpic = 0;
     if (empty($click)) $click = ($cfg_arc_click == '-1' ? mt_rand(1000, 6000) : $cfg_arc_click);
-    //检测文档是否重复
+    //检查15天内文档是否重复
     if ($cfg_mb_cktitle == 'Y') {
-        $row = $dsql->GetOne("SELECT * FROM `#@__archives` WHERE title = '$title' ");
-        if (is_array($row)) {
-            ShowMsg("请不要发布重复文档", "-1");
+        $moon = time() - (15 * 24 * 60 * 60);
+        $repeat = $dsql->GetOne("SELECT title,pubdate FROM `#@__archives` WHERE title = '$title' AND pubdate > $moon LIMIT 1");
+        if (!empty($repeat)) {
+            ShowMsg("请不要发布重复的文档", "-1");
             exit();
         }
     }

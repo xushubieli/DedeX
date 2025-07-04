@@ -31,7 +31,7 @@ if ($action == "save") {
     if (is_uploaded_file($newimg)) {
         $imgfile_type = strtolower(trim($newimg_type));
         if (!in_array($imgfile_type, $allow_mark_types)) {
-            ShowMsg("上传的图片格式错误，请使用gif、png格式的其中一种", "-1");
+            ShowMsg("上传的图片格式错误，请使用gif、png其中一种", "-1");
             exit();
         }
         if ($imgfile_type == 'image/xpng' || $imgfile_type == 'image/png') {
@@ -39,7 +39,7 @@ if ($action == "save") {
         } else if ($imgfile_type == 'image/gif') {
             $shortname = ".gif";
         } else {
-            ShowMsg("水印图片仅支持gif、png格式的其中一种", "-1");
+            ShowMsg("水印图片仅支持gif、png其中一种", "-1");
             exit;
         }
         $photo_markimg = 'mark'.$shortname;

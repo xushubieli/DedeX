@@ -87,7 +87,7 @@ function CheckCatalog($cid, $msg)
         return TRUE;
     }
     if (!in_array($cid, $admin_catalogs)) {
-        ShowMsg("$msg", "-1");
+        ShowMsg("{$msg}", "-1");
         exit();
     }
     return TRUE;

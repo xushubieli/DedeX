@@ -37,7 +37,7 @@ function CheckCSRF()
     if (
         !(isset($_POST['_csrf_token'], $cc_csrf_token_check) && is_string($_POST['_csrf_token']) && is_string($cc_csrf_token_check) && hash_equals($_POST['_csrf_token'], $cc_csrf_token_check))
     ) {
-        ShowMsg('刷新页面重新提交，请不要发布重复文档', '-1');
+        ShowMsg('请不要发布重复的文档', '-1');
         exit();
     }
     DropCookie("dede_csrf_token");
@@ -155,10 +155,10 @@ function CheckRank($rank = 0, $money = 0)
                     $myname = "注册会员";
                 }
             }
-            ShowMsg("需要".$needname."才能浏览本页面，您目前等级是".$myname."", "-1");
+            ShowMsg("需要{$needname}才能浏览本页面，您目前等级：{$myname}", "-1");
             exit();
         } else if ($cfg_ml->M_Money < $money) {
-            ShowMsg("需要".$money."金币才能浏览本页面，您目前金币".$cfg_ml->M_Money."个", "-1");
+            ShowMsg("需要{$money}金币才能浏览本页面，您目前金币{$cfg_ml->M_Money}个", "-1");
             exit();
         }
     }

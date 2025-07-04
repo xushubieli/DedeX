@@ -25,7 +25,7 @@ function GetCurContentAlbum($body, $rfurl, &$firstdd)
 {
     global $dsql, $cfg_multi_site, $cfg_basehost, $cfg_ddimg_width, $cfg_basedir, $pagestyle, $cuserLogin, $cfg_addon_savetype;
     require_once(DEDEINC.'/dedecollection.func.php');
-    if (empty($cfg_ddimg_width))    $cfg_ddimg_width = 320;
+    if (empty($cfg_ddimg_width)) $cfg_ddimg_width = 320;
     $rsimg = '';
     $cfg_uploaddir = $GLOBALS['cfg_image_dir'];
     $cfg_basedir = $GLOBALS['cfg_basedir'];
@@ -73,7 +73,7 @@ function GetCurContentAlbum($body, $rfurl, &$firstdd)
                 }
             }
             @WaterImg($rndFileName, 'down');
-            $rsimg .= "{dede:img ddimg='$litpicname' text='' width='".$imginfos[0]."' height='".$imginfos[1]."'} $iurl {/dede:img}\r\n";
+            $rsimg .= "{dede:img ddimg='$litpicname' text='' width='".$imginfos[0]."' height='".$imginfos[1]."'}$iurl{/dede:img}";
         }
     }
     return $rsimg;
@@ -92,7 +92,7 @@ function GetCurContent($body)
     $htd = new DedeHttpDown();
     $basehost = IsSSL()? "https://".$_SERVER["HTTP_HOST"] : "http://".$_SERVER["HTTP_HOST"];
     $img_array = array();
-    $body = str_replace("data-src=","src=", $body);
+    $body = str_replace("data-src=", "src=", $body);
     preg_match_all("/src=[\"|'|\s]([^\"|^\'|^\s]*?)/isU", $body, $img_array);
     $img_array = array_unique($img_array[1]);
     $imgUrl = $cfg_uploaddir.'/'.MyDate("ymd", time());
@@ -348,7 +348,7 @@ function GetDDImage($litpic, $picname, $isremote)
         $sparr = array("image/pjpeg", "image/jpeg", "image/gif", "image/png");
         $_FILES[$litpic]['type'] = strtolower(trim($_FILES[$litpic]['type']));
         if (!in_array($_FILES[$litpic]['type'], $sparr)) {
-            ShowMsg("您上传的图片格式错误，请使用jpg、png、gif、wbmp格式其中一种", "-1");
+            ShowMsg("您上传的图片格式错误，请使用jpg、png、gif、wbmp其中一种", "-1");
             exit();
         }
         $savepath = $cfg_image_dir.'/'.MyDate($cfg_addon_savetype, $ntime);
@@ -464,7 +464,7 @@ function PrintAutoFieldsAdd($fieldset, $loadtype = 'all')
             }
         }
     }
-    echo "<input type='hidden' name='dede_addonfields' value=\"".$dede_addonfields."\">\r\n";
+    echo "<input type='hidden' name='dede_addonfields' value=\"".$dede_addonfields."\">";
 }
 /**
  *  载入自定义表单用于修改
@@ -491,7 +491,7 @@ function PrintAutoFieldsEdit(&$fieldset, &$fieldValues, $loadtype = 'all')
             }
         }
     }
-    echo "<input type='hidden' name='dede_addonfields' value=\"".$dede_addonfields."\">\r\n";
+    echo "<input type='hidden' name='dede_addonfields' value=\"".$dede_addonfields."\">";
 }
 /**
  * 处理网页文本，删除非站外链接，自动摘要，自动获取缩略图
@@ -642,7 +642,7 @@ function UploadOneImage($upname, $handurl = '', $isremote = 1, $ntitle = '')
         $sparr = array("image/pjpeg", "image/jpeg", "image/gif", "image/png");
         $_FILES[$upname]['type'] = strtolower(trim($_FILES[$upname]['type']));
         if (!in_array($_FILES[$upname]['type'], $sparr)) {
-            ShowMsg("您上传的图片格式错误，请使用jpg、png、gif、wbmp格式其中一种", "-1");
+            ShowMsg("您上传的图片格式错误，请使用jpg、png、gif、wbmp其中一种", "-1");
             exit();
         }
         if (!empty($handurl) && !preg_match("#^(http|https):\/\/#i", $handurl) && file_exists($cfg_basedir.$handurl)) {

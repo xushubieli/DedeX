@@ -34,7 +34,7 @@ $nowtme = time();
 $sparr = array("image/pjpeg", "image/jpeg", "image/gif", "image/png", "image/xpng", "image/wbmp", "image/webp");
 $imgfile_type = strtolower(trim($imgfile_type));
 if (!in_array($imgfile_type, $sparr)) {
-    ShowMsg("您上传的图片格式错误，请使用jpg、png、gif、wbmp格式其中一种", "-1");
+    ShowMsg("您上传的图片格式错误，请使用jpg、png、gif、wbmp其中一种", "-1");
     exit();
 }
 $mdir = MyDate($cfg_addon_savetype, $nowtme);

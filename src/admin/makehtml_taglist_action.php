@@ -26,7 +26,7 @@ if ($tagid > 0) {
     $upall = 1; //更新全部模式
 }
 $allfinish = false; //是否全部完成
-$gwhere = ($startid == 0 ? "WHERE 1=1" : "WHERE id>=$startid");
+$gwhere = ($startid == 0 ? "WHERE 1=1" : "WHERE id >= $startid");
 if ($endid > $startid && $startid > 0) $gwhere .= " AND id <= $endid ";
 //判断生成模式
 if ($upall == 1 && $ctagid == 0) {
@@ -76,7 +76,7 @@ if (is_array($tag) && count($tag) > 0) {
             $query = "UPDATE `#@__tagindex` SET mktime=uptime WHERE id='$ctagid' ";
             $dsql->ExecuteNoneQuery($query);
             $reurl .= '/'.$ctagid;
-            ShowMsg("正在更新标签".$tag['tag']."，<a href='{$reurl}' target='_blank'>点击浏览</a>", "javascript:;");
+            ShowMsg("正在更新标签：{$tag['tag']}，<a href='{$reurl}' target='_blank'>点击浏览</a>", "javascript:;");
         }
         exit();
     } else {
@@ -89,12 +89,12 @@ if (is_array($tag) && count($tag) > 0) {
                 $nextpage = 0;
             }
             $gourl = "makehtml_taglist_action.php?maxpagesize={$maxpagesize}&tagid={$tagid}&pageno={$nextpage}&upall={$upall}&ctagid={$ctagid}&startid={$startid}&endid={$endid}&mktime={$mktime}";
-            ShowMsg("正在更新标签".$tag['tag']."，继续更新标签", $gourl, 0, 100);
+            ShowMsg("正在更新标签：{$tag['tag']}，继续更新标签", $gourl, 0, 100);
             exit();
         } else {
             //继续当前这个
             $gourl = "makehtml_taglist_action.php?mkpage={$mkpage}&maxpagesize={$maxpagesize}&tagid={$tagid}&pageno={$pageno}&upall={$upall}&ctagid={$ctagid}&startid={$startid}&endid={$endid}&mktime={$mktime}";
-            ShowMsg("正在更新标签".$tag['tag']."，继续更新标签", $gourl, 0, 100);
+            ShowMsg("正在更新标签：{$tag['tag']}，继续更新标签", $gourl, 0, 100);
             exit();
         }
     }

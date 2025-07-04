@@ -63,9 +63,9 @@ if (empty($action)) {
         $query = "DELETE FROM `#@__taglist` WHERE tid IN ($stringids)";
         $dsql->ExecuteNoneQuery($query);
         $dsql->ExecuteNoneQuery("DELETE FROM `#@__tagindex_infos` WHERE tagid IN ($stringids)");
-        ShowMsg("删除[$stringids]标签成功", 'tags_main.php');
+        ShowMsg("删除{$stringids}标签成功：", 'tags_main.php');
     } else {
-        ShowMsg("删除[$stringids]标签失败", 'tags_main.php');
+        ShowMsg("删除{$stringids}标签失败", 'tags_main.php');
     }
     exit();
 } else if ($action == 'fetch') {

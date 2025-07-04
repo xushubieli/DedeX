@@ -112,14 +112,14 @@ if (!function_exists('MemberUploads')) {
                 $sparr = array("image/pjpeg", "image/jpeg", "image/gif", "image/png", "image/xpng", "image/wbmp");
                 $imgfile_type = strtolower(trim($GLOBALS[$upname.'_type']));
                 if (!in_array($imgfile_type, $sparr)) {
-                    ShowMsg("您上传的图片格式错误，请使用jpg、png、gif、wbmp格式其中一种", "-1");
+                    ShowMsg("您上传的图片格式错误，请使用jpg、png、gif、wbmp其中一种", "-1");
                     exit();
                 }
             } else if ($utype == 'flash' && !preg_match("/\.swf$/", $GLOBALS[$upname.'_name'])) {
                 ShowMsg("上传的文件必须为flash文件", "-1");
                 exit();
             } else if ($utype == 'media' && !preg_match("/\.(".$cfg_mediatype.")$/", $GLOBALS[$upname.'_name'])) {
-                ShowMsg("您上传的文件类型必须为：$cfg_mediatype", "-1");
+                ShowMsg("您上传的文件类型必须为{$cfg_mediatype}", "-1");
                 exit();
             } else if (!preg_match("/\.(".$allAllowType.")$/", $GLOBALS[$upname.'_name'])) {
                 ShowMsg("您上传的文件类型不被允许", '-1');

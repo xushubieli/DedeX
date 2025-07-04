@@ -32,11 +32,11 @@ if ($cInfos['issend'] != 1 || $cInfos['ispart'] != 0  || $cInfos['channeltype'] 
 //检查栏目设定的投稿许可权限
 if ($cInfos['sendrank'] > $cfg_ml->M_Rank) {
     $row = $dsql->GetOne("SELECT membername FROM `#@__arcrank` WHERE `rank`='".$cInfos['sendrank']."' ");
-    ShowMsg("需要".$row['membername']."才能在这个栏目发布文档", "-1", "0", 3000);
+    ShowMsg("需要{$row['membername']}才能在这个栏目发布文档", "-1", "0", 5000);
     exit();
 }
 if ($cInfos['usertype'] != '' && $cInfos['usertype'] != $cfg_ml->M_MbType) {
-    ShowMsg("需要".$cInfos['usertype']."才能在这个栏目发布文档", "-1", "0", 3000);
+    ShowMsg("需要{$cInfos['usertype']}才能在这个栏目发布文档", "-1", "0", 5000);
     exit();
 }
 //文档的默认状态
@@ -61,11 +61,12 @@ if (empty($description)) $description = '';
 $description = cn_substrR(HtmlReplace($description, 1), 250);
 $keywords = cn_substrR(HtmlReplace($tags, 1), 255);
 $mid = $cfg_ml->M_ID;
-//检测文档是否重复
+//检查15天内文档是否重复
 if ($cfg_mb_cktitle == 'Y') {
-    $row = $dsql->GetOne("SELECT * FROM `#@__archives` WHERE title = '$title' ");
-    if (is_array($row)) {
-        ShowMsg("请不要发布重复文档", "-1");
+    $moon = time() - (15 * 24 * 60 * 60);
+    $repeat = $dsql->GetOne("SELECT title,pubdate FROM `#@__archives` WHERE title = '$title' AND pubdate > $moon LIMIT 1");
+    if (!empty($repeat)) {
+        ShowMsg("请不要发布重复的文档", "-1");
         exit();
     }
 }
