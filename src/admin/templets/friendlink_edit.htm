@@ -65,11 +65,11 @@
 										<td>
 											<select name="typeid" id="typeid" class="admin-input-sm">
 												<?php
-												echo " <option value='".$myLink['typeid']."'>".$myLink['typename']."</option>";
-												$dsql->SetQuery("SELECT * FROM `#@__flinktype` where id<>'".$myLink['typeid']."'");
+												echo " <option value='{$myLink['typeid']}'>{$myLink['typename']}</option>";
+												$dsql->SetQuery("SELECT * FROM `#@__flinktype` WHERE id<>'{$myLink['typeid']}'");
 												$dsql->Execute();
 												while($row=$dsql->GetObject()){
-													echo " <option value='".$row->id."'>".$row->typename."</option>";
+													echo " <option value='{$row->id}'>{$row->typename}</option>";
 												}
 												?>
 											</select>

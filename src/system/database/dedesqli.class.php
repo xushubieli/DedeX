@@ -210,9 +210,9 @@ class DedeSqli
         if (DEBUG_LEVEL === TRUE) {
             $queryTime = ExecTime() - $t1;
             if (PHP_SAPI === 'cli') {
-                echo "执行SQL：".$this->queryString."，执行时间：{$queryTime}\r\n";
+                echo "执行SQL：{$this->queryString}，执行时间：{$queryTime}";
             } else {
-                echo DedeAlert("执行SQL：".$this->queryString."，执行时间：{$queryTime}", ALERT_SUCCESS);
+                echo DedeAlert("执行SQL：{$this->queryString}，执行时间：{$queryTime}", ALERT_SUCCESS);
             }
         }
         return $rs;
@@ -247,9 +247,9 @@ class DedeSqli
         if (DEBUG_LEVEL === TRUE) {
             $queryTime = ExecTime() - $t1;
             if (PHP_SAPI === 'cli') {
-                echo "执行SQL：".$this->queryString."，执行时间：{$queryTime}\r\n";
+                echo "执行SQL：{$this->queryString}，执行时间：{$queryTime}\r\n";
             } else {
-                echo DedeAlert("执行SQL：".$this->queryString."，执行时间：{$queryTime}", ALERT_SUCCESS);
+                echo DedeAlert("执行SQL：{$this->queryString}，执行时间：{$queryTime}", ALERT_SUCCESS);
             }
         }
         return mysqli_affected_rows($this->linkID);
@@ -297,13 +297,13 @@ class DedeSqli
         if (DEBUG_LEVEL === TRUE) {
             $queryTime = ExecTime() - $t1;
             if (PHP_SAPI === 'cli') {
-                echo "执行SQL：".$this->queryString."，执行时间：{$queryTime}\r\n";
+                echo "执行SQL：{$this->queryString}，执行时间：{$queryTime}\r\n";
             } else {
-                echo DedeAlert("执行SQL：".$this->queryString."，执行时间：{$queryTime}", ALERT_SUCCESS);
+                echo DedeAlert("执行SQL：{$this->queryString}，执行时间：{$queryTime}", ALERT_SUCCESS);
             }
         }
         if ($this->result[$id] === FALSE) {
-            $this->DisplayError(mysqli_error($this->linkID)." <br>Error sql:".$this->queryString."");
+            $this->DisplayError(mysqli_error($this->linkID)." <br>Error sql:{$this->queryString}");
         }
     }
     function Query($id = "me", $sql = '')

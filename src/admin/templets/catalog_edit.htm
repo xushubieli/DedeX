@@ -127,9 +127,9 @@
 												while($row = $dsql->GetObject('cc'))
 												{
 													if ($myrow['corank']==$row->rank)
-													echo "<option value='".$row->rank."' selected>".$row->membername."</option>";
+													echo "<option value='{$row->rank}' selected>{$row->membername}</option>";
 													else
-													echo "<option value='".$row->rank."'>".$row->membername."</option>";
+													echo "<option value='{$row->rank}'>{$row->membername}</option>";
 												}
 												?>
 											</select>

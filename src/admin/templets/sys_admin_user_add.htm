@@ -48,7 +48,7 @@
 												$dsql->Execute("ut");
 												while($myrow = $dsql->GetObject("ut"))
 												{
-													echo "<option value='".$myrow->rank."'>".$myrow->typename."</option>";
+													echo "<option value='{$myrow->rank}'>{$myrow->typename}</option>";
 												}
 												?>
 											</select>

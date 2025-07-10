@@ -223,7 +223,7 @@ if (!function_exists('CheckSql')) {
  *  {
  *      function HelloDede()
  *      {
- *          echo "Hello! Dede";
+ *          echo "Hello! DedeX";
  *      }
  *  }
  *  </code>

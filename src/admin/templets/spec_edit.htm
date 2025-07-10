@@ -272,7 +272,7 @@
 												<?php
 												$subday = SubDay($arcRow["sortrank"],$arcRow["senddate"]);
 												echo "<option value='0'>正常排序</option>";
-												if ($subday>0) echo "<option value='$subday' selected>置顶".$subday."天</option>";
+												if ($subday>0) echo "<option value='{$subday}' selected>置顶{$subday}天</option>";
 												?>
 												<option value="7">置顶一周</option>
 												<option value="30">置顶一个月</option>
@@ -300,24 +300,15 @@
 										<td>发布时间</td>
 										<td>
 											<?php
-											$addtime = GetDateTimeMk($arcRow["senddate"]);
-											echo "$addtime <input type='hidden' name='senddate' value='".$arcRow["senddate"]."' class='admin-input-sm'>";
-											?>
-										</td>
-									</tr>
-									<tr>
-										<td>发布时间</td>
-										<td>
-											<?php
 											$notime = GetDateTimeMk($arcRow["pubdate"]);
-											echo "<input type='text' name='pubdate' value='$notime' id='pubdate' class='datepicker admin-input-sm'>";
+											echo "<input type='text' name='pubdate' value='{$notime}' id='pubdate' class='datepicker admin-input-sm'>";
 											?>
 										</td>
 										<td>更新时间</td>
 										<td>
 											<?php
 											$nowtime = GetDateTimeMk(time());
-											echo "<input type='text' name='senddate' value='$nowtime' id='senddate' class='datepicker admin-input-sm'>";
+											echo "<input type='text' name='senddate' value='{$nowtime}' id='senddate' class='datepicker admin-input-sm'>";
 											?>
 										</td>
 									</tr>

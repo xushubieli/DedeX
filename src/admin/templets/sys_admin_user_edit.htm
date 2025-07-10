@@ -50,8 +50,8 @@
 												$dsql->Execute("ut");
 												while($myrow = $dsql->GetObject("ut"))
 												{
-													if ($row['usertype']==$myrow->rank) echo "<option value='".$myrow->rank."' selected='1'>".$myrow->typename."</option>";
-													else echo "<option value='".$myrow->rank."'>".$myrow->typename."</option>";
+													if ($row['usertype']==$myrow->rank) echo "<option value='{$myrow->rank}' selected='1'>{$myrow->typename}</option>";
+													else echo "<option value='{$myrow->rank}'>{$myrow->typename}</option>";
 												}
 												?>
 											</select>
@@ -77,7 +77,7 @@
 												$dsql->Execute("ut");
 												while($myrow = $dsql->GetObject("ut"))
 												{
-													if ($row['usertype']==$myrow->rank) echo "<option value='".$myrow->rank."' selected='1'>".$myrow->typename."</option>";
+													if ($row['usertype']==$myrow->rank) echo "<option value='{$myrow->rank}' selected='1'>{$myrow->typename}</option>";
 												}
 												?>
 											</select>

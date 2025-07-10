@@ -28,7 +28,7 @@ if (isset($_GET['upcache']) || !file_exists('index.html')) {
         if (DEBUG_LEVEL == TRUE) {
             $queryTime = ExecTime() - $ttt1;
             if (PHP_SAPI === 'cli') {
-                echo '首页生成花费时间：'.$queryTime."\r\n";
+                echo "首页生成花费时间：{$queryTime}";
             } else {
                 echo DedeAlert("页面加载总消耗时间：{$queryTime}", ALERT_DANGER);
             }
@@ -40,7 +40,7 @@ if (isset($_GET['upcache']) || !file_exists('index.html')) {
         if (DEBUG_LEVEL == TRUE) {
             $queryTime = ExecTime() - $ttt1;
             if (PHP_SAPI === 'cli') {
-                echo '首页加载花费时间：'.$queryTime."\r\n";
+                echo "首页加载花费时间：{$queryTime}";
             } else {
                 echo DedeAlert("页面加载总消耗时间：{$queryTime}", ALERT_DANGER);
             }

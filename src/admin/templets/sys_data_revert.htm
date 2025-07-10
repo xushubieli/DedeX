@@ -33,14 +33,14 @@
 							<table class="table table-borderless">
 								<tbody>
 									<?php
-									for ($i=0;$i<count($filelists);$i++)
+									for ($i=0; $i<count($filelists); $i++)
 									{
 										echo "<tr>";
-										$mtd = "<td><input name='bakfile' id='bakfile' type='checkbox' value='".$filelists[$i]."' checked></td><td>{$filelists[$i]}</td>";
+										$mtd = "<td><input name='bakfile' id='bakfile' type='checkbox' value='{$filelists[$i]}' checked></td><td>{$filelists[$i]}</td>";
 										echo $mtd;
 										if (isset($filelists[$i+1])) {
 											$i++;
-											$mtd = "<td><input name='bakfile' id='bakfile' type='checkbox' value='".$filelists[$i]."' checked></td><td>{$filelists[$i]}</td>";
+											$mtd = "<td><input name='bakfile' id='bakfile' type='checkbox' value='{$filelists[$i]}' checked></td><td>{$filelists[$i]}</td>";
 											echo $mtd;
 										} else {
 											echo "<td></td><td></td>";

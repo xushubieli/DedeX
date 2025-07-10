@@ -30,7 +30,7 @@
 								<tbody>
 									<tr>
 										<td colspan="2" align="center">
-											<?php if ($row['face']!='') {echo "<p><img src='{$row['face']}' class='user-img-md'></p>";};echo "<p>".$row['userid']."</p>";?>
+											<?php if ($row['face']!='') {echo "<p><img src='{$row['face']}' class='user-img-md'></p>";};echo "<p>{$row['userid']}</p>";?>
 											<p class="m-0">
 												<span class="btn btn-outline-primary btn-sm"><?php echo GetMemberTypeName($row['rank']);?></span>
 												<span class="btn btn-outline-secondary btn-sm"><?php echo GetHonor($row['scores']);?></span>
@@ -124,8 +124,8 @@
 												<?php
 												foreach($staArr as $k=>$v)
 												{
-													if ($row['spacesta']==$k) echo "<option value='$k' selected>$v</option>";
-													else echo "<option value='$k'>$v</option>";
+													if ($row['spacesta']==$k) echo "<option value='{$k}' selected>{$v}</option>";
+													else echo "<option value='{$k}'>{$v}</option>";
 												}
 												?>
 											</select>

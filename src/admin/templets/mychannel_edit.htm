@@ -70,8 +70,8 @@
 												$dsql->Execute();
 												while($row2 = $dsql->GetObject())
 												{
-													if ($row2->rank==$row['sendrank']) echo "<option value='".$row2->rank."' selected>".$row2->membername."</option>";
-													else echo "<option value='".$row2->rank."'>".$row2->membername."</option>";
+													if ($row2->rank==$row['sendrank']) echo "<option value='{$row2->rank}' selected>{$row2->membername}</option>";
+													else echo "<option value='{$row2->rank}'>{$row2->membername}</option>";
 												}
 												?>
 											</select>

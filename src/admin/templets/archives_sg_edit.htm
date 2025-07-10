@@ -100,7 +100,7 @@
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` where adminrank<='$urank' And `rank`<>'{$addRow["arcrank"]}' ");
 												$dsql->Execute();
 												while($row = $dsql->GetObject()) {
-													echo "<option value='".$row->rank."'>".$row->membername."</option>";
+													echo "<option value='{$row->rank}'>{$row->membername}</option>";
 												}
 												?>
 											</select>

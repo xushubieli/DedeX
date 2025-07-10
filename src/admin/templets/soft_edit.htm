@@ -158,7 +158,7 @@
 										<td>文件类型</td>
 										<td>
 											<select name="filetype" id="filetype" class="admin-input-sm">
-												<?php if ($addRow["filetype"]!="") echo "<option value=\"".$addRow["filetype"]."\">".$addRow['filetype']."</option>";?>
+												<?php if ($addRow["filetype"]!="") echo "<option value='{$addRow['filetype']}'>{$addRow['filetype']}</option>";?>
 												<option value=".exe">.exe</option>
 												<option value=".zip">.zip</option>
 												<option value=".rar">.rar</option>
@@ -172,7 +172,7 @@
 										<td>软件等级</td>
 										<td>
 											<select name="softrank" id="softrank" class="admin-input-sm">
-												<?php if ($addRow["softrank"]!="") echo "<option value=\"".$addRow["softrank"]."\">".$addRow['softrank']."星</option>";?>
+												<?php if ($addRow["softrank"]!="") echo "<option value='{$addRow['softrank']}'>{$addRow['softrank']}星</option>";?>
 												<option value="1">一星</option>
 												<option value="2">二星</option>
 												<option value="3">三星 </option>
@@ -183,7 +183,7 @@
 										<td>软件类型</td>
 										<td>
 											<select name="softtype" id="softtype" class="admin-input-sm">
-												<?php if ($addRow["softtype"]!="") echo "<option value=\"".$addRow["softtype"]."\">".$addRow['softtype']."</option>";?>
+												<?php if ($addRow["softtype"]!="") echo "<option value='{$addRow['softtype']}'>{$addRow['softtype']}</option>";?>
 												<option value="国产软件">国产软件</option>
 												<option value="国外软件">国外软件</option>
 												<option value="汉化补丁">汉化补丁</option>
@@ -194,7 +194,7 @@
 										<td>界面语言</td>
 										<td>
 											<select name="language" id="language" class="admin-input-sm">
-												<?php if ($addRow["language"]!="") echo "<option value=\"".$addRow["language"]."\">".$addRow['language']."</option>";?>
+												<?php if ($addRow["language"]!="") echo "<option value='{$addRow['language']}'>{$addRow['language']}</option>";?>
 												<option value="简体中文">简体中文</option>
 												<option value="英文软件">英文软件</option>
 												<option value="繁体中文">繁体中文</option>
@@ -204,7 +204,7 @@
 										<td>授权方式</td>
 										<td>
 											<select name="accredit" id="accredit" class="admin-input-sm">
-												<?php if ($addRow["accredit"]!="") echo "<option value=\"".$addRow["accredit"]."\">".$addRow['accredit']."</option>";?>
+												<?php if ($addRow["accredit"]!="") echo "<option value='{$addRow['accredit']}'>{$addRow['accredit']}</option>";?>
 												<option value="共享软件">共享软件</option>
 												<option value="免费软件">免费软件</option>
 												<option value="开源软件">开源软件</option>
@@ -275,7 +275,7 @@
 												<?php
 												$subday = SubDay($arcRow["sortrank"],$arcRow["pubdate"]);
 												echo "<option value='0'>正常排序</option>";
-												if ($subday>0) echo "<option value='$subday' selected>置顶".$subday."天</option>";
+												if ($subday>0) echo "<option value='{$subday}' selected>置顶{$subday}天</option>";
 												?>
 												<option value="7">置顶一周</option>
 												<option value="30">置顶一个月</option>
@@ -310,14 +310,14 @@
 										<td>
 											<?php
 											$notime = GetDateTimeMk($arcRow["pubdate"]);
-											echo "<input type='text' name='pubdate' value='$notime' id='pubdate' class='datepicker admin-input-sm'>";
+											echo "<input type='text' name='pubdate' value='{$notime}' id='pubdate' class='datepicker admin-input-sm'>";
 											?>
 										</td>
 										<td>更新时间</td>
 										<td>
 											<?php
 											$nowtime = GetDateTimeMk(time());
-											echo "<input type='text' name='senddate' value='$nowtime' id='senddate' class='datepicker admin-input-sm'>";
+											echo "<input type='text' name='senddate' value='{$nowtime}' id='senddate' class='datepicker admin-input-sm'>";
 											?>
 										</td>
 									</tr>

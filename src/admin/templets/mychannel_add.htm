@@ -70,7 +70,7 @@
 												$dsql->Execute();
 												while($row2 = $dsql->GetObject())
 												{
-													echo "<option value='".$row2->rank."'>".$row2->membername."</option>";
+													echo "<option value='{$row2->rank}'>{$row2->membername}</option>";
 												}
 												?>
 											</select>

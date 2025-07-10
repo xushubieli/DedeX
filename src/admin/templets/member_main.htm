@@ -39,8 +39,8 @@
 								<?php
 								foreach($staArr as $k=>$v)
 								{
-									if ($spacesta==$k) echo "<option value='$k' selected>$v</option>";
-									else echo "<option value='$k'>$v</option>";
+									if ($spacesta==$k) echo "<option value='{$k}' selected>{$v}</option>";
+									else echo "<option value='{$k}'>{$v}</option>";
 								}
 								?>
 							</select>
@@ -78,7 +78,7 @@
 										<td><input type="checkbox" name="mid" value="{dede:field.mid/}"></td>
 										<td>{dede:field.mid/}</td>
 										<td>
-											<?php if (!empty($fields['face'])) {echo "<img src='{$fields['face']}' class='user-img-sm'>";};echo ' <span>'.$fields['userid'].'</span>';if ($fields['spacesta']==-2) echo ' <span class="btn btn-danger btn-sm">禁言</span>';if ($fields['spacesta']==-1) echo ' <span class="btn btn-danger btn-sm">待审核</span>';?>
+											<?php if (!empty($fields['face'])) {echo "<img src='{$fields['face']}' class='user-img-sm'>";};echo " <span>{$fields['userid']}</span>";if ($fields['spacesta']==-2) echo ' <span class="btn btn-danger btn-sm">禁言</span>';if ($fields['spacesta']==-1) echo ' <span class="btn btn-danger btn-sm">待审核</span>';?>
 											<span>{dede:field.matt function="GetMAtt(@me)"/}</span>
 										</td>
 										<td>{dede:field.uname/}</td>

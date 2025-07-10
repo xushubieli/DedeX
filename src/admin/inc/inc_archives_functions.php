@@ -464,7 +464,7 @@ function PrintAutoFieldsAdd($fieldset, $loadtype = 'all')
             }
         }
     }
-    echo "<input type='hidden' name='dede_addonfields' value=\"".$dede_addonfields."\">";
+    echo "<input type='hidden' name='dede_addonfields' value='{$dede_addonfields}'>";
 }
 /**
  *  载入自定义表单用于修改
@@ -491,7 +491,7 @@ function PrintAutoFieldsEdit(&$fieldset, &$fieldValues, $loadtype = 'all')
             }
         }
     }
-    echo "<input type='hidden' name='dede_addonfields' value=\"".$dede_addonfields."\">";
+    echo "<input type='hidden' name='dede_addonfields' value='{$dede_addonfields}'>";
 }
 /**
  * 处理网页文本，删除非站外链接，自动摘要，自动获取缩略图
@@ -708,7 +708,7 @@ function UploadOneImage($upname, $handurl = '', $isremote = 1, $ntitle = '')
     return $filename;
 }
 /**
- *  获取更新测试信息
+ *  文档发布是否更新
  *
  * @access    public
  * @return    string
@@ -724,7 +724,7 @@ function GetUpdateTest()
         $dolists = explode(',', $dolist);
         $jumpUrl = "task_do.php?typeid={$typeid}&aid={$arcID}&dopost={$dolists[0]}&nextdo=".preg_replace("#".$dolists[0]."[,]{0,1}#", '', $dolist);
         $revalue = "<tr id='tgtable'><td>";
-        $revalue .= "<div class='admin-win-iframe'><iframe src='$jumpUrl' name='stafrm' frameborder='0' id='stafrm' width='100%' height='100%'></iframe></div>";
+        $revalue .= "<div class='admin-win-iframe'><iframe src='{$jumpUrl}' name='stafrm' frameborder='0' id='stafrm' width='100%' height='100%'></iframe></div>";
         $revalue .= "</td></tr>";
     } else {
         $revalue = '';

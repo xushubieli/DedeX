@@ -21,10 +21,10 @@ if ($action == 'post') {
         $postform = $diy->getForm('post', array(), 'admin');
         include DEDEADMIN.'/templets/diy_post.htm';
     } else if ($do == 2) {
-        $dede_fields = empty($dede_fields) ? '' : trim($dede_fields);
-        $dede_fieldshash = empty($dede_fieldshash) ? '' : trim($dede_fieldshash);
-        if (!empty($dede_fields)) {
-            if ($dede_fieldshash != md5($dede_fields.$cfg_cookie_encode)) {
+        $form_fields = empty($form_fields) ? '' : trim($form_fields);
+        $form_fieldshash = empty($form_fieldshash) ? '' : trim($form_fieldshash);
+        if (!empty($form_fields)) {
+            if ($form_fieldshash != md5($form_fields.$cfg_cookie_encode)) {
                 showMsg('数据校验不对', '-1');
                 exit();
             }
@@ -35,8 +35,8 @@ if ($action == 'post') {
             exit();
         }
         $addvar = $addvalue = '';
-        if (!empty($dede_fields)) {
-            $fieldarr = explode(';', $dede_fields);
+        if (!empty($form_fields)) {
+            $fieldarr = explode(';', $form_fields);
             if (is_array($fieldarr)) {
                 foreach ($fieldarr as $field) {
                     if ($field == '') {
@@ -101,7 +101,7 @@ if ($action == 'post') {
         $c2 = $row['ifcheck'] == 0 ? 'checked' : '';
         include DEDEADMIN.'/templets/diy_edit_content.htm';
     } else if ($do == 2) {
-        $dede_fields = empty($dede_fields) ? '' : trim($dede_fields);
+        $form_fields = empty($form_fields) ? '' : trim($form_fields);
         $diyform = $dsql->GetOne("SELECT * FROM `#@__diyforms` WHERE diyid=$diyid");
         $diyco = $dsql->GetOne("SELECT * FROM `$diy->table` WHERE id='$id'");
         if (!is_array($diyform)) {
@@ -109,8 +109,8 @@ if ($action == 'post') {
             exit();
         }
         $addsql = '';
-        if (!empty($dede_fields)) {
-            $fieldarr = explode(';', $dede_fields);
+        if (!empty($form_fields)) {
+            $fieldarr = explode(';', $form_fields);
             if (is_array($fieldarr)) {
                 foreach ($fieldarr as $field) {
                     if ($field == '') {
@@ -175,12 +175,13 @@ if ($action == 'post') {
             showmsg('删除成功', "diy_list.php?action=list&diyid={$diy->diyid}");
         } else {
             showmsg('删除失败', '-1');
+            exit();
         }
     }
 } else if ($action == 'excel') {
     ob_end_clean();//清除缓冲区，避免乱码
     header("Content-type:application/vnd.ms-excel");
-    header("Content-Disposition:attachment;filename={$diy->name}".date("Y-m-d").".xls");
+    header("Content-Disposition:attachment;filename={$diy->name}".date("Y-m-d").".xlsx");
     print(chr(0xEF).chr(0xBB).chr(0xBF));//清除bom
     $fieldlist = (array)$diy->getFieldList();
     echo "<table><tr>";
@@ -198,14 +199,15 @@ if ($action == 'post') {
         echo "<tr>";
         foreach($fieldlist as $key => $field)
         {
-            echo "<td>".$arr[$key]."</td>";
+            echo "<td>{$arr[$key]}</td>";
         }
     $status = $arr['ifcheck'] == 1 ? '已审核' : '待审核';
-    echo "<td>".$status."</td>";
+    echo "<td>{$status}</td>";
     echo "</tr>";
     }
     echo "</table>";
 } else {
     showmsg('未定义操作', '-1');
+    exit();
 }
 ?>

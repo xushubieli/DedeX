@@ -37,7 +37,7 @@
 										echo '<tr><td width="260">'.$fielddata[0].'：'.'</td><td>'.$row[$field].'</td></tr>';
 										$formfields .= 	$formfields == ''? $field.','.$fielddata[1] : ';'.$field.','.$fielddata[1];	
 									}
-									echo "<input type='hidden' name='dede_fields' value='".$formfields."'>";
+									echo "<input type='hidden' name='form_fields' value='{$formfields}'>";
 									?>
 									<tr>
 										<td colspan="2" align="center">

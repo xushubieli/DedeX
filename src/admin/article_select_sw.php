@@ -17,7 +17,7 @@ if ($t == 'source') {
     foreach ($allsources as $v) {
         $v = trim($v);
         if ($v != "") {
-            echo "<a href=\"javascript:PutSource('$v');\">$v</a> | \r\n";
+            echo "<a href=\"javascript:PutSource('{$v}');\">{$v}</a> ";
         }
     }
     echo "</div></div>";
@@ -34,7 +34,7 @@ if ($t == 'source') {
         foreach ($strs as $str) {
             $str = trim($str);
             if ($str != "") {
-                echo "<a href='javascript:PutWriter(\"$str\");'>$str</a> | ";
+                echo "<a href='javascript:PutWriter(\"{$str}\");'>{$str}</a> ";
             }
         }
     }

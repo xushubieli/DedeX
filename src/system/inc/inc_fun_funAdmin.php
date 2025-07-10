@@ -102,7 +102,7 @@ function SpCreateDir($spath)
                 $isok = ChmodAll($truepath, $cfg_dir_purview);
             }
             if (!$isok) {
-                echo "创建或修改目录".$truepath."失败";
+                echo "创建或修改目录{$truepath}失败";
                 return false;
             }
         }

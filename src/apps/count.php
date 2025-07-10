@@ -41,7 +41,7 @@ if (!empty($view)) {
             );
             echo json_encode($result);
         } else {
-            echo "document.write('".$row['click']."');\r\n";
+            echo "document.write('{$row['click']}');\r\n";
         }
     }
 }
