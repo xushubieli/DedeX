@@ -37,7 +37,7 @@ if ($dopost == "viewinfo") {
             $dsql->Execute('cols');
             echo "表的列信息:\n";
             while ($colRow = $dsql->GetArray('cols', SQLITE3_ASSOC)) {
-                echo "列名: {$colRow['name']}, 类型: {$colRow['type']}, 是否为主键: {($colRow['pk'] ? '是' : '否')}";
+                echo "列名: {$colRow['name']}, 类型: {$colRow['type']}, 是否为主键: ".($colRow['pk'] ? '是' : '否');
             }
         }
         echo '</xmp>';

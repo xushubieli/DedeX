@@ -75,11 +75,11 @@
 							<h1>{dede:field.title/}</h1>
 						</div>
 						<div class="meta py-3">
-							<a href="{dede:field.userurl/}"><span><img src="{dede:field.face/}" class="user-img-xs mr-2">{dede:field.uname/}</span></a>
-							<span><i class="fa fa-calendar mr-2"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
-							<span><i class="fa fa-globe mr-2"></i>{dede:field.source/}</span>
-							<span><i class="fa fa-user mr-2"></i>{dede:field.writer/}</span>
-							<span><i class="fa fa-eye mr-2"></i><script src="{dede:global.cfg_phpurl/}/count.php?view=yes&aid={dede:field.id/}&mid={dede:field name='mid'/}"></script>次</span>
+							<a href="{dede:field.userurl/}"><span><img src="{dede:field.face/}" class="user-img-xs me-3">{dede:field.uname/}</span></a>
+							<span><i class="fa fa-calendar me-3"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
+							<span><i class="fa fa-globe me-3"></i>{dede:field.source/}</span>
+							<span><i class="fa fa-user me-3"></i>{dede:field.writer/}</span>
+							<span><i class="fa fa-eye me-3"></i><script src="{dede:global.cfg_phpurl/}/count.php?view=yes&aid={dede:field.id/}&mid={dede:field name='mid'/}"></script>次</span>
 						</div>
 						<div class="picbox py-3">
 							{dede:field name='pagestyle' alt='图片头部调用' runphp='yes'}
@@ -125,10 +125,10 @@
 							<div class="col-md-8">
 								<div class="row actbox">
 									<ul>
-										<li><i class="fa fa-star-o mr-2"></i><a href="{dede:global.cfg_phpurl/}/stow.php?aid={dede:field.id/}">收藏</a></li>
-										<li><i class="fa fa-bug mr-2"></i><a href="javascript:ErrorAddSave({dede:field.id/}, '{dede:field.title/}');">挑错</a></li>
-										<li><i class="fa fa-thumbs-o-up mr-2"></i><a href="{dede:global.cfg_phpurl/}/recommend.php?aid={dede:field.id/}">推荐</a></li>
-										<li><i class="fa fa-print mr-2"></i><a href="javascript:;" onclick="window.print();">打印</a></li>
+										<li><i class="fa fa-star-o me-3"></i><a href="{dede:global.cfg_phpurl/}/stow.php?aid={dede:field.id/}">收藏</a></li>
+										<li><i class="fa fa-bug me-3"></i><a href="javascript:ErrorAddSave({dede:field.id/}, '{dede:field.title/}');">挑错</a></li>
+										<li><i class="fa fa-thumbs-o-up me-3"></i><a href="{dede:global.cfg_phpurl/}/recommend.php?aid={dede:field.id/}">推荐</a></li>
+										<li><i class="fa fa-print me-3"></i><a href="javascript:;" onclick="window.print();">打印</a></li>
 									</ul>
 								</div>
 							</div>
@@ -242,7 +242,7 @@
 			}
 			//回复某个评论
 			function ReplyFeedback(fid) {
-				let replyPannel = `<div class="form-group">
+				let replyPannel = `<div class="mb-3">
 					<div class="input-group">
 						<input type="text" class="form-control iptReplyContent">
 						<div class="input-group-append"><button type="button" class="btn btn-primary btn-send" onclick='SendReplyFeedback(${fid})'>评论</button></div>
@@ -268,7 +268,7 @@
 				}, function(data) {
 					let result = JSON.parse(data);
 					let tpl = `<div class="media py-3">
-						<img src="~face~" class="face mr-3">
+						<img src="~face~" class="face me-3">
 						<div class="media-body">
 							<div class="feedback-infos pb-3">
 								<div class="feedback-basic">

@@ -6,54 +6,14 @@
 		<title>发布专题</title>
 		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
-		<link rel="stylesheet" href="/static/web/css/cropper.min.css">
-		<script>const cfg_uplitpic_cut = '<?php echo $cfg_uplitpic_cut;?>';</script>
+		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
 		<script src="/static/web/js/moment.min.js"></script>
 		<script src="/static/web/js/daterangepicker.js"></script>
-		<script src="/static/web/js/cropper.min.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
-		<script>
-			function checkSubmit() {
-				if (document.form1.title.value == "") {
-					ShowMsg("请输入专题标题");
-					return false;
-				}
-				for (i = 1; i <= 6; i++) {
-					$val = CheckVal(i);
-					if ($val == false) {
-						return false;
-					}
-				}
-			}
-			function CheckVal(id) {
-				var notename = $DE('notename' + id);
-				var arcid = $DE('arcid' + id);
-				if (arcid.value != '') {
-					if (notename.value == "") {
-						$DE('notename' + id).focus();
-						ShowMsg('请输入' + id + '名称');
-						return false;
-					}
-				}
-			}
-			function SelectArcList(fname) {
-				var pos = GetWinPos(800, 600);
-				window.open("content_select_list.php?f=" + fname, "selArcList", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
-			}
-			function SelectImage(fname, vlist) {
-				var pos = GetWinPos(800, 600);
-				window.open("./dialog/select_images.php?f=" + fname + "&imgstick=" + vlist, "popUpImagesWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
-			}
-			function SelectTemplets(fname) {
-				var pos = GetWinPos(800, 600);
-				window.open("./dialog/select_templets.php?f=" + fname, "poptempWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
-			}
-		</script>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -100,10 +60,9 @@
 										<td colspan="3">
 											<input type="text" name="picname" id="picname" class="admin-input-lg">
 											<label><input type="checkbox" name="ddisremote" value="1" id="ddisremote"> 远程图片</label>
-											<span class="btn btn-primary btn-sm opt-button">上传<input type="file" name="files[]" id="iptAddImages"></span>
 											<button type="button" onclick="SelectImage('form1.picname','');" class="btn btn-primary btn-sm">选择</button>
 											<button type="button" id="btnClearAll" class="btn btn-primary btn-sm">清空</button>
-											<img id="litPic" src="/static/web/img/thumbnail.jpg" id="litPic" class="thumbnail-md ml-3">
+											<img id="litPic" src="/static/web/img/thumbnail.jpg" id="litPic" class="thumbnail-md ms-3">
 										</td>
 									</tr>
 									<tr>
@@ -136,72 +95,64 @@
 										<td colspan="3"><textarea name="description" id="description" class="admin-textarea-sm"></textarea></td>
 									</tr>
 									<?php PrintAutoFieldsAdd(stripslashes($cInfos['fieldset']),'autofield');?>
+									<?php
+									$speclisttmp = GetSysTemplets("spec_arclist.htm");
+									$nodename = $nodeid = '';
+									for ($i=1;$i<=$cfg_specnote;$i++)
+									{
+									if ($i==1) {
+										$nodename = '默认节点';
+										$nodeid = 'default';
+									} else {
+										$nodename = $nodeid = '';
+									}
+									?>
 									<tr>
-										<td colspan="4">
-											<table class="table">
-												<tbody>
-													<?php
-													$speclisttmp = GetSysTemplets("spec_arclist.htm");
-													$nodename = $nodeid = '';
-													for ($i=1;$i<=$cfg_specnote;$i++)
-													{
-													if ($i==1) {
-														$nodename = '默认节点';
-														$nodeid = 'default';
-													} else {
-														$nodename = $nodeid = '';
-													}
-													?>
-													<tr>
-														<td>节点<?php echo $i?>名称</td>
-														<td>
-															<input type="text" name="notename<?php echo $i;?>" value="<?php echo $nodename;?>" id="notename<?php echo $i;?>" class="admin-input-lg">
-															<label>节点标识：<input type="text" name="noteid<?php echo $i;?>" alue="<?php echo $nodeid;?>" id="noteid<?php echo $i;?>" class="admin-input-sm"></label>
-														</td>
-													</tr>
-													<tr>
-														<td>文档列表</td>
-														<td>
-															<textarea name="arcid<?php echo $i;?>" onblur='CheckVal(<?php echo $i ?>)' id="arcid<?php echo $i;?>" class="admin-textarea-sm"></textarea>
-															<button name="selarc<?php echo $i;?>" type="button" id="selarc<?php echo $i?>2" class="btn btn-primary btn-sm" onclick="SelectArcList('form1.arcid<?php echo $i;?>');">选择节点文档</button>
-														</td>
-													</tr>
-													<tr>
-														<td>文档来源</td>
-														<td>
-															<label>栏目id：<input type="text" name="typeid<?php echo $i;?>" id="_typeid<?php echo $i;?>" value="0" class="admin-input-sm"></label>
-															<label>关键词：<input type="text" name="keywords<?php echo $i;?>" id="keywords<?php echo $i;?>" class="admin-input-lg">（英文逗号隔开）</label>
-															<label><input type="radio" name="isauto<?php echo $i;?>" id="isauto<?php echo $i;?>" value="0" checked> 按文档列表</label>
-															<label><input type="radio" name="isauto<?php echo $i;?>" id="isauto<?php echo $i;?>" value="1"> 自动获取文档</label>
-														</td>
-													</tr>
-													<tr>
-														<td>节点布局</td>
-														<td>
-															<label>列数：<input type="text" name="col<?php echo $i;?>" id="col<?php echo $i;?>" value="1" class="admin-input-sm"></label>
-															<label>图片宽：<input type="text" name="imgwidth<?php echo $i;?>" id="imgwidth<?php echo $i;?>" value="120" class="admin-input-sm"></label>
-															<label>图片高：<input type="text" name="imgheight<?php echo $i;?>" id="imgheight<?php echo $i;?>" value="90" class="admin-input-sm"></label>
-															<label>标题长：<input type="text" name="titlelen<?php echo $i;?>" id="titlelen<?php echo $i;?>" value="60" class="admin-input-sm"></label>
-															<label>简介长：<input type="text" name="infolen<?php echo $i;?>" id="infolen<?php echo $i;?>" value="160" class="admin-input-sm"></label>
-															<label>文档数：<input type="text" name="rownum<?php echo $i;?>" id="rownum<?php echo $i;?>" value="10" class="admin-input-sm"></label>
-														</td>
-													</tr>
-													<tr>
-														<td>应用样式</td>
-														<td><textarea name="listtmp<?php echo $i;?>" id="listtmp<?php echo $i;?>" class="admin-textarea-xl"><?php echo $speclisttmp;?></textarea></td>
-													</tr>
-													<tr>
-														<td>应用模板</td>
-														<td>
-															<input type="text" name="notetemplet<?php echo $i;?>" id="notetemplet<?php echo $i;?>" value="system/channel_spec_note.htm" class="admin-input-lg">
-															<button type="button" name="selno<?php echo $i;?>" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.notetemplet<?php echo $i;?>');">选择</button>
-														</td>
-													</tr>
-													<?php }?>
-												</tbody>
-											</table>
+										<td>节点<?php echo $i?>名称</td>
+										<td colspan="3">
+											<input type="text" name="notename<?php echo $i;?>" value="<?php echo $nodename;?>" id="notename<?php echo $i;?>" class="admin-input-lg">
+											<label>节点标识：<input type="text" name="noteid<?php echo $i;?>" alue="<?php echo $nodeid;?>" id="noteid<?php echo $i;?>" class="admin-input-sm"></label>
 										</td>
 									</tr>
+									<tr>
+										<td>文档列表</td>
+										<td colspan="3">
+											<textarea name="arcid<?php echo $i;?>" onblur='CheckVal(<?php echo $i ?>)' id="arcid<?php echo $i;?>" class="admin-textarea-sm"></textarea>
+											<button name="selarc<?php echo $i;?>" type="button" id="selarc<?php echo $i?>2" class="btn btn-primary btn-sm" onclick="SelectArcList('form1.arcid<?php echo $i;?>');">选择节点文档</button>
+										</td>
+									</tr>
+									<tr>
+										<td>文档来源</td>
+										<td colspan="3">
+											<label>栏目id：<input type="text" name="typeid<?php echo $i;?>" id="_typeid<?php echo $i;?>" value="0" class="admin-input-xs"></label>
+											<label>关键词：<input type="text" name="keywords<?php echo $i;?>" id="keywords<?php echo $i;?>" class="admin-input-lg">（英文逗号隔开）</label>
+											<label><input type="radio" name="isauto<?php echo $i;?>" id="isauto<?php echo $i;?>" value="0" checked> 按文档列表</label>
+											<label><input type="radio" name="isauto<?php echo $i;?>" id="isauto<?php echo $i;?>" value="1"> 自动获取文档</label>
+										</td>
+									</tr>
+									<tr>
+										<td>节点布局</td>
+										<td colspan="3">
+											<label>列数：<input type="text" name="col<?php echo $i;?>" id="col<?php echo $i;?>" value="1" class="admin-input-xs"></label>
+											<label>图片宽：<input type="text" name="imgwidth<?php echo $i;?>" id="imgwidth<?php echo $i;?>" value="120" class="admin-input-xs"></label>
+											<label>图片高：<input type="text" name="imgheight<?php echo $i;?>" id="imgheight<?php echo $i;?>" value="90" class="admin-input-xs"></label>
+											<label>标题长：<input type="text" name="titlelen<?php echo $i;?>" id="titlelen<?php echo $i;?>" value="255" class="admin-input-xs"></label>
+											<label>简介长：<input type="text" name="infolen<?php echo $i;?>" id="infolen<?php echo $i;?>" value="255" class="admin-input-xs"></label>
+											<label>文档数：<input type="text" name="rownum<?php echo $i;?>" id="rownum<?php echo $i;?>" value="30" class="admin-input-xs"></label>
+										</td>
+									</tr>
+									<tr>
+										<td>应用样式</td>
+										<td colspan="3"><textarea name="listtmp<?php echo $i;?>" id="listtmp<?php echo $i;?>" class="admin-textarea-xl"><?php echo $speclisttmp;?></textarea></td>
+									</tr>
+									<tr>
+										<td>应用模板</td>
+										<td colspan="3">
+											<input type="text" name="notetemplet<?php echo $i;?>" id="notetemplet<?php echo $i;?>" value="system/channel_spec_note.htm" class="admin-input-lg">
+											<button type="button" name="selno<?php echo $i;?>" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.notetemplet<?php echo $i;?>');">选择</button>
+										</td>
+									</tr>
+									<?php }?>
 									<tr>
 										<td>评论选项</td>
 										<td>
@@ -266,5 +217,42 @@
 			</div>
 		</div>
 		<script>InitPage();</script>
+		<script>
+			function checkSubmit() {
+				if (document.form1.title.value == "") {
+					ShowMsg("请输入专题标题");
+					return false;
+				}
+				for (i = 1; i <= 6; i++) {
+					$val = CheckVal(i);
+					if ($val == false) {
+						return false;
+					}
+				}
+			}
+			function CheckVal(id) {
+				var notename = $DE('notename' + id);
+				var arcid = $DE('arcid' + id);
+				if (arcid.value != '') {
+					if (notename.value == "") {
+						$DE('notename' + id).focus();
+						ShowMsg('请输入' + id + '名称');
+						return false;
+					}
+				}
+			}
+			function SelectArcList(fname) {
+				var pos = GetWinPos(800, 600);
+				window.open("content_select_list.php?f=" + fname, "selArcList", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
+			}
+			function SelectImage(fname, vlist) {
+				var pos = GetWinPos(800, 600);
+				window.open("./dialog/select_images.php?f=" + fname + "&imgstick=" + vlist, "popUpImagesWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
+			}
+			function SelectTemplets(fname) {
+				var pos = GetWinPos(800, 600);
+				window.open("./dialog/select_templets.php?f=" + fname, "poptempWin", "scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=" + pos.left + ", top=" + pos.top);
+			}
+		</script>
 	</body>
 </html>

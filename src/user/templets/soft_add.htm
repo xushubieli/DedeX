@@ -16,27 +16,27 @@
 					<input type="hidden" name="dopost" value="save">
 					<input type="hidden" name="channelid" value="<?php echo $channelid;?>">
 					<input type="hidden" id="litpic" name="litpic">
-					<div class="form-group row">
+					<div class="mb-3 row">
 						<label class="col-sm-2 col-form-label" for="title">标题</label>
 						<div class="col-sm-10"><input type="text" name="title" id="title" class="form-control" placeholder="请输入标题"></div>
 					</div>
-					<div class="form-group row">
+					<div class="mb-3 row">
 						<label class="col-sm-2 col-form-label" for="tags">标签</label>
 						<div class="col-sm-10"><input type="text" name="tags" id="tags" class="form-control" placeholder="请输入标签"></div>
 					</div>
-					<div class="form-group row">
+					<div class="mb-3 row">
 						<span class="col-sm-2 col-form-label">缩略图</span>
 						<div class="col-sm-10">
-							<img id="imgLitpic" src="/static/web/img/thumbnail.jpg" class="thumbnail-md mr-3">
+							<img id="imgLitpic" src="/static/web/img/thumbnail.jpg" class="thumbnail-md me-3">
 							<span class="btn btn-primary btn-sm" id="btnUploadLitpic">上传缩略图</span>
 							<input id="iptLitpic" type="file" name="iptLitpic" class="d-none">
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="mb-3 row">
 						<label class="col-sm-2 col-form-label" for="writer">作者</label>
 						<div class="col-sm-10"><input type="text" name="writer" id="writer" class="form-control" value="<?php echo $cfg_ml->M_UserName;?>"></div>
 					</div>
-					<div class="form-group row">
+					<div class="mb-3 row">
 						<label class="col-sm-2 col-form-label" for="typeid">发布栏目</label>
 						<div class="col-sm-10">
 							<?php
@@ -48,12 +48,12 @@
 							?>
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="mb-3 row">
 						<label class="col-sm-2 col-form-label" for="description">描述</label>
 						<div class="col-sm-10"><textarea name="description" id="description" class="form-control" placeholder="请输入描述"></textarea></div>
 					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
+					<div class="mb-3 row">
+						<div class="mb-3 col-md-6">
 							<label for="filetype">文件类型</label>
 							<select name="filetype" id="filetype" class="form-control">
 								<option value=".exe" selected="selected">.exe</option>
@@ -64,7 +64,7 @@
 								<option value="其它">其它</option>
 							</select>
 						</div>
-						<div class="form-group col-md-6">
+						<div class="mb-3 col-md-6">
 							<label for="language">界面语言</label>
 							<select name="language" id="language" class="form-control">
 								<option value="简体中文" selected="selected">简体中文</option>
@@ -74,8 +74,8 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
+					<div class="mb-3 row">
+						<div class="mb-3 col-md-6">
 							<label for="softtype">软件类型</label>
 							<select name="softtype" id="softtype" class="form-control">
 								<option value="国产软件" selected="selected">国产软件</option>
@@ -83,7 +83,7 @@
 								<option value="汉化补丁">汉化补丁</option>
 							</select>
 						</div>
-						<div class="form-group col-md-6">
+						<div class="mb-3 col-md-6">
 							<label for="accredit">授权方式</label>
 							<select name="accredit" id="accredit" class="form-control">
 								<option value="共享软件" selected="selected">共享软件</option>
@@ -95,12 +95,12 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
+					<div class="mb-3 row">
+						<div class="mb-3 col-md-6">
 							<label for="os">运行环境</label>
 							<input type="text" id="os" name="os" value="win7,win10,win11" class="form-control">
 						</div>
-						<div class="form-group col-md-6">
+						<div class="mb-3 col-md-6">
 							<label for="softrank">软件等级</label>
 							<select name="softrank" id="softrank" class="form-control">
 								<option value="1">一星</option>
@@ -111,18 +111,18 @@
 							</select>
 						</div>
 					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
+					<div class="mb-3 row">
+						<div class="mb-3 col-md-6">
 							<label for="officialDemo">官方网址</label>
 							<input type="text" name="officialUrl" id="officialDemo" class="form-control">
 						</div>
-						<div class="form-group col-md-6">
+						<div class="mb-3 col-md-6">
 							<label for="officialUrl">演示网址</label>
 							<input type="text" name="officialDemo" id="officialUrl" class="form-control">
 						</div>
 					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
+					<div class="mb-3 row">
+						<div class="mb-3 col-md-6">
 							<label for="softsize">软件大小</label>
 							<div class="input-group">
 								<input type="text" name="softsize" id="softsize" class="form-control">
@@ -135,17 +135,17 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group col-md-6">
+						<div class="mb-3 col-md-6">
 							<label for="source">软件来源</label>
 							<input type="text" name="source" id="source" class="form-control">
 						</div>
 					</div>
 					<?php PrintAutoFieldsAdd(stripslashes($cInfos['fieldset']),'autofield');?>
-					<div class="form-group row">
+					<div class="mb-3 row">
 						<span class="col-sm-2 col-form-label">正文</span>
 						<div class="col-sm-10"><?php GetEditor("body","",350,"Member");?></div>
 					</div>
-					<div class="form-group">
+					<div class="mb-3">
 						<label for="softurl1">软件网址：</label>
 						<div class="input-group mb-3">
 							<input type="text" name="softurl1" id="softurl1" class="form-control d-inline-block w-75">
@@ -154,9 +154,9 @@
 						<label for="servermsg1">下载名称：</label>
 						<input type="text" name="servermsg1" id="servermsg1" class="form-control" value="本地下载">
 					</div>
-					<div class="form-group">
+					<div class="mb-3">
 						<span>其它地址：</span>
-						<input type="text" name="picnum" id="picnum" value="5" class="form-control w-25 mr-2">
+						<input type="text" name="picnum" id="picnum" value="5" class="form-control w-25 ">
 						<button type="button" name="kkkup" id="kkkup2" onclick="MakeUpload();" class="btn btn-primary btn-sm">添加网址</button>
 						<button type="button" name="submit3" id="btsh3" onclick="ShowHideAddr();" class="btn btn-primary btn-sm">隐藏网址</button>
 					</div>
@@ -182,7 +182,7 @@
 				morelinkobj.style.display = "block";
 				if (endNum > 12) endNum = 12;
 				for (startNum; startNum <= endNum; startNum++) {
-					upfield.innerHTML += "<div class='form-group'><label>软件网址" + startNum + "：</label><div class='input-group mb-3'><input type='text' name='softurl" + startNum + "' class='form-control' placeholder='请选择软件上传或填写软件网址'><div class='input-group-append'><span class='btn btn-primary btn-sm btn-send' onclick=\"SelectSoft('addcontent.softurl"+startNum+"')\">选择</span></div></div><label>下载名称" + startNum + "：</label><input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control'></div>";
+					upfield.innerHTML += "<div class='mb-3'><label>软件网址" + startNum + "：</label><div class='input-group mb-3'><input type='text' name='softurl" + startNum + "' class='form-control' placeholder='请选择软件上传或填写软件网址'><div class='input-group-append'><span class='btn btn-primary btn-sm btn-send' onclick=\"SelectSoft('addcontent.softurl"+startNum+"')\">选择</span></div></div><label>下载名称" + startNum + "：</label><input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control'></div>";
 				}
 			}
 			function ShowHideAddr() {

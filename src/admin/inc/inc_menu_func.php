@@ -8,17 +8,17 @@
  */
 require_once(dirname(__FILE__)."/../config.php");
 require_once(DEDEINC."/dedetag.class.php");
-$headTemplet = '<div class="menu-item"~target~><a class="menu-link"><i class="~icon~"></i>~channelname~</a><i class="fa fa-angle-down"></i></div><ul class="menu-sub"~target~>';
+$headTemplet = '<div class="menu-item"><a class="menu-link"><i class="~icon~"></i>~channelname~</a><i class="fa fa-angle-down"></i></div><ul class="menu-sub">';
 $footTemplet = '</ul>';
 $itemTemplet = '<li class="sub-item">~link~</li>';
 function GetMenus($userrank, $topos = 'main')
 {
-    global $openitem, $headTemplet, $footTemplet, $itemTemplet;
+    global $showitem, $headTemplet, $footTemplet, $itemTemplet;
     if ($topos == 'main') {
-        $openitem = (empty($openitem) ? 1 : $openitem);
+        $showitem = (empty($showitem) ? 1 : $showitem);
         $menus = $GLOBALS['menusMain'];
     } else if ($topos == 'module') {
-        $openitem = 100;
+        $showitem = 100;
         $menus = $GLOBALS['menusMoudle'];
     }
     $dtp = new DedeTagParse();
@@ -28,10 +28,8 @@ function GetMenus($userrank, $topos = 'main')
     $dtp2->SetNameSpace('m', '<', '>');
     foreach ($dtp->CTags as $i => $ctag) {
         if ($ctag->GetName() == 'top' && ($ctag->GetAtt('rank') == '' || TestPurview($ctag->GetAtt('rank')))) {
-            if ($openitem != 999 && !preg_match("#".$openitem.'_'."#", $ctag->GetAtt('item')) && $openitem != 100) continue;
+            if ($showitem != 999 && !preg_match("#".$showitem.'_'."#", $ctag->GetAtt('item')) && $showitem != 100) continue;
             $htmp = str_replace("~channelname~", $ctag->GetAtt("name"), $headTemplet);
-            if ($ctag->GetAtt('data-target') != '') $htmp = str_replace("~target~", ' data-target="'.$ctag->GetAtt("data-target").'"', $htmp);
-            else $htmp = str_replace("~target~", '', $htmp);
             $icon = 'fa fa-plug';
             if ($ctag->GetAtt('icon') != '') {
                 $icon = $ctag->GetAtt('icon');

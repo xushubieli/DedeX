@@ -16,116 +16,210 @@
 	</head>
 	<body>
 		<div class="container-fluid">
-			<div class="body-row">
-				<div id="body-tips" class="w-100"></div>
-				<div class="w-100 pb-3">
-					<div class="card shadow-sm">
-						<div class="card-header d-flex justify-content-between">
-							<span><i class="fa fa-bar-chart"></i> 流量统计表</span>
-							<a href="statistics_list.php" target="main">查看列表</a>
+			<div class="row g-3">
+				<div class="col-lg-8">
+					<div class="row g-3">
+						<div class="col-lg-6">
+							<div class="card admin-panel-way shadow-sm">
+								<div class="card-header"><i class="fa fa-bolt"></i> 快捷方式</div>
+								<div class="card-body">
+									<div class="row row-cols-4 g-3">
+										<div class="col">
+											<a class="list" href="catalog_main.php" target="main">
+												<i class="font fa fa-navicon"></i>
+												<span class="item">栏目管理</span>
+											</a>
+										</div>
+										<div class="col">
+											<a class="list" href="tags_main.php" target="main">
+												<i class="font fa fa-tags"></i>
+												<span class="item">标签管理</span>
+											</a>
+										</div>
+										<div class="col">
+											<a class="list" href="content_list.php" target="main">
+												<i class="font fa fa-file-text"></i>
+												<span class="item">所有文档</span>
+											</a>
+										</div>
+										<div class="col">
+											<a class="list" href="media_main.php" target="main">
+												<i class="font fa fa-folder"></i>
+												<span class="item">附件管理</span>
+											</a>
+										</div>
+										<div class="col">
+											<a class="list" href="templets_main.php" target="main">
+												<i class="font fa fa-cube"></i>
+												<span class="item">模板管理</span>
+											</a>
+										</div>
+										<div class="col">
+											<a class="list" href="module_main.php" target="main">
+												<i class="font fa fa-database"></i>
+												<span class="item">模块管理</span>
+											</a>
+										</div>
+										<div class="col">
+											<a class="list" href="member_main.php" target="main">
+												<i class="font fa fa-user-circle"></i>
+												<span class="item">会员管理</span>
+											</a>
+										</div>
+										<div class="col">
+											<a class="list" href="sys_info.php" target="main">
+												<i class="font fa fa-cog"></i>
+												<span class="item">系统设置</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-borderless table-hover">
-									<thead>
-										<tr>
-											<td scope="col"></td>
-											<td scope="col">浏览次数（PV）</td>
-											<td scope="col">独立访客（UV）</td>
-											<td scope="col">独立地址（IP）</td>
-											<td scope="col">访问次数（VV）</td>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>今日记录</td>
-											<td id="today_pv">0</td>
-											<td id="today_uv">0</td>
-											<td id="today_ip">0</td>
-											<td id="today_vv">0</td>
-										</tr>
-										<tr>
-											<td>昨日记录</td>
-											<td id="yestoday_pv">0</td>
-											<td id="yestoday_uv">0</td>
-											<td id="yestoday_ip">0</td>
-											<td id="yestoday_vv">0</td>
-										</tr>
-										<tr>
-											<td>半月记录</td>
-											<td id="total_pv">0</td>
-											<td id="total_uv">0</td>
-											<td id="total_ip">0</td>
-											<td id="total_vv">0</td>
-										</tr>
-									</tbody>
-								</table>
+						<div class="col-lg-6">
+							<div class="card admin-panel-ip shadow-sm">
+								<div class="card-header"><i class="fa fa-dashboard"></i> 实时流量</div>
+								<div class="card-body">
+									<div class="row row-cols-2 g-3">
+										<div class="col">
+											<div class="list">
+												<h6 class="title">浏览次数（PV）</h6>
+												<p id="today_pv">0</p>
+											</div>
+										</div>
+
+										<div class="col">
+											<div class="list">
+												<h6 class="title">独立访客（UV）</h6>
+												<p  id="today_uv">0</p>
+											</div>
+										</div>
+
+										<div class="col">
+											<div class="list">
+												<h6 class="title">独立地址（IP）</h6>
+												<p id="today_ip">0</p>
+											</div>
+										</div>	
+										<div class="col">
+											<div class="list">
+												<h6 class="title">访问次数（VV）</h6>
+												<p id="today_vv">0</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="card shadow-sm">
+								<div class="card-header"><i class="fa fa-line-chart"></i> 流量统计</div>
+								<div class="card-body">
+									<canvas id="statChart"></canvas>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="card shadow-sm">
+								<div class="card-header"><i class="fa fa-list"></i> 最新文档</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-borderless">
+											<tbody>
+												<?php
+												$query = "SELECT arc.id,arc.arcrank,arc.title,arc.typeid,arc.pubdate,arc.channel, ch.editcon, tp.typename FROM `#@__archives` arc LEFT JOIN `#@__channeltype` ch ON ch.id = arc.channel LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.arcrank<>-2 ORDER BY arc.id DESC LIMIT 0, 10";
+												$arcArr = array();
+												$dsql->Execute('m', $query);
+												while ($row = $dsql->GetArray('m')) {
+													$arcArr[] = $row;
+												}
+												?>
+												<?php
+												if (count($arcArr) > 1) {
+													foreach ($arcArr as $row) {
+														if (trim($row['editcon'])=='') {
+															$row['editcon'] = 'archives_edit.php';
+														}
+														$rowarcrank = $row['arcrank']==-1 ? '待审核' : '已审核';
+														$pubdate = GetDateMk($row['pubdate']);
+														$row['title'] = cn_substr($row['title'], 190);
+														echo "<tr><td><a href='{$row['editcon']}?aid={$row['id']}&channelid={$row['channel']}'>{$row['title']}</a></td><td width='70'>{$rowarcrank}</td><td width='110'>{$pubdate}</td></tr>";
+													}
+												} else {
+												?>
+												<tr>
+													<td colspan="2">暂无文档</td>
+												</tr>
+												<?php }?>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="w-65 pr-md-3 pb-3">
-					<div class="card shadow-sm">
-						<div class="card-header"><i class="fa fa-cogs"></i> 软件信息</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-borderless">
-									<thead>
-										<tr>
-											<td width="16%">软件版本</td>
-											<td width="16%">IP地址</td>
-											<td width="16%">系统服务器</td>
-											<td width="16%">PHP版本</td>
-											<td width="16%">数据库版本</td>
-											<td width="16%">上传限制</td>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><?php echo $cfg_version_detail;?></td>
-											<td><?php echo gethostbyname($_SERVER['SERVER_NAME']);?></td>
-											<td><?php echo PHP_OS;?> / <?php echo GetSimpleServerSoftware();?></td>
-											<td><?php echo @phpversion();?></td>
-											<td><?php echo $dsql->GetVersion();?></td>
-											<td><?php echo ini_get("post_max_size");?></td>
-										</tr>
-									</tbody>
-								</table>
+				<div class="col-lg-4">
+					<div class="row g-3">
+						<div class="col-12">
+							<div class="card admin-panel-web shadow-sm">
+								<div class="card-header"><i class="fa fa-globe"></i> 站点信息</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-borderless">
+											<tbody>
+												<tr>
+													<td width="160">操作系统</td>
+													<td><?php echo PHP_OS;?>/<?php echo GetSimpleServerSoftware();?></td>
+												</tr>
+												<tr>
+													<td>服务器IP</td>
+													<td><?php echo gethostbyname($_SERVER['SERVER_NAME']);?></td>
+												</tr>
+												<tr>
+													<td>PHP版本</td>
+													<td><?php echo @phpversion();?></td>
+												</tr>
+												<tr>
+													<td>数据库版本</td>
+													<td><?php echo $dsql->GetVersion();?></td>
+												</tr>
+												<tr>
+													<td>上传限制</td>
+													<td><?php echo ini_get("post_max_size");?></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="w-35 pb-3">
-					<div class="card shadow-sm">
-						<div class="card-header"><i class="fa fa-copyright"></i> 版本授权</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-borderless">
-									<tbody>
-										<tr>
-											<td>站点（<?php echo $cfg_basehost;?>）已获得<?php echo $cfg_soft_enname;?><?php echo $cfg_version_detail;?>授权</td>
-										</tr>
-										<tr>
-											<td>更多技术支持，请联系<a href="https://github.com/xushubieli/DedeX" target="_blank" class="text-primary">DedeX团队</a></td>
-										</tr>
-									</tbody>
-								</table>
+						<div class="col-12">
+							<div class="card shadow-sm">
+								<div class="card-header"><i class="fa fa-copyright"></i> 站点授权</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-borderless">
+											<tbody>
+												<tr>
+													<td>站点授权</td>
+													<td>站点（<?php echo $cfg_basehost;?>）已授权</td>
+												</tr>
+												<tr>
+													<td width="160">当前版本</td>
+													<td><?php echo $cfg_soft_enname;?><?php echo $cfg_version_detail;?></td>
+												</tr>
+												<tr>
+													<td>技术支持</td>
+													<td><a href="https://github.com/xushubieli/DedeX" target="_blank" class="text-primary">DedeX团队</a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="w-65 pr-md-3 pb-3 pb-lg-0">
-					<div class="card shadow-sm">
-						<div class="card-header"><i class="fa fa-line-chart"></i> 流量统计图</div>
-						<div class="card-body">
-							<canvas id="statChart"></canvas>
-						</div>
-					</div>
-				</div>
-				<div class="w-35">
-					<div class="card shadow-sm">
-						<div class="card-header"><i class="fa fa-list"></i> 最新文档</div>
-						<div class="card-body" id="system-word">正在加载</div>
+						<div id="body-tips" class="col-12"></div>
 					</div>
 				</div>
 			</div>

@@ -21,7 +21,7 @@ if (!function_exists('TestAdminPWD')) {
     }
 }
 if (!function_exists('IsWritable')) {
-    //检查data/common.inc.php是否可写
+    //检查/data/common.inc.php是否可写
     function IsWritable($pathfile)
     {
         $isDir = substr($pathfile, -1) == '/' ? true : false;
@@ -47,50 +47,49 @@ if (!function_exists('IsWritable')) {
 $safeMsg = array();
 $dirname = str_replace('index_body.php', '', strtolower($_SERVER['PHP_SELF']));
 if (!DEDEX_SAFE_MODE) {
-    $safeMsg[] = '系统运行环境为开发模式，建议您启用安全模式 <a href="index_body.php?dopost=safe_mode" class="btn btn-primary btn-xs">详情</a>';
+    $safeMsg[] = '检查出系统运行开发模式，建议您启用安全模式 <a href="index_body.php?dopost=safe_mode" class="btn btn-primary btn-xs">详情</a>';
 }
 if (!IsSSL()) {
-    $safeMsg[] = '检查到网址非安全链接，建议您部署https';
+    $safeMsg[] = '检查出站点非安全链接，建议您部署https';
 }
 if (IsWritable(DEDEDATA.'/common.inc.php')) {
-    $safeMsg[] = '检查到data/common.inc.php数据库配置文件权限可以写入，建议您以最高管理员权限设置禁止写入和执行';
+    $safeMsg[] = '检查出/data/common.inc.php数据库配置文件权限可以写入，建议您以管理员权限设置禁止写入';
 }
 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-    $safeMsg[] = '检查到php版本过低会导致无法操作后台，建议您升级到php.x';
+    $safeMsg[] = '检查出PHP版本过低会导致无法操作后台，建议您升级到PHP.8x';
 }
 if (preg_match("#admin#", $dirname)) {
-    $safeMsg[] = '检查到后台管理文件夹命名为admin，建议您修改后台管理文件夹名称';
+    $safeMsg[] = '检查出后台管理文件夹命名为admin，建议您修改后台管理文件夹名称';
 }
 $rs = TestAdminPWD();
 if ($rs < 0) {
     $linkurl = ' <a href="sys_admin_user.php" class="btn btn-primary btn-xs">修改</a>';
     switch ($rs) {
         case -1:
-            $msg = "检查到默认管理员账号，建议您修改{$linkurl}";
+            $msg = "检查出默认管理员账号，建议您修改{$linkurl}";
             break;
         case -2:
-            $msg = "检查到默认管理员账号和密码，建议您修改{$linkurl}";
+            $msg = "检查出默认管理员账号和密码，建议您修改{$linkurl}";
             break;
     }
     $safeMsg[] = $msg;
 }
 ?>
-<?php
-if (count($safeMsg) > 0) {
-?>
-<div class="alert alert-info">
-    <ul>
-        <?php
-        $i = 1;
-        foreach ($safeMsg as $key => $val) {
-        ?>
-        <li><?php echo $i;?>.<?php echo $val;?></li>
-        <?php
-        $i++;
-        }
-        ?>
-    </ul>
+<?php if (count($safeMsg) > 0) {?>
+<div class="card shadow-sm">
+    <div class="card-header"><i class="fa fa-shield"></i> 安全提示</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <tbody>
+                    <?php foreach ($safeMsg as $key => $val) {?>
+                    <tr>
+                        <td><?php echo $val;?></td>
+                    </tr>
+                    <?php }?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<?php
-}
-?>
+<?php }?>

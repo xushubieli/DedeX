@@ -36,54 +36,53 @@
 							<input type="hidden" name="step" value="2">
 							<input type="hidden" name="cookieencode" value="<?php echo $rnd_cookieEncode;?>">
 							<input type="hidden" name="adminmail" value="admin@qq.com">
-							<div class="form-group">
+							<div class="mb-3">
 								<label for="dbtype" class="form-label">数据库类型</label>
 								<select id="dbtype" name="dbtype" class="form-control form-select">
 									<option value="mysql" selected>MySQL</option>
 									<?php if (extension_loaded("sqlite3")) {;?><option value="sqlite">SQLite</option><?php }?>
 								</select>
 							</div>
-							<div class="form-group server">
+							<div class="mb-3 server">
 								<label for="dbhost" class="form-label">数据库地址</label>
 								<input type="text" name="dbhost" id="dbhost" class="form-control" placeholder="localhost">
 							</div>
-							<div class="form-group server">
+							<div class="mb-3 server">
 								<label for="dbuser" class="form-label">数据库账号</label>
 								<input type="text" name="dbuser" id="dbuser" class="form-control" placeholder="root">
 							</div>
-							<div class="form-group server">
+							<div class="mb-3 server">
 								<label for="dbpwd" class="form-label">数据库密码</label>
 								<input type="text" name="dbpwd" id="dbpwd" class="form-control" placeholder="请输入数据库密码" required>
 							</div>
-							<div class="form-group">
+							<div class="mb-3">
 								<label for="dbprefix" class="form-label">数据表前缀</label>
 								<input type="text" name="dbprefix" id="dbprefix" class="form-control" placeholder="x_">
 							</div>
-							<div class="form-group">
+							<div class="mb-3">
 								<label for="dbname" class="form-label">数据库名称</label>
 								<div class="input-group">
 									<input type="text" name="dbname" id="dbname" class="form-control" placeholder="DedeX">
 									<div class="input-group-append"><button type="button" id="dbtip" class="btn btn-primary btn-sm">检查数据库</button></div>
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="mb-3">
 								<label for="webname" class="form-label">网站名称</label>
 								<input type="text" name="webname" id="webname" class="form-control" placeholder="我的网站">
 							</div>
-							<div class="form-group">
+							<div class="mb-3">
 								<label for="adminuser" class="form-label">管理员账号</label>
 								<input type="text" name="adminuser" id="adminuser" class="form-control" placeholder="admin" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');">
 								<small class="form-text text-black-50">请使用数字0-9小写a-z大写A-Z符号_@!.-</small>
 							</div>
-							<div class="form-group">
+							<div class="mb-3">
 								<label for="adminpwd" class="form-label">管理员密码</label>
 								<input type="text" name="adminpwd" id="adminpwd" class="form-control" placeholder="admin" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');">
 								<small class="form-text text-black-50">请使用数字0-9小写a-z大写A-Z符号_@!.-</small>
 							</div>
-							<div class="form-group">
-								<label for="installdemo" class="form-label">安装演示数据</label>
+							<div class="mb-3">
 								<input name="installdemo" type="checkbox" id="installdemo" value="1">
-								<small class="form-text text-black-50">体验DedeX部分功能操作示例</small>
+								<label for="installdemo" class="form-label">安装演示数据（系统部分功能操作示例）</label>
 							</div>
 							<div class="text-center"><button type="submit" class="btn btn-primary btn-sm">立即安装</button></div>
 						</form>
@@ -98,7 +97,7 @@
 				let dbpwd = $("#dbpwd").val();
 				if (!dbhost) dbhost = "localhost";
 				if (!dbuser) dbuser = "root";
-				$.get('index.php?step=10&dbhost=' + dbhost + '&dbuser=' + dbuser + '&dbpwd=' + dbpwd,function(rs) {
+				$.get('index.php?step=10&dbhost=' + dbhost + '&dbuser=' + dbuser + '&dbpwd=' + dbpwd, function(rs) {
 					console.log(rs);
 					let result = JSON.parse(rs);
 					if (result.code === 200) {
@@ -110,10 +109,10 @@
 			});
 			$("#dbtype").change(function() {
 				if ($(this).val() === 'sqlite') {
-					$(".form-group.server").hide();
+					$(".mb-3.server").hide();
 					$("#dbpwd").prop("required", false);
 				} else {
-					$(".form-group.server").show();
+					$(".mb-3.server").show();
 					$("#dbpwd").prop("required", true);
 				}
 			});

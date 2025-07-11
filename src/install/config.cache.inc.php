@@ -116,17 +116,11 @@ $cfg_arc_dirname = 'Y';
 $cfg_puccache_time = 36000;
 $cfg_arc_click = -1;
 $cfg_addon_savetype = 'ymd';
-$cfg_qk_uploadlit = 'Y';
 $cfg_login_adds = 2;
 $cfg_userad_adds = 10;
 $cfg_ddimg_full = 'N';
 $cfg_ddimg_bgcolor = 0;
 $cfg_replace_num = 2;
-$cfg_uplitpic_cut = 'Y';
-$cfg_album_mark = 'N';
-$cfg_mb_feedcheck = 'N';
-$cfg_mb_msgischeck = 'N';
 $cfg_mb_reginfo = 'Y';
-$cfg_title_site = 'N';
 $cfg_memcache_enable = 'N';
 ?>

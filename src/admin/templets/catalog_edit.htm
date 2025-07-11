@@ -276,20 +276,20 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">跨站调用</h5>
-						<button type="button" class="update-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<form>
-							<div class="form-group">
+							<div class="mb-3">
 								<span>跨站调用功能用于同后台管理或其他网站之间调用栏目文档数据</span>
 							</div>
-							<div class="form-group">
+							<div class="mb-3">
 								<label for="iptAPICode" class="mb-3">代码示例</label>
 								<div class="nav nav-pills mb-3" id="data-tab" role="tablist">
-									<button type="button" class="nav-link active" id="php-tab" data-toggle="tab" data-target="#nav-php" role="tab" aria-controls="nav-php" aria-selected="true">PHP</button>
-									<button type="button" class="nav-link" id="js-tab" data-toggle="tab" data-target="#nav-js" role="tab" aria-controls="nav-js" aria-selected="true">Javasctipt</button>
-									<button type="button" class="nav-link" id="go-tab" data-toggle="tab" data-target="#nav-go" role="tab" aria-controls="nav-go" aria-selected="false">Go</button>
-									<button type="button" class="nav-link" id="python-tab" data-toggle="tab" data-target="#nav-python" role="tab" aria-controls="nav-python" aria-selected="false">Python3</button>
+									<button type="button" class="nav-link active" id="php-tab" data-bs-toggle="tab" data-bs-target="#nav-php" role="tab" aria-controls="nav-php" aria-selected="true">PHP</button>
+									<button type="button" class="nav-link" id="js-tab" data-bs-toggle="tab" data-bs-target="#nav-js" role="tab" aria-controls="nav-js" aria-selected="true">Javasctipt</button>
+									<button type="button" class="nav-link" id="go-tab" data-bs-toggle="tab" data-bs-target="#nav-go" role="tab" aria-controls="nav-go" aria-selected="false">Go</button>
+									<button type="button" class="nav-link" id="python-tab" data-bs-toggle="tab" data-bs-target="#nav-python" role="tab" aria-controls="nav-python" aria-selected="false">Python3</button>
 								</div>
 								<div class="tab-content" id="data-tabContent">
 									<div class="tab-pane fade show active" id="nav-php" role="tabpanel" aria-labelledby="php-tab">
@@ -305,14 +305,14 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="mb-3">
 								<label for="iptAPITag" class="mb-3">标签示例</label>
 								<pre><code id="codetag"></code></pre>
 							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<div class="btnStep"><button id="btnGoStep4" type="button" class="btn btn-primary btn-sm" data-dismiss="modal">关闭</button></div>
+						<button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal" aria-label="Close">关闭</button>
 					</div>
 				</div>
 			</div>

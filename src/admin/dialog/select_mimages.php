@@ -178,7 +178,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                         li.querySelector('.namebox span').innerText = filename;
                         n++
                         upAllFiles(n);
-                    },function(err) {
+                    }, function(err) {
                         document.querySelector('#imgs-topbar .upall').innerText='全部上传';
                         document.querySelectorAll('#imgs-list li.up-now').forEach((el,i) => {
                             el.setAttribute('class','up-no');

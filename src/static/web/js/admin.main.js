@@ -259,7 +259,7 @@ function DedeConfirm(content = "", title = "确认提示") {
 		}
 		let footer = `<button type="button" class="btn btn-outline-primary btn-sm" onclick="__DedeConfirmRunClose(\'${modalID}\')">取消</button><button type="button" class="btn btn-primary btn-sm" onclick="__DedeConfirmRun(\'${modalID}\')">确定</button>`;
 		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DedeModalLabel${modalID}"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="DedeModalLabel${modalID}">${title}</h6>`;
-		modal += `<button type="button" class="update-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>`;
+		modal += `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 		modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
 		$("body").append(modal)
 		$("#DedeModal" + modalID).modal({
@@ -297,7 +297,7 @@ function ShowMsg(content, ...args) {
 	content = content.replaceAll("~modalID~", modalID);
 	var modal = `<div id="GKModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="GKModalLabel${modalID}"><div class="modal-dialog ${size}" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="GKModalLabel${modalID}">${title}</h5>`;
 	if (!noClose) {
-		modal += `<button type="button" class="update-close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>`;
+		modal += `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 	}
 	modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
 	$("body").append(modal)
@@ -318,86 +318,10 @@ function CloseModal(modalID) {
 		}
 	});
 }
-//获取缩略图
-var litpicImgSrc = '';
-var litpicImg = '';
-var mdlCropperID = '';
-var optCropper = {
-	preview: ".pv",
-	crop: function(e) {
-		$("#cropWidth").text(Math.round(e.detail.height));
-		$("#cropHeight").text(Math.round(e.detail.width));
-		if ($(this).cropper("getCroppedCanvas")) {
-			var dataUrl = $(this).cropper("getCroppedCanvas").toDataURL();
-			litpicImg = dataUrl;
-			$("#litPic").attr("src", litpicImg);	
-		}
-	},
-	aspectRatio: 4 / 3,
-	cropend: function(data) {
-		var dataUrl = $(this).cropper("getCroppedCanvas").toDataURL();
-		litpicImg = dataUrl;
-		$("#litPic").attr("src", litpicImg);
-		$("#litpic_b64").val(litpicImg);
-	}
-}
-var cropperAspectRatio = {
-	0: 16 / 9,
-	1: 4 / 3,
-	2: 1 / 1,
-	3: 2 / 3,
-	4: NaN,
-}
-function setAspectRatio(ar) {
-	var opts = optCropper;
-	opts.aspectRatio = cropperAspectRatio[ar];
-	$("#cropImg" + mdlCropperID).cropper("destroy").cropper(opts);
-}
-function okImage(modalID) {
-	uploadImage(litpicImg);
-	$("#litPic").attr("src", litpicImg);
-	CloseModal("GKModal" + modalID);
-}
-function useDefault(modalID) {
-	uploadImage(litpicImgSrc);
-	$("#litPic").attr("src", litpicImgSrc);
-	CloseModal("GKModal" + modalID);
-}
-function uploadImage(litpicImgSrc) {
-	const formData = new FormData()
-	formData.append("litpic_b64", litpicImgSrc);
-	fetch("archives_do.php?dopost=upload_base64_image", {
-		method: 'POST',
-		body: formData
-	}).then(r => {
-		if (r.ok) {
-			return r.json()
-		}
-		throw new Error(errMsg);
-	}).then(d => {
-		if (d.code == 200) {
-			$("#picname").val(d.data.image_url);
-		}
-	}).catch((error) => {
-		alert("上传缩略图失败，请重新修改图片上传");
-	});
-}
-function SetThumb(srcURL) {
-	var footer = "<p><a href='javascript:useDefault(\"~modalID~\");' class='btn btn-primary btn-sm'>使用原图</a><a href='javascript:okImage(\"~modalID~\")' class='btn btn-primary btn-sm'>确定</a></p>";
-	var optButton = `<p><label for="aspectRatio">比例</label><select id="aspectRatio" onchange="setAspectRatio(this.selectedIndex)"><option>16:9</option><option selected>4:3</option><option>1:1</option><option>2:3</option><option>自定义</option></select></p>`;
-	mdlCropperID = ShowMsg('<div class="float-left" style="width:320px"><p><img id="cropImg~modalID~" src="' + srcURL + '"></p><p>宽度：<span id="cropWidth"></span>px，高度：<span id="cropHeight"></span>px</p>' + optButton + '</div><div class="pv float-right" style="width:200px;height:100px;overflow:hidden"></div>', {
-		footer: footer,
-		noClose: false,
-		title: '图片裁剪',
-	});
-	setTimeout(function() {
-		$("#cropImg" + mdlCropperID).cropper(optCropper);
-	}, 500);
-}
 $(function($) {
-	$("#togglemenu").click(function() {
-		var bodyClass = $("body").attr("class");
-		if (bodyClass === "menu-show") {
+	$("#toggleMenu").click(function() {
+		var bodyMenu = $("body").attr("class");
+		if (bodyMenu === "menu-show") {
 			$("body").attr("class", "menu-hide");
 			$(this).html('<i class="fa fa-indent"></i>');
 		} else {
@@ -421,38 +345,19 @@ $(function($) {
 	}
 	headColour();
 	//setInterval(headColour, 3600000);
-	$(".menu-item").on("click", function() {
+	$(".side-menu .menu-item").on("click", function() {
 		var $this = $(this);
-		$(".menu-sub").stop().slideUp();
-		$this.siblings(".menu-item").removeAttr("id");
-		if ($this.attr("id") === "open") {
+		$(".side-menu .menu-sub").stop().slideUp();
+		$this.siblings(".side-menu .menu-item").removeAttr("id");
+		if ($this.attr("id") === "show") {
 			$this.removeAttr("id");
 		} else {
-			$this.attr("id", "open").next().slideDown();
+			$this.attr("id", "show").next().slideDown();
 		}
 	});
-	$(".sub-item").click(function() {
-		$(".sub-item").removeClass("active");
+	$(".side-menu .sub-item").click(function() {
+		$(".side-menu .sub-item").removeClass("active");
 		$(this).addClass("active");
-	});
-	$('.navbar-nav .nav-link').click(function() {
-		var target = $(this).data('target');
-		if (target) {
-			$(".menu-item").removeAttr("id");
-			$(".menu-sub").slideUp();
-			var $targetMenuItem = $('.side-menu .menu-item[data-target="' + target + '"]');
-			$targetMenuItem.attr("id", "open").next(`.menu-sub[data-target="${target}"]`).slideDown();
-			var currentIframeSrc = $(this).attr('href');
-			$targetMenuItem.next(`.menu-sub[data-target="${target}"]`).find(".sub-item a").each(function() {
-				var subItemHref = $(this).attr('href');
-				var isIcon = $(this).hasClass('submenu-right');
-				if (!isIcon && subItemHref === currentIframeSrc) {
-					$(this).parent().addClass('active');
-				} else {
-					$(this).parent().removeClass('active');
-				}
-			});
-		}
 	});
 	$("#btnClearAll").click(function(event) {
 		litpicImgSrc = '';
@@ -460,28 +365,6 @@ $(function($) {
 		$("#picname").val(litpicImg);
 		$("#litPic").attr("src", "../static/web/img/thumbnail.jpg");
 	})
-	$("#iptAddImages").change(function(event) {
-		var files = event.target.files;
-		for (var i = 0, f; f = files[i]; i++) {
-			if (!f.type.match('image.*')) {
-				continue;
-			}
-			var reader = new FileReader();
-			reader.onload = (function(theFile) {
-				return function(e) {
-					litpicImgSrc = e.target.result;
-					if (cfg_uplitpic_cut == 'Y') {
-						SetThumb(litpicImgSrc);
-					} else {
-						uploadImage(litpicImgSrc);
-						$("#litPic").attr("src", litpicImgSrc);
-					}
-				};
-			})(f);
-			reader.readAsDataURL(f);
-		}
-		$("#iptAddImages").val("");
-	});
 	if ($.fn.daterangepicker) {
 		$(".datepicker").daterangepicker({
 			"singleDatePicker": true,

@@ -27,7 +27,7 @@ function TestOneFile($f)
         $trfile = preg_replace("#^".DEDEROOT."#", '', $f);
         $oldTrfile = $trfile;
         $trfile = '/'.substr(str_replace("\\", "/", $trfile), 1);
-        $message .= "<p><span class='d-inline-block w-65'>发现可疑文件：{$trfile}</span><a href='file_manage_view.php?fmdo=edit&filename={$oldTrfile}&activepath=' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='查看'></i></a><a href='file_manage_view.php?fmdo=del&filename={$oldTrfile}&activepath=' target='_blank' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a></p>\r\n";
+        $message .= "<p><span class='d-inline-block w-75'>发现可疑文件：{$trfile}</span><a href='file_manage_view.php?fmdo=edit&filename={$oldTrfile}&activepath=' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='查看'></i></a><a href='file_manage_view.php?fmdo=del&filename={$oldTrfile}&activepath=' target='_blank' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a></p>\r\n";
         return 1;
     }
     return 0;

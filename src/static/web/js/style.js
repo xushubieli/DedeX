@@ -45,7 +45,7 @@ function DedeConfirm(content = "", title = "确认提示") {
 			CloseModal(`DedeModal${modalID}`);
 		}
 		let footer = `<button type="button" class="btn btn-primary btn-sm" onClick="__DedeConfirmRun(\'${modalID}\')">确定</button><button type="button" class="btn btn-outline-primary btn-sm" onClick="__DedeConfirmRunClose(\'${modalID}\')">取消</button>`;
-		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DedeModalLabel${modalID}"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="DedeModalLabel${modalID}">${title}</h6>`;modal +=`<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>`;
+		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DedeModalLabel${modalID}"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="DedeModalLabel${modalID}">${title}</h6>`;modal +=`<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 		modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
 		$("body").append(modal)
 		$("#DedeModal" + modalID).modal({
@@ -82,7 +82,7 @@ function ShowMsg(content, ...args) {
 	content = content.replaceAll("~modalID~", modalID);
 	var modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DedeModalLabel${modalID}"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="DedeModalLabel${modalID}">${title}</h6>`;
 	if (!noClose) {
-		modal += `<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>`;
+		modal += `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 	}
 	modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
 	$("body").append(modal)
@@ -145,12 +145,12 @@ function ErrAddSaveDo(modalID) {
 //错误提示
 function ErrorAddSave(id, title) {
 	let content = `<input type="hidden" value="${id}" class="form-control" id="iptID">
-<div class="form-group">
+<div class="mb-3">
 	<div id="error-add-alert"></div>
 	<label for="iptTitle" class="col-form-label">标题：</label>
 	<input type="text" disabled=true value="${title}" class="form-control" id="iptTitle">
 </div>
-<div class="form-group">
+<div class="mb-3">
 	<label for="message-text" class="col-form-label">错误类型：</label>
 	<select id="selType" class="form-control">
 		<option value="1">错别字(除的、地、得)</option>
@@ -162,11 +162,11 @@ function ErrorAddSave(id, title) {
 		<option value="7">其他</option>
 	</select>
 </div>
-<div class="form-group">
+<div class="mb-3">
 	<label for="message-text" class="col-form-label">错误文档：</label>
 	<textarea name="iptErr" class="form-control" id="iptErr"></textarea>
 </div>
-<div class="form-group">
+<div class="mb-3">
 	<label for="message-text" class="col-form-label">修正建议：</label>
 	<textarea name="optErradd" class="form-control" id="iptErradd"></textarea>
 </div>`;

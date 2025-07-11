@@ -140,21 +140,10 @@ else if ($dopost == "uploadLitpic") {
             alert('文件类型不正确');
         </script>";
     } else {
-        if (!empty($cfg_uplitpic_cut) && $cfg_uplitpic_cut == 'N') {
-            $msg = "<script>
-                parent.document.getElementById('uploadwait').style.display = 'none';
-                parent.document.getElementById('picname').value = '{$upfile}';
-                if (parent.document.getElementById('divpicview')) {
-                    parent.document.getElementById('divpicview').style.width = '150px';
-                    parent.document.getElementById('divpicview').innerHTML = \"<img src='{$upfile}'>\";
-                }
-            </script>";
-        } else {
-            $msg = "<script>
-                parent.document.getElementById('uploadwait').style.display = 'none';
-                window.open('imagecut.php?f=picname&isupload=yes&file={$upfile}', 'popUpImagesWin', 'scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=150,top=50');
-            </script>";
-        }
+        $msg = "<script>
+            parent.document.getElementById('uploadwait').style.display = 'none';
+            window.open('imagecut.php?f=picname&isupload=yes&file={$upfile}', 'popUpImagesWin', 'scrollbars=yes,resizable=yes,statebar=no,width=800,height=600,left=150,top=50');
+        </script>";
     }
     echo $msg;
     exit();

@@ -12,45 +12,7 @@ require_once(DEDEINC.'/dedetag.class.php');
 if (empty($dopost)) {
     include DedeInclude('templets/index_body.htm');
     exit();
-} if ($dopost == 'get_articles') {
-?>
-<div class="table-responsive">
-    <table class="table table-borderless">
-        <tbody>
-        <?php
-        $userCatalogSql = '';
-        if (count($admin_catalogs) > 0) {
-            $admin_catalog = join(',', $admin_catalogs);
-            $userCatalogSql = "AND arc.typeid IN($admin_catalog) ";
-        }
-        $query = "SELECT arc.id, arc.arcrank, arc.title, arc.typeid, arc.mid, arc.pubdate, arc.channel, ch.editcon, tp.typename FROM `#@__archives` arc LEFT JOIN `#@__channeltype` ch ON ch.id = arc.channel LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.arcrank<>-2 {$userCatalogSql} AND arc.mid={$cuserLogin->getUserID()} ORDER BY arc.id DESC LIMIT 0,10";
-        $arcArr = array();
-        $dsql->Execute('m', $query);
-        while($row = $dsql->GetArray('m'))
-        {
-            $arcArr[] = $row;
-        }
-        ?>
-        <?php
-        if (count($arcArr) > 0) {
-            foreach($arcArr as $row)
-            {
-                if (trim($row['editcon']) == '') {
-                    $row['editcon'] = 'archives_edit.php';
-                }
-                $rowarcrank = $row['arcrank']==-1 ? '待审核' : '已审核';
-                $pubdate = GetDateMk($row['pubdate']);
-                $row['title'] = cn_substr($row['title'], 40);
-                echo "<tr><td><a href='{$row['editcon']}?aid={$row['id']}&channelid={$row['channel']}'>{$row['title']}</a></td><td width='70'>{$rowarcrank}</td><td width='110'>{$pubdate}</td></tr>";
-            }
-        ?>
-        </tbody>
-    </table>
-</div>
-<?php }?>
-<?php
-    exit;
-} else if ($dopost == 'get_statistics') {
+} if ($dopost == 'get_statistics') {
     require_once(DEDEINC."/libraries/statistics.class.php");
     $sdate = empty($sdate) ? 0 : intval($sdate);
     $stat = new DedeStatistics;

@@ -13,8 +13,8 @@ Date.prototype.Format = function(fmt) {
 		if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
 	return fmt;
 }
-function LoadStat() {
-	$.get("index_body.php?dopost=get_statistics",function(data) {
+function loadStat() {
+	$.get("index_body.php?dopost=get_statistics", function(data) {
 		try {
 			let rsp = JSON.parse(data);
 			if (rsp.code == 200) {
@@ -26,7 +26,7 @@ function LoadStat() {
 				$("#today_uv").html(tuv);
 				$("#today_ip").html(tip);
 				$("#today_vv").html(tvv);
-				$.get("index_body.php?dopost=get_statistics&sdate=-1",function(data) {
+				$.get("index_body.php?dopost=get_statistics&sdate=-1", function(data) {
 					let rsp = JSON.parse(data);
 					if (rsp.code == 200) {
 						$("#total_pv").html(parseInt(rsp.result.pv) + tpv);
@@ -44,7 +44,7 @@ function LoadStat() {
 	d.setDate(d.getDate() - 1);
 	var s = d.Format("yyyy-MM-dd");
 	s = s.replaceAll("-", "");
-	$.get("index_body.php?dopost=get_statistics&sdate=" + s,function(data) {
+	$.get("index_body.php?dopost=get_statistics&sdate=" + s, function(data) {
 		try {
 			let rsp = JSON.parse(data);
 			if (rsp.code == 200) {
@@ -58,7 +58,7 @@ function LoadStat() {
 		}
 	});
 }
-async function LoadStatChart() {
+async function loadStatChart() {
 	const ctx = document.getElementById('statChart').getContext('2d');
 	let labels = [];
 	let dates = [];
@@ -85,7 +85,7 @@ async function LoadStatChart() {
 		});
 	}
 	Chart.defaults.font.size = 14;
-	Chart.defaults.color = '#545b62';
+	Chart.defaults.color = '#6c757d';
 	const myChart = new Chart(ctx, {
 		type: 'line',
 		options: {
@@ -134,16 +134,11 @@ async function LoadStatChart() {
 	});
 }
 $(function($) {
-	$.get("index_testenv.php",function(data) {
+	$.get("index_testenv.php", function(data) {
 		if (data !== '') {
 			$("#body-tips").html(data);
 		}
 	});
-	$.get("index_body.php?dopost=get_articles",function(data) {
-		if (data !== '') {
-			$("#system-word").html(data);
-		}
-	});
-	LoadStat();
-	LoadStatChart();
+	loadStat();
+	loadStatChart();
 });

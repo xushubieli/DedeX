@@ -6,30 +6,13 @@
 		<title>添加投票</title>
 		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
+		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/moment.min.js"></script>
 		<script src="/static/web/js/daterangepicker.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
-		<script>
-			var i = 1;
-			function AddItem() {
-			  i++;
-			  if (i > 15) {
-				ShowMsg("最多添加15个选项");
-					return;
-				}
-				var htmldata = "<div class='my-2'>选项" + i + "：<input type='text' name='voteitem" + i + "' class='admin-input-lg'></div>";
-				jQuery("#voteitem").append(htmldata);
-			}
-			function ResetItem() {
-				i = 1;
-				var obj = document.getElementById("voteitem");
-				obj.innerHTML = "<div class='my-2'>选项1：<input type='text' name='voteitem1' class='admin-input-lg'></div>";
-			}
-		</script>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -119,6 +102,21 @@
 			</div>
 		</div>
 		<script>
+			var i = 1;
+			function AddItem() {
+				i++;
+				if (i > 15) {
+					ShowMsg("最多添加15个选项");
+					return;
+				}
+				var htmldata = "<div class='my-2'>选项" + i + "：<input type='text' name='voteitem" + i + "' class='admin-input-lg'></div>";
+				jQuery("#voteitem").append(htmldata);
+			}
+			function ResetItem() {
+				i = 1;
+				var obj = document.getElementById("voteitem");
+				obj.innerHTML = "<div class='my-2'>选项1：<input type='text' name='voteitem1' class='admin-input-lg'></div>";
+			}
 			$(function($) {
 				$('.datepicker1').daterangepicker({
 					"singleDatePicker": true,

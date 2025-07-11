@@ -198,7 +198,7 @@ if ($fmdo == 'sendMail') {
     $row = $dsql->GetOne("SELECT count(*) as dd FROM `#@__member` WHERE `pmid`='{$cfg_ml->M_ID}' ");
     $msg = "<p>您已经邀请了{$row['dd']}人：</p>
     <div class='media mb-3'>
-        <span class='btn btn-primary btn-sm mr-3'>链</span>
+        <span class='btn btn-primary btn-sm'>链</span>
         <div class='media-body pb-3 border-bottom border-gray'>
             <div class='d-flex justify-content-between align-items-center'>
                 <h4>链接邀请</h4>
@@ -208,7 +208,7 @@ if ($fmdo == 'sendMail') {
         </div>
     </div>
     <div class='media mb-3'>
-        <span class='btn btn-primary btn-sm mr-3'>码</span>
+        <span class='btn btn-primary btn-sm'>码</span>
         <div class='media-body pb-3 border-bottom border-gray'>
             <div class='d-flex justify-content-between align-items-center'>
                 <h4>二维码邀请</h4>

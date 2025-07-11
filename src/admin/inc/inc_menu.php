@@ -30,13 +30,13 @@ while ($row = $dsql->GetObject('im')) {
 }
 $adminMenu1 = $adminMenu2 = '';
 if ($cuserLogin->getUserType() >= 10) {
-    $adminMenu1 = (DEDEX_SAFE_MODE ? "" : "<m:top item='11_' name='模板管理' rank='temp_One,temp_Other,temp_MyTag,temp_test,temp_All' icon='fa fa-cube' data-target='templets'>
+    $adminMenu1 = (DEDEX_SAFE_MODE ? "" : "<m:top item='11_' name='模板管理' rank='temp_One,temp_Other,temp_MyTag,temp_test,temp_All' icon='fa fa-cube'>
     <m:item name='默认模板管理' link='templets_main.php' rank='temp_All' target='main' />
     <m:item name='标签文件管理' link='templets_tagsource.php' rank='temp_All' target='main' />
     <m:item name='自定义宏标签' link='mytag_main.php' rank='temp_MyTag' target='main' />
     <m:item name='标签调用测试' link='tag_test.php' rank='temp_Test' target='main' />
 </m:top>")."
-<m:top item='4_' name='模型管理' rank='t_List,t_AccList,c_List,temp_One' icon='fa fa-area-chart' data-target='channel'>
+<m:top item='4_' name='模型管理' rank='t_List,t_AccList,c_List,temp_One' icon='fa fa-area-chart'>
     ".(DEDEX_SAFE_MODE ? "" : "<m:item name='文档模型管理' link='mychannel_main.php' rank='c_List' target='main' />")."
     <m:item name='文档单页管理' link='templets_one.php' rank='temp_One' target='main' />
     <m:item name='联动类型管理' link='stepselect_main.php' rank='c_Stepseclect' target='main' />
@@ -49,7 +49,7 @@ if ($cuserLogin->getUserType() >= 10) {
     <m:item name='积分产品分类' link='cards_type.php' rank='sys_Data' target='main' />
     <m:item name='支付接口设置' link='sys_payment.php' .php' rank='sys_Data' target='main' />
 </m:top>
-<m:top item='12_' name='系统设置' rank='sys_User,sys_Group,sys_Edit,sys_Log,sys_Data' icon='fa fa-cog' data-target='sys'>
+<m:top item='12_' name='系统设置' rank='sys_User,sys_Group,sys_Edit,sys_Log,sys_Data' icon='fa fa-cog'>
     <m:item name='系统设置' link='sys_info.php' rank='sys_Edit' target='main' />
     <m:item name='日志管理' link='log_list.php' rank='sys_Log' target='main' />
     <m:item name='管理员管理' link='sys_admin_user.php' rank='sys_User' target='main' />
@@ -63,7 +63,7 @@ if ($cuserLogin->getUserType() >= 10) {
     <m:item name='系统修复工具' link='sys_repair.php' rank='sys_verify' target='main' />
 </m:top>";
 }
-$menusMain = "<m:top item='1_' name='常用功能' icon='fa fa-desktop' data-target='common'>
+$menusMain = "<m:top item='1_' name='常用功能' icon='fa fa-desktop'>
     <m:item name='网站栏目管理' link='catalog_main.php' ischannel='1' linkadd='catalog_add.php?listtype=all' rank='t_List,t_AccList' target='main' />
     <m:item name='所有文档列表' link='content_list.php' rank='a_List,a_AccList' target='main' />
     <m:item name='待审核的文档' link='content_list.php?arcrank=-1' rank='a_Check,a_AccCheck' target='main' />
@@ -77,7 +77,7 @@ $menusMain = "<m:top item='1_' name='常用功能' icon='fa fa-desktop' data-tar
 <m:top item='2_' name='文档管理' icon='fa fa-file-text'>
     $addset
 </m:top>
-<m:top item='3_' name='附件管理' rank='sys_Upload,sys_MyUpload,plus_文件管理器' icon='fa fa-folder' data-target='media'>
+<m:top item='3_' name='附件管理' rank='sys_Upload,sys_MyUpload,plus_文件管理器' icon='fa fa-folder'>
     <m:item name='附件管理' link='media_main.php' rank='sys_Upload,sys_MyUpload' target='main' />
     <m:item name='文件管理器' link='media_main.php?dopost=filemanager' rank='plus_文件管理器' target='main' />
 </m:top>
@@ -91,7 +91,7 @@ $adminMenu1
     ".(DEDEX_SAFE_MODE ? "" : "<m:item name='数据库字段替换' link='sys_data_replace.php' rank='sys_ArcBatch' target='main' />")."
 </m:top>
 {$GLOBALS['menusMoudle']}
-<m:top item='8_' name='更新网站' rank='sys_MakeHtml' icon='fa fa-repeat' data-target='makehtml'>
+<m:top item='8_' name='更新网站' rank='sys_MakeHtml' icon='fa fa-repeat'>
     <m:item name='更新整站' link='makehtml_all.php' rank='sys_MakeHtml' target='main' />
     <m:item name='更新首页' link='makehtml_homepage.php' rank='sys_MakeHtml' target='main' />
     <m:item name='更新栏目' link='makehtml_list.php' rank='sys_MakeHtml' target='main' />
