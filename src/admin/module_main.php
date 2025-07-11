@@ -69,7 +69,7 @@ if ($action == '') {
         ShowMsg("获取模块信息错误，模块文件错误", -1);
         exit;
     }
-    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '<br>该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
+    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
     $filelists = (array)$dm->GetFileLists($hash);
     $filelist = '';
     $prvdirs = array();
@@ -218,7 +218,7 @@ if ($action == '') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
     if ($infos['url']=='') $infos['url'] = '';
-    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '<br>该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
+    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
     $win = new OxWindow();
     $win->Init("module_main.php", "/static/web/js/admin.blank.js", "post");
     $wintitle = "删除{$infos['name']}";
@@ -264,7 +264,7 @@ if ($action == '') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
     if ($infos['url'] == '') $infos['url'] = ' ';
-    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '<br>该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
+    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
     $filelists = (array)$dm->GetFileLists($hash);
     $filelist = '';
     foreach ($filelists as $v) {
@@ -364,7 +364,7 @@ if ($action == '') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
     if ($infos['url'] == '') $infos['url'] = '';
-    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '<br>该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
+    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
     $filelists = (array)$dm->GetFileLists($hash);
     $filelist = '';
     $setupinfo = '';

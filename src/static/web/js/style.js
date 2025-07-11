@@ -36,22 +36,23 @@ function __DedeConfirmRunClose(modalID) {
 function DedeConfirm(content = "", title = "确认提示") {
 	let modalID = guid();
 	return new Promise((resolve, reject) => {
-		_DedeConfirmFuncs[modalID] = () => {
+		_DedeConfirmFuncs[modalID] = ()=> {
 			resolve("success");
 			CloseModal(`DedeModal${modalID}`);
 		}
-		_DedeConfirmFuncsClose[modalID] = () => {
+		_DedeConfirmFuncsClose[modalID] = ()=> {
 			reject("cancel");
 			CloseModal(`DedeModal${modalID}`);
 		}
-		let footer = `<button type="button" class="btn btn-primary btn-sm" onClick="__DedeConfirmRun(\'${modalID}\')">确定</button><button type="button" class="btn btn-outline-primary btn-sm" onClick="__DedeConfirmRunClose(\'${modalID}\')">取消</button>`;
-		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DedeModalLabel${modalID}"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="DedeModalLabel${modalID}">${title}</h6>`;modal +=`<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
+		let footer = `<button type="button" class="btn btn-primary btn-sm" onclick="__DedeConfirmRun(\'${modalID}\')">确定</button><button type="button" class="btn btn-outline-primary btn-sm" onclick="__DedeConfirmRunClose(\'${modalID}\')">取消</button>`;
+		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" aria-labelledby="DedeModalLabel${modalID}" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="DedeModalLabel${modalID}">${title}</h5>`;
+		modal += `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 		modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
 		$("body").append(modal)
-		$("#DedeModal" + modalID).modal({
+		new bootstrap.Modal(document.getElementById(`DedeModal${modalID}`), {
 			backdrop: 'static',
-			show: true
-		});
+			keyboard: false
+		}).show();
 		$("#DedeModal" + modalID).on('hidden.bs.modal', function(e) {
 			$("#DedeModal" + modalID).remove();
 		});
@@ -59,9 +60,10 @@ function DedeConfirm(content = "", title = "确认提示") {
 }
 function ShowMsg(content, ...args) {
 	title = "系统提示";
+	size = '';
 	if (typeof content == "undefined") content = '';
 	modalID = guid();
-	var footer = `<button type="button" class="btn btn-primary btn-sm" onClick="CloseModal(\'DedeModal${modalID}\')">确定</button>`;
+	var footer = `<button type="button" class="btn btn-primary btn-sm" onclick="CloseModal(\'GKModal${modalID}\')">确定</button>`;
 	var noClose = false;
 	if (args.length == 1) {
 		//存在args参数
@@ -71,27 +73,27 @@ function ShowMsg(content, ...args) {
 		if (typeof args[0].footer !== 'undefined' && args[0].footer != "") {
 			footer = args[0].footer;
 		}
+		if (typeof args[0].size !== 'undefined' && args[0].size != "") {
+			size = args[0].size;
+		}
 		if (typeof args[0].noClose !== 'undefined' && args[0].noClose == true) {
 			noClose = true;
 		}
 	}
-	String.prototype.replaceAll = function(s1, s2) {
-		return this.replace(new RegExp(s1, "gm"), s2);
-	}
 	footer = footer.replaceAll("~modalID~", modalID);
 	content = content.replaceAll("~modalID~", modalID);
-	var modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DedeModalLabel${modalID}"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="DedeModalLabel${modalID}">${title}</h6>`;
+	var modal = `<div id="GKModal${modalID}" class="modal fade" tabindex="-1" aria-labelledby="GKModalLabel${modalID}" aria-hidden="true"><div class="modal-dialog ${size}" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="GKModalLabel${modalID}">${title}</h5>`;
 	if (!noClose) {
 		modal += `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 	}
 	modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
 	$("body").append(modal)
-	$("#DedeModal" + modalID).modal({
+	new bootstrap.Modal(document.getElementById(`GKModal${modalID}`), {
 		backdrop: 'static',
-		show: true
-	});
-	$("#DedeModal" + modalID).on('hidden.bs.modal', function(e) {
-		$("#DedeModal" + modalID).remove();
+		keyboard: false
+	}).show();
+	$("#GKModal" + modalID).on('hidden.bs.modal', function(e) {
+		$("#GKModal" + modalID).remove();
 	});
 	return modalID;
 }

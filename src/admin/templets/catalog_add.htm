@@ -290,8 +290,7 @@
 			var channelArray = new Array();
 			<?php
 			$i = 0;
-			foreach($channelArray as $k=> $arr)
-			{
+			foreach ($channelArray as $k=> $arr) {
 				echo "channelArray[$k] = \"{$arr['nid']}\";";
 			}
 			?>
@@ -303,7 +302,6 @@
 				var obj = document.getElementById(objname);
 				if (obj.style.display != "none") obj.style.display = "none";
 				else obj.style.display = "block";
-				
 			}
 			function ShowObj(objname) {
 				var obj = document.getElementById(objname);
@@ -330,11 +328,8 @@
 				tempindex[0].value = dfstyleValue + "/index_" + sevvalue + ".htm";
 				templist[0].value = dfstyleValue + "/list_" + sevvalue + ".htm";
 				temparticle[0].value = dfstyleValue + "/article_" + sevvalue + ".htm";
-				if (obj.value < 0) {
-					tobj.style.display = "block";
-				} else {
-					tobj.style.display = "none";
-				}
+				if (obj.value < 0) tobj.style.display = "block";
+				else tobj.style.display = "none";
 			}
 			function CheckPathSet() {
 				var surl = document.getElementById("siteurl");

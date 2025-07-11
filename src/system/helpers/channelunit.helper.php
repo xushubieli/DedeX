@@ -140,9 +140,9 @@ if (!function_exists('GetTypeUrl')) {
         if ($isdefault == -1) {
             if ($cfg_rewrite == 'Y') {
                 //开启伪静态栏目/list/1、/list/2，则分页/list/1-1、/list/1-2
-                $reurl = $GLOBALS['cfg_cmspath']."/list/".$typeid;
+                $reurl = $GLOBALS['cfg_cmspath']."/list/{$typeid}";
             } else {
-                $reurl = $GLOBALS['cfg_phpurl']."/list.php?tid=".$typeid;
+                $reurl = $GLOBALS['cfg_phpurl']."/list.php?tid={$typeid}";
             }
         }
         //跳转网址
@@ -204,9 +204,9 @@ if (!function_exists('GetFileName')) {
         if ($rank != 0 || $ismake == -1 || $typeid == 0 || $money > 0) {
             if ($cfg_rewrite == 'Y') {
                 //开启伪静态文档/article/1.html、/article/2.html，则分页/article/1-1.html、/article/1-2.html
-                return $GLOBALS['cfg_cmspath']."/article/".$aid.".html";
+                return $GLOBALS['cfg_cmspath']."/article/{$aid}.html";
             } else {
-                return $GLOBALS['cfg_phpurl']."/view.php?aid=$aid";
+                return $GLOBALS['cfg_phpurl']."/view.php?aid={$aid}";
             }
         } else {
             $articleDir = MfTypedir($typedir);
@@ -598,7 +598,7 @@ function GetHotKeywords(&$dsql, $num = 8, $nday = 365, $klen = 16, $orderby = 'c
     $dsql->Execute('hw');
     $hotword = '';
     while ($row = $dsql->GetArray('hw')) {
-        $hotword .= "<a href='".$cfg_phpurl."/search.php?keyword=".urlencode($row['keyword'])."&searchtype=titlekeyword'>".$row['keyword']."</a> ";
+        $hotword .= "<a href='{$cfg_phpurl}/search.php?keyword=".urlencode($row['keyword'])."&searchtype=titlekeyword'>{$row['keyword']}</a> ";
     }
     return $hotword;
 }

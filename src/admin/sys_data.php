@@ -66,14 +66,14 @@ else if ($dopost == "opimize") {
         if ($cfg_dbtype == 'sqlite') {
             $rs = $dsql->ExecuteNoneQuery("VACUUM");
             if ($rs) {
-                echo "执行优化表{$tablename}完成<br>";
+                echo "执行优化表{$tablename}完成";
             } else {
                 echo "执行优化表{$tablename}失败，原因：".$dsql->GetError();
             }
         } else {
             $rs = $dsql->ExecuteNoneQuery("OPTIMIZE TABLE `$tablename`");
             if ($rs) {
-                echo "执行优化表{$tablename}完成<br>";
+                echo "执行优化表{$tablename}完成";
             } else {
                 echo "执行优化表{$tablename}失败，原因：".$dsql->GetError();
             }
@@ -90,7 +90,7 @@ else if ($dopost == "repair") {
     } else {
         $rs = $dsql->ExecuteNoneQuery("REPAIR TABLE `$tablename`");
         if ($rs) {
-            echo "修复表{$tablename}完成<br>";
+            echo "修复表{$tablename}完成";
         } else {
             echo "修复表{$tablename}失败，原因：".$dsql->GetError();
         }

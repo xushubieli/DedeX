@@ -53,13 +53,13 @@ else if ($dopost == "opimize") {
         if ($cfg_dbtype == 'sqlite') {
             $rs = $dsql->ExecuteNoneQuery("VACUUM");
             if ($rs) {
-                echo "执行优化表{$tablename}完成<br>";
+                echo "执行优化表{$tablename}完成";
             } else {
                 echo "执行优化表{$tablename}失败，原因：".$dsql->GetError();
             }
         }  else { 
             $rs = $dsql->ExecuteNoneQuery("OPTIMIZE TABLE `$tablename`");
-            if ($rs)  echo "执行优化表{$tablename}完成<br>";
+            if ($rs)  echo "执行优化表{$tablename}完成";
             else echo "执行优化表{$tablename}失败，原因：".$dsql->GetError();
         }
     }
@@ -73,7 +73,7 @@ else if ($dopost == "opimizeAll") {
     if ($cfg_dbtype == 'sqlite') {
         $rs = $dsql->ExecuteNoneQuery("VACUUM");
         if ($rs) {
-            echo "执行数据库完成<br>";
+            echo "执行数据库完成";
         } else {
             echo "执行数据库失败，原因：".$dsql->GetError();
         }
@@ -81,7 +81,7 @@ else if ($dopost == "opimizeAll") {
         while ($row = $dsql->GetArray('t', MYSQL_BOTH)) {
             $rs = $dsql->ExecuteNoneQuery("OPTIMIZE TABLE `{$row[0]}`");
             if ($rs) {
-                echo "优化表{$row[0]}完成<br>";
+                echo "优化表{$row[0]}完成";
             } else {
                 echo "优化表{$row[0]}失败，原因：".$dsql->GetError();
             }
@@ -99,7 +99,7 @@ else if ($dopost == "repair") {
             //SQLite数据库使用VACUUM尝试修复和优化
             $rs = $dsql->ExecuteNoneQuery("VACUUM");
             if ($rs) {
-                echo "对表{$tablename}尝试修复和优化完成<br>";
+                echo "对表{$tablename}尝试修复和优化完成";
             } else {
                 echo "对表{$tablename}尝试修复和优化失败，原因：".$dsql->GetError();
             }
@@ -107,7 +107,7 @@ else if ($dopost == "repair") {
             //非SQLite数据库（如 MySQL）使用REPAIR TABLE语句
             $rs = $dsql->ExecuteNoneQuery("REPAIR TABLE `{$tablename}`");
             if ($rs) {
-                echo "修复表{$tablename}完成<br>";
+                echo "修复表{$tablename}完成";
             } else {
                 echo "修复表{$tablename}失败，原因：".$dsql->GetError();
             }
@@ -122,7 +122,7 @@ else if ($dopost == "repairAll") {
         //SQLite 数据库使用VACUUM尝试修复和优化整个数据库
         $rs = $dsql->ExecuteNoneQuery("VACUUM");
         if ($rs) {
-            echo "对所有表尝试修复和优化完成<br>";
+            echo "对所有表尝试修复和优化完成";
         } else {
             echo "对所有表尝试修复和优化失败，原因：".$dsql->GetError();
         }
@@ -132,7 +132,7 @@ else if ($dopost == "repairAll") {
         while ($row = $dsql->GetArray('t', MYSQL_BOTH)) {
             $rs = $dsql->ExecuteNoneQuery("REPAIR TABLE `{$row[0]}`");
             if ($rs) {
-                echo "修复表{$row[0]}完成<br>";
+                echo "修复表{$row[0]}完成";
             } else {
                 echo "修复表{$row[0]}失败，原因：".$dsql->GetError();
             }
@@ -160,7 +160,7 @@ else if ($dopost == "query") {
         $dsql->SetQuery($sqlquery);
         $dsql->Execute();
         if ($dsql->GetTotalRow() <= 0) {
-            echo "运行SQL：{$sqlquery}无返回记录<br>";
+            echo "运行SQL：{$sqlquery}无返回记录";
         } else {
             echo "运行SQL：{$sqlquery}共有".$dsql->GetTotalRow()."条记录，最大返回100条";
         }

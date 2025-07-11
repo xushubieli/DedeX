@@ -21,7 +21,7 @@
 					<div class="row g-3">
 						<div class="col-lg-6">
 							<div class="card admin-panel-way shadow-sm">
-								<div class="card-header"><i class="fa fa-bolt"></i> 快捷方式</div>
+								<div class="card-header"><i class="fa fa-sliders"></i> 快捷方式</div>
 								<div class="card-body">
 									<div class="row row-cols-4 g-3">
 										<div class="col">
@@ -78,7 +78,7 @@
 						</div>
 						<div class="col-lg-6">
 							<div class="card admin-panel-ip shadow-sm">
-								<div class="card-header"><i class="fa fa-dashboard"></i> 实时流量</div>
+								<div class="card-header"><i class="fa fa-signal"></i> 今日流量</div>
 								<div class="card-body">
 									<div class="row row-cols-2 g-3">
 										<div class="col">
@@ -124,10 +124,10 @@
 								<div class="card-header"><i class="fa fa-list"></i> 最新文档</div>
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-borderless">
+										<table class="table table-borderless table-hover">
 											<tbody>
 												<?php
-												$query = "SELECT arc.id,arc.arcrank,arc.title,arc.typeid,arc.pubdate,arc.channel, ch.editcon, tp.typename FROM `#@__archives` arc LEFT JOIN `#@__channeltype` ch ON ch.id = arc.channel LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.arcrank<>-2 ORDER BY arc.id DESC LIMIT 0, 10";
+												$query = "SELECT arc.id,arc.arcrank,arc.title,arc.typeid,arc.pubdate,arc.channel,ch.editcon,tp.typename FROM `#@__archives` arc LEFT JOIN `#@__channeltype` ch ON ch.id = arc.channel LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.arcrank<>-2 ORDER BY arc.id DESC LIMIT 0, 10";
 												$arcArr = array();
 												$dsql->Execute('m', $query);
 												while ($row = $dsql->GetArray('m')) {
@@ -140,10 +140,10 @@
 														if (trim($row['editcon'])=='') {
 															$row['editcon'] = 'archives_edit.php';
 														}
-														$rowarcrank = $row['arcrank']==-1 ? '待审核' : '已审核';
+														$rowarcrank = $row['arcrank']==-1 ? '<span class="btn btn-warning btn-xs">待审核</span>' : '<span class="btn btn-success btn-xs">已审核</span>';
 														$pubdate = GetDateMk($row['pubdate']);
 														$row['title'] = cn_substr($row['title'], 190);
-														echo "<tr><td><a href='{$row['editcon']}?aid={$row['id']}&channelid={$row['channel']}'>{$row['title']}</a></td><td width='70'>{$rowarcrank}</td><td width='110'>{$pubdate}</td></tr>";
+														echo "<tr><td width='100'>{$pubdate}</td><td><a href='{$row['editcon']}?aid={$row['id']}&channelid={$row['channel']}'>{$row['title']}</a></td><td width='60'>{$rowarcrank}</td></tr>";
 													}
 												} else {
 												?>
@@ -169,7 +169,7 @@
 										<table class="table table-borderless">
 											<tbody>
 												<tr>
-													<td width="160">操作系统</td>
+													<td width="100">操作系统</td>
 													<td><?php echo PHP_OS;?>/<?php echo GetSimpleServerSoftware();?></td>
 												</tr>
 												<tr>
@@ -202,12 +202,16 @@
 										<table class="table table-borderless">
 											<tbody>
 												<tr>
-													<td>站点授权</td>
+													<td width="100">站点授权</td>
 													<td>站点（<?php echo $cfg_basehost;?>）已授权</td>
 												</tr>
 												<tr>
-													<td width="160">当前版本</td>
-													<td><?php echo $cfg_soft_enname;?><?php echo $cfg_version_detail;?></td>
+													<td>系统名称</td>
+													<td><?php echo $cfg_soft_enname;?></td>
+												</tr>
+												<tr>
+													<td>当前版本</td>
+													<td><?php echo $cfg_version_detail;?></td>
 												</tr>
 												<tr>
 													<td>技术支持</td>
@@ -216,6 +220,14 @@
 											</tbody>
 										</table>
 									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="card shadow-sm">
+								<div class="card-header"><i class="fa fa-heart"></i> 开发心语</div>
+								<div class="card-body">
+									<div class="alert alert-primary mb-0">系统严格遵循GPLv2国际开源标准，致力于打造纯粹的开源环境，开发者可自由使用、修改与分发代码，畅享开源带来的无限可能。</div>
 								</div>
 							</div>
 						</div>

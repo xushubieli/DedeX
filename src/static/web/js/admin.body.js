@@ -137,6 +137,8 @@ $(function($) {
 	$.get("index_testenv.php", function(data) {
 		if (data !== '') {
 			$("#body-tips").html(data);
+		} else {
+			$("#body-tips").hide();
 		}
 	});
 	loadStat();

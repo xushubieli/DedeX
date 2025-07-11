@@ -272,7 +272,7 @@
 			</div>
 		</div>
 		<div id="mdlViewAPI" class="modal fade" tabindex="-1" aria-hidden="true">
-			<div class="modal-dialog modal-xl">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">跨站调用</h5>
@@ -284,7 +284,7 @@
 								<span>跨站调用功能用于同后台管理或其他网站之间调用栏目文档数据</span>
 							</div>
 							<div class="mb-3">
-								<label for="iptAPICode" class="mb-3">代码示例</label>
+								<label class="mb-3">代码示例</label>
 								<div class="nav nav-pills mb-3" id="data-tab" role="tablist">
 									<button type="button" class="nav-link active" id="php-tab" data-bs-toggle="tab" data-bs-target="#nav-php" role="tab" aria-controls="nav-php" aria-selected="true">PHP</button>
 									<button type="button" class="nav-link" id="js-tab" data-bs-toggle="tab" data-bs-target="#nav-js" role="tab" aria-controls="nav-js" aria-selected="true">Javasctipt</button>
@@ -306,7 +306,7 @@
 								</div>
 							</div>
 							<div class="mb-3">
-								<label for="iptAPITag" class="mb-3">标签示例</label>
+								<label class="mb-3">标签示例</label>
 								<pre><code id="codetag"></code></pre>
 							</div>
 						</form>
@@ -321,8 +321,7 @@
 			var channelArray = new Array();
 			<?php	
 			$i = 0;
-			foreach($channelArray as $k=> $arr)
-			{
+			foreach ($channelArray as $k=> $arr) {
 				echo "channelArray[$k] = \"{$arr['nid']}\";";
 			}
 			?>
@@ -332,11 +331,8 @@
 			}
 			function ShowHide(objname) {
 				var obj = document.getElementById(objname);
-				if (obj.style.display != "none")
-					obj.style.display = "none";
-				else {
-					obj.style.display = "block";
-				}
+				if (obj.style.display != "none") obj.style.display = "none";
+				else obj.style.display = "block";
 			}
 			function ShowObj(objname) {
 				var obj = document.getElementById(objname);
@@ -363,11 +359,8 @@
 				tempindex[0].value = dfstyleValue + "/index_" + sevvalue + ".htm";
 				templist[0].value = dfstyleValue + "/list_" + sevvalue + ".htm";
 				temparticle[0].value = dfstyleValue + "/article_" + sevvalue + ".htm";
-				if (obj.value < 0) {
-					tobj.style.display = "block";
-				} else {
-					tobj.style.display = "none";
-				}
+				if (obj.value < 0) tobj.style.display = "block";
+				else tobj.style.display = "none";
 			}
 			function CheckCross() {
 				var cross2 = document.getElementById('cross2');

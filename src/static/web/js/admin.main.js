@@ -249,23 +249,23 @@ function __DedeConfirmRunClose(modalID) {
 function DedeConfirm(content = "", title = "确认提示") {
 	let modalID = guid();
 	return new Promise((resolve, reject) => {
-		_DedeConfirmFuncs[modalID] = ()=>{
+		_DedeConfirmFuncs[modalID] = ()=> {
 			resolve("success");
 			CloseModal(`DedeModal${modalID}`);
 		}
-		_DedeConfirmFuncsClose[modalID] = ()=>{
+		_DedeConfirmFuncsClose[modalID] = ()=> {
 			reject("cancel");
 			CloseModal(`DedeModal${modalID}`);
 		}
-		let footer = `<button type="button" class="btn btn-outline-primary btn-sm" onclick="__DedeConfirmRunClose(\'${modalID}\')">取消</button><button type="button" class="btn btn-primary btn-sm" onclick="__DedeConfirmRun(\'${modalID}\')">确定</button>`;
-		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DedeModalLabel${modalID}"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h6 class="modal-title" id="DedeModalLabel${modalID}">${title}</h6>`;
+		let footer = `<button type="button" class="btn btn-primary btn-sm" onclick="__DedeConfirmRun(\'${modalID}\')">确定</button><button type="button" class="btn btn-outline-primary btn-sm" onclick="__DedeConfirmRunClose(\'${modalID}\')">取消</button>`;
+		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" aria-labelledby="DedeModalLabel${modalID}" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="DedeModalLabel${modalID}">${title}</h5>`;
 		modal += `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 		modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
 		$("body").append(modal)
-		$("#DedeModal" + modalID).modal({
+		new bootstrap.Modal(document.getElementById(`DedeModal${modalID}`), {
 			backdrop: 'static',
-			show: true
-		});
+			keyboard: false
+		}).show();
 		$("#DedeModal" + modalID).on('hidden.bs.modal', function(e) {
 			$("#DedeModal" + modalID).remove();
 		});
@@ -295,16 +295,16 @@ function ShowMsg(content, ...args) {
 	}
 	footer = footer.replaceAll("~modalID~", modalID);
 	content = content.replaceAll("~modalID~", modalID);
-	var modal = `<div id="GKModal${modalID}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="GKModalLabel${modalID}"><div class="modal-dialog ${size}" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="GKModalLabel${modalID}">${title}</h5>`;
+	var modal = `<div id="GKModal${modalID}" class="modal fade" tabindex="-1" aria-labelledby="GKModalLabel${modalID}" aria-hidden="true"><div class="modal-dialog ${size}" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="GKModalLabel${modalID}">${title}</h5>`;
 	if (!noClose) {
 		modal += `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 	}
 	modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
 	$("body").append(modal)
-	$("#GKModal" + modalID).modal({
+	new bootstrap.Modal(document.getElementById(`GKModal${modalID}`), {
 		backdrop: 'static',
-		show: true
-	});
+		keyboard: false
+	}).show();
 	$("#GKModal" + modalID).on('hidden.bs.modal', function(e) {
 		$("#GKModal" + modalID).remove();
 	});

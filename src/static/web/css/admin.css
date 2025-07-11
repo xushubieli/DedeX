@@ -10,6 +10,7 @@
 	letter-spacing:0.5px
 }
 body {
+	position:relative;
 	line-height:1.5;
 	font-size:14px;
 	font-family:Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
@@ -17,7 +18,8 @@ body {
 	background:var(--xs-bg)
 }
 p {
-	margin-bottom:0.5rem
+	margin-bottom:0.5rem;
+	word-wrap:break-word
 }
 p:last-child {
 	margin-bottom:0
@@ -242,27 +244,27 @@ body.menu-show .admin-content {
 	left:220px
 }
 .admin-content {
+	display:grid;
 	position:absolute;
 	top:60px;
 	right:0;
-	bottom:0
+	height:calc(100vh - 60px)
 }
 .admin-content iframe {
 	width:100%;
-	height:99%;
-	border:0
+	height:100%;
+	border:none
 }
 .admin-aside {
 	position:absolute;
 	top:60px;
 	left:0;
-	bottom:0;
 	width:220px;
+	height:calc(100vh - 60px);
 	overflow-y:auto
 }
 .side-menu {
-	padding:1rem 0;
-	min-height:100%
+	padding:1rem 0
 }
 .side-menu .menu-item {
 	position:relative;
@@ -326,12 +328,10 @@ body.menu-show .admin-content {
 }
 .admin-panel-ip .list .title {
 	margin-bottom:0.5rem;
-	font-size:14px;
-	font-weight:400
+	font-size:14px
 }
 .admin-panel-ip .list p {
 	font-size:18px;
-	font-weight:700;
 	color:var(--bs-primary)
 }
 .admin-panel-web .card-body {
@@ -685,8 +685,8 @@ body.menu-show .admin-content {
 	background:none
 }
 .modal-title {
-	font-size:14px;
-	line-height:1.6
+	font-size:16px;
+	line-height:1.5
 }
 .card,.modal-content {
 	border:0
@@ -708,8 +708,8 @@ body.menu-show .admin-content {
 	color:var(--bs-gray)
 }
 .table.icon img {
-	width:18px;
-	height:18px;
+	width:20px;
+	height:20px;
 	border-radius:var(--xs-radius-sm)
 }
 .table th,.table td {
@@ -720,7 +720,8 @@ body.menu-show .admin-content {
 .form-control {
 	display:inline-block;
 	padding:0.25rem 0.5rem;
-	height:30px
+	height:30px;
+	color:var(--bs-gray)
 }
 .form-control,.btn {
 	font-size:14px!important
@@ -758,9 +759,6 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	height:30px;
 	font-size:14px
 }
-.nav-pills .nav-link.active,.nav-pills .show>.nav-link {
-	background:var(--bs-primary)
-}
 .nav-pills .nav-link,.btn-sm {
 	padding:0 0.5rem!important;
 	height:30px;
@@ -792,7 +790,7 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 }
 @media screen and (min-width:992px) and (max-width:1199px) {
 	.login-box {
-		padding:1rem
+		padding:2.75rem 1rem
 	}
 }
 @media  screen and (min-width:767px) {
@@ -808,12 +806,8 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 		width:100%;
 		min-width:100%
 	}
-	.admin-textarea-xl,.admin-textarea-sm,.admin-input-lg,.admin-input-md,.admin-input-sm {
-		width:auto!important;
-		min-width:35%
-	}
-	.admin-head .navbar-nav {
-		margin-left:auto
+	.login-box {
+		padding:1.75rem
 	}
 	body.menu-hide .admin-aside {
 		display:block;
@@ -828,14 +822,18 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	body.menu-show .admin-content {
 		left:0
 	}
+	.admin-textarea-xl,.admin-textarea-sm,.admin-input-lg,.admin-input-md,.admin-input-sm {
+		width:auto!important;
+		min-width:35%
+	}
+	.admin-head .navbar-nav {
+		margin-left:auto
+	}
 	.card .card-body .pagination {
 		display:none
 	}
-	.tips {
-		padding:0 0.75rem
-	}
-	.login-box {
-		padding:30px
+	.container-fluid,.tips {
+		padding:0.75rem
 	}
 	.card-body canvas {
 		height:230px!important
