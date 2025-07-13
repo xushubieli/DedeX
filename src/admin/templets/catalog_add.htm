@@ -51,7 +51,7 @@
 										<td>文档模型</td>
 										<td>
 											<input type="hidden" value="{style}" name="dfstyle">
-											<select name="channeltype" id="channeltype" onChange="ParTemplet(this);" class="admin-input-sm">
+											<select name="channeltype" id="channeltype" onChange="ParTemplet(this);" class="form-select admin-w-sm">
 												<?php
 												foreach($channelArray as $k=>$arr)
 												{
@@ -65,7 +65,7 @@
 												?>
 											</select>
 											<div id="smclass" class="mt-3" style="<?php echo ($channelid<0 ? '' : 'display:none');?>">
-												<select name="smalltype[]" multiple="yes" class="admin-input-lg">
+												<select name="smalltype[]" multiple="yes" class="form-select admin-w-lg">
 													<?php
 													$sql = "SELECT * FROM `#@__sys_enum` WHERE egroup LIKE 'infotype' ORDER BY disorder ASC,evalue ASC ";
 													$dsql->Execute('s',$sql);
@@ -97,34 +97,34 @@
 									</tr>
 									<tr>
 										<td>中文名称</td>
-										<td><input type="text" name="typename" class="admin-input-lg" required></td>
+										<td><input type="text" name="typename" class="form-control admin-w-lg" required></td>
 										<td>中文概述</td>
-										<td><input type="text" name="cnoverview" class="admin-input-lg"></td>
+										<td><input type="text" name="cnoverview" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
 										<td>英文名称</td>
-										<td><input type="text" name="enname" class="admin-input-lg"></td>
+										<td><input type="text" name="enname" class="form-control admin-w-lg"></td>
 										<td>英文概述</td>
-										<td><input type="text" name="enoverview" class="admin-input-lg"></td>
+										<td><input type="text" name="enoverview" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
 										<td>栏目大图</td>
 										<td>
-											<input type="text" name="bigpic" class="admin-input-lg">
+											<input type="text" name="bigpic" class="form-control admin-w-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectImage('form1.bigpic');">选择</button>
 										</td>
 										<td>栏目小图</td>
 										<td>
-											<input type="text" name="litimg" class="admin-input-lg">
+											<input type="text" name="litimg" class="form-control admin-w-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectImage('form1.litimg');">选择</button>
 										</td>
 									</tr>
 									<tr>
 										<td>排列顺序</td>
-										<td><input type="text" name="sortrank" class="admin-input-sm">（由低到高）</td>
+										<td><input type="text" name="sortrank" class="form-control admin-w-sm">（由低到高）</td>
 										<td>浏览权限</td>
 										<td>
-											<select name="corank" id="corank" class="admin-input-sm">
+											<select name="corank" id="corank" class="form-select admin-w-sm">
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE `rank` >= 0 ORDER BY `rank` ASC");
 												$dsql->Execute('cc');
@@ -144,7 +144,7 @@
 									<tr>
 										<td>栏目生成目录</td>
 										<td>
-											<input type="text" name="typedir" id="typedir" class="admin-input-lg">
+											<input type="text" name="typedir" id="typedir" class="form-control admin-w-lg">
 											<label for="upinyin"><input type="checkbox" name="upinyin" id="upinyin" value="1" onclick="CheckTypeDir();"> 拼音</label>
 										</td>
 										<td>目录相对位置</td>
@@ -164,7 +164,7 @@
 											<label><input type="radio" name="isdefault" value="0"> 列表第一页浏览</label>
 										</td>
 										<td>默认页的名称</td>
-										<td><input type="text" name="defaultname" value="index.html" class="admin-input-lg"></td>
+										<td><input type="text" name="defaultname" value="index.html" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
 										<td>栏目属性</td>
@@ -192,18 +192,18 @@
 											<span>（需要绑定二级域名，系统变量中开启支持多站点）</span>
 										</td>
 										<td>绑定域名</td>
-										<td><input type="text" name="siteurl" id="siteurl" onChange="CheckPathSet();" class="admin-input-lg">（请输入网址，在系统设置开启多站点功能）</td>
+										<td><input type="text" name="siteurl" id="siteurl" onChange="CheckPathSet();" class="form-control admin-w-lg">（请输入网址，在系统设置开启多站点功能）</td>
 									</tr>
 									<?php }?>
 									<tr>
 										<td>列表模板</td>
 										<td>
-											<input type="text" name="templist" value="{style}/list_<?php echo $nid?>.htm" class="admin-input-lg">
+											<input type="text" name="templist" value="{style}/list_<?php echo $nid?>.htm" class="form-control admin-w-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.templist')">选择</button>
 										</td>
 										<td>封面模板</td>
 										<td>
-											<input type="text" name="tempindex" value="{style}/index_<?php echo $nid?>.htm" class="admin-input-lg">
+											<input type="text" name="tempindex" value="{style}/index_<?php echo $nid?>.htm" class="form-control admin-w-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.tempindex')">选择</button>
 											<a href="javascript:ShowHide('helpvar1');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar1" class="helpinfo mt-3" style="display:none">
@@ -215,12 +215,12 @@
 									<tr>
 										<td>文档模板</td>
 										<td>
-											<input type="text" name="temparticle" value="{style}/article_<?php echo $nid?>.htm" class="admin-input-lg">
+											<input type="text" name="temparticle" value="{style}/article_<?php echo $nid?>.htm" class="form-control admin-w-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.temparticle')">选择</button>
 										</td>
 										<td>列表命名规则</td>
 										<td>
-											<input type="text" name="namerule2" id="namerule2" value="{typedir}/{tid}-{page}.html" class="admin-input-lg">
+											<input type="text" name="namerule2" id="namerule2" value="{typedir}/{tid}-{page}.html" class="form-control admin-w-lg">
 											<a href="javascript:ShowHide('helpvar2');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar2" class="helpinfo mt-3" style="display:none">
 												<p>静态规则</p>
@@ -235,7 +235,7 @@
 									<tr>
 										<td>文档命名规则</td>
 										<td>
-											<input type="text" name="namerule" tid="namerule" value="<?php echo $cfg_df_namerule;?>" class="admin-input-lg">
+											<input type="text" name="namerule" tid="namerule" value="<?php echo $cfg_df_namerule;?>" class="form-control admin-w-lg">
 											<a href="javascript:ShowHide('helpvar3');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar3" class="helpinfo mt-3" style="display:none">
 												<p>静态规则</p>
@@ -252,7 +252,7 @@
 											</div>
 										</td>
 										<td>SEO标题</td>
-										<td><input type="text" name="seotitle" id="seotitle" class="admin-input-lg"></td>
+										<td><input type="text" name="seotitle" id="seotitle" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
 										<td>关键词</td>
@@ -264,7 +264,7 @@
 										<td colspan="2">栏目文档</td>
 										<td>是否支持跨站调用</td>
 										<td>
-											<input type="text" name="apikey" id="apikey" class="admin-input-lg" placeholder="请输入跨站调用秘钥">
+											<input type="text" name="apikey" id="apikey" class="form-control admin-w-lg" placeholder="请输入跨站调用秘钥">
 											<label><input type="radio" name="apienabled" value="1"> 支持</label>
 											<label><input type="radio" name="apienabled" value="0" checked> 不支持</label>
 											<a href="javascript:makeAPIKey();" class="btn btn-primary btn-sm">更新</i></a>

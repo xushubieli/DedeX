@@ -30,21 +30,21 @@
 								<tbody>
 									<tr>
 										<td width="260">账号</td>
-										<td><input type="text" name="userid" id="userid" value="<?php echo $row['userid'];?>" class="admin-input-sm" required></td>
+										<td><input type="text" name="userid" id="userid" value="<?php echo $row['userid'];?>" class="form-control admin-w-sm" required></td>
 									</tr>
 									<tr>
 										<td>昵称</td>
-										<td><input type="text" name="uname" id="uname" value="<?php echo $row['uname'];?>" class="admin-input-sm" required>（前后台显示文档作者的名称）</td>
+										<td><input type="text" name="uname" id="uname" value="<?php echo $row['uname'];?>" class="form-control admin-w-sm" required>（前后台显示文档作者的名称）</td>
 									</tr>
 									<tr>
 										<td>密码</td>
-										<td><input type="text" name="pwd" id="pwd" class="admin-input-sm" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');">（留空则不修改，请使用数字0-9小写a-z大写A-Z符号_@!.-）</td>
+										<td><input type="text" name="pwd" id="pwd" class="form-control admin-w-sm" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');">（留空则不修改，请使用数字0-9小写a-z大写A-Z符号_@!.-）</td>
 									</tr>
 									<?php if ($cuserLogin->getUserType() >= 10) {?>
 									<tr>
 										<td>类型</td>
 										<td>
-											<select name="usertype" class="admin-input-sm">
+											<select name="usertype" class="form-select admin-w-sm">
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__admintype` ORDER BY `rank` ASC");
 												$dsql->Execute("ut");
@@ -60,7 +60,7 @@
 									<tr>
 										<td>授权栏目</td>
 										<td>
-											<select name="typeids[]" id="typeid" multiple="yes" class="admin-input-lg">
+											<select name="typeids[]" id="typeid" multiple="yes" class="form-select admin-w-lg">
 												<option value="0">所有栏目</option>
 												<?php echo $typeOptions?>
 											</select>
@@ -71,7 +71,7 @@
 									<tr>
 										<td>类型</td>
 										<td>
-											<select name="usertype" class="admin-input-sm">
+											<select name="usertype" class="form-select admin-w-sm">
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__admintype` ORDER BY `rank` ASC");
 												$dsql->Execute("ut");
@@ -86,16 +86,16 @@
 									<?php }?>
 									<tr>
 										<td>姓名</td>
-										<td><input type="text" name="tname" id="tname" value="<?php echo $row['tname'];?>" class="admin-input-sm"></td>
+										<td><input type="text" name="tname" id="tname" value="<?php echo $row['tname'];?>" class="form-control admin-w-sm"></td>
 									</tr>
 									<tr>
 										<td>邮箱</td>
-										<td><input type="text" name="email" id="email" autocomplete="off" value="<?php echo $row['email'];?>" class="admin-input-sm"></td>
+										<td><input type="text" name="email" id="email" autocomplete="off" value="<?php echo $row['email'];?>" class="form-control admin-w-sm"></td>
 									</tr>
 									<tr>
 										<td>验证安全码</td>
 										<td>
-											<input type="text" name="safecode" id="safecode" class="admin-input-sm">
+											<input type="text" name="safecode" id="safecode" class="form-control admin-w-sm">
 											<input type="hidden" name="randcode" value="<?php echo $randcode;?>">
 											<span>（安全码：<?php echo $safecode;?>）</span>
 										</td>

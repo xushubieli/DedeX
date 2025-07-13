@@ -37,7 +37,7 @@
 												echo "找不到您所指定的数据库{$dbname}";
 												echo $qbutton;
 											}
-											echo "<select name='exptable' multiple='yes' onchange='ShowFields();' id='exptable' class='admin-input-lg mb-3'>";
+											echo "<select name='exptable' multiple='yes' onchange='ShowFields();' id='exptable' class='form-select admin-w-lg mb-3'>";
 											while($row = $dsql->GetArray('t',MYSQL_BOTH))
 											{
 												echo "<option value='{$row[0]}'>{$row[0]}</option>";
@@ -46,13 +46,13 @@
 											$dsql->Close();
 											?>
 											<div id="fields"></div>
-											<input type="text" name="rpfield" id="rpfield" class="admin-input-sm" required>
+											<input type="text" name="rpfield" id="rpfield" class="form-control admin-w-sm" required>
 										</td>
 									</tr>
 									<tr>
 										<td>主键字段</td>
 										<td>
-											<input type="text" name="keyfield" id="keyfield" class="admin-input-sm">
+											<input type="text" name="keyfield" id="keyfield" class="form-control admin-w-sm">
 											<label><input type="radio" name="rptype" id="ot1" value="replace" checked> 普通替换</label>
 											<label><input type="radio" name="rptype" id="ot2" value="regex"> 正则表达式</label>
 										</td>
@@ -67,12 +67,12 @@
 									</tr>
 									<tr>
 										<td>替换条件</td>
-										<td><input type="text" name="condition" id="condition" class="admin-input-sm">（不填写则完全替换）</td>
+										<td><input type="text" name="condition" id="condition" class="form-control admin-w-sm">（不填写则完全替换）</td>
 									</tr>
 									<tr>
 										<td>验证码</td>
 										<td>
-											<input type="text" name="validate" class="admin-input-sm text-uppercase">
+											<input type="text" name="validate" class="form-control admin-w-sm text-uppercase">
 											<img src="<?php echo $cfg_phpurl;?>/vdimgck.php" onclick="this.src='<?php echo $cfg_phpurl;?>/vdimgck.php?'+new Date().getTime()+Math.round(Math.random() * 10000)" title="验证码">
 										</td>
 									</tr>

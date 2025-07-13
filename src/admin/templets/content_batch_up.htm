@@ -32,7 +32,7 @@
 											<?php
 											$tl = new TypeLink(0);
 											$typeOptions = $tl->GetOptionArray(0,$admin_catalogs,0,1);
-											echo "<select name='typeid' class='admin-input-sm'>";
+											echo "<select name='typeid' class='form-select admin-w-sm'>";
 											echo "<option value='0' selected>不限栏目</option>";
 											echo $typeOptions;
 											echo "</select>";
@@ -41,20 +41,20 @@
 									</tr>
 									<tr>
 										<td>会员登录id</td>
-										<td><input name="userid" type="text" id="userid" class="admin-input-sm">（网址uid=后面跟的id）</td>
+										<td><input name="userid" type="text" id="userid" class="form-control admin-w-sm">（网址uid=后面跟的id）</td>
 									</tr>
 									<tr>
 										<td>文档id</td>
 										<td>
-											<label>开始：<input name="startid" type="text" id="startid" class="admin-input-sm"></label>
-											<label>结束：<input name="endid" type="text" id="endid" class="admin-input-sm"></label>
+											<label>开始：<input name="startid" type="text" id="startid" class="form-control admin-w-sm"></label>
+											<label>结束：<input name="endid" type="text" id="endid" class="form-control admin-w-sm"></label>
 										</td>
 									</tr>
 									<tr>
 										<td>文档发布时间</td>
 										<td>
-											<label>开始<?php $nowtime = GetDateTimeMk(time()-(24*3600*30));?>：<input type="text" name="starttime" id="starttime" class="datepicker admin-input-sm" value="<?php echo $nowtime;?>"></label>
-											<label>结束<?php $nowtime = GetDateTimeMk(time());?>：<input type="text" name="endtime" id="endtime" class="datepicker admin-input-sm" value="<?php echo $nowtime;?>"></label>
+											<label>开始<?php $nowtime = GetDateTimeMk(time()-(24*3600*30));?>：<input type="text" name="starttime" id="starttime" class="form-control datepicker admin-w-sm" value="<?php echo $nowtime;?>"></label>
+											<label>结束<?php $nowtime = GetDateTimeMk(time());?>：<input type="text" name="endtime" id="endtime" class="form-control datepicker admin-w-sm" value="<?php echo $nowtime;?>"></label>
 											<label><input type="checkbox" name="seltime" id="seltime" value="1"> 启用时间筛选（移动或删除文档可用该选项）</label>
 										</td>
 									</tr>

@@ -54,19 +54,19 @@ if ($dopost == "show") {
     $win->AddHidden("dopost", 'copysave');
     $msg = "<tr>
         <td width='260'>新模型id</td>
-        <td><input name='newid' type='text' id='newid' value='{$newid}' class='admin-input-sm'></td>
+        <td><input name='newid' type='text' id='newid' value='{$newid}' class='form-control admin-w-sm'></td>
     </tr>
     <tr>
         <td>新模型名称</td>
-        <td><input name='newtypename' type='text' id='newtypename' value='{$row['typename']}{$idname}' class='admin-input-lg'></td>
+        <td><input name='newtypename' type='text' id='newtypename' value='{$row['typename']}{$idname}' class='form-control admin-w-lg'></td>
     </tr>
     <tr>
         <td>新模型标识</td>
-        <td><input name='newnid' type='text' id='newnid' value='{$row['nid']}{$idname}' class='admin-input-lg'></td>
+        <td><input name='newnid' type='text' id='newnid' value='{$row['nid']}{$idname}' class='form-control admin-w-lg'></td>
     </tr>
     <tr>
         <td>新附加表</td>
-        <td><input name='newaddtable' type='text' id='newaddtable' value='{$row['addtable']}{$idname}' class='admin-input-lg'></td>
+        <td><input name='newaddtable' type='text' id='newaddtable' value='{$row['addtable']}{$idname}' class='form-control admin-w-lg'></td>
     </tr>
     <tr>
         <td>复制模板</td>

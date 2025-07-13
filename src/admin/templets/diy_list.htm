@@ -21,18 +21,18 @@
 						<form name="form1" action="diy_list.php">
 							<input type="hidden" name="action" value="list">
 							<input type="hidden" name="diyid" value="<?php echo $diy->diyid;;?>">
-							<input type="text" name="keyword" class="admin-input-lg" value="<?php echo $keyword;;?>" placeholder="请输入关键词">
-							<select name="field" class="admin-input-sm">
-							<?php
-							foreach($fieldlist as $k=>$fielddata)
-							{
-								if ($k==$field) {
-									echo "<option value='{$k}' selected>{$fielddata[0]}</option>\r\n";
-								} else {
-									echo "<option value='{$k}'>{$fielddata[0]}</option>\r\n";
+							<input type="text" name="keyword" class="form-control admin-w-lg" value="<?php echo $keyword;;?>" placeholder="请输入关键词">
+							<select name="field" class="form-select admin-w-sm">
+								<?php
+								foreach($fieldlist as $k=>$fielddata)
+								{
+									if ($k==$field) {
+										echo "<option value='{$k}' selected>{$fielddata[0]}</option>\r\n";
+									} else {
+										echo "<option value='{$k}'>{$fielddata[0]}</option>\r\n";
+									}
 								}
-							}
-							?>
+								?>
 							</select>
 							<button type="submit" class="btn btn-primary btn-sm">搜索</button>
 						</form>

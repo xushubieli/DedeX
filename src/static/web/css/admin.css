@@ -1,6 +1,6 @@
 :root {
 	--xs-bg:#f8fafb;
-	--xs-blue-300:#80bdff;
+	--xs-blue-300:#86b7fe;
 	--xs-radius:0.5rem;
 	--xs-radius-sm:0.25rem;
 	--bs-primary:#4285f4
@@ -38,6 +38,12 @@ a:hover {
 	color:var(--bs-blue);
 	text-decoration:none
 }
+h1,h2,h3,h4,h5,h6 {
+	margin:0;
+	line-height:1.2;
+	font-weight:700;
+	color:var(--bs-gray-dark)
+}
 img {
 	max-width:100%;
 	border-radius:var(--xs-radius)
@@ -62,9 +68,9 @@ input[type=file] {
 	border:none;
 	border-radius:0!important
 }
-input:focus,select:focus,textarea:focus {
+input:focus,select:focus,textarea:focus,button:focus,.btn:focus {
 	border-color:var(--xs-blue-300);
-	box-shadow:0 0 0 0.25rem rgba(0,123,255,0.25);
+	box-shadow:0 0 0 0.25rem rgba(13,110,253,0.25);
 	outline:0
 }
 input[type=radio],input[type=checkbox],input[type=radio]:focus,input[type=checkbox]:focus {
@@ -119,10 +125,7 @@ textarea {
 	padding:1.25rem
 }
 .install-box h1 {
-	margin:0;
-	font-size:18px;
-	font-weight:700;
-	color:var(--bs-gray-dark)
+	font-size:18px
 }
 .install-box label {
 	margin-bottom:0.5rem
@@ -152,9 +155,7 @@ textarea {
 }
 .login-box .title h1 {
 	margin-bottom:40px;
-	font-size:18px;
-	font-weight:700;
-	color:var(--bs-gray-dark)
+	font-size:18px
 }
 .login-from {
 	margin-bottom:40px
@@ -330,7 +331,9 @@ body.menu-show .admin-content {
 }
 .admin-panel-ip .list .title {
 	margin-bottom:0.5rem;
-	font-size:14px
+	font-size:14px;
+	font-weight:400;
+	color:var(--bs-gray)
 }
 .admin-panel-ip .list p {
 	font-size:18px;
@@ -661,16 +664,16 @@ body.menu-show .admin-content {
 	width:350px;
 	height:60px
 }
-.admin-input-lg {
+.admin-w-lg {
 	width:350px
 }
-.admin-input-md {
+.admin-w-md {
 	width:230px
 }
-.admin-input-sm {
+.admin-w-sm {
 	width:190px
 }
-.admin-input-xs {
+.admin-w-xs {
 	width:70px
 }
 .admin-btns {
@@ -719,13 +722,13 @@ body.menu-show .admin-content {
 	font-weight:400;
 	vertical-align:middle
 }
-.form-control {
+.form-control,.form-select {
 	display:inline-block;
 	padding:0.25rem 0.5rem;
 	height:30px;
 	color:var(--bs-gray)
 }
-.form-control,.btn {
+.form-control,.form-select,.btn {
 	font-size:14px!important
 }
 a:hover,body.menu-hide .admin-content,body.menu-show .admin-content,.sidemenu .submenu li:hover,.admin-head,.column:hover,.table-hover tbody tr:hover {
@@ -827,7 +830,7 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	body.menu-show .admin-content {
 		left:0
 	}
-	.admin-textarea-xl,.admin-textarea-sm,.admin-input-lg,.admin-input-md,.admin-input-sm {
+	.admin-textarea-xl,.admin-textarea-sm,.admin-w-lg,.admin-w-md,.admin-w-sm {
 		width:auto!important;
 		min-width:35%
 	}

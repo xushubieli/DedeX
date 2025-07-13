@@ -38,31 +38,31 @@
 									</tr>
 									<tr>
 										<td>附件标题</td>
-										<td><input type="text" name="title" id="title" class="admin-input-lg" required></td>
+										<td><input type="text" name="title" id="title" class="form-control admin-w-lg" required></td>
 									</tr>
 									<tr>
 										<td>附加参数</td>
 										<td>
-											<label>宽：<input type="text" name="mediawidth" id="mediawidth" class="admin-input-sm" placeholder="附件像素宽度"></label>
-											<label>高：<input type="text" name="mediaheight" id="mediaheight" class="admin-input-sm" placeholder="附件像高宽度"></label>
-											<label>播放时间：<input type="text" name="playtime" id="mediawidth3" class="admin-input-sm" placeholder="附件播放分钟"></label>
+											<label>宽：<input type="text" name="mediawidth" id="mediawidth" class="form-control admin-w-sm" placeholder="附件像素宽度"></label>
+											<label>高：<input type="text" name="mediaheight" id="mediaheight" class="form-control admin-w-sm" placeholder="附件像高宽度"></label>
+											<label>播放时间：<input type="text" name="playtime" id="mediawidth3" class="form-control admin-w-sm" placeholder="附件播放分钟"></label>
 										</td>
 									</tr>
 									<tr>
 										<td>上传附件</td>
 										<td>
-											<label>数量：<input type="text" name="picnum" id="picnum" value="5" class="admin-input-sm"></label>
+											<label>数量：<input type="text" name="picnum" id="picnum" value="5" class="form-control admin-w-sm"></label>
 											<a href="javascript:MakeUpload();" class="btn btn-primary btn-sm">添加</a>
 											<a href="javascript:ResetUpload();" class="btn btn-primary btn-sm">恢复</a>
 										</td>
 									</tr>
 									<tr>
 										<td colspan="2">
-											<p><label>附件1：<input type="file" name="upfile1" id="upfile1" class="admin-input-lg"></label></p>
-											<p><label>附件2：<input type="file" name="upfile2" id="upfile2" class="admin-input-lg"></label></p>
-											<p><label>附件3：<input type="file" name="upfile3" id="upfile3" class="admin-input-lg"></label></p>
-											<p><label>附件4：<input type="file" name="upfile4" id="upfile4" class="admin-input-lg"></label></p>
-											<p><label>附件5：<input type="file" name="upfile5" id="upfile5" class="admin-input-lg"></label></p>
+											<p><label>附件1：<input type="file" name="upfile1" id="upfile1" class="form-control admin-w-lg"></label></p>
+											<p><label>附件2：<input type="file" name="upfile2" id="upfile2" class="form-control admin-w-lg"></label></p>
+											<p><label>附件3：<input type="file" name="upfile3" id="upfile3" class="form-control admin-w-lg"></label></p>
+											<p><label>附件4：<input type="file" name="upfile4" id="upfile4" class="form-control admin-w-lg"></label></p>
+											<p><label>附件5：<input type="file" name="upfile5" id="upfile5" class="form-control admin-w-lg"></label></p>
 											<div id="uploadfield"></div>
 										</td>
 									</tr>
@@ -86,7 +86,7 @@
 				var endNum = Number(document.form1.picnum.value) + startNum;
 				if (endNum > 30) endNum = 30;
 				for (startNum; startNum <= endNum; startNum++) {
-					upfield.innerHTML += "<p><label>附件" + startNum + "：<input type='file' name='upfile" + startNum + "' class='admin-input-lg'></label></p>";
+					upfield.innerHTML += "<p><label>附件" + startNum + "：<input type='file' name='upfile" + startNum + "' class='form-control admin-w-lg'></label></p>";
 				}
 			}
 			function ResetUpload() {

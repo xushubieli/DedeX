@@ -18,15 +18,15 @@
 				<div class="card-body">
 					<div class="admin-btns">
 						<form name="forms" action="media_main.php" method="post">
-							<input type="text" name="keyword" id="keyword" placeholder="请输入关键词" value="<?php echo $keyword;?>" class="admin-input-lg">
-							<select name="mediatype" class="admin-input-sm">
+							<input type="text" name="keyword" id="keyword" placeholder="请输入关键词" value="<?php echo $keyword;?>" class="form-control admin-w-lg">
+							<select name="mediatype" class="form-select admin-w-sm">
 								<option value="0">文件类型</option>
 								<option value="1" <?php if ($mediatype==1) echo "selected"?>>图片</option>
 								<option value="2" <?php if ($mediatype==2) echo "selected"?>>FLASH</option>
 								<option value="3" <?php if ($mediatype==3) echo "selected"?>>视频音频</option>
 								<option value="4" <?php if ($mediatype==4) echo "selected"?>>其它附件</option>
 							</select>
-							<select name="membertype" class="admin-input-sm">
+							<select name="membertype" class="form-select admin-w-sm">
 								<option value="0">会员组</option>
 								<option value="1" <?php if ($membertype==1) echo "selected"?>>管理员</option>
 								<option value="2" <?php if ($membertype==2) echo "selected"?>>外部会员</option>

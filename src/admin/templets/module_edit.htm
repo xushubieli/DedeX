@@ -27,7 +27,7 @@
 								<tbody>
 									<tr>
 										<td width="260">模块名称</td>
-										<td><input type="text" name="modulname" id="modulname" class="admin-input-sm" value="<?php echo $name;?>" required></td>
+										<td><input type="text" name="modulname" id="modulname" class="form-control admin-w-sm" value="<?php echo $name;?>" required></td>
 									</tr>
 									<tr>
 										<td>语言编码</td>
@@ -46,12 +46,12 @@
 										<td>模块识别码</td>
 										<td>
 											<input type="hidden" name="hash" value="<?php echo $hash;?>">
-											<input type="text" name="hashv" value="<?php echo $hash;?>" class="admin-input-lg" disabled>
+											<input type="text" name="hashv" value="<?php echo $hash;?>" class="form-control admin-w-lg" disabled>
 										</td>
 									</tr>
 									<tr>
 										<td>发布时间</td>
-										<td><input type="text" name="mtime" id="mtime" class="admin-input-sm" value="<?php echo $time;?>"></td>
+										<td><input type="text" name="mtime" id="mtime" class="form-control admin-w-sm" value="<?php echo $time;?>"></td>
 									</tr>
 									<tr>
 										<td>是否涉及会员系统</td>
@@ -59,8 +59,8 @@
 											<label><input type="radio" name="ismember" id="ismember1" value="1" onclick="ShowHideMb('ismember0','rboxct')" <?php if ($ismember=='1') echo 'checked';?>> 涉及</label>
 											<label><input type="radio" name="ismember" id="ismember0" value="0" onclick="ShowHideMb('ismember0','rboxct')" <?php if ($ismember=='0') echo 'checked';?>> 不涉及</label>
 											<div id="rboxct" style="display:<?php echo ($ismember=='0' ? 'none' : 'block');?>">
-												<label>导航使用名称：<input type="text" name="indexname" id="indexname" class="admin-input-sm" value="<?php echo $indexname;?>"></label>
-												<label>导航使用网址：<input type="text" name="indexurl" id="indexurl" class="admin-input-sm" value="<?php echo $indexurl;?>"></label>
+												<label>导航使用名称：<input type="text" name="indexname" id="indexname" class="form-control admin-w-sm" value="<?php echo $indexname;?>"></label>
+												<label>导航使用网址：<input type="text" name="indexurl" id="indexurl" class="form-control admin-w-sm" value="<?php echo $indexurl;?>"></label>
 												<span>（用相对于会员中心的网址，例：/ask）</span>
 											</div>
 										</td>
@@ -83,7 +83,7 @@
 										<td>程序安装</td>
 										<td>
 											<label><input type="checkbox" name="autosetup" id="autosetup" value="1" onclick="ShowHideField('autosetup','autosetupinput','autosetupct')" <?php if (isset($autosetup) && $autosetup==1) echo 'checked';?>> 自动生成</label><br>
-											<div style="display:<?php if (!isset($autosetup) || $autosetup==0) echo 'block'; else echo 'none';?>" id="autosetupinput"><input type="file" name="setup" id="setup" class="admin-input-lg"></div>
+											<div style="display:<?php if (!isset($autosetup) || $autosetup==0) echo 'block'; else echo 'none';?>" id="autosetupinput"><input type="file" name="setup" id="setup" class="form-control admin-w-lg"></div>
 											<div style="display:<?php if (isset($autosetup) && $autosetup==1) echo 'block'; else echo 'none';?>" id="autosetupct">
 												<p>（由系统自动处理安装，请使用MySQL4.0版本格式的SQL语句：MySQL4.1/5.x版本请把创建表语句 ENGINE=MyISAM DEFAULT CHARSET=*，改为TYPE=MyISAM，SQL语句允许换行，但必须用;表示一条SQL语句结束，如果SQL中包含有模块网址的，用 _ROOTURL_ 表示，例：_ROOTURL_/ask/index.php）</p>
 												<textarea name="setupsql40" id="setupsql40" class="admin-textarea-xl"><?php echo $setupsql40;?></textarea>
@@ -94,7 +94,7 @@
 										<td>删除程序</td>
 										<td>
 											<label><input type="checkbox" name="autodel" id="autodel" value="1" onclick="ShowHideField('autodel','autodelinput','autodelct')" <?php if (isset($autodel) && $autodel==1) echo 'checked';?>> 自动生成</label>
-											<div style="display:<?php if (!isset($autodel) || $autodel==0) echo 'block'; else echo 'none';?>" id="autodelinput"><input type="file" name="uninstall" id="uninstall" class="admin-input-lg"></div>
+											<div style="display:<?php if (!isset($autodel) || $autodel==0) echo 'block'; else echo 'none';?>" id="autodelinput"><input type="file" name="uninstall" id="uninstall" class="form-control admin-w-lg"></div>
 											<div style="display:<?php if (isset($autodel) && $autodel==1) echo 'block'; else echo 'none';?>" id="autodelct">
 												<p>（由系统自动处理卸载，卸载时执行SQL允许换行，但必须用;表示一条SQL语句结束）</p>
 												<textarea name="delsql" id="delsql" class="admin-textarea-xl"><?php echo $delsql;?></textarea>

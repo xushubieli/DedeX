@@ -31,16 +31,16 @@
 								<tbody>
 									<tr>
 										<td width="260">广告名称</td>
-										<td><input type="text" name="adname" id="adname" class="admin-input-lg" required></td>
+										<td><input type="text" name="adname" id="adname" class="form-control admin-w-lg" required></td>
 									</tr>
 									<tr>
 										<td>广告标记</td>
-										<td><input type="text" name="tagname" id="tagname" class="admin-input-lg" required>（使用英文或数字表示标识）</td>
+										<td><input type="text" name="tagname" id="tagname" class="form-control admin-w-lg" required>（使用英文或数字表示标识）</td>
 									</tr>
 									<tr>
 										<td>广告分类</td>
 										<td>
-											<select name="clsid" id="clsid" class="admin-input-sm">
+											<select name="clsid" id="clsid" class="form-select admin-w-sm">
 												<option value="0">默认分类</option>
 												<?php echo $option;?>
 											</select>
@@ -52,7 +52,7 @@
 											<?php
 											$tl = new TypeLink(0);
 											$typeOptions = $tl->GetOptionArray(0,0,0);
-											echo "<select name='typeid' class='admin-input-sm'>";
+											echo "<select name='typeid' class='form-select admin-w-sm'>";
 											echo "<option value='0' selected>没有同名标记所有栏目</option>";
 											echo $typeOptions;
 											echo "</select>";
@@ -70,8 +70,8 @@
 									<tr>
 										<td>投放时间</td>
 										<td>
-											<label>从：<input type="text" name="starttime" id="starttime" value="<?php echo $startDay;?>" class="datepicker admin-input-sm"></label>
-											<label>到：<input type="text" name="endtime" id="endtime" value="<?php echo $endDay;?>" class="datepicker admin-input-sm"></label>
+											<label>从：<input type="text" name="starttime" id="starttime" value="<?php echo $startDay;?>" class="form-control datepicker admin-w-sm"></label>
+											<label>到：<input type="text" name="endtime" id="endtime" value="<?php echo $endDay;?>" class="form-control datepicker admin-w-sm"></label>
 										</td>
 									</tr>
 									<tr>
@@ -105,22 +105,22 @@
 							<textarea name="normbody[htmlcode]" class="admin-textarea-xl" placeholder="请输入广告，支持网页代码"></textarea>
 						</div>
 						<div id="txt" class="content">
-							<p><input type="text" name="normbody[title]" class="admin-input-lg" placeholder="请输入文字标题"></p>
-							<p><input type="text" name="normbody[link]" class="admin-input-lg" placeholder="请输入文字链接"></p>
-							<p><input type="text" name="normbody[color]" class="admin-input-lg" placeholder="请输入文字颜色"></p>
-							<input type="text" name="normbody[size]" class="admin-input-lg" placeholder="请输入文字大小">
+							<p><input type="text" name="normbody[title]" class="form-control admin-w-lg" placeholder="请输入文字标题"></p>
+							<p><input type="text" name="normbody[link]" class="form-control admin-w-lg" placeholder="请输入文字链接"></p>
+							<p><input type="text" name="normbody[color]" class="form-control admin-w-lg" placeholder="请输入文字颜色"></p>
+							<input type="text" name="normbody[size]" class="form-control admin-w-lg" placeholder="请输入文字大小">
 						</div>
 						<div id="img" class="content">
-							<p><input type="text" name="normbody[url]" class="admin-input-lg" placeholder="请输入图片地址"></p>
-							<p><input type="text" name="normbody[link]" class="admin-input-lg" placeholder="请输入图片链接"></p>
-							<p><input type="text" name="normbody[width]" class="admin-input-lg" placeholder="请输入图片宽度"></p>
-							<p><input type="text" name="normbody[height]" class="admin-input-lg" placeholder="请输入图片高度"></p>
-							<input type="text" name="normbody[descrip]" class="admin-input-lg" placeholder="请输入图片描述">
+							<p><input type="text" name="normbody[url]" class="form-control admin-w-lg" placeholder="请输入图片地址"></p>
+							<p><input type="text" name="normbody[link]" class="form-control admin-w-lg" placeholder="请输入图片链接"></p>
+							<p><input type="text" name="normbody[width]" class="form-control admin-w-lg" placeholder="请输入图片宽度"></p>
+							<p><input type="text" name="normbody[height]" class="form-control admin-w-lg" placeholder="请输入图片高度"></p>
+							<input type="text" name="normbody[descrip]" class="form-control admin-w-lg" placeholder="请输入图片描述">
 						</div>
 						<div id="flash" class="content">
-							<p><input type="text" name="normbody[link]" class="admin-input-lg" placeholder="请输入flash链接"></p>
-							<p><input type="text" name="normbody[width]" class="admin-input-lg" placeholder="请输入flash宽度"></p>
-							<input type="text" name="normbody[height]" class="admin-input-lg" placeholder="请输入flash高度">
+							<p><input type="text" name="normbody[link]" class="form-control admin-w-lg" placeholder="请输入flash链接"></p>
+							<p><input type="text" name="normbody[width]" class="form-control admin-w-lg" placeholder="请输入flash宽度"></p>
+							<input type="text" name="normbody[height]" class="form-control admin-w-lg" placeholder="请输入flash高度">
 						</div>
 					</div>
 				</div>

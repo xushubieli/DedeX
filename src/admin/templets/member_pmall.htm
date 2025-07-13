@@ -18,9 +18,9 @@
 				<div class="card-body">
 					<div class="admin-btns">
 						<form action="member_pm.php" name="form1" method="get">
-							<input type="text" name="keyword" id="keyword" placeholder="请输入关键词" class="admin-input-lg">
-							<input type="text" name="username" id="username" placeholder="请输入账号" autocomplete="off" class="admin-input-lg">
-							<select name="folder" id="folder" class="admin-input-sm">
+							<input type="text" name="keyword" id="keyword" placeholder="请输入关键词" class="form-control admin-w-lg">
+							<input type="text" name="username" id="username" placeholder="请输入账号" autocomplete="off" class="form-control admin-w-lg">
+							<select name="folder" id="folder" class="form-select admin-w-sm">
 								<option value="inbox">收件箱</option>
 								<option value="outbox">发件箱</option>
 							</select>
@@ -42,7 +42,7 @@
 								<tbody>
 									<tr>
 										<td width="260">标题</td>
-										<td><input type="text" name="subject" id="subject" class="admin-input-lg" placeholder="标题少于70个字符内" required></td>
+										<td><input type="text" name="subject" id="subject" class="form-control admin-w-lg" placeholder="标题少于70个字符内" required></td>
 									</tr>
 									<tr>
 										<td>内容</td>

@@ -31,7 +31,7 @@
 								<tbody>
 									<tr>
 										<td width="260">广告名称</td>
-										<td><input type="text" name="adname" id="adname" value="<?php echo $row['adname'];?>" class="admin-input-lg" required></td>
+										<td><input type="text" name="adname" id="adname" value="<?php echo $row['adname'];?>" class="form-control admin-w-lg" required></td>
 									</tr>
 									<tr>
 										<td>广告标记</td>
@@ -40,7 +40,7 @@
 									<tr>
 										<td>广告分类</td>
 										<td>
-											<select name="clsid" id="clsid" class="admin-input-sm">
+											<select name="clsid" id="clsid" class="form-select admin-w-sm">
 												<option value="0">默认分类</option>
 												<?php echo $option;?>
 											</select>
@@ -52,7 +52,7 @@
 											<?php
 											$tl = new TypeLink(0);
 											$typeOptions = $tl->GetOptionArray($row['typeid'],0,0);
-											echo "<select name='typeid' class='admin-input-sm'>";
+											echo "<select name='typeid' class='form-select admin-w-sm'>";
 											echo "<option value='0' selected>没有同名标记所有栏目</option>";
 											echo $typeOptions;
 											echo "</select>";
@@ -70,8 +70,8 @@
 									<tr>
 										<td>投放时间</td>
 										<td>
-											<label>从：<input type="text" name="starttime" id="starttime" value="<?php echo GetDateTimeMk($row['starttime']);?>" class="datepicker admin-input-sm"></label>
-											<label>到：<input type="text" name="endtime" id="endtime" value="<?php echo GetDateTimeMk($row['endtime']);?>" class="datepicker admin-input-sm"></label>
+											<label>从：<input type="text" name="starttime" id="starttime" value="<?php echo GetDateTimeMk($row['starttime']);?>" class="form-control datepicker admin-w-sm"></label>
+											<label>到：<input type="text" name="endtime" id="endtime" value="<?php echo GetDateTimeMk($row['endtime']);?>" class="form-control datepicker admin-w-sm"></label>
 										</td>
 									</tr>
 									<tr>

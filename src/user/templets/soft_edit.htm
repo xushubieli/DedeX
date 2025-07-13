@@ -44,7 +44,7 @@
 						<div class="col-sm-10">
 							<?php
 							$typeOptions = GetOptionList($row["typeid"],$row["channel"]);
-							echo "<select name='typeid' id='typeid' class='form-control'>";
+							echo "<select name='typeid' id='typeid' class='form-select'>";
 							echo $typeOptions;
 							echo "</select>";
 							?>
@@ -57,7 +57,7 @@
 					<div class="mb-3 row">
 						<div class="mb-3 col-md-6">
 							<label for="filetype">文件类型</label>
-							<select name="filetype" id="filetype" class="form-control">
+							<select name="filetype" id="filetype" class="form-select">
 								<?php if ($addRow["filetype"]!="") echo "<option value='{$addRow['filetype']}' selected>{$addRow['filetype']}</option>";?>
 								<option value=".exe">.exe</option>
 								<option value=".zip">.zip</option>
@@ -69,7 +69,7 @@
 						</div>
 						<div class="mb-3 col-md-6">
 							<label for="language">界面语言</label>
-							<select name="language" id="language" class="form-control">
+							<select name="language" id="language" class="form-select">
 								<?php if ($addRow["language"]!="") echo "<option value='{$addRow['language']}' selected>{$addRow['language']}</option>";?>
 								<option value="简体中文">简体中文</option>
 								<option value="英文软件">英文软件</option>
@@ -81,7 +81,7 @@
 					<div class="mb-3 row">
 						<div class="mb-3 col-md-6">
 							<label for="softtype">软件类型</label>
-							<select name="softtype" id="softtype" class="form-control">
+							<select name="softtype" id="softtype" class="form-select">
 								<?php if ($addRow["softtype"]!="") echo "<option value='{$addRow['softtype']' selected>{$addRow['softtype']}</option>";?>
 								<option value="国产软件" selected="selected">国产软件</option>
 								<option value="国外软件">国外软件</option>
@@ -90,7 +90,7 @@
 						</div>
 						<div class="mb-3 col-md-6">
 							<label for="accredit">授权方式</label>
-							<select name="accredit" id="accredit" class="form-control">
+							<select name="accredit" id="accredit" class="form-select">
 								<?php if ($addRow["accredit"]!="") echo "<option value='{$addRow['accredit']}' selected>{$addRow['accredit']}</option>";?>
 								<option value="共享软件">共享软件</option>
 								<option value="免费软件">免费软件</option>
@@ -108,7 +108,7 @@
 						</div>
 						<div class="mb-3 col-md-6">
 							<label for="softrank">软件等级</label>
-							<select name="softrank" id="softrank" class="form-control">
+							<select name="softrank" id="softrank" class="form-select">
 								<?php if ($addRow["softrank"]!="") echo "<option value='{$addRow['softrank']}' selected>{$addRow['softrank']}星</option>";?>
 								<option value="1">一星</option>
 								<option value="2">二星</option>

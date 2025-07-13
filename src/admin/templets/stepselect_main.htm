@@ -22,7 +22,7 @@
 			<div class="card shadow-sm mb-3">
 				<div class="card-body">
 					<div class="admin-btns">
-						<select name="egroup1" onChange="ChangePage(this);" id="egroup1" class="admin-input-sm">
+						<select name="egroup1" onChange="ChangePage(this);" id="egroup1" class="form-select admin-w-sm">
 							<option value="0">所有组</option>
 							<?php
 							$selgroup = '';
@@ -70,11 +70,11 @@
 							<input type="hidden" name="action" value="addenum_save">
 							<input type="hidden" name="issign" value="<?php echo $arr['issign'];?>">
 							<input type="hidden" name="egroup" value="<?php echo $arr['egroup'];?>">
-							<select name="topvalue" onChange="ChangePage2(this);" class="admin-input-sm">
+							<select name="topvalue" onChange="ChangePage2(this);" class="form-select admin-w-sm">
 								<option value="0"><?php echo $selgroup;?></option>
 								<?php echo $options;?>
 							</select>
-							<input type="text" name="ename" class="admin-input-lg" placeholder="请填分类名称">
+							<input type="text" name="ename" class="form-control admin-w-lg" placeholder="请填分类名称">
 							<button type="submit" class="btn btn-primary btn-sm">添加分类</button>
 							<?php if ($egroup=='nativeplace') {echo "<a href='stepselect_main.php?action=exarea' class='btn btn-primary btn-sm'>导入默认地区</a>";}?>
 						</form>

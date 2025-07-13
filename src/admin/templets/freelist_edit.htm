@@ -35,31 +35,31 @@
 								<tbody>
 									<tr>
 										<td width="160">自由列表标题</td>
-										<td width="550"><input type="text" name="title" id="title" value="<?php echo $row['title'];?>" class="admin-input-lg"></td>
+										<td width="550"><input type="text" name="title" id="title" value="<?php echo $row['title'];?>" class="form-control admin-w-lg"></td>
 										<td width="160">列表生成目录</td>
-										<td><input type="text" name="listdir" id="listdir" value="<?php echo $row['listdir'];?>" class="admin-input-lg"></td>
+										<td><input type="text" name="listdir" id="listdir" value="<?php echo $row['listdir'];?>" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
 										<td>默认页名称</td>
 										<td>
-											<input type="text" name="defaultpage" id="defaultpage" value="<?php echo $row['defaultpage'];?>" class="admin-input-lg">
+											<input type="text" name="defaultpage" id="defaultpage" value="<?php echo $row['defaultpage'];?>" class="form-control admin-w-lg">
 											<label><input type="checkbox" name="nodefault" id="nodefault" value="1" <?php if ($row['nodefault']==1) echo 'checked';?>> 不使用默认首页</label>
 										</td>
 										<td>命名规则</td>
-										<td><input type="text" name="namerule" id="namerule" value="<?php echo $row['namerule'];?>" class="admin-input-lg">（{listdir}列表存放目录）</td>
+										<td><input type="text" name="namerule" id="namerule" value="<?php echo $row['namerule'];?>" class="form-control admin-w-lg">（{listdir}列表存放目录）</td>
 									</tr>
 									<tr>
 										<td>列表模板</td>
 										<td>
-											<input type="text" name="templet" id="templet" value="<?php echo $row['templet'];?>" class="admin-input-lg">
+											<input type="text" name="templet" id="templet" value="<?php echo $row['templet'];?>" class="form-control admin-w-lg">
 											<button type="button" onclick="SelectTemplets('form1.templet');" class="btn btn-primary btn-sm">选择</button>
 										</td>
 										<td>最大列出页数</td>
-										<td><input type="text" name="maxpage" id="maxpage" value="<?php echo $row['maxpage'];?>" class="admin-input-sm"></td>
+										<td><input type="text" name="maxpage" id="maxpage" value="<?php echo $row['maxpage'];?>" class="form-control admin-w-sm"></td>
 									</tr>
 									<tr>
 										<td>列表关键词</td>
-										<td><input type="text" name="keywords" id="keywords" value="<?php echo $row['keywords'];?>" class="admin-input-lg"></td>
+										<td><input type="text" name="keywords" id="keywords" value="<?php echo $row['keywords'];?>" class="form-control admin-w-lg"></td>
 										<td>列表描述</td>
 										<td><textarea name="description" id="description" class="admin-textarea-sm"><?php echo $row['description'];?></textarea></td>
 									</tr>
@@ -68,7 +68,7 @@
 										<td>
 											<?php
 											$typeid = $ctag->GetAtt('typeid');
-											echo "<select name='typeid' class='admin-input-sm'>";
+											echo "<select name='typeid' class='form-select admin-w-sm'>";
 											echo "<option value='0'>不限栏目</option>";
 											$dsql->SetQuery("SELECT id,typename, channeltype FROM `#@__arctype`");
 											$dsql->Execute();
@@ -88,7 +88,7 @@
 										<td>
 											<?php
 											$channel  = $ctag->GetAtt('channel');
-											echo "<select name='channel' class='admin-input-sm'><option value='0'>不限模型</option>";
+											echo "<select name='channel' class='form-select admin-w-sm'><option value='0'>不限模型</option>";
 											$dsql->SetQuery("SELECT id,typename FROM `#@__channeltype` WHERE id > 0");
 											$dsql->Execute();
 											while($nrow = $dsql->GetObject())
@@ -105,7 +105,7 @@
 										<td>
 											<?php
 											$att  = $ctag->GetAtt('att');
-											echo "<select name='att' class='admin-input-sm'>";
+											echo "<select name='att' class='form-select admin-w-sm'>";
 											echo "<option value='0'>不限</option>";
 											$dsql->SetQuery("SELECT * FROM `#@__arcatt`");
 											$dsql->Execute();
@@ -122,20 +122,20 @@
 											?>
 										</td>
 										<td>发布天数</td>
-										<td><input type="text" name="subday" id="subday" class="admin-input-sm" value="<?php echo $ctag->GetAtt('subday');?>">（0表示不限）</td>
+										<td><input type="text" name="subday" id="subday" class="form-control admin-w-sm" value="<?php echo $ctag->GetAtt('subday');?>">（0表示不限）</td>
 										
 
 									</tr>
 									<tr>
 										<td>每页记录数</td>
-										<td><input type="text" name="pagesize" id="pagesize" value="<?php echo $ctag->GetAtt('pagesize');?>" class="admin-input-sm"></td>
+										<td><input type="text" name="pagesize" id="pagesize" value="<?php echo $ctag->GetAtt('pagesize');?>" class="form-control admin-w-sm"></td>
 										<td>显示列数</td>
-										<td><input type="text" name="col" id="col" value="<?php  $col = $ctag->GetAtt('col'); $v = ( empty($col) ? '1' :  $col ); echo $v;?>" class="admin-input-sm"></td>
+										<td><input type="text" name="col" id="col" value="<?php  $col = $ctag->GetAtt('col'); $v = ( empty($col) ? '1' :  $col ); echo $v;?>" class="form-control admin-w-sm"></td>
 
 									</tr>
 									<tr>
 										<td>标题长度</td>
-										<td><input type="text" name="titlelen" id="titlelen" value="<?php echo $ctag->GetAtt('titlelen');?>" class="admin-input-sm">（1字节=0.5个中文字）</td>
+										<td><input type="text" name="titlelen" id="titlelen" value="<?php echo $ctag->GetAtt('titlelen');?>" class="form-control admin-w-sm">（1字节=0.5个中文字）</td>
 										<td>
 											<?php
 											$setype = $ctag->GetAtt('type');
@@ -165,7 +165,7 @@
 												$sortarrs[$vs[0]] = $vs[1];
 											}
 											?>
-											<select name="orderby" id="orderby" class="admin-input-sm">
+											<select name="orderby" id="orderby" class="form-select admin-w-sm">
 												<?php echo "<option value=\"$orderby\" selected>{$sortarrs[$orderby]}</option>";?>
 												<option value="sortrank">置顶权限值</option>
 												<option value="pubdate">发布时间</option>

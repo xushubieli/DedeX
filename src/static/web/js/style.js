@@ -154,7 +154,7 @@ function ErrorAddSave(id, title) {
 </div>
 <div class="mb-3">
 	<label for="message-text" class="col-form-label">错误类型：</label>
-	<select id="selType" class="form-control">
+	<select id="selType" class="form-select">
 		<option value="1">错别字(除的、地、得)</option>
 		<option value="2">成语运用不当</option>
 		<option value="3">专业术语写法不规则</option>

@@ -63,7 +63,7 @@
 									<tr>
 										<td>下载默认等级</td>
 										<td>
-											<select name="dfrank" id="dfrank" class="admin-input-sm">
+											<select name="dfrank" id="dfrank" class="form-select admin-w-sm">
 												<?php
 												$urank = $cuserLogin->getUserRank();
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE `rank` >= 0 ");
@@ -80,7 +80,7 @@
 									</tr>
 									<tr>
 										<td>下载默认金币</td>
-										<td><input type="text" name="dfywboy" value="<?php echo $row['dfywboy'];?>" class="admin-input-sm"></td>
+										<td><input type="text" name="dfywboy" value="<?php echo $row['dfywboy'];?>" class="form-control admin-w-sm"></td>
 									</tr>
 									<tr>
 										<td>参数限制方式</td>

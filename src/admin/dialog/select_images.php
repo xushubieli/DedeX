@@ -74,8 +74,8 @@ if (!empty($iseditor)) {
                     <input type="file" name="imgfile">
                     <label><input type="checkbox" name="needwatermark" value="1" <?php if ($photo_markup == '1') echo 'checked';?>> 水印</label>
                     <label><input type="checkbox" name="resize" value="1"> 缩小</label>
-                    <label><input type="text" name="iwidth" value="<?php echo $cfg_ddimg_width ?>" class="admin-input-xs"> 宽</label>
-                    <label><input type="text" name="iheight" value="<?php echo $cfg_ddimg_height ?>" class="admin-input-xs"> 高</label>
+                    <label><input type="text" name="iwidth" value="<?php echo $cfg_ddimg_width ?>" class="form-control admin-w-xs"> 宽</label>
+                    <label><input type="text" name="iheight" value="<?php echo $cfg_ddimg_height ?>" class="form-control admin-w-xs"> 高</label>
                     <button type="submit" class="btn btn-primary btn-sm">上传</button>
                 </form>
             </div>

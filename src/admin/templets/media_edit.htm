@@ -39,20 +39,20 @@
 									</tr>
 									<tr>
 										<td>附件标题</td>
-										<td><input type="text" name="title" id="title" value="<?php echo $myrow['title'];?>" class="admin-input-lg" required></td>
+										<td><input type="text" name="title" id="title" value="<?php echo $myrow['title'];?>" class="form-control admin-w-lg" required></td>
 									</tr>
 									<tr>
 										<td>附加参数</td>
 										<td>
-											<label>宽：<input type="text" name="mediawidth" id="mediawidth" value="<?php echo $myrow['width'];?>" class="admin-input-sm" placeholder="附件像素宽度"></label>
-											<label>高：<input type="text" name="mediaheight" id="mediaheight" value="<?php echo $myrow['height'];?>" class="admin-input-sm" placeholder="附件像高宽度"></label>
-											<label>播放时间：<input type="text" name="playtime" id="playtime" value="<?php echo $myrow['playtime'];?>" class="admin-input-sm"  placeholder="附件播放分钟"></label>
+											<label>宽：<input type="text" name="mediawidth" id="mediawidth" value="<?php echo $myrow['width'];?>" class="form-control admin-w-sm" placeholder="附件像素宽度"></label>
+											<label>高：<input type="text" name="mediaheight" id="mediaheight" value="<?php echo $myrow['height'];?>" class="form-control admin-w-sm" placeholder="附件像高宽度"></label>
+											<label>播放时间：<input type="text" name="playtime" id="playtime" value="<?php echo $myrow['playtime'];?>" class="form-control admin-w-sm"  placeholder="附件播放分钟"></label>
 										</td>
 									</tr>
 									<tr>
 										<td>源文件</td>
 										<td>
-											<input type="text" name="filename" id="filename" value="<?php echo $myrow['url'];?>" class="admin-input-lg">
+											<input type="text" name="filename" id="filename" value="<?php echo $myrow['url'];?>" class="form-control admin-w-lg">
 											<a href="<?php echo $myrow['url'];?>" target="_blank" class="btn btn-primary btn-sm">查看</a>
 										</td>
 									</tr>
@@ -73,7 +73,7 @@
 									<?php }}}?>
 									<tr>
 										<td>修改附件</td>
-										<td><input type="file" name="upfile" id="upfile" class="admin-input-lg"></td>
+										<td><input type="file" name="upfile" id="upfile" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
 										<td colspan="2" align="center">

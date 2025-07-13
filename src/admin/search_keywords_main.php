@@ -86,9 +86,9 @@ function GetKeywordList($dsql, $pageno, $pagesize, $orderby = 'aid')
             <td><input name='aids[]' type='checkbox' value=\"{$row['aid']}\"></td>
             <td>{$row['aid']}</td>
             <td><a href='{$cfg_phpurl}/search.php?keyword=".urlencode($row['keyword'])."' target='_blank'>{$row['keyword']}</a></td>
-            <td><input type='text' name='keyword' id='keyword{$row['aid']}' value='{$row['keyword']}' class='admin-input-sm'></td>
-            <td><input type='text' name='spwords' id='spwords{$row['aid']}' value='{$row['spwords']}' class='admin-input-md'></td>
-            <td><input type='text' name='count' id='count{$row['aid']}' value='{$row['count']}' class='admin-input-sm'></td>
+            <td><input type='text' name='keyword' id='keyword{$row['aid']}' value='{$row['keyword']}' class='form-control admin-w-sm'></td>
+            <td><input type='text' name='spwords' id='spwords{$row['aid']}' value='{$row['spwords']}' class='form-control admin-w-md'></td>
+            <td><input type='text' name='count' id='count{$row['aid']}' value='{$row['count']}' class='form-control admin-w-sm'></td>
             <td>{$row['result']}</td>
             <td>".MyDate("Y-m-d H:i:s", $row['lasttime'])."</td>
             <td>

@@ -47,31 +47,31 @@
 									</tr>
 									<tr>
 										<td width="160">自由列表标题</td>
-										<td width="550"><input type="text" name="title" id="title" class="admin-input-lg" required></td>
+										<td width="550"><input type="text" name="title" id="title" class="form-control admin-w-lg" required></td>
 										<td width="160">列表生成目录</td>
-										<td><input type="text" name="listdir" id="listdir" value="/a/freelist/" class="admin-input-lg"></td>
+										<td><input type="text" name="listdir" id="listdir" value="/a/freelist/" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
 										<td>默认页名称</td>
 										<td>
-											<input type="text" name="defaultpage" id="defaultpage" value="index.html" class="admin-input-lg">
+											<input type="text" name="defaultpage" id="defaultpage" value="index.html" class="form-control admin-w-lg">
 											<label><input type="checkbox" name="nodefault" id="nodefault" value="1"> 不使用默认首页</label>
 										</td>
 										<td>命名规则</td>
-										<td><input type="text" name="namerule" id="namerule" value="{listdir}/index_{listid}_{page}.html" class="admin-input-lg">（{listdir}列表存放目录）</td>
+										<td><input type="text" name="namerule" id="namerule" value="{listdir}/index_{listid}_{page}.html" class="form-control admin-w-lg">（{listdir}列表存放目录）</td>
 									</tr>
 									<tr>
 										<td>列表模板</td>
 										<td>
-											<input type="text" name="templet" id="templet" value="{style}/list_free.htm" class="admin-input-lg">
+											<input type="text" name="templet" id="templet" value="{style}/list_free.htm" class="form-control admin-w-lg">
 											<button type="button" onclick="SelectTemplets('form1.templet');" class="btn btn-primary btn-sm">选择</button>
 										</td>
 										<td>最大列出页数</td>
-										<td><input type="text" name="maxpage" id="maxpage" value="100" class="admin-input-sm"></td>
+										<td><input type="text" name="maxpage" id="maxpage" value="100" class="form-control admin-w-sm"></td>
 									</tr>
 									<tr>
 										<td>列表关键词</td>
-										<td><input type="text" name="keywords" id="keywords" class="admin-input-lg"></td>
+										<td><input type="text" name="keywords" id="keywords" class="form-control admin-w-lg"></td>
 										<td>列表描述</td>
 										<td><textarea name="description" id="description" class="admin-textarea-sm"></textarea></td>
 									</tr>
@@ -79,7 +79,7 @@
 										<td>调用栏目</td>
 										<td>
 											<?php
-											echo "<select name='typeid' class='admin-input-sm'>";
+											echo "<select name='typeid' class='form-select admin-w-sm'>";
 											echo "<option value='0'>不限栏目</option>";
 											$dsql->SetQuery("SELECT id,typename, channeltype FROM `#@__arctype`");
 											$dsql->Execute();
@@ -96,7 +96,7 @@
 										<td>限定模型</td>
 										<td>
 											<?php
-											echo "<select name='channel' class='admin-input-sm'>";
+											echo "<select name='channel' class='form-select admin-w-sm'>";
 											echo "<option value='0' selected>不限模型</option>";
 											$dsql->SetQuery("SELECT id,typename FROM `#@__channeltype` WHERE id > 0");
 												$dsql->Execute();
@@ -112,7 +112,7 @@
 										<td>附加属性</td>
 										<td>
 											<?php
-											echo "<select name='att' class='admin-input-sm'>";
+											echo "<select name='att' class='form-select admin-w-sm'>";
 											echo "<option value='0' selected>不限</option>";
 											$dsql->SetQuery("SELECT * FROM `#@__arcatt`");
 											$dsql->Execute();
@@ -124,17 +124,17 @@
 											?>
 										</td>
 										<td>发布天数</td>
-										<td><input type="text" name="subday" id="subday2" value="0" class="admin-input-sm">（0表示不限）</td>
+										<td><input type="text" name="subday" id="subday2" value="0" class="form-control admin-w-sm">（0表示不限）</td>
 									</tr>
 									<tr>
 										<td>每页记录数</td>
-										<td><input type="text" name="pagesize" id="pagesize" value="30" class="admin-input-sm"></td>
+										<td><input type="text" name="pagesize" id="pagesize" value="30" class="form-control admin-w-sm"></td>
 										<td>显示列数</td>
-										<td><input type="text" name="col" id="col3" value="1" class="admin-input-sm"></td>
+										<td><input type="text" name="col" id="col3" value="1" class="form-control admin-w-sm"></td>
 									</tr>
 									<tr>
 										<td>标题长度</td>
-										<td><input type="text" name="titlelen" id="titlelen" value="60" class="admin-input-sm">（1字节=0.5个中文字）</td>
+										<td><input type="text" name="titlelen" id="titlelen" value="60" class="form-control admin-w-sm">（1字节=0.5个中文字）</td>
 										<td>高级筛选</td>
 										<td>
 											<label><input type="checkbox" name="types[]" id="type1" value="image"> 带缩略图</label>
@@ -147,7 +147,7 @@
 										<td><input type="text" name="keywordarc" id="keywordarc">（英文逗号隔开）</td>
 										<td>排列顺序</td>
 										<td>
-											<select name="orderby" id="orderby" class="admin-input-sm">
+											<select name="orderby" id="orderby" class="form-select admin-w-sm">
 												<option value="sortrank">置顶权限值</option>
 												<option value="pubdate" selected>发布时间</option>
 												<option value="senddate">录入时间</option>

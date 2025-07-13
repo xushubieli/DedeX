@@ -37,9 +37,9 @@
 									<?php foreach($Scores as $v) {?>
 									<tr>
 										<td><input type="checkbox" name="Ids-<?php echo $v['id'];?>" id="Ids-<?php echo $v['id'];?>" value="1"></td>
-										<td><input type="text" name="integral-<?php echo $v['id'];?>" id="integral-<?php echo $v['id'];?>" value="<?php echo $v['integral'];?>" class="admin-input-sm"></td>
-										<td><input type="text" name="icon-<?php echo $v['id'];?>" id="icon-<?php echo $v['id'];?>" value="<?php echo $v['icon'];?>" class="admin-input-sm"></td>
-										<td><input type="text" name="titles-<?php echo $v['id'];?>" id="titles-<?php echo $v['id'];?>" value="<?php echo $v['titles'];?>" class="admin-input-sm">
+										<td><input type="text" name="integral-<?php echo $v['id'];?>" id="integral-<?php echo $v['id'];?>" value="<?php echo $v['integral'];?>" class="form-control admin-w-sm"></td>
+										<td><input type="text" name="icon-<?php echo $v['id'];?>" id="icon-<?php echo $v['id'];?>" value="<?php echo $v['icon'];?>" class="form-control admin-w-sm"></td>
+										<td><input type="text" name="titles-<?php echo $v['id'];?>" id="titles-<?php echo $v['id'];?>" value="<?php echo $v['titles'];?>" class="form-control admin-w-sm">
 										</td>
 										<td>
 											<select name="isdefault-<?php echo $v['id'];?>" id="isdefault-<?php echo $v['id'];?>">
@@ -51,9 +51,9 @@
 									<?php }?>
 									<tr>
 										<td></td>
-										<td><input type="text" name="add_integral" id="add_integral" class="admin-input-sm"></td>
-										<td><input type="text" name="add_icon" id="add_icon" class="admin-input-sm"></td>
-										<td><input type="text" name="add_titles" id="add_titles" class="admin-input-sm"></td>
+										<td><input type="text" name="add_integral" id="add_integral" class="form-control admin-w-sm"></td>
+										<td><input type="text" name="add_icon" id="add_icon" class="form-control admin-w-sm"></td>
+										<td><input type="text" name="add_titles" id="add_titles" class="form-control admin-w-sm"></td>
 										<td>
 											<select name="add_isdefault" id="add_isdefault">
 												<option value="1">是</option>

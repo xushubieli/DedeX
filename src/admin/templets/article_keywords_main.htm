@@ -19,9 +19,9 @@
 					<div class="admin-btns">
 						<form name="form2" action="article_keywords_main.php">
 							<input type="hidden" name="dopost" value="add">
-							<input type="text" name="keyword" id="keyword" placeholder="请输入关键词" class="admin-input-lg">
-							<input type="text" name="rpurl" id="rpurl" placeholder="请输入链接" class="admin-input-lg">
-							<input type="text" name="rank" id="rank" value="30" class="admin-input-sm">
+							<input type="text" name="keyword" id="keyword" placeholder="请输入关键词" class="form-control admin-w-lg">
+							<input type="text" name="rpurl" id="rpurl" placeholder="请输入链接" class="form-control admin-w-lg">
+							<input type="text" name="rank" id="rank" value="30" class="form-control admin-w-sm">
 							<button type="submit" class="btn btn-primary btn-sm">添加</button>
 						</form>
 					</div>
@@ -50,9 +50,9 @@
 										<td><input type="hidden" name="keyword_{dede:field.aid/}" value="{dede:field.keyword/}">{dede:field.keyword/}</td>
 										<td>
 											<input type="hidden" name="rpurlold_{dede:field.aid/}" value="{dede:field.rpurl/}">
-											<input type="text" name="rpurl_{dede:field.aid/}" class="w-100" value="{dede:field.rpurl/}">
+											<input type="text" name="rpurl_{dede:field.aid/}" class="form-control w-100" value="{dede:field.rpurl/}">
 										</td>
-										<td><input type="text" name="rank_{dede:field.aid/}" class="admin-input-sm" value="{dede:field.rank/}"></td>
+										<td><input type="text" name="rank_{dede:field.aid/}" class="form-control admin-w-sm" value="{dede:field.rank/}"></td>
 										<td>
 											<input type="hidden" name="staold_{dede:field.aid/}" value="{dede:field.sta/}">
 											<label><input type="checkbox" name="isnouse_{dede:field.aid/}" value="1" {dede:field.sta function="GetSta(@me)"/}> 禁用</label>

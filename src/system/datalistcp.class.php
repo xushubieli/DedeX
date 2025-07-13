@@ -238,7 +238,7 @@ class DataListCP
             $listdd .= $j == $this->pageNO ? "<li class='page-item active'><span class='page-link'>{$j}</span></li>\r\n" : "<li class='page-item'><a class='page-link' href='{$purl}pageno={$j}'>{$j}</a></li>\r\n";
         }
         $plist = "<div class='d-flex justify-content-end'>\r\n";
-        $sizesel = "<select name='pagesize' id='dedepagesize' class='form-control me-3' style='width:120px'>\r\n";
+        $sizesel = "<select name='pagesize' id='dedepagesize' class='form-select' style='width:120px'>\r\n";
         $sizesel .= "<option value='30' ".($this->pagesize == 30 ? "selected='selected'" : "").">30条/页</option>\r\n";
         $sizesel .= "<option value='50' ".($this->pagesize == 50 ? "selected='selected'" : "").">50条/页</option>\r\n";
         $sizesel .= "<option value='100' ".($this->pagesize == 100 ? "selected='selected'" : "").">100条/页</option>\r\n";
@@ -248,7 +248,7 @@ class DataListCP
         if (preg_match("#pagesize#i", $atts['listitem'])) {
             $plist .= $sizesel;
         }
-        $plist .= "<ul class='pagination me-3'>\r\n";
+        $plist .= "<ul class='pagination ms-3'>\r\n";
         if (preg_match("#info#i", $atts['listitem'])) {
             $plist .= $infos;
         }
@@ -271,7 +271,7 @@ class DataListCP
         if (preg_match("#form#i", $atts['listitem'])) {
             $plist .= "<form name='pagelist' action='".$this->GetCurUrl()."'>{$hidenform}";
             if ($totalpage > $total_list) {
-                $plist .= "<input type='text' name='pageno' class='form-control admin-input-xs' placeholder='页数'>\r\n";
+                $plist .= "<input type='text' name='pageno' class='form-control admin-w-xs ms-3' placeholder='页数'>\r\n";
                 $plist .= "<button type='submit' name='plistgo' class='btn btn-primary btn-sm'>前往</button>\r\n";
             }
             $plist .= "</form>\r\n";

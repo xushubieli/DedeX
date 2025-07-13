@@ -26,7 +26,7 @@
 									<tr>
 										<td width="260">积分类型</td>
 										<td>
-											<select name="cardtype" class="admin-input-sm">
+											<select name="cardtype" class="form-select admin-w-sm">
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__moneycard_type`");
 												$dsql->Execute();
@@ -38,13 +38,13 @@
 											</select>
 										</td>
 										<td width="160">生成数量</td>
-										<td><input name="mnum" type="text" id="mnum" class="admin-input-sm" value="100"></td>
+										<td><input name="mnum" type="text" id="mnum" class="form-control admin-w-sm" value="100"></td>
 									</tr>
 									<tr>
 										<td>积分前缀</td>
-										<td><input name="snprefix" type="text" id="snprefix" class="admin-input-sm" value="X"></td>
+										<td><input name="snprefix" type="text" id="snprefix" class="form-control admin-w-sm" value="X"></td>
 										<td>密码长度</td>
-										<td><input name="pwdlen" type="text" id="pwdlen" class="admin-input-sm" value="6"></td>
+										<td><input name="pwdlen" type="text" id="pwdlen" class="form-control admin-w-sm" value="6"></td>
 									</tr>
 									<tr>
 										<td>密码类型</td>
@@ -53,7 +53,7 @@
 											<label><input type="radio" name="ctype" value="2" checked> 大写字母</label>
 										</td>
 										<td>密码组数</td>
-										<td><input name="pwdgr" type="text" id="pwdgr" class="admin-input-sm" value="3"></td>
+										<td><input name="pwdgr" type="text" id="pwdgr" class="form-control admin-w-sm" value="3"></td>
 									</tr>
 									<tr>
 										<td colspan="4" align="center" align="py-2"><button type="submit" class="btn btn-primary btn-sm">开始执行</button></td>

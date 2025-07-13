@@ -769,7 +769,7 @@ class Archives
                 $i++;
             }
         } else {
-            $revalue = "<select class='form-control w-25' onchange='location.href=this.options[this.selectedIndex].value;'>";
+            $revalue = "<select class='form-select w-25' onchange='location.href=this.options[this.selectedIndex].value;'>";
             foreach ($this->SplitTitles as $k => $v) {
                 if ($i == 1) {
                     $revalue .= "<option value='{$this->NameFirst}.{$this->ShortName}'>{$i}、{$v}</option>";
@@ -894,7 +894,7 @@ class Archives
                 $i++;
             }
         } else {
-            $revalue = "<select class='form-control w-25' onchange='location.href=this.options[this.selectedIndex].value;'>";
+            $revalue = "<select class='form-select w-25' onchange='location.href=this.options[this.selectedIndex].value;'>";
             foreach ($this->SplitTitles as $k => $v) {
                 if ($i == 1) {
                     if ($cfg_rewrite == 'Y') {

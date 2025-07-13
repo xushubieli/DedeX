@@ -35,7 +35,7 @@
 								<tbody>
 									<tr>
 										<td width="160"><?php echo $cInfos['titlename'];?></td>
-										<td width="650"><input type="text" name="title" id="title" value="<?php echo $addRow['title'];?>" class="admin-input-lg" required></td>
+										<td width="650"><input type="text" name="title" id="title" value="<?php echo $addRow['title'];?>" class="form-control admin-w-lg" required></td>
 										<td width="160"></td>
 										<td></td>
 									</tr>
@@ -59,7 +59,7 @@
 									<tr id="pictable" style="<?php if ($cInfos['needpic']==0) echo 'display:none';?>">
 										<td>缩略图</td>
 										<td colspan="3">
-											<input type="text" name="picname" id="picname" class="admin-input-lg" value="<?php echo $addRow['litpic'];?>">
+											<input type="text" name="picname" id="picname" class="form-control admin-w-lg" value="<?php echo $addRow['litpic'];?>">
 											<label><input type="checkbox" name="ddisremote" value="1" id="ddisremote"> 远程图片</label>
 											<button type="button" onclick="SelectImage('form1.picname','');" class="btn btn-primary btn-sm">选择</button>
 											<button type="button" id="btnClearAll" class="btn btn-primary btn-sm">清空</button>
@@ -76,7 +76,7 @@
 										<td colspan="3">
 											<?php
 											$typeOptions = GetOptionList($addRow['typeid'],$cuserLogin->getUserChannel(),$channelid);
-											echo "<select name='typeid' id='typeid' class='admin-input-sm'>";
+											echo "<select name='typeid' id='typeid' class='form-select admin-w-sm'>";
 											if ($addRow["typeid"]=="0") echo "<option value='0' selected>请选择文档栏目</option>";
 											echo $typeOptions;
 											echo "</select>";
@@ -89,7 +89,7 @@
 									<tr>
 										<td>浏览权限</td>
 										<td colspan="3">
-											<select name="arcrank" id="arcrank" class="admin-input-sm">
+											<select name="arcrank" id="arcrank" class="form-select admin-w-sm">
 												<option value='<?php echo $addRow["arcrank"];?>'><?php echo $addRow["rankname"];?></option>
 												<?php
 												$urank = $cuserLogin->getUserRank();

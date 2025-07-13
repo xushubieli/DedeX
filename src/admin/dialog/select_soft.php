@@ -57,7 +57,7 @@ if (!empty($noeditor)) {
                     <input type="hidden" name="f" value="<?php echo $f ?>">
                     <input type="hidden" name="job" value="upload">
                     <input type="file" name="uploadfile">
-                    <label>重命名：<input type="text" name="newname" class="admin-input-sm"></label>
+                    <label>重命名：<input type="text" name="newname" class="form-control admin-w-sm"></label>
                     <button type="submit" class="btn btn-primary btn-sm">保存</button>
                 </form>
             </div>

@@ -21,8 +21,8 @@
 				<div class="card-body">
 					<div class="admin-btns">
 						<form name="form1" action="statistics_list.php" method="get">
-							<input type="text" name="ip" class="admin-input-lg" placeholder="请输入地址ip" value="<?php echo !empty($ip)? $ip : '';?>">
-							<select name="url_type" class="admin-input-sm">
+							<input type="text" name="ip" class="form-control admin-w-lg" placeholder="请输入地址ip" value="<?php echo !empty($ip)? $ip : '';?>">
+							<select name="url_type" class="form-select admin-w-sm">
 								<option value="0"<?php echo $url_type ===0? ' selected' : '';?>>选择类型</option>
 								<option value="1"<?php echo $url_type ===1? ' selected' : '';?>>用户</option>
 								<option value="-1"<?php echo $url_type ===-1? ' selected' : '';?>>蜘蛛</option>

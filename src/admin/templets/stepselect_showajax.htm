@@ -13,11 +13,11 @@ if ($action=='edit') {
 				<tbody>
 					<tr>
 						<td width="160">类别名</td>
-						<td><input type="text" name="itemname" class="admin-input-lg" value="<?php echo $arr['itemname'];?>" required></td>
+						<td><input type="text" name="itemname" class="form-control admin-w-lg" value="<?php echo $arr['itemname'];?>" required></td>
 					</tr>
 					<tr>
 						<td>缓存名</td>
-						<td><input type="text" name="egroup" value="<?php echo $arr['egroup'];?>" class="admin-input-lg" required>（缓存名必须用英文或数字）</td>
+						<td><input type="text" name="egroup" value="<?php echo $arr['egroup'];?>" class="form-control admin-w-lg" required>（缓存名必须用英文或数字）</td>
 					</tr>
 					<tr>
 						<td colspan="2">
@@ -41,11 +41,11 @@ if ($action=='edit') {
 				<tbody>
 					<tr>
 						<td width="160">类别名</td>
-						<td><input type="text" name="itemname" class="admin-input-lg" required></td>
+						<td><input type="text" name="itemname" class="form-control admin-w-lg" required></td>
 					</tr>
 					<tr>
 						<td>缓存名</td>
-						<td><input type="text" name="egroup" class="admin-input-lg" required>（缓存名必须用英文或数字）</td>
+						<td><input type="text" name="egroup" class="form-control admin-w-lg" required>（缓存名必须用英文或数字）</td>
 					</tr>
 					<tr>
 						<td colspan="2">
@@ -78,7 +78,7 @@ if ($action=='edit') {
 					<tr>
 						<td width="160">所属枚举</td>
 						<td>
-							<select name="topvalue" class="admin-input-lg">
+							<select name="topvalue" class="form-select admin-w-lg">
 								<option value="0">保存一级枚举</option>
 								<?php echo $options;?>
 							</select>
@@ -86,11 +86,11 @@ if ($action=='edit') {
 					</tr>
 					<tr>
 						<td>枚举名</td>
-						<td><input type="text" name="ename" class="admin-input-lg" required></td>
+						<td><input type="text" name="ename" class="form-control admin-w-lg" required></td>
 					</tr>
 					<tr>
 						<td>排序值</td>
-						<td><input type="text" name="disorder" class="admin-input-lg" required></td>
+						<td><input type="text" name="disorder" class="form-control admin-w-lg" required></td>
 					</tr>
 					<tr>
 						<td colspan="2">
@@ -124,7 +124,7 @@ if ($action=='edit') {
 				<tr>
 					<td width="160">类别关系</td>
 					<td>
-						<select name="topvalue" class="admin-input-lg">
+						<select name="topvalue" class="form-select admin-w-lg">
 							<option value="0">请选择</option>
 							<?php echo $options;?>
 						</select>

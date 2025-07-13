@@ -117,7 +117,7 @@ else if ($action == 'upload') {
             <td>
                 <input name='acdir' type='hidden' value='$acdir'>
                 <input name='token' type='hidden' value='{$_SESSION['token']}'>
-                <input name='upfile' type='file' id='upfile' class='admin-input-lg'>
+                <input name='upfile' type='file' id='upfile' class='form-control admin-w-lg'>
             </td>
         </tr>";
     $win->AddMsgItem($msg);

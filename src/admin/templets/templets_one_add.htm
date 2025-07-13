@@ -26,11 +26,11 @@
 								<tbody>
 									<tr>
 										<td width="260">页面标题</td>
-										<td><input type="text" name="title" id="title" class="admin-input-lg" required></td>
+										<td><input type="text" name="title" id="title" class="form-control admin-w-lg" required></td>
 									</tr>
 									<tr>
 										<td>页面关键词</td>
-										<td><input type="text" name="keywords" id="keywords" class="admin-input-lg"></td>
+										<td><input type="text" name="keywords" id="keywords" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
 										<td>页面摘要信息</td>
@@ -39,9 +39,9 @@
 									<tr>
 										<td>关联标识</td>
 										<td>
-											<input type="text" name="likeid" id="likeid" class="admin-input-lg">
+											<input type="text" name="likeid" id="likeid" class="form-control admin-w-lg">
 											<?php
-											echo "<select name='likeidsel' id='likeidsel' class='admin-input-sm'>";
+											echo "<select name='likeidsel' id='likeidsel' class='form-select admin-w-sm'>";
 											$dsql->Execute('s',"SELECT likeid FROM `#@__sgpage` GROUP BY likeid "); 
 											echo "<option value='default'>default</option>";
 											while($arr = $dsql->GetArray('s'))
@@ -55,11 +55,11 @@
 									</tr>
 									<tr>
 										<td>保存位置</td>
-										<td><input type="text" name="nfilename" id="nfilename" value="<?php echo $cfg_arcdir.'/diy.html';?>" class="admin-input-lg">（填写路径文件夹）</td>
+										<td><input type="text" name="nfilename" id="nfilename" value="<?php echo $cfg_arcdir.'/diy.html';?>" class="form-control admin-w-lg">（填写路径文件夹）</td>
 									</tr>
 									<tr>
 										<td>模板文件名</td>
-										<td><input type="text" name="template" id="template" value="{style}/index_article.htm" class="admin-input-lg">（填写模板名称）</td>
+										<td><input type="text" name="template" id="template" value="{style}/index_article.htm" class="form-control admin-w-lg">（填写模板名称）</td>
 									</tr>
 									<tr>
 										<td>是否编译文档</td>

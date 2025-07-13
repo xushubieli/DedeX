@@ -41,7 +41,7 @@
 						<div class="col-sm-10">
 							<?php
 							$typeOptions = GetOptionList(0,$channelid);
-							echo "<select name='typeid' id='typeid' class='form-control'>";
+							echo "<select name='typeid' id='typeid' class='form-select'>";
 							echo "<option value='0' selected>请选择文档栏目</option>";
 							echo $typeOptions;
 							echo "</select>";
@@ -55,7 +55,7 @@
 					<div class="mb-3 row">
 						<div class="mb-3 col-md-6">
 							<label for="filetype">文件类型</label>
-							<select name="filetype" id="filetype" class="form-control">
+							<select name="filetype" id="filetype" class="form-select">
 								<option value=".exe" selected="selected">.exe</option>
 								<option value=".zip">.zip</option>
 								<option value=".rar">.rar</option>
@@ -66,7 +66,7 @@
 						</div>
 						<div class="mb-3 col-md-6">
 							<label for="language">界面语言</label>
-							<select name="language" id="language" class="form-control">
+							<select name="language" id="language" class="form-select">
 								<option value="简体中文" selected="selected">简体中文</option>
 								<option value="英文软件">英文软件</option>
 								<option value="繁体中文">繁体中文</option>
@@ -77,7 +77,7 @@
 					<div class="mb-3 row">
 						<div class="mb-3 col-md-6">
 							<label for="softtype">软件类型</label>
-							<select name="softtype" id="softtype" class="form-control">
+							<select name="softtype" id="softtype" class="form-select">
 								<option value="国产软件" selected="selected">国产软件</option>
 								<option value="国外软件">国外软件</option>
 								<option value="汉化补丁">汉化补丁</option>
@@ -85,7 +85,7 @@
 						</div>
 						<div class="mb-3 col-md-6">
 							<label for="accredit">授权方式</label>
-							<select name="accredit" id="accredit" class="form-control">
+							<select name="accredit" id="accredit" class="form-select">
 								<option value="共享软件" selected="selected">共享软件</option>
 								<option value="免费软件">免费软件</option>
 								<option value="开源软件">开源软件</option>
@@ -102,7 +102,7 @@
 						</div>
 						<div class="mb-3 col-md-6">
 							<label for="softrank">软件等级</label>
-							<select name="softrank" id="softrank" class="form-control">
+							<select name="softrank" id="softrank" class="form-select">
 								<option value="1">一星</option>
 								<option value="2">二星</option>
 								<option value="3" selected="selected">三星 </option>
@@ -127,7 +127,7 @@
 							<div class="input-group">
 								<input type="text" name="softsize" id="softsize" class="form-control">
 								<div class="input-group-append">
-									<select name="unit" id="unit" class="form-control btn-send">
+									<select name="unit" id="unit" class="form-select">
 										<option value="MB" selected="selected">MB</option>
 										<option value="KB">KB</option>
 										<option value="GB">GB</option>

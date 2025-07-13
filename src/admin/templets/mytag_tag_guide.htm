@@ -49,7 +49,7 @@
 											<?php
 											$tl = new TypeLink(0);
 											$typeOptions = $tl->GetOptionArray(0,$admin_catalogs,0,1);
-											echo "<select name='typeid' class='admin-input-sm'>";
+											echo "<select name='typeid' class='form-select admin-w-sm'>";
 											echo "<option value='0' selected>不限栏目</option>";
 											echo $typeOptions;
 											echo "</select>";
@@ -58,7 +58,7 @@
 										<td width="160">限定模型</td>
 										<td>
 											<?php
-											echo "<select name='channel' class='admin-input-sm'>";
+											echo "<select name='channel' class='form-select admin-w-sm'>";
 											echo "<option value='0' selected>不限模型</option>";
 											$tl->dsql->SetQuery("SELECT id,typename FROM `#@__channeltype` WHERE id > 0");
 											$tl->dsql->Execute();
@@ -74,7 +74,7 @@
 										<td>附加属性</td>
 										<td>
 											<?php
-											echo "<select name='att' class='admin-input-sm'>";
+											echo "<select name='att' class='form-select admin-w-sm'>";
 											echo "<option value='0' selected>不限</option>";
 											$tl->dsql->SetQuery("SELECT * FROM `#@__arcatt`");
 											$tl->dsql->Execute();
@@ -86,17 +86,17 @@
 											?>
 										</td>
 										<td>调用记录条数</td>
-										<td><input type="text" name="row" id="row" value="10" class="admin-input-sm"></td>
+										<td><input type="text" name="row" id="row" value="10" class="form-control admin-w-sm"></td>
 									</tr>
 									<tr>
 										<td>显示列数</td>
-										<td><input type="text" name="col" id="col" value="1" class="admin-input-sm"></td>
+										<td><input type="text" name="col" id="col" value="1" class="form-control admin-w-sm"></td>
 										<td>标题长度</td>
-										<td><input type="text" name="titlelen" id="titlelen" value="24" class="admin-input-sm">（1字节=0.5个中文字）</td>
+										<td><input type="text" name="titlelen" id="titlelen" value="190" class="form-control admin-w-sm">（1字节=0.5个中文字）</td>
 									</tr>
 									<tr>
 										<td>关键词</td>
-										<td><input type="text" name="keyword" id="keyword" class="admin-input-sm">（英文逗号隔开）</td>
+										<td><input type="text" name="keyword" id="keyword" class="form-control admin-w-sm">（英文逗号隔开）</td>
 										<td>高级筛选</td>
 										<td>
 											<label><input type="checkbox" name="types[]" value="image"> 带缩略图</label>
@@ -106,10 +106,10 @@
 									</tr>
 									<tr>
 										<td>文档发布时间</td>
-										<td><input type="text" name="subday" value="0" id="subday" class="admin-input-sm">（天以内，0表示不限）</td>
+										<td><input type="text" name="subday" value="0" id="subday" class="form-control admin-w-sm">（天以内，0表示不限）</td>
 										<td>排列顺序</td>
 										<td>
-											<select name="orderby" id="orderby" class="admin-input-sm">
+											<select name="orderby" id="orderby" class="form-select admin-w-sm">
 												<option value="sortrank">置顶权限值</option>
 												<option value="pubdate" selected>发布时间</option>
 												<option value="senddate">录入时间</option>

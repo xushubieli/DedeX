@@ -41,9 +41,9 @@
 									?>
 									<input type="hidden" name="ID_<?php echo $k;?>" value="<?php echo $row->aid;?>">
 									<tr>
-										<td><input type="text" name="pname_<?php echo $k;?>" value="<?php echo $row->pname;?>" id="pname_<?php echo $k;?>" class="admin-input-lg"></td>
+										<td><input type="text" name="pname_<?php echo $k;?>" value="<?php echo $row->pname;?>" id="pname_<?php echo $k;?>" class="form-control admin-w-lg"></td>
 										<td>
-											<select name="rank_<?php echo $k;?>" id="rank_<?php echo $k;?>" class="admin-input-sm">
+											<select name="rank_<?php echo $k;?>" id="rank_<?php echo $k;?>" class="form-select admin-w-sm">
 												<?php
 												foreach($arcranks as $kkk=>$vvv){
 													if ($row->rank==$kkk) echo "<option value='{$kkk}' selected>{$vvv}</option>";
@@ -52,9 +52,9 @@
 												?>
 											</select>
 										</td>
-										<td><input type="text" name="money_<?php echo $k;?>" value="<?php echo $row->money;?>" id="money_<?php echo $k;?>" class="admin-input-sm"></td>
+										<td><input type="text" name="money_<?php echo $k;?>" value="<?php echo $row->money;?>" id="money_<?php echo $k;?>" class="form-control admin-w-sm"></td>
 										<td>
-											<select name="exptime_<?php echo $k;?>" id="exptime_<?php echo $k;?>" class="admin-input-sm">
+											<select name="exptime_<?php echo $k;?>" id="exptime_<?php echo $k;?>" class="form-select admin-w-sm">
 												<?php
 												foreach($times as $kkk=>$vvv){
 													if ($row->exptime==$kkk) echo "<option value='{$kkk}' selected>{$vvv}</option>";
@@ -68,9 +68,9 @@
 									<?php }?>
 									<input type="hidden" name="idend" value="<?php echo $k;?>">
 									<tr>
-										<td><input type="text" name="pname_new" id="pname_new" class="admin-input-lg"></td>
+										<td><input type="text" name="pname_new" id="pname_new" class="form-control admin-w-lg"></td>
 										<td>
-											<select name="rank_new" id="rank_new" class="admin-input-sm">
+											<select name="rank_new" id="rank_new" class="form-select admin-w-sm">
 												<?php
 												foreach($arcranks as $kkk=>$vvv){
 													echo "<option value='{$kkk}'>{$vvv}</option>";
@@ -78,9 +78,9 @@
 												?>
 											</select>
 										</td>
-										<td><input type="text" name="money_new" id="money_new" class="admin-input-sm" value="100"></td>
+										<td><input type="text" name="money_new" id="money_new" class="form-control admin-w-sm" value="100"></td>
 										<td>
-											<select name="exptime_new" id="exptime_new" class="admin-input-sm">
+											<select name="exptime_new" id="exptime_new" class="form-select admin-w-sm">
 												<?php
 												foreach($times as $kkk=>$vvv){
 													echo "<option value='{$kkk}'>{$vvv}</option>";

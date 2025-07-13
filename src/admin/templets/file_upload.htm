@@ -30,7 +30,7 @@
 									</tr>
 									<tr>
 										<td colspan="2" id="upfield">
-											<p><label>文件1：<input type="file" name="upfile1" class="admin-input-lg"></label></p>
+											<p><label>文件1：<input type="file" name="upfile1" class="form-control admin-w-lg"></label></p>
 										</td>
 									</tr>
 									<tr>
@@ -52,11 +52,11 @@
 			function make_upload() {
 				i++;
 				myob = document.getElementById("upfield");
-				myob.innerHTML+="<p><label>文件"+i+"：<input type='file' name='upfile"+i+"' class='admin-input-lg'></label></p>";
+				myob.innerHTML+="<p><label>文件"+i+"：<input type='file' name='upfile"+i+"' class='form-control admin-w-lg'></label></p>";
 			}
 			function reset_upload() {
 				myob = document.getElementById("upfield");
-				myob.innerHTML="<p><label>文件1：<input type='file' name='upfile1' class='admin-input-lg'></label></p>";
+				myob.innerHTML="<p><label>文件1：<input type='file' name='upfile1' class='form-control admin-w-lg'></label></p>";
 			}
 		</script>
 	</body>

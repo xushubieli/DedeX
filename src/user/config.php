@@ -203,7 +203,7 @@ $safequestions[7] = '您最喜欢的歌曲是什么';
 function GetSafequestion($selid=0,$formname='safequestion')
 {
 	global $safequestions;
-	$safequestions_form = "<select name='$formname' id='$formname' class='form-control'>";
+	$safequestions_form = "<select name='$formname' id='$formname' class='form-select'>";
 	foreach($safequestions as $k=>$v)
 	{
 	 	if ($k==$selid) $safequestions_form .= "<option value='$k' selected>$v</option>\r\n";

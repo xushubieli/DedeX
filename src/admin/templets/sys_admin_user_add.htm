@@ -29,20 +29,20 @@
 								<tbody>
 									<tr>
 										<td width="260">账号</td>
-										<td><input type="text" name="userid" id="userid" class="admin-input-sm" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');" required>（请使用数字0-9小写a-z大写A-Z符号_@!.-）</td>
+										<td><input type="text" name="userid" id="userid" class="form-control admin-w-sm" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');" required>（请使用数字0-9小写a-z大写A-Z符号_@!.-）</td>
 									</tr>
 									<tr>
 										<td>昵称</td>
-										<td><input type="text" name="uname" id="uname" class="admin-input-sm" required>（前后台显示文档作者的名称）</td>
+										<td><input type="text" name="uname" id="uname" class="form-control admin-w-sm" required>（前后台显示文档作者的名称）</td>
 									</tr>
 									<tr>
 										<td>密码</td>
-										<td><input type="text" name="pwd" id="pwd" class="admin-input-sm" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');" required>（请使用数字0-9小写a-z大写A-Z符号_@!.-）</td>
+										<td><input type="text" name="pwd" id="pwd" class="form-control admin-w-sm" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');" required>（请使用数字0-9小写a-z大写A-Z符号_@!.-）</td>
 									</tr>
 									<tr>
 										<td>会员组</td>
 										<td>
-											<select name="usertype" class="admin-input-sm">
+											<select name="usertype" class="form-select admin-w-sm">
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__admintype` ORDER BY `rank` ASC");
 												$dsql->Execute("ut");
@@ -58,7 +58,7 @@
 									<tr>
 										<td>授权栏目</td>
 										<td>
-											<select name="typeids[]" id="typeid" multiple="yes" class="admin-input-lg">
+											<select name="typeids[]" id="typeid" multiple="yes" class="form-select admin-w-lg">
 												<option value="0" selected>所有栏目</option>
 												<?php echo $typeOptions?>
 											</select>
@@ -67,16 +67,16 @@
 									</tr>
 									<tr>
 										<td>姓名</td>
-										<td><input type="text" name="tname" id="tname" class="admin-input-sm"></td>
+										<td><input type="text" name="tname" id="tname" class="form-control admin-w-sm"></td>
 									</tr>
 									<tr>
 										<td>邮箱</td>
-										<td><input type="text" name="email" id="email" autocomplete="off" class="admin-input-sm"></td>
+										<td><input type="text" name="email" id="email" autocomplete="off" class="form-control admin-w-sm"></td>
 									</tr>
 									<tr>
 										<td>验证安全码</td>
 										<td>
-											<input type="text" name="safecode" id="safecode" class="admin-input-sm">
+											<input type="text" name="safecode" id="safecode" class="form-control admin-w-sm">
 											<input type="hidden" name="randcode" value="<?php echo $randcode;?>">
 											<span>（安全码：<?php echo $safecode;?>）</span>
 										</td>

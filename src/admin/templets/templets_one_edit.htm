@@ -26,11 +26,11 @@
 								<tbody>
 									<tr>
 										<td width="260">页面标题</td>
-										<td><input type="text" name="title" id="title" value="<?php echo $row['title'];?>" class="admin-input-lg" required></td>
+										<td><input type="text" name="title" id="title" value="<?php echo $row['title'];?>" class="form-control admin-w-lg" required></td>
 									</tr>
 									<tr>
 										<td>页面关键词</td>
-										<td><input type="text" name="keywords" id="keywords" value="<?php echo $row['keywords'];?>" class="admin-input-lg"></td>
+										<td><input type="text" name="keywords" id="keywords" value="<?php echo $row['keywords'];?>" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
 										<td>页面摘要信息</td>
@@ -39,10 +39,10 @@
 									<tr>
 										<td>关联标识</td>
 										<td>
-											<input type="text" name="likeid" id="likeid" value="<?php echo $row['likeid'];?>" class="admin-input-lg">
+											<input type="text" name="likeid" id="likeid" value="<?php echo $row['likeid'];?>" class="form-control admin-w-lg">
 											<input type="hidden" name="oldlikeid" id="oldlikeid" value="<?php echo $row['likeid'];?>">
 											<?php
-											echo "<select name='likeidsel' id='likeidsel' class='admin-input-sm'>";
+											echo "<select name='likeidsel' id='likeidsel' class='form-select admin-w-sm'>";
 											$dsql->Execute('s',"Select likeid From `#@__sgpage` group  by likeid ");
 											echo "<option value='{$row['likeid']}' selected>{$row['likeid']}</option>";
 											while($arr = $dsql->GetArray('s'))
@@ -56,18 +56,20 @@
 									<tr>
 										<td>保存位置</td>
 										<td>
-											<input type="hidden" name="oldfilename" id="oldfilename" value="<?php echo $row['filename'];?>" class="admin-input-lg">
-											<input type="text" name="nfilename" id="nfilename" value="<?php echo $row['filename'];?>" class="admin-input-lg">（填写路径文件夹）
+											<input type="hidden" name="oldfilename" id="oldfilename" value="<?php echo $row['filename'];?>" class="form-control admin-w-lg">
+											<input type="text" name="nfilename" id="nfilename" value="<?php echo $row['filename'];?>" class="form-control admin-w-lg">（填写路径文件夹）
 										</td>
 									</tr>
 									<tr>
 										<td>模板文件名</td>
-										<td><input type="text" name="template" id="template" value="<?php echo $row['template'];?>" class="admin-input-lg">（填写模板名称）</td>
+										<td><input type="text" name="template" id="template" value="<?php echo $row['template'];?>" class="form-control admin-w-lg">（填写模板名称）</td>
 									</tr>
 									<tr>
 										<td>是否编译文档</td>
 										<td>
-											<?php if (!DEDEX_SAFE_MODE) {?> <label><input type="radio" name="ismake" value="1" <?php if ($row['ismake']==1) echo 'checked';?>> 含模板标记，要编译</label> <?php }?>
+											<?php if (!DEDEX_SAFE_MODE) {?>
+											<label><input type="radio" name="ismake" value="1" <?php if ($row['ismake']==1) echo 'checked';?>> 含模板标记，要编译</label>
+											<?php }?>
 											<label><input type="radio" name="ismake" value="0" <?php if ($row['ismake']==0  || DEDEX_SAFE_MODE) echo 'checked';?>> 不含模板标记，不需要编译</label>
 										</td>
 									</tr>

@@ -19,7 +19,7 @@
 							<?php
 							$tl = new TypeLink(0);
 							$typeOptions = $tl->GetOptionArray(0,0,0);
-							echo "<select name='typeid' class='form-control'>";
+							echo "<select name='typeid' class='form-select'>";
 							echo "<option value='0' selected>不限栏目</option>";
 							echo $typeOptions;
 							echo "</select>";
@@ -45,7 +45,7 @@
 					<tr>
 						<td>文档类型</td>
 						<td>
-							<select name="channeltype" id="channeltype" class="form-control">
+							<select name="channeltype" id="channeltype" class="form-select">
 								<option value="0" selected>不限</option>
 								<?php
 								$dsql->SetQuery("SELECT id,typename FROM `#@__channeltype` ORDER BY id DESC");
@@ -61,7 +61,7 @@
 					<tr>
 						<td>排序方式</td>
 						<td>
-							<select name="orderby" id="orderby" class="form-control">
+							<select name="orderby" id="orderby" class="form-select">
 								<option value="sortrank" selected>默认</option>
 								<option value="senddate">收录时间</option>
 								<option value="pubdate">发布时间</option>
@@ -83,7 +83,7 @@
 					<tr>
 						<td>搜索文档</td>
 						<td>
-							<select name="searchtype" id="searchtype" class="form-control">
+							<select name="searchtype" id="searchtype" class="form-select">
 								<option value="titlekeyword" selected>默认搜索</option>
 								<option value="title">仅搜索标题</option>
 							</select>

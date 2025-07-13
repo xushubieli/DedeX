@@ -33,7 +33,7 @@
 								<tbody>
 									<tr>
 										<td>标记名称</td>
-										<td><input type="text" name="tagname" id="tagname" class="admin-input-md" required>（使用英文或数字表示标识）</td>
+										<td><input type="text" name="tagname" id="tagname" class="form-control admin-w-md" required>（使用英文或数字表示标识）</td>
 									</tr>
 									<tr>
 										<td width="260">所属栏目</td>
@@ -41,7 +41,7 @@
 											<?php
 											$tl = new TypeLink(0);
 											$typeOptions = $tl->GetOptionArray(0,0,0);
-											echo "<select name='typeid' class='admin-input-md'>";
+											echo "<select name='typeid' class='form-select admin-w-md'>";
 											echo "<option value='0' selected>没有继承本标记所有栏目</option>";
 											echo $typeOptions;
 											echo "</select>";
@@ -57,11 +57,11 @@
 									</tr>
 									<tr>
 										<td>开始时间</td>
-										<td><input type="text" name="starttime" id="starttime" value="<?php echo $startDay;?>" class="datepicker admin-input-md"></td>
+										<td><input type="text" name="starttime" id="starttime" value="<?php echo $startDay;?>" class="form-control datepicker admin-w-md"></td>
 									</tr>
 									<tr>
 										<td>结束时间</td>
-										<td><input type="text" name="endtime" id="endtime" value="<?php echo $endDay;?>" class="datepicker admin-input-md"></td>
+										<td><input type="text" name="endtime" id="endtime" value="<?php echo $endDay;?>" class="form-control datepicker admin-w-md"></td>
 									</tr>
 									<tr>
 										<td>标记内容</td>

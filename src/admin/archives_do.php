@@ -233,7 +233,7 @@ else if ($dopost == "checkArchives") {
         $channelid = empty($channelid) ? 0 : $channelid;
         $tl = new TypeLink($aid);
         $typeOptions = $tl->GetOptionArray(0, $admin_catalogs, $channelid);
-        $typeOptions = "<select name='totype' class='admin-input-sm'>
+        $typeOptions = "<select name='totype' class='form-select admin-w-sm'>
         <option value='0'>请选择移动位置</option>
         $typeOptions
         </select>";
@@ -252,7 +252,7 @@ else if ($dopost == "checkArchives") {
             </tr>
             <tr>
                 <td>文档id</td>
-                <td><input type="text" name="tmpids" class="admin-input-lg" value="<?php echo $qstr;?>"></td>
+                <td><input type="text" name="tmpids" class="form-control admin-w-lg" value="<?php echo $qstr;?>"></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
@@ -473,7 +473,7 @@ else if ($dopost == 'quickEdit') {
             <td>
                 <?php
                 $typeOptions = GetOptionList($arcRow['typeid'], $cuserLogin->getUserChannel(), $arcRow['channel']);
-                echo "<select name='typeid' class='admin-input-sm'>";
+                echo "<select name='typeid' class='form-select admin-w-sm'>";
                 if ($arcRow["typeid"] == "0") echo "<option value='0' selected>请选择文档栏目</option>";
                 echo $typeOptions;
                 echo "</select>";
@@ -499,16 +499,16 @@ else if ($dopost == 'quickEdit') {
         </tr>
         <tr>
             <td>标题</td>
-            <td><input type="text" name="title" id="title" value="<?php echo $arcRow['title'];?>" class="admin-input-lg"></td>
+            <td><input type="text" name="title" id="title" value="<?php echo $arcRow['title'];?>" class="form-control admin-w-lg"></td>
         </tr>
         <tr>
             <td>简略标题</td>
-            <td><input type="text" name="shorttitle" id="shorttitle" value="<?php echo $arcRow['shorttitle'];?>" class="admin-input-lg"></td>
+            <td><input type="text" name="shorttitle" id="shorttitle" value="<?php echo $arcRow['shorttitle'];?>" class="form-control admin-w-lg"></td>
         </tr>
         <tr>
             <td>浏览权限</td>
             <td>
-                <select name="arcrank" id="arcrank" class="admin-input-sm">
+                <select name="arcrank" id="arcrank" class="form-select admin-w-sm">
                     <option value='<?php echo $arcRow["arcrank"] ?>'>
                     <?php echo $arcRow["rankname"] ?> </option>
                     <?php
@@ -525,11 +525,11 @@ else if ($dopost == 'quickEdit') {
         </tr>
         </tr>
             <td>金币</td>
-            <td><input type="text" name="money" id="money" value="<?php echo $arcRow["money"];?>" class="admin-input-sm"></td>
+            <td><input type="text" name="money" id="money" value="<?php echo $arcRow["money"];?>" class="form-control admin-w-sm"></td>
         <tr>
         <tr>
             <td>关键词</td>
-            <td><input type="text" name="keywords" id="keywords" value="<?php echo $arcRow['keywords'];?>" class="admin-input-lg"></td>
+            <td><input type="text" name="keywords" id="keywords" value="<?php echo $arcRow['keywords'];?>" class="form-control admin-w-lg"></td>
         </tr>
         <tr>
             <td colspan="2" align="center">
