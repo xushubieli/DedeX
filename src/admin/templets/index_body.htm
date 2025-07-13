@@ -121,7 +121,7 @@
 						</div>
 						<div class="col-12">
 							<div class="card shadow-sm">
-								<div class="card-header"><i class="fa fa-list"></i> 最新文档</div>
+								<div class="card-header"><i class="fa fa-list"></i> 最新发布</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-borderless table-hover">
@@ -140,7 +140,7 @@
 														if (trim($row['editcon'])=='') {
 															$row['editcon'] = 'archives_edit.php';
 														}
-														$rowarcrank = $row['arcrank']==-1 ? '<span class="btn btn-warning btn-xs">待审核</span>' : '<span class="btn btn-success btn-xs">已审核</span>';
+														$rowarcrank = $row['arcrank']==-1 ? '待审核' : '已审核';
 														$pubdate = GetDateMk($row['pubdate']);
 														$row['title'] = cn_substr($row['title'], 190);
 														echo "<tr><td width='100'>{$pubdate}</td><td><a href='{$row['editcon']}?aid={$row['id']}&channelid={$row['channel']}'>{$row['title']}</a></td><td width='60'>{$rowarcrank}</td></tr>";
@@ -211,7 +211,7 @@
 												</tr>
 												<tr>
 													<td>当前版本</td>
-													<td><?php echo $cfg_version_detail;?></td>
+													<td>v<?php echo $cfg_version_detail;?></td>
 												</tr>
 												<tr>
 													<td>技术支持</td>

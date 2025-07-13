@@ -48,11 +48,11 @@ function DedeConfirm(content = "", title = "确认提示") {
 		let modal = `<div id="DedeModal${modalID}" class="modal fade" tabindex="-1" aria-labelledby="DedeModalLabel${modalID}" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="DedeModalLabel${modalID}">${title}</h5>`;
 		modal += `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 		modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
-		$("body").append(modal)
-		new bootstrap.Modal(document.getElementById(`DedeModal${modalID}`), {
+		$("body").append(modal);
+		$("#DedeModal" + modalID).modal({
 			backdrop: 'static',
 			keyboard: false
-		}).show();
+		}).modal('show');
 		$("#DedeModal" + modalID).on('hidden.bs.modal', function(e) {
 			$("#DedeModal" + modalID).remove();
 		});
@@ -87,11 +87,11 @@ function ShowMsg(content, ...args) {
 		modal += `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 	}
 	modal += `</div><div class="modal-body">${content}</div><div class="modal-footer">${footer}</div></div></div></div>`;
-	$("body").append(modal)
-	new bootstrap.Modal(document.getElementById(`GKModal${modalID}`), {
+	$("body").append(modal);
+	$("#GKModal" + modalID).modal({
 		backdrop: 'static',
 		keyboard: false
-	}).show();
+	}).modal('show');
 	$("#GKModal" + modalID).on('hidden.bs.modal', function(e) {
 		$("#GKModal" + modalID).remove();
 	});

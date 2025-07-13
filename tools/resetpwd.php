@@ -88,3 +88,4 @@ $win->AddMsgItem('<tr>
 </tr>');
 $winform = $win->GetWindow('ok');
 $win->Display();
+?>

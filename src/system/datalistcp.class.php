@@ -237,7 +237,6 @@ class DataListCP
         for ($j; $j <= $total_list; $j++) {
             $listdd .= $j == $this->pageNO ? "<li class='page-item active'><span class='page-link'>{$j}</span></li>\r\n" : "<li class='page-item'><a class='page-link' href='{$purl}pageno={$j}'>{$j}</a></li>\r\n";
         }
-
         $plist = "<div class='d-flex justify-content-end'>\r\n";
         $sizesel = "<select name='pagesize' id='dedepagesize' class='form-control me-3' style='width:120px'>\r\n";
         $sizesel .= "<option value='30' ".($this->pagesize == 30 ? "selected='selected'" : "").">30条/页</option>\r\n";

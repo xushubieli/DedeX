@@ -225,7 +225,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
         $orwheres[] = 'arc.arcrank > -1';
         //否定栏目调用
         if (!empty($notypeid)) {
-            $orwheres[] = "and arc.typeid NOT IN (".GetSonIds($notypeid).")";
+            $orwheres[] = "And arc.typeid NOT IN (".GetSonIds($notypeid).")";
         }
     }
     //文档排序的方式
@@ -256,7 +256,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
         $orwhere = preg_replace("#^ And#is", '', $orwhere);
         $orwhere = preg_replace("#And[ ]{1,}And#is", 'And ', $orwhere);
     }
-    if ($orwhere != '') $orwhere = "WHERE $orwhere and tp.ishidden != 1";
+    if ($orwhere != '') $orwhere = "WHERE $orwhere And tp.ishidden != 1";
     //获取附加表信息
     $addfield = trim($ctag->GetAtt('addfields'));
     $addfieldsSql = '';

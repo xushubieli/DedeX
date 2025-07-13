@@ -4,7 +4,7 @@ DedeX系统基于PHP7开发，遵循GPLv2协议开源，具有简洁易用、灵
 
 ## 版本说明
 
-DedeX1.x是一个LTS版本，支持将到2035年11月截止，目前DedeX已经发布，可以[点击下载](https://codeload.github.com/xushubieli/DedeX/zip/refs/heads/main)获取。
+DedeX是一个LTS版本，支持将到2035年11月截止，目前DedeX已经发布，可以[点击下载](https://codeload.github.com/xushubieli/DedeX/zip/refs/heads/main)获取。
 
 ![DedeX](docs/dedex.png)
 
