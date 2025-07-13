@@ -71,7 +71,7 @@ if (!empty($iseditor)) {
                     <input type="hidden" name="imgstick" value="<?php echo $imgstick ?>">
                     <input type="hidden" name="CKEditorFuncNum" value="<?php echo isset($CKEditorFuncNum) ? $CKEditorFuncNum : 1;?>">
                     <input type="hidden" name="job" value="upload">
-                    <input type="file" name="imgfile">
+                    <input type="file" name="imgfile" class="form-control admin-w-lg">
                     <label><input type="checkbox" name="needwatermark" value="1" <?php if ($photo_markup == '1') echo 'checked';?>> 水印</label>
                     <label><input type="checkbox" name="resize" value="1"> 缩小</label>
                     <label><input type="text" name="iwidth" value="<?php echo $cfg_ddimg_width ?>" class="form-control admin-w-xs"> 宽</label>
