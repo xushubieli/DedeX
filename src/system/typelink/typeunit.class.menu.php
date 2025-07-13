@@ -97,9 +97,9 @@ class TypeUnit
             }
             echo "<dl>\r\n";
             echo "<dd><img onclick=\"LoadSuns('suns{$id}',{$id});\" style='cursor:pointer'></dd>\r\n";
-            echo "<dd><a href='catalog_do.php?cid=".$id."&dopost=listArchives'>".$typeName."</a></dd>\r\n";
+            echo "<dd><a href='catalog_do.php?cid={$id}&dopost=listArchives'>{$typeName}</a></dd>\r\n";
             echo "</dl>\r\n";
-            echo "<div id='suns".$id."'>";
+            echo "<div id='suns{$id}'>";
             if ($lastid == $id || $cfg_admin_channel == 'array') {
                 $this->LogicListAllSunType($id, "　");
             }
@@ -119,7 +119,7 @@ class TypeUnit
     {
         global $cfg_admin_channel, $admin_catalogs;
         $fid = $id;
-        $this->dsql->SetQuery("SELECT id,reid,typedir,typename,ispart,channeltype FROM `#@__arctype` WHERE reid='".$id."' ORDER BY sortrank");
+        $this->dsql->SetQuery("SELECT id,reid,typedir,typename,ispart,channeltype FROM `#@__arctype` WHERE reid='{$id}' ORDER BY sortrank");
         $this->dsql->Execute($fid);
         if ($this->dsql->GetTotalRow($fid) > 0) {
             while ($row = $this->dsql->GetObject($fid)) {
@@ -152,11 +152,9 @@ class TypeUnit
                     else {
                         continue;
                     }
-                    echo "<table>\r\n";
-                    echo "<tr>\r\n";
-                    echo "<td align='left'>".$step."<a href='catalog_do.php?cid=".$id."&dopost=listArchives'>".$typeName."</a></td>\r\n";
-                    echo "</tr>\r\n";
-                    echo "</table>\r\n";
+                    echo "<table><tbody>\r\n";
+                    echo "<tr><td>{$step}<a href='catalog_do.php?cid={$id}&dopost=listArchives'>{$typeName}</a></td></tr>\r\n";
+                    echo "</tbody></table>\r\n";
                     $this->LogicListAllSunType($id, $step."　", false);
                 }
             }

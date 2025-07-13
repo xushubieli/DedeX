@@ -73,7 +73,7 @@ if ($dopost == 'makeindex') {
     $templet = str_replace("{style}", $cfg_df_style, $row['templet']);
     $homeFile = dirname(__FILE__).'/'.$row['position'];
     $homeFile = str_replace("//", "/", str_replace("\\", "/", $homeFile));
-    $fp = fopen($homeFile, 'w') or die("无法更新网站首页到：".$homeFile."位置");
+    $fp = fopen($homeFile, 'w') or die("无法更新网站首页到：{$homeFile}位置");
     fclose($fp);
     $tpl = $cfg_basedir.$cfg_templets_dir.'/'.$templet;
     if (!file_exists($tpl)) {

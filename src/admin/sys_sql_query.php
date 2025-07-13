@@ -162,7 +162,7 @@ else if ($dopost == "query") {
         if ($dsql->GetTotalRow() <= 0) {
             echo "运行SQL：{$sqlquery}无返回记录";
         } else {
-            echo "运行SQL：{$sqlquery}共有".$dsql->GetTotalRow()."条记录，最大返回100条";
+            echo "运行SQL：{$sqlquery}共有{$dsql->GetTotalRow()}条记录，最大返回100条";
         }
         $j = 0;
         while ($row = $dsql->GetArray()) {

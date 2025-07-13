@@ -95,7 +95,7 @@ class TypeUnitSelector
         $fid = $id;
         $oldvalues = array();
         if (!empty($oldvalue)) $oldvalues = explode(',', $oldvalue);
-        $this->dsql->SetQuery("SELECT id,reid,typedir,typename,ispart,channeltype FROM `#@__arctype` WHERE reid='".$id."' ORDER BY sortrank");
+        $this->dsql->SetQuery("SELECT id,reid,typedir,typename,ispart,channeltype FROM `#@__arctype` WHERE reid='{$id}' ORDER BY sortrank");
         $this->dsql->Execute($fid);
         while ($row = $this->dsql->GetObject($fid)) {
             if ($cfg_admin_channel == 'array' && !in_array($row->id, $admin_catalogs)) {
@@ -117,10 +117,10 @@ class TypeUnitSelector
                 continue;
             }
             if ($chackRadio != '') {
-                $soncat .= "<div class='list'><label>".$chackRadio .' '. $typeName."</label></div>\r\n";
+                $soncat .= "<div class='list'><label>{$chackRadio} {$typeName}</label></div>\r\n";
                 $this->LogicListAllSunType($id, $channel, $soncat);
             } else {
-                $soncat .= "<div class='list'>".$typeName."</div>\r\n";
+                $soncat .= "<div class='list'>{$typeName}</div>\r\n";
                 $this->LogicListAllSunType($id, $channel, $soncat);
             }
         }

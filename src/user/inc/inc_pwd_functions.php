@@ -67,8 +67,8 @@ function newmail($mid, $userid, $mailto, $type, $send)
     $mailtime = time();
     $randval = random(8);
     $mailtitle = $cfg_webname.":密码修改";
-    $headers = "From:".$cfg_adminemail."\r\nReply-To:$cfg_adminemail";
-    $mailbody = "尊敬的".$userid."会员，临时验证码：".$randval."\r\n请在3天内修改登录密码：".$cfg_basehost.$cfg_memberurl."/resetpassword.php?dopost=getpasswd&id=".$mid;
+    $headers = "From: {$cfg_adminemail}\r\nReply-To: {$cfg_adminemail}";
+    $mailbody = "尊敬的{$userid}会员，临时验证码：{$randval}\r\n请在3天内修改登录密码：{$cfg_basehost}{$cfg_memberurl}/resetpassword.php?dopost=getpasswd&id={$mid}";
     if ($type == 'INSERT') {
         $key = md5($randval);
         $sql = "INSERT INTO `#@__pwd_tmp` (`mid` ,`membername` ,`pwd` ,`mailtime`) VALUES ('$mid', '$userid',  '$key', '$mailtime');";
@@ -77,7 +77,7 @@ function newmail($mid, $userid, $mailto, $type, $send)
                 sendmail($mailto, $mailtitle, $mailbody, $headers);
                 return ShowMsg('验证码已经发送到原来的邮箱，请注意查收', 'login.php', '', '5000');
             } else if ($send == 'N') {
-                return ShowMsg('正在前往密码修改', $cfg_basehost.$cfg_memberurl."/resetpassword.php?dopost=getpasswd&id=".$mid."&key=".$randval);
+                return ShowMsg("正在前往密码修改", "{$cfg_basehost}{$cfg_memberurl}/resetpassword.php?dopost=getpasswd&id={$mid}&key={$randval}");
             }
         } else {
             return ShowMsg('修改失败，请联系管理员', 'login.php');
@@ -90,7 +90,7 @@ function newmail($mid, $userid, $mailto, $type, $send)
                 sendmail($mailto, $mailtitle, $mailbody, $headers);
                 ShowMsg('临时验证码已经发送到原来的邮箱请查收', 'login.php');
             } else if ($send === 'N') {
-                return ShowMsg('正在前往密码修改', $cfg_basehost.$cfg_memberurl."/resetpassword.php?dopost=getpasswd&id=".$mid."&key=".$randval);
+                return ShowMsg("正在前往密码修改", "{$cfg_basehost}{$cfg_memberurl}/resetpassword.php?dopost=getpasswd&id={$mid}&key={$randval}");
             }
         } else {
             ShowMsg('修改失败，请与管理员联系', 'login.php');

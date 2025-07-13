@@ -79,7 +79,7 @@ class TypeLink
     //获得某栏目的链接列表：栏目一-栏目二--栏目三，islink表示返回的列表是否带连接
     function GetPositionLink($islink = true)
     {
-        $indexpage = "<li class='breadcrumb-item'><a href='".$this->indexUrl."'>".$this->indexName."</a></li>";
+        $indexpage = "<li class='breadcrumb-item'><a href='{$this->indexUrl}'>{$this->indexName}</a></li>";
         if ($this->valuePosition != "" && $islink) {
             return $this->valuePosition;
         } else if ($this->valuePositionName != "" && !$islink) {
@@ -134,7 +134,7 @@ class TypeLink
     function GetOneTypeLink($typeinfos)
     {
         $typepage = $this->GetOneTypeUrl($typeinfos);
-        $typelink = "<li class='breadcrumb-item'><a href='".$typepage."'>".$typeinfos['typename']."</a></li>";
+        $typelink = "<li class='breadcrumb-item'><a href='{$typepage}'>{$typeinfos['typename']}</a></li>";
         return $typelink;
     }
     //获得某分类连接链接
@@ -167,9 +167,9 @@ class TypeLink
             $row = $this->dsql->GetOne("SELECT id,typename,ispart,channeltype FROM `#@__arctype` WHERE id='$hid'");
             $channeltype = $row['channeltype'];
             if ($row['ispart'] == 1) {
-                $this->OptionArrayList .= "<option value='".$row['id']."' class='opt-bg1' selected>".$row['typename']."</option>\r\n";
+                $this->OptionArrayList .= "<option value='{$row['id']}' class='opt-bg1' selected>{$row['typename']}</option>\r\n";
             } else {
-                $this->OptionArrayList .= "<option value='".$row['id']."' selected>".$row['typename']."</option>\r\n";
+                $this->OptionArrayList .= "<option value='{$row['id']}' selected>{$row['typename']}</option>\r\n";
             }
         }
         if ($channeltype == 0) $ctsql = '';
@@ -201,9 +201,9 @@ class TypeLink
         while ($row = $this->dsql->GetObject()) {
             if ($row->id != $hid) {
                 if ($row->ispart == 1) {
-                    $this->OptionArrayList .= "<option value='".$row->id."' class='opt-bg1'>".$row->typename."</option>\r\n";
+                    $this->OptionArrayList .= "<option value='{$row->id}' class='opt-bg1'>{$row->typename}</option>\r\n";
                 } else {
-                    $this->OptionArrayList .= "<option value='".$row->id."'>".$row->typename."</option>\r\n";
+                    $this->OptionArrayList .= "<option value='{$row->id}'>{$row->typename}</option>\r\n";
                 }
             }
             $this->LogicGetOptionArray($row->id, "─", $oper);
@@ -223,16 +223,16 @@ class TypeLink
     {
         global $cfg_admin_channel;
         if (empty($cfg_admin_channel)) $cfg_admin_channel = 'all';
-        $this->dsql->SetQuery("SELECT id,typename,ispart FROM `#@__arctype` WHERE reid='".$id."' ORDER BY sortrank ASC");
+        $this->dsql->SetQuery("SELECT id,typename,ispart FROM `#@__arctype` WHERE reid='{$id}' ORDER BY sortrank ASC");
         $this->dsql->Execute($id);
         while ($row = $this->dsql->GetObject($id)) {
             if (is_array($oper) && $cfg_admin_channel != 'all') {
                 if (!in_array($row->id, $oper)) continue;
             }
             if ($row->ispart == 1) {
-                $this->OptionArrayList .= "<option value='".$row->id."' class='opt-bg1'>└$step ".$row->typename."</option>\r\n";
+                $this->OptionArrayList .= "<option value='{$row->id}' class='opt-bg1'>└{$step} {$row->typename}</option>\r\n";
             } else {
-                $this->OptionArrayList .= "<option value='".$row->id."'>└$step ".$row->typename."</option>\r\n";
+                $this->OptionArrayList .= "<option value='{$row->id}'>└{$step} {$row->typename}</option>\r\n";
             }
             $this->LogicGetOptionArray($row->id, $step."─", $oper);
         }

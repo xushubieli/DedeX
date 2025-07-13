@@ -171,7 +171,7 @@ echo <<<tpl
 </div>
 tpl;
             }
-            echo "<div id='suns".$id."'>";
+            echo "<div id='suns{$id}'>";
             $lastid = GetCookie('lastCid');
             if ($channel == $id || $lastid == $id || isset($GLOBALS['exallct']) || $cfg_admin_channel == 'array') {
                 $this->LogicListAllSunType($id, "");
@@ -192,7 +192,7 @@ tpl;
     {
         global $cfg_admin_channel, $admin_catalogs;
         $fid = $id;
-        $this->dsql->SetQuery("SELECT id,reid,typedir,typename,ispart,sortrank,ishidden FROM `#@__arctype` WHERE reid='".$id."' ORDER BY sortrank");
+        $this->dsql->SetQuery("SELECT id,reid,typedir,typename,ispart,sortrank,ishidden FROM `#@__arctype` WHERE reid='{$id}' ORDER BY sortrank");
         $this->dsql->Execute($fid);
         if ($this->dsql->GetTotalRow($fid) > 0) {
             while ($row = $this->dsql->GetObject($fid)) {
@@ -283,7 +283,7 @@ echo <<<tpl
 </div>
 tpl;
                 }
-                echo "<div id='suns".$id."' style='".(isset($GLOBALS['exallct'])? "" : "display:none")."'>";
+                echo "<div id='suns{$id}' style='".(isset($GLOBALS['exallct'])? "" : "display:none")."'>";
                 $this->LogicListAllSunType($id, $step."──");
                 echo "</div>";
             }
@@ -330,7 +330,7 @@ tpl;
         $this->GetSunTypes($id);
         $query = "SELECT `#@__arctype`.*,`#@__channeltype`.typename AS ctypename, `#@__channeltype`.addtable FROM `#@__arctype` LEFT JOIN `#@__channeltype` ON `#@__channeltype`.id=`#@__arctype`.channeltype WHERE `#@__arctype`.id='$id' ";
         $typeinfos = $this->dsql->GetOne($query);
-        $topinfos = $this->dsql->GetOne("SELECT moresite,siteurl FROM `#@__arctype` WHERE id='".$typeinfos['topid']."'");
+        $topinfos = $this->dsql->GetOne("SELECT moresite,siteurl FROM `#@__arctype` WHERE id='{$typeinfos['topid']}'");
         if (!is_array($typeinfos)) {
             return FALSE;
         }
@@ -342,7 +342,7 @@ tpl;
         foreach ($this->idArray as $id) {
             $myrow = $this->dsql->GetOne("SELECT * FROM `#@__arctype` WHERE id='$id'");
             if ($myrow['topid'] > 0) {
-                $mytoprow = $this->dsql->GetOne("SELECT moresite,siteurl FROM `#@__arctype` WHERE id='".$myrow['topid']."'");
+                $mytoprow = $this->dsql->GetOne("SELECT moresite,siteurl FROM `#@__arctype` WHERE id='{$myrow['topid']}'");
                 if (is_array($mytoprow) && !empty($mytoprow)) {
                     foreach ($mytoprow as $k => $v) {
                         if (!preg_match("/[0-9]/", $k)) {

@@ -211,7 +211,7 @@
 												while($row = $dsql->GetObject())
 												{
 													$selected = $row->rank == 0 ? ' selected' : '';
-													echo "<option value='".$row->rank."'{$selected}>".$row->membername."</option>";
+													echo "<option value='".$row->rank."'{$selected}>{$row->membername}</option>";
 												}
 												?>
 											</select>

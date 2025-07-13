@@ -52,7 +52,7 @@
 								$dsql->Execute();
 								while($row = $dsql->GetObject())
 								{
-									echo "<option value='".$row->id."'>".$row->typename."</option>";
+									echo "<option value='{$row->id}'>{$row->typename}</option>";
 								}
 								?>
 							</select>

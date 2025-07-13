@@ -29,7 +29,7 @@ if ($dopost == "delete") {
     $query = "UPDATE `#@__vote` SET votename='$votename',starttime='$starttime',endtime='$endtime',totalcount='$totalcount',ismore='$ismore',votenote='$votenote',isallow='$isallow',view='$view',spec='$spec',isenable='$isenable' WHERE aid='$aid'";
     if ($dsql->ExecuteNoneQuery($query)) {
         $vt = new DedeVote($aid);
-        $vote_file = DEDEDATA."/vote/vote_".$aid.".js";
+        $vote_file = DEDEDATA."/vote/vote_{$aid}.js";
         $vote_content = $vt->GetVoteForm();
         $vote_content = preg_replace(array("#/#", "#([\r\n])[\s]+#"), array("\/", " "), $vote_content); //取出文档中的空白字符并进行转义
         $vote_content = 'document.write("'.$vote_content.'");';

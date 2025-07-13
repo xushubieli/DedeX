@@ -28,7 +28,7 @@ if ($dopost == "clear") {
             $dquery .= " Or lid='$id' ";
         }
     }
-    if ($dquery != "") $dquery = " where ".$dquery;
+    if ($dquery != "") $dquery = " WHERE ".$dquery;
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__log` $dquery");
     ShowMsg("成功删除指定日志", $bkurl);
     exit();

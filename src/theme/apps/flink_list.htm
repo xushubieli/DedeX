@@ -31,9 +31,9 @@
 				{
 					$wtitle = cn_substr($dbrow->webname,$titlelen);
 					if ($dbrow->logo=="")
-					$revalue.= "<li class='list-group-item'><a href='".$dbrow->url."' target='_blank'>$wtitle</a></li>";
+					$revalue.= "<li class='list-group-item'><a href='{$dbrow->url}' target='_blank'>{$wtitle}</a></li>";
 				else
-					$revalue.= "<li class='list-group-item'><a href='".$dbrow->url."' target='_blank'><img src='".$dbrow->logo."' alt='$wtitle' class='thumbnail-sm'></a></li>";
+					$revalue.= "<li class='list-group-item'><a href='{$dbrow->url}' target='_blank'><img src='{$dbrow->logo}' alt='{$wtitle}' class='thumbnail-sm'></a></li>";
 				}
 				if (!$dbrow) break;
 			}

@@ -48,7 +48,7 @@ if ($dopost == "show") {
     $wintitle = "复制文档模型";
     $win = new OxWindow();
     $win->Init("mychannel_edit.php", "/static/web/js/admin.blank.js", "post");
-    $win->AddTitle("复制文档模型：".$row['typename']."");
+    $win->AddTitle("复制{$row['typename']}文档模型");
     $win->AddHidden("cid", $id);
     $win->AddHidden("id", $id);
     $win->AddHidden("dopost", 'copysave');
@@ -283,7 +283,7 @@ if ($dopost == "show") {
     $wintitle = "查看模型应用模板";
     $win = new OxWindow();
     $win->Init("", "/static/web/js/admin.blank.js", "");
-    $win->AddTitle("栏目".$row['typename']."默认模板文件说明");
+    $win->AddTitle("栏目{$row['typename']}默认模板文件说明");
     $defaulttemplate = $cfg_templets_dir.'/'.$cfg_df_style;
     $msg = "<tr>
         <td>
@@ -324,7 +324,7 @@ if ($dopost == "show") {
         $win->AddHidden("job", "yes");
         $win->AddHidden("dopost", $dopost);
         $win->AddHidden("id", $id);
-        $win->AddTitle("您确定要删除".$row['typename']."模型吗");
+        $win->AddTitle("您确定要删除{$row['typename']}模型吗");
         $winform = $win->GetWindow("ok");
         $win->Display();
         exit();

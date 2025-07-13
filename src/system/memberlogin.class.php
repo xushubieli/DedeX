@@ -537,7 +537,7 @@ class MemberLogin
             $sta .= "您目前等级是：".$row['membername'];
             $rs = $this->dsql->GetOne("SELECT id FROM `#@__admin` WHERE userid='".$this->M_LoginID."'");
             if (!is_array($rs)) {
-                if ($this->M_Rank > 10 && $this->M_HasDay > 0) $sta .= "，剩余".$this->M_HasDay."天";
+                if ($this->M_Rank > 10 && $this->M_HasDay > 0) $sta .= "，剩余{$this->M_HasDay}天";
                 else if ($this->M_Rank > 10) $sta .= "，<span class='text-danger'>会员已到期</span>";
             }
         }

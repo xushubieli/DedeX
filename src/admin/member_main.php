@@ -70,7 +70,7 @@ function GetMemberName($rank, $mt)
 {
     global $MemberTypes;
     if (isset($MemberTypes[$rank])) {
-        if ($mt == 'ut') return " <span class='btn btn-outline-secondary btn-sm'>待升级".$MemberTypes[$rank]."</span>";
+        if ($mt == 'ut') return " <span class='btn btn-outline-secondary btn-sm'>待升级{$MemberTypes[$rank]}</span>";
         else return $MemberTypes[$rank];
     } else {
         if ($mt == 'ut') return '';

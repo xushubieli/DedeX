@@ -56,7 +56,7 @@ if ($action == "save") {
     }
     $configstr .= "\$photo_markimg = '{$photo_markimg}';\r\n";
     $configstr = "<"."?php\r\n".$configstr."?".">\r\n";
-    $fp = fopen($ImageWaterConfigFile, "w") or die("写入文件".$ImageWaterConfigFile."失败，请检查权限");
+    $fp = fopen($ImageWaterConfigFile, "w") or die("写入文件{$ImageWaterConfigFile}失败，请检查权限");
     fwrite($fp, $configstr);
     fclose($fp);
     ShowMsg('成功更新图片水印设置', '-1');
