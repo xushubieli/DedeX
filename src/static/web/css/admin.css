@@ -46,7 +46,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 img {
 	max-width:100%;
-	border-radius:var(--xs-radius)
+	border-radius:var(--xs-radius);
+	object-fit:cover
 }
 form,label {
 	margin-bottom:0
@@ -66,7 +67,7 @@ input {
 input:focus,select:focus,textarea:focus,button:focus,.btn:focus {
 	border-color:var(--xs-blue-300);
 	box-shadow:0 0 0 0.25rem rgba(13,110,253,0.25);
-	outline:0
+	outline:none
 }
 input[type=radio],input[type=checkbox],input[type=radio]:focus,input[type=checkbox]:focus {
 	width:14px;
@@ -201,6 +202,9 @@ textarea {
 .admin-head .logo .version {
 	font-size:12px;
 	color:var(--bs-white)
+}
+.admin-head .navbar-nav {
+	margin-right:auto
 }
 .admin-head .nav-item {
 	position:relative
@@ -360,7 +364,7 @@ body.menu-show .admin-content {
 	height:100vh;
 	background:#000;
 	opacity:0.5;
-	z-index:1980
+	z-index:19991
 }
 .adminmodal {
 	position:fixed;
@@ -423,7 +427,7 @@ body.menu-show .admin-content {
 .tipslite {
 	background:var(--bs-white);
 	border:1px solid var(--bs-gray-300);
-	z-index:19991
+	z-index:19995
 }
 .tips-box {
 	margin:1.75rem auto;
@@ -452,31 +456,6 @@ body.menu-show .admin-content {
 	word-break:break-all;
 	word-wrap:break-word
 }
-.atlas {
-	display:inline-block;
-	padding:0.5rem;
-	width:12.5%;
-	height:auto;
-	text-align:center
-}
-.atlas .atlas-head {
-	padding-bottom:75%;
-	position:relative
-}
-.atlas .atlas-head img {
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	object-fit:cover
-}
-.atlas .atlas-head,.atlas .atlas-body {
-	margin-bottom:0.5rem
-}
-.atlas .atlas-input {
-	width:100%
-}
 .toolad li {
 	display:inline-block;
 	padding:0.5rem;
@@ -485,6 +464,14 @@ body.menu-show .admin-content {
 .toolad .active {
 	color:var(--bs-blue)
 }
+.browsehappy {
+	padding:1rem 30px;
+	color:var(--bs-orange);
+	background:var(--bs-yellow)
+}
+.column:hover {
+	background:rgba(0,0,0,0.075)
+}
 #validateimg {
 	border-radius:0 var(--xs-radius) var(--xs-radius) 0;
 	cursor:pointer
@@ -492,25 +479,20 @@ body.menu-show .admin-content {
 #imgs-list {
 	display:grid;
 	grid-gap:1rem;
-	grid-template-columns:repeat(auto-fill,minmax(160px,1fr))
+	grid-template-columns:repeat(auto-fill,minmax(132px,1fr))
 }
 #imgs-list li {
 	position:relative
 }
-#imgs-list li .picbox {
-	padding-bottom:75%;
-	position:relative
-}
-#imgs-list li .picbox img {
-	position:absolute;
-	top:0;
-	left:0;
+#imgs-list li .picbox img,.atlas .atlas-head img,.opt-img .list a > img {
 	width:100%;
-	height:100%;
-	object-fit:cover
+	aspect-ratio:4 / 3
 }
 #imgs-list li .namebox {
-	padding-top:0.5rem
+	padding-top:0.5rem;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap
 }
 #imgs-list li.up-over .picbox:after {
 	position:absolute;
@@ -553,13 +535,18 @@ body.menu-show .admin-content {
 	width:500px;
 	height:auto
 }
-.browsehappy {
-	padding:1rem 30px;
-	color:var(--bs-orange);
-	background:var(--bs-yellow)
+.atlas {
+	display:inline-block;
+	padding:0.5rem;
+	width:12.5%;
+	height:auto;
+	text-align:center
 }
-.column:hover {
-	background:rgba(0,0,0,0.075)
+.atlas .atlas-head,.atlas .atlas-body {
+	margin-bottom:0.5rem
+}
+.atlas .atlas-input {
+	width:100%
 }
 .opt-img .list {
 	display:inline-block;
@@ -572,17 +559,7 @@ body.menu-show .admin-content {
 }
 .opt-img .list a {
 	display:block;
-	margin-bottom:0.5rem;
-	padding-bottom:75%;
-	position:relative
-}
-.opt-img .list a > img {
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	object-fit:cover
+	margin-bottom:0.5rem
 }
 .opt-img .list span {
 	display:block;
@@ -608,7 +585,7 @@ body.menu-show .admin-content {
 	position:absolute;
 	top:0;
 	left:0;
-	width:40px;
+	width:100%;
 	height:100%;
 	opacity:0;
 	cursor:pointer
@@ -627,25 +604,21 @@ body.menu-show .admin-content {
 }
 .thumbnail-md {
 	max-width:200px;
-	max-height:120px
+	max-height:150px
 }
 .thumbnail-sm {
-	max-width:80px;
-	max-height:80px
-}
-.admin-win {
-	background:var(--xs-bg);
-	border:1px solid var(--bs-gray-300)!important
-}
-.admin-win-iframe {
-	width:100%;
-	height:350px
+	max-width:70px;
+	max-height:70px
 }
 .admin-main-sort {
 	margin-left:1rem;
 	padding:0;
 	width:30px;
 	text-align:center
+}
+.admin-win-iframe {
+	width:100%;
+	height:350px
 }
 .admin-textarea-xl {
 	width:100%;
@@ -667,7 +640,7 @@ body.menu-show .admin-content {
 .admin-w-xs {
 	width:70px
 }
-.admin-btns {
+.admin-btns,.opt-img,#gallery,#galleryedit {
 	margin:-0.5rem
 }
 .admin-btns input,.admin-btns select,.admin-btns button,.admin-btns .btn {
@@ -685,18 +658,15 @@ body.menu-show .admin-content {
 	line-height:1.5
 }
 .card,.modal-content {
-	border:0
+	border:none
 }
 .card-header {
 	padding:1rem;
 	background-color:rgba(0,0,0,0);
 	border-bottom:1px solid rgba(0,0,0,0.05)
 }
-.card-body {
-	padding:1rem
-}
 .card-body canvas {
-	height:370px!important
+	height:350px!important
 }
 .table {
 	margin-bottom:0;
@@ -704,8 +674,8 @@ body.menu-show .admin-content {
 	color:var(--bs-gray)
 }
 .table.icon img {
-	width:20px;
-	height:20px;
+	width:18px;
+	height:18px;
 	border-radius:var(--xs-radius-sm)
 }
 .table th,.table td {
@@ -768,7 +738,7 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	border-radius:var(--xs-radius-sm)!important
 }
 .btn-close {
-	background:transparent var(--bs-btn-close-bg) center / 0.75em auto no-repeat
+	background:transparent var(--bs-btn-close-bg)center / 0.75em auto no-repeat
 }
 .btn+.btn {
 	margin-left:1rem
@@ -808,6 +778,10 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	.login-box {
 		padding:1.75rem
 	}
+	.admin-head .navbar-nav {
+		margin-right:unset;
+		margin-left:auto
+	}
 	body.menu-hide .admin-aside {
 		display:block;
 		width:100%
@@ -815,7 +789,7 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	body.menu-hide .admin-content {
 		left:100%
 	}
-	body.menu-show .admin-aside {
+	body.menu-show .admin-aside,.card .card-body .pagination {
 		display:none
 	}
 	body.menu-show .admin-content {
@@ -825,17 +799,11 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 		width:auto!important;
 		min-width:35%
 	}
-	.admin-head .navbar-nav {
-		margin-left:auto
-	}
-	.card .card-body .pagination {
-		display:none
-	}
 	.container-fluid,.tips {
 		padding:0.75rem
 	}
 	.card-body canvas {
-		height:230px!important
+		height:220px!important
 	}
 	.adminmodal {
 		padding:0 0.5rem
@@ -844,7 +812,7 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 		margin:0.5rem auto;
 		width:auto
 	}
-	.pagination,.page-item {
-		display:inline-table
+	.opt-img .list,.opt-img .list.dir {
+		width:50%
 	}
 }

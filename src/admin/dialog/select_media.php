@@ -52,9 +52,9 @@ if (!empty($noeditor)) {
         <div class="card shadow-sm mb-3">
             <div class="card-body">
                 <form name="myform" action="select_media_post.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="activepath" value="<?php echo $activepath ?>">
+                    <input type="hidden" name="activepath" value="<?php echo $activepath;?>">
                     <?php $noeditor = !empty($noeditor) ? "<input type='hidden' name='noeditor' value='yes'>" : ''; echo $noeditor;?>
-                    <input type="hidden" name="f" value="<?php echo $f ?>">
+                    <input type="hidden" name="f" value="<?php echo $f;?>">
                     <input type="hidden" name="job" value="upload">
                     <input type="hidden" name="CKEditorFuncNum" value="<?php echo isset($CKEditorFuncNum) ? $CKEditorFuncNum : 1;?>">
                     <input type="file" name="uploadfile" class="form-control admin-w-lg">

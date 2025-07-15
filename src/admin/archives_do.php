@@ -324,8 +324,8 @@ else if ($dopost == 'return') {
     }
     $qstrs = explode('`', $qstr);
     foreach ($qstrs as $aid) {
-        $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET arcrank='-1',ismake='0' WHERE id='$aid'");
-        $dsql->ExecuteNoneQuery("UPDATE `#@__arctiny` SET `arcrank`='-1' WHERE id='$aid';");
+        $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET arcrank='-1',ismake='0' WHERE id='$aid' ");
+        $dsql->ExecuteNoneQuery("UPDATE `#@__arctiny` SET arcrank='-1' WHERE id='$aid' ");
     }
     ShowMsg("成功还原指定文档", "recycling.php");
     exit();
@@ -392,7 +392,7 @@ else if ($dopost == 'clear') {
         ShowMsg("成功删除指定文档", "recycling.php");
         exit();
     } else {
-        $dsql->SetQuery("SELECT id FROM `#@__archives` WHERE `arcrank` = '-2'");
+        $dsql->SetQuery("SELECT id FROM `#@__archives` WHERE arcrank='-2' ");
         $dsql->Execute();
         $qstr = '';
         while ($row = $dsql->GetArray()) {

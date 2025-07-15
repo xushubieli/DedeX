@@ -142,7 +142,7 @@
 														}
 														$rowarcrank = $row['arcrank']==-1 ? '待审核' : '已审核';
 														$pubdate = GetDateMk($row['pubdate']);
-														$row['title'] = cn_substr($row['title'], 190);
+														$row['title'] = cn_substr($row['title'], 150);
 														echo "<tr><td width='100'>{$pubdate}</td><td><a href='{$row['editcon']}?aid={$row['id']}&channelid={$row['channel']}'>{$row['title']}</a></td><td width='60'>{$rowarcrank}</td></tr>";
 													}
 												} else {

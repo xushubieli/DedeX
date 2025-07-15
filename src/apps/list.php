@@ -11,6 +11,17 @@ $t1 = ExecTime();
 $tid = (isset($tid) && is_numeric($tid) ? $tid : 0);
 $mod = (isset($mod) && is_numeric($mod) ? $mod : 0);
 $channelid = (isset($channelid) && is_numeric($channelid) ? $channelid : 0);
+//根据流量统计，限制用户浏览
+if ($cfg_access == 'Y') {
+    $viewIp = GetIP();
+    $moon = time() - (24 * 60 * 60);
+    $row = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS view_count FROM `#@__statistics_detail` WHERE ip='$viewIp' AND t>='$moon' AND url_type=1 ");
+    if ($row && $row['view_count'] > $cfg_access_count) {
+        header("HTTP/1.1 403 Forbidden");
+        echo "Access Denied";
+        exit();
+    }
+}
 if ($tid == 0 && $channelid == 0) die("dedex");
 if (isset($TotalResult)) $TotalResult = intval(preg_replace("/[^\d]/", '', $TotalResult));
 //如果指定了文档模型id但没有指定栏目id，那么自动获得为这个文档模型的第一个顶级栏目作为栏目默认栏目

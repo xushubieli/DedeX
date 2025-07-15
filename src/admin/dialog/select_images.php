@@ -64,18 +64,18 @@ if (!empty($iseditor)) {
             <div class="card-body">
                 <form name="myform" action="select_images_post.php" method="POST" enctype="multipart/form-data">
                     <?php $noeditor = !empty($noeditor) ? "<input type='hidden' name='noeditor' value='yes'>" : ''; echo $noeditor;?>
-                    <input type="hidden" name="activepath" value="<?php echo $activepath ?>">
-                    <input type="hidden" name="f" value="<?php echo $f ?>">
-                    <input type="hidden" name="v" value="<?php echo $v ?>">
-                    <input type="hidden" name="iseditor" value="<?php echo $iseditor ?>">
-                    <input type="hidden" name="imgstick" value="<?php echo $imgstick ?>">
+                    <input type="hidden" name="activepath" value="<?php echo $activepath;?>">
+                    <input type="hidden" name="f" value="<?php echo $f;?>">
+                    <input type="hidden" name="v" value="<?php echo $v;?>">
+                    <input type="hidden" name="iseditor" value="<?php echo $iseditor;?>">
+                    <input type="hidden" name="imgstick" value="<?php echo $imgstick;?>">
                     <input type="hidden" name="CKEditorFuncNum" value="<?php echo isset($CKEditorFuncNum) ? $CKEditorFuncNum : 1;?>">
                     <input type="hidden" name="job" value="upload">
                     <input type="file" name="imgfile" class="form-control admin-w-lg">
                     <label><input type="checkbox" name="needwatermark" value="1" <?php if ($photo_markup == '1') echo 'checked';?>> 水印</label>
                     <label><input type="checkbox" name="resize" value="1"> 缩小</label>
-                    <label><input type="text" name="iwidth" value="<?php echo $cfg_ddimg_width ?>" class="form-control admin-w-xs"> 宽</label>
-                    <label><input type="text" name="iheight" value="<?php echo $cfg_ddimg_height ?>" class="form-control admin-w-xs"> 高</label>
+                    <label><input type="text" name="iwidth" value="<?php echo $cfg_ddimg_width;?>" class="form-control admin-w-xs"> 宽</label>
+                    <label><input type="text" name="iheight" value="<?php echo $cfg_ddimg_height;?>" class="form-control admin-w-xs"> 高</label>
                     <button type="submit" class="btn btn-primary btn-sm">上传</button>
                 </form>
             </div>
@@ -108,7 +108,7 @@ if (!empty($iseditor)) {
                     else if ($file == "..") {
                         if ($activepath == "") continue;
                         $tmp = preg_replace("#[\/][^\/]*$#i", "", $activepath);
-                        $line = "<div class='d-flex justify-content-between align-items-center mb-3'>
+                        $line = "<div class='d-flex justify-content-between align-items-center p-2'>
                             <span>当前目录：{$activepath}</span>
                             <a href='select_images.php?imgstick={$imgstick}&v={$v}&f={$f}&activepath=".urlencode($tmp).$addparm."' class='btn btn-primary btn-sm'>返回上级</a>
                         </div>";

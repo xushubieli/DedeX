@@ -43,8 +43,8 @@ if (empty($comeback)) {
         <div class="card shadow-sm mb-3">
             <div class="card-body">
                 <form name="myform" action="select_templets_post.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="activepath" value="<?php echo $activepath ?>">
-                    <input type="hidden" name="f" value="<?php echo $f ?>">
+                    <input type="hidden" name="activepath" value="<?php echo $activepath;?>">
+                    <input type="hidden" name="f" value="<?php echo $f;?>">
                     <input type="hidden" name="job" value="upload">
                     <input type="file" name="uploadfile" class="form-control admin-w-lg">
                     <label>重命名：<input type="text" name="filename" class="form-control admin-w-sm"></label>

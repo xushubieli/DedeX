@@ -157,7 +157,9 @@
 									</tr>
 									<tr id="spagelist" style="display:none">
 										<td>每页图片数</td>
-										<td colspan="3"><input type="text" name="pagepicnum" id="pagpicnum" class="form-control admin-w-sm" value="<?php echo $cfg_album_pagesize;?>">（单页多图显示需要设置此参数，这种模式下系统不会为每张图单独生成缩略图）</td>
+										<td colspan="3"><input type="text" name="pagepicnum" id="pagpicnum" class="form-control admin-w-sm" value="<?php echo $cfg_album_pagesize;?>"></td>
+										<td>限制宽度</td>
+										<td><input type="text" name="maxwidth" id="maxwidth" class="form-control admin-w-sm" value="<?php echo $maxwidth;?>">（防止图片太宽在页面溢出）</td>
 									</tr>
 									<tr>
 										<td>本地上传</td>
