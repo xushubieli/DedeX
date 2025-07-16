@@ -472,10 +472,6 @@ body.menu-show .admin-content {
 .column:hover {
 	background:rgba(0,0,0,0.075)
 }
-#validateimg {
-	border-radius:0 var(--xs-radius) var(--xs-radius) 0;
-	cursor:pointer
-}
 #imgs-list {
 	display:grid;
 	grid-gap:1rem;
@@ -655,6 +651,7 @@ body.menu-show .admin-content {
 }
 .modal-title {
 	font-size:14px;
+	font-weight:400;
 	line-height:1.5
 }
 .card,.modal-content {
@@ -689,13 +686,14 @@ body.menu-show .admin-content {
 	height:30px;
 	color:var(--bs-gray)
 }
-.form-control,.form-select,.btn {
-	font-size:14px!important
-}
 a:hover,body.menu-hide .admin-content,body.menu-show .admin-content,.sidemenu .submenu li:hover,.admin-head,.column:hover,.table-hover tbody tr:hover {
 	transition:all 0.5s
 }
-input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipslite,#edsta,.cke_chrome,.cke_inner,.alert,.card,.rounded,.form-control,.btn {
+input,select,textarea,.form-control,.form-select,.btn {
+	font-size:14px!important;
+	border-radius:var(--xs-radius)
+}
+.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipslite,#edsta,.cke_chrome,.cke_inner,.alert,.card,.rounded {
 	border-radius:var(--xs-radius)!important
 }
 .cke_top {
@@ -703,14 +701,6 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 }
 .cke_bottom {
 	border-radius:0 0 var(--xs-radius) var(--xs-radius)!important
-}
-.input-group>.input-group-append>.btn {
-	border-top-left-radius:0!important;
-	border-bottom-left-radius:0!important
-}
-.input-group:not(.has-validation)>.form-control:not(:last-child) {
-	border-top-right-radius:0!important;
-	border-bottom-right-radius:0!important
 }
 .page-item:first-child .page-link {
 	border-top-left-radius:var(--xs-radius);
@@ -750,6 +740,10 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 .bg-primary {
 	background-color:var(--bs-primary)!important
 }
+.input-group #validateimg {
+	border-radius:0 var(--xs-radius) var(--xs-radius) 0;
+	cursor:pointer
+}
 .list-group-item.active {
 	background-color:var(--bs-primary);
 	border-color:var(--bs-primary)
@@ -768,9 +762,6 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	}
 }
 @media screen and (max-width:767px) {
-	td {
-		white-space:nowrap
-	}
 	.install-box {
 		width:100%;
 		min-width:100%
@@ -795,7 +786,10 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 	body.menu-show .admin-content {
 		left:0
 	}
-	.admin-textarea-xl,.admin-textarea-sm,.admin-w-lg,.admin-w-md,.admin-w-sm {
+	td {
+		white-space:nowrap
+	}
+	input.w-25,input.w-75,.admin-textarea-xl,.admin-textarea-sm,.admin-w-lg,.admin-w-md,.admin-w-sm {
 		width:auto!important;
 		min-width:35%
 	}
@@ -803,7 +797,7 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 		padding:0.75rem
 	}
 	.card-body canvas {
-		height:218px!important
+		height:208px!important
 	}
 	.adminmodal {
 		padding:0 0.5rem

@@ -78,7 +78,9 @@
 									<tr>
 										<td></td>
 										<td>
-											<div id="voteitem">选项1：<input type="text" name="voteitem1" id="voteitem1" class="form-control admin-w-lg"></div>
+											<div id="voteitem">
+												<p>选项1：<input type="text" name="voteitem1" id="voteitem1" class="form-control admin-w-lg"></p>
+											</div>
 										</td>
 									</tr>
 									<tr>
@@ -109,13 +111,13 @@
 					ShowMsg("最多添加15个选项");
 					return;
 				}
-				var htmldata = "<div class='my-2'>选项" + i + "：<input type='text' name='voteitem" + i + "' class='form-control admin-w-lg'></div>";
+				var htmldata = "<p>选项" + i + "：<input type='text' name='voteitem" + i + "' class='form-control admin-w-lg'></p>";
 				jQuery("#voteitem").append(htmldata);
 			}
 			function ResetItem() {
 				i = 1;
 				var obj = document.getElementById("voteitem");
-				obj.innerHTML = "<div class='my-2'>选项1：<input type='text' name='voteitem1' class='form-control admin-w-lg'></div>";
+				obj.innerHTML = "<p>选项1：<input type='text' name='voteitem1' class='form-control admin-w-lg'></p>";
 			}
 			$(function($) {
 				$('.datepicker1').daterangepicker({

@@ -126,13 +126,11 @@
 							<label for="softsize">软件大小</label>
 							<div class="input-group">
 								<input type="text" name="softsize" id="softsize" class="form-control">
-								<div class="input-group-append">
-									<select name="unit" id="unit" class="form-select">
-										<option value="MB" selected="selected">MB</option>
-										<option value="KB">KB</option>
-										<option value="GB">GB</option>
-									</select>
-								</div>
+								<select name="unit" id="unit" class="form-select">
+									<option value="MB" selected="selected">MB</option>
+									<option value="KB">KB</option>
+									<option value="GB">GB</option>
+								</select>
 							</div>
 						</div>
 						<div class="mb-3 col-md-6">
@@ -149,7 +147,7 @@
 						<label for="softurl1">软件网址：</label>
 						<div class="input-group mb-3">
 							<input type="text" name="softurl1" id="softurl1" class="form-control d-inline-block w-75">
-							<div class="input-group-append"><span class="btn btn-primary btn-sm btn-send" onclick="SelectSoft('addcontent.softurl1')">选择</span></div>
+							<span class="btn btn-primary btn-sm" onclick="SelectSoft('addcontent.softurl1')">选择</span>
 						</div>
 						<label for="servermsg1">下载名称：</label>
 						<input type="text" name="servermsg1" id="servermsg1" class="form-control" value="本地下载">
@@ -158,7 +156,7 @@
 						<span>其它地址：</span>
 						<input type="text" name="picnum" id="picnum" value="5" class="form-control w-25 ">
 						<button type="button" name="kkkup" id="kkkup2" onclick="MakeUpload();" class="btn btn-primary btn-sm">添加网址</button>
-						<button type="button" name="submit3" id="btsh3" onclick="ShowHideAddr();" class="btn btn-primary btn-sm">隐藏网址</button>
+						<button type="button" name="submit3" id="btsh3" onclick="ShowHideAddr();" class="btn btn-primary btn-sm">显隐网址</button>
 					</div>
 					<div id="morelink" style="display:none">
 						<?php echo "<div id='uploadfield'></div>";?>
@@ -182,12 +180,11 @@
 				morelinkobj.style.display = "block";
 				if (endNum > 12) endNum = 12;
 				for (startNum; startNum <= endNum; startNum++) {
-					upfield.innerHTML += "<div class='mb-3'><label>软件网址" + startNum + "：</label><div class='input-group mb-3'><input type='text' name='softurl" + startNum + "' class='form-control' placeholder='请选择软件上传或填写软件网址'><div class='input-group-append'><span class='btn btn-primary btn-sm btn-send' onclick=\"SelectSoft('addcontent.softurl"+startNum+"')\">选择</span></div></div><label>下载名称" + startNum + "：</label><input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control'></div>";
+					upfield.innerHTML += "<div class='mb-3'><label>软件网址" + startNum + "：</label><div class='input-group mb-3'><input type='text' name='softurl" + startNum + "' class='form-control' placeholder='请选择软件上传或填写软件网址'><button type='button' class='btn btn-primary btn-sm' onclick=\"SelectSoft('addcontent.softurl"+startNum+"')\">选择</button></div><label>下载名称" + startNum + "：</label><input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control'></div>";
 				}
 			}
 			function ShowHideAddr() {
-				document.getElementById('morelink').style.display = (document.getElementById('morelink').style.display == 'block' ? 'none' : 'block');
-				document.getElementById('btsh3').value = (document.getElementById('morelink').style.display == 'block' ? '隐藏网址' : '显示网址');
+				document.getElementById('morelink').style.display = document.getElementById('morelink').style.display == 'block' ? 'none' : 'block';
 			}
 		</script>
 		<?php include(DEDEMEMBER."/templets/widget_litpic.htm");?>

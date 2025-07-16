@@ -47,8 +47,7 @@ if (empty($dopost)) {
         if (is_array($dtp->CTags)) {
             foreach ($dtp->CTags as $ctag) {
                 if ($ctag->GetName() == 'link') {
-                    $nForm .= "<div class='mb-3'><label>下载地址".$newRowStart."：</label><div class='input-group mb-3'><input type='text' name='softurl".$newRowStart."' value='".trim($ctag->GetInnerText())."' class='form-control'><div class='input-group-append'><span class='btn btn-primary btn-sm btn-send' onclick=\"SelectSoft('addcontent.softurl".$newRowStart."')\">选择</span></div></div>
-                    <label>下载名称：</label><input type='text' name='servermsg".$newRowStart."' value='".$ctag->GetAtt("text")."' class='form-control'></div>";
+                    $nForm .= "<div class='mb-3'><label>下载地址{$newRowStart}：</label><div class='input-group mb-3'><input type='text' name='softurl{$newRowStart}' value='".trim($ctag->GetInnerText())."' class='form-control'><span class='btn btn-primary btn-sm' onclick=\"SelectSoft('addcontent.softurl{$newRowStart}')\">选择</span></div><label>下载名称：</label><input type='text' name='servermsg{$newRowStart}' value='".$ctag->GetAtt("text")."' class='form-control'></div>";
                     $newRowStart++;
                 }
             }

@@ -91,7 +91,7 @@
 						<span>图片<?php echo $j;?>上传：</span>
 						<div class="input-group mb-3">
 							<input type="text" name="imgfile<?php echo $j;?>" class="form-control" value="<?php echo trim($ctag->GetInnerText());?>" placeholder="请输入网址">
-							<div class="input-group-append"><span class="btn btn-primary btn-sm btn-send" onclick="SelectImage('addcontent.imgfile<?php echo $j;?>', 'big')">选择</span></div>
+							<button type="button" class="btn btn-primary btn-sm" onclick="SelectImage('addcontent.imgfile<?php echo $j;?>', 'big')">选择</button>
 						</div>
 						<span>图片<?php echo $j;?>简介：</span>
 						<textarea name="imgmsg<?php echo $j;?>" class="form-control"><?php echo trim($ctag->GetAtt('text'))?></textarea>

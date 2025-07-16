@@ -224,9 +224,11 @@
 									<tr>
 										<td>链接上传</td>
 										<td colspan="3">
-											<input type="text" name="picnum" id="picnum" class="form-control admin-w-sm" value="5">
-											<button type="button" class="btn btn-primary btn-sm" onclick="MakeUpload();">添加网址</button>
-											<button type="button" class="btn btn-primary btn-sm" onclick="ShowHideAddr();">隐藏网址</button>
+											<p>
+												<input type="text" name="picnum" id="picnum" class="form-control admin-w-sm" value="5">
+												<button type="button" class="btn btn-primary btn-sm" onclick="MakeUpload();">添加网址</button>
+												<button type="button" class="btn btn-primary btn-sm" onclick="ShowHideAddr();">显隐网址</button>
+											</p>
 											<?php echo $nForm;?>
 											<div id="morelink">
 												<div id="uploadfield"></div>
@@ -281,7 +283,7 @@
 												<option value='0'>已审核状态</option>
 												<option value='-1'>待审核状态</option>
 											</select>
-											<span>（暂不支持静态）</span>
+											<span>（仅支持动态浏览）</span>
 										</td>
 										<td>文件名称</td>
 										<td><input type="text" name="filename" id="filename" value="<?php echo $arcRow['filename'];?>" class="form-control admin-w-sm">（不包括文件扩展名）</td>
@@ -327,11 +329,11 @@
 				var endNum = parseInt(document.form1.picnum.value) + startNum;
 				if (endNum > 30) endNum = 30;
 				for (startNum; startNum < endNum; startNum++) {
-					upfield.innerHTML += "<div class='my-2'><label>软件网址" + startNum + "：<input type='text' name='softurl" + startNum + "' class='form-control admin-w-lg'></label> <label>下载名称" + startNum + "：<input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control admin-w-sm'></label> <button type='button' name='sel1' id='sel1' onclick=\"SelectSoft('form1.softurl" + startNum + "')\" class='btn btn-primary btn-sm'>选择</button></div>";
+					upfield.innerHTML += "<p><label>软件网址" + startNum + "：<input type='text' name='softurl" + startNum + "' class='form-control admin-w-lg'></label> <label>下载名称" + startNum + "：<input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control admin-w-sm'></label> <button type='button' name='sel1' id='sel1' onclick=\"SelectSoft('form1.softurl" + startNum + "')\" class='btn btn-primary btn-sm'>选择</button></p>";
 				}
 			}
 			function ShowHideAddr() {
-				document.getElementById('morelink').style.display = (document.getElementById('morelink').style.display == 'block' ? 'none' : 'block');
+				document.getElementById('morelink').style.display = document.getElementById('morelink').style.display == 'block' ? 'none' : 'block';
 			}
 		</script>
 	</body>
