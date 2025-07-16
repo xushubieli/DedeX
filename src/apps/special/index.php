@@ -6,7 +6,7 @@
  */
 require_once(dirname(__FILE__)."/../../system/common.inc.php");
 require_once(DEDEINC."/archive/specview.class.php");
-if (strlen($art_shortname) > 6) exit("art_shortname too long!");
+if (strlen($art_shortname) > 6) exit("art_shortname太长了");
 $specfile = dirname(__FILE__)."spec_1".$art_shortname;
 //如果已经编译静态列表，则直接引入第一个文件
 if (file_exists($specfile)) {

@@ -176,11 +176,11 @@ if (!function_exists('MemberUploads')) {
             if ($handname == '') {
                 return $handname;
             } else if (preg_match("/\.(asp|php|pl|cgi|shtm|js|htm)$/", $handname)) {
-                exit('Not allow filename for not safe!');
+                exit('不允许文件名，因为不安全');
             } else if (!preg_match("/\.(".$allAllowType.")$/", $handname)) {
-                exit('Not allow filename for filetype!');
+                exit('不允许文件名作为文件类型');
             } else if (!preg_match('#^(http|https):#', $handname) && !preg_match('#^'.$cfg_user_dir.'/'.$userid."#", $handname) && !$isadmin) {
-                exit('Not allow filename for not userdir!');
+                exit('不允许非用户目录的文件名');
             }
             return $handname;
         }

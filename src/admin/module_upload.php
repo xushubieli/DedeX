@@ -32,7 +32,7 @@ if ($action == 'upload') {
             exit();
         }
         if (preg_match("#[^0-9a-zA-Z]#", $infos['hash'])) {
-            exit("hash check failed!");
+            exit("hash校验失败");
         }
         $okfile = $mdir.'/'.$infos['hash'].'.xml';
         if ($dm->HasModule($infos['hash']) && empty($delhas)) {

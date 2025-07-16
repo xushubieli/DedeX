@@ -12,10 +12,10 @@ require_once(DEDEINC."/archive/taglist.class.php");
 if ($cfg_access == 'Y') {
     $viewIp = GetIP();
     $moon = time() - (24 * 60 * 60);
-    $row = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS view_count FROM `#@__statistics_detail` WHERE ip='$viewIp' AND t>='$moon' AND url_type=4 ");
-    if ($row && $row['view_count'] > $cfg_access_count) {
+    $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS view_count FROM `#@__statistics_detail` WHERE ip='$viewIp' AND t>='$moon' AND url_type=4 ");
+    if ($flow && $flow['view_count'] > $cfg_access_count) {
         header("HTTP/1.1 403 Forbidden");
-        echo "Access Denied";
+        echo "拒绝访问";
         exit();
     }
 }

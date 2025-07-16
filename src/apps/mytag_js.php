@@ -10,13 +10,13 @@ require_once(dirname(__FILE__).'/../system/common.inc.php');
 require_once(DEDEINC.'/archive/partview.class.php');
 if (isset($arcID)) $aid = $arcID;
 $arcID = $aid = (isset($aid) && is_numeric($aid)) ? $aid : 0;
-if ($aid == 0) die(" document.write('Request Error!'); ");
+if ($aid == 0) die("document.write('请求错误');");
 $cacheFile = DEDEDATA.'/cache/mytag-'.$aid.'.htm';
 if (isset($nocache) || !file_exists($cacheFile) || time() - filemtime($cacheFile) > $cfg_puccache_time) {
     $pv = new PartView();
     $row = $pv->dsql->GetOne("SELECT * FROM `#@__mytag` WHERE aid='$aid' ");
     if (!is_array($row)) {
-        $myvalues = "<!--\r\ndocument.write('Not found input!');\r\n-->";
+        $myvalues = "<!--\r\ndocument.write('标签未输入');\r\n-->";
     } else {
         $tagbody = '';
         if ($row['timeset'] == 0) {

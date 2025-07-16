@@ -48,8 +48,8 @@ class DedeModule
     function GetModuleList($moduletype = '')
     {
         if (is_array($this->modules)) return $this->modules;
-        $dh = dir($this->modulesPath) or die("没找到模块目录：({$this->modulesPath})");
-        $fp = @fopen($this->modulesPath.'/modulescache.php', 'w') or die('读取文件权限出错，目录：'.$this->modulesPath.'/modulescache.php文件不可写');
+        $dh = dir($this->modulesPath) or die("没找到模块目录：{$this->modulesPath}");
+        $fp = @fopen($this->modulesPath."/modulescache.php", "w") or die("读取文件权限出错，目录：{$this->modulesPath}/modulescache.php文件不可写");
         fwrite($fp, "<"."?php\r\n");
         fwrite($fp, "global \$allmodules;\r\n");
         while ($filename = $dh->read()) {

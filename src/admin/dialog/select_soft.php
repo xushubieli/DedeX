@@ -18,11 +18,11 @@ if (strlen($activepath) < strlen($cfg_soft_dir)) {
 }
 $inpath = $cfg_basedir.$activepath;
 $activeurl = '..'.$activepath;
+if (!is_dir($inpath)) {
+    die('无效路径');
+}
 if (empty($f)) {
     $f = 'form1.enclosure';
-}
-if (!is_dir($inpath)) {
-    die('No Exsits Path');
 }
 if (empty($comeback)) {
     $comeback = '';

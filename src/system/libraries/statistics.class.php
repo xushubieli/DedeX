@@ -95,11 +95,11 @@ class DedeStatistics {
         $sign = $pmvalue['sign'];
         unset($pmvalue['sign']);
         if (time() - $pmvalue['t'] > 5) {
-            die("DedeX:time out");
+            die("统计超时");
         }
         $cs = sha1(http_build_query($pmvalue).md5($cfg_cookie_encode));
         if ($sign !== $cs) {
-            die("DedeX:check sign failed");
+            die("检查失败");
         }
         $pmvalue['ip'] = GetIP();
         $kstr = $vstr = array();

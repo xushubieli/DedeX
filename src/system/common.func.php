@@ -145,7 +145,7 @@ if (!function_exists('CheckSql')) {
             $notallow1 = "[^0-9a-z@\._-]{1,}(union|sleep|benchmark|load_file|outfile)[^0-9a-z@\.-]{1,}";
             if (preg_match("/".$notallow1."/i", $db_string)) {
                 fputs(fopen($log_file, 'a+'), "$userIP||$getUrl||$db_string||SelectBreak\r\n");
-                exit("<span>Safe Alert: Request Error step 1 !</span>");
+                exit("<span>安全警报：请求错误步骤1</span>");
             }
         }
         //完整的SQL检查
@@ -210,7 +210,7 @@ if (!function_exists('CheckSql')) {
         }
         if (!empty($fail)) {
             fputs(fopen($log_file, 'a+'), "$userIP||$getUrl||$db_string||$error\r\n");
-            exit("<span>Safe Alert: Request Error step 2!</span>");
+            exit("<span>安全警报：请求错误步骤2</span>");
         } else {
             return $db_string;
         }
@@ -252,7 +252,7 @@ function helper($helpers)
     }
     //无法载入助手
     if (!isset($_helpers[$helpers])) {
-        exit('Unable to load the requested file: helpers/'.$helpers.'.helper.php');
+        exit('无法加载请求的文件/{$helpers}.helper.php');
     }
 }
 function dede_htmlspecialchars($str)

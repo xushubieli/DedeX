@@ -78,7 +78,7 @@ if ($dopost == 'makeindex') {
     $tpl = $cfg_basedir.$cfg_templets_dir.'/'.$templet;
     if (!file_exists($tpl)) {
         $tpl = $cfg_basedir.$cfg_templets_dir.'/dedex/index.htm';
-        if (!file_exists($tpl)) exit("无法找到首页模板：$tpl");
+        if (!file_exists($tpl)) exit("无法找到首页模板：{$tpl}");
     }
     $GLOBALS['_arclistEnv'] = 'index';
     $pv->SetTemplet($tpl);

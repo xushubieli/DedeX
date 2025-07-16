@@ -1,6 +1,6 @@
 <?php
 if (!defined('DEDEINC')) exit('dedex');
-if (isset($_FILES['GLOBALS'])) exit('Request not allow!');
+if (isset($_FILES['GLOBALS'])) exit('请求不允许');
 /**
  * 文件上传安全校验方法
  *

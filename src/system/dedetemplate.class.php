@@ -367,7 +367,7 @@ class DedeTemplate
         include $this->cacheFile;
         $okstr = ob_get_contents();
         ob_end_clean();
-        $fp = @fopen($savefile, "w") or die(" Tag Engine Create File FALSE! ");
+        $fp = @fopen($savefile, "w") or die("标签引擎创建文件错误");
         fwrite($fp, $okstr);
         fclose($fp);
     }
@@ -413,7 +413,7 @@ class DedeTemplate
             if (!$this->isParse) {
                 $this->ParseTemplate();
             }
-            $fp = fopen($this->cacheFile, 'w') or dir("Write Cache File Error! ");
+            $fp = fopen($this->cacheFile, 'w') or dir("写入缓存文件错误");
             flock($fp, 3);
             $result = trim($this->GetResult());
             $errmsg = '';
@@ -425,7 +425,7 @@ class DedeTemplate
             fwrite($fp, $result);
             fclose($fp);
             if (count($this->tpCfgs) > 0) {
-                $fp = fopen($this->configFile, 'w') or dir("Write Config File Error! ");
+                $fp = fopen($this->configFile, 'w') or dir("写入配置文件错误");
                 flock($fp, 3);
                 fwrite($fp, '<'.'?php'."\r\n");
                 foreach ($this->tpCfgs as $k => $v) {

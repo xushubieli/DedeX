@@ -4,9 +4,9 @@
  * @package        DedeX.Libraries
  * @license        GNU GPL v2 (/license.txt)
  */
-//系统默认运行模式为安全模式，模板管理、标签管理、数据库管理、模块管理等功能已暂停，如果您需要这些功能，DEDEX_SAFE_MODE后面值`TRUE`改为`FALSE`恢复使用
+//系统默认运行模式为安全模式，模板管理、标签管理、数据库管理、模块管理等功能已暂停，如果您需要这些功能，DEDEX_SAFE_MODE后面值TRUE改为FALSE恢复使用
 define('DEDEX_SAFE_MODE', FALSE);
-//生产环境使用`production`，如果采用`dev`模式，会有一些php的报错信息提示，用于开发调试
+//生产环境使用production，如果采用dev模式，会有一些php的报错信息提示，用于开发调试
 if (!defined('DEDE_ENVIRONMENT')) {
     define('DEDE_ENVIRONMENT', 'production');
 }
@@ -71,7 +71,7 @@ function _RunMagicQuotes(&$svar)
         }
     } else {
         if (strlen($svar) > 0 && preg_match('#^(cfg_|GLOBALS|_GET|_REQUEST|_POST|_COOKIE|_SESSION)#', $svar)) {
-            exit('The requested operation is forbidden');
+            exit('所请求的操作被禁止');
         }
         $svar = addslashes($svar);
     }
@@ -80,7 +80,7 @@ function _RunMagicQuotes(&$svar)
 foreach (array('_GET', '_POST', '_COOKIE') as $_req) {
     foreach ($$_req as $_k => $_v) {
         if (preg_match('#^(cfg_|GLOBALS|_GET|_REQUEST|_POST|_COOKIE|_SESSION)#', $_k)) {
-            exit('The requested operation is forbidden');
+            exit('所请求的操作被禁止');
         }
         if ($_k == 'nvarname') ${$_k} = $_v;
         else ${$_k} = _RunMagicQuotes($_v);
@@ -135,37 +135,36 @@ if (PHP_VERSION > '5.1') {
 }
 $cfg_isUrlOpen = @ini_get("allow_url_fopen");
 if (!isset($cfg_cmspath)) $cfg_cmspath = '';
-//站点根目录
 $cfg_basedir = preg_replace('#'.$cfg_cmspath.'\/system$#i', '', DEDEINC);
 if ($cfg_multi_site == 'Y') {
     $cfg_mainsite = $cfg_basehost;
 } else {
     $cfg_mainsite = '';
 }
-//模板存放目录
+//主题模板目录
 $cfg_templets_dir = $cfg_cmspath.'/theme';
 $cfg_templeturl = $cfg_mainsite.$cfg_templets_dir;
 $cfg_templets_skin = empty($cfg_df_style) ? $cfg_mainsite.$cfg_templets_dir."/templets" : $cfg_mainsite.$cfg_templets_dir."/$cfg_df_style";
-//安装目录网址
+//安装网址目录
 $cfg_cmsurl = $cfg_mainsite.$cfg_cmspath;
 //模块插件目录
 $cfg_plus_dir = $cfg_cmspath.'/apps';
 $cfg_phpurl = $cfg_mainsite.$cfg_plus_dir;
-//一些缓存配置数据存放目录
+//缓存配置数据存放目录
 $cfg_data_dir = $cfg_cmspath.'/data';
 $cfg_dataurl = $cfg_mainsite.$cfg_data_dir;
 //专题存放目录
 $cfg_special = $cfg_cmspath.'/a/special';
 $cfg_specialurl = $cfg_mainsite.$cfg_special;
-//会员会员目录
+//会员中心目录
 $cfg_member_dir = $cfg_cmspath.'/user';
 $cfg_memberurl = $cfg_mainsite.$cfg_member_dir;
 //静态文件存放目录
 $cfg_static_dir = $cfg_cmspath.'/static';
 $cfg_staticurl = $cfg_mainsite.$cfg_static_dir;
-//上传图片存放目录，建议按默认
+//上传图片存放目录
 $cfg_image_dir = $cfg_medias_dir.'/allimg';
-//会员投稿图片存放目录
+//会员上传图片存放目录
 $cfg_user_dir = $cfg_medias_dir.'/userup';
 //上传软件存放目录
 $cfg_soft_dir = $cfg_medias_dir.'/soft';
@@ -178,14 +177,13 @@ $cfg_mediasurl = $cfg_mainsite.$cfg_medias_dir;
 $cfg_version = '1';
 $cfg_version_detail = '1.0.6';//详细版本号
 $cfg_soft_lang = 'utf-8';
-$cfg_soft_public = 'base';
-$cfg_softname = '得德未来';
+$cfg_soft_chname = '得德未来';
 $cfg_soft_enname = 'DedeX';
 $cfg_soft_devteam = 'DedeX团队';
-//文档的默认命名规则
+//文档默认命名规则
 $art_shortname = $cfg_df_ext = '.html';
 $cfg_df_namerule = '{typedir}/{aid}'.$cfg_df_ext;
-//新建目录的权限，如果您使用别的属性，本程不保证程序能顺利在Linux或Unix系统运行
+//新建目录的权限，如果您使用别的属性，不保证程序能顺利在Linux或Unix系统运行
 $cfg_dir_purview = 0755;
 //Cookie设置
 $cfg_cookie_samesite = 'Lax'; //samesite属性（Lax, Strict or None）

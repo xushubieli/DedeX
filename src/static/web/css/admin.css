@@ -666,7 +666,7 @@ body.menu-show .admin-content {
 	border-bottom:1px solid rgba(0,0,0,0.05)
 }
 .card-body canvas {
-	height:350px!important
+	height:328px!important
 }
 .table {
 	margin-bottom:0;
@@ -803,7 +803,7 @@ input,select,textarea,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipsl
 		padding:0.75rem
 	}
 	.card-body canvas {
-		height:220px!important
+		height:218px!important
 	}
 	.adminmodal {
 		padding:0 0.5rem
