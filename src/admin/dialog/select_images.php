@@ -82,43 +82,44 @@ if (!empty($iseditor)) {
         </div>
         <div class="card shadow-sm">
             <div class="card-header">选择图片</div>
-            <div class="card-body opt-img">
+            <div class="card-body">
                 <?php
                 $dh = scandir($inpath);
-                $ty1 = "";
-                $ty2 = "";
-                foreach ($dh as $file) {
+                $filtered_dh = array_diff($dh, ['.', '..']);
+                $fileTimes = array_map(function($file) use ($inpath) {
+                    return file_exists("$inpath/$file") ? filemtime("$inpath/$file") : 0;
+                }, $filtered_dh);
+                array_multisort($fileTimes, SORT_DESC, $filtered_dh);//按照时间戳降序排序
+                //处理返回上级目录的链接
+                if ($activepath != "") {
+                    $tmp = preg_replace("#[\/][^\/]*$#i", "", $activepath);
+                    $line = "<div class='d-flex justify-content-between align-items-center mb-3'>
+                        <span>当前目录：{$activepath}</span>
+                        <a href='select_images.php?imgstick={$imgstick}&v={$v}&f={$f}&activepath=".urlencode($tmp).$addparm."' class='btn btn-primary btn-sm'>返回上级</a>
+                    </div>";
+                    echo $line;
+                }
+                echo "<div class='opt-img'>";
+                foreach ($filtered_dh as $file) {
                     //计算文件大小和创建时间
-                    if ($file != "." && $file != ".." && !is_dir("$inpath/$file")) {
-                        $filesize = filesize("$inpath/$file");
-                        $filesize = $filesize / 1024;
-                        if ($filesize != "")
+                    if (!is_dir("$inpath/$file")) {
+                        $filesize = filesize("$inpath/$file") / 1024;
                         if ($filesize < 0.1) {
-                            @list($ty1, $ty2) = split("\.", $filesize);
-                            $filesize = $ty1.".".substr($ty2, 0, 2);
+                            $filesize = number_format($filesize, 2);
                         } else {
-                            @list($ty1, $ty2) = split("\.", $filesize);
-                            $filesize = $ty1.".".substr($ty2, 0, 1);
+                            $filesize = number_format($filesize, 1);
                         }
-                        $filetime = filemtime("$inpath/$file");
-                        $filetime = MyDate("Y-m-d H:i:s", $filetime);
+                        $filetime = MyDate("Y-m-d H:i:s", filemtime("$inpath/$file"));
                     }
                     //判断文件类型并作处理
-                    if ($file == ".") continue;
-                    else if ($file == "..") {
-                        if ($activepath == "") continue;
-                        $tmp = preg_replace("#[\/][^\/]*$#i", "", $activepath);
-                        $line = "<div class='d-flex justify-content-between align-items-center p-2'>
-                            <span>当前目录：{$activepath}</span>
-                            <a href='select_images.php?imgstick={$imgstick}&v={$v}&f={$f}&activepath=".urlencode($tmp).$addparm."' class='btn btn-primary btn-sm'>返回上级</a>
-                        </div>";
-                        echo $line;
-                    } else if (is_dir("$inpath/$file")) {
+                    if (is_dir("$inpath/$file")) {
                         if (preg_match("#^_(.*)$#i", $file)) continue;
                         if (preg_match("#^\.(.*)$#i", $file)) continue;
                         $line = "<div class='list dir'>
-                            <a href='select_images.php?imgstick={$imgstick}&v={$v}&f={$f}&activepath=".urlencode("$activepath/$file").$addparm."'><img src='/static/web/img/icon_dir.png'></a>
-                            <span>{$file}</span>
+                            <a href='select_images.php?imgstick={$imgstick}&v={$v}&f={$f}&activepath=".urlencode("$activepath/$file").$addparm."'>
+                                <img src='/static/web/img/icon_dir.png'>
+                                <span>{$file}</span>
+                            </a>
                         </div>";
                         echo $line;
                     } else if (preg_match("#\.(".$cfg_imgtype.")#i", $file)) {
@@ -127,8 +128,10 @@ if (!empty($iseditor)) {
                         if ($file == $comeback) $lstyle = "class='text-danger'";
                         else $lstyle = '';
                         $line = "<div class='list'>
-                            <a href='{$reurl}' onclick=\"ReturnImg('{$reurl}');\"><img src='{$reurl}' title='{$file}'></a>
-                            <span {$lstyle}>{$file}</span>
+                            <a href='{$reurl}' onclick=\"ReturnImg('{$reurl}');\">
+                                <img src='{$reurl}' title='{$file}'>
+                                <span {$lstyle}>{$file}</span>
+                            </a>
                         </div>";
                         echo $line;
                     } else if (preg_match("#\.(jpg)#i", $file)) {
@@ -137,51 +140,22 @@ if (!empty($iseditor)) {
                         if ($file == $comeback) $lstyle = "class='text-danger'";
                         else $lstyle = '';
                         $line = "<div class='list'>
-                            <a href='{$reurl}' onclick=\"ReturnImg('{$reurl}');\"><img src='{$reurl}' title='{$file}'></a>
-                            <span {$lstyle}>{$file}</span>
+                            <a href='{$reurl}' onclick=\"ReturnImg('{$reurl}');\">
+                                <img src='{$reurl}' title='{$file}'>
+                                <span {$lstyle}>{$file}</span>
+                            </a>
                         </div>";
                         echo $line;
                     }
                 }
+                echo "</div>";
                 ?>
             </div>
         </div>
         <script>
-        function nullLink() {
-            return;
-        }
-        //获取地址参数
-        function getUrlParam(paramName) {
-            var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i');
-            var match = window.location.search.match(reParam);
-            return (match && match.length > 1) ? match[1] : '';
-        }
         function ReturnImg(reimg) {
-            var funcNum = getUrlParam('CKEditorFuncNum');
-            var iseditor = parseInt(getUrlParam('iseditor'));
-            if (funcNum > 1) {
-                var fileUrl = reimg;
-                window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl);
-            }
-            if (iseditor==1) {
-                let addonHTML = `<img src='${reimg}'>`;
-                window.opener.CKEDITOR.instances["<?php echo $f ?>"].insertHtml(addonHTML);
-            } else {
-                if (window.opener.document.<?php echo $f ?> != null) {
-                    window.opener.document.<?php echo $f ?>.value = reimg;
-                    if (window.opener.document.getElementById('div<?php echo $v ?>')) {
-                        window.opener.document.getElementById('<?php echo $v ?>').src = reimg;
-                    }
-                    //适配新的缩略图
-                    if (window.opener.document.getElementById('litPic')) {
-                        window.opener.document.getElementById('litPic').src = reimg;
-                    }
-                    if (document.all) window.opener = true;
-                } else if (typeof window.opener.CKEDITOR.instances["<?php echo $f ?>"] !== "undefined") {
-                    let addonHTML = `<img src='${reimg}'>`;
-                    window.opener.CKEDITOR.instances["<?php echo $f ?>"].insertHtml(addonHTML);
-                }
-            }
+            window.opener.document.<?php echo $f;?>.value = reimg;
+            window.opener.document.getElementById('litPic').src = reimg;
             window.close();
         }
         </script>

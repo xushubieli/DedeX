@@ -472,13 +472,17 @@ body.menu-show .admin-content {
 .column:hover {
 	background:rgba(0,0,0,0.075)
 }
-#imgs-list {
+#imgs-list,.opt-img {
 	display:grid;
 	grid-gap:1rem;
-	grid-template-columns:repeat(auto-fill,minmax(132px,1fr))
+	grid-template-columns:repeat(auto-fill,minmax(130px,auto))
 }
-#imgs-list li {
-	position:relative
+#imgs-list li,.atlas,.opt-img .list {
+	position:relative;
+	padding:0.5rem;
+	background:var(--bs-light);
+	border-radius:var(--xs-radius);
+	text-align:center
 }
 #imgs-list li .picbox img,.atlas .atlas-head img,.opt-img .list a > img {
 	width:100%;
@@ -492,8 +496,8 @@ body.menu-show .admin-content {
 }
 #imgs-list li.up-over .picbox:after {
 	position:absolute;
-	top:0;
-	left:0;
+	top:0.5rem;
+	left:0.5rem;
 	font-family:'FontAwesome';
 	font-size:14px;
 	color:var(--bs-primary);
@@ -503,8 +507,8 @@ body.menu-show .admin-content {
 #imgs-list li .tools {
 	display:none;
 	position:absolute;
-	bottom:0;
-	right:0;
+	bottom:0.5rem;
+	right:0.5rem;
 	z-index:1992
 }
 #imgs-list li:hover .tools {
@@ -531,12 +535,10 @@ body.menu-show .admin-content {
 	width:500px;
 	height:auto
 }
-.atlas {
-	display:inline-block;
-	padding:0.5rem;
-	width:12.5%;
-	height:auto;
-	text-align:center
+#gallery,#galleryedit {
+	display:grid;
+	grid-gap:1rem;
+	grid-template-columns:repeat(auto-fill,minmax(190px,auto))
 }
 .atlas .atlas-head,.atlas .atlas-body {
 	margin-bottom:0.5rem
@@ -544,21 +546,9 @@ body.menu-show .admin-content {
 .atlas .atlas-input {
 	width:100%
 }
-.opt-img .list {
-	display:inline-block;
-	padding:0.5rem;
-	width:20%;
-	text-align:center
-}
-.opt-img .list.dir {
-	width:12.5%
-}
-.opt-img .list a {
-	display:block;
-	margin-bottom:0.5rem
-}
 .opt-img .list span {
 	display:block;
+	margin-top:0.5rem;
 	overflow:hidden;
 	text-overflow:ellipsis;
 	white-space:nowrap
@@ -636,7 +626,7 @@ body.menu-show .admin-content {
 .admin-w-xs {
 	width:70px
 }
-.admin-btns,.opt-img,#gallery,#galleryedit {
+.admin-btns {
 	margin:-0.5rem
 }
 .admin-btns input,.admin-btns select,.admin-btns button,.admin-btns .btn {
@@ -805,8 +795,5 @@ input,select,textarea,.form-control,.form-select,.btn {
 	.adminmodal .card,.tips-box {
 		margin:0.5rem auto;
 		width:auto
-	}
-	.opt-img .list,.opt-img .list.dir {
-		width:50%
 	}
 }

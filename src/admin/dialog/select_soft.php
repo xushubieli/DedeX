@@ -77,35 +77,32 @@ if (!empty($noeditor)) {
                         <tbody>
                             <?php
                             $dh = scandir($inpath);
-                            $ty1 = "";
-                            $ty2 = "";
-                            foreach ($dh as $file) {
+                            $filtered_dh = array_diff($dh, ['.', '..']);
+                            $fileTimes = array_map(function($file) use ($inpath) {
+                                return file_exists("$inpath/$file") ? filemtime("$inpath/$file") : 0;
+                            }, $filtered_dh);
+                            array_multisort($fileTimes, SORT_DESC, $filtered_dh);//按照时间戳降序排序
+                            //处理返回上级目录的链接
+                            if ($activepath != "") {
+                                $tmp = preg_replace("#[\/][^\/]*$#i", "", $activepath);
+                                $line = "<tr>
+                                    <td colspan='2'>当前目录：{$activepath}</td>
+                                    <td align='right'><a href='select_soft.php?f={$f}&activepath=".urlencode($tmp).$addparm."'><img src='/static/web/img/icon_dir2.png'> 返回上级</a></td>
+                                </tr>";
+                                echo $line;
+                            }
+                            foreach ($filtered_dh as $file) {
                                 //计算文件大小和创建时间
-                                if ($file != "." && $file != ".." && !is_dir("$inpath/$file")) {
-                                    $filesize = filesize("$inpath/$file");
-                                    $filesize = $filesize / 1024;
-                                    if ($filesize != "")
+                                if (!is_dir("$inpath/$file")) {
+                                    $filesize = filesize("$inpath/$file") / 1024;
                                     if ($filesize < 0.1) {
-                                        @list($ty1, $ty2) = split("\.", $filesize);
-                                        $filesize = $ty1.".".substr($ty2, 0, 2);
+                                        $filesize = number_format($filesize, 2);
                                     } else {
-                                        @list($ty1, $ty2) = split("\.", $filesize);
-                                        $filesize = $ty1.".".substr($ty2, 0, 1);
+                                        $filesize = number_format($filesize, 1);
                                     }
-                                    $filetime = filemtime("$inpath/$file");
-                                    $filetime = MyDate("Y-m-d H:i:s", $filetime);
+                                    $filetime = MyDate("Y-m-d H:i:s", filemtime("$inpath/$file"));
                                 }
-                                //判断文件类型并作处理
-                                if ($file == ".") continue;
-                                else if ($file == "..") {
-                                    if ($activepath == "") continue;
-                                    $tmp = preg_replace("#[\/][^\/]*$#i", "", $activepath);
-                                    $line = "<tr>
-                                        <td colspan='2'>当前目录：{$activepath}</td>
-                                        <td align='right'><a href='select_soft.php?f={$f}&activepath=".urlencode($tmp).$addparm."'><img src='/static/web/img/icon_dir2.png'> 返回上级</a></td>
-                                    </tr>";
-                                    echo $line;
-                                } else if (is_dir("$inpath/$file")) {
+                                if (is_dir("$inpath/$file")) {
                                     if (preg_match("#^_(.*)$#i", $file)) continue;
                                     if (preg_match("#^\.(.*)$#i", $file)) continue;
                                     $line = "<tr>
@@ -143,23 +140,12 @@ if (!empty($noeditor)) {
             </div>
         </div>
         <script>
-        function nullLink() {
-            return;
-        }
         function ReturnValue(reimg) {
-            var funcNum = <?php echo isset($CKEditorFuncNum) ? $CKEditorFuncNum : 1;?>;
-            if (window.opener.CKEDITOR != null && funcNum != 1) {
-                window.opener.CKEDITOR.tools.callFunction(funcNum, reimg);
+            if (typeof window.opener.CKEDITOR.instances["<?php echo $f;?>"] !== "undefined") {
+                let addonHTML = `<a href='${reimg}' target='_blank'><img src='<?php echo $cfg_cmspath;?>/static/web/img/icon_addon.png'>附件：${reimg}</a>`;
+                window.opener.CKEDITOR.instances["<?php echo $f;?>"].insertHtml(addonHTML);
             }
-            if (typeof window.opener.CKEDITOR.instances["<?php echo $f ?>"] !== "undefined") {
-                let addonHTML = `<a href='${reimg}' target='_blank'><img src='<?php echo $cfg_cmspath ?>/static/web/img/icon_addon.png'>附件：${reimg}</a>`;
-                window.opener.CKEDITOR.instances["<?php echo $f ?>"].insertHtml(addonHTML);
-            }
-            if (window.opener.document.<?php echo $f ?> != null) {
-                window.opener.document.<?php echo $f ?>.value = reimg;
-                window.close();
-                return
-            }
+            window.opener.document.<?php echo $f;?>.value = reimg;
             window.close();
         }
         </script>
