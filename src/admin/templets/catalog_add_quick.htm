@@ -35,13 +35,7 @@
 										</td>
 										<td width="10%">目录保存位置</td>
 										<td width="40%">
-											<label><input type="radio" name="referpath" value="parent" checked> 默认网页目录（
-												<?php
-												$pardir = $cfg_arcdir;
-												if (!empty($typedir)) $pardir = $typedir.'/';
-												$pardir = preg_replace("#\/{1,}#", '/', $pardir);
-												echo $pardir;
-												?>）</label>
+											<label><input type="radio" name="referpath" value="parent" checked> 默认网页目录（<?php $pardir = $cfg_arcdir;if (!empty($typedir)) $pardir = $typedir.'/';$pardir = preg_replace("#\/{1,}#", '/', $pardir);echo $pardir;?>）</label>
 											<label><input type="radio" name="referpath" value="cmspath"> 系统根目录</label>
 											<input type="hidden" name="nextdir" id="nextdir" value="<?php echo $pardir;?>">
 											<span id="pathtype" style="display:none"><input type="radio" name="referpath" id="truepath3" value="typepath">所属栏目所属目录</span>

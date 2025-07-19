@@ -509,8 +509,8 @@ else if ($dopost == 'quickEdit') {
             <td>浏览权限</td>
             <td>
                 <select name="arcrank" id="arcrank" class="form-select admin-w-sm">
-                    <option value='<?php echo $arcRow["arcrank"] ?>'>
-                    <?php echo $arcRow["rankname"] ?> </option>
+                    <option value='<?php echo $arcRow["arcrank"];?>'>
+                    <?php echo $arcRow["rankname"];?> </option>
                     <?php
                     $urank = $cuserLogin->getUserRank();
                     $dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE adminrank<='$urank' ORDER BY `rank` ASC");

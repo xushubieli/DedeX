@@ -125,7 +125,7 @@
 										if (empty($rownum)) $rownum = 40;
 									?>
 									<tr>
-										<td>节点<?php echo $i?>名称</td>
+										<td>节点<?php echo $i;?>名称</td>
 										<td colspan="3">
 											<input type="text" name="notename<?php echo $i;?>" id="notename<?php echo $i;?>" class="form-control admin-w-lg" value="<?php echo $notename;?>">
 											<label>节点标识：<input type="text" name="noteid<?php echo $i;?>" id="noteid<?php echo $i;?>" value="<?php echo $noteid;?>" class="form-control admin-w-sm"></label>
@@ -134,8 +134,8 @@
 									<tr>
 										<td>文档列表</td>
 										<td colspan="3">
-											<textarea name="arcid<?php echo $i;?>" onblur="CheckVal(<?php echo $i ?>)" id="arcid<?php echo $i;?>" class="admin-textarea-sm"><?php echo $idlist;?></textarea>
-											<button type="button" class="btn btn-primary btn-sm" name="selarc<?php echo $i;?>" id="selarc<?php echo $i?>2" onclick="SelectArcList('form1.arcid<?php echo $i;?>');">选择节点文档</button>
+											<textarea name="arcid<?php echo $i;?>" onblur="CheckVal(<?php echo $i;?>)" id="arcid<?php echo $i;?>" class="admin-textarea-sm"><?php echo $idlist;?></textarea>
+											<button type="button" class="btn btn-primary btn-sm" name="selarc<?php echo $i;?>" id="selarc<?php echo $i;?>2" onclick="SelectArcList('form1.arcid<?php echo $i;?>');">选择节点文档</button>
 										</td>
 									</tr>
 									<tr>
@@ -170,7 +170,7 @@
 									{
 									?>
 									<tr>
-										<td>节点<?php echo $i?>名称</td>
+										<td>节点<?php echo $i;?>名称</td>
 										<td colspan="3">
 											<input type="text" name="notename<?php echo $i;?>" id="notename<?php echo $i;?>" class="form-control admin-w-lg">
 											<label>节点标识：<input type="text" name="noteid<?php echo $i;?>" id="noteid<?php echo $i;?>" class="form-control admin-w-sm"></label>
@@ -179,8 +179,8 @@
 									<tr>
 										<td>文档列表</td>
 										<td colspan="3">
-											<textarea name="arcid<?php echo $i;?>" rows="3" onblur="CheckVal(<?php echo $i ?>)" id="arcid<?php echo $i;?>" class="admin-textarea-sm"></textarea>
-											<button name="selarc<?php echo $i;?>" type="button" id="selarc<?php echo $i?>2" class="btn btn-primary btn-sm" onclick="SelectArcList('form1.arcid<?php echo $i;?>');">选择节点文档</button>
+											<textarea name="arcid<?php echo $i;?>" rows="3" onblur="CheckVal(<?php echo $i;?>)" id="arcid<?php echo $i;?>" class="admin-textarea-sm"></textarea>
+											<button name="selarc<?php echo $i;?>" type="button" id="selarc<?php echo $i;?>2" class="btn btn-primary btn-sm" onclick="SelectArcList('form1.arcid<?php echo $i;?>');">选择节点文档</button>
 										</td>
 									</tr>
 									<tr>

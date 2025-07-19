@@ -72,7 +72,7 @@ class SearchView
         $kwtype = 1,
         $mid = 0
     ) {
-        global $cfg_search_max, $cfg_search_maxrc, $cfg_search_time,$envs;
+        global $cfg_search_max, $cfg_search_maxrc, $cfg_search_time, $envs;
         if (empty($upagesize)) {
             $upagesize = 10;
         }

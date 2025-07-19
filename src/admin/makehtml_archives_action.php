@@ -68,8 +68,13 @@ if ($totalnum > 500 && empty($typeid)) {
 while ($row = $dsql->GetObject('out')) {
     $tjnum++;
     $id = $row->id;
-    $ac = new Archives($id);
-    $rurl = $ac->MakeHtml(0);
+    try {
+        $ac = new Archives($id);
+        $rurl = $ac->MakeHtml(0);
+    } catch (Exception $e) {
+        //error_log("无法更新文档ID：{$id}，原因：".$e->getMessage());
+        continue;
+    }
 }
 $t2 = ExecTime();
 $t2 = ($t2 - $est1);

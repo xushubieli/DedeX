@@ -19,7 +19,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
     <body class="p-3">
         <div class="card shadow-sm mb-3">
             <div id="imgs-topbar" class="card-body">
-                <label><input type="checkbox" name="isWater" id="isWater" <?php if ($photo_markup == '1') echo 'checked';?>> 是否水印</label>
+                <label><input type="checkbox" name="isWater" id="isWater" <?php if ($photo_markup == '1') echo 'checked';?>> 水印</label>
                 <button class="btn btn-primary btn-sm addfile">添加图片</button>
                 <button class="btn btn-primary btn-sm removeall">清空图片</button>
                 <button class="btn btn-primary btn-sm upall">全部上传</button>
@@ -75,15 +75,15 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                 for (let i=0; i<files_sum; i++) {
                     let file = files[i];
                     if (!isFileImage(file)) {
-                        alert("选择非图片文件无法上传")
+                        alert("上传失败，请重新选择图片")
                         return;
                     }
                     let blobUrl = window.URL.createObjectURL(file)
-                    axupimgs.res.push({file:file,blobUrl:blobUrl,url:''});
+                    axupimgs.res.push({file:file,blobUrl:blobUrl, url:''});
                     let li = document.createElement('li');
                     li.setAttribute('class','up-no');
-                    li.setAttribute('data-time',file.lastModified);
-                    li.innerHTML='<div class="picbox"><img src="'+blobUrl+'"></div><div class="namebox"><span>'+file.name+'</span></div><div class="tools"><a class="remove"></a></div>';
+                    li.setAttribute('data-time', file.lastModified);
+                    li.innerHTML='<div class="picbox"><img src="' + blobUrl + '"></div><div class="namebox"><span>' + file.name + '</span></div><div class="tools"><a class="remove"></a></div>';
                     vDom.appendChild(li);
                 }
                 document.querySelector('#imgs-list').appendChild(vDom);
@@ -150,7 +150,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                     //返回
                     axupimgs.res.forEach((v, k) => {
                         let addonHTML = `<img src='${v.url}'>`;
-                        window.opener.CKEDITOR.instances["<?php echo $f ?>"].insertHtml(addonHTML);
+                        window.opener.CKEDITOR.instances["<?php echo $f;?>"].insertHtml(addonHTML);
                     })
                     window.close();
                     return true;

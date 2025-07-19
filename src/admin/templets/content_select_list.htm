@@ -18,7 +18,7 @@
 							<input type="text" name="keyword" class="form-control admin-w-lg" value="<?php echo $keyword;?>" placeholder="请输入文档标题或文档id">
 							<select name="cid" class="form-select admin-w-sm">
 								<option value="0">选择分类</option>
-								<?php echo $optionarr?>
+								<?php echo $optionarr;?>
 							</select>
 							<button type="submit" class="btn btn-primary btn-sm">搜索</button>
 						</form>
@@ -102,10 +102,10 @@
 				}
 			}
 			function ReturnValue() {
-				if (window.opener.document.<?php echo $f ?>.value == "") {
-					window.opener.document.<?php echo $f ?>.value = getCheckboxItem();
+				if (window.opener.document.<?php echo $f;?>.value == "") {
+					window.opener.document.<?php echo $f;?>.value = getCheckboxItem();
 				} else {
-					window.opener.document.<?php echo $f ?>.value += "," + getCheckboxItem();
+					window.opener.document.<?php echo $f;?>.value += "," + getCheckboxItem();
 				}
 				window.opener = null;
 				window.close();

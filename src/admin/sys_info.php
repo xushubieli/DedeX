@@ -132,7 +132,7 @@ EOT;
                 }
                 ?>
             </td>
-            <td><?php echo $row['varname'] ?></td>
+            <td><?php echo $row['varname'];?></td>
         </tr>
         <?php }?>
     </tbody>
