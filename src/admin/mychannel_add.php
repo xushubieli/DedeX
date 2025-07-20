@@ -18,7 +18,7 @@ if (empty($action)) $action = '';
 if ($action == 'add') {
     //检查输入
     if (empty($id) || preg_match("#[^0-9-]#", $id)) {
-        ShowMsg("模型id必须为数字", "-1");
+        ShowMsg("模型ID必须为数字", "-1");
         exit();
     }
     if (preg_match("#[^a-z0-9]#i", $nid) || $nid == "") {
@@ -34,7 +34,7 @@ if ($action == 'add') {
     //检查id是否重复
     $row = $dsql->GetOne("SELECT * FROM `#@__channeltype` WHERE id='$id' OR nid LIKE '$nid' OR addtable LIKE '$addtable'");
     if (is_array($row)) {
-        ShowMsg("模型id和模型名称及附加表名称数据库已存在，请重新填写", "-1");
+        ShowMsg("模型ID和模型名称及附加表名称数据库已存在，请重新填写", "-1");
         exit();
     }
     $mysql_version = $dsql->GetVersion();
@@ -64,9 +64,9 @@ if ($action == 'add') {
     }
     $listfields = $fieldset = '';
     if ($issystem == -1) {
-        $fieldset = "<field:channel itemname=\"模型id\" autofield=\"0\" notsend=\"0\" type=\"int\" isnull=\"true\" islist=\"1\" default=\"0\" maxlength=\"10\" page=\"\"></field:channel>
+        $fieldset = "<field:channel itemname=\"模型ID\" autofield=\"0\" notsend=\"0\" type=\"int\" isnull=\"true\" islist=\"1\" default=\"0\" maxlength=\"10\" page=\"\"></field:channel>
 <field:arcrank itemname=\"浏览权限\" autofield=\"0\" notsend=\"0\" type=\"int\" isnull=\"true\" islist=\"1\" default=\"0\" maxlength=\"5\" page=\"\"></field:arcrank>
-<field:mid itemname=\"会员id\" autofield=\"0\" notsend=\"0\" type=\"int\" isnull=\"true\" islist=\"1\" default=\"0\" maxlength=\"8\" page=\"\"></field:mid>
+<field:mid itemname=\"会员ID\" autofield=\"0\" notsend=\"0\" type=\"int\" isnull=\"true\" islist=\"1\" default=\"0\" maxlength=\"8\" page=\"\"></field:mid>
 <field:click itemname=\"点击\" autofield=\"0\" notsend=\"0\" type=\"int\" isnull=\"true\" islist=\"1\" default=\"0\" maxlength=\"10\" page=\"\"></field:click>
 <field:title itemname=\"标题\" autofield=\"0\" notsend=\"0\" type=\"text\" isnull=\"true\" islist=\"1\" default=\"0\" maxlength=\"60\" page=\"\"></field:title>
 <field:senddate itemname=\"发布时间\" autofield=\"0\" notsend=\"0\" type=\"int\" isnull=\"true\" islist=\"1\" default=\"0\" maxlength=\"10\" page=\"\"></field:senddate>

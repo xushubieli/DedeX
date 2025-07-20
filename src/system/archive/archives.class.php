@@ -35,7 +35,7 @@ class Archives
      *  php5构造函数
      *
      * @access    public
-     * @param     int  $aid  文档id
+     * @param     int  $aid  文档ID
      * @return    string
      */
     function __construct($aid)
@@ -792,7 +792,7 @@ class Archives
      * @access    public
      * @param     int   $totalPage  总页数
      * @param     int   $nowPage  当前页数
-     * @param     int   $aid  文档id
+     * @param     int   $aid  文档ID
      * @return    string
      */
     function GetPagebreak($totalPage, $nowPage, $aid)
@@ -929,7 +929,7 @@ class Archives
      * @access    public
      * @param     int   $totalPage  总页数
      * @param     int   $nowPage  当前页数
-     * @param     int   $aid  文档id
+     * @param     int   $aid  文档ID
      * @return    string
      */
     function GetPagebreakDM($totalPage, $nowPage, $aid)

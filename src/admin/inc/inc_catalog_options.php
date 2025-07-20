@@ -10,7 +10,7 @@
  *  获取选项列表
  *
  * @access    public
- * @param     string  $selid  选择id
+ * @param     string  $selid  选择ID
  * @param     string  $userCatalog  会员栏目
  * @param     string  $channeltype  栏目类型
  * @return    string

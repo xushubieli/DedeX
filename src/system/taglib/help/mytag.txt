@@ -3,4 +3,4 @@
 {dede:mytag name='' typeid=''/}
 >>dede>>
 name='' 标签名
-typeid='1' 调用指定栏目id（0全部栏目）
+typeid='1' 调用指定栏目ID（0全部栏目）

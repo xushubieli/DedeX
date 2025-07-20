@@ -18,7 +18,7 @@ if (empty($action)) {
     include(DEDEADMIN."/templets/diy_add.htm");
 } else {
     if (preg_match("#[^0-9-]#", $diyid) || empty($diyid)) {
-        ShowMsg("自定义表单id必须为数字", "-1");
+        ShowMsg("自定义表单ID必须为数字", "-1");
         exit();
     }
     if ($table == "") {

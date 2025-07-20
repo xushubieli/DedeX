@@ -131,7 +131,7 @@ else if ($dopost == 'thumbnail') {
     echo $_SESSION['file_info'][$id];
     exit(0);
 }
-//删除指定id的图片
+//删除指定ID的图片
 else if ($dopost == 'del') {
     if (!isset($_SESSION['bigfile_info'][$id])) {
         echo '';

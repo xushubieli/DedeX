@@ -54,8 +54,8 @@ function sendmail($email, $mailtitle, $mailbody, $headers)
 /**
  *  发送邮件，type为INSERT新建验证码，UPDATE修改验证码
  *
- * @param     int  $mid  会员id
- * @param     int  $userid  会员id
+ * @param     int  $mid  会员ID
+ * @param     int  $userid  会员ID
  * @param     string  $mailto  发送到
  * @param     string  $type  类型
  * @param     string  $send  发送到
@@ -101,7 +101,7 @@ function newmail($mid, $userid, $mailto, $type, $send)
  *  查询会员信息，mail会员输入邮箱地址，userid账号
  *
  * @param     string  $mail  邮件
- * @param     string  $userid  会员id
+ * @param     string  $userid  会员ID
  * @return    mixed
  */
 function member($mail, $userid)
@@ -111,7 +111,7 @@ function member($mail, $userid)
     $sql = "SELECT mid,email,safequestion FROM `#@__member` WHERE $msql AND userid = '$userid'";
     $row = $db->GetOne($sql);
     if (!is_array($row)) {
-        ShowMsg("会员id输入错误", "-1");
+        ShowMsg("会员ID输入错误", "-1");
         exit;
     } else {
         return $row;
@@ -120,7 +120,7 @@ function member($mail, $userid)
 /**
  *  查询是否发送过验证码
  *
- * @param     string  $mid  会员id
+ * @param     string  $mid  会员ID
  * @param     string  $userid  账号
  * @param     string  $mailto  发送邮件地址
  * @param     string  $send  邮件默认为Y，Y发送，N不发送

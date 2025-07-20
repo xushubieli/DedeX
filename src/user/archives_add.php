@@ -75,7 +75,7 @@ if (empty($dopost)) {
     }
     //处理图片文档的自定义属性
     if ($litpic != '') $flag = 'p';
-    //生成文档id
+    //生成文档ID
     $arcID = GetIndexKey($arcrank, $typeid, $sortrank, $channelid, $senddate, $mid);
     if (empty($arcID)) {
         ShowMsg("获取主键失败，无法进行后续操作", "-1");

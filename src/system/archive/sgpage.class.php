@@ -20,7 +20,7 @@ class sgpage
      *  php5构造函数
      *
      * @access    public
-     * @param     int  $aid  文档id
+     * @param     int  $aid  文档ID
      * @return    string
      */
     function __construct($aid)

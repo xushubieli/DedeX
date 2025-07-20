@@ -166,7 +166,7 @@ function GetCurContent($body)
  *
  * @access    public
  * @param     string  $url  地址
- * @param     int  $uid  会员id
+ * @param     int  $uid  会员ID
  * @return    string
  */
 function GetRemoteImage($url, $uid = 0)
@@ -210,11 +210,11 @@ function GetRemoteImage($url, $uid = 0)
     return ($ok ? $revalues : '');
 }
 /**
- *  检测栏目id
+ *  检测栏目ID
  *
  * @access    public
- * @param     int  $typeid  栏目id
- * @param     int  $channelid  栏目id
+ * @param     int  $typeid  栏目ID
+ * @param     int  $channelid  栏目ID
  * @return    bool
  */
 function CheckChannel($typeid, $channelid)
@@ -230,7 +230,7 @@ function CheckChannel($typeid, $channelid)
  *
  * @access    public
  * @param     int  $aid  文档aid
- * @param     int  $adminid  管理员id
+ * @param     int  $adminid  管理员ID
  * @return    bool
  */
 function CheckArcAdmin($aid, $adminid)
@@ -292,10 +292,10 @@ function SpLongBody($mybody, $spsize, $sptag)
     return addslashes($mybody);
 }
 /**
- *  创建指定id的文档
+ *  创建指定ID的文档
  *
  * @access    public
- * @param     string  $aid  文档id
+ * @param     string  $aid  文档ID
  * @param     string  $ismakesign  生成标志
  * @param     int  $isremote  是否远程
  * @return    string

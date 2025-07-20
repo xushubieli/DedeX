@@ -19,7 +19,7 @@ function plus_channel(&$atts, &$refObj, &$fields)
     $reArray = array();
     $reid = 0;
     $topid = 0;
-    //如果属性里没指定栏目id，从引用类里获取栏目信息
+    //如果属性里没指定栏目ID，从引用类里获取栏目信息
     if (empty($typeid)) {
         $refObj = (object)$refObj;
         if (isset($refObj->TypeLink->TypeInfos['id'])) {
@@ -30,7 +30,7 @@ function plus_channel(&$atts, &$refObj, &$fields)
             $typeid = 0;
         }
     }
-    //如果指定了栏目id，从数据库获取栏目信息
+    //如果指定了栏目ID，从数据库获取栏目信息
     else {
         $row2 = $dsql->GetOne("SELECT * FROM `#@__arctype` WHERE id='$typeid' ");
         $typeid = $row2['id'];

@@ -40,7 +40,7 @@ if (empty($dopost)) {
 } else if ($dopost == 'save') {
     $description = '';
     include(DEDEMEMBER.'/inc/archives_check.php');
-    //生成文档id
+    //生成文档ID
     $arcID = GetIndexKey($arcrank, $typeid, $sortrank, $channelid, $senddate, $mid);
     if (empty($arcID)) {
         ShowMsg("获取主键失败，无法进行后续操作", "-1");

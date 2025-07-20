@@ -39,8 +39,8 @@
 							<table class="table table-borderless table-hover">
 								<thead>
 									<tr>
-										<td scope="col">id</td>
 										<td scope="col">选择</td>
+										<td scope="col">ID</td>
 										<td scope="col">名称</td>
 										<td scope="col">文档</td>
 										<td scope="col">评论</td>
@@ -52,8 +52,8 @@
 								<tbody>
 									{dede:datalist}
 									<tr>
-										<td>{dede:field.id/}</td>
 										<td><input type="checkbox" name="fid" id="fid" value="{dede:field.id/}"></td>
+										<td>{dede:field.id/}</td>
 										<td>{dede:field.username/}</td>
 										<td>{dede:field.arctitle function="RemoveXSS(@me)"/}</td>
 										<td>

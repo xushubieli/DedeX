@@ -23,8 +23,8 @@
 </html>
 >>dede>>
 row='10' 调用10个栏目
-typeid='1' 调用指定栏目id全部子类，多个栏目，例：typeid='1,2,3'，调用单个栏目，例：typeid='1,1'
-notypeid='2' 排除指定栏目id，多个栏目，例：notypeid='4,5,6'
+typeid='1' 调用指定栏目ID全部子类，多个栏目，例：typeid='1,2,3'，调用单个栏目，例：typeid='1,1'
+notypeid='2' 排除指定栏目ID，多个栏目，例：notypeid='4,5,6'
 {dede:field.currentstyle/} 当前栏目应用样式为active
 【进阶用法】
 {dede:channel type='son' noself='yes' row='1'} 判断栏目是否有子类栏目

@@ -251,7 +251,7 @@ else if ($dopost == "checkArchives") {
                 <td><?php echo $typeOptions;?></td>
             </tr>
             <tr>
-                <td>文档id</td>
+                <td>文档ID</td>
                 <td><input type="text" name="tmpids" class="form-control admin-w-lg" value="<?php echo $qstr;?>"></td>
             </tr>
             <tr>
@@ -734,7 +734,7 @@ else if ($dopost == 'attsDlg') {
             </td>
         </tr>
         <tr>
-            <td>文档id</td>
+            <td>文档ID</td>
             <td><input type="text" name="tmpids" value="<?php echo $qstr;?>"></td>
         </tr>
         <tr>

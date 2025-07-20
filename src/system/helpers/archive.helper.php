@@ -10,7 +10,7 @@ if (!defined('DEDEINC')) exit('dedex');
 /**
  *  获取单篇文档信息
  *
- * @param     int  $aid  文档id
+ * @param     int  $aid  文档ID
  * @return    array
  */
 if (!function_exists('GetOneArchive')) {
@@ -72,7 +72,7 @@ if (!function_exists('GetOneArchive')) {
 /**
  *  获取模型的表信息
  *
- * @param     int  $id  模型id
+ * @param     int  $id  模型ID
  * @param     string  $formtype  表单类型
  * @return    array
  */
@@ -94,7 +94,7 @@ if (!function_exists('GetChannelTable')) {
 /**
  *  获得某文档的所有tag
  *
- * @param     int  $aid  文档id
+ * @param     int  $aid  文档ID
  * @return    string
  */
 if (!function_exists('GetTags')) {
@@ -107,7 +107,7 @@ if (!function_exists('GetTags')) {
 /**
  *  获得某文档的所有tag数组
  *
- * @param     int  $aid  文档id
+ * @param     int  $aid  文档ID
  * @return    array
  */
 if (!function_exists('GetTagsArray')) {
@@ -128,11 +128,11 @@ if (!function_exists('GetTagsArray')) {
  *
  * @access    public
  * @param     string  $arcrank  权限值
- * @param     int  $typeid  栏目id
+ * @param     int  $typeid  栏目ID
  * @param     int  $sortrank  排序id
- * @param     int  $channelid  模型id
+ * @param     int  $channelid  模型ID
  * @param     int  $senddate  发布日期
- * @param     int  $mid  会员id
+ * @param     int  $mid  会员ID
  * @return    int
  */
 if (!function_exists('GetIndexKey')) {
@@ -154,9 +154,9 @@ if (!function_exists('GetIndexKey')) {
  *  更新微表key及tag
  *
  * @access    public
- * @param     int  $id  文档id
+ * @param     int  $id  文档ID
  * @param     string  $arcrank  权限值
- * @param     int  $typeid  栏目id
+ * @param     int  $typeid  栏目ID
  * @param     int  $sortrank  排序id
  * @param     string  $tags  标签
  * @return    string

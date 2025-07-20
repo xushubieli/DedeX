@@ -19,7 +19,7 @@ if ($dopost != 'save') {
     $cid = empty($cid) ? 0 : intval($cid);
     if (empty($geturl)) $geturl = '';
     $keywords = $writer = $source = $body = $description = $title = '';
-    //获得栏目模型id
+    //获得栏目模型ID
     if ($cid > 0 && $channelid == 0) {
         $row = $dsql->GetOne("SELECT channeltype FROM `#@__arctype` WHERE id='$cid';");
         $channelid = $row['channeltype'];
@@ -102,7 +102,7 @@ if ($dopost != 'save') {
         $ddisremote = 0;
     }
     $litpic = GetDDImage('none', $picname, $ddisremote);
-    //生成文档id
+    //生成文档ID
     $arcID = GetIndexKey($arcrank, $typeid, $sortrank, $channelid, $senddate, $adminid);
     if (empty($arcID)) {
         ShowMsg("获取主键失败，无法进行后续操作", "-1");

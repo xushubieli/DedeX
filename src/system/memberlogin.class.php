@@ -488,7 +488,7 @@ class MemberLogin
      *  保存会员cookie
      *
      * @access    public
-     * @param     string  $uid  会员id
+     * @param     string  $uid  会员ID
      * @param     string  $logintime  登录限制时间
      * @return    void
      */

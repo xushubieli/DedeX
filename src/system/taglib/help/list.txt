@@ -18,4 +18,4 @@ orderby='sortrank' 排序方式：sortrank按发布时间（可用参数：hot/c
 pagelist 列表分页（可用参数：index首页、pre上页、next下页、end末页、pageno页码、option跳转、info条数信息）
 listsize 限制页码
 【进阶用法】
-channelid='1' addfields='diy' 调用文档模型id为1的diy字段（需在后台添加附加字段，多个字段，例：addfields='diy,url'，则标签为[field:diy/][field:url/]）
+channelid='1' addfields='diy' 调用文档模型ID为1的diy字段（需在后台添加附加字段，多个字段，例：addfields='diy,url'，则标签为[field:diy/][field:url/]）

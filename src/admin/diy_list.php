@@ -86,7 +86,7 @@ if ($action == 'post') {
     if (empty($do)) {
         $id = isset($id) && is_numeric($id) ? $id : 0;
         if (empty($id)) {
-            showMsg('操作失败，未指定id', '-1');
+            showMsg('操作失败，未指定ID', '-1');
             exit();
         }
         $query = "SELECT * FROM {$diy->table} WHERE id=$id";

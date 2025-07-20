@@ -37,7 +37,7 @@ class SgListView
      *  php5构造函数
      *
      * @access    public
-     * @param     int    $typeid  栏目id
+     * @param     int    $typeid  栏目ID
      * @param     array  $searchArr  检索数组
      * @param     int    $mod  渲染类型 0:HTML 1:JSON
      * @return    void
@@ -105,7 +105,7 @@ class SgListView
             //设置环境变量
             SetSysEnv($this->TypeID, $this->Fields['typename'], 0, '', 'list');
             $this->Fields['typeid'] = $this->TypeID;
-            //获得交叉栏目id
+            //获得交叉栏目ID
             if ($this->TypeLink->TypeInfos['cross'] > 0 && $this->TypeLink->TypeInfos['ispart'] == 0) {
                 $selquery = '';
                 if ($this->TypeLink->TypeInfos['cross'] == 1) {
@@ -150,7 +150,7 @@ class SgListView
         if (isset($GLOBALS['PageNo'])) $this->PageNo = $GLOBALS['PageNo'];
         else $this->PageNo = 1;
         $this->addSql  = " arc.arcrank > -1 ";
-        //栏目id条件
+        //栏目ID条件
         if (!empty($this->TypeID)) {
             if ($cfg_list_son == 'N') {
                 if ($this->CrossID == '') $this->addSql .= " AND (arc.typeid='".$this->TypeID."') ";
@@ -657,7 +657,7 @@ class SgListView
      *  获得要创建的文件名称规则
      *
      * @access    public
-     * @param     string  $typeid  栏目id
+     * @param     string  $typeid  栏目ID
      * @param     string  $wname
      * @param     string  $typedir  栏目目录
      * @param     string  $defaultname  默认名称

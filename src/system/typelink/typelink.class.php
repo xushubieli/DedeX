@@ -54,7 +54,7 @@ class TypeLink
     function Close()
     {
     }
-    //重设栏目id
+    //重设栏目ID
     function SETtypeid($typeid)
     {
         $this->TypeID = $typeid;
@@ -214,7 +214,7 @@ class TypeLink
      *  逻辑递归
      *
      * @access    public
-     * @param     int   $id   栏目id
+     * @param     int   $id   栏目ID
      * @param     string   $step   步进标志
      * @param     int   $oper   操作权限
      * @return    void
@@ -241,7 +241,7 @@ class TypeLink
      *  获得与该类相关的栏目，本函数应用于模板标记{dede:channel}{/dede:channel}中$typetype的值为：sun下级分类，self同级分类，top顶级分类
      *
      * @access    public
-     * @param     int   $typeid   栏目id
+     * @param     int   $typeid   栏目ID
      * @param     int   $reid   所属ID
      * @param     int   $row   栏目行数
      * @param     string   $typetype   栏目类型

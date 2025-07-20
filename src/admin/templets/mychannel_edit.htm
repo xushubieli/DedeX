@@ -37,7 +37,7 @@
 										<td><?php if ($row['issystem']==0) echo "自动模型";else if ($row['issystem']==1) echo "系统模型";else if ($row['issystem']==-1) echo "独立模型";?>（系统模型禁止删除，独立模型具有单独主表，自动创建字段aid、栏目id、文档标题等，文档必须点击栏目进入列表管理）</td>
 									</tr>
 									<tr>
-										<td>模型id</td>
+										<td>模型ID</td>
 										<td><?php echo $row['id'];?>（创建后不可修改，具有唯一性）</td>
 									</tr>
 									<tr>
@@ -116,7 +116,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td>默认栏目id</td>
+										<td>默认栏目ID</td>
 										<td><input type="text" name="dfcid" id="dfcid" class="form-control admin-w-sm" value="<?php echo $row['dfcid'];?>">（与投稿唯一性结合可以用自定义模型）</td>
 									</tr>
 									<tr>

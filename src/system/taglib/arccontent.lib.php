@@ -26,7 +26,7 @@ function lib_arccontent(&$ctag, &$refObj)
         $fields = $dsql->GetOne("SELECT * FROM `{$channel->ChannelInfos['addtable']}` WHERE aid = {$row['id']}");
     }
     if (!empty($aid)) {
-        //指定id获取文档
+        //指定ID获取文档
         $row =  $dsql->GetOne("SELECT id,channel FROM `#@__arctiny` WHERE id={$aid} AND arcrank>-1");
         $channel = new ChannelUnit($row['channel'], $aid);
         $fields = $dsql->GetOne("SELECT * FROM `{$channel->ChannelInfos['addtable']}` WHERE aid = {$row['id']}");

@@ -21,7 +21,7 @@
 				<div class="card-body">
 					<div class="admin-btns">
 						<form name="form1" action="statistics_list.php" method="get">
-							<input type="text" name="ip" class="form-control admin-w-lg" placeholder="请输入地址ip" value="<?php echo !empty($ip)? $ip : '';?>">
+							<input type="text" name="ip" class="form-control admin-w-lg" placeholder="请输入地址" value="<?php echo !empty($ip)? $ip : '';?>">
 							<select name="url_type" class="form-select admin-w-sm">
 								<option value="0"<?php echo $url_type ===0? ' selected' : '';?>>选择类型</option>
 								<option value="1"<?php echo $url_type ===1? ' selected' : '';?>>用户</option>
@@ -41,7 +41,7 @@
 								<thead>
 									<tr>
 										<td scope="col">选择</td>
-										<td scope="col">序号</td>
+										<td scope="col">ID</td>
 										<td scope="col">用户</td>
 										<td scope="col">地址</td>
 										<td scope="col">浏览器内核</td>

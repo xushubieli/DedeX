@@ -58,7 +58,7 @@ function GetTagList($dsql,$pageno,$pagesize,$orderby='aid')
     <table class='table table-borderless table-hover'>
         <thead>
         <tr>
-            <td scope='col'><a href=\"javascript:ReloadPage('aid');\">id</a></td>
+            <td scope='col'><a href=\"javascript:ReloadPage('aid');\">ID</a></td>
             <td scope='col'>列表名称</td>
             <td scope='col'>模板文件</td>
             <td scope='col'><a href=\"javascript:ReloadPage('click');\">点击</a></td>

@@ -2,7 +2,7 @@
 >>dede>>
 {dede:vote id='' lineheight='' tablewidth='100%' titlebgcolor='#EDEDE2' titlebackground='' tablebgcolor='#ffffff'/}
 >>dede>>
-id='1' 调用指定投票id
+id='1' 调用指定投票ID
 lineheight='30' 限制表格显示高度30px
 tablewidth='100%' 限制表格显示宽度100%
 titlebgcolor='#EDEDE2' 限制表格显示标题背景色#EDEDE2

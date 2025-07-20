@@ -29,8 +29,8 @@ if (!function_exists('GetRankStar')) {
 /**
  *  获得文档网址，如果要获得文件的路径，直接用GetFileUrl($aid,$typeid,$timetag,$title,$ismake,$rank,$namerule,$typedir,$money)即是不指定站点参数则返回相当对根目录的真实路径
  *
- * @param     int  $aid  文档id
- * @param     int  $typeid  栏目id
+ * @param     int  $aid  文档ID
+ * @param     int  $typeid  栏目ID
  * @param     int  $timetag  时间戳
  * @param     string  $title  标题
  * @param     int  $ismake  是否生成
@@ -80,8 +80,8 @@ if (!function_exists('GetFileUrl')) {
 /**
  *  获得新文件名，本函数会自动创建目录
  *
- * @param     int  $aid  文档id
- * @param     int  $typeid  栏目id
+ * @param     int  $aid  文档ID
+ * @param     int  $typeid  栏目ID
  * @param     int  $timetag  时间戳
  * @param     string  $title  标题
  * @param     int  $ismake  是否生成
@@ -119,7 +119,7 @@ if (!function_exists('GetFileNewName')) {
 /**
  *  获得栏目链接
  *
- * @param     int  $typeid  栏目id
+ * @param     int  $typeid  栏目ID
  * @param     string  $typedir  栏目目录
  * @param     int  $isdefault  是否默认
  * @param     string  $defaultname  默认名称
@@ -179,8 +179,8 @@ if (!function_exists('GetTypeUrl')) {
 /**
  *  获得文档链接
  *
- * @param     int  $aid  文档id
- * @param     int  $typeid  栏目id
+ * @param     int  $aid  文档ID
+ * @param     int  $typeid  栏目ID
  * @param     int  $timetag  时间戳
  * @param     string  $title  标题
  * @param     int  $ismake  是否生成
@@ -251,9 +251,9 @@ if (!function_exists('MagicVar')) {
     }
 }
 /**
- *  获取某个栏目的所有上级栏目id
+ *  获取某个栏目的所有上级栏目ID
  *
- * @param     int  $tid  栏目id
+ * @param     int  $tid  栏目ID
  * @return    string
  */
 if (!function_exists('GetTopids')) {
@@ -264,10 +264,10 @@ if (!function_exists('GetTopids')) {
     }
 }
 /**
- *  获取上级id列表
+ *  获取上级列表ID
  *
  * @access    public
- * @param     string  $tid  栏目id
+ * @param     string  $tid  栏目ID
  * @return    string
  */
 if (!function_exists('GetParentIds')) {
@@ -301,9 +301,9 @@ if (!function_exists('IsParent')) {
     }
 }
 /**
- *  获取一个栏目的顶级栏目id
+ *  获取一个栏目的顶级栏目ID
  *
- * @param     string  $tid  栏目id
+ * @param     string  $tid  栏目ID
  * @return    string
  */
 if (!function_exists('GetTopid')) {
@@ -323,8 +323,8 @@ if (!function_exists('GetTopid')) {
 /**
  *  获得某id的所有下级id
  *
- * @param     string  $id  栏目id
- * @param     string  $channel  模型id
+ * @param     string  $id  栏目ID
+ * @param     string  $channel  模型ID
  * @param     string  $addthis  是否包含本身
  * @return    string
  */
@@ -500,9 +500,9 @@ function GetOneTypeUrlA($typeinfos)
 /**
  *  设置全局环境变量
  *
- * @param     int  $typeid  栏目id
+ * @param     int  $typeid  栏目ID
  * @param     string  $typename  栏目名称
- * @param     string  $aid  文档id
+ * @param     string  $aid  文档ID
  * @param     string  $title  标题
  * @param     string  $curfile  当前文件
  * @return    void
@@ -526,7 +526,7 @@ function SetSysEnv($typeid = 0, $typename = '', $aid = 0, $title = '', $curfile 
 /**
  *  根据id生成目录
  *
- * @param     string  $aid  文档id
+ * @param     string  $aid  文档ID
  * @return    int
  */
 function DedeID2Dir($aid)
@@ -537,7 +537,7 @@ function DedeID2Dir($aid)
 /**
  *  获得自由列表的网址
  *
- * @param     string  $lid  列表id
+ * @param     string  $lid  列表ID
  * @param     string  $namerule  命名规则
  * @param     string  $listdir  列表目录
  * @param     string  $defaultpage  默认页面

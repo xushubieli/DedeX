@@ -31,7 +31,7 @@ function lib_channel(&$ctag, &$refObj)
     }
     $reid = 0;
     $topid = 0;
-    //如果属性里没指定栏目id，从引用类里获取栏目信息
+    //如果属性里没指定栏目ID，从引用类里获取栏目信息
     if (empty($typeid)) {
         if (isset($refObj->TypeLink->TypeInfos['id'])) {
             $typeid = $refObj->TypeLink->TypeInfos['id'];
@@ -41,7 +41,7 @@ function lib_channel(&$ctag, &$refObj)
             $typeid = 0;
         }
     }
-    //如果指定了栏目id，从数据库获取栏目信息
+    //如果指定了栏目ID，从数据库获取栏目信息
     else {
         $row2 = $dsql->GetOne("SELECT * FROM `#@__arctype` WHERE id='$typeid' ");
         if (is_array($row2)) {

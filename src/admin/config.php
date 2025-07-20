@@ -140,7 +140,7 @@ function DedeInclude($filename, $isabs = FALSE)
  *  根据会员mid获取账号
  *
  * @access    public
- * @param     int  $mid   会员id
+ * @param     int  $mid   会员ID
  * @return    string
  */
 if (!function_exists('GetMemberName')) {

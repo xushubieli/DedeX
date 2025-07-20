@@ -70,10 +70,10 @@ class ChannelUnit
         $this->__construct($cid, $aid);
     }
     /**
-     *  设置文档id
+     *  设置文档ID
      *
      * @access    private
-     * @param     int   $aid  文档id
+     * @param     int   $aid  文档ID
      * @return    void
      */
     function SetArcID($aid)

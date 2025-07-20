@@ -9,4 +9,4 @@
 	</body>
 </html>
 >>dede>>
-typeid='1' 调用指定栏目id
+typeid='1' 调用指定栏目ID

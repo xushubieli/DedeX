@@ -48,7 +48,7 @@ class TypeUnit
      *  读出所有分类，在栏目管理页list_type中使用
      *
      * @access    public
-     * @param     int   $channel  栏目id
+     * @param     int   $channel  栏目ID
      * @param     int   $nowdir  当前操作ID
      * @return    void
      */
@@ -110,7 +110,7 @@ class TypeUnit
      *  获得子栏目的递归调用
      *
      * @access    public
-     * @param     int  $id  栏目id
+     * @param     int  $id  栏目ID
      * @param     string  $step  层级标志
      * @param     bool  $needcheck  权限
      * @return    void

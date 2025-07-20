@@ -25,10 +25,10 @@ function GetNextUrl($notallowArr = array('dopost', 'f', 'del'))
             //如果系统有多重任务，把下一任务和任务列表参数提交给程序处理
             if (in_array('morejob', $notallowArr)) {
                 $reurl .= "&doposttmp=".$nextdos[0];
-                if ($nextdo != '') $reurl .= "&nextdotmp=$nextdo";
+                if ($nextdo != '') $reurl .= "&nextdotmp={$nextdo}";
             } else {
                 $reurl .= "&dopost=".$nextdos[0];
-                if ($nextdo != '') $reurl .= "&nextdo=$nextdo";
+                if ($nextdo != '') $reurl .= "&nextdo={$nextdo}";
             }
         } else if (in_array($k, $notallowArr)) {
             continue;
@@ -85,7 +85,7 @@ if ($dopost == 'makeindex') {
     $pv->SaveToHtml($homeFile);
     $pv->Close();
     if (empty($nextdo)) {
-        ShowMsg("完成所有首页更新任务", "close::tgtable");
+        ShowMsg("完成首页更新任务", "close::tgtable");
         exit();
     } else {
         $jumpurl = GetNextUrl();
@@ -123,16 +123,16 @@ else if ($dopost == 'makeparenttype') {
         if (!empty($doposttmp)) {
             $jumpurl = preg_replace("#doposttmp|nextdotmp#", 'del', $jumpurl);
             $jumpurl .= "&dopost={$doposttmp}&nextdo={$nextdotmp}";
-            ShowMsg("完成栏目：{$tid}更新，继续更新后续任务", $jumpurl);
+            ShowMsg("完成更新栏目ID：{$tid}，继续更新后续任务", $jumpurl);
             exit();
         } else {
-            ShowMsg("完成栏目：{$tid}更新，完成所有更新任务", "close::tgtable");
+            ShowMsg("完成更新栏目ID：{$tid}，完成所有更新任务", "close::tgtable");
             exit();
         }
     } else {
         $curpage++;
         $jumpurl .= "&curpage={$curpage}&dopost=makeparenttype";
-        ShowMsg("完成栏目：{$tid}更新，继续更新其它栏目", $jumpurl);
+        ShowMsg("完成更新栏目ID：{$tid}，继续更新其它栏目", $jumpurl);
         exit();
     }
 }

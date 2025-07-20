@@ -361,8 +361,8 @@ function FillUrl($refurl, $surl)
  * @access    public
  * @param     string  $regxurl  正则地址
  * @param     string  $handurl  操作地址
- * @param     string  $startid  开始id
- * @param     string  $endid  结束id
+ * @param     string  $startid  开始ID
+ * @param     string  $endid  结束ID
  * @param     string  $addv  增值
  * @param     string  $usemore  使用更多
  * @param     string  $batchrule  列表规则
@@ -410,7 +410,7 @@ function GetUrlFromListRule($regxurl = '', $handurl = '', $startid = 0, $endid =
                     }
                 }
             }
-            //匹配多个栏目，规则表达式[(#)=>(#)匹配的网址; (*)=>(*)的范围，如：1-20;typeid=>栏目id;addurl=>附加的网址(用|分开多个)]
+            //匹配多个栏目，规则表达式[(#)=>(#)匹配的网址; (*)=>(*)的范围，如：1-20;typeid=>栏目ID;addurl=>附加的网址(用|分开多个)]
             else {
                 $nrules = explode(']', trim($batchrule));
                 foreach ($nrules as $nrule) {

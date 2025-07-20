@@ -25,7 +25,7 @@ if (file_exists($timelock)) {
 $mid = isset($mid) && is_numeric($mid) ? $mid : 0;
 $sqlhash = isset($sqlhash) && preg_match("/^[A-Za-z0-9]+$/", $sqlhash) ? $sqlhash : '';
 if ($mid == 0) {
-    showmsg('参数不正确，高级自定义搜索必须指定模型id', 'javascript');
+    showmsg('参数不正确，高级自定义搜索必须指定模型ID', 'javascript');
     exit();
 }
 $query = "SELECT maintable, mainfields, addontable, addonfields, template FROM `#@__advancedsearch` WHERE mid='$mid'";

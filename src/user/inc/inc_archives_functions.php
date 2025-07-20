@@ -225,7 +225,7 @@ function PrintAutoFieldsEdit(&$fieldset, &$fieldValues, $loadtype = 'all')
     echo "<input type=\"hidden\" name=\"_csrf_token\" value=\"".$GLOBALS['csrf_token']."\" />";
 }
 /**
- *  创建指定id的文档
+ *  创建指定ID的文档
  *
  * @param     int  $aid
  * @param     bool  $ismakesign

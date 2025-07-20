@@ -83,7 +83,7 @@ $ttime = number_format(($ttime / 60), 2);
 //返回提示信息
 $tjlen = $totalnum > 0 ? ceil(($tjnum / $totalnum) * 100) : 100;
 $tjsta = "<div class='progress mb-3'><div class='progress-bar progress-bar-striped bg-primary' role='progressbar' aria-valuenow='{$tjlen}%' aria-valuemin='0' aria-valuemax='100' style='width:{$tjlen}%'>{$tjlen}%</div></div>";
-$tjsta .= "正在更新文档id：{$id}，更新进度{$tjlen}%，用时{$ttime}分钟";
+$tjsta .= "正在更新文档ID：{$id}，更新进度{$tjlen}%，用时{$ttime}分钟";
 //速度测试
 if ($tjnum < $totalnum) {
     $nurl  = "makehtml_archives_action.php?endid={$endid}&startid={$startid}&typeid={$typeid}";

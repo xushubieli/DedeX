@@ -30,7 +30,7 @@ class TypeUnitSelector
      *  列出某一栏目下的所有栏目
      *
      * @access    public
-     * @param     string  $channel  栏目id
+     * @param     string  $channel  栏目ID
      * @return    void
      */
     function ListAllType($channel = 0)
@@ -84,8 +84,8 @@ class TypeUnitSelector
      *  获得子栏目的递归调用
      *
      * @access    public
-     * @param     int   $id  栏目id
-     * @param     int   $channel  栏目id
+     * @param     int   $id  栏目ID
+     * @param     int   $channel  栏目ID
      * @param     int   $soncat  子级分类
      * @return    void
      */

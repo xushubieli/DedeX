@@ -61,7 +61,7 @@ if ($dopost != 'save') {
         $ddisremote = 0;
     }
     $litpic = GetDDImage('none', $picname, $ddisremote);
-    //生成文档id
+    //生成文档ID
     $arcID = GetIndexKey($arcrank, $typeid, $sortrank, $channelid, $senddate, $adminid);
     if (empty($arcID)) {
         ShowMsg("无法获得主键，无法进行后续操作", "-1");

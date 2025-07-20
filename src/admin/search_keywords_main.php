@@ -66,7 +66,7 @@ function GetKeywordList($dsql, $pageno, $pagesize, $orderby = 'aid')
     <thead>
         <tr>
             <td scope='col'>选择</td>
-            <td scope='col'><a href=\"javascript:ReloadPage('aid');\">id</a></td>
+            <td scope='col'><a href=\"javascript:ReloadPage('aid');\">ID</a></td>
             <td scope='col'>关键词</td>
             <td scope='col'>关键词调整</td>
             <td scope='col'>分词调整</td>

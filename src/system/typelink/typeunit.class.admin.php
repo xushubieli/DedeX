@@ -35,7 +35,7 @@ class TypeUnit
     function Close()
     {
     }
-    //获取所有栏目的文档id数
+    //获取所有栏目的文档ID数
     function UpdateCatalogNum()
     {
         $this->dsql->SetQuery("SELECT typeid,count(typeid) as dd FROM `#@__arctiny` WHERE arcrank <>-3 GROUP BY typeid");
@@ -66,7 +66,7 @@ class TypeUnit
      *  读出所有分类，在栏目管理页list_type中使用
      *
      * @access    public
-     * @param     int   $channel  栏目id
+     * @param     int   $channel  栏目ID
      * @param     int   $nowdir  当前操作ID
      * @return    void
      */
@@ -112,7 +112,7 @@ echo <<<tpl
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
         <span class='btn btn-primary btn-sm'>列表</span>
         {$nss}
-        <span class='btn btn-sm'>id：{$id}</span>
+        <span class='btn btn-sm'>ID：{$id}</span>
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>{$typeName}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>文档数：{$this->GetTotalArc($id)}</a>
     </div>
@@ -135,7 +135,7 @@ echo <<<tpl
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
         <span class='btn btn-info btn-sm'>封面</span>
         {$nss}
-        <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}</a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>ID：{$id}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>{$typeName}</a>
     </div>
     <div class='right'>
@@ -157,7 +157,7 @@ echo <<<tpl
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
         <span class='btn btn-outline-primary btn-sm'>外部</span>
         {$nss}
-        <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}<a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>ID：{$id}<a>
         <a href='{$typeDir}' target='_blank' class='btn btn-sm'>{$typeName}</a>
     </div>
     <div class='right'>
@@ -184,7 +184,7 @@ tpl;
      *  获得子栏目的递归调用
      *
      * @access    public
-     * @param     int  $id  栏目id
+     * @param     int  $id  栏目ID
      * @param     string  $step  层级标志
      * @return    void
      */
@@ -223,7 +223,7 @@ echo <<<tpl
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
         <span class='btn btn-primary btn-sm'>列表</span>
         {$nss}
-        <span class='btn btn-sm'>id：{$id}</span>
+        <span class='btn btn-sm'>ID：{$id}</span>
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>{$typeName}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>文档数：{$this->GetTotalArc($id)}</a>
     </div>
@@ -247,7 +247,7 @@ echo <<<tpl
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
         <span class='btn btn-info btn-sm'>封面</span>
         {$nss}
-        <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}</a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>ID：{$id}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>{$typeName}</a>
     </div>
     <div class='right'>
@@ -270,7 +270,7 @@ echo <<<tpl
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
         <span class='btn btn-outline-primary btn-sm'>外部</span>
         {$nss}
-        <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>id：{$id}</a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>ID：{$id}</a>
         <a href='{$typeDir}' target='_blank' class='btn btn-sm'>{$typeName}</a>
     </div>
     <div class='right'>
@@ -290,11 +290,11 @@ tpl;
         }
     }
     /**
-     *  返回某个相关下级目录的栏目id列表删除栏目或文档时调用
+     *  返回某个相关下级目录的栏目列表ID删除栏目或文档时调用
      *
      * @access    public
-     * @param     int   $id  栏目id
-     * @param     int   $channel  栏目id
+     * @param     int   $id  栏目ID
+     * @param     int   $channel  栏目ID
      * @return    array
      */
     function GetSunTypes($id, $channel = 0)
@@ -319,7 +319,7 @@ tpl;
      *  删除栏目
      *
      * @access    public
-     * @param     int   $id  栏目id
+     * @param     int   $id  栏目ID
      * @param     bool   $isDelFile  是否删除文件
      * @return    string
      */

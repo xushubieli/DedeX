@@ -10,7 +10,7 @@ if (!defined('DEDEINC')) exit('dedex');
 /**
  *  获取选项列表
  *
- * @param     string  $selid  当前选择id
+ * @param     string  $selid  当前选择ID
  * @param     string  $channeltype  栏目类型
  * @return    string
  */
@@ -78,9 +78,9 @@ function LogicGetOptionArray($id, $step, $channeltype, $selid = 0)
 /**
  *  自定义类型
  *
- * @param     int  $mid  会员id
- * @param     int  $mtypeid  自定义类别id
- * @param     int  $channelid  栏目id
+ * @param     int  $mid  会员ID
+ * @param     int  $mtypeid  自定义类别ID
+ * @param     int  $channelid  栏目ID
  * @return    string
  */
 function classification($mid, $mtypeid = 0, $channelid = 1)

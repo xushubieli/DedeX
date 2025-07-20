@@ -19,7 +19,7 @@ if (empty($typeid)) $typeid = 0;
 if (!isset($uppage)) $uppage = 0;
 if (empty($maxpagesize)) $maxpagesize = 30;
 $adminID = $cuserLogin->getUserID();
-//检测获取所有栏目id，普通更新或一键更新时更新所有栏目
+//检测获取所有栏目ID，普通更新或一键更新时更新所有栏目
 if ($gotype == '' || $gotype == 'mkallct') {
     if ($upnext == 1 || $typeid == 0) {
         if ($typeid > 0) {
@@ -44,7 +44,7 @@ if (!$idArray) {
     ShowMsg("暂无栏目", "javascript:;");
     exit;
 }
-//当前更新栏目id
+//当前更新栏目ID
 $totalpage = count($idArray);
 if (isset($idArray[$pageno])) {
     $tid = $idArray[$pageno];
@@ -107,13 +107,13 @@ if ($nextpage >= $totalpage && $finishType) {
     $typename = isset($cfg_Cs[$tid][3])? base64_decode($cfg_Cs[$tid][3]) : "";
     if ($finishType) {
         $gourl = "makehtml_list_action.php?gotype={$gotype}&uppage={$uppage}&maxpagesize={$maxpagesize}&typeid={$typeid}&pageno={$nextpage}";
-        ShowMsg("正在更新栏目id：{$tid}{$typename}，继续更新栏目", $gourl, 0, 100);
+        ShowMsg("正在更新栏目ID：{$tid}{$typename}，继续更新栏目", $gourl, 0, 100);
         exit();
     } else {
         $startpage = ceil(($mkpage - 1) / $maxpagesize) + 1;
         $endpage = ceil($ntotalpage / $maxpagesize);
         $gourl = "makehtml_list_action.php?gotype={$gotype}&uppage={$uppage}&mkpage={$mkpage}&maxpagesize={$maxpagesize}&typeid={$typeid}&pageno={$pageno}";
-        ShowMsg("正在更新栏目id：{$tid}{$typename}，继续更新{$startpage}/{$endpage}页，每页{$maxpagesize}页", $gourl, 0, 100);
+        ShowMsg("正在更新栏目ID：{$tid}{$typename}，继续更新{$startpage}/{$endpage}页，每页{$maxpagesize}页", $gourl, 0, 100);
         exit();
     }
 }

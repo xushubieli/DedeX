@@ -76,7 +76,7 @@ $DedeUserCatalogs = array();
  *  检测会员是否有权限操作某栏目
  *
  * @access    public
- * @param     int   $cid  栏目id
+ * @param     int   $cid  栏目ID
  * @param     string   $msg  返回消息
  * @return    string
  */
@@ -119,10 +119,10 @@ function AddMyAddon($fid, $filename)
     fclose($fp);
 }
 /**
- *  清理附件，如果关连的文档id，先把上一批附件传给这个文档id
+ *  清理附件，如果关连的文档ID，先把上一批附件传给这个文档ID
  *
  * @access    public
- * @param     string  $aid  文档id
+ * @param     string  $aid  文档ID
  * @param     string  $title  文档标题
  * @return    void
  */
@@ -462,8 +462,8 @@ class userLogin
  *  获得某id的所有下级id
  *
  * @access    public
- * @param     int   $id  栏目id
- * @param     int   $channel  栏目id
+ * @param     int   $id  栏目ID
+ * @param     int   $channel  栏目ID
  * @param     int   $addthis  是否加入当前这个栏目
  * @return    string
  */
@@ -482,9 +482,9 @@ function GetSonIdsUL($id, $channel = 0, $addthis = TRUE)
  *  递归逻辑
  *
  * @access    public
- * @param     int  $id  栏目id
+ * @param     int  $id  栏目ID
  * @param     array  $sArr  缓存数组
- * @param     int   $channel  栏目id
+ * @param     int   $channel  栏目ID
  * @param     int   $addthis  是否加入当前这个栏目
  * @return    void
  */

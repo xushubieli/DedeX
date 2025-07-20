@@ -15,7 +15,7 @@ if ($dopost == 'analyse') {
     if (is_array($arr)) {
         $maintable = $arr['maintable'];
     } else {
-        showmsg('栏目id不正确，无法处理', 'javascript:;');
+        showmsg('栏目ID不正确，无法处理', 'javascript:;');
         exit();
     }
     $pagesize = intval($pagesize);

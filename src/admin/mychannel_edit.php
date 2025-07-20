@@ -53,7 +53,7 @@ if ($dopost == "show") {
     $win->AddHidden("id", $id);
     $win->AddHidden("dopost", 'copysave');
     $msg = "<tr>
-        <td width='260'>新模型id</td>
+        <td width='260'>新模型ID</td>
         <td><input name='newid' type='text' id='newid' value='{$newid}' class='form-control admin-w-sm'></td>
     </tr>
     <tr>
@@ -339,7 +339,7 @@ if ($dopost == "show") {
         $addtable = str_replace($cfg_dbprefix, '', str_replace('#@__', $cfg_dbprefix, $myrow['addtable']));
         $row = $dsql->GetOne("SELECT COUNT(id) AS dd FROM `#@__channeltype` WHERE addtable like '{$cfg_dbprefix}{$addtable}' OR addtable LIKE CONCAT('#','@','__','$addtable') ;");
         $isExclusive2 = ($row['dd'] > 1 ? 0 : 1);
-        //获取与栏目关连的所有栏目id
+        //获取与栏目关连的所有栏目ID
         $tids = '';
         $dsql->Execute('qm', "SELECT id FROM `#@__arctype` WHERE channeltype='$id'");
         while ($row = $dsql->GetArray('qm')) {

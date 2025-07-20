@@ -50,7 +50,7 @@ class SearchView
      *  php5构造函数
      *
      * @access    public
-     * @param     int  $typeid  栏目id
+     * @param     int  $typeid  栏目ID
      * @param     string  $keyword  关键词
      * @param     string  $orderby  排序
      * @param     string  $achanneltype  栏目类型
@@ -58,7 +58,7 @@ class SearchView
      * @param     string  $starttime  开始时间
      * @param     string  $upagesize  页数
      * @param     string  $kwtype  关键词类型
-     * @param     string  $mid  会员id
+     * @param     string  $mid  会员ID
      * @return    string
      */
     function __construct(

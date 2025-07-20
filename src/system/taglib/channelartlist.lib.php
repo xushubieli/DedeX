@@ -28,7 +28,7 @@ function lib_channelartlist(&$ctag, &$refObj)
     if ($innertext == '') $innertext = GetSysTemplets('part_channelartlist.htm');
     $totalnum = $row;
     if (empty($totalnum)) $totalnum = 20;
-    //获得类别id总数的信息
+    //获得类别ID总数的信息
     $typeids = array();
     $order = " ORDER BY sortrank ASC ";
     if ($type == 'reid') {        

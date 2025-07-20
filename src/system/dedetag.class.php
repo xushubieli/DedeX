@@ -412,10 +412,10 @@ class DedeTagParse
         return $this->GetTag($str);
     }
     /**
-     *  获得指定id的CTag数据类
+     *  获得指定ID的CTag数据类
      *
      * @access    public
-     * @param     string  标签id
+     * @param     string  标签ID
      * @return    string
      */
     function GetTagByID($id)
@@ -442,10 +442,10 @@ class DedeTagParse
         $_sys_globals[$vname] = $vvalue;
     }
     /**
-     *  分配指定id的标记的值
+     *  分配指定ID的标记的值
      *
      * @access    public
-     * @param     string   $i  标签id
+     * @param     string   $i  标签ID
      * @param     string  $str  字符串
      * @param     string  $runfunc  运行函数
      * @return    void

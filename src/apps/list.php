@@ -24,7 +24,7 @@ if ($cfg_access == 'Y') {
         exit();
     }
 }
-//如果指定文档模型id但没指定栏目id，则文档模型的第一个顶级栏目作为栏目默认栏目
+//如果指定文档模型ID但没指定栏目ID，则文档模型的第一个顶级栏目作为栏目默认栏目
 if (!empty($channelid) && empty($tid)) {
     $tinfos = $dsql->GetOne("SELECT tp.id,ch.issystem FROM `#@__arctype` tp LEFT JOIN `#@__channeltype` ch ON ch.id=tp.channeltype WHERE tp.channeltype='$channelid' And tp.reid=0 ORDER BY sortrank ASC");
     if (!is_array($tinfos)) die("频道中没有目录");

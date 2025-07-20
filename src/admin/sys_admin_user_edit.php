@@ -94,14 +94,14 @@ if ($dopost == 'saveedit') {
         ShowMsg("请填写正确的验证安全码", "sys_admin_user.php");
         exit();
     }
-    //不能删除id为1的创建人帐号，不能删除自己
+    //不能删除ID为1的创建人帐号，不能删除自己
     $rs = $dsql->ExecuteNoneQuery2("DELETE FROM `#@__admin` WHERE id='$id' AND id<>1 AND id<>'".$cuserLogin->getUserID()."' ");
     if ($rs > 0) {
         //更新前台管理员信息
         $dsql->ExecuteNoneQuery("UPDATE `#@__member` SET matt='0' WHERE mid='$id' LIMIT 1");
         ShowMsg("成功删除一个帐户", "sys_admin_user.php");
     } else {
-        ShowMsg("不能删除id为1的创建人帐号，不能删除自己", "sys_admin_user.php");
+        ShowMsg("不能删除ID为1的创建人帐号，不能删除自己", "sys_admin_user.php");
     }
     exit();
 }

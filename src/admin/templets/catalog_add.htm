@@ -177,7 +177,7 @@
 										<td>
 											<label><input type="radio" name="cross" id="cross0" value="0" onclick="CheckCross();" checked> 不交叉</label>
 											<label><input type="radio" name="cross" id="cross1" value="1" onclick="CheckCross();"> 自动获取同名栏目</label>
-											<label><input type="radio" name="cross" id="cross2" value="2" onclick="CheckCross();"> 指定交叉栏目id（英文逗号隔开）</label>
+											<label><input type="radio" name="cross" id="cross2" value="2" onclick="CheckCross();"> 指定交叉栏目ID（英文逗号隔开）</label>
 											<a href="javascript:ShowHide('helpvarco');" class="btn btn-primary btn-sm">说明</a>
 											<div id="crossid"  style="display:none"><textarea name="crossid" class="admin-textarea-sm"></textarea></div>
 											<div id="helpvarco" class="helpinfo mt-3" style="display:none">交叉栏目该栏目与另一个非子栏目交叉的情况，相当于副栏目功能</div>
@@ -207,8 +207,8 @@
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.tempindex')">选择</button>
 											<a href="javascript:ShowHide('helpvar1');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar1" class="helpinfo mt-3" style="display:none">
-												<p>{tid} 栏目id</p>
-												<span>{cid} 栏目模型名字id</span>
+												<p>{tid} 栏目ID</p>
+												<span>{cid} 栏目模型名字ID</span>
 											</div>
 										</td>
 									</tr>
@@ -224,7 +224,7 @@
 											<a href="javascript:ShowHide('helpvar2');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar2" class="helpinfo mt-3" style="display:none">
 												<p>静态规则</p>
-												<p>{tid} 栏目id</p>
+												<p>{tid} 栏目ID</p>
 												<p>{page} 栏目页码数</p>
 												<p>伪静态规则（Nginx）</p>
 												<p>rewrite ^/list/([0-9]+)$ /apps/list.php?tid=$1;</p>
@@ -241,9 +241,9 @@
 												<p>静态规则</p>
 												<p>{Y}{M}{D} 年月日</p>
 												<p>{timestamp} INT类型的UNIX时间戳</p>
-												<p>{aid} 文档id</p>
-												<p>{pinyin} 拼音加文档id</p>
-												<p>{py} 拼音部首加文档id</p>
+												<p>{aid} 文档ID</p>
+												<p>{pinyin} 拼音加文档ID</p>
+												<p>{py} 拼音部首加文档ID</p>
 												<p>{typedir} 栏目保存目录</p>
 												<p>{cc} 日期加混编id后用转换为适合字母</p>
 												<p>伪静态规则（Nginx）</p>

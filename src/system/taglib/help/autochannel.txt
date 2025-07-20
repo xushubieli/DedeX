@@ -10,4 +10,4 @@
 </html>
 >>dede>>
 partsort='' 栏目所在排序位置
-typeid='' 调用指定父栏目id
+typeid='' 调用指定父栏目ID

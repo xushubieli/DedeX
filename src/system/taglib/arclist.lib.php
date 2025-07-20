@@ -79,7 +79,7 @@ function lib_arclist(&$ctag, &$refObj)
  * @access    public
  * @param     object  $refObj  引用对象
  * @param     object  $ctag  标签
- * @param     int  $typeid  栏目id
+ * @param     int  $typeid  栏目ID
  * @param     int  $row  调用行数
  * @param     int  $titlelen  字符串长度
  * @param     int  $infolen  描述信息长度
@@ -89,15 +89,15 @@ function lib_arclist(&$ctag, &$refObj)
  * @param     string  $orderby  排列顺序
  * @param     string  $keyword  关键词
  * @param     string  $innertext  底层模板
- * @param     int  $arcid  文档id
- * @param     string  $idlist  ID列表
- * @param     int  $channelid  栏目id
+ * @param     int  $arcid  文档ID
+ * @param     string  $idlist  列表ID
+ * @param     int  $channelid  栏目ID
  * @param     string  $limit  限制
  * @param     string  $att  属性
  * @param     string  $order  排序类型
  * @param     int  $subday  天内
  * @param     string  $noflag  属性标记
- * @param     string  $tagid  标签id
+ * @param     string  $tagid  标签ID
  * @param     string  $pagesize  显示条数
  * @param     string  $isweight  是否需要对检索出来的文档按照weight排序
  * @return    string
@@ -208,7 +208,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
                 else $orwheres[] = ' arc.typeid IN ('.GetSonIds($typeid).','.$CrossID.')';
             }
         }
-        //栏目id
+        //栏目ID
         if (preg_match('#spec#i', $listtype)) $channelid == -1;
         if (!empty($channelid)) $orwheres[] = " And arc.channel = '$channelid' ";
         if (!empty($noflag)) {
@@ -422,8 +422,8 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
         if ($cfg_cache_type == 'content' && $idsstr != '0') {
             $idsstr = addslashes($artlist);
         }
-        $inquery = "INSERT INTO `#@__arccache` (`md5hash`,`uptime`,`cachedata`) VALUES ('".$taghash."','".time()."', '$idsstr'); ";
-        $dsql->ExecuteNoneQuery("DELETE FROM `#@__arccache` WHERE md5hash='".$taghash."' ");
+        $inquery = "INSERT INTO `#@__arccache` (`md5hash`,`uptime`,`cachedata`) VALUES ('{$taghash}','".time()."', '{$idsstr}'); ";
+        $dsql->ExecuteNoneQuery("DELETE FROM `#@__arccache` WHERE md5hash='{$taghash}' ");
         $dsql->ExecuteNoneQuery($inquery);
     }
     return $artlist;
@@ -451,7 +451,7 @@ function GetArclistCache($md5hash)
     }
 }
 /**
- *  获取自动栏目id
+ *  获取自动栏目ID
  *
  * @access    public
  * @param     string  $sortid 
