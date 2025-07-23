@@ -173,11 +173,11 @@ $cfg_other_medias = $cfg_medias_dir.'/media';
 //附件目录
 $cfg_medias_dir = $cfg_cmspath.$cfg_medias_dir;
 $cfg_mediasurl = $cfg_mainsite.$cfg_medias_dir;
-//程序信息摘要
+//系统信息摘要
 $cfg_version = '1';
-$cfg_version_detail = '1.0.6';//详细版本号
+$cfg_version_detail = '1.0.6'; //版本详情
 $cfg_soft_lang = 'utf-8';
-$cfg_soft_chname = '得德未来';
+$cfg_soft_cnname = '得德管理系统';
 $cfg_soft_enname = 'DedeX';
 $cfg_soft_devteam = 'DedeX团队';
 //文档默认命名规则

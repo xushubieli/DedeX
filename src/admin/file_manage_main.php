@@ -20,7 +20,7 @@ if ($activepath == "/") $activepath = '';
 if ($activepath == "") $inpath = $cfg_basedir;
 else $inpath = $cfg_basedir.$activepath;
 $activeurl = $activepath;
-if (preg_match("#".$cfg_templets_dir."#i", $activepath)) {
+if (preg_match("#{$cfg_templets_dir}#i", $activepath)) {
     $istemplets = TRUE;
 } else {
     $istemplets = FALSE;

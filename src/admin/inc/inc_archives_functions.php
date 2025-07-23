@@ -42,7 +42,7 @@ function GetCurContentAlbum($body, $rfurl, &$firstdd)
     foreach ($img_array as $key => $value) {
         $value = trim($value);
         if (
-            preg_match("#".$basehost."#i", $value) || !preg_match("#^(http|https):\/\/#i", $value) || ($cfg_basehost != $basehost && preg_match("#".$cfg_basehost."#i", $value))) {
+            preg_match("#{$basehost}#i", $value) || !preg_match("#^(http|https):\/\/#i", $value) || ($cfg_basehost != $basehost && preg_match("#{$cfg_basehost}#i", $value))) {
             continue;
         }
         $itype =  substr($value, -4, 4);
@@ -102,10 +102,10 @@ function GetCurContent($body)
     }
     $milliSecond = MyDate('His', time());
     foreach ($img_array as $key => $value) {
-        if (preg_match("#".$basehost."#i", $value)) {
+        if (preg_match("#{$basehost}#i", $value)) {
             continue;
         }
-        if ($cfg_basehost != $basehost && preg_match("#".$cfg_basehost."#i", $value)) {
+        if ($cfg_basehost != $basehost && preg_match("#{$cfg_basehost}#i", $value)) {
             continue;
         }
         if (!preg_match("#^(http|https):\/\/#i", $value)) {
@@ -722,7 +722,7 @@ function GetUpdateTest()
         if ($cfg_makeindex == 'Y') $dolist .= empty($dolist) ? 'makeindex' : ',makeindex';
         if ($cfg_make_andcat == 'Y') $dolist .= empty($dolist) ? 'makeparenttype' : ',makeparenttype';
         $dolists = explode(',', $dolist);
-        $jumpUrl = "task_do.php?typeid={$typeid}&aid={$arcID}&dopost={$dolists[0]}&nextdo=".preg_replace("#".$dolists[0]."[,]{0,1}#", '', $dolist);
+        $jumpUrl = "task_do.php?typeid={$typeid}&aid={$arcID}&dopost={$dolists[0]}&nextdo=".preg_replace("#{$dolists[0]}[,]{0,1}#", '', $dolist);
         $revalue = "<tr id='tgtable'><td>";
         $revalue .= "<div class='admin-win-iframe'><iframe src='{$jumpUrl}' name='stafrm' frameborder='0' id='stafrm' width='100%' height='100%'></iframe></div>";
         $revalue .= "</td></tr>";

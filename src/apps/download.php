@@ -113,7 +113,7 @@ else if ($open == 2) {
             if (!isset($firstLink) && $islocal == 1) $firstLink = $link;
             if ($islocal == 1 && $softconfig['islocal'] != 1) continue;
             //支持http、迅雷下载、ftp、flashget
-            if (!preg_match("#^http:\/\/|^thunder:\/\/|^ftp:\/\/|^flashget:\/\/#i", $link)) {
+            if (!preg_match("#^(http|https):\/\/|^thunder:\/\/|^ftp:\/\/|^flashget:\/\/#i", $link)) {
                 $link = $link;
             }
             $dbhash = substr(md5($link), 0, 24);

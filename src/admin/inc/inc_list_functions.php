@@ -40,7 +40,7 @@ function IsCommendArchives($iscommend)
     $sn = '';
     foreach ($arcatts as $k => $v) {
         $v = cn_substr($v, 8);
-        $sn .= (preg_match("#".$k."#", $iscommend) ? ' '.$v : '');
+        $sn .= (preg_match("#{$k}#", $iscommend) ? ' '.$v : '');
     }
     $sn = trim($sn);
     if ($sn == '') return '';

@@ -105,7 +105,7 @@ if (!function_exists('MemberUploads')) {
             $GLOBALS[$upname.'_name'] = trim(preg_replace("#[ \r\n\t\*\%\\\/\?><\|\":]{1,}#", '', $GLOBALS[$upname.'_name']));
             //源文件类型检查
             if ($utype == 'image') {
-                if (!preg_match("/\.(".$cfg_imgtype.")$/", $GLOBALS[$upname.'_name'])) {
+                if (!preg_match("/\.({$cfg_imgtype})$/", $GLOBALS[$upname.'_name'])) {
                     ShowMsg("您上传的图片类型错误，请上传{$cfg_imgtype}类型", "-1");
                     exit();
                 }
@@ -118,10 +118,10 @@ if (!function_exists('MemberUploads')) {
             } else if ($utype == 'flash' && !preg_match("/\.swf$/", $GLOBALS[$upname.'_name'])) {
                 ShowMsg("上传的文件必须为flash文件", "-1");
                 exit();
-            } else if ($utype == 'media' && !preg_match("/\.(".$cfg_mediatype.")$/", $GLOBALS[$upname.'_name'])) {
+            } else if ($utype == 'media' && !preg_match("/\.({$cfg_mediatype})$/", $GLOBALS[$upname.'_name'])) {
                 ShowMsg("您上传的文件类型必须为{$cfg_mediatype}", "-1");
                 exit();
-            } else if (!preg_match("/\.(".$allAllowType.")$/", $GLOBALS[$upname.'_name'])) {
+            } else if (!preg_match("/\.({$allAllowType})$/", $GLOBALS[$upname.'_name'])) {
                 ShowMsg("您上传的文件类型不被允许", '-1');
                 exit();
             }
@@ -179,7 +179,7 @@ if (!function_exists('MemberUploads')) {
                 exit('不允许文件名，因为不安全');
             } else if (!preg_match("/\.(".$allAllowType.")$/", $handname)) {
                 exit('不允许文件名作为文件类型');
-            } else if (!preg_match('#^(http|https):#', $handname) && !preg_match('#^'.$cfg_user_dir.'/'.$userid."#", $handname) && !$isadmin) {
+            } else if (!preg_match('#^(http|https):\/\/#i', $handname) && !preg_match('#^'.$cfg_user_dir.'/'.$userid."#", $handname) && !$isadmin) {
                 exit('不允许非用户目录的文件名');
             }
             return $handname;

@@ -107,7 +107,7 @@ else if ($dopost == "delArc") {
     if ($row['issystem'] != -1) $rs = DelArc($aid);
     else $rs = DelArcSg($aid);
     //删除缩略图
-    if (trim($row['litpic']) != '' && preg_match("#^".$cfg_user_dir."/{$cfg_ml->M_ID}#", $row['litpic'])) {
+    if (trim($row['litpic']) != '' && preg_match("#^{$cfg_user_dir}/{$cfg_ml->M_ID}#", $row['litpic'])) {
         $dsql->ExecuteNoneQuery("DELETE FROM `#@__uploads` WHERE url LIKE '{$row['litpic']}' AND mid='{$cfg_ml->M_ID}' ");
         @unlink($cfg_basedir.$row['litpic']);
     }

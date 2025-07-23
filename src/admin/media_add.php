@@ -33,10 +33,10 @@ if ($dopost == "upload") {
                 $savePath = $cfg_other_medias."/".$dpath;
             }
             //修复附件无法上传的错误
-            else if (preg_match('#audio|media|video#i', $upfile_type) && preg_match("#\.".$cfg_mediatype."$#i", $upfile_name)) {
+            else if (preg_match('#audio|media|video#i', $upfile_type) && preg_match("#\.{$cfg_mediatype}$#i", $upfile_name)) {
                 $mediatype = 3;
                 $savePath = $cfg_other_medias."/".$dpath;
-            } else if (preg_match("#\.".$cfg_softtype."+\.".$cfg_softtype."$#i", $upfile_name)) {
+            } else if (preg_match("#\.{$cfg_softtype}+\.{$cfg_softtype}$#i", $upfile_name)) {
                 $mediatype = 4;
                 $savePath = $cfg_soft_dir."/".$dpath;
             } else {

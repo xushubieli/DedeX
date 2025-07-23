@@ -55,7 +55,7 @@ $typeid = intval($typeid);
 $keyword = addslashes(cn_substr($keyword, 30));
 $typeid = intval($typeid);
 //判断关键词是否输入违禁词，在后台-系统设置：禁用关键词添加
-if (!empty($cfg_notallowstr) && preg_match("#".$cfg_notallowstr."#i", $keyword)) {
+if (!empty($cfg_notallowstr) && preg_match("#{$cfg_notallowstr}#i", $keyword)) {
     ShowMsg("您输入的关键词存在违禁，请重新填写", "-1");
     exit();
 }

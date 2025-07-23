@@ -233,7 +233,7 @@ else if ($dopost == 'redat') {
         exit();
     } else {
         $nowfile = $bakfiles[0];
-        $bakfilesTmp = preg_replace("#".$nowfile."[,]{0,1}#", "", $bakfilesTmp);
+        $bakfilesTmp = preg_replace("#{$nowfile}[,]{0,1}#", "", $bakfilesTmp);
         $oknum = 0;
         if (filesize("$bkdir/$nowfile") > 0) {
             $fp = fopen("$bkdir/$nowfile", 'r');

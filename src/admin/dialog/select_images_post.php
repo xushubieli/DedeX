@@ -26,7 +26,7 @@ if (!is_uploaded_file($imgfile)) {
 }
 $CKEditorFuncNum = (isset($CKEditorFuncNum)) ? $CKEditorFuncNum : 1;
 $imgfile_name = trim(preg_replace("#[ \r\n\t\*\%\\\/\?><\|\":]{1,}#", '', $imgfile_name));
-if (!preg_match("#\.(".$cfg_imgtype.")#i", $imgfile_name)) {
+if (!preg_match("#\.({$cfg_imgtype})#i", $imgfile_name)) {
     ShowMsg("您上传的图片类型错误，请修改系统对扩展名配置", "-1");
     exit();
 }

@@ -70,7 +70,7 @@ else if ($action == 'apply') {
         $oo = 0;
         while ($row = $dsql->GetArray()) {
             $kid = $row[$keyfield];
-            $rpf = preg_replace("#".$rpstring."#i", $tostring, $row[$rpfield]);
+            $rpf = preg_replace("#{$rpstring}#i", $tostring, $row[$rpfield]);
             $rs = $dsql->ExecuteNoneQuery("UPDATE $exptable SET $rpfield='$rpf' WHERE $keyfield='$kid' ");
             if ($rs) {
                 $oo++;

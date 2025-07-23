@@ -47,7 +47,7 @@
 											$dsql->Execute();
 											while($trow = $dsql->GetObject())
 											{
-												if (preg_match("#".$trow->att."#", $addRow['flag'])) {
+												if (preg_match("#{$trow->att}#", $addRow['flag'])) {
 													echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' checked> {$trow->attname}[{$trow->att}]</label> ";
 												} else {
 													echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}'> {$trow->attname}[{$trow->att}]</label> ";

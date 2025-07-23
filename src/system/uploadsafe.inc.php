@@ -36,7 +36,7 @@ foreach ($_FILES as $_key => $_value) {
     if (is_array(${$_key.'_name'}) && count(${$_key.'_name'}) > 0) {
         foreach (${$_key.'_name'} as $key => $value) {
             $value = trim($value);
-            if (!empty($value) && (preg_match("#\.(".$cfg_not_allowall.")$#i", $value) || !preg_match("#\.#", $value) || preg_match('#\.[\x00-\x1F\x7F]*$#', trim($value)))) {
+            if (!empty($value) && (preg_match("#\.({$cfg_not_allowall})$#i", $value) || !preg_match("#\.#", $value) || preg_match('#\.[\x00-\x1F\x7F]*$#', trim($value)))) {
                 if (!defined('DEDEADMIN')) {
                     echo DedeAlert('禁止上传当前格式的文件', ALERT_DANGER);
                     exit;
@@ -45,7 +45,7 @@ foreach ($_FILES as $_key => $_value) {
         }
     } else {
         $fname = trim(${$_key.'_name'});
-        if (!empty($fname) && (preg_match("#\.(".$cfg_not_allowall.")$#i", $fname) || !preg_match("#\.#", $fname) || preg_match('#\.[\x00-\x1F\x7F]*$#', trim($value)))) {
+        if (!empty($fname) && (preg_match("#\.({$cfg_not_allowall})$#i", $fname) || !preg_match("#\.#", $fname) || preg_match('#\.[\x00-\x1F\x7F]*$#', trim($value)))) {
             if (!defined('DEDEADMIN')) {
                 echo DedeAlert('禁止上传当前格式的文件', ALERT_DANGER);
                 exit;

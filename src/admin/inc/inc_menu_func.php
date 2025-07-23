@@ -28,7 +28,7 @@ function GetMenus($userrank, $topos = 'main')
     $dtp2->SetNameSpace('m', '<', '>');
     foreach ($dtp->CTags as $i => $ctag) {
         if ($ctag->GetName() == 'top' && ($ctag->GetAtt('rank') == '' || TestPurview($ctag->GetAtt('rank')))) {
-            if ($showitem != 999 && !preg_match("#".$showitem.'_'."#", $ctag->GetAtt('item')) && $showitem != 100) continue;
+            if ($showitem != 999 && !preg_match("#{$showitem}_#", $ctag->GetAtt('item')) && $showitem != 100) continue;
             $htmp = str_replace("~channelname~", $ctag->GetAtt("name"), $headTemplet);
             $icon = 'fa fa-plug';
             if ($ctag->GetAtt('icon') != '') {

@@ -7,7 +7,7 @@
 error_reporting(E_ALL || ~E_NOTICE);
 define('INSLOCKFILE', dirname(__FILE__).'/install_lock.txt');
 $dfDbname = 'DedeX';
-$cfg_version_detail = '1.0.6'; //详细版本号
+$cfg_version_detail = '1.0.6'; //版本详情
 $errmsg = '';
 if (version_compare(PHP_VERSION, '8.0.0', '>=') && function_exists("mysqli_report")) {
     mysqli_report(MYSQLI_REPORT_OFF);
@@ -57,10 +57,8 @@ if ($step == 1) {
     else
     $scriptName = $_SERVER['PHP_SELF'];
     $basepath = preg_replace("#\/install(.*)$#i", '', $scriptName);
-    if (!empty($_SERVER['HTTP_HOST']))
-        $baseurl = $proto.$_SERVER['HTTP_HOST'];
-    else
-        $baseurl = $proto.$_SERVER['SERVER_NAME'];
+    if (!empty($_SERVER['HTTP_HOST'])) $baseurl = $proto.$_SERVER['HTTP_HOST'];
+    else $baseurl = $proto.$_SERVER['SERVER_NAME'];
     $chars='abcdefghigklmnopqrstuvwxwyABCDEFGHIGKLMNOPQRSTUVWXWY0123456789';
     $rnd_cookieEncode='';
     $length = rand(28,32);

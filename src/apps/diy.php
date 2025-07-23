@@ -70,7 +70,7 @@ if ($action == 'post') {
             exit();
         }*/
         //判断$name是否输入违禁词，在后台-系统设置：禁用关键词添加，$name改成您表单字段标识，恢复注释代码使用
-        /*if ($name === '' || preg_match("#".$cfg_notallowstr."#i", $name)) {
+        /*if ($name === '' || preg_match("#{$cfg_notallowstr}#i", $name)) {
             ShowMsg('您输入的信息存在违禁，请重新填写', '-1');
             exit();
         }*/

@@ -23,7 +23,7 @@ function _FilterAll($fk, &$svar)
             $svar[$_k] = _FilterAll($fk, $_v);
         }
     } else {
-        if ($cfg_notallowstr != '' && preg_match("#".$cfg_notallowstr."#i", $svar)) {
+        if ($cfg_notallowstr != '' && preg_match("#{$cfg_notallowstr}#i", $svar)) {
             ShowMsg("{$fk}字段中包含禁用词", '-1');
             exit();
         }

@@ -9,7 +9,7 @@
 require_once(dirname(__FILE__).'/../system/common.inc.php');
 require_once(DEDEINC."/libraries/oxwindow.class.php");
 $url = isset($url)? RemoveXSS($url) : '';
-if (preg_match("#^http#", $url)) {
+if (preg_match("#^(http|https):\/\/#i", $url)) {
     $rur = parse_url($url);
     $loc = parse_url($cfg_basehost);
     if (!$rur || !$loc) {

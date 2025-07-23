@@ -36,13 +36,13 @@ function GetCurContentAlbum($body, $rfurl, &$firstdd)
     }
     $milliSecond = MyDate("ymdHis", time());
     foreach ($img_array as $key => $value) {
-        if (preg_match("#".$basehost."#i", $value)) {
+        if (preg_match("#{$basehost}#i", $value)) {
             continue;
         }
-        if ($cfg_basehost != $basehost && preg_match("#".$cfg_basehost."#i", $value)) {
+        if ($cfg_basehost != $basehost && preg_match("#{$cfg_basehost}#i", $value)) {
             continue;
         }
-        if (!preg_match("#^http[s]?:\/\/#i", $value)) {
+        if (!preg_match("#^(http|https):\/\/#i", $value)) {
             continue;
         }
         if ($cfg_mb_rmdown == 'Y') {
@@ -303,10 +303,10 @@ function GetCurContent(&$body)
     }
     $milliSecond = MyDate("ymdHis", time());
     foreach ($img_array as $key => $value) {
-        if (preg_match("#".$basehost."#i", $value)) {
+        if (preg_match("#{$basehost}#i", $value)) {
             continue;
         }
-        if ($cfg_basehost != $basehost && preg_match("#".$cfg_basehost."#i", $value)) {
+        if ($cfg_basehost != $basehost && preg_match("#{$cfg_basehost}#i", $value)) {
             continue;
         }
         if (!preg_match("#^(http|https):\/\/#i", $value)) {

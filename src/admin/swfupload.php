@@ -157,7 +157,7 @@ else if ($dopost == 'addtoedit') {
 else if ($dopost == 'ddimg') {
     //生成缩略图
     ob_start();
-    if (!preg_match("/^(http[s]?:\/\/)?([^\/]+)/i", $img)) $img = $cfg_basedir.$img;
+    if (!preg_match("#^(http|https):\/\/#i", $img)) $img = $cfg_basedir.$img;
     ImageResizeNew($img, $cfg_ddimg_width, $cfg_ddimg_height, '', false);
     $imagevariable = ob_get_contents();
     ob_end_clean();
@@ -169,7 +169,7 @@ else if ($dopost == 'ddimg') {
 //删除指定的图片修改图片时用
 else if ($dopost == 'delold') {
     $imgfile = $cfg_basedir.$picfile;
-    if (!file_exists($imgfile) && !is_dir($imgfile) && preg_match("#^".$cfg_medias_dir."#", $imgfile)) {
+    if (!file_exists($imgfile) && !is_dir($imgfile) && preg_match("#^{$cfg_medias_dir}#", $imgfile)) {
         @unlink($imgfile);
     }
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__uploads` WHERE url LIKE '{$picfile}';");

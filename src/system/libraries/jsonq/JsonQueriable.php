@@ -88,7 +88,7 @@ trait JsonQueriable
     {
         if (!is_null($file)) {
             if (is_string($file)) {
-                if (preg_match("#^http#", $file)) {
+                if (preg_match("#^(http|https):\/\/#i", $file)) {
                     $this->_map = $this->getDataFromUrl($file);
                 } else {
                     $this->_map = $this->getDataFromFile($file);

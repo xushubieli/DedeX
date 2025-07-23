@@ -23,7 +23,7 @@ function TestOneFile($f)
         $str .= fgets($fp, 1024);
     }
     fclose($fp);
-    if (preg_match("#(".$info.")[ \r\n\t]{0,}([\[\(])#i", $str)) {
+    if (preg_match("#({$info})[ \r\n\t]{0,}([\[\(])#i", $str)) {
         $trfile = preg_replace("#^".DEDEROOT."#", '', $f);
         $oldTrfile = $trfile;
         $trfile = '/'.substr(str_replace("\\", "/", $trfile), 1);
@@ -41,7 +41,7 @@ function TestSafe($tdir)
         if (@is_dir($fnamef) && $fname != '.' && $fname != '..') {
             TestSafe($fnamef);
         }
-        if (preg_match("#\.(".$filetype.")#i", $fnamef)) {
+        if (preg_match("#\.({$filetype})#i", $fnamef)) {
             TestOneFile($fnamef);
         }
     }

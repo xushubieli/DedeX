@@ -80,10 +80,10 @@ function ch_img($fvalue, &$arcTag, &$refObj, $fname = '')
             }
             if ($cfg_multi_site == 'Y') {
                 //$cfg_basehost)
-                if (!preg_match('#^(http|https):#i', $fields['imgsrc'])) {
+                if (!preg_match('#^(http|https):\/\/#i', $fields['imgsrc'])) {
                     $fields['imgsrc'] = $cfg_basehost.$fields['imgsrc'];
                 }
-                if (!preg_match('#^(http|https):#i', $fields['ddimg'])) {
+                if (!preg_match('#^(http|https):\/\/#i', $fields['ddimg'])) {
                     $fields['ddimg'] = $cfg_basehost.$fields['ddimg'];
                 }
             }

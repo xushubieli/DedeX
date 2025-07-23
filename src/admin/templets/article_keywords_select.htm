@@ -10,19 +10,19 @@
 	</head>
 	<body>
 		<div class="container-fluid">
-			<div class="card shadow-sm mb-3">
-				<div class="card-body">
-					<div class="admin-btns">
-						<input type="text" name="keywords" id="keywords" value="<?php echo $keywords;?>" class="form-control admin-w-lg">
-						<button type="button" onclick="ReturnValue();" class="btn btn-primary btn-sm">选用</button>
-						<button type="button" onclick="location='article_keywords_main.php';" class="btn btn-primary btn-sm">关键词管理</button>
+			<form name="form2">
+				<div class="card shadow-sm mb-3">
+					<div class="card-body">
+						<div class="admin-btns">
+							<input type="text" name="keywords" id="keywords" value="<?php echo $keywords;?>" class="form-control admin-w-lg">
+							<button type="button" onclick="ReturnValue();" class="btn btn-primary btn-sm">选用</button>
+							<a href="article_keywords_main.php" class="btn btn-primary btn-sm">文档关键词维护</a>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="card shadow-sm">
-				<div class="card-header">文档关键词选择</div>
-				<div class="card-body">
-					<form name="form2">
+				<div class="card shadow-sm">
+					<div class="card-header">文档关键词选择</div>
+					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-borderless table-hover">
 								<tbody>
@@ -36,10 +36,10 @@
 								</tbody>
 							</table>
 						</div>
-					</form>
-					{dede:pagelist listsize='2'/}
+						{dede:pagelist listsize='2'/}
+					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 		<script>
 			function SelKw(kw) {
@@ -53,7 +53,7 @@
 				if (window.opener.document.<?php echo $f;?>.value) {
 					window.opener.document.<?php echo $f;?>.value += ','+document.form2.keywords.value;
 				} else {
-				  window.opener.document.<?php echo $f;?>.value = document.form2.keywords.value;
+					window.opener.document.<?php echo $f;?>.value = document.form2.keywords.value;
 				}
 				window.close();
 			}

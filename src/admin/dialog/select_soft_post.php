@@ -24,7 +24,7 @@ if (!is_uploaded_file($uploadfile)) {
 //软件类型所有支持的附件
 $cfg_softtype = str_replace('||', '|', $cfg_softtype);
 $uploadfile_name = trim(preg_replace("#[ \r\n\t\*\%\\\/\?><\|\":]{1,}#", '', $uploadfile_name));
-if (!preg_match("#\.(".$cfg_softtype.")#i", $uploadfile_name)) {
+if (!preg_match("#\.({$cfg_softtype})#i", $uploadfile_name)) {
     ShowMsg("您上传的{$uploadmbtype}扩展名已被系统禁止", "-1");
     exit();
 }
@@ -41,7 +41,7 @@ if (!empty($newname)) {
     $filename = $newname;
     if (!preg_match("#\.#", $filename)) $fs = explode('.', $uploadfile_name);
     else $fs = explode('.', $filename);
-    if (preg_match("#".$cfg_not_allowall."#", $fs[count($fs) - 1])) {
+    if (preg_match("#{$cfg_not_allowall}#", $fs[count($fs) - 1])) {
         ShowMsg("文件扩展名已被系统禁止", "javascript:;");
         exit();
     }
@@ -49,7 +49,7 @@ if (!empty($newname)) {
 } else {
     $filename = $cuserLogin->getUserID().'-'.dd2char(MyDate('ymdHis', $nowtme));
     $fs = explode('.', $uploadfile_name);
-    if (preg_match("#".$cfg_not_allowall."#", $fs[count($fs) - 1])) {
+    if (preg_match("#{$cfg_not_allowall}#", $fs[count($fs) - 1])) {
         ShowMsg("您上传的文件失败，请重新上传", "-1");
         exit();
     }

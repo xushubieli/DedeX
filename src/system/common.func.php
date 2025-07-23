@@ -143,7 +143,7 @@ if (!function_exists('CheckSql')) {
         //如果是普通查询语句，直接过滤一些特殊语法
         if ($querytype == 'select') {
             $notallow1 = "[^0-9a-z@\._-]{1,}(union|sleep|benchmark|load_file|outfile)[^0-9a-z@\.-]{1,}";
-            if (preg_match("/".$notallow1."/i", $db_string)) {
+            if (preg_match("/{$notallow1}/i", $db_string)) {
                 fputs(fopen($log_file, 'a+'), "$userIP||$getUrl||$db_string||SelectBreak\r\n");
                 exit("<span>安全警报：请求错误步骤1</span>");
             }

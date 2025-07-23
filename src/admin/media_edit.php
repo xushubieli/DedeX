@@ -104,7 +104,7 @@ else if ($dopost == 'save') {
         $oldfile = $myrow['url'];
         $oldfiles = explode('/', $oldfile);
         $fullfilename = $cfg_basedir.$oldfile;
-        $oldfile_path = preg_replace("#".$oldfiles[count($oldfiles) - 1]."$#", "", $oldfile);
+        $oldfile_path = preg_replace("#{$oldfiles[count($oldfiles) - 1]}$#", "", $oldfile);
         if (!is_dir($cfg_basedir.$oldfile_path)) {
             MkdirAll($cfg_basedir.$oldfile_path, 777);
         }

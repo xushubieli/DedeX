@@ -489,7 +489,7 @@ else if ($dopost == 'quickEdit') {
                 $dsql->Execute();
                 while ($trow = $dsql->GetObject()) {
                     if ($trow->att == 'j') continue;
-                    if (preg_match("#".$trow->att."#", $arcRow['flag']))
+                    if (preg_match("#{$trow->att}#", $arcRow['flag']))
                     echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' checked> {$trow->attname}[{$trow->att}]</label> ";
                     else
                     echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}'> {$trow->attname}[{$trow->att}]</label> ";
@@ -690,7 +690,7 @@ else if ($dopost == 'attsDel') {
             $arr = $dsql->GetOne("SELECT flag FROM `{$maintable}` WHERE aid='$aid' ");
         }
         $flag = $arr['flag'];
-        if (trim($flag) == '' || !preg_match("#".$flagname."#", $flag)) {
+        if (trim($flag) == '' || !preg_match("#{$flagname}#", $flag)) {
             continue;
         } else {
             $flags  = explode(',', $flag);

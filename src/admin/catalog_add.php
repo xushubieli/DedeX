@@ -156,7 +156,7 @@ if ($dopost == 'quick') {
                 ShowMsg("您输入的网址无效，请重新输入", "-1");
                 exit();
             }
-            if (preg_match("#".$cfg_basehost."#i", $siteurl)) {
+            if (preg_match("#{$cfg_basehost}#i", $siteurl)) {
                 ShowMsg("您输入的网址与当前站点一致，请重新输入", "-1");
                 exit();
             }
