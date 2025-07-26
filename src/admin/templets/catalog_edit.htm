@@ -245,18 +245,18 @@
 										<td><textarea name="description" id="description" class="admin-textarea-sm"><?php echo $myrow['description'];?></textarea></td>
 									</tr>
 									<tr>
-										<td colspan="2">栏目文档</td>
-										<td>是否支持跨站调用</td>
-										<td>
+										<td>是否启用跨站调用</td>
+										<td colspan="3">
 											<input value="<?php echo $myrow['apikey'];?>" type="text" name="apikey" id="apikey" class="form-control admin-w-lg" placeholder="请输入跨站调用秘钥">
-											<label><input type="radio" name="apienabled" value="1" <?php if ($myrow['apienabled']=="1") echo 'checked';?>> 支持</label>
-											<label><input type="radio" name="apienabled" value="0" <?php if ($myrow['apienabled']=="0") echo 'checked';?>> 不支持</label>
+											<label><input type="radio" name="apienabled" value="1" <?php if ($myrow['apienabled']=="1") echo 'checked';?>> 启用</label>
+											<label><input type="radio" name="apienabled" value="0" <?php if ($myrow['apienabled']=="0") echo 'checked';?>> 禁用</label>
 											<a href="javascript:makeAPIKey();" class="btn btn-primary btn-sm">更新</i></a>
 											<a href="javascript:showAPI(<?php echo $id;?>);" class="btn btn-primary btn-sm">说明</a>
 										</td>
 									</tr>
 									<tr>
-										<td colspan="4"><?php GetEditor("content",$myrow['content'],"400","Default","print","false");?></td>
+										<td>栏目介绍</td>
+										<td colspan="3"><?php GetEditor("content",$myrow['content'],"350","Default","print","false");?></td>
 									</tr>
 									<tr>
 										<td align="center" colspan="4">
@@ -281,10 +281,7 @@
 					<div class="modal-body">
 						<form>
 							<div class="mb-3">
-								<span>跨站调用功能用于同后台管理或其他网站之间调用栏目文档数据</span>
-							</div>
-							<div class="mb-3">
-								<label class="mb-3">代码示例</label>
+								<label class="mb-3">跨站调用功能用于同后台管理或其他网站之间调用栏目文档</label>
 								<div class="nav nav-pills mb-3" id="data-tab" role="tablist">
 									<button type="button" class="nav-link active" id="php-tab" data-bs-toggle="tab" data-bs-target="#nav-php" role="tab" aria-controls="nav-php" aria-selected="true">PHP</button>
 									<button type="button" class="nav-link" id="js-tab" data-bs-toggle="tab" data-bs-target="#nav-js" role="tab" aria-controls="nav-js" aria-selected="true">Javasctipt</button>
@@ -306,7 +303,6 @@
 								</div>
 							</div>
 							<div class="mb-3">
-								<label class="mb-3">标签示例</label>
 								<pre><code id="codetag"></code></pre>
 							</div>
 						</form>

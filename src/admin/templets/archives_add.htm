@@ -150,8 +150,8 @@
 										</td>
 										<td>发布选项</td>
 										<td>
-											<label><input type="radio" name="ishtml" value="1" checked> 静态浏览</label>
-											<label><input type="radio" name="ishtml" value="0"> 动态浏览</label>
+											<label><input type="radio" name="ishtml" value="1" <?php if (!isset($cfg_browse_mode) || $cfg_browse_mode=='N') echo 'checked';?>> 静态浏览</label>
+											<label><input type="radio" name="ishtml" value="0" <?php if ($cfg_browse_mode=='Y') echo 'checked';?>> 动态浏览</label>
 										</td>
 									</tr>
 									<tr>

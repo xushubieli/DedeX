@@ -4039,7 +4039,8 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('120','cfg_feedback_msglen', '评论文档字数限定', 5, 'number', '255'),
 ('121','cfg_tags_dir', '标签生成目录', 7, 'string', '/a/tags'),
 ('122','cfg_access','是否限制用户浏览，适用部分动态浏览','1','bool','N'),
-('123','cfg_access_count','限制用户浏览量','1','number','100');
+('123','cfg_access_count','限制用户浏览量','1','number','100'),
+('124','cfg_browse_mode','是否启用栏目和文档动态浏览','2','bool','N');
 
 INSERT INTO `#@__sys_module` VALUES(1, '1f35620fb42d452fa2bdc1dee1690f92', '文件管理器', '', '', 0, ''),
 (2, 'b437d85a7a7bc778c9c79b5ec36ab9aa', '友情链接', '', '', 0, ''),

@@ -1,3 +1,4 @@
 -- 1.0.6
 INSERT INTO `#@__sysconfig` VALUES ('122','cfg_access','是否限制用户浏览，适用部分动态浏览','1','bool','N');
 INSERT INTO `#@__sysconfig` VALUES ('123','cfg_access_count','限制用户浏览量','1','number','100');
+INSERT INTO `#@__sysconfig` VALUES ('124','cfg_browse_mode','是否启用栏目和文档动态浏览','2','bool','N');

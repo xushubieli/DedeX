@@ -164,7 +164,7 @@
 										<div id="galleryedit">
 											<?php
 											$j = 1;
-											if ($imgurls!=""){
+											if ($imgurls!="") {
 												$dtp = new DedeTagParse();
 												$dtp->LoadSource($imgurls);
 												if (is_array($dtp->CTags)) {
@@ -208,7 +208,8 @@
 								</tr>
 								<?php PrintAutoFieldsEdit(stripslashes($cInfos['fieldset']),$addRow,'autofield');?>
 								<tr>
-									<td colspan="4"><?php GetEditor('body',$body,350,'Diy');?></td>
+									<td>正文</td>
+									<td colspan="3"><?php GetEditor('body',$body,350,'Diy');?></td>
 								</tr>
 								<tr>
 									<td>评论选项</td>

@@ -119,6 +119,7 @@ $cfg_replace_num = 2;
 $cfg_mb_reginfo = 'Y';
 $cfg_memcache_enable = 'N';
 $cfg_tags_dir = '/a/tags';
-$cfg_403 = 'N';
-$cfg_403_count = 100;
+$cfg_access = 'N';
+$cfg_access_count = 100;
+$cfg_browse_mode = 'N';
 ?>

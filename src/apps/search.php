@@ -13,6 +13,17 @@ $typeid = (isset($typeid) && is_numeric($typeid)) ? $typeid : 0;
 $channeltype = (isset($channeltype) && is_numeric($channeltype)) ? $channeltype : 0;
 $kwtype = (isset($kwtype) && is_numeric($kwtype)) ? $kwtype : 0;
 $mid = (isset($mid) && is_numeric($mid)) ? $mid : 0;
+//根据流量统计，限制用户浏览
+if ($cfg_access == 'Y') {
+    $viewIp = GetIP();
+    $moon = time() - (24 * 60 * 60);
+    $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS view_count FROM `#@__statistics_detail` WHERE ip='$viewIp' AND t>='$moon' AND url_type=3 ");
+    if ($flow && $flow['view_count'] > $cfg_access_count) {
+        header("HTTP/1.1 403 Forbidden");
+        echo "拒绝访问";
+        exit();
+    }
+}
 unset($typeArr);
 if (!isset($orderby)) $orderby = '';
 else $orderby = preg_replace("#[^a-z]#i", '', $orderby);
