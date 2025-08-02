@@ -436,7 +436,7 @@ input,select,textarea,.form-control,.form-select,.btn {
 	border-color:var(--bs-primary)
 }
 .input-group #validateimg {
-	border-radius:0 var(--xs-radius) var(--xs-radius) 0;
+	object-fit:unset;
 	cursor:pointer
 }
 .shadow-sm {

@@ -153,9 +153,31 @@ if (!empty($iseditor)) {
             </div>
         </div>
         <script>
+        function getUrlParam(paramName) {
+            var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i');
+            var match = window.location.search.match(reParam);
+            return (match && match.length > 1) ? match[1] : '';
+        }
         function ReturnImg(reimg) {
-            window.opener.document.<?php echo $f;?>.value = reimg;
-            window.opener.document.getElementById('litPic').src = reimg;
+            var funcNum = getUrlParam('CKEditorFuncNum');
+            var iseditor = parseInt(getUrlParam('iseditor'));
+            if (funcNum > 1) {
+                var fileUrl = reimg;
+                window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl);
+            } else if (iseditor == 1) {
+                let addonHTML = `<img src='${reimg}'>`;
+                window.opener.CKEDITOR.instances["<?php echo $f;?>"].insertHtml(addonHTML);
+            } else if (window.opener.document.<?php echo $f;?> != null) {
+                window.opener.document.<?php echo $f;?>.value = reimg;
+                if (window.opener.document.getElementById('div<?php echo $v;?>')) {
+                    window.opener.document.getElementById('<?php echo $v;?>').src = reimg;
+                } else if (window.opener.document.getElementById('litPic')) {
+                    window.opener.document.getElementById('litPic').src = reimg;
+                } else if (document.all) window.opener = true;
+            } else if (typeof window.opener.CKEDITOR.instances["<?php echo $f;?>"] !== "undefined") {
+                let addonHTML = `<img src='${reimg}'>`;
+                window.opener.CKEDITOR.instances["<?php echo $f;?>"].insertHtml(addonHTML);
+            }
             window.close();
         }
         </script>

@@ -164,7 +164,12 @@ if (!empty($noeditor)) {
         </div>
         <script>
         function ReturnValue(reimg) {
-            window.opener.document.<?php echo $f;?>.value = reimg;
+            var funcNum = <?php echo isset($CKEditorFuncNum) ? $CKEditorFuncNum : 1;?>;
+            if (window.opener.CKEDITOR != null && funcNum != 1) {
+                window.opener.CKEDITOR.tools.callFunction(funcNum, reimg);
+            } else if (window.opener.document.<?php echo $f;?> != null) {
+                window.opener.document.<?php echo $f;?>.value = reimg;
+            }
             window.close();
         }
         </script>

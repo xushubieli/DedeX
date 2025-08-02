@@ -71,13 +71,13 @@ class TagList
             if(is_array($addInfos)) $this->Fields['litpic'] = empty($addInfos['litpic']) ? $addInfos['litpic'] : $addInfos['litpic'];
         }
         //初始化模板
-        $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/".$GLOBALS['cfg_df_style'].'/'.$this->Templet;
+        $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/".$GLOBALS['cfg_df_style']."/".$this->Templet;
         if (!file_exists($tempfile) || !is_file($tempfile)) {
             showmsg("标签主题模板htm文件不存在", "javascript:;");
             exit();
         }
         $this->dtp->LoadTemplate($tempfile);
-        $this->TempletsFile = preg_replace("#^".$GLOBALS['cfg_basedir']."#", '', $tempfile);
+        $this->TempletsFile = preg_replace("#^{$GLOBALS['cfg_basedir']}#", '', $tempfile);
         $envs['url_type'] = 4;
         $envs['value'] = $keyword;
     }

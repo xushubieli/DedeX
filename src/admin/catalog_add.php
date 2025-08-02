@@ -135,6 +135,12 @@ if ($dopost == 'quick') {
         ShowMsg("跨站调用秘钥不能为空", "-1");
         exit();
     }
+    if ($moresite == 1) {
+        if (!preg_match("/^(http|https):\/\//", $siteurl) || preg_match("#{$cfg_basehost}#i", $siteurl)) {
+            ShowMsg("您输入的网址不合法，请输入http开头网址", "-1");
+            exit();
+        }
+    }
     if ($ispart != 2 && $isdefault != -1) {
         //栏目的参照目录
         if ($referpath == 'cmspath') $nextdir = '{cmspath}';
@@ -145,22 +151,6 @@ if ($dopost == 'quick') {
         }
         $typedir = $nextdir.'/'.$typedir;
         $typedir = preg_replace("#\/{1,}#", "/", $typedir);
-    }
-    //开启多站点时的设置，仅针对顶级栏目
-    if ($reid == 0 && $moresite == 1) {
-        $sitepath = $typedir;
-        //检测二级网址
-        if ($siteurl != '') {
-            $siteurl = preg_replace("#\/$#", "", $siteurl);
-            if (!preg_match("#http:\/\/#i", $siteurl)) {
-                ShowMsg("您输入的网址无效，请重新输入", "-1");
-                exit();
-            }
-            if (preg_match("#{$cfg_basehost}#i", $siteurl)) {
-                ShowMsg("您输入的网址与当前站点一致，请重新输入", "-1");
-                exit();
-            }
-        }
     }
     //创建目录
     if ($ispart != 2) {

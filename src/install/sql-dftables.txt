@@ -244,9 +244,9 @@ CREATE TABLE `#@__arctype` (
 	`description` varchar(255) NOT NULL default '' COMMENT '描述',
 	`keywords` varchar(255) NOT NULL default '' COMMENT '关键词',
 	`seotitle` varchar(255) NOT NULL default '' COMMENT 'SEO标题',
-	`moresite` tinyint(1) unsigned NOT NULL default '0' COMMENT '多站点支持 0:不启用 1:启用，默认值为不启用',
+	`moresite` tinyint(1) unsigned NOT NULL default '0' COMMENT '多站点支持 0:禁用 1:启用，默认值为禁用',
 	`sitepath` char(60) NOT NULL default '' COMMENT '站点路径',
-	`siteurl` char(50) NOT NULL default '' COMMENT '绑定域名',
+	`siteurl` char(50) NOT NULL default '' COMMENT '绑定网址',
 	`ishidden` smallint(6) NOT NULL default '0' COMMENT '是否隐藏栏目 0:显示 1:隐藏，默认值为显示',
 	`cross` tinyint(1) NOT NULL default '0' COMMENT '栏目交叉 0:不交叉 1:自动获取同名栏目 2:指定交叉栏目ID（英文逗号隔开），默认值为不交叉',
 	`crossid` text COMMENT '交叉栏目ID，当cross为2时，用于存储指定的交叉栏目ID，英文逗号隔开',
@@ -915,7 +915,7 @@ CREATE TABLE `#@__vote` (
 	`isallow` tinyint(6) NOT NULL default '0' COMMENT '是否允许游客投票 0:允许 1:不允许',
 	`view` tinyint(6) NOT NULL default '0' COMMENT '是否允许查看投票 0:允许 1:不允许',
 	`spec` int(20) unsigned NOT NULL default '0' COMMENT '投票时间间隔（N天后可再次投票，0表示此地址IP只能投一次）',
-	`isenable` tinyint(6) NOT NULL default '0' COMMENT '是否启用该投票 0:启用 1:不启用',
+	`isenable` tinyint(6) NOT NULL default '0' COMMENT '是否启用该投票 0:启用 1:禁用',
 	`votenote` text COMMENT '投票项内容',
 	PRIMARY KEY (`aid`)
 ) TYPE=MyISAM;

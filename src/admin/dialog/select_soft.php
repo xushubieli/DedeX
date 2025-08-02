@@ -141,11 +141,15 @@ if (!empty($noeditor)) {
         </div>
         <script>
         function ReturnValue(reimg) {
-            if (typeof window.opener.CKEDITOR.instances["<?php echo $f;?>"] !== "undefined") {
+            var funcNum = <?php echo isset($CKEditorFuncNum) ? $CKEditorFuncNum : 1;?>;
+            if (window.opener.CKEDITOR != null && funcNum != 1) {
+                window.opener.CKEDITOR.tools.callFunction(funcNum, reimg);
+            } else if (typeof window.opener.CKEDITOR.instances["<?php echo $f;?>"] !== "undefined") {
                 let addonHTML = `<a href='${reimg}' target='_blank'><img src='<?php echo $cfg_cmspath;?>/static/web/img/icon_addon.png'>附件：${reimg}</a>`;
                 window.opener.CKEDITOR.instances["<?php echo $f;?>"].insertHtml(addonHTML);
+            } else if (window.opener.document.<?php echo $f;?> != null) {
+                window.opener.document.<?php echo $f;?>.value = reimg;
             }
-            window.opener.document.<?php echo $f;?>.value = reimg;
             window.close();
         }
         </script>

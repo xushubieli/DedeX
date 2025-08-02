@@ -175,10 +175,10 @@ class FreeList
         $tempfile = str_replace("{style}", $GLOBALS['cfg_df_style'], $this->FLInfos['templet']);
         $tempfile = $tmpdir."/".$tempfile;
         if (!file_exists($tempfile)) {
-            $tempfile = $tmpdir."/".$GLOBALS['cfg_df_style']."/list_free.htm";
+            $tempfile = $tmpdir."/{$GLOBALS['cfg_df_style']}/list_free.htm";
         }
         $this->dtp->LoadTemplate($tempfile);
-        $this->TempletsFile = preg_replace("#^".$GLOBALS['cfg_basedir']."#", '', $tempfile);
+        $this->TempletsFile = preg_replace("#^{$GLOBALS['cfg_basedir']}#", '', $tempfile);
     }
     /**
      *  列表创建网页

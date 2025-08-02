@@ -19,6 +19,12 @@ if ($dopost == "save") {
         ShowMsg("跨站调用秘钥不能为空", "-1");
         exit();
     }
+    if ($moresite == 1) {
+        if (!preg_match("/^(http|https):\/\//", $siteurl) || preg_match("#{$cfg_basehost}#i", $siteurl)) {
+            ShowMsg("您输入的网址不合法，请输入http开头网址", "-1");
+            exit();
+        }
+    }
     $description = Html2Text($description, 1);
     $keywords = Html2Text($keywords, 1);
     $uptopsql = $smalltypes = '';

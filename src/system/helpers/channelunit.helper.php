@@ -8,7 +8,7 @@ if (!defined('DEDEINC')) exit('dedex');
  * @license        GNU GPL v2 (/license.txt)
  */
 /**
- *  用星表示软件或Flash的等级
+ *  星表示软件等级
  *
  * @param     string  $rank  星星数
  * @return    string
@@ -27,7 +27,7 @@ if (!function_exists('GetRankStar')) {
     }
 }
 /**
- *  获得文档网址，如果要获得文件的路径，直接用GetFileUrl($aid,$typeid,$timetag,$title,$ismake,$rank,$namerule,$typedir,$money)即是不指定站点参数则返回相当对根目录的真实路径
+ *  获得文档网址
  *
  * @param     int  $aid  文档ID
  * @param     int  $typeid  栏目ID
@@ -45,40 +45,28 @@ if (!function_exists('GetRankStar')) {
  * @return    string
  */
 if (!function_exists('GetFileUrl')) {
-    function GetFileUrl(
-        $aid,
-        $typeid,
-        $timetag,
-        $title,
-        $ismake = 0,
-        $rank = 0,
-        $namerule = '',
-        $typedir = '',
-        $money = 0,
-        $filename = '',
-        $moresite = 0,
-        $siteurl = '',
-        $sitepath = ''
-    ) {
+    function GetFileUrl($aid, $typeid, $timetag, $title, $ismake = 0, $rank = 0, $namerule = '', $typedir = '', $money = 0, $filename = '', $moresite = 0, $siteurl = '', $sitepath = '')
+    {
         $articleUrl = GetFileName($aid, $typeid, $timetag, $title, $ismake, $rank, $namerule, $typedir, $money, $filename);
         $sitepath = MfTypedir($sitepath);
-        //是否强制使用绝对网址
         if ($GLOBALS['cfg_multi_site'] == 'Y') {
-            if ($siteurl == '') {
+            if ($moresite == 0) {
                 $siteurl = $GLOBALS['cfg_basehost'];
-            }
-            if ($moresite == 1) {
-                $articleUrl = preg_replace("#^".$sitepath.'#', '', $articleUrl);
-            }
-            if (!preg_match("/^(http|https):\/\//", $articleUrl)) {
-                $articleUrl = $siteurl.$articleUrl;
+                if (!preg_match("/^(http|https):\/\//", $articleUrl)) {
+                    $articleUrl = $siteurl.$articleUrl;
+                }
+            } else if ($moresite == 1) {
+                $articleUrl = preg_replace("#^{$sitepath}#", '', $articleUrl);
+                if (!preg_match("/^(http|https):\/\//", $articleUrl)) {
+                    $articleUrl = $siteurl.$articleUrl;
+                }
             }
         }
         return $articleUrl;
     }
 }
 /**
- *  获得新文件名，本函数会自动创建目录
+ *  获得新文件名，函数自动创建目录
  *
  * @param     int  $aid  文档ID
  * @param     int  $typeid  栏目ID
@@ -117,7 +105,7 @@ if (!function_exists('GetFileNewName')) {
     }
 }
 /**
- *  获得栏目链接
+ *  获得栏目网址，封面和单独页面的情况，强制使用默认页名称
  *
  * @param     int  $typeid  栏目ID
  * @param     string  $typedir  栏目目录
@@ -138,11 +126,11 @@ if (!function_exists('GetTypeUrl')) {
         $sitepath = MfTypedir($sitepath);
         //动态栏目
         if ($isdefault == -1) {
+            //开启伪静态栏目/list/1、/list/2，则分页/list/1-1、/list/1-2
             if ($cfg_rewrite == 'Y') {
-                //开启伪静态栏目/list/1、/list/2，则分页/list/1-1、/list/1-2
                 $reurl = $GLOBALS['cfg_cmspath']."/list/{$typeid}";
             } else {
-                $reurl = $GLOBALS['cfg_phpurl']."/list.php?tid={$typeid}";
+                $reurl = $GLOBALS['cfg_cmspath'].$GLOBALS["cfg_plus_dir"]."/list.php?tid={$typeid}";
             }
         }
         //跳转网址
@@ -163,21 +151,23 @@ if (!function_exists('GetTypeUrl')) {
             $reurl = preg_replace("/\/{1,}/i", '/', $reurl);
         }
         if ($GLOBALS['cfg_multi_site'] == 'Y') {
-            if ($siteurl == '') {
+            if ($moresite == 0) {
                 $siteurl = $GLOBALS['cfg_basehost'];
-            }
-            if ($moresite == 1) {
-                $reurl = preg_replace("#^".$sitepath."#", '', $reurl);
-            }
-            if (!preg_match("/^(http|https):\/\//", $reurl)) {
-                $reurl = $siteurl.$reurl;
+                if (!preg_match("/^(http|https):\/\//", $reurl)) {
+                    $reurl = $siteurl.$reurl;
+                }
+            } else if ($moresite == 1) {
+                $reurl = preg_replace("#^{$sitepath}#", '', $reurl);
+                if (!preg_match("/^(http|https):\/\//", $reurl)) {
+                    $reurl = $siteurl.$reurl;
+                }
             }
         }
         return $reurl;
     }
 }
 /**
- *  获得文档链接
+ *  获得站点根目录的物理文件名，动态返回网址
  *
  * @param     int  $aid  文档ID
  * @param     int  $typeid  栏目ID
@@ -202,11 +192,11 @@ if (!function_exists('GetFileName')) {
         }
         //动态文档
         if ($rank != 0 || $ismake == -1 || $typeid == 0 || $money > 0) {
+            //开启伪静态文档/article/1.html、/article/2.html，则分页/article/1-1.html、/article/1-2.html
             if ($cfg_rewrite == 'Y') {
-                //开启伪静态文档/article/1.html、/article/2.html，则分页/article/1-1.html、/article/1-2.html
                 return $GLOBALS['cfg_cmspath']."/article/{$aid}.html";
             } else {
-                return $GLOBALS['cfg_phpurl']."/view.php?aid={$aid}";
+                return $GLOBALS['cfg_cmspath'].$GLOBALS["cfg_plus_dir"]."/view.php?aid={$aid}";
             }
         } else {
             $articleDir = MfTypedir($typedir);
@@ -238,7 +228,7 @@ if (!function_exists('GetFileName')) {
     }
 }
 /**
- *  魔法变量，用于获取两个可变的值
+ *  魔法变量，用于获得两个可变的值
  *
  * @param     string  $v1  第一个变量
  * @param     string  $v2  第二个变量
@@ -251,7 +241,7 @@ if (!function_exists('MagicVar')) {
     }
 }
 /**
- *  获取某个栏目的所有上级栏目ID
+ *  获得某个栏目的所有上级栏目ID
  *
  * @param     int  $tid  栏目ID
  * @return    string
@@ -264,7 +254,7 @@ if (!function_exists('GetTopids')) {
     }
 }
 /**
- *  获取上级列表ID
+ *  获得上级列表ID
  *
  * @access    public
  * @param     string  $tid  栏目ID
@@ -301,7 +291,7 @@ if (!function_exists('IsParent')) {
     }
 }
 /**
- *  获取一个栏目的顶级栏目ID
+ *  获得一个栏目的顶级栏目ID
  *
  * @param     string  $tid  栏目ID
  * @return    string
@@ -478,7 +468,7 @@ function MakeOneTag(&$dtp, &$refObj, $parfield = 'Y')
     }
 }
 /**
- *  获取某栏目链接
+ *  获得某栏目链接
  *
  * @param     array  $typeinfos  栏目信息
  * @return    string
@@ -564,10 +554,10 @@ function GetFreeListUrl($lid, $namerule, $listdir, $defaultpage, $nodefault)
     return $okfile;
 }
 /**
- *  获取网站搜索的热门关键词
+ *  获得网站搜索的热门关键词
  *
  * @param     object  $dsql
- * @param     string  $num  获取数目
+ * @param     string  $num  获得数目
  * @param     string  $nday  天数
  * @param     string  $klen 关键词字数
  * @param     string  $orderby 排列顺序
@@ -632,7 +622,7 @@ function Quote_replace($quote)
     return $quote;
 }
 /**
- *  获取、写入指定cacheid的块
+ *  获得、写入指定cacheid的块
  *
  * @param     string  $cacheid  缓存ID
  * @return    string

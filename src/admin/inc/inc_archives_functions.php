@@ -684,7 +684,7 @@ function UploadOneImage($upname, $handurl = '', $isremote = 1, $ntitle = '')
             return '';
         }
         //远程图片并要求本地化
-        if ($isremote == 1 && preg_match("#^http[s]?:\/\/#i", $handurl)) {
+        if ($isremote == 1 && preg_match("#^(http|https):\/\/#i", $handurl)) {
             $ddinfos = GetRemoteImage($handurl, $cuserLogin->getUserID());
             if (!is_array($ddinfos)) {
                 $litpic = '';

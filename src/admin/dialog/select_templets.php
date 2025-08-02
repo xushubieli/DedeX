@@ -181,6 +181,7 @@ if (empty($comeback)) {
         </div>
         <script>
         function ReturnValue(reimg) {
+            if (document.all) window.opener = true;
             window.opener.document.<?php echo $f;?>.value = reimg;
             window.close();
         }

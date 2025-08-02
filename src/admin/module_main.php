@@ -90,7 +90,7 @@ if ($action == '') {
         if (!preg_match("#^\.#", $prvdir)) $prvdir = './';
         $n = TRUE;
         foreach ($incdir as $k => $v) {
-            if (preg_match("#^".$v."#i", $prvdir)) {
+            if (preg_match("#^{$v}#i", $prvdir)) {
                 $n = FALSE;
                 break;
             }

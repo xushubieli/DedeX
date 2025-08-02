@@ -48,7 +48,7 @@ if ($dopost == "show") {
     $wintitle = "复制文档模型";
     $win = new OxWindow();
     $win->Init("mychannel_edit.php", "/static/web/js/admin.blank.js", "post");
-    $win->AddTitle("复制{$row['typename']}文档模型");
+    $win->AddTitle("复制{$row['typename']}");
     $win->AddHidden("cid", $id);
     $win->AddHidden("id", $id);
     $win->AddHidden("dopost", 'copysave');
@@ -95,7 +95,7 @@ if ($dopost == "show") {
     $wintitle = "导出指定文档模型规则";
     $win = new OxWindow();
     $win->Init();
-    $win->AddTitle("导出{$row['typename']}文档模型规则");
+    $win->AddTitle("导出{$row['typename']}规则");
     $winform = $win->GetWindow("hand", "<link rel='stylesheet' href='/static/web/css/codemirror.css'><script src='/static/web/js/codemirror.js'></script><script src='/static/web/js/mode/xml/xml.js'></script><script src='/static/web/js/mode/javascript/javascript.js'></script><script src='/static/web/js/mode/css/css.js'></script><script src='/static/web/js/mode/htmlmixed/htmlmixed.js'></script><textarea name='config' id='content' class='form-control'>$channelconfig</textarea><script>var editor = CodeMirror.fromTextArea(document.getElementById('content'), {lineNumbers: true,lineWrapping: true,mode: 'text/html'});</script>");
     $win->Display();
     exit();
