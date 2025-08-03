@@ -12,6 +12,7 @@ $cuserLogin = new userLogin();
 $cuserLogin->exitUser();
 if (empty($needclose)) {
     header('Location: index.php');
+    exit();
 } else {
     $msg = "<script>
     if (document.all) window.opener=true;

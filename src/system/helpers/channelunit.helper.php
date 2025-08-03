@@ -311,7 +311,7 @@ if (!function_exists('GetTopid')) {
     }
 }
 /**
- *  获得某id的所有下级id
+ *  获得某ID的所有下级ID
  *
  * @param     string  $id  栏目ID
  * @param     string  $channel  模型ID

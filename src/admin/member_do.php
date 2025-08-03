@@ -88,7 +88,7 @@ if ($dopost == "delmember") {
                 $dsql->ExecuteNoneQuery("DELETE FROM `#@__feedback` WHERE mid IN (".str_replace("`", ",", $id).") ");
                 $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET mid='0' WHERE mid IN (".str_replace("`", ",", $id).")");
             } else {
-                ShowMsg("无法删除此会员，如果这个会员是管理员关连的id，必须先删除这个管理员才能删除此帐号", $ENV_GOBACK_URL);
+                ShowMsg("无法删除此会员，如果这个会员是管理员关连的ID，必须先删除这个管理员才能删除此帐号", $ENV_GOBACK_URL);
                 exit();
             }
         }

@@ -420,7 +420,7 @@ class userLogin
         return $this->getUserType();
     }
     /**
-     *  获得会员的id
+     *  获得会员的ID
      *
      * @access    public
      * @return    int
@@ -459,7 +459,7 @@ class userLogin
     }
 }
 /**
- *  获得某id的所有下级id
+ *  获得某ID的所有下级ID
  *
  * @access    public
  * @param     int   $id  栏目ID

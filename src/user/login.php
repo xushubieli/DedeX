@@ -9,7 +9,7 @@
 require_once(dirname(__FILE__)."/config.php");
 $gourl = RemoveXSS($gourl);
 if ($cfg_ml->IsLogin()) {
-    ShowMsg('正在登录会员中心，请稍等', 'index.php');
+    header('Location: index.php');
     exit();
 }
 require_once(dirname(__FILE__)."/templets/login.htm");

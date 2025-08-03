@@ -357,7 +357,7 @@ class DedeTagParse
         $this->LoadSource($str);
     }
     /**
-     *  获得指定名称的Tag的id，如果有多个同名的Tag，则取没有被取代为文档的第一个Tag
+     *  获得指定名称的Tag的ID，如果有多个同名的Tag，则取没有被取代为文档的第一个Tag
      *
      * @access    public
      * @param     string  $str  字符串

@@ -166,7 +166,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
             for ($i = 0; isset($flags[$i]); $i++) $orwheres[] = " FIND_IN_SET('{$flags[$i]}', arc.flag)>0 ";
         }
         if (!empty($typeid) && $typeid != 'top') {
-            //指定了多个栏目时，不再获取子类的id
+            //指定了多个栏目时，不再获取子类的ID
             if (preg_match('#,#', $typeid)) {
                 //指定了getall属性或首页模板例外
                 if ($getall == 1 || empty($refObj->Fields['typeid'])) {
@@ -290,7 +290,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
             return $idlist;
         }
     }
-    //指定了id或使用缓存中的id
+    //指定了id或使用缓存中的ID
     if ($idlist != '') {
         $query = "SELECT arc.*,tp.typedir,tp.typename,tp.corank,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath,mb.userid,mb.uname,mb.face $addfieldsSql FROM `$maintable` arc left join `#@__arctype` tp on arc.typeid=tp.id LEFT JOIN `#@__member` mb on arc.mid = mb.mid $addfieldsSqlJoin WHERE arc.id in($idlist) $ordersql ";
     }

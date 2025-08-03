@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<div class="login-step">
-			<div class="row">
+			<div class="row g-0">
 				<div class="col-lg-8 d-none d-lg-block">
 					<div class="login-bg"></div>
 				</div>
@@ -33,19 +33,19 @@
 								<input type="hidden" name="gotopage" value="<?php if (!empty($gotopage)) echo RemoveXSS($gotopage);?>">
 								<input type="hidden" name="dopost" value="login">
 								<input type="hidden" name="adminstyle" value="newDedeX">
-								<div class="mb-3">
+								<div class="form-group">
 									<input type="text" name="userid" id="iptUserid" class="form-control" placeholder="请输入管理员账号" required>
 									<div class="form-icon">
 										<i class="fa fa-user-circle"></i>
 									</div>
 								</div>
-								<div class="mb-3">
+								<div class="form-group">
 									<input type="password" name="pwd" id="iptPwd" class="form-control" placeholder="请输入管理员密码" autocomplete="off" required>
 									<div class="form-icon">
 										<i class="fa fa-key"></i>
 									</div>
 								</div>
-								<div id="vdimgck" class="mb-3" style="display:none">
+								<div id="vdimgck" class="form-group" style="display:none">
 									<div class="input-group">
 										<input type="text" name="validate" id="iptValidate" class="form-control text-uppercase" placeholder="请输入验证码">
 										<img src="<?php echo $cfg_phpurl;?>/vdimgck.php" onclick="this.src='<?php echo $cfg_phpurl;?>/vdimgck.php?'+new Date().getTime()+Math.round(Math.random() * 10000)" title="验证码" id="validateimg">
@@ -54,7 +54,7 @@
 										<i class="fa fa-code"></i>
 									</div>
 								</div>
-								<div class="operate">
+								<div class="go">
 									<button type="submit" class="btn btn-primary shadow-lg">登录</button>
 								</div>
 							</form>

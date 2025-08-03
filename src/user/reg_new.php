@@ -15,7 +15,7 @@ if (!isset($dopost)) $dopost = '';
 $step = empty($step) ? 1 : intval($step);
 if ($step == 1) {
     if ($cfg_ml->IsLogin()) {
-        ShowMsg('正在登录会员中心，请稍等', 'index.php');
+        header('Location: index.php');
         exit();
     }
     if ($dopost == 'regbase') {
@@ -107,8 +107,8 @@ if ($step == 1) {
             if ($pMid > 0) {
                 $dsql->ExecuteNoneQuery("UPDATE `#@__member` SET scores=scores+{$cfg_userad_adds} WHERE mid='$pMid'");
             }
-            ShowMsg('正在登录会员中心，请稍等', 'index.php');
-            exit;
+            header('Location: index.php');
+            exit();
         } else {
             ShowMsg("注册失败，请检查资料是否有误或与管理员联系", "-1");
             exit();
@@ -119,10 +119,10 @@ if ($step == 1) {
 } else {
     if (!$cfg_ml->IsLogin()) {
         ShowMsg("您未填写基本信息，请填写基本信息", "index_do.php?fmdo=user&dopost=regnew");
-        exit;
+        exit();
     } else {
-        ShowMsg('正在登录会员中心，请稍等', 'index.php');
-        exit;
+        header('Location: index.php');
+        exit();
     }
 }
 ?>

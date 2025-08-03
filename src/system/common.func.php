@@ -302,24 +302,24 @@ function ShowMsg($msg, $gourl, $onlymsg = 0, $limittime = 0)
 {
     if (defined('DEDE_DIALOG_UPLOAD') && !isset($GLOBALS['noeditor'])) {
         echo json_encode(array(
-            "uploaded"=>0,
-            "error"=>array(
+            "uploaded" => 0,
+            "error" => array(
                 "message" => $msg,
             ),
         ));
         return;
     }
-    if (isset($GLOBALS['format']) && strtolower($GLOBALS['format'])==='json') {
+    if (isset($GLOBALS['format']) && strtolower($GLOBALS['format']) === 'json') {
         echo json_encode(array(
-            "code"=>0,
-            "msg"=>$msg,
-            "gourl"=>$gourl,
+            "code" => 0,
+            "msg" => $msg,
+            "gourl" => $gourl,
         ));
         return;
     }
     if (empty($GLOBALS['cfg_plus_dir'])) $GLOBALS['cfg_plus_dir'] = '..';
-    $htmlhead  = "<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1'><meta name='viewport' content='width=device-width,initial-scale=1'><title>系统提示</title><link rel='stylesheet' href='/static/web/css/bootstrap.min.css'><link rel='stylesheet' href='/static/web/css/admin.css'></head><base target='_self'><body>";
-    $htmlfoot  = "</body></html>";
+    $htmlhead = "<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1'><meta name='viewport' content='width=device-width,initial-scale=1'><title>系统提示</title><link rel='stylesheet' href='/static/web/css/bootstrap.min.css'><link rel='stylesheet' href='/static/web/css/admin.css'></head><base target='_self'><body>";
+    $htmlfoot = "</body></html>";
     $litime = ($limittime == 0 ? 1000 : $limittime);
     $func = '';
     if ($gourl == '-1') {
@@ -327,9 +327,8 @@ function ShowMsg($msg, $gourl, $onlymsg = 0, $limittime = 0)
         $gourl = "javascript:history.go(-1);";
     }
     if ($gourl == '' || $onlymsg == 1) {
-        $msg = "<script>alert(\"".str_replace("\"", "“", $msg)."\");</script>";
+        $msg = "<script>alert(\"".addslashes($msg)."\");</script>";
     } else {
-        //当网址为:close::objname时，关闭父框架的id=objname元素
         if (preg_match('/close::/', $gourl)) {
             $tgobj = trim(preg_replace('/close::/', '', $gourl));
             $gourl = 'javascript:;';
@@ -339,11 +338,11 @@ function ShowMsg($msg, $gourl, $onlymsg = 0, $limittime = 0)
         $rmsg = $func;
         $rmsg .= "<div class='tips'><div class='tips-box shadow-sm'><div class='tips-head'><p>系统提示</p></div>";
         $rmsg .= "<div class='tips-body'>";
-        $rmsg .= "<p class='mb-3'>".str_replace("\"", "“", $msg)."</p>";
+        $rmsg .= $msg;
         $rmsg .= "";
         if ($onlymsg == 0) {
             if ($gourl != 'javascript:;' && $gourl != '') {
-                $rmsg .= "<div class='text-center'><a href='{$gourl}' class='btn btn-primary btn-sm'>点击反应</a></div>";
+                $rmsg .= "<div class='text-center mt-3'><a href='{$gourl}' class='btn btn-primary btn-sm'>点击反应</a></div>";
                 $rmsg .= "<script>setTimeout('JumpUrl()', {$litime});</script>";
             } else {
                 $rmsg .= "</div>";
@@ -351,7 +350,7 @@ function ShowMsg($msg, $gourl, $onlymsg = 0, $limittime = 0)
         } else {
             $rmsg .= "</div></div>";
         }
-        $msg  = $htmlhead.$rmsg.$htmlfoot;
+        $msg = $htmlhead.$rmsg.$htmlfoot;
     }
     echo $msg;
 }

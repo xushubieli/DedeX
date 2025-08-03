@@ -338,7 +338,7 @@ DROP TABLE IF EXISTS `#@__feedback`;
 CREATE TABLE `#@__feedback` (
 	`id` int(10) unsigned NOT NULL auto_increment COMMENT '评论ID',
 	`aid` mediumint(8) unsigned NOT NULL default '0' COMMENT '文档ID',
-	`fid` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '父评论的id',
+	`fid` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '父评论的ID',
 	`typeid` smallint(5) unsigned NOT NULL default '0' COMMENT '栏目ID',
 	`username` char(20) NOT NULL default '' COMMENT '评论人的用户名',
 	`arctitle` varchar(60) NOT NULL default '' COMMENT '文档标题',

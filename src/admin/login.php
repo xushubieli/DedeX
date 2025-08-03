@@ -52,10 +52,10 @@ if ($dopost == 'login') {
         if ($res == 1) {
             $cuserLogin->keepUser();
             if (!empty($gotopage)) {
-                ShowMsg('正在登录后台管理，请稍等', $gotopage);
+                header("Location: {$gotopage}");
                 exit();
             } else {
-                ShowMsg('正在登录后台管理，请稍等', 'index.php');
+                header('Location: index.php');
                 exit();
             }
         } else if ($res == -1) {
@@ -69,7 +69,7 @@ if ($dopost == 'login') {
         }
     } else {
         ResetVdValue();
-        ShowMsg('管理员账号和密码没填完整', 'login.php');
+        ShowMsg('请重新输入管理员账号和密码', 'login.php');
         exit;
     }
 }

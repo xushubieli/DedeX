@@ -72,7 +72,7 @@ function lib_arclistsg(&$ctag, &$refObj)
             for ($i = 0; isset($flags[$i]); $i++) $orwheres[] = " FIND_IN_SET('{$flags[$i]}',flag)>0 ";
         }
         if (!empty($typeid)) {
-            //指定了多个栏目时，不再获取子类的id
+            //指定了多个栏目时，不再获取子类的ID
             if (preg_match('#,#', $typeid)) $orwheres[] = " typeid IN ($typeid) ";
             else {
                 //处理交叉栏目
@@ -132,7 +132,7 @@ function lib_arclistsg(&$ctag, &$refObj)
         $idlist = GetArclistSgCache($md5hash);
         if ($idlist != '') $needcache = FALSE;
     }
-    //指定了id或使用缓存中的id
+    //指定了id或使用缓存中的ID
     if ($idlist != '' && $_arclistEnv != 'index') {
         $query = "SELECT $arclistquery,tp.typedir,tp.typename,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath FROM `$maintable` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.aid IN($idlist) $ordersql $limitsql";
     }

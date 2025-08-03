@@ -81,7 +81,7 @@ if ($fmdo == 'sendMail') {
         exit();
     }
     //检查邮箱是否存在
-    else if ($dopost == "checkmail") {
+    else if ($dopost == 'checkmail') {
         AjaxHead();
         if ($cfg_md_mailtest == 'N') {
             $msg = "可以使用";
@@ -101,13 +101,13 @@ if ($fmdo == 'sendMail') {
         exit();
     }
     //引入注册页面
-    else if ($dopost == "regnew") {
+    else if ($dopost == 'regnew') {
         $step = empty($step) ? 1 : intval(preg_replace("/[^\d]/", '', $step));
         require_once(dirname(__FILE__)."/reg_new.php");
         exit();
     }
     //积分换金币
-    else if ($dopost == "money2s") {
+    else if ($dopost == 'money2s') {
         CheckRank(0, 0);//禁止游客操作
         if ($cfg_money_scores == 0) {
             ShowMsg('系统禁用了积分与金币兑换功能', 'index.php');
@@ -178,21 +178,21 @@ if ($fmdo == 'sendMail') {
             //清除会员缓存
             $cfg_ml->DelCache($cfg_ml->M_ID);
             if (empty($gourl) || preg_match("#action|_do#i", $gourl)) {
-                ShowMsg('正在登录会员中心，请稍等', 'index.php');
+                header('Location: index.php');
             } else {
                 $gourl = str_replace('^', '&', $gourl);
-                ShowMsg('正在前往指定页面，请稍等', $gourl);
+                header("Location: {$gourl}");
             }
             exit();
         }
     }
     //退出登录
-    else if ($dopost == "exit") {
+    else if ($dopost == 'exit') {
         $cfg_ml->ExitCookie();
-        ShowMsg('已退出会员中心', 'index.php');
+        header('Location: index.php');
         exit();
     }
-} else if ($fmdo == 'purl'){
+} else if ($fmdo == 'purl') {
     require_once(DEDEINC.'/libraries/webwindow.class.php');
     CheckRank(0, 0);//禁止游客操作
     $row = $dsql->GetOne("SELECT count(*) as dd FROM `#@__member` WHERE `pmid`='{$cfg_ml->M_ID}' ");

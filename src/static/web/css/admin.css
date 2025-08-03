@@ -70,6 +70,7 @@ input:focus,select:focus,textarea:focus,button:focus,.btn:focus {
 	outline:none
 }
 input[type=radio],input[type=checkbox],input[type=radio]:focus,input[type=checkbox]:focus {
+	padding:0;
 	width:14px;
 	height:14px;
 	box-shadow:none;
@@ -117,14 +118,8 @@ textarea {
 	margin:0 auto;
 	width:768px
 }
-.install-box .card-header,.install-box .card-body {
-	padding:1.25rem
-}
 .install-box h1 {
 	font-size:18px
-}
-.install-box label {
-	margin-bottom:0.5rem
 }
 .login-step {
 	height:100vh;
@@ -156,9 +151,13 @@ textarea {
 .login-from {
 	margin-bottom:40px
 }
-.login-from .mb-3 {
+.login-from .form-group {
 	margin-bottom:20px;
 	position:relative
+}
+.login-from .form-control {
+	padding-left:45px;
+	height:50px
 }
 .login-from .form-icon {
 	position:absolute;
@@ -170,14 +169,10 @@ textarea {
 	font-size:18px!important;
 	color:var(--bs-gray-500)
 }
-.login-from .form-control {
-	padding-left:45px;
-	height:50px
-}
-.login-from .operate {
+.login-from .go {
 	margin-top:40px
 }
-.login-from .operate button {
+.login-from .go .btn {
 	width:100%;
 	height:50px
 }
@@ -752,6 +747,9 @@ input,select,textarea,.form-control,.form-select,.btn {
 	}
 }
 @media screen and (max-width:767px) {
+	td {
+		white-space:nowrap
+	}
 	.install-box {
 		width:100%;
 		min-width:100%
@@ -775,9 +773,6 @@ input,select,textarea,.form-control,.form-select,.btn {
 	}
 	body.menu-show .admin-content {
 		left:0
-	}
-	td {
-		white-space:nowrap
 	}
 	input.w-25,input.w-75,.admin-textarea-xl,.admin-textarea-sm,.admin-w-lg,.admin-w-md,.admin-w-sm {
 		width:auto!important;

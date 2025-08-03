@@ -18,7 +18,7 @@ if (empty($dopost)) $dopost = '';
 $aid = (isset($aid) && is_numeric($aid)) ? $aid : 0;
 if ($aid == 0) die('dedex');
 if ($aid == 0) {
-    ShowMsg("没指定投票项目的id", "-1");
+    ShowMsg("没指定投票项目的ID", "-1");
     exit();
 }
 $vo = new DedeVote($aid);
