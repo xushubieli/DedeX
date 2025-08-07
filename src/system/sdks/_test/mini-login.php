@@ -3,7 +3,7 @@ if (!defined('DEDEINC')) exit('dedex');
 include '../include.php';
 //小程序配置
 $config = [
-    'appid'     => 'wx6bb7b70258da09c6',
+    'appid'     => '',
     'appsecret' => '78b7b8d65bd67b078babf951d4342b42',
 ];
 //解码数据

@@ -9,7 +9,7 @@ try {
     $payment = \WePayV3\Order::instance($config);
     //组装支付参数
     $result = $payment->create('jsapi', [
-        'appid'        => 'wx60a43dd8161666d4',
+        'appid'        => '',
         'mchid'        => $config['mch_id'],
         'description'  => '商品描述',
         'out_trade_no' => (string)time(),
