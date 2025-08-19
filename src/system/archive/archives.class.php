@@ -136,7 +136,7 @@ class Archives
      */
     function ParAddTable()
     {
-        //读取附加表信息，并把附加表的资料经过编译处理后导入到$this->Fields中，以方便在模板中用“{dede:field name='fieldname'/}”标记统一调用
+        //读取附加表信息，并把附加表的资料经过编译处理后导入到$this->Fields中，以方便在模板中用{dede:field name='fieldname'/}统一调用
         if ($this->ChannelUnit->ChannelInfos['addtable'] != '') {
             $row = $this->addTableRow;
             if ($this->ChannelUnit->ChannelInfos['issystem'] == -1) {
@@ -198,16 +198,21 @@ class Archives
             $this->SplitFields = explode("#p#", $this->Fields[$this->SplitPageField]);
             $i = 1;
             foreach ($this->SplitFields as $k => $v) {
-                $tmpv = cn_substr($v, 50);
-                $pos = strpos($tmpv, '#e#');
+                $tmpv = cn_substr($v, 255);
+                $pos = strpos($tmpv, "#e#");
+                //替换分页标题#p#前字符和#e#后字符为空，使文档网页代码正常
+                $v = preg_replace("/<.*?#p#/", "#p#", $v);
+                $v = preg_replace("/#e#.*?>/", "#e#", $v);
                 if ($pos > 0) {
                     $st = trim(cn_substr($tmpv, $pos));
                     if ($st == "" || $st == "副标题" || $st == "分页标题") {
                         $this->SplitFields[$k] = preg_replace("/^(.*)#e#/is", "", $v);
                         continue;
                     } else {
+                        $bt = substr($tmpv, 0, $pos);
+                        //替换分页标题为空，扩展文章目录功能：1、以下代码修改为$this->SplitFields[$k] = preg_replace("/^(.*)#e#/is", "<h3 id='{$i}'>$bt</h3>", $v);正文出现ID的描点标题；2、找到注释“按分页标题进行文章分页”功能暂停；3、找到注释“获得静态文档分页标题”对应代码修改为您文章目录网页代码，动态同理
                         $this->SplitFields[$k] = preg_replace("/^(.*)#e#/is", "", $v);
-                        $this->SplitTitles[$k] = $st;
+                        $this->SplitTitles[$k] = $bt;
                     }
                 } else {
                     continue;
@@ -303,10 +308,10 @@ class Archives
         $filenames  = explode(".", $filename);
         $this->ShortName = $filenames[count($filenames) - 1];
         if ($this->ShortName == '') $this->ShortName = 'html';
-        $fileFirst = preg_replace("/\.".$this->ShortName."$/i", "", $filename);
+        $fileFirst = preg_replace("/\.{$this->ShortName}$/i", "", $filename);
         $this->Fields['namehand'] = basename($fileFirst);
         $filenames  = explode("/", $filename);
-        $this->NameFirst = preg_replace("/\.".$this->ShortName."$/i", "", $filenames[count($filenames) - 1]);
+        $this->NameFirst = preg_replace("/\.{$this->ShortName}$/i", "", $filenames[count($filenames) - 1]);
         if ($this->NameFirst == '') {
             $this->NameFirst = $this->ArcID;
         }
@@ -336,13 +341,16 @@ class Archives
         else {
             $seoUrls = array();
             for ($i = 1; $i <= $this->TotalPage; $i++) {
+                //获得分页标题页数，显示第几页
                 if ($this->TotalPage > 1) {
                     $this->Fields['tmptitle'] = (empty($this->Fields['tmptitle']) ? $this->Fields['title'] : $this->Fields['tmptitle']);
-                    if ($i > 1) $this->Fields['title'] = $this->Fields['tmptitle']."-第"."$i"."页";
+                    if ($i > 1) {
+                        $this->Fields['title'] = "{$this->Fields['tmptitle']}-第{$i}页";
+                    }
                 }
                 if ($i > 1) {
-                    $TRUEfilename = $this->GetTruePath().$fileFirst."-".$i.".".$this->ShortName;
-                    $URLFilename = $fileFirst."-".$i.".".$this->ShortName;
+                    $TRUEfilename = $this->GetTruePath()."{$fileFirst}-{$i}.{$this->ShortName}";
+                    $URLFilename = "{$fileFirst}-{$i}.{$this->ShortName}";
                 } else {
                     $TRUEfilename = $this->GetTruePath().$filename;
                     $URLFilename = $filename;
@@ -352,7 +360,7 @@ class Archives
                 $this->dtp->SaveTo($TRUEfilename);
             }
         }
-        $this->dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET ismake=1 WHERE id='".$this->ArcID."'");
+        $this->dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET ismake=1 WHERE id='{$this->ArcID}'");
         return $this->GetTrueUrl($filename);
     }
     /**
@@ -405,7 +413,7 @@ class Archives
         if ($fname == 'array') {
             return $this->Fields;
         }
-        //指定了id的节点
+        //指定了ID的节点
         else if ($ctag->GetAtt('noteid') != '') {
             if (isset($this->Fields[$fname.'_'.$ctag->GetAtt('noteid')])) {
                 return $this->Fields[$fname.'_'.$ctag->GetAtt('noteid')];
@@ -551,8 +559,10 @@ class Archives
         $this->NowPage = $PageNo;
         $this->Fields['nowpage'] = $this->NowPage;
         if ($this->SplitPageField != '' && isset($this->Fields[$this->SplitPageField])) {
+            //按分页标题进行文章分页
             $this->Fields[$this->SplitPageField] = $this->SplitFields[$PageNo - 1];
-            if ($PageNo > 1) $this->Fields['description'] = trim(preg_replace("/[\r\n\t]/", ' ', cn_substr(html2text($this->Fields[$this->SplitPageField]), 200)));
+            //文章分页获得正文开头作为描述
+            if ($PageNo > 1) $this->Fields['description'] = trim(preg_replace("/[\r\n\t]/", ' ', cn_substr(html2text($this->Fields[$this->SplitPageField]), 255)));
         }
         //解析模板
         if (is_array($this->dtp->CTags)) {
@@ -575,8 +585,7 @@ class Archives
                     $this->dtp->Assign($i, $this->GetPreNext($ctag->GetAtt('get')));
                 }
                 //添加上篇下篇标签{dede:prenextdiy get='pre'}{/dede:prenextdiy}{dede:prenextdiy get='next'}{/dede:prenextdiy}
-                else if ($ctag->GetName()=='prenextdiy')
-                {
+                else if ($ctag->GetName()=='prenextdiy') {
                     $innertext = trim($ctag->GetInnerText());
                     if ($innertext) {
                         $get = $ctag->GetAtt('get');
@@ -597,8 +606,7 @@ class Archives
                         }
                         if ($row[$get]['id']) $this->dtp->Assign($i,$revalue);
                     }
-                }
-                else if ($ctag->GetName() == 'fieldlist') {
+                } else if ($ctag->GetName() == 'fieldlist') {
                     $innertext = trim($ctag->GetInnerText());
                     if ($innertext == '') $innertext = GetSysTemplets('tag_fieldlist.htm');
                     $dtp2 = new DedeTagParse();
@@ -733,7 +741,7 @@ class Archives
         } else if ($gtype == 'nextimg') {
             $rs =  $this->PreNext['nextimg'];
         } else {
-            $rs =  $this->PreNext['pre']." &nbsp; ".$this->PreNext['next'];
+            $rs = $this->PreNext['pre']." - ".$this->PreNext['next'];
         }
         return $rs;
     }
@@ -877,7 +885,7 @@ class Archives
                     if ($cfg_rewrite == 'Y') {
                         $revalue .= "<a href='/article/{$aid}-{$i}.html'>{$v}</a>";
                     } else {
-                        $revalue .= "<a href='".$this->Fields['phpurl']."/view.php?aid={$aid}&PageNo={$i}'>{$v}</a>";
+                        $revalue .= "<a href='{$this->Fields['phpurl']}/view.php?aid={$aid}&PageNo={$i}'>{$v}</a>";
                     }
                 } else {
                     if ($PageNo == $i) {
@@ -886,7 +894,7 @@ class Archives
                         if ($cfg_rewrite == 'Y') {
                             $revalue .= "<a href='/article/{$aid}-{$i}.html'>{$v}</a>";
                         } else {
-                            $revalue .= "<a href='".$this->Fields['phpurl']."/view.php?aid={$aid}&PageNo={$i}'>{$v}</a>";
+                            $revalue .= "<a href='{$this->Fields['phpurl']}/view.php?aid={$aid}&PageNo={$i}'>{$v}</a>";
                         }
                         
                     }
@@ -900,20 +908,20 @@ class Archives
                     if ($cfg_rewrite == 'Y') {
                         $revalue .= "<option value='/article/{$aid}-{$i}.html'>{$i}、{$v}</option>";
                     } else {
-                        $revalue .= "<option value='".$this->Fields['phpurl']."/view.php?aid={$aid}&PageNo={$i}'>{$i}、{$v}</option>";
+                        $revalue .= "<option value='{$this->Fields['phpurl']}/view.php?aid={$aid}&PageNo={$i}'>{$i}、{$v}</option>";
                     }
                 } else {
                     if ($PageNo == $i) {
                         if ($cfg_rewrite == 'Y') {
                             $revalue .= "<option value='/article/{$aid}-{$i}.html' selected>{$i}、{$v}</option>";
                         } else {
-                            $revalue .= "<option value='".$this->Fields['phpurl']."/view.php?aid={$aid}&PageNo={$i}' selected>{$i}、{$v}</option>";
+                            $revalue .= "<option value='{$this->Fields['phpurl']}/view.php?aid={$aid}&PageNo={$i}' selected>{$i}、{$v}</option>";
                         }
                     } else {
                         if ($cfg_rewrite == 'Y') {
                             $revalue .= "<option value='/article/{$aid}-{$i}.html'>{$i}、{$v}</option>";
                         } else {
-                            $revalue .= "<option value='".$this->Fields['phpurl']."/view.php?aid={$aid}&PageNo={$i}'>{$i}、{$v}</option>";
+                            $revalue .= "<option value='{$this->Fields['phpurl']}/view.php?aid={$aid}&PageNo={$i}'>{$i}、{$v}</option>";
                         }
                     }
                 }
@@ -947,24 +955,24 @@ class Archives
         } else {
             if ($nPage == 1) {
                 if ($cfg_rewrite == 'Y') {
-                    $PageList .= "<li class='page-item'><a class='page-link' href='".$cfg_cmsurl."/article/{$aid}.html'>上页</a></li>";
+                    $PageList .= "<li class='page-item'><a class='page-link' href='{$cfg_cmsurl}/article/{$aid}.html'>上页</a></li>";
                 } else {
-                    $PageList .= "<li class='page-item'><a class='page-link' href='".$this->Fields['phpurl']."/view.php?aid={$aid}'>上页</a></li>";
+                    $PageList .= "<li class='page-item'><a class='page-link' href='{$this->Fields['phpurl']}/view.php?aid={$aid}'>上页</a></li>";
                 }
             } else {
                 if ($cfg_rewrite == 'Y') {
-                    $PageList .= "<li class='page-item'><a class='page-link' href='".$cfg_cmsurl."/article/{$aid}-{$nPage}.html'>上页</a></li>";
+                    $PageList .= "<li class='page-item'><a class='page-link' href='{$cfg_cmsurl}/article/{$aid}-{$nPage}.html'>上页</a></li>";
                 } else {
-                    $PageList .= "<li class='page-item'><a class='page-link' href='".$this->Fields['phpurl']."/view.php?aid={$aid}&PageNo={$nPage}'>上页</a></li>";
+                    $PageList .= "<li class='page-item'><a class='page-link' href='{$this->Fields['phpurl']}/view.php?aid={$aid}&PageNo={$nPage}'>上页</a></li>";
                 }
             }
         }
         //第一页
         if ($nowPage != 1) {
             if ($cfg_rewrite == 'Y') {
-                $PageList .= "<li class='page-item'><a class='page-link' href='".$cfg_cmsurl."/article/{$aid}.html'>1</a></li>";
+                $PageList .= "<li class='page-item'><a class='page-link' href='{$cfg_cmsurl}/article/{$aid}.html'>1</a></li>";
             } else {
-                $PageList .= "<li class='page-item'><a class='page-link' href='".$this->Fields['phpurl']."/view.php?aid={$aid}'>1</a></li>";
+                $PageList .= "<li class='page-item'><a class='page-link' href='{$this->Fields['phpurl']}/view.php?aid={$aid}'>1</a></li>";
             }
         } else {
             $PageList .= "<li class='page-item active'><span class='page-link'>1</span></li>";
@@ -981,9 +989,9 @@ class Archives
                 $PageList .= "<li class='page-item active'><span class='page-link'>{$i}</span></li>";
             } else {
                 if ($cfg_rewrite == 'Y') {
-                    $PageList .= "<li class='page-item'><a class='page-link' href='".$cfg_cmsurl."/article/{$aid}-{$i}.html'>{$i}</a></li>";
+                    $PageList .= "<li class='page-item'><a class='page-link' href='{$cfg_cmsurl}/article/{$aid}-{$i}.html'>{$i}</a></li>";
                 } else {
-                    $PageList .= "<li class='page-item'><a class='page-link' href='".$this->Fields['phpurl']."/view.php?aid={$aid}&PageNo={$i}'>{$i}</a></li>";
+                    $PageList .= "<li class='page-item'><a class='page-link' href='{$this->Fields['phpurl']}/view.php?aid={$aid}&PageNo={$i}'>{$i}</a></li>";
                 }
             }
         }
@@ -994,9 +1002,9 @@ class Archives
         //最后一页
         if ($nowPage != $totalPage) {
             if ($cfg_rewrite == 'Y') {
-                $PageList .= "<li class='page-item'><a class='page-link' href='".$cfg_cmsurl."/article/{$aid}-{$totalPage}.html'>{$totalPage}</a></li>";
+                $PageList .= "<li class='page-item'><a class='page-link' href='{$cfg_cmsurl}/article/{$aid}-{$totalPage}.html'>{$totalPage}</a></li>";
             } else {
-                $PageList .= "<li class='page-item'><a class='page-link' href='".$this->Fields['phpurl']."/view.php?aid={$aid}&PageNo={$totalPage}'>{$totalPage}</a></li>";
+                $PageList .= "<li class='page-item'><a class='page-link' href='{$this->Fields['phpurl']}/view.php?aid={$aid}&PageNo={$totalPage}'>{$totalPage}</a></li>";
             }
         } else {
             $PageList .= "<li class='page-item active'><span class='page-link'>{$totalPage}</span></li>";
@@ -1004,9 +1012,9 @@ class Archives
         //下一页
         if ($lPage <= $totalPage) {
             if ($cfg_rewrite == 'Y') {
-                $PageList .= "<li class='page-item'><a class='page-link' href='".$cfg_cmsurl."/article/{$aid}-{$lPage}.html'>下页</a></li>";
+                $PageList .= "<li class='page-item'><a class='page-link' href='{$cfg_cmsurl}/article/{$aid}-{$lPage}.html'>下页</a></li>";
             } else {
-                $PageList .= "<li class='page-item'><a class='page-link' href='".$this->Fields['phpurl']."/view.php?aid={$aid}&PageNo={$lPage}'>下页</a></li>";
+                $PageList .= "<li class='page-item'><a class='page-link' href='{$this->Fields['phpurl']}/view.php?aid={$aid}&PageNo={$lPage}'>下页</a></li>";
             }
         } else {
             $PageList .= "<li class='page-item'><span class='page-link'>下页</span></li>";

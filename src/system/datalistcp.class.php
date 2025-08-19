@@ -269,7 +269,7 @@ class DataListCP
         }
         $plist .= "</ul>\r\n";
         if (preg_match("#form#i", $atts['listitem'])) {
-            $plist .= "<form name='pagelist' action='".$this->GetCurUrl()."'>{$hidenform}";
+            $plist .= "<form name='pagelist' action='{$this->GetCurUrl()}'>{$hidenform}";
             if ($totalpage > $total_list) {
                 $plist .= "<input type='text' name='pageno' class='form-control admin-w-xs ms-3' placeholder='页数'>\r\n";
                 $plist .= "<button type='submit' name='plistgo' class='btn btn-primary btn-sm'>前往</button>\r\n";

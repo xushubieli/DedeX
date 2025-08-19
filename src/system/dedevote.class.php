@@ -94,7 +94,7 @@ class DedeVote
             $titlebgcolor = "#98C6EF";
         }
         if ($titlebackgroup != "") {
-            $titlebackgroup = "background='$titlebackgroup'";
+            $titlebackgroup = "background='{$titlebackgroup}'";
         }
         if ($tablebg == "") {
             $tablebg = "#ffffff";
@@ -103,22 +103,22 @@ class DedeVote
             $itembgcolor = "#ffffff";
         }
         $items = "<table width='$tablewidth' id='voteitem' class='table'>\r\n";
-        $items .= "<form name='voteform' method='post' action='".$GLOBALS['cfg_phpurl']."/vote.php' target='_blank'>\r\n";
-        $items .= "<input type='hidden' name='dopost' value='send' />\r\n";
-        $items .= "<input type='hidden' name='aid' value='".$this->VoteID."' />\r\n";
-        $items .= "<input type='hidden' name='ismore' value='".$this->VoteInfos['ismore']."' />\r\n";
-        $items .= "<tr align='center'><td id='votetitle' $titlebackgroup>".$this->VoteInfos['votename']."</td></tr>\r\n";
+        $items .= "<form name='voteform' method='post' action='{$GLOBALS['cfg_phpurl']}/vote.php' target='_blank'>\r\n";
+        $items .= "<input type='hidden' name='dopost' value='send'>\r\n";
+        $items .= "<input type='hidden' name='aid' value='{$this->VoteID}'>\r\n";
+        $items .= "<input type='hidden' name='ismore' value='{$this->VoteInfos['ismore']}'>\r\n";
+        $items .= "<tr align='center'><td id='votetitle' {$titlebackgroup}>{$this->VoteInfos['votename']}</td></tr>\r\n";
         if ($this->VoteCount > 0) {
             foreach ($this->VoteNotes as $k => $arr) {
                 if ($this->VoteInfos['ismore'] == 0) {
-                    $items .= "<tr><td bgcolor='$itembgcolor'><label class='mb-0'><input type='radio' name='voteitem' value='$k'> ".$arr['name']."</label></td></tr>\r\n";
+                    $items .= "<tr><td bgcolor='{$itembgcolor}'><label class='mb-0'><input type='radio' name='voteitem' value='{$k}'> {$arr['name']}</label></td></tr>\r\n";
                 } else {
-                    $items .= "<tr><td bgcolor='$itembgcolor'><label class='mb-0'><input type=checkbox name='voteitem[]' value='$k'> ".$arr['name']."</label></td></tr>\r\n";
+                    $items .= "<tr><td bgcolor='{$itembgcolor}'><label class='mb-0'><input type=checkbox name='voteitem[]' value='{$k}'> {$arr['name']}</label></td></tr>\r\n";
                 }
             }
             $items .= "<tr><td>\r\n";
             $items .= "<input type='submit' name='vbt1' class='btn btn-primary' value='投票'>\r\n";
-            $items .= "<input type='button' name='vbt2' class='btn btn-primary' value='查看结果' onclick=window.open('".$GLOBALS['cfg_phpurl']."/vote.php?dopost=view&aid=".$this->VoteID."');>";
+            $items .= "<input type='button' name='vbt2' class='btn btn-primary' value='查看结果' onclick=window.open('{$GLOBALS['cfg_phpurl']}/vote.php?dopost=view&aid={$this->VoteID}');>";
             $items .= "</td></tr>\r\n";
         }
         $items .= "</form>\r\n</table>\r\n";
@@ -203,10 +203,10 @@ class DedeVote
                 }
             }
             foreach ($this->VoteNotes as $k => $arr) {
-                $items .= "<v:note id='$k' count='".$arr['count']."'>".$arr['name']."</v:note>\r\n";
+                $items .= "<v:note id='{$k}' count='{$arr['count']}'>{$arr['name']}</v:note>\r\n";
             }
         }
-        $this->dsql->ExecuteNoneQuery("UPDATE `#@__vote` SET totalcount='".($this->VoteInfos['totalcount'] + 1)."',votenote='".addslashes($items)."' WHERE aid='".$this->VoteID."'");
+        $this->dsql->ExecuteNoneQuery("UPDATE `#@__vote` SET totalcount='".($this->VoteInfos['totalcount'] + 1)."',votenote='".addslashes($items)."' WHERE aid='{$this->VoteID}'");
         return "投票成功";
     }
     /**
@@ -228,7 +228,7 @@ class DedeVote
         foreach ($this->VoteNotes as $k => $arr) {
             $res .= "<tr><td width='260'>".$i."、".$arr['name']."</td>";
             $c = $arr['count'];
-            $res .= "<td><div class='progress'><div class='progress-bar' role='progressbar' style='width: ".(($c / $totalcount) * 100)."%' aria-valuenow='".(($c / $totalcount) * 100)."' aria-valuemin='0' aria-valuemax='100'></div></div></td></tr>\r\n";
+            $res .= "<td><div class='progress'><div class='progress-bar' role='progressbar' style='width:".(($c / $totalcount) * 100)."%' aria-valuenow='".(($c / $totalcount) * 100)."' aria-valuemin='0' aria-valuemax='100'></div></div></td></tr>\r\n";
             $i++;
         }
         $res .= "<tr><td></td><td></td></tr>\r\n";

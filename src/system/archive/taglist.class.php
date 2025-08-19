@@ -71,7 +71,7 @@ class TagList
             if(is_array($addInfos)) $this->Fields['litpic'] = empty($addInfos['litpic']) ? $addInfos['litpic'] : $addInfos['litpic'];
         }
         //初始化模板
-        $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/".$GLOBALS['cfg_df_style']."/".$this->Templet;
+        $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/{$GLOBALS['cfg_df_style']}/".$this->Templet;
         if (!file_exists($tempfile) || !is_file($tempfile)) {
             showmsg("标签主题模板htm文件不存在", "javascript:;");
             exit();
@@ -154,7 +154,7 @@ class TagList
     {
         global $cfg_cmspath, $cfg_tags_dir;
         $tagsDir = str_replace("{cmspath}",$cfg_cmspath,$cfg_tags_dir);
-        $makeDir = empty($this->Tag) ? $this->GetTruePath().$tagsDir."/index.html" : $this->GetTruePath().$tagsDir."/".$this->Tag."/index.html";
+        $makeDir = empty($this->Tag) ? $this->GetTruePath().$tagsDir."/index.html" : $this->GetTruePath().$tagsDir."/{$this->Tag}/index.html";
         if ($this->Tag != '') {
             $this->CountRecord();
         }

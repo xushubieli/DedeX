@@ -75,7 +75,7 @@ class SgListView
             $this->ListFields = explode(',', $listfield);
             //设置一些全局参数的值
             foreach ($GLOBALS['PubFields'] as $k => $v) $this->Fields[$k] = $v;
-            $this->Fields['rsslink'] = $GLOBALS['cfg_cmsurl']."/static/rss/".$this->TypeID.".xml";
+            $this->Fields['rsslink'] = $GLOBALS['cfg_cmsurl']."/static/rss/{$this->TypeID}.xml";
             //api相关逻辑处理
             if ($this->mod == 1 && empty($this->Fields['apikey'])) {
                 echo json_encode(array(
@@ -153,11 +153,11 @@ class SgListView
         //栏目ID条件
         if (!empty($this->TypeID)) {
             if ($cfg_list_son == 'N') {
-                if ($this->CrossID == '') $this->addSql .= " AND (arc.typeid='".$this->TypeID."') ";
+                if ($this->CrossID == '') $this->addSql .= " AND (arc.typeid='{$this->TypeID}') ";
                 else $this->addSql .= " AND (arc.typeid IN({$this->CrossID},{$this->TypeID})) ";
             } else {
-                if ($this->CrossID == '') $this->addSql .= " AND (arc.typeid IN (".GetSonIds($this->TypeID, $this->Fields['channeltype']).") ) ";
-                else $this->addSql .= " AND (arc.typeid IN (".GetSonIds($this->TypeID, $this->Fields['channeltype']).",{$this->CrossID}) ) ";
+                if ($this->CrossID == '') $this->addSql .= " AND (arc.typeid IN (".GetSonIds($this->TypeID, $this->Fields['channeltype']).")) ";
+                else $this->addSql .= " AND (arc.typeid IN (".GetSonIds($this->TypeID, $this->Fields['channeltype']).",{$this->CrossID})) ";
             }
         }
         $naddQuery = '';
@@ -576,7 +576,7 @@ class SgListView
         if (preg_match("/^(http|https):\/\//i", $nurl)) return $nurl;
         if ($this->Fields['moresite'] == 1) {
             if ($this->Fields['sitepath'] != '') {
-                $nurl = preg_replace("/^".$this->Fields['sitepath']."/", '', $nurl);
+                $nurl = preg_replace("/^{$this->Fields['sitepath']}/", '', $nurl);
             }
             $nurl = $this->Fields['siteurl'].$nurl;
         }

@@ -123,7 +123,7 @@ class SearchView
         }
         $this->TotalPage = ceil($this->TotalResult / $this->pagesize);
         if ($this->PageNo == 1) {
-            $this->dsql->ExecuteNoneQuery("UPDATE `#@__search_keywords` SET result='".$this->TotalResult."' WHERE keyword='".addslashes($keyword)."';");
+            $this->dsql->ExecuteNoneQuery("UPDATE `#@__search_keywords` SET result='{$this->TotalResult}' WHERE keyword='".addslashes($keyword)."';");
         }
         $envs['url_type'] = 3;
         $envs['value'] = $keyword;
@@ -310,16 +310,16 @@ class SearchView
         $ksql = $this->GetKeywordSql();
         $ksqls = array();
         if ($this->StartTime > 0) {
-            $ksqls[] = " arc.senddate>'".$this->StartTime."' ";
+            $ksqls[] = " arc.senddate>'{$this->StartTime}' ";
         }
         if ($this->TypeID > 0) {
             $ksqls[] = " typeid IN (".GetSonIds($this->TypeID).") ";
         }
         if ($this->ChannelType > 0) {
-            $ksqls[] = " arc.channel='".$this->ChannelType."'";
+            $ksqls[] = " arc.channel='{$this->ChannelType}'";
         }
         if ($this->mid > 0) {
-            $ksqls[] = " arc.mid = '".$this->mid."'";
+            $ksqls[] = " arc.mid = '{$this->mid}'";
         }
         $ksqls[] = " arc.arcrank > -1 ";
         $this->AddSql = ($ksql == '' ? join(' AND ', $ksqls) : join(' AND ', $ksqls)." AND ($ksql)");
@@ -634,10 +634,10 @@ class SearchView
         }
         $infos = "<li class='page-item disabled'><span class='page-link'>{$totalpage}页{$this->TotalResult}条</span></li>";
         $geturl = "";
-        //$geturl = "keyword=".urlencode($oldkeyword)."&searchtype=".$this->SearchType;
-        //$geturl .= "&channeltype=".$this->ChannelType."&orderby=".$this->OrderBy;
-        //$geturl .= "&kwtype=".$this->KType."&pagesize=".$this->pagesize;
-        $geturl .= "typeid=".$this->TypeID."&keyword=".urlencode($oldkeyword)."&";
+        //$geturl = "keyword=".urlencode($oldkeyword)."&searchtype={$this->SearchType}";
+        //$geturl .= "&channeltype={$this->ChannelType}&orderby={$this->OrderBy}";
+        //$geturl .= "&kwtype={$this->KType}&pagesize={$this->pagesize}";
+        $geturl .= "typeid={$this->TypeID}&keyword=".urlencode($oldkeyword)."&";
         $purl .= "?".$geturl;
         //获得上页和下页的链接
         if ($this->PageNo != 1) {

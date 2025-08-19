@@ -80,20 +80,20 @@ if ($action == 'post') {
             exit();
         }*/
         //判断是否重复提交表单，根据提交的链接、时间、ip，前台表单可以不用出现该输入框，恢复注释代码使用
-        /*$result = $dsql->getOne("SELECT count(*) AS dd FROM `{$diy->table}` WHERE ip='$ip' AND date_format(date,'Y-m-d') = date_format(now(),'Y-m-d')");
-        if ($result['dd'] >= 3) {
+        /*$repeat = $dsql->getOne("SELECT count(*) AS date_count FROM `{$diy->table}` WHERE ip='$ip' AND date_format(date,'Y-m-d') = date_format(now(),'Y-m-d')");
+        if ($repeat['date_count'] >= 3) {
             showmsg('您已重复提交太多次了，稍后我们会主动联系您', '-1', 0, 5000);
             exit();
         }*/
         $query = "INSERT INTO `{$diy->table}` (`id`, `ifcheck` $addvar) VALUES (NULL, 0 $addvalue); ";
         if ($dsql->ExecuteNoneQuery($query)) {
             $id = $dsql->GetLastID();
-            $mailtitle = "{$diy->name}通知";
+            $mailtitle = "来自{$diy->name}通知";
             $mailbody = '';
-            foreach ($diy->getFieldList() as $field=>$fieldvalue) {
+            foreach ($diy->getFieldList() as $field => $fieldvalue) {
                 $mailbody .= "{$fieldvalue[0]}：{${$field}}\r\n";
             }
-            $headers = "From: ".$cfg_adminemail."Reply-To: ".$cfg_adminemail;
+            $headers = "From: {$cfg_adminemail} Reply-To: {$cfg_adminemail}";
             $mailbody = mb_convert_encoding($mailbody, "GBK", "UTF-8");
             if ($cfg_sendmail_bysmtp == 'Y' && !empty($cfg_smtp_server)) {
                 $mailtype = 'TXT';

@@ -180,7 +180,7 @@ class DedeSqlite
         $t1 = ExecTime();
         $rs = $this->linkID->exec($this->queryString);
         if ($rs === false) {
-            var_dump_cli("Error in fetch ".$this->linkID->lastErrorMsg().",SQL:{$this->queryString}");
+            var_dump_cli("Error in fetch {$this->linkID->lastErrorMsg()}, SQL:{$this->queryString}");
         }
         //查询性能测试
         if ($this->recordLog) {
@@ -264,7 +264,7 @@ class DedeSqlite
             //echo $this->queryString."--{$queryTime}<hr/>\r\n";
         }
         if ($this->result[$id] === FALSE) {
-            $this->DisplayError($this->linkID->lastErrorMsg()."<br>Error sql:".$this->queryString."");
+            $this->DisplayError($this->linkID->lastErrorMsg()."<br>Error sql:{$this->queryString}");
         }
     }
     function Query($id = "me", $sql = '')

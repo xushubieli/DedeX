@@ -132,7 +132,7 @@ function lib_arclistsg(&$ctag, &$refObj)
         $idlist = GetArclistSgCache($md5hash);
         if ($idlist != '') $needcache = FALSE;
     }
-    //指定了id或使用缓存中的ID
+    //指定了ID或使用缓存中的ID
     if ($idlist != '' && $_arclistEnv != 'index') {
         $query = "SELECT $arclistquery,tp.typedir,tp.typename,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath FROM `$maintable` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.aid IN($idlist) $ordersql $limitsql";
     }

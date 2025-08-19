@@ -104,7 +104,7 @@ class SpecView
         }
         if ($this->TotalResult == -1) {
             if ($this->StartTime > 0) {
-                $timesql = " AND #@__archives.senddate>'".$this->StartTime."'";
+                $timesql = " AND #@__archives.senddate>'{$this->StartTime}'";
             } else {
                 $timesql = '';
             }
@@ -311,7 +311,7 @@ class SpecView
         //按不同情况设定SQL条件
         $orwhere = " arc.arcrank > -1 AND arc.channel = -1 ";
         if ($this->StartTime > 0) {
-            $orwhere .= " AND arc.senddate>'".$this->StartTime."'";
+            $orwhere .= " AND arc.senddate>'{$this->StartTime}'";
         }
         //排序方式
         $ordersql = '';
@@ -505,9 +505,9 @@ class SpecView
             return "<li class='page-item disabled'><span class='page-link'>0页{$this->TotalResult}条</span></li>";
         }
         $purl = $this->GetCurUrl();
-        $geturl = "typeid=".$this->TypeID."&TotalResult=".$this->TotalResult."&";
-        //$hidenform = "<input type='hidden' name='typeid' value='".$this->TypeID."'>";
-        //$hidenform .= "<input type='hidden' name='TotalResult' value='".$this->TotalResult."'>";
+        $geturl = "typeid={$this->TypeID}&TotalResult={$this->TotalResult}&";
+        //$hidenform = "<input type='hidden' name='typeid' value='{$this->TypeID}'>";
+        //$hidenform .= "<input type='hidden' name='TotalResult' value='{$this->TotalResult}'>";
         $purl .= "?".$geturl;
         //获得上页和下页的链接
         if ($this->PageNo != 1) {

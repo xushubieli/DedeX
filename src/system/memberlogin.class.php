@@ -143,7 +143,7 @@ class MemberLogin
             if (is_array($this->fields)) {
                 //间隔一小时更新一次会员登录时间
                 if (time() - $this->M_LoginTime > 3600) {
-                    $this->dsql->ExecuteNoneQuery("update `#@__member` set logintime='".time()."',loginip='".GetIP()."' WHERE mid='".$this->fields['mid']."';");
+                    $this->dsql->ExecuteNoneQuery("update `#@__member` set logintime='".time()."',loginip='".GetIP()."' WHERE mid='{$this->fields['mid']}';");
                     PutCookie("DedeLoginTime", time(), $this->M_KeepTime);
                 }
                 $this->M_LoginID = $this->fields['userid'];
@@ -200,7 +200,7 @@ class MemberLogin
         $nowtime = time();
         $mhasDay = $this->M_ExpTime - ceil(($nowtime - $this->M_UpTime) / 3600 / 24) + 1;
         if ($mhasDay <= 0) {
-            $this->dsql->ExecuteNoneQuery("UPDATE `#@__member` SET uptime='0',exptime='0',`rank`='$cfg_mb_rank' WHERE mid='".$this->fields['mid']."';");
+            $this->dsql->ExecuteNoneQuery("UPDATE `#@__member` SET uptime='0',exptime='0',`rank`='$cfg_mb_rank' WHERE mid='{$this->fields['mid']}';");
         }
         return $mhasDay;
     }
@@ -502,7 +502,7 @@ class MemberLogin
         $this->M_ID = $uid;
         $this->M_LoginTime = time();
         $loginip = GetIP();
-        $inquery = "UPDATE `#@__member` SET loginip='$loginip',logintime='".$this->M_LoginTime."',loginerr=0 WHERE mid='".$uid."'";
+        $inquery = "UPDATE `#@__member` SET loginip='$loginip',logintime='{$this->M_LoginTime}',loginerr=0 WHERE mid='{$uid}'";
         $this->dsql->ExecuteNoneQuery($inquery);
         if ($this->M_KeepTime > 0) {
             PutCookie('DedeUserID', $uid, $this->M_KeepTime);
@@ -517,7 +517,7 @@ class MemberLogin
         if ($this->M_Rank == 0) {
             return '注册会员';
         } else {
-            $row = $this->dsql->GetOne("SELECT membername FROM `#@__arcrank` WHERE `rank`='".$this->M_Rank."'");
+            $row = $this->dsql->GetOne("SELECT membername FROM `#@__arcrank` WHERE `rank`='{$this->M_Rank}'");
             return $row['membername'];
         }
     }
@@ -533,9 +533,9 @@ class MemberLogin
         if ($this->M_Rank == 0) {
             $sta .= "您目前等级是：注册会员";
         } else {
-            $row = $this->dsql->GetOne("SELECT membername FROM `#@__arcrank` WHERE `rank`='".$this->M_Rank."'");
+            $row = $this->dsql->GetOne("SELECT membername FROM `#@__arcrank` WHERE `rank`='{$this->M_Rank}'");
             $sta .= "您目前等级是：".$row['membername'];
-            $rs = $this->dsql->GetOne("SELECT id FROM `#@__admin` WHERE userid='".$this->M_LoginID."'");
+            $rs = $this->dsql->GetOne("SELECT id FROM `#@__admin` WHERE userid='{$this->M_LoginID}'");
             if (!is_array($rs)) {
                 if ($this->M_Rank > 10 && $this->M_HasDay > 0) $sta .= "，剩余{$this->M_HasDay}天";
                 else if ($this->M_Rank > 10) $sta .= "，<span class='text-danger'>会员已到期</span>";

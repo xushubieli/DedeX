@@ -116,7 +116,7 @@ class FreeList
             //是否指定栏目条件
             if (!empty($typeid)) {
                 if ($cfg_list_son == 'N') {
-                    $addSql .= " AND (typeid='$typeid') ";
+                    $addSql .= " AND (typeid='{$typeid}') ";
                 } else {
                     $addSql .= " AND typeid in (".GetSonIds($typeid, 0, TRUE).") ";
                 }
@@ -124,7 +124,7 @@ class FreeList
             //自定义属性条件
             if ($att != '') {
                 $flags = explode(',', $att);
-                for ($i = 0; isset($flags[$i]); $i++) $addSql .= " AND FIND_IN_SET('{$flags[$i]}',flag)>0 ";
+                for ($i = 0; isset($flags[$i]); $i++) $addSql .= " AND FIND_IN_SET('{$flags[$i]}', flag) > 0 ";
             }
             //文档的栏目模型
             if ($channelid > 0 && !preg_match("#spec#i", $listtype)) {

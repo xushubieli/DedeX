@@ -290,7 +290,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
             return $idlist;
         }
     }
-    //指定了id或使用缓存中的ID
+    //指定了ID或使用缓存中的ID
     if ($idlist != '') {
         $query = "SELECT arc.*,tp.typedir,tp.typename,tp.corank,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath,mb.userid,mb.uname,mb.face $addfieldsSql FROM `$maintable` arc left join `#@__arctype` tp on arc.typeid=tp.id LEFT JOIN `#@__member` mb on arc.mid = mb.mid $addfieldsSqlJoin WHERE arc.id in($idlist) $ordersql ";
     }

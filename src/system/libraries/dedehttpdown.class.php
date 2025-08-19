@@ -390,9 +390,9 @@ class DedeHttpDown
         $headString = '';
         //发送固定的起始请求头GET、Host信息
         if ($requestType == "GET") {
-            $headString .= "GET ".$this->m_urlpath." $httpv\r\n";
+            $headString .= "GET {$this->m_urlpath} $httpv\r\n";
         } else {
-            $headString .= "POST ".$ps[0]." $httpv\r\n";
+            $headString .= "POST {$ps[0]} $httpv\r\n";
         }
         $this->m_puthead["Host"] = $this->m_host;
         //发送会员自定义的请求头

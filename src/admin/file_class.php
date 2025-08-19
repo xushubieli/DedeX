@@ -36,7 +36,7 @@ class FileManagement
         if (($newname != $oldname) && is_writable($oldname)) {
             rename($oldname, $newname);
         }
-        ShowMsg("成功修改一个文件名", "file_manage_main.php?activepath=".$this->activeDir);
+        ShowMsg("成功修改一个文件名", "file_manage_main.php?activepath={$this->activeDir}");
         return 0;
     }
     //创建新目录
@@ -46,10 +46,10 @@ class FileManagement
         $dirname = $this->baseDir.$this->activeDir."/".$dirname;
         if (is_writable($this->baseDir.$this->activeDir)) {
             MkdirAll($dirname, $GLOBALS['cfg_dir_purview']);
-            ShowMsg("成功创建一个新目录", "file_manage_main.php?activepath=".$this->activeDir."/".$newdir);
+            ShowMsg("成功创建一个新目录", "file_manage_main.php?activepath={$this->activeDir}/{$newdir}");
             return 1;
         } else {
-            ShowMsg("创建新目录失败，因为这个位置不允许写入", "file_manage_main.php?activepath=".$this->activeDir);
+            ShowMsg("创建新目录失败，因为这个位置不允许写入", "file_manage_main.php?activepath={$this->activeDir}");
             return 0;
         }
     }
@@ -153,11 +153,11 @@ class FileManagement
             if ($this->allowDeleteDir == 1) {
                 $this->RmDirFiles($filename);
             } else {
-                ShowMsg("系统禁止删除{$t}", "file_manage_main.php?activepath=".$this->activeDir);
+                ShowMsg("系统禁止删除{$t}", "file_manage_main.php?activepath={$this->activeDir}");
                 exit;
             }
         }
-        ShowMsg("成功删除一个{$t}", "file_manage_main.php?activepath=".$this->activeDir);
+        ShowMsg("成功删除一个{$t}", "file_manage_main.php?activepath={$this->activeDir}");
         return 0;
     }
 }
@@ -173,7 +173,7 @@ class SpaceUse
                 if (is_dir("$indir/$filename")) {
                     $this->checksize("$indir/$filename");
                 } else {
-                    $this->totalsize = $this->totalsize + filesize("$indir/$filename");
+                    $this->totalsize = $this->totalsize + filesize("{$indir}/{$filename}");
                 }
             }
         }

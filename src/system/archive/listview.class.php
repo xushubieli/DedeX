@@ -98,7 +98,7 @@ class ListView
                     exit;
                 }
             }
-            $this->Fields['rsslink'] = $GLOBALS['cfg_cmsurl']."static/rss/".$this->TypeID.".xml";
+            $this->Fields['rsslink'] = $GLOBALS['cfg_cmsurl']."static/rss/{$this->TypeID}.xml";
             //设置环境变量
             SetSysEnv($this->TypeID, $this->Fields['typename'], 0, '', 'list');
             $this->Fields['typeid'] = $this->TypeID;
@@ -152,17 +152,17 @@ class ListView
         $typeid2like = " '%,{$this->TypeID},%' ";
         if ($cfg_list_son == 'N') {
             if ($cfg_need_typeid2 == 'N') {
-                if ($this->CrossID == '') $this->addSql .= " AND (arc.typeid='".$this->TypeID."') ";
+                if ($this->CrossID == '') $this->addSql .= " AND (arc.typeid='{$this->TypeID}') ";
                 else $this->addSql .= " AND (arc.typeid in({$this->CrossID},{$this->TypeID})) ";
             } else {
                 if ($this->CrossID == '') {
-                    $this->addSql .= " AND ( (arc.typeid='".$this->TypeID."') OR CONCAT(',', arc.typeid2, ',') LIKE $typeid2like) ";
+                    $this->addSql .= " AND ((arc.typeid='{$this->TypeID}') OR CONCAT(',', arc.typeid2, ',') LIKE {$typeid2like}) ";
                 } else {
                     if ($cfg_cross_sectypeid == 'Y') {
                         $typeid2Clike = " '%,{$this->CrossID},%' ";
-                        $this->addSql .= " AND ( arc.typeid IN({$this->CrossID},{$this->TypeID}) OR CONCAT(',', arc.typeid2, ',') LIKE $typeid2like OR CONCAT(',', arc.typeid2, ',') LIKE $typeid2Clike)";
+                        $this->addSql .= " AND (arc.typeid IN({$this->CrossID},{$this->TypeID}) OR CONCAT(',', arc.typeid2, ',') LIKE {$typeid2like} OR CONCAT(',', arc.typeid2, ',') LIKE {$typeid2Clike})";
                     } else {
-                        $this->addSql .= " AND ( arc.typeid IN({$this->CrossID},{$this->TypeID}) OR CONCAT(',', arc.typeid2, ',') LIKE $typeid2like)";
+                        $this->addSql .= " AND (arc.typeid IN({$this->CrossID},{$this->TypeID}) OR CONCAT(',', arc.typeid2, ',') LIKE {$typeid2like})";
                     }
                 }
             }
@@ -174,17 +174,20 @@ class ListView
                 $sonidsCon = " arc.typeid IN($sonids) ";
             }
             if ($cfg_need_typeid2 == 'N') {
-                if ($this->CrossID == '') $this->addSql .= " AND ( $sonidsCon ) ";
-                else $this->addSql .= " AND ( arc.typeid IN ({$sonids},{$this->CrossID}) ) ";
+                if ($this->CrossID == '') {
+                    $this->addSql .= " AND ({$sonidsCon}) ";
+                } else {
+                    $this->addSql .= " AND (arc.typeid IN ({$sonids},{$this->CrossID})) ";
+                }
             } else {
                 if ($this->CrossID == '') {
-                    $this->addSql .= " AND ( $sonidsCon OR CONCAT(',', arc.typeid2, ',') like $typeid2like  ) ";
+                    $this->addSql .= " AND ( $sonidsCon OR CONCAT(',', arc.typeid2, ',') like $typeid2like) ";
                 } else {
                     if ($cfg_cross_sectypeid == 'Y') {
                         $typeid2Clike = " '%,{$this->CrossID},%' ";
-                        $this->addSql .= " AND ( arc.typeid IN ({$sonids},{$this->CrossID}) OR CONCAT(',', arc.typeid2, ',') LIKE $typeid2like OR CONCAT(',', arc.typeid2, ',') LIKE $typeid2Clike) ";
+                        $this->addSql .= " AND (arc.typeid IN ({$sonids},{$this->CrossID}) OR CONCAT(',', arc.typeid2, ',') LIKE {$typeid2like} OR CONCAT(',', arc.typeid2, ',') LIKE {$typeid2Clike}) ";
                     } else {
-                        $this->addSql .= " AND ( arc.typeid IN ({$sonids},{$this->CrossID}) OR CONCAT(',', arc.typeid2, ',') LIKE $typeid2like) ";
+                        $this->addSql .= " AND (arc.typeid IN ({$sonids},{$this->CrossID}) OR CONCAT(',', arc.typeid2, ',') LIKE {$typeid2like}) ";
                     }
                 }
             }
@@ -628,7 +631,7 @@ class ListView
     {
         if ($this->Fields['moresite'] == 1) {
             if ($this->Fields['sitepath'] != '') {
-                $nurl = preg_replace("/^".$this->Fields['sitepath']."/", '', $nurl);
+                $nurl = preg_replace("/^{$this->Fields['sitepath']}/", '', $nurl);
             }
             $nurl = $this->Fields['siteurl'].$nurl;
         }

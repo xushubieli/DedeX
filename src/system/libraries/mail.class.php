@@ -144,34 +144,34 @@ class smtp
     }
     function smtp_sockopen_relay()
     {
-        $this->log_write("Trying to ".$this->relay_host.":".$this->smtp_port."\n");
+        $this->log_write("Trying to {$this->relay_host}:{$this->smtp_port}\n");
         $this->sock = @fsockopen($this->relay_host, $this->smtp_port, $errno, $errstr, $this->time_out);
         if (!($this->sock && $this->smtp_ok())) {
-            $this->log_write("Error: Cannot connenct to relay host ".$this->relay_host."\n");
+            $this->log_write("Error: Cannot connenct to relay host {$this->relay_host}\n");
             $this->log_write("Error: ".$errstr." (".$errno.")\n");
             return FALSE;
         }
-        $this->log_write("Connected to relay host ".$this->relay_host."\n");
+        $this->log_write("Connected to relay host {$this->relay_host}\n");
         return TRUE;;
     }
     function smtp_sockopen_mx($address)
     {
         $domain = preg_replace("/^.+@([^@]+)$/i", "\1", $address);
         if (!@getmxrr($domain, $MXHOSTS)) {
-            $this->log_write("Error: Cannot resolve MX \"".$domain."\"\n");
+            $this->log_write("Error: Cannot resolve MX \"{$domain}\"\n");
             return FALSE;
         }
         foreach ($MXHOSTS as $host)
         {
-            $this->log_write("Trying to ".$host.":".$this->smtp_port."\n");
+            $this->log_write("Trying to {$host}:{$this->smtp_port}\n");
             $this->sock = @fsockopen($host, $this->smtp_port, $errno, $errstr, $this->time_out);
             if (!($this->sock && $this->smtp_ok()))
             {
-                $this->log_write("Warning: Cannot connect to mx host ".$host."\n");
-                $this->log_write("Error: ".$errstr." (".$errno.")\n");
+                $this->log_write("Warning: Cannot connect to mx host {$host}\n");
+                $this->log_write("Error: {$errstr} ({$errno})\n");
                 continue;
             }
-            $this->log_write("Connected to mx host ".$host."\n");
+            $this->log_write("Connected to mx host {$host}\n");
             return TRUE;
         }
         $this->log_write("Error: Cannot connect to any mx hosts (".implode(", ", $MXHOSTS).")\n");
@@ -180,7 +180,7 @@ class smtp
     function smtp_message($header, $body)
     {
         fputs($this->sock, $header."\r\n".$body);
-        $this->smtp_debug("> ".str_replace("\r\n", "\n"."> ", $header."\n> ".$body."\n> "));
+        $this->smtp_debug("> ".str_replace("\r\n", "\n"."> ", "{$header}\n> {$body}\n> "));
         return TRUE;
     }
     function smtp_eom()
@@ -196,7 +196,7 @@ class smtp
         if (!preg_match("#^[23]#", $response)) {
             fputs($this->sock, "QUIT\r\n");
             fgets($this->sock, 512);
-            $this->log_write("Error: Remote host returned \"".$response."\"\n");
+            $this->log_write("Error: Remote host returned \"{$response}\"\n");
             return FALSE;
         }
         return TRUE;
@@ -216,7 +216,7 @@ class smtp
     }
     function smtp_error($string)
     {
-        $this->log_write("Error: Error occurred while ".$string.".\n");
+        $this->log_write("Error: Error occurred while {$string}.\n");
         return FALSE;
     }
     function log_write($message)
@@ -227,7 +227,7 @@ class smtp
         }
         $message = date("M d H:i:s ").get_current_user()."[".getmypid()."]: ".$message;
         if (!@file_exists($this->log_file) || !($fp = @fopen($this->log_file, "a"))) {
-            $this->smtp_debug("Warning: Cannot open log file \"".$this->log_file."\"\n");
+            $this->smtp_debug("Warning: Cannot open log file \"{$this->log_file}\"\n");
             return FALSE;;
         }
         flock($fp, LOCK_EX);
