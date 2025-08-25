@@ -22,7 +22,7 @@ if ($dopost == 'ok') {
     ShowMsg("成功删除一个栏目", "catalog_main.php");
     exit();
 }
-$dsql->SetQuery("SELECT typename,typedir FROM `#@__arctype` WHERE id=".$id);
+$dsql->SetQuery("SELECT typename,typedir FROM `#@__arctype` WHERE id={$id}");
 $row = $dsql->GetOne();
 $wintitle = "删除栏目";
 $win = new OxWindow();

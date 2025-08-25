@@ -18,7 +18,7 @@ if (empty($dopost)) $dopost = '';
 $bkdir = DEDEDATA.'/'.$cfg_backup_dir;
 //跳转一下页的js
 $gotojs = "function GotoNextPage(){document.gonext."."submit();}"."\r\nset"."Timeout('GotoNextPage()',500);";
-$dojs = "<script>$gotojs</script>";
+$dojs = "<script>{$gotojs}</script>";
 //备份数据
 if ($dopost == 'bak') {
     if (empty($tablearr)) {
@@ -66,14 +66,14 @@ if ($dopost == 'bak') {
             $fp = fopen($bkfile, "w");
             foreach ($tables as $t) {
                 fwrite($fp, "DROP TABLE IF EXISTS `$t`;\r\n");
-                $dsql->SetQuery("SHOW CREATE TABLE `".$dsql->dbName."`.".$t); //感谢：LandQ
+                $dsql->SetQuery("SHOW CREATE TABLE `{$dsql->dbName}`.{$t}"); //感谢：LandQ
                 $dsql->Execute('me');
                 $row = $dsql->GetArray('me', MYSQL_BOTH);
                 //去除AUTO_INCREMENT
                 $row[1] = preg_replace("#AUTO_INCREMENT=([0-9]{1,})[\r\n]{1,}#i", "", $row[1]);
                 //4.1以下版本备份为低版本
                 if ($datatype == 4.0 && $mysql_version > 4.0) {
-                    $eng1 = "#ENGINE=MyISAM[\r\n]{1,}DEFAULT[\r\n]{1,}CHARSET=".$cfg_db_language."#i";
+                    $eng1 = "#ENGINE=MyISAM[\r\n]{1,}DEFAULT[\r\n]{1,}CHARSET={$cfg_db_language}#i";
                     $tableStruct = preg_replace($eng1, "TYPE=MyISAM", $row[1]);
                 }
                 //4.1以下版本备份为高版本
@@ -85,19 +85,19 @@ if ($dopost == 'bak') {
                 else {
                     $tableStruct = $row[1];
                 }
-                fwrite($fp,''.$tableStruct.";\r\n");
+                fwrite($fp, "{$tableStruct};\r\n");
             }
             fclose($fp);
         }
         $tmsg .= "正在进行数据备份初始化工作，请稍后";
-        $doneForm = "<form name='gonext' action='sys_data_done.php' method='post'>
-           <input type='hidden' name='isstruct' value='$isstruct'>
+        $doneForm = "<form action='sys_data_done.php' name='gonext' method='post'>
+           <input type='hidden' name='isstruct' value='{$isstruct}'>
            <input type='hidden' name='dopost' value='bak'>
-           <input type='hidden' name='fsize' value='$fsize'>
-           <input type='hidden' name='tablearr' value='$tablearr'>
+           <input type='hidden' name='fsize' value='{$fsize}'>
+           <input type='hidden' name='tablearr' value='{$tablearr}'>
            <input type='hidden' name='nowtable' value='{$tables[0]}'>
            <input type='hidden' name='startpos' value='0'>
-           <input type='hidden' name='iszip' value='$iszip'>\r\n</form>\r\n{$dojs}\r\n";
+           <input type='hidden' name='iszip' value='{$iszip}'>\r\n</form>\r\n{$dojs}\r\n";
         PutInfo($tmsg, $doneForm);
         exit();
     }
@@ -135,14 +135,14 @@ if ($dopost == 'bak') {
                 fwrite($fp, $bakStr);
                 fclose($fp);
                 $tmsg = "正在备份{$m}条数据，继续备份{$nowtable}";
-                $doneForm = "<form name='gonext' action='sys_data_done.php' method='post'>
-                <input type='hidden' name='isstruct' value='$isstruct'>
+                $doneForm = "<form action='sys_data_done.php' name='gonext' method='post'>
+                <input type='hidden' name='isstruct' value='{$isstruct}'>
                 <input type='hidden' name='dopost' value='bak'>
-                <input type='hidden' name='fsize' value='$fsize'>
-                <input type='hidden' name='tablearr' value='$tablearr'>
-                <input type='hidden' name='nowtable' value='$nowtable'>
-                <input type='hidden' name='startpos' value='$m'>
-                <input type='hidden' name='iszip' value='$iszip'>\r\n</form>\r\n{$dojs}\r\n";
+                <input type='hidden' name='fsize' value='{$fsize}'>
+                <input type='hidden' name='tablearr' value='{$tablearr}'>
+                <input type='hidden' name='nowtable' value='{$nowtable}'>
+                <input type='hidden' name='startpos' value='{$m}'>
+                <input type='hidden' name='iszip' value='{$iszip}'>\r\n</form>\r\n{$dojs}\r\n";
                 PutInfo($tmsg, $doneForm);
                 exit();
             }
@@ -177,12 +177,12 @@ if ($dopost == 'bak') {
             }
         }
         $tmsg = "正在备份{$m}条数据，继续备份{$nowtable}";
-        $doneForm = "<form name='gonext' action='sys_data_done.php?dopost=bak' method='post'>
-          <input type='hidden' name='isstruct' value='$isstruct'>
-          <input type='hidden' name='fsize' value='$fsize'>
-          <input type='hidden' name='tablearr' value='$tablearr'>
-          <input type='hidden' name='nowtable' value='$nowtable'>
-          <input type='hidden' name='startpos' value='$startpos'>\r\n</form>\r\n{$dojs}\r\n";
+        $doneForm = "<form action='sys_data_done.php?dopost=bak' name='gonext' method='post'>
+          <input type='hidden' name='isstruct' value='{$isstruct}'>
+          <input type='hidden' name='fsize' value='{$fsize}'>
+          <input type='hidden' name='tablearr' value='{$tablearr}'>
+          <input type='hidden' name='nowtable' value='{$nowtable}'>
+          <input type='hidden' name='startpos' value='{$startpos}'>\r\n</form>\r\n{$dojs}\r\n";
         PutInfo($tmsg, $doneForm);
         exit();
     }
@@ -214,7 +214,7 @@ else if ($dopost == 'redat') {
         fclose($fp);
         $querys = explode(';', $tbdata);
         foreach ($querys as $q) {
-            $q = preg_replace("#TYPE=MyISAM#i", "ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language, $q);
+            $q = preg_replace("#TYPE=MyISAM#i", "ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}", $q);
             if (empty(trim($q))) {
                 continue;
             }
@@ -224,10 +224,10 @@ else if ($dopost == 'redat') {
             @unlink("$bkdir/$structfile");
         }
         $tmsg = "成功完成数据表还原，继续还原其它数据";
-        $doneForm = "<form name='gonext' action='sys_data_done.php?dopost=redat' method='post'>
+        $doneForm = "<form action='sys_data_done.php?dopost=redat' name='gonext' method='post'>
         <input type='hidden' name='startgo' value='1'>
-        <input type='hidden' name='delfile' value='$delfile'>
-        <input type='hidden' name='bakfiles' value='$bakfilesTmp'>
+        <input type='hidden' name='delfile' value='{$delfile}'>
+        <input type='hidden' name='bakfiles' value='{$bakfilesTmp}'>
         </form>\r\n{$dojs}\r\n";
         PutInfo($tmsg, $doneForm);
         exit();
@@ -253,10 +253,10 @@ else if ($dopost == 'redat') {
             exit();
         }
         $tmsg = "正在还原{$nowfile}文件{$oknum}条数据，继续还原其它数据";
-        $doneForm = "<form name='gonext' action='sys_data_done.php?dopost=redat' method='post'>
+        $doneForm = "<form action='sys_data_done.php?dopost=redat' name='gonext' method='post'>
         <input type='hidden' name='startgo' value='1'>
-        <input type='hidden' name='delfile' value='$delfile'>
-        <input type='hidden' name='bakfiles' value='$bakfilesTmp'>
+        <input type='hidden' name='delfile' value='{$delfile}'>
+        <input type='hidden' name='bakfiles' value='{$bakfilesTmp}'>
         </form>\r\n{$dojs}\r\n";
         PutInfo($tmsg, $doneForm);
         exit();

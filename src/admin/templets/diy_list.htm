@@ -52,20 +52,26 @@
 									if (!empty($fields)) {
 										$allowhtml = array('htmltext');
 										$fields['sta'] = $fields['ifcheck']==1 ? '已审核' : '待审核';
-										echo '<tr>
+										echo '<tr class="table-light">
 											<td width="260">
-												<label><input type="checkbox" name="id[]" value="'.$fields['id'].'"> '.$fields['id'].'</label>
+												<label><input type="checkbox" name="id[]" value="'.$fields['id'].'"> 表单'.$fields['id'].'</label>
 											</td>
 											<td align="right">
-												<span class="btn btn-light btn-sm">'.$fields['sta'].'</span>
-												<a href="diy_list.php?action=edit&diyid='.$diy->diyid.'&id='.$fields['id'].'" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
+												<span class="btn btn-primary btn-sm">'.$fields['sta'].'</span>
+												<a href="diy_list.php?action=edit&diyid='.$diy->diyid.'&id='.$fields['id'].'" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
 											</td>
 										</tr>';
 										foreach($fieldlist as $field => $fielddata)
 										{
-											if ($fields[$field] == '') continue;
-											if (!in_array($fielddata[1], $allowhtml)) {
-												$fields[$field] = dede_htmlspecialchars($fields[$field]);
+											if ($fields[$field]=='') continue;
+											if ($fielddata[1] == 'img') {
+												$fields[$field] = "<img src='{$fields[$field]}' class='thumbnail-md'> <a href='{$fields[$field]}' target='_blank' class='btn btn-primary btn-sm'>浏览</a>";
+											} else if($fielddata[1] == 'addon') {
+												$fields[$field] = "{$fields[$field]} <a href='{$fields[$field]}' target='_blank' class='btn btn-primary btn-sm'>下载</a>";
+											} else {
+												if(!in_array($fielddata[1],$allowhtml)) {
+													$fields[$field] = dede_htmlspecialchars($fields[$field]);
+												}
 											}
 											echo '<tr><td>'.$fielddata[0].'</td><td>'.$fields[$field].'</td></tr>';
 										}
@@ -94,13 +100,13 @@
 		<script>
 		function selAll() {
 			var a = document.getElementsByTagName("input");
-			for (var i = 0; i < a.length; i++){
+			for (var i = 0; i < a.length; i++) {
 				if (a[i].type == "checkbox") a[i].checked = true;
 			}
 		}
 		function noSelAll() {
 			var a = document.getElementsByTagName("input");
-			for (var i = 0; i < a.length; i++){
+			for (var i = 0; i < a.length; i++) {
 				if (a[i].type == "checkbox") a[i].checked = false;
 			}
 		}

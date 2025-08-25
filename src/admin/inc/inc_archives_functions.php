@@ -73,7 +73,7 @@ function GetCurContentAlbum($body, $rfurl, &$firstdd)
                 }
             }
             @WaterImg($rndFileName, 'down');
-            $rsimg .= "{dede:img ddimg='$litpicname' text='' width='".$imginfos[0]."' height='".$imginfos[1]."'}$iurl{/dede:img}";
+            $rsimg .= "{dede:img ddimg='$litpicname' text='' width='".$imginfos[0]."' height='".$imginfos[1]."'} $iurl {/dede:img}";
         }
     }
     return $rsimg;

@@ -62,13 +62,11 @@ class TagList
                 ShowMsg('当前标签不存在，系统自动返回主页', '/');
                 exit();
             }
-            $this->Fields['keywords'] = empty($this->Fields['keywords'])? "" : $this->Fields['keywords'];
-            $this->Fields['description'] = empty($this->Fields['description'])? "" : $this->Fields['description'];
             $this->Fields['title'] = empty($this->TagInfos['title']) ? $this->TagInfos['tag'] : $this->TagInfos['title'];
-            $this->Fields['keywords'] = empty($this->TagInfos['keywords']) ? $this->Fields['keywords'] : $this->TagInfos['keywords'];
-            $this->Fields['description'] = empty($this->TagInfos['description']) ? $this->Fields['description'] : $this->TagInfos['description'];
+            $this->Fields['keywords'] = empty($this->TagInfos['keywords']) ? "" : $this->TagInfos['keywords'];
+            $this->Fields['description'] = empty($this->TagInfos['description']) ? "" : $this->TagInfos['description'];
             $addInfos = $this->dsql->GetOne("SELECT * FROM `#@__tagindex_infos` WHERE tagid='{$this->Tag}' ");
-            if(is_array($addInfos)) $this->Fields['litpic'] = empty($addInfos['litpic']) ? $addInfos['litpic'] : $addInfos['litpic'];
+            $this->Fields['litpic'] = empty($addInfos['litpic']) ? "" : $addInfos['litpic'];
         }
         //初始化模板
         $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/{$GLOBALS['cfg_df_style']}/".$this->Templet;

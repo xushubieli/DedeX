@@ -53,7 +53,7 @@ if ($action == 'add') {
             if ($mysql_version < 4.1) {
                 $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) TYPE=MyISAM; ";
             } else {
-                $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language."; ";
+                $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}; ";
             }
             $rs = $dsql->ExecuteNoneQuery($tabsql);
             if (!$rs) {
@@ -81,7 +81,7 @@ if ($action == 'add') {
     }
     $inQuery = "INSERT INTO `#@__channeltype` (id,nid,typename,addtable,addcon,mancon,editcon,useraddcon,usermancon,usereditcon,fieldset,listfields,issystem,issend,arcsta,usertype,sendrank,needdes,needpic,titlename,onlyone,dfcid) VALUES ('$id','$nid','$typename','$addtable','$addcon','$mancon','$editcon','$useraddcon','$usermancon','$usereditcon','$fieldset','$listfields','$issystem','$issend','$arcsta','$usertype','$sendrank','$needdes','$needpic','$titlename','$onlyone','$dfcid');";
     $dsql->ExecuteNoneQuery($inQuery);
-    ShowMsg("成功创建一个文档模型", "mychannel_edit.php?id=".$id);
+    ShowMsg("成功创建一个文档模型", "mychannel_edit.php?id={$id}");
     exit();
 }
 $row = $dsql->GetOne("SELECT id FROM `#@__channeltype` ORDER BY id DESC LIMIT 0,1 ");

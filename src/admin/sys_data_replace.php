@@ -60,7 +60,7 @@ else if ($action == 'apply') {
         $rpstring = stripslashes($rpstring);
         $rpstring2 = str_replace("\\", "\\\\", $rpstring);
         $rpstring2 = str_replace("'", "\\'", $rpstring2);
-        $dsql->SetQuery("SELECT $keyfield,$rpfield FROM $exptable WHERE $rpfield REGEXP '$rpstring2'  $condition ");
+        $dsql->SetQuery("SELECT $keyfield,$rpfield FROM $exptable WHERE $rpfield REGEXP '$rpstring2' $condition ");
         $dsql->Execute();
         $tt = $dsql->GetTotalRow();
         if ($tt == 0) {

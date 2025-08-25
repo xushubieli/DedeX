@@ -80,8 +80,8 @@ if ($action == 'post') {
             exit();
         }*/
         //判断是否重复提交表单，根据提交的链接、时间、ip，前台表单可以不用出现该输入框，恢复注释代码使用
-        /*$repeat = $dsql->getOne("SELECT count(*) AS date_count FROM `{$diy->table}` WHERE ip='$ip' AND date_format(date,'Y-m-d') = date_format(now(),'Y-m-d')");
-        if ($repeat['date_count'] >= 3) {
+        /*$repeat = $dsql->getOne("SELECT count(*) AS dd FROM `{$diy->table}` WHERE ip='$ip' AND date_format(date,'Y-m-d') = date_format(now(),'Y-m-d')");
+        if ($repeat['dd'] >= 3) {
             showmsg('您已重复提交太多次了，稍后我们会主动联系您', '-1', 0, 5000);
             exit();
         }*/

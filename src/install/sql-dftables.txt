@@ -861,10 +861,10 @@ CREATE TABLE `#@__tagindex` (
 
 DROP TABLE IF EXISTS `#@__tagindex_infos`;
 CREATE TABLE `#@__tagindex_infos` (
-  `tagid` int NOT NULL COMMENT '标签ID',
-  `litpic` varchar(255) DEFAULT NULL COMMENT '缩略图',
-  `body` mediumtext COMMENT '内容',
-  PRIMARY KEY (`tagid`)
+	`tagid` int(10) NOT NULL COMMENT '标签ID',
+	`litpic` varchar(255) DEFAULT NULL COMMENT '缩略图',
+	`body` mediumtext COMMENT '内容',
+	PRIMARY KEY (`tagid`)
 ) TYPE=MyISAM;
 
 DROP TABLE IF EXISTS `#@__taglist`;

@@ -172,7 +172,7 @@ function GetFieldValue($dvalue, $dtype, $aid = 0, $job = 'add', $addvar = '')
             return "";
         }
         $iurl = trim(str_replace($GLOBALS['cfg_basehost'], "", $iurl));
-        $imgurl = "{dede:img text='' width='' height=''} ".$iurl." {/dede:img}";
+        $imgurl = "{dede:img text='' width='' height=''} $iurl {/dede:img}";
         if (preg_match("#^(http|https):\/\/#i", $iurl) && $GLOBALS['isUrlOpen']) {
             //远程图片
             $reimgs = '';
@@ -182,7 +182,7 @@ function GetFieldValue($dvalue, $dtype, $aid = 0, $job = 'add', $addvar = '')
                     $imgurl = "{dede:img text='' width='".$reimgs[1]."' height='".$reimgs[2]."'} ".$reimgs[0]." {/dede:img}";
                 }
             } else {
-                $imgurl = "{dede:img text='' width='' height=''} ".$iurl." {/dede:img}";
+                $imgurl = "{dede:img text='' width='' height=''} $iurl {/dede:img}";
             }
         } else if ($iurl != "") {
             //站内图片

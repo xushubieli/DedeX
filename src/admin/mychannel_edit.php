@@ -165,7 +165,7 @@ if ($dopost == "show") {
     if ($mysql_version < 4.1) {
         $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) TYPE=MyISAM; ";
     } else {
-        $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language."; ";
+        $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}; ";
     }
     $rs = $dsql->ExecuteNoneQuery($tabsql);
     if (!$rs) {

@@ -32,16 +32,16 @@ if (empty($action)) {
 } else if ($action == 'update') {
     $tid = (empty($tid) ? 0 : intval($tid));
     $count = (empty($count) ? 0 : intval($count));
-    $litpic = (empty($litpic) ? '' : HtmlReplace($litpic, -1));
     $title = (empty($title) ? '' : HtmlReplace($title, -1));
     $keywords = (empty($keywords) ? '' : HtmlReplace($keywords, -1));
     $description = (empty($description) ? '' : HtmlReplace($description, -1));
+    $litpic = (empty($litpic) ? '' : HtmlReplace($litpic, -1));
     if (empty($tid)) {
         die('请选择需要更新的标签');
     }
     $query = "UPDATE `#@__tagindex` SET `count`='$count',`title`='$title',`keywords`='$keywords',`description`='$description' WHERE id='$tid' ";
     $dsql->ExecuteNoneQuery($query);
-    $row = $dsql->GetOne("SELECT COUNT(*) AS dd FROM `#@__tagindex_infos` WHERE tagid = $tid");
+    $row = $dsql->GetOne("SELECT COUNT(*) AS dd FROM `#@__tagindex_infos` WHERE tagid='$tid'");
     if ($row['dd'] > 0) {
         $dsql->ExecuteNoneQuery("UPDATE `#@__tagindex_infos` SET `litpic`=='$litpic'");
     } else {

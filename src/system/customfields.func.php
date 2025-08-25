@@ -26,11 +26,11 @@ function GetFormItem($ctag, $admintype = 'admin')
     if ($fieldType == 'select') {
         $myformItem = '';
         $items = explode(',', $ctag->GetAtt("default"));
-        $myformItem = "<select name='$fieldname' class='form-select admin-w-sm'>";
+        $myformItem = "<select name='{$fieldname}' class='form-select admin-w-sm'>";
         foreach ($items as $v) {
             $v = trim($v);
             if ($v != '') {
-                $myformItem .= "<option value='$v'>$v</option>";
+                $myformItem .= "<option value='{$v}'>{$v}</option>";
             }
         }
         $myformItem .= "</select>";
@@ -44,7 +44,7 @@ function GetFormItem($ctag, $admintype = 'admin')
         $myformItem .= "<span id='span_{$fieldname}_son'></span>";
         $myformItem .= "<span id='span_{$fieldname}_sec'></span>";
         if ($hasSetEnumJs != 'hasset') {
-            $myformItem .= '<script src="'.$cmspath.'static/web/js/enums.js"></script>'."";
+            $myformItem .= "<script src='{$cmspath}static/web/js/enums.js'></script>";
             $GLOBALS['hasSetEnumJs'] = 'hasset';
         }
         $myformItem .= "<script>
@@ -66,7 +66,7 @@ function GetFormItem($ctag, $admintype = 'admin')
         foreach ($items as $v) {
             $v = trim($v);
             if ($v != '') {
-                $myformItem .= ($i == 0 ? "<div class='form-check form-check-inline'><label class='form-check-label'><input type='radio' name='$fieldname' class='form-check-input' value='$v' checked> $v</label></div>" : "<div class='form-check form-check-inline'><label class='form-check-label'><input type='radio' name='$fieldname' class='form-check-input' value='$v'> $v</label></div>");
+                $myformItem .= ($i == 0 ? "<div class='form-check form-check-inline'><label class='form-check-label'><input type='radio' name='{$fieldname}' class='form-check-input' value='{$v}' checked> {$v}</label></div>" : "<div class='form-check form-check-inline'><label class='form-check-label'><input type='radio' name='{$fieldname}' class='form-check-input' value='{$v}'> {$v}</label></div>");
                 $i++;
             }
         }
@@ -78,9 +78,9 @@ function GetFormItem($ctag, $admintype = 'admin')
             $v = trim($v);
             if ($v != '') {
                 if ($admintype == 'membermodel') {
-                    $myformItem .= "<div class='form-check form-check-inline'><label class='form-check-label'><input type='checkbox' name='{$fieldname}[]' class='form-check-input' value='$v'> $v</label></div>";
+                    $myformItem .= "<div class='form-check form-check-inline'><label class='form-check-label'><input type='checkbox' name='{$fieldname}[]' class='form-check-input' value='{$v}'> {$v}</label></div>";
                 } else {
-                    $myformItem .= "<div class='form-check form-check-inline'><label class='form-check-label'><input type='checkbox' name='{$fieldname}[]' class='form-check-input' value='$v'> $v</label></div>";
+                    $myformItem .= "<div class='form-check form-check-inline'><label class='form-check-label'><input type='checkbox' name='{$fieldname}[]' class='form-check-input' value='{$v}'> {$v}</label></div>";
                 }
             }
         }
@@ -97,26 +97,38 @@ function GetFormItem($ctag, $admintype = 'admin')
             $innertext = GetEditor($fieldname, $dfvalue, 350, 'Member', 'string');
         }
     } else if ($fieldType == "multitext") {
-        $innertext = "<textarea name='$fieldname' id='$fieldname' class='form-control admin-textarea-sm'></textarea>";
+        $innertext = "<textarea name='{$fieldname}' id='{$fieldname}' class='form-control admin-textarea-sm'></textarea>";
     } else if ($fieldType == "datetime") {
         $nowtime = GetDateTimeMk(time());
-        $innertext = "<input type='text' name='$fieldname' value='$nowtime' id='$fieldname' class='form-control admin-w-lg datepicker'>";
+        $innertext = "<input type='text' name='{$fieldname}' value='{$nowtime}' id='{$fieldname}' class='form-control admin-w-lg datepicker'>";
     } else if ($fieldType == 'img') {
         $fname = defined('DEDEADMIN')? 'form1' : 'addcontent';
-        $innertext = "<input type='text' name='$fieldname' id='$fieldname' class='form-control admin-w-lg' placeholder='请选择图片上传或填写图片地址'> <input type='button' name='".$fieldname."_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectImage('$fname.$fieldname','big')\">";
+        if ($admintype == 'diy') {
+            $innertext = "<input type='file' name='{$fieldname}' id='{$fieldname}' class='form-control admin-w-lg'>\r\n";
+        } else {
+           $innertext = "<input type='text' name='{$fieldname}' id='{$fieldname}' class='form-control admin-w-lg' placeholder='请选择图片上传或填写图片地址'> <input type='button' name='{$fieldname}_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectImage('$fname.$fieldname','big')\">";
+        }
     } else if ($fieldType == 'media') {
         $fname = defined('DEDEADMIN')? 'form1' : 'addcontent';
-        $innertext = "<input type='text' name='$fieldname' id='$fieldname' class='form-control admin-w-lg' placeholder='请选择多媒体上传或填写多媒体地址'> <input type='button' name='".$fieldname."_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectMedia('$fname.$fieldname')\">";
+        if ($admintype == 'diy') {
+            $innertext = "<input type='hidden' name='{$fieldname}' id='{$fieldname}' value=''>不支持此字段\r\n";
+        } else {
+            $innertext = "<input type='text' name='{$fieldname}' id='{$fieldname}' class='form-control admin-w-lg' placeholder='请选择多媒体上传或填写多媒体地址'> <input type='button' name='{$fieldname}_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectMedia('$fname.$fieldname')\">";
+        }
     } else if ($fieldType == 'addon') {
         $fname = defined('DEDEADMIN')? 'form1' : 'addcontent';
-        $innertext = "<input type='text' name='$fieldname' id='$fieldname' class='form-control admin-w-lg' placeholder='请选择附件上传或填写附件地址'> <input type='button' name='".$fieldname."_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectSoft('$fname.$fieldname')\">";
+        if ($admintype == 'diy') {
+            $innertext = "<input type='file' name='{$fieldname}' id='{$fieldname}' class='form-control admin-w-lg'>\r\n";
+        } else {
+            $innertext = "<input type='text' name='{$fieldname}' id='{$fieldname}' class='form-control admin-w-lg' placeholder='请选择附件上传或填写附件地址'> <input type='button' name='{$fieldname}_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectSoft('$fname.$fieldname')\">";
+        }
     } else if ($fieldType == 'int' || $fieldType == 'float') {
         $dfvalue = ($ctag->GetAtt('default') != '' ? $ctag->GetAtt('default') : '0');
-        $innertext = "<input type='text' name='$fieldname' id='$fieldname' class='form-control admin-w-sm' value='$dfvalue'>";
+        $innertext = "<input type='text' name='{$fieldname}' id='{$fieldname}' class='form-control admin-w-sm' value='{$dfvalue}'>";
     } else if ($fieldType == 'relation') {
         $dfvalue = ($ctag->GetAtt('default') != '' ? $ctag->GetAtt('default') : '');
         $channel = ($ctag->GetAtt('channel') == "") ? "1" : $ctag->GetAtt('channel');
-        $innertext = "<textarea name='$fieldname' id='$fieldname' class='form-control admin-textarea-sm'>$dfvalue</textarea><br><button type='button' class='btn btn-primary btn-sm' onclick='SelectArcList(\"form1.$fieldname\", $channel);'>选择关联文档</button>";
+        $innertext = "<textarea name='{$fieldname}' id='{$fieldname}' class='form-control admin-textarea-sm'>{$dfvalue}</textarea><br><button type='button' class='btn btn-primary btn-sm' onclick='SelectArcList(\"form1.$fieldname\", $channel);'>选择关联文档</button>";
         if ($ctag->GetAtt('automake') == 1) {
             $innertext .= "<input type='hidden' name='automake[$fieldname]' value='1'>";
         }
@@ -133,8 +145,7 @@ if (typeof SelectArcList === "undefined") {
 EOT;
     } else {
         $dfvalue = ($ctag->GetAtt('default') != '' ? $ctag->GetAtt('default') : '');
-        $innertext = "<input type='text' name='$fieldname' id='$fieldname' class='form-control admin-w-lg' value='$dfvalue'>
-        ";
+        $innertext = "<input type='text' name='{$fieldname}' id='{$fieldname}' class='form-control admin-w-lg' value='{$dfvalue}'>";
     }
     $formitem = str_replace("~name~", $ctag->GetAtt('itemname'), $formitem);
     $formitem = str_replace("~form~", $innertext, $formitem);
@@ -214,12 +225,15 @@ function GetFieldValue($dvalue, $dtype, $aid = 0, $job = 'add', $addvar = '', $a
         fclose($fp);
         return $filename;
     } else if ($dtype == 'img' || $dtype == 'imgfile') {
+        if (preg_match("#[\\|/]uploads[\\|/]userup#", $dvalue)) return $dvalue;
+        if ($admintype == 'diy') {
+            $iurl = MemberUploads($fieldname, '', 0, 'image', '', -1, -1, false);
+            return $iurl;
+        }
         return addslashes($dvalue);
     } else if ($dtype == 'addon' && $admintype == 'diy') {
-        if ($admintype == 'diy') {
-            return addslashes($dvalue);
-        }
-        $dvalue = MemberUploads($fieldname, '', 0, 'addon', '', -1, -1, false);
+        if (preg_match("#[\\|/]uploads[\\|/]userup#", $dvalue)) return $dvalue;
+        $dvalue = MemberUploads($fieldname,'', 0, 'addon', '', -1, -1, false);
         return $dvalue;
     } else {
         if ($admintype == 'member' || $admintype == 'diy') {
@@ -253,14 +267,14 @@ function GetFormItemValue($ctag, $fvalue, $admintype = 'admin', $fieldname = '')
         $items = explode(',', $ctag->GetAtt('default'));
     }
     if ($ftype == 'select') {
-        $myformItem = "<select name='$fieldname' class='form-select admin-w-sm'>";
+        $myformItem = "<select name='{$fieldname}' class='form-select admin-w-sm'>";
         if (is_array($items)) {
             foreach ($items as $v) {
                 $v = trim($v);
                 if ($v == '') {
                     continue;
                 }
-                $myformItem .= ($fvalue == $v ? "<option value='$v' selected>$v</option>" : "<option value='$v'>$v</option>");
+                $myformItem .= ($fvalue == $v ? "<option value='{$v}' selected>{$v}</option>" : "<option value='{$v}'>{$v}</option>");
             }
         }
         $myformItem .= "</select>";
@@ -274,7 +288,7 @@ function GetFormItemValue($ctag, $fvalue, $admintype = 'admin', $fieldname = '')
         $myformItem .= "<span id='span_{$fieldname}_son'></span>";
         $myformItem .= "<span id='span_{$fieldname}_sec'></span>";
         if ($hasSetEnumJs != 'hasset') {
-            $myformItem .= '<script src="'.$cmspath.'static/web/js/enums.js"></script>'."";
+            $myformItem .= "<script src='{$cmspath}static/web/js/enums.js'></script>";
             $GLOBALS['hasSetEnumJs'] = 'hasset';
         }
         $myformItem .= "<script>
@@ -294,7 +308,7 @@ function GetFormItemValue($ctag, $fvalue, $admintype = 'admin', $fieldname = '')
             foreach ($items as $v) {
                 $v = trim($v);
                 if ($v == '') continue;
-                $myformItem .= ($fvalue == $v ? "<div class='form-check form-check-inline'><label class='form-check-label'><input type='radio' name='$fieldname' class='form-check-input' value='$v' checked> $v</label></div>" : "<div class='form-check form-check-inline'><label class='form-check-label'><input type='radio' name='$fieldname' class='form-check-input' value='$v'> $v</label></div>");
+                $myformItem .= ($fvalue == $v ? "<div class='form-check form-check-inline'><label class='form-check-label'><input type='radio' name='{$fieldname}' class='form-check-input' value='{$v}' checked> {$v}</label></div>" : "<div class='form-check form-check-inline'><label class='form-check-label'><input type='radio' name='{$fieldname}' class='form-check-input' value='{$v}'> {$v}</label></div>");
             }
         }
         $innertext = $myformItem;
@@ -310,9 +324,9 @@ function GetFormItemValue($ctag, $fvalue, $admintype = 'admin', $fieldname = '')
                     continue;
                 }
                 if (in_array($v, $fvalues)) {
-                    $myformItem .= "<div class='form-check form-check-inline'><label class='form-check-label'><input type='checkbox' name='{$fieldname}[]' class='form-check-input' value='$v' checked> $v</label></div>";
+                    $myformItem .= "<div class='form-check form-check-inline'><label class='form-check-label'><input type='checkbox' name='{$fieldname}[]' class='form-check-input' value='{$v}' checked> {$v}</label></div>";
                 } else {
-                    $myformItem .= "<div class='form-check form-check-inline'><label class='form-check-label'><input type='checkbox' name='{$fieldname}[]' class='form-check-input' value='$v'> $v</label></div>";
+                    $myformItem .= "<div class='form-check form-check-inline'><label class='form-check-label'><input type='checkbox' name='{$fieldname}[]' class='form-check-input' value='{$v}'> {$v}</label></div>";
                 }
             }
         }
@@ -344,10 +358,10 @@ function GetFormItemValue($ctag, $fvalue, $admintype = 'admin', $fieldname = '')
         }
         $innertext = $myformItem;
     } else if ($ftype == "multitext") {
-        $innertext = "<textarea name='$fieldname' id='$fieldname' class='form-control admin-textarea-sm'>$fvalue</textarea>";
+        $innertext = "<textarea name='{$fieldname}' id='{$fieldname}' class='form-control admin-textarea-sm'>{$fvalue}</textarea>";
     } else if ($ftype == "datetime") {
         $nowtime = GetDateTimeMk($fvalue);
-        $innertext = "<input type='text' name='$fieldname' value='$nowtime' id='$fieldname' class='form-control admin-w-lg datepicker'>";
+        $innertext = "<input type='text' name='{$fieldname}' value='{$nowtime}' id='{$fieldname}' class='form-control admin-w-lg datepicker'>";
     } else if ($ftype == "img") {
         $tmpValue = $fvalue;
         $ndtp = new DedeTagParse();
@@ -363,24 +377,24 @@ function GetFormItemValue($ctag, $fvalue, $admintype = 'admin', $fieldname = '')
         }
         $fvalue = empty($fvalue)? $tmpValue : $fvalue;
         $fname = defined('DEDEADMIN')? 'form1' : 'addcontent';
-        $innertext = "<input type='text' name='$fieldname' value='$fvalue' id='$fieldname' class='form-control admin-w-lg'> <input type='button' name='".$fieldname."_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectImage('$fname.$fieldname','big')\">";
+        $innertext = "<input type='text' name='{$fieldname}' value='{$fvalue}' id='{$fieldname}' class='form-control admin-w-lg'> <input type='button' name='{$fieldname}_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectImage('$fname.$fieldname','big')\">";
     } else if ($ftype == "imgfile") {
         $fname = defined('DEDEADMIN')? 'form1' : 'addcontent';
-        $innertext = "<input type='text' name='$fieldname' value='$fvalue' id='$fieldname' class='form-control admin-w-lg'>";
+        $innertext = "<input type='text' name='{$fieldname}' value='{$fvalue}' id='{$fieldname}' class='form-control admin-w-lg'>";
     } else if ($ftype == "media") {
         $fname = defined('DEDEADMIN')? 'form1' : 'addcontent';
-        $selectStr = "<input type='button'  name='".$fieldname."_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectMedia('$fname.$fieldname')\">";
-        $innertext = "<input type='text' name='$fieldname' value='$fvalue' id='$fieldname' class='form-control admin-w-lg'> $selectStr";
+        $selectStr = "<input type='button'  name='{$fieldname}_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectMedia('$fname.$fieldname')\">";
+        $innertext = "<input type='text' name='{$fieldname}' value='{$fvalue}' id='{$fieldname}' class='form-control admin-w-lg'> {$selectStr}";
     } else if ($ftype == "addon") {
         $fname = defined('DEDEADMIN')? 'form1' : 'addcontent';
-        $selectStr = "<input type='button' name='".$fieldname."_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectSoft('$fname.$fieldname')\">";
-        $innertext = "<input type='text' name='$fieldname' id='$fieldname' value='$fvalue' class='form-control admin-w-lg'> $selectStr";
+        $selectStr = "<input type='button' name='{$fieldname}_bt' class='btn btn-primary btn-sm' value='选择' onclick=\"SelectSoft('$fname.$fieldname')\">";
+        $innertext = "<input type='text' name='{$fieldname}' id='{$fieldname}' value='{$fvalue}' class='form-control admin-w-lg'> {$selectStr}";
     } else if ($ftype == "int" || $ftype == "float") {
-        $innertext = "<input type='text' name='$fieldname' id='$fieldname' class='form-control admin-w-sm' value='$fvalue'>";
+        $innertext = "<input type='text' name='{$fieldname}' id='{$fieldname}' class='form-control admin-w-sm' value='{$fvalue}'>";
     } else if ($ftype == "relation") {
         $fname = defined('DEDEADMIN')? 'form1' : 'addcontent';
         $channel = ($ctag->GetAtt('channel') == "") ? "1" : $ctag->GetAtt('channel');
-        $innertext = "<textarea name='$fieldname' id='$fieldname' class='form-control admin-textarea-sm'>$fvalue</textarea><br><button type='button' class='btn btn-primary btn-sm' onclick='SelectArcList(\"$fname.$fieldname\", $channel);'>选择关联文档</button>";
+        $innertext = "<textarea name='{$fieldname}' id='{$fieldname}' class='form-control admin-textarea-sm'>{$fvalue}</textarea><br><button type='button' class='btn btn-primary btn-sm' onclick='SelectArcList(\"$fname.$fieldname\", $channel);'>选择关联文档</button>";
         if ($ctag->GetAtt('automake') == 1) {
             $innertext .= "<input type='hidden' name='automake[$fieldname]' value='1'>";
         }
@@ -396,7 +410,7 @@ if (typeof SelectArcList === "undefined") {
 </script>
 EOT;
     } else {
-        $innertext = "<input type='text' name='$fieldname' id='$fieldname' class='form-control admin-w-lg' value='$fvalue'>";
+        $innertext = "<input type='text' name='{$fieldname}' id='{$fieldname}' class='form-control admin-w-lg' value='{$fvalue}'>";
     }
     $formitem = str_replace('~name~', $ctag->GetAtt('itemname'), $formitem);
     $formitem = str_replace('~form~', $innertext, $formitem);
