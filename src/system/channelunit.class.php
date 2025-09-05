@@ -180,7 +180,7 @@ class ChannelUnit
                     if ($photoid == 1) {
                         $imgurl = $GLOBALS["fileFirst"].".html";
                     } else {
-                        $imgurl = $GLOBALS["fileFirst"]."_".$photoid.".html";
+                        $imgurl = $GLOBALS["fileFirst"]."_{$photoid}.html";
                     }
                 }
                 $imgcls = "image".($photoid - 1);

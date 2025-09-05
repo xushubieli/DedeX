@@ -42,12 +42,12 @@ if (isset($dopost) && $dopost == "delete") {
         if ($dquery == "") $dquery .= "id='$id' ";
         else $dquery .= " OR id='$id' ";
     }
-    if ($dquery != "") $dquery = " WHERE ".$dquery;
+    if ($dquery != "") $dquery = " WHERE $dquery";
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__statistics_detail` $dquery");
     ShowMsg("成功删除指定的记录", "statistics_list.php");
     exit();
 } else {
-    $addsql = " WHERE ip LIKE '%$ip%' ";
+    $addsql = " WHERE ip LIKE '%{$ip}%' ";
     if ($url_type === -1) {
         $addsql .= " AND url_type = -1 ";
     } else if ($url_type === 1) {

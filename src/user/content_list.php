@@ -46,7 +46,7 @@ $whereSql = " WHERE arc.channel = '$channelid' And arc.mid='$mid' ";
 if ($keyword != '') {
     $keyword = cn_substr(trim(preg_replace("#[><\|\"\r\n\t%\*\.\?\(\)\$ ;,'%-]#", "", stripslashes($keyword))), 30);
     $keyword = addslashes($keyword);
-    $whereSql .= " And (arc.title like '%$keyword%') ";
+    $whereSql .= " And (arc.title like '%{$keyword}%') ";
 }
 if ($cid != 0) $whereSql .= " And arc.typeid in (".GetSonIds($cid).")";
 //添加分类查询
@@ -61,7 +61,7 @@ $classlist = '';
 $dsql->SetQuery("SELECT * FROM `#@__mtypes` WHERE `mid` = '$cfg_ml->M_ID';");
 $dsql->Execute();
 while ($row = $dsql->GetArray()) {
-    $classlist .= "<option value='content_list.php?channelid=".$channelid."&mtypesid=".$row['mtypeid']."'>".$row['mtypename']."</option>\r\n";
+    $classlist .= "<option value='content_list.php?channelid={$channelid}&mtypesid={$row['mtypeid']}'>{$row['mtypename']}</option>\r\n";
 }
 if ($mtypesid != 0) {
     $whereSql .= " And arc.mtype = '$mtypesid'";

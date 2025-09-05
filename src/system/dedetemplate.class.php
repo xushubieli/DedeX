@@ -322,8 +322,8 @@ class DedeTemplate
     {
         $this->sourceString = $str;
         $hashcode = md5($this->sourceString);
-        $this->cacheFile = $this->cacheDir."/string_".$hashcode.".inc";
-        $this->configFile = $this->cacheDir."/string_".$hashcode."_config.inc";
+        $this->cacheFile = $this->cacheDir."/string_{$hashcode}.inc";
+        $this->configFile = $this->cacheDir."/string_{$hashcode}_config.inc";
         $this->ParseTemplate();
     }
     /**
@@ -745,7 +745,7 @@ class DedeTemplate
             }
             $rsvalue = '<'.'?php '.$addvar.' foreach('.$varname.' as '.$kk.'=>'.$vv.'){ ?'.">";
             $rsvalue .= $cTag->GetInnerText();
-            $rsvalue .= '<'.'?php  }    ?'.">\r\n";
+            $rsvalue .= '<'.'?php } ?'.">\r\n";
             $cTag->tagValue = $rsvalue;
         }
         //system文件
@@ -760,7 +760,7 @@ class DedeTemplate
         } else if ($tagname == 'label') {
             $bindFunc = $cTag->GetAtt('bind');
             $rsvalue = 'echo '.$bindFunc.";\r\n";
-            $rsvalue = '<'.'?php  '.$rsvalue.'  ?'.">\r\n";
+            $rsvalue = '<'.'?php '.$rsvalue.' ?'.">\r\n";
             $cTag->tagValue = $rsvalue;
         } else if ($tagname == 'datalist') {
             //生成属性数组
@@ -799,7 +799,7 @@ class DedeTemplate
                 $rsvalue .= '$atts[\''.$k.'\'] = \''.str_replace("'", "\\'", $v)."';\r\n";
             }
             $rsvalue = '<'.'?php'."\r\n".'$atts = array();'."\r\n".$rsvalue;
-            //绑定到默认函数还是指定函数(datasource属性指定)
+            //绑定到默认函数还是指定函数datasource属性指定
             if ($bindFunc == '') {
                 $rsvalue .= '$blockValue = MakePublicTag($atts,$this->refObj,$fields); '."\r\n";
             } else {

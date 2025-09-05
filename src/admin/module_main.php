@@ -44,7 +44,7 @@ function ReWriteConfigAuto()
     $dsql->Execute();
     while ($row = $dsql->GetArray()) {
         if (empty($row['value']) && $row['type'] == 'number') $row['value'] = 0;
-        if ($row['type'] == 'number') fwrite($fp, "\${$row['varname']} = ".$row['value'].";\r\n");
+        if ($row['type'] == 'number') fwrite($fp, "\${$row['varname']} = {$row['value']};\r\n");
         else fwrite($fp, "\${$row['varname']} = '".str_replace("'", '', $row['value'])."';\r\n");
       }
       fwrite($fp, "?".">");

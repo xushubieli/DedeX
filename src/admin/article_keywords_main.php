@@ -67,7 +67,7 @@ if (empty($keyword)) {
     $keyword = '';
     $addquery = '';
 } else {
-    $addquery = " WHERE keyword LIKE '%$keyword%' ";
+    $addquery = " WHERE keyword LIKE '%{$keyword}%' ";
 }
 $sql = "SELECT * FROM `#@__keywords` $addquery ORDER BY `rank` DESC";
 $dlist = new DataListCP();

@@ -51,11 +51,11 @@ function lib_tag(&$ctag, &$refObj)
         $row['keyword'] = $row['tag'];
         $row['tag'] = dede_htmlspecialchars($row['tag']);
         if (isset($envs['makeTag']) && $envs['makeTag'] == 1 || $ishtml == 1) {
-            $row['link'] = $cfg_cmsurl.$tagsdir."/".$row['id']."/";
+            $row['link'] = $cfg_cmsurl.$tagsdir."/{$row['id']}/";
         } else if ($cfg_rewrite == 'Y') {
-            $row['link'] = $cfg_cmsurl."/tags/".$row['id'];
+            $row['link'] = $cfg_cmsurl."/tags/{$row['id']}";
         } else {
-            $row['link'] = $cfg_cmsurl."/apps/tags.php?/".$row['id'];
+            $row['link'] = $cfg_cmsurl."/apps/tags.php?/{$row['id']}";
         }
         $row['highlight'] = mt_rand(1, 10);
         foreach ($ctp->CTags as $tagid => $ctag) {

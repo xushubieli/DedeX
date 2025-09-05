@@ -18,7 +18,7 @@ if ($dopost == 'del') {
         $ids = '';
     }
     if ($ids == "") {
-        $myrow = $dsql->GetOne("SELECT url FROM `#@__uploads` WHERE aid='".$aid."'");
+        $myrow = $dsql->GetOne("SELECT url FROM `#@__uploads` WHERE aid='{$aid}'");
         $truefile = $cfg_basedir.$myrow['url'];
         $rs = 0;
         if (!file_exists($truefile) || $myrow['url'] == "") {
@@ -28,7 +28,7 @@ if ($dopost == 'del') {
         }
         if ($rs == 1) {
             $msg = "成功删除一个附件";
-            $dsql->ExecuteNoneQuery("DELETE FROM `#@__uploads` WHERE aid='".$aid."'");
+            $dsql->ExecuteNoneQuery("DELETE FROM `#@__uploads` WHERE aid='{$aid}'");
         }
         ShowMsg($msg, $backurl);
         exit();
@@ -53,7 +53,7 @@ if ($dopost == 'del') {
                 $rs = @unlink($truefile);
             }
             if ($rs == 1) {
-                $dsql->ExecuteNoneQuery("DELETE FROM `#@__uploads` WHERE aid='".$myrow['aid']."'");
+                $dsql->ExecuteNoneQuery("DELETE FROM `#@__uploads` WHERE aid='{$myrow['aid']}'");
             }
         }
         ShowMsg('成功删除选定的文件', $backurl);
@@ -65,7 +65,7 @@ else if ($dopost == 'save') {
     if ($aid == "") exit();
     CheckCSRF();
     //检查是否有修改权限
-    $myrow = $dsql->GetOne("SELECT * FROM `#@__uploads` WHERE aid='".$aid."'");
+    $myrow = $dsql->GetOne("SELECT * FROM `#@__uploads` WHERE aid='{$aid}'");
     if ($myrow['mid'] != $cuserLogin->getUserID()) {
         CheckPurview('sys_Upload');
     }
@@ -89,12 +89,12 @@ else if ($dopost == 'save') {
                 ShowMsg("您上传的为不正确类型的影音文件", "javascript:history.go(-1);");
                 exit();
             }
-            if (!preg_match("#\.".$cfg_mediatype."#", $upfile_name)) {
+            if (!preg_match("#\.{$cfg_mediatype}#", $upfile_name)) {
                 ShowMsg("您上传的影音文件扩展名无法被识别，请修改系统配置的参数", "javascript:history.go(-1);");
                 exit();
             }
         } else {
-            if (!preg_match("#\.".$cfg_softtype."#", $upfile_name)) {
+            if (!preg_match("#\.{$cfg_softtype}#", $upfile_name)) {
                 ShowMsg("您上传的附件扩展名无法被识别，请修改系统配置的参数", "javascript:history.go(-1);");
                 exit();
             }
@@ -147,11 +147,11 @@ else if ($dopost == 'save') {
     $query = "UPDATE `#@__uploads` SET title='$title',mediatype='$mediatype',playtime='$playtime'";
     $query .= "$addquery WHERE aid='$aid' ";
     $dsql->ExecuteNoneQuery($query);
-    ShowMsg('成功修改一则附件数据', 'media_edit.php?aid='.$aid);
+    ShowMsg("成功修改一则附件数据", "media_edit.php?aid={$aid}");
     exit();
 }
 //读取文档信息
-$myrow = $dsql->GetOne("SELECT * FROM `#@__uploads` WHERE aid='".$aid."'");
+$myrow = $dsql->GetOne("SELECT * FROM `#@__uploads` WHERE aid='{$aid}'");
 if (!is_array($myrow)) {
     ShowMsg('找不到此编号文档', 'javascript:;');
     exit();

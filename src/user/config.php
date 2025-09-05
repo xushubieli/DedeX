@@ -145,7 +145,7 @@ function CheckRank($rank = 0, $money = 0)
                 $myname = "注册会员";
                 $needname = $row['membername'];
             } else {
-                $dsql->SetQuery("SELECT membername From `#@__arcrank` WHERE `rank`='$rank' OR `rank`='".$cfg_ml->M_Rank."' ORDER BY `rank` DESC");
+                $dsql->SetQuery("SELECT membername From `#@__arcrank` WHERE `rank`='$rank' OR `rank`='{$cfg_ml->M_Rank}' ORDER BY `rank` DESC");
                 $dsql->Execute();
                 $row = $dsql->GetObject();
                 $needname = $row->membername;
@@ -181,9 +181,9 @@ function countArchives($channelid)
         } else {
             $_field = 'articles';
         }
-        $row = $dsql->GetOne("SELECT COUNT(*) AS nums FROM `#@__archives` WHERE channel='$id' AND mid='".$cfg_ml->M_ID."'");
+        $row = $dsql->GetOne("SELECT COUNT(*) AS nums FROM `#@__archives` WHERE channel='$id' AND mid='{$cfg_ml->M_ID}'");
 
-        $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET ".$_field."='".$row['nums']."' WHERE mid='".$cfg_ml->M_ID."'");
+        $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET {$_field}='{$row['nums']}' WHERE mid='{$cfg_ml->M_ID}'");
     } else {
         return FALSE;
     }
@@ -203,11 +203,11 @@ $safequestions[7] = '您最喜欢的歌曲是什么';
 function GetSafequestion($selid=0,$formname='safequestion')
 {
 	global $safequestions;
-	$safequestions_form = "<select name='$formname' id='$formname' class='form-select'>";
+	$safequestions_form = "<select name='{$formname}' id='{$formname}' class='form-select'>";
 	foreach($safequestions as $k=>$v)
 	{
-	 	if ($k==$selid) $safequestions_form .= "<option value='$k' selected>$v</option>\r\n";
-	 	else $safequestions_form .= "<option value='$k'>$v</option>\r\n";
+	 	if ($k==$selid) $safequestions_form .= "<option value='{$k}' selected>{$v}</option>\r\n";
+	 	else $safequestions_form .= "<option value='{$k}'>{$v}</option>\r\n";
 	}
 	$safequestions_form .= "</select>\r\n";
 	return $safequestions_form;

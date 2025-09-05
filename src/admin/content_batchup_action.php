@@ -130,7 +130,7 @@ else if ($action == 'move') {
         ShowMsg("不能把数据移动到文档类型不同的栏目", "javascript:;");
         exit();
     }
-    $gwhere .= " AND channel='".$typenew['channeltype']."' AND title like '%$keyword%'";
+    $gwhere .= " AND channel='{$typenew['channeltype']}' AND title like '%{$keyword}%'";
     $ch = $dsql->GetOne("SELECT addtable FROM `#@__channeltype` WHERE id={$typenew['channeltype']} ");
     $addtable = $ch['addtable'];
     $dsql->SetQuery("SELECT id FROM `#@__archives` $gwhere");

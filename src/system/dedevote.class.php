@@ -166,7 +166,7 @@ class DedeVote
         if (!empty($memberID)) {
             if (isset($VoteMem['id'])) {
                 $voteday = date("Y-m-d", $VoteMem['uptime']);
-                $day = strtotime("-".$row['spec']." day");
+                $day = strtotime("-{$row['spec']} day");
                 $day = date("Y-m-d", $day);
                 if ($day < $voteday) {
                     ShowMsg('在'.$row['spec'].'天内不能重复投票', $ENV_GOBACK_URL);
@@ -226,7 +226,7 @@ class DedeVote
         $res = "<table width='$tablewidth' class='table'>\r\n";
         $i = 1;
         foreach ($this->VoteNotes as $k => $arr) {
-            $res .= "<tr><td width='260'>".$i."、".$arr['name']."</td>";
+            $res .= "<tr><td width='260'>{$i}、{$arr['name']}</td>";
             $c = $arr['count'];
             $res .= "<td><div class='progress'><div class='progress-bar' role='progressbar' style='width:".(($c / $totalcount) * 100)."%' aria-valuenow='".(($c / $totalcount) * 100)."' aria-valuemin='0' aria-valuemax='100'></div></div></td></tr>\r\n";
             $i++;

@@ -16,7 +16,7 @@ if (empty($adminid)) $adminid = 0;
 if (empty($cip)) $cip = '';
 if (empty($dtime)) $dtime = 0;
 if ($adminid > 0) $where .= " AND `#@__log`.adminid='$adminid' ";
-if ($cip != "") $where .= " AND `#@__log`.cip LIKE '%$cip%' ";
+if ($cip != "") $where .= " AND `#@__log`.cip LIKE '%{$cip}%' ";
 if ($dtime > 0) {
     $nowtime = time();
     $starttime = $nowtime - ($dtime * 24 * 3600);

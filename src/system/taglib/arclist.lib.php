@@ -234,7 +234,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
     else if ($orderby == 'sortrank' || $orderby == 'pubdate') $ordersql = " ORDER BY arc.sortrank $orderWay";
     else if ($orderby == 'senddate') $ordersql = " ORDER BY arc.senddate $orderWay";
     else if ($orderby == 'id') $ordersql = " ORDER BY arc.id $orderWay";
-    else if ($orderby == 'near') $ordersql = " ORDER BY ABS(arc.id - ".$arcid.")";
+    else if ($orderby == 'near') $ordersql = " ORDER BY ABS(arc.id - $arcid)";
     else if ($orderby == 'lastpost') $ordersql = " ORDER BY arc.lastpost $orderWay";
     else if ($orderby == 'scores') $ordersql = " ORDER BY arc.scores $orderWay";
     else if ($orderby == 'weight') $ordersql = " ORDER by arc.weight $orderWay";
@@ -297,7 +297,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
     $dsql->SetQuery($query);
     $dsql->Execute('al');
     $artlist = '';
-    if ($pagesize > 0) $artlist .= "<div id='{$tagid}'>\r\n";
+    if ($pagesize > 0) $artlist .= "<div id='$tagid'>\r\n";
     if ($col > 1) $artlist = "<table width='$tablewidth'>\r\n";
     $dtp2 = new DedeTagParse();
     $dtp2->SetNameSpace('field', '[', ']');
@@ -351,14 +351,13 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
                 }
                 $row['picname'] = $row['litpic'];
                 $row['stime'] = GetDateMK($row['pubdate']);
-                $row['typelink'] = "<a href='".$row['typeurl']."'>".$row['typename']."</a>";
-                $row['image'] = "<img src='".$row['picname']."' width='$imgwidth' height='$imgheight' title='".preg_replace("#['><]#", "", $row['title'])."'>";
-                $row['imglink'] = "<a href='".$row['filename']."'>".$row['image']."</a>";
+                $row['typelink'] = "<a href='{$row['typeurl']}'>{$row['typename']}</a>";
+                $row['image'] = "<img src='{$row['picname']}' width='{$imgwidth}' height='{$imgheight}' title='".preg_replace("#['><]#", "", $row['title'])."'>";
+                $row['imglink'] = "<a href='{$row['filename']}'>{$row['image']}</a>";
                 $row['fulltitle'] = $row['title'];
                 $row['title'] = cn_substr($row['title'], $titlelen);
-                if ($row['color'] != '') $row['title'] = "<span style='color:".$row['color']."'>".$row['title']."</span>";
-                if (preg_match('#b#', $row['flag'])) $row['title'] = "".$row['title']."";
-                $row['textlink'] = "<a href='".$row['filename']."'>".$row['title']."</a>";
+                if ($row['color'] != '') $row['title'] = "<span style='color:{$row['color']}'>{$row['title']}</span>";
+                $row['textlink'] = "<a href='{$row['filename']}'>{$row['title']}</a>";
                 $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
                 $row['memberurl'] = $GLOBALS['cfg_memberurl'];
                 $row['userurl'] = $GLOBALS['cfg_memberurl'].'/index.php?uid='.$row['userid'];

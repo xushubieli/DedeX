@@ -15,7 +15,7 @@ function ch_softlinks($fvalue, &$ctag, &$refObj, $fname = '', $downloadpage = fa
     $downlinks = '';
     if ($row['downtype'] != '0' && !$downloadpage) {
         $tempStr = GetSysTemplets("channel_downlinkpage.htm");
-        $links = $phppath."/download.php?open=0&aid=".$refObj->ArcID."&cid=".$refObj->ChannelID;
+        $links = $phppath."/download.php?open=0&aid={$refObj->ArcID}&cid={$refObj->ChannelID}";
         $downlinks = str_replace("~link~", $links, $tempStr);
         return $downlinks;
     } else {

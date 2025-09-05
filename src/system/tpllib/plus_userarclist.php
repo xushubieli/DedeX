@@ -37,12 +37,9 @@ function plus_userarclist(&$atts, &$refObj, &$fields)
         $row['image'] = "<img src='{$row['picname']}' width='$imgwidth' height='$imgheight' alt='".preg_replace("#['><]#", "", $row['title'])."'>";
         $row['imglink'] = "<a href='{$row['filename']}'>{$row['image']}</a>";
         $row['fulltitle'] = $row['title'];
-        $row['title'] = cn_substr($row['title'],$titlelen);
+        $row['title'] = cn_substr($row['title'], $titlelen);
         if ($row['color']!='') {
             $row['title'] = "<span color='{$row['color']}'>{$row['title']}</span>";
-        }
-        if (preg_match('#b#', $row['flag'])) {
-            $row['title'] = "<strong>{$row['title']}</strong>";
         }
         $row['textlink'] = "<a href='{$row['filename']}'>{$row['title']}</a>";
         $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];

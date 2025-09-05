@@ -19,7 +19,7 @@ if (!preg_match("#^text#", $uploadfile_type)) {
     ShowMsg("您上传的不是文本类型附件", "-1");
     exit();
 }
-if (!preg_match("#\.(".$cfg_txttype.")#i", $uploadfile_name)) {
+if (!preg_match("#\.({$cfg_txttype})#i", $uploadfile_name)) {
     ShowMsg("您上传的模板文件类型存在问题，请使用htm、html、tpl、txt扩展名", "-1");
     exit();
 }
@@ -27,7 +27,7 @@ if ($filename =='') {
     $filename = $uploadfile_name;
 }
 $filename = trim(preg_replace("#[ \r\n\t\*\%\\\/\?><\|\":]{1,}#", '', $filename));
-if ($filename == '' || !preg_match("#\.(".$cfg_txttype.")#i", $filename)) {
+if ($filename == '' || !preg_match("#\.({$cfg_txttype})#i", $filename)) {
     ShowMsg("您上传的文件存在问题，请检查文件类型", "-1");
     exit();
 }

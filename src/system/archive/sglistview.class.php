@@ -204,7 +204,7 @@ class SgListView
             $tempfile = str_replace("{tid}", $this->TypeID, $tempfile);
             $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
             if (!file_exists($tempfile)) {
-                $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/".$GLOBALS['cfg_df_style']."/list_default_sg.htm";
+                $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/{$GLOBALS['cfg_df_style']}/list_default_sg.htm";
             }
             if (!file_exists($tempfile) || !is_file($tempfile)) {
                 showmsg("{$this->TypeLink->TypeInfos['typename']}栏目，主题模板htm文件不存在", "javascript:;");
@@ -451,13 +451,10 @@ class SgListView
             $row['picname'] = $row['litpic'];
             $row['pubdate'] = $row['senddate'];
             $row['stime'] = GetDateMK($row['pubdate']);
-            $row['typelink'] = "<a href='".$row['typeurl']."'>".$row['typename']."</a>";
+            $row['typelink'] = "<a href='{$row['typeurl']}'>{$row['typename']}</a>";
             $row['fulltitle'] = $row['title'];
             $row['title'] = cn_substr($row['title'], $titlelen);
-            if (preg_match('/b/', $row['flag'])) {
-                $row['title'] = "".$row['title']."";
-            }
-            $row['textlink'] = "<a href='".$row['filename']."'>".$row['title']."</a>";
+            $row['textlink'] = "<a href='{$row['filename']}'>{$row['title']}</a>";
             $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
             $row['memberurl'] = $GLOBALS['cfg_memberurl'];
             $row['templeturl'] = $GLOBALS['cfg_templeturl'];
@@ -493,7 +490,7 @@ class SgListView
             $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
             $tempfile = $tmpdir."/".$tempfile;
             if (!file_exists($tempfile)) {
-                $tempfile = $tmpdir."/".$GLOBALS['cfg_df_style']."/index_default_sg.htm";
+                $tempfile = $tmpdir."/{$GLOBALS['cfg_df_style']}/index_default_sg.htm";
             }
             $this->PartView->SetTemplet($tempfile);
         } else if ($this->Fields['ispart'] == 2) {
@@ -531,7 +528,7 @@ class SgListView
             $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
             $tempfile = $tmpdir."/".$tempfile;
             if (!file_exists($tempfile)) {
-                $tempfile = $tmpdir."/".$GLOBALS['cfg_df_style']."/index_default_sg.htm";
+                $tempfile = $tmpdir."/{$GLOBALS['cfg_df_style']}/index_default_sg.htm";
             }
             $this->PartView->SetTemplet($tempfile);
         } else if ($this->Fields['ispart'] == 2) {
@@ -814,13 +811,10 @@ class SgListView
                     $row['picname'] = $row['litpic'];
                     $row['pubdate'] = $row['senddate'];
                     $row['stime'] = GetDateMK($row['pubdate']);
-                    $row['typelink'] = "<a href='".$row['typeurl']."'>".$row['typename']."</a>";
+                    $row['typelink'] = "<a href='{$row['typeurl']}'>{$row['typename']}</a>";
                     $row['fulltitle'] = $row['title'];
                     $row['title'] = cn_substr($row['title'], $titlelen);
-                    if (preg_match('/b/', $row['flag'])) {
-                        $row['title'] = "".$row['title']."";
-                    }
-                    $row['textlink'] = "<a href='".$row['filename']."'>".$row['title']."</a>";
+                    $row['textlink'] = "<a href='{$row['filename']}'>{$row['title']}</a>";
                     $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
                     $row['memberurl'] = $GLOBALS['cfg_memberurl'];
                     $row['templeturl'] = $GLOBALS['cfg_templeturl'];

@@ -42,7 +42,7 @@ if ($dopost == "delete") {
     }
     if (!empty($logoimg)) {
         if (!is_uploaded_file($logoimg)) {
-            ShowMsg("您没有选择上传文件".$logoimg, "-1");
+            ShowMsg("您没有选择上传文件{$logoimg}", "-1");
             exit();
         }
         $mime = get_mime_type($logoimg);

@@ -46,7 +46,7 @@ function lib_sql(&$ctag, &$refObj)
         $mysqlver = $mysqlver[0].'.'.$mysqlver[1];
         //设定数据库编码及长连接
         if ($mysqlver > 4.0) {
-            @mysql_query("SET NAMES '".$config['dblanguage']."', character_set_client=binary, sql_mode='', interactive_timeout=3600 ;", $linkid);
+            @mysql_query("SET NAMES '{$config['dblanguage']}', character_set_client=binary, sql_mode='', interactive_timeout=3600 ;", $linkid);
         }
         $prefix = "#@__";
         $sql = str_replace($prefix, $config['dbprefix'], $sql);

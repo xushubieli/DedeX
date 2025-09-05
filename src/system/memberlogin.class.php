@@ -418,7 +418,7 @@ class MemberLogin
                 if (empty($row['pwd_new']) && function_exists('password_hash')) {
                     //升级密码
                     $newpwd = password_hash($loginpwd, PASSWORD_BCRYPT);
-                    $inquery = "UPDATE `#@__member` SET pwd='',pwd_new='{$newpwd}' WHERE mid='".$row['mid']."'";
+                    $inquery = "UPDATE `#@__member` SET pwd='',pwd_new='{$newpwd}' WHERE mid='{$row['mid']}'";
                     $this->dsql->ExecuteNoneQuery($inquery);
                 }
                 //管理员帐号不允许从前台登录
@@ -481,7 +481,7 @@ class MemberLogin
             return;
         }
         $loginip = GetIP();
-        $inquery = "UPDATE `#@__member` SET loginip='$loginip',logintime='".time()."',loginerr=loginerr+1 WHERE userid='".$loginuser."'";
+        $inquery = "UPDATE `#@__member` SET loginip='$loginip',logintime='".time()."',loginerr=loginerr+1 WHERE userid='{$loginuser}'";
         $this->dsql->ExecuteNoneQuery($inquery);
     }
     /**
@@ -534,7 +534,7 @@ class MemberLogin
             $sta .= "您目前等级是：注册会员";
         } else {
             $row = $this->dsql->GetOne("SELECT membername FROM `#@__arcrank` WHERE `rank`='{$this->M_Rank}'");
-            $sta .= "您目前等级是：".$row['membername'];
+            $sta .= "您目前等级是：{$row['membername']}";
             $rs = $this->dsql->GetOne("SELECT id FROM `#@__admin` WHERE userid='{$this->M_LoginID}'");
             if (!is_array($rs)) {
                 if ($this->M_Rank > 10 && $this->M_HasDay > 0) $sta .= "，剩余{$this->M_HasDay}天";

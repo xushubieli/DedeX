@@ -51,7 +51,7 @@ function DelArc($aid)
                     break;
             }
             if ($nid != "") {
-                $row = $dsql->GetOne("SELECT $nid FROM ".$arcRow['addtable']." WHERE aid = '$aid'");
+                $row = $dsql->GetOne("SELECT $nid FROM `{$arcRow['addtable']}` WHERE aid = '$aid'");
                 $licp = $dsql->GetOne("SELECT litpic FROM `#@__archives` WHERE id = '$aid'");
                 if ($licp['litpic'] != "") {
                     $litpic = DEDEROOT.$licp['litpic'];
@@ -71,7 +71,7 @@ function DelArc($aid)
                 }
             }
         }
-        $dsql->ExecuteNoneQuery("DELETE FROM `".$arcRow['addtable']."` WHERE aid='$aid' ");
+        $dsql->ExecuteNoneQuery("DELETE FROM `{$arcRow['addtable']}` WHERE aid='$aid' ");
     }
     $dsql->ExecuteNoneQuery(" DELETE FROM `#@__archives` WHERE id='$aid' ");
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__feedback` WHERE aid='$aid'");
@@ -133,7 +133,7 @@ function DelArcSg($aid)
     }
     //删除数据库的文档
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__arctiny` WHERE id='$aid' ");
-    $dsql->ExecuteNoneQuery("DELETE FROM `".$arcRow['addtable']."` WHERE aid='$aid' ");
+    $dsql->ExecuteNoneQuery("DELETE FROM `{$arcRow['addtable']}` WHERE aid='$aid' ");
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__feedback` WHERE aid='$aid'");
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__member_stow` WHERE aid='$aid'");
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__taglist ` WHERE aid='$aid'");

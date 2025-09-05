@@ -11,7 +11,7 @@ CheckRank(0, 0);//禁止游客操作
 $menutype = 'config';
 if (!isset($dopost)) $dopost = '';
 $pwd2 = (empty($pwd2)) ? "" : $pwd2;
-$row = $dsql->GetOne("SELECT * FROM `#@__member` WHERE mid='".$cfg_ml->M_ID."'");
+$row = $dsql->GetOne("SELECT * FROM `#@__member` WHERE mid='{$cfg_ml->M_ID}' ");
 $face = $row['face'];
 $newface = isset($newface)? $newface : '';
 if ($dopost == 'save') {
@@ -50,7 +50,7 @@ if ($dopost == 'save') {
     if (!empty($newface) && file_exists($target_file)) {
         $rnd = mt_rand(10000, 99999);
         rename($target_file, $cfg_basedir.$cfg_user_dir."/{$cfg_ml->M_ID}/face{$rnd}.png");
-        $target_url = $cfg_mediasurl.'/userup'."/{$cfg_ml->M_ID}/face{$rnd}.png";
+        $target_url = $cfg_mediasurl."/userup/{$cfg_ml->M_ID}/face{$rnd}.png";
         $addupquery = ",face='{$target_url}'";
         @unlink($target_file);
     }
@@ -97,11 +97,11 @@ if ($dopost == 'save') {
         ShowMsg('请选择正常的性别', 'edit_baseinfo.php');
         exit();
     }
-    $query1 = "UPDATE `#@__member` SET $pp='$pwd',sex='$sex'{$addupquery} WHERE mid='".$cfg_ml->M_ID."' ";
+    $query1 = "UPDATE `#@__member` SET $pp='$pwd',sex='$sex'{$addupquery} WHERE mid='{$cfg_ml->M_ID}' ";
     $dsql->ExecuteNoneQuery($query1);
     //如果是管理员，修改其后台密码
     if ($cfg_ml->fields['matt'] == 10 && $pwd2 != "") {
-        $query2 = "UPDATE `#@__admin` SET $pp='$pwd2'{$admaddupquery} WHERE id='".$cfg_ml->M_ID."' ";
+        $query2 = "UPDATE `#@__admin` SET $pp='$pwd2'{$admaddupquery} WHERE id='{$cfg_ml->M_ID}' ";
         $dsql->ExecuteNoneQuery($query2);
     }
     //清除会员缓存

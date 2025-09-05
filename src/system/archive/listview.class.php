@@ -207,7 +207,7 @@ class ListView
             $tempfile = str_replace("{tid}", $this->TypeID, $tempfile);
             $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
             if (!file_exists($tempfile)) {
-                $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/".$GLOBALS['cfg_df_style']."/list_default.htm";
+                $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/{$GLOBALS['cfg_df_style']}/list_default.htm";
             }
             if (!file_exists($tempfile) || !is_file($tempfile)) {
                 showmsg("{$this->TypeLink->TypeInfos['typename']}栏目，主题模板htm文件不存在", "javascript:;");
@@ -326,7 +326,7 @@ class ListView
                 $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
                 $tempfile = $tmpdir."/".$tempfile;
                 if (!file_exists($tempfile)) {
-                    $tempfile = $tmpdir."/".$GLOBALS['cfg_df_style']."/index_default.htm";
+                    $tempfile = $tmpdir."/{$GLOBALS['cfg_df_style']}/index_default.htm";
                 }
                 $this->dtp->LoadTemplate($tempfile);
             }
@@ -402,7 +402,7 @@ class ListView
         $filtersql = '';
         if ($addtable!="")
         {
-            $addJoin = " LEFT JOIN `$addtable` ON arc.id = ".$addtable.'.aid ';
+            $addJoin = " LEFT JOIN `$addtable` ON arc.id = {$addtable}.aid ";
             $addField = '';
             $fields = explode(',',$this->ChannelUnit->ChannelInfos['listfields']);
             foreach($fields as $k=>$v)
@@ -495,19 +495,16 @@ class ListView
             }
             $row['picname'] = $row['litpic'];
             $row['stime'] = GetDateMK($row['pubdate']);
-            $row['typelink'] = "<a href='".$row['typeurl']."'>".$row['typename']."</a>";
-            $row['image'] = "<img src='".$row['picname']."' title='".preg_replace("/['><]/", "", $row['title'])."'>";
-            $row['imglink'] = "<a href='".$row['filename']."'>".$row['image']."</a>";
+            $row['typelink'] = "<a href='{$row['typeurl']}'>{$row['typename']}</a>";
+            $row['image'] = "<img src='{$row['picname']}' title='".preg_replace("/['><]/", "", $row['title'])."'>";
+            $row['imglink'] = "<a href='{$row['filename']}'>{$row['image']}</a>";
             $row['fulltitle'] = $row['title'];
             $row['title'] = cn_substr($row['title'], $titlelen);
             if ($row['color'] != '') {
-                $row['title'] = "<span style='color:".$row['color']."'>".$row['title']."</span>";
-            }
-            if (preg_match('/c/', $row['flag'])) {
-                $row['title'] = "".$row['title']."";
+                $row['title'] = "<span style='color:{$row['color']}'>{$row['title']}</span>";
             }
             $row['face'] = empty($row['face'])? $GLOBALS['cfg_mainsite'].'/static/web/img/admin.png' : $row['face'];
-            $row['textlink'] = "<a href='".$row['filename']."'>".$row['title']."</a>";
+            $row['textlink'] = "<a href='{$row['filename']}'>{$row['title']}</a>";
             $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
             $row['memberurl'] = $GLOBALS['cfg_memberurl'];
             $row['userurl'] = $GLOBALS['cfg_memberurl'].'/index.php?uid='.$row['userid'];
@@ -544,7 +541,7 @@ class ListView
             $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
             $tempfile = $tmpdir."/".$tempfile;
             if (!file_exists($tempfile)) {
-                $tempfile = $tmpdir."/".$GLOBALS['cfg_df_style']."/index_default.htm";
+                $tempfile = $tmpdir."/{$GLOBALS['cfg_df_style']}/index_default.htm";
             }
             $this->PartView->SetTemplet($tempfile);
         } else if ($this->Fields['ispart'] == 2) {
@@ -585,7 +582,7 @@ class ListView
             $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
             $tempfile = $tmpdir."/".$tempfile;
             if (!file_exists($tempfile)) {
-                $tempfile = $tmpdir."/".$GLOBALS['cfg_df_style']."/index_default.htm";
+                $tempfile = $tmpdir."/{$GLOBALS['cfg_df_style']}/index_default.htm";
             }
             $this->PartView->SetTemplet($tempfile);
         } else if ($this->Fields['ispart'] == 2) {
@@ -818,7 +815,7 @@ class ListView
         $filtersql = '';
         if ($addtable!="")
         {
-            $addJoin = " LEFT JOIN `$addtable` ON arc.id = ".$addtable.'.aid ';
+            $addJoin = " LEFT JOIN `$addtable` ON arc.id = {$addtable}.aid ";
             $addField = '';
             $fields = explode(',',$this->ChannelUnit->ChannelInfos['listfields']);
             foreach($fields as $k=>$v)
@@ -917,19 +914,16 @@ class ListView
                     }
                     $row['picname'] = $row['litpic'];
                     $row['stime'] = GetDateMK($row['pubdate']);
-                    $row['typelink'] = "<a href='".$row['typeurl']."'>".$row['typename']."</a>";
-                    $row['image'] = "<img src='".$row['picname']."' width='$imgwidth' height='$imgheight' title='".preg_replace("/['><]/", "", $row['title'])."'>";
-                    $row['imglink'] = "<a href='".$row['filename']."'>".$row['image']."</a>";
+                    $row['typelink'] = "<a href='{$row['typeurl']}'>{$row['typename']}</a>";
+                    $row['image'] = "<img src='{$row['picname']}' width='{$imgwidth}' height='{$imgheight}' title='".preg_replace("/['><]/", "", $row['title'])."'>";
+                    $row['imglink'] = "<a href='{$row['filename']}'>{$row['image']}</a>";
                     $row['fulltitle'] = $row['title'];
                     $row['title'] = cn_substr($row['title'], $titlelen);
                     if ($row['color'] != '') {
-                        $row['title'] = "<span style='color:".$row['color']."'>".$row['title']."</span>";
-                    }
-                    if (preg_match('/c/', $row['flag'])) {
-                        $row['title'] = "".$row['title']."";
+                        $row['title'] = "<span style='color:{$row['color']}'>{$row['title']}</span>";
                     }
                     $row['face'] = empty($row['face'])? $GLOBALS['cfg_mainsite'].'/static/web/img/admin.png' : $row['face'];
-                    $row['textlink'] = "<a href='".$row['filename']."'>".$row['title']."</a>";
+                    $row['textlink'] = "<a href='{$row['filename']}'>{$row['title']}</a>";
                     $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
                     $row['memberurl'] = $GLOBALS['cfg_memberurl'];
                     $row['userurl'] = $GLOBALS['cfg_memberurl'].'/index.php?uid='.$row['userid'];

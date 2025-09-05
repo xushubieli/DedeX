@@ -24,7 +24,7 @@ if (empty($dopost)) {
     $cInfos = $dsql->GetOne("SELECT * FROM `#@__channeltype` WHERE id='$channelid';");
     //检查会员等级和类型限制
     if ($cInfos['sendrank'] > $cfg_ml->M_Rank) {
-        $row = $dsql->GetOne("SELECT membername FROM `#@__arcrank` WHERE `rank`='".$cInfos['sendrank']."' ");
+        $row = $dsql->GetOne("SELECT membername FROM `#@__arcrank` WHERE `rank`='{$cInfos['sendrank']}' ");
         ShowMsg("需要{$row['membername']}才能在这个栏目发布文档", "-1", "0", 5000);
         exit();
     }
@@ -99,7 +99,7 @@ if (empty($dopost)) {
         }
     }
     //增加积分
-    $dsql->ExecuteNoneQuery("UPDATE `#@__member` set scores=scores+{$cfg_sendarc_scores} WHERE mid='".$cfg_ml->M_ID."' ;");
+    $dsql->ExecuteNoneQuery("UPDATE `#@__member` set scores=scores+{$cfg_sendarc_scores} WHERE mid='{$cfg_ml->M_ID}' ;");
     //更新统计
     countArchives($channelid);
     //生成网页

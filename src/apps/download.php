@@ -31,7 +31,7 @@ if ($open == 0) {
             break;
         }
     }
-    $row = $dsql->GetOne("SELECT $vname FROM `".$cu->ChannelInfos['addtable']."` WHERE aid='$aid'");
+    $row = $dsql->GetOne("SELECT $vname FROM `{$cu->ChannelInfos['addtable']}` WHERE aid='$aid'");
     include_once(DEDEINC.'/taglib/channel/softlinks.lib.php');
     $ctag = '';
     $downlinks = ch_softlinks($row[$vname], $ctag, $cu, '', TRUE);
@@ -169,7 +169,7 @@ else if ($open == 2) {
         }
         //以下为正常情况，自动扣点数，如果文档金币，检查会员是否浏览过本文档
         if ($needMoney > 0  && $mid != $cfg_ml->M_ID) {
-            $sql = "SELECT aid,money FROM `#@__member_operation` WHERE buyid='ARCHIVE".$id."' AND mid='".$cfg_ml->M_ID."'";
+            $sql = "SELECT aid,money FROM `#@__member_operation` WHERE buyid='ARCHIVE{$id}' AND mid='{$cfg_ml->M_ID}'";
             $row = $dsql->GetOne($sql);
             //未购买过此文档
             if (!is_array($row)) {
@@ -181,14 +181,14 @@ else if ($open == 2) {
                     exit(0);
                 }
                 //有足够金币，记录会员信息
-                $inquery = "INSERT INTO `#@__member_operation` (mid,oldinfo,money,mtime,buyid,product,pname,sta) VALUES ('".$cfg_ml->M_ID."','$arctitle','$needMoney','".time()."', 'ARCHIVE".$id."', 'archive','下载软件', 2); ";
+                $inquery = "INSERT INTO `#@__member_operation` (mid,oldinfo,money,mtime,buyid,product,pname,sta) VALUES ('{$cfg_ml->M_ID}','$arctitle','$needMoney','".time()."','ARCHIVE{$id}','archive','下载软件',2); ";
                 //记录定单
                 if (!$dsql->ExecuteNoneQuery($inquery)) {
                     ShowMsg('记录定单失败，请返回', '-1');
                     exit(0);
                 }
                 //扣除金币
-                $dsql->ExecuteNoneQuery("UPDATE `#@__member` SET money = money - $needMoney WHERE mid='".$cfg_ml->M_ID."'");
+                $dsql->ExecuteNoneQuery("UPDATE `#@__member` SET money = money - $needMoney WHERE mid='{$cfg_ml->M_ID}'");
             }
         }
     }

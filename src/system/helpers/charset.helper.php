@@ -51,7 +51,7 @@ if (!function_exists('utf82gb')) {
                     $c = dechex($UC2GBTABLE[$c] + 0x8080);
                     $okstr .= chr(hexdec($c[0].$c[1])).chr(hexdec($c[2].$c[3]));
                 } else {
-                    $okstr .= "&#".$c.";";
+                    $okstr .= "&#{$c};";
                 }
             } else {
                 $okstr .= $c;

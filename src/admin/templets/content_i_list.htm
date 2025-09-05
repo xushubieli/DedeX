@@ -90,10 +90,7 @@
 										<td><input type="checkbox" name="arcID" value="{dede:field.id/}"></td>
 										<td>{dede:field.id/}</td>
 										<td>
-											<a href="archives_do.php?aid={dede:field.id/}&dopost=editArchives">
-												<img src="{dede:field.litpic function='CheckPic(@me)'/}" class="thumbnail-sm">
-												<span>{dede:field.title/}</span>
-											</a>
+											<a href="archives_do.php?aid={dede:field.id/}&dopost=editArchives"><img src="{dede:field.litpic function='CheckPic(@me)'/}" class="thumbnail-sm me-3">{dede:field.title/}</a>
 											{dede:field.flag function='IsCommendArchives(@me)'/}
 										</td>
 										<td>{dede:field.typeid function='GetTypename(@me)'/}</td>

@@ -20,10 +20,10 @@ if ($fmdo == 'sendMail') {
     }
     $userhash = md5($cfg_cookie_encode.'--'.$cfg_ml->fields['mid'].'--'.$cfg_ml->fields['email']);
     $url = $cfg_basehost.(empty($cfg_cmspath) ? '/' : $cfg_cmspath)."/user/index_do.php?fmdo=checkMail&mid={$cfg_ml->fields['mid']}&userhash={$userhash}&do=1";
-    $mailtitle = "来自{$cfg_webname}：邮件验证通知";
+    $mailtitle = "来自{$cfg_webname}验证通知";
     $mailbody = '';
     $mailbody .= "尊敬的{$cfg_ml->fields['uname']}会员，欢迎成为{$cfg_webname}会员！\r\n通过注册还须进行最后一步操作，请点击链接或复制链接到地址栏访问：{$url}";
-    $headers = "From: ".$cfg_adminemail."\r\nReply-To: ".$cfg_adminemail;
+    $headers = "From: {$cfg_adminemail}\r\nReply-To: {$cfg_adminemail}";
     if ($cfg_sendmail_bysmtp == 'Y' && !empty($cfg_smtp_server)) {
         $mailtype = 'HTML';
         require_once(DEDEINC.'/libraries/mail.class.php');
@@ -129,7 +129,7 @@ if ($fmdo == 'sendMail') {
         $inquery = "INSERT INTO `#@__member_operation` (`buyid`,`pname`,`product`,`money`,`mtime`,`pid`,`mid`,`sta` ,`oldinfo`) VALUES ('ScoresToMoney','积分换金币操作','stc' ,'0' ,'$mtime' ,'0' ,'{$cfg_ml->M_ID}','0' ,'用{$needscores}积分兑了换金币{$money}个'); ";
         $dsql->ExecuteNoneQuery($inquery);
         //修改积分与金币值
-        $dsql->ExecuteNoneQuery("UPDATE `#@__member` SET `scores`=$litmitscores, money= money + $money WHERE mid='".$cfg_ml->M_ID."' ");
+        $dsql->ExecuteNoneQuery("UPDATE `#@__member` SET `scores`=$litmitscores, money= money + $money WHERE mid='{$cfg_ml->M_ID}' ");
         //清除会员缓存
         $cfg_ml->DelCache($cfg_ml->M_ID);
         ShowMsg('成功兑换指定量的金币', 'operation.php');

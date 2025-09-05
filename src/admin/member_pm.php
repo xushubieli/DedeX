@@ -24,10 +24,10 @@ if (!empty($folder)) $whereSql = "WHERE folder='$folder'";
 $postuser = "收件人";
 if ($folder == "inbox" || $folder == '') $postuser = "发件人";
 if (!empty($keyword)) {
-    $whereSql .= " AND (subject like '%".$keyword."%' OR message like '%".$keyword."%')";
+    $whereSql .= " AND (subject like '%{$keyword}%' OR message like '%{$keyword}%')";
 }
 if (!empty($username)) {
-    $whereSql .= " AND floginid like '%".$username."%'";
+    $whereSql .= " AND floginid like '%{$username}%'";
 }
 $sql = "SELECT * FROM `#@__member_pms` $whereSql ORDER BY sendtime DESC";
 $dlist = new DataListCP();

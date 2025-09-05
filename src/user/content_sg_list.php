@@ -41,7 +41,7 @@ $whereSql = " WHERE arc.channel = '$channelid' AND arc.mid='$mid' ";
 if ($keyword != '') {
     $keyword = cn_substr(trim(preg_replace("#[><\|\"\r\n\t%\*\.\?\(\)\$ ;,'%-]#", "", stripslashes($keyword))), 30);
     $keyword = addslashes($keyword);
-    $whereSql .= " AND (arc.title like '%$keyword%') ";
+    $whereSql .= " AND (arc.title like '%{$keyword}%') ";
 }
 if ($cid != 0) {
     $whereSql .= " AND arc.typeid in (".GetSonIds($cid).")";

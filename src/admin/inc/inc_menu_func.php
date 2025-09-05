@@ -40,14 +40,14 @@ function GetMenus($userrank, $topos = 'main')
             foreach ($dtp2->CTags as $j => $ctag2) {
                 $ischannel = trim($ctag2->GetAtt('ischannel'));
                 if ($ctag2->GetName() == 'item' && ($ctag2->GetAtt('rank') == '' || TestPurview($ctag2->GetAtt('rank')))) {
-                    $link = "<a href='".$ctag2->GetAtt('link')."' target='".$ctag2->GetAtt('target')."'>".$ctag2->GetAtt('name')."</a>";
+                    $link = "<a href='{$ctag2->GetAtt('link')}' target='{$ctag2->GetAtt('target')}'>{$ctag2->GetAtt('name')}</a>";
                     if ($ischannel == '1') {
                         if ($ctag2->GetAtt('addico') != '') {
                             $addico = $ctag2->GetAtt('addico');
                         } else {
                             $addico = 'fa fa-plus-circle';
                         }
-                        $link = "$link<a href='".$ctag2->GetAtt('linkadd')."' class='submenu-right' target='".$ctag2->GetAtt('target')."'><span class='$addico'></span></a>";
+                        $link = "{$link}<a href='{$ctag2->GetAtt('linkadd')}' class='submenu-right' target='{$ctag2->GetAtt('target')}'><span class='{$addico}'></span></a>";
                     } else {
                         $link .= '';
                     }

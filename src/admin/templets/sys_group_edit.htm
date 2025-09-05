@@ -46,7 +46,7 @@
 												continue;
 											}
 											$start++;
-											$lhead = "<tr> <td colspan='2'>{$start}、".$ls[0]."</td></tr><tr><td colspan='2'>";
+											$lhead = "<tr><td colspan='2'>{$start}、{$ls[0]}</td></tr><tr><td colspan='2'>";
 											echo  $lhead;
 										} else if (preg_match("#^>#", $line)) {
 											$ls = explode('>',$line);

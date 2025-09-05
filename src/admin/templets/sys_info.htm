@@ -146,7 +146,7 @@
 												} else if ($row['type']=='img') {
 													echo "<input type='text' name='edit___{$row['varname']}' id='edit___{$row['varname']}' value='{$row['value']}' class='w-50'> <input type='button' name='set9' class='btn btn-primary btn-sm' onclick="."SelectImage('form1.edit___{$row['varname']}','','idd_{$row['varname']}');"." value='选择'>";
 														if ($row['value']) {
-															echo " <img src=".$row['value']." id='idd_{$row['varname']}' class='thumbnail-md ms-3'>";
+															echo " <img src='{$row['value']}' id='idd_{$row['varname']}' class='thumbnail-md ms-3'>";
 														} else {
 														echo " <img src='/static/web/img/thumbnail.jpg' id='idd_{$row['varname']}' class='thumbnail-md ms-3'>";
 													}

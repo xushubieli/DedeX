@@ -58,17 +58,17 @@ if (empty($sql)) {
     if ($enddate != '') $endtime = strtotime($enddate);
     else $endtime = 0;
     $where = ' WHERE main.arcrank>-1 ';
-    if ($q != '') $where .= " AND main.title LIKE '%$q%' ";
+    if ($q != '') $where .= " AND main.title LIKE '%{$q}%' ";
     if ($iscommend == 1) $where .= " AND FIND_IN_SET('c', main.flag)>0 ";
     if (!empty($typeid)) {
         if ($includesons == 1) {
             $tids =  TypeGetSunID($typeid, $dsql, '', $mid, TRUE);
-            $where .= " AND main.typeid IN ($tids) ";
+            $where .= " AND main.typeid IN($tids) ";
         } else {
             $where .= " AND main.typeid=$typeid ";
         }
     } else {
-        $where .= " AND main.channel = $mid ";
+        $where .= " AND main.channel=$mid ";
     }
     if ($writer != '') {
         $writer = stripslashes($writer);
@@ -137,7 +137,7 @@ if (empty($sql)) {
                         $tmpvar = stripslashes($tmpvar);
                         $tmpvar = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim($tmpvar));
                         $tmpvar = addslashes($tmpvar);
-                        $where .= " AND CONCAT(',',addon.$var, ',') LIKE '%,$tmpvar,%' ";
+                        $where .= " AND CONCAT(',',addon.$var, ',') LIKE '%,{$tmpvar},%' ";
                     }
                 }
             }

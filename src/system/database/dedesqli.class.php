@@ -72,7 +72,7 @@ class DedeSqli
         $this->Open($pconnect);
     }
     //用指定参数初始数据库信息
-    function SetSource($host, $username, $pwd, $dbname, $dbprefix = "dede_")
+    function SetSource($host, $username, $pwd, $dbname, $dbprefix = "x_")
     {
         $this->dbHost = $host;
         $this->dbUser = $username;
@@ -104,30 +104,29 @@ class DedeSqli
             $this->linkID = mysqli_init();
             try {
                 mysqli_real_connect($this->linkID, $dbhost, $this->dbUser, $this->dbPwd, false, $dbport);
-                mysqli_errno($this->linkID) != 0 && $this->DisplayError('链接（'.$this->pconnect.'）到MySQL发生错误');
+                mysqli_errno($this->linkID) != 0 && $this->DisplayError("链接（{$this->pconnect}）到MySQL发生错误");
             } catch (Exception $e) {
-                $this->DisplayError("连接数据库失败，数据库密码不对或数据库服务器出错");
+                $this->DisplayError("连接数据库失败，数据库密码出错或服务器负载严重");
                 exit;
             }
-            
             //复制一个对象副本
             CopySQLiPoint($this);
         }
         //处理错误，成功连接则选择数据库
         if (!$this->linkID) {
-            $this->DisplayError("连接数据库失败，数据库密码不对或数据库服务器出错");
+            $this->DisplayError("连接数据库失败，数据库密码出错或服务器负载严重");
             exit();
         }
         $this->isInit = TRUE;
         $serverinfo = mysqli_get_server_info($this->linkID);
         if (version_compare($serverinfo, '4.1', ">=") && $GLOBALS['cfg_db_language']) {
-            mysqli_query($this->linkID, "SET character_set_connection=".$GLOBALS['cfg_db_language'].",character_set_results=".$GLOBALS['cfg_db_language'].",character_set_client=binary");
+            mysqli_query($this->linkID, "SET character_set_connection={$GLOBALS['cfg_db_language']},character_set_results={$GLOBALS['cfg_db_language']},character_set_client=binary");
         }
         if (version_compare($serverinfo, '5.0', ">")) {
             mysqli_query($this->linkID, "SET sql_mode=''");
         }
         if ($this->dbName && !@mysqli_select_db($this->linkID, $this->dbName)) {
-            $this->DisplayError('连接数据库失败，数据库服务器奔溃');
+            $this->DisplayError("连接数据库失败，数据库奔溃");
         }
         return TRUE;
     }
@@ -135,7 +134,7 @@ class DedeSqli
     function SetLongLink()
     {
         if ($this->linkID) {
-            @mysqli_query($this->linkID, "SET interactive_timeout=3600, wait_timeout=3600 ;");
+            @mysqli_query($this->linkID, "SET interactive_timeout=3600, wait_timeout=3600;");
         }
     }
     //获得错误描述
@@ -380,7 +379,7 @@ class DedeSqli
         if (!$dsqli->isInit) {
             $this->Init($this->pconnect);
         }
-        if (mysqli_num_rows(@mysqli_query($this->linkID, "SHOW TABLES LIKE '".$tbname."'"))) {
+        if (mysqli_num_rows(@mysqli_query($this->linkID, "SHOW TABLES LIKE '{$tbname}'"))) {
             return TRUE;
         }
         return FALSE;
@@ -473,14 +472,14 @@ class DedeSqli
     {
         global $cfg_cookie_encode;
         $enkey = substr(md5(substr($cfg_cookie_encode.'DedeX', 0, 5)), 0, 10);
-        $RecordLogFile = DEDEDATA.'/mysqli_record_log_'.$enkey.'.inc';
+        $RecordLogFile = DEDEDATA."/mysqli_record_log_{$enkey}.inc";
         $url = $this->GetCurUrl();
         $savemsg = <<<EOT
 
 ------------------------------------------
 SQL:{$this->queryString}
-Page:$url
-Runtime:$runtime
+Page:{$url}
+Runtime:{$runtime}
 EOT;
         $fp = @fopen($RecordLogFile, 'a');
         @fwrite($fp, $savemsg);
@@ -491,16 +490,16 @@ EOT;
     {
         global $cfg_cookie_encode;
         $enkey = substr(md5(substr($cfg_cookie_encode.'DedeX', 0, 5)), 0, 10);
-        $errorTrackFile = DEDEDATA.'/mysqli_error_trace_'.$enkey.'.inc';
+        $errorTrackFile = DEDEDATA."/mysqli_error_trace_{$enkey}.inc";
         if ($this->showError) {
             $msg = str_replace(array("\r","\n"),"",addslashes($msg));
             ShowMsg("{$msg}", "javascript:;", -1);
             exit;
         }
-        $savemsg = 'Page: '.$this->GetCurUrl()."\r\nError: ".$msg."\r\nTime".date('Y-m-d H:i:s');
+        $savemsg = "Page:{$this->GetCurUrl()}\r\nError:{$msg}\r\nTime:".date('Y-m-d H:i:s')."";
         //保存MySql错误日志
         $fp = @fopen($errorTrackFile, 'a');
-        @fwrite($fp, '<'.'?php  exit();'."\r\n/*\r\n{$savemsg}\r\n*/\r\n?".">\r\n");
+        @fwrite($fp, '<'.'?php exit();'."\r\n/*\r\n{$savemsg}\r\n*/\r\n?".">\r\n");
         @fclose($fp);
     }
     //获得当前的脚本网址

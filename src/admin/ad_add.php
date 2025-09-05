@@ -37,7 +37,7 @@ if ($dopost == "save") {
         } else {
             $height = "height=\"{$normbody['height']}\"";
         }
-        $normbody = "<a href=\"{$link}\"><img src=\"{$normbody['url']}\"$width $height></a>";
+        $normbody = "<a href=\"{$link}\"><img src=\"{$normbody['url']}\"{$width} {$height}></a>";
     } else {
         if (empty($normbody['width'])) {
             $width = '';
@@ -49,7 +49,7 @@ if ($dopost == "save") {
         } else {
             $height = "height=\"{$normbody['height']}\"";
         }
-        $normbody = "<object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=\"http://download.Macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0\"$width $height><param name=\"movie\" value=\"{$link}\"/><param name=\"quality\" value=\"high\"/></object>";
+        $normbody = "<object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=\"http://download.Macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0\"{$width} {$height}><param name=\"movie\" value=\"{$link}\"/><param name=\"quality\" value=\"high\"/></object>";
     }
     $query = "INSERT INTO `#@__myad` (clsid,typeid,tagname,adname,timeset,starttime,endtime,normbody,expbody) VALUES ('$clsid','$typeid','$tagname','$adname','$timeset','$starttime','$endtime','$normbody','$expbody');";
     $dsql->ExecuteNoneQuery($query);

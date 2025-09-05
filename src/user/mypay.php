@@ -14,7 +14,7 @@ require_once(DEDEINC.'/datalistcp.class.php');
 DedeSetCookie('ENV_GOBACK_URL', GetCurUrl(), time() + 3600, '/');
 if (!isset($dopost)) $dopost = '';
 if ($dopost == '') {
-    $query = "SELECT * FROM `#@__member_operation` WHERE mid='".$cfg_ml->M_ID."' And product='archive' ORDER BY aid DESC";
+    $query = "SELECT * FROM `#@__member_operation` WHERE mid='{$cfg_ml->M_ID}' And product='archive' ORDER BY aid DESC";
     $dlist = new DataListCP();
     $dlist->pagesize = 10;
     $dlist->SetTemplate(DEDEMEMBER.'/templets/mypay.htm');

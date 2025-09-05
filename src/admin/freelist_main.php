@@ -20,7 +20,7 @@ if (empty($keyword)) {
     $addsql = '';
 } else {
     $addget = '&keyword='.urlencode($keyword);
-    $addsql = " where title like '%$keyword%' ";
+    $addsql = " where title like '%{$keyword}%' ";
 }
 //重载列表
 if ($dopost=='getlist') {

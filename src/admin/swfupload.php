@@ -92,10 +92,10 @@ if (empty($dopost)) {
     //WaterImg($cfg_basedir.$fileurl, 'up');
     $title = $filename.$sname;
     $inquery = "INSERT INTO `#@__uploads` (title,url,mediatype,width,height,playtime,filesize,uptime,mid)
-        VALUES ('$title','$fileurl','$ftype','0','0','0','".filesize($cfg_basedir.$fileurl)."','".time()."','".$cuserLogin->getUserID()."'); ";
+        VALUES ('$title','$fileurl','$ftype','0','0','0','".filesize($cfg_basedir.$fileurl)."','".time()."','{$cuserLogin->getUserID()}'); ";
     if (!empty($arcid)) {
         $inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid)
-        VALUES ('$arcid','$title','$fileurl','$ftype','0','0','0','".filesize($cfg_basedir.$fileurl)."','".time()."','".$cuserLogin->getUserID()."'); ";
+        VALUES ('$arcid','$title','$fileurl','$ftype','0','0','0','".filesize($cfg_basedir.$fileurl)."','".time()."','{$cuserLogin->getUserID()}'); ";
     }
     $dsql->ExecuteNoneQuery($inquery);
     $fid = $dsql->GetLastID();

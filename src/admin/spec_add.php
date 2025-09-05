@@ -67,8 +67,10 @@ if ($dopost != 'save') {
         ShowMsg("无法获得主键，无法进行后续操作", "-1");
         exit();
     }
+    //处理顶数
+    $goodpost = rand(30, 350);
     //保存到主表
-    $inQuery = "INSERT INTO `#@__archives` (id,typeid,sortrank,flag,ismake,channel,arcrank,click,money,title,shorttitle,color,writer,source,litpic,pubdate,senddate,mid,notpost,description,keywords,filename) VALUES ('$arcID','$typeid','$sortrank','$flag','$ismake','$channelid','$arcrank','$click','$money','$title','$shorttitle','$color','$writer','$source','$litpic','$pubdate','$senddate','$adminid','$notpost','$description','$keywords','$filename');";
+    $inQuery = "INSERT INTO `#@__archives` (id,typeid,sortrank,flag,ismake,channel,arcrank,click,money,title,shorttitle,color,writer,source,goodpost,litpic,pubdate,senddate,mid,notpost,description,keywords,filename) VALUES ('$arcID','$typeid','$sortrank','$flag','$ismake','$channelid','$arcrank','$click','$money','$title','$shorttitle','$color','$writer','$source','$goodpost','$litpic','$pubdate','$senddate','$adminid','$notpost','$description','$keywords','$filename');";
     if (!$dsql->ExecuteNoneQuery($inQuery)) {
         echo $inQuery;
         $gerr = $dsql->GetError();

@@ -57,7 +57,7 @@ function GetCurContentAlbum($body, $rfurl, &$firstdd)
             $fsize = filesize($rndFileName);
             $filename = $milliSecond.'-'.$key.$itype;
             //保存图片附件信息
-            $inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('0','$filename','$iurl','1','{$imginfos[0]}','$imginfos[1]','0','$fsize','".time()."','".$cuserLogin->getUserID()."'); ";
+            $inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('0','$filename','$iurl','1','{$imginfos[0]}','{$imginfos[1]}','0','$fsize','".time()."','{$cuserLogin->getUserID()}'); ";
             $dsql->ExecuteNoneQuery($inquery);
             $fid = $dsql->GetLastID();
             AddMyAddon($fid, $iurl);
@@ -73,7 +73,7 @@ function GetCurContentAlbum($body, $rfurl, &$firstdd)
                 }
             }
             @WaterImg($rndFileName, 'down');
-            $rsimg .= "{dede:img ddimg='$litpicname' text='' width='".$imginfos[0]."' height='".$imginfos[1]."'} $iurl {/dede:img}";
+            $rsimg .= "{dede:img ddimg='$litpicname' text='' width='{$imginfos[0]}' height='{$imginfos[1]}'} $iurl {/dede:img}";
         }
     }
     return $rsimg;
@@ -145,7 +145,7 @@ function GetCurContent($body)
             }
             $fsize = filesize($rndFileName);
             //保存图片附件信息
-            $inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('{$arcID}','$rndFileName','$fileurl','1','{$imginfos[0]}','$imginfos[1]','0','$fsize','".time()."','".$cuserLogin->getUserID()."'); ";
+            $inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('$arcID','$rndFileName','$fileurl','1','{$imginfos[0]}','{$imginfos[1]}','0','$fsize','".time()."','{$cuserLogin->getUserID()}'); ";
             $dsql->ExecuteNoneQuery($inquery);
             $fid = $dsql->GetLastID();
             AddMyAddon($fid, $fileurl);
@@ -603,14 +603,14 @@ function GetImageMapDD($filename, $maxwidth)
 {
     global $cuserLogin, $dsql, $cfg_ddimg_height;
     $ddn = substr($filename, -3);
-    $ddpicok = preg_replace("#\.".$ddn."$#", "-X.".$ddn, $filename);
+    $ddpicok = preg_replace("#\.{$ddn}$#", "-X.{$ddn}", $filename);
     $toFile = $GLOBALS['cfg_basedir'].$ddpicok;
     ImageResizeNew($GLOBALS['cfg_basedir'].$filename, $maxwidth, $cfg_ddimg_height, $toFile);
     //保存图片附件信息
     $fsize = filesize($toFile);
     $ddpicoks = explode('/', $ddpicok);
     $filename = $ddpicoks[count($ddpicoks) - 1];
-    $inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('0','$filename','$ddpicok','1','0','0','0','$fsize','".time()."','".$cuserLogin->getUserID()."'); ";
+    $inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('0','$filename','$ddpicok','1','0','0','0','$fsize','".time()."','{$cuserLogin->getUserID()}'); ";
     $dsql->ExecuteNoneQuery($inquery);
     $fid = $dsql->GetLastID();
     AddMyAddon($fid, $ddpicok);
@@ -702,7 +702,7 @@ function UploadOneImage($upname, $handurl = '', $isremote = 1, $ntitle = '')
         $info = '';
         $imginfos = GetImageSize($imgfile, $info);
         //把新上传的图片信息保存到媒体文档管理文档中
-        $inquery = "INSERT INTO `#@__uploads` (title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('$title','$filename','1','".$imginfos[0]."','".$imginfos[1]."','0','".filesize($imgfile)."','".time()."','".$cuserLogin->getUserID()."');";
+        $inquery = "INSERT INTO `#@__uploads` (title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('$title','$filename','1','{$imginfos[0]}','{$imginfos[1]}','0','".filesize($imgfile)."','".time()."','{$cuserLogin->getUserID()}');";
         $dsql->ExecuteNoneQuery($inquery);
     }
     return $filename;

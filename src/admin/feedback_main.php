@@ -88,12 +88,12 @@ else {
     $tl = new TypeLink($typeid);
     $openarray = $tl->GetOptionArray($typeid, $admin_catalogs, 0);
     $addsql = ($typeid != 0  ? " And typeid IN (".GetSonIds($typeid).")" : '');
-    $addsql .= ($aid != 0  ? " And aid=$aid " : '');
+    $addsql .= ($aid != 0  ? " And aid='$aid' " : '');
     $addsql .= ($ip != ''  ? " And ip LIKE '$ip' " : '');
     if ($fid > 0) {
         $addsql .= " AND fid={$fid} ";
     }
-    $querystring = "SELECT * FROM `#@__feedback` WHERE msg LIKE '%$keyword%' $addsql ORDER BY dtime DESC";
+    $querystring = "SELECT * FROM `#@__feedback` WHERE msg LIKE '%{$keyword}%' $addsql ORDER BY dtime DESC";
     $dlist = new DataListCP();
     $dlist->pagesize = 30;
     $dlist->SetParameter('aid', $aid);

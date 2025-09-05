@@ -23,7 +23,7 @@ if ($dopost != 'save') {
         ShowMsg("读取文档信息出错", "javascript:;");
         exit();
     }
-    $query = "SELECT * FROM `#@__channeltype` WHERE id='".$arcRow['channel']."'";
+    $query = "SELECT * FROM `#@__channeltype` WHERE id='{$arcRow['channel']}'";
     $cInfos = $dsql->GetOne($query);
     if (!is_array($cInfos)) {
         ShowMsg("读取栏目信息出错", "javascript:;");

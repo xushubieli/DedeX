@@ -35,10 +35,9 @@ else if ($action == 'send') {
     }
     $mailbody = '';
     $msg = RemoveXSS(dede_htmlspecialchars($msg));
-    $mailtitle = "您的好友给您推荐了一篇文档";
-    $mailbody .= "$msg\r\n";
-    $mailbody .= "Powered by DedeX";
-    $headers = "From: ".$cfg_adminemail."\r\nReply-To: ".$cfg_adminemail;
+    $mailtitle = "好友推荐文档";
+    $mailbody .= "{$msg}\r\n";
+    $headers = "From: {$cfg_adminemail}\r\nReply-To: {$cfg_adminemail}";
     if ($cfg_sendmail_bysmtp == 'Y' && !empty($cfg_smtp_server)) {
         $mailtype = 'TXT';
         require_once(DEDEINC.'/libraries/mail.class.php');

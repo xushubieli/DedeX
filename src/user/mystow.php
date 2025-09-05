@@ -18,7 +18,7 @@ if ($rank == 'top') {
     $sql = "SELECT s.*,COUNT(s.aid) AS num,t.* FROM `#@__member_stow` AS s LEFT JOIN `#@__member_stowtype` AS t on t.stowname=s.type GROUP BY s.aid ORDER BY num DESC";
     $tpl = 'mystowtop';
 } else {
-    $sql = "SELECT s.*,t.* FROM `#@__member_stow` AS s LEFT JOIN `#@__member_stowtype` AS t on t.stowname=s.type WHERE s.mid='".$cfg_ml->M_ID."' ORDER BY s.id DESC";
+    $sql = "SELECT s.*,t.* FROM `#@__member_stow` AS s LEFT JOIN `#@__member_stowtype` AS t on t.stowname=s.type WHERE s.mid='{$cfg_ml->M_ID}' ORDER BY s.id DESC";
     $tpl = 'mystow';
 }
 $dsql->Execute('nn', 'SELECT indexname,stowname FROM `#@__member_stowtype`');

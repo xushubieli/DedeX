@@ -23,7 +23,7 @@ if ($dopost != 'save') {
         ShowMsg("读取文档信息出错", "javascript:;");
         exit();
     }
-    $query = "SELECT * FROM `#@__channeltype` WHERE id='".$arcRow['channel']."'";
+    $query = "SELECT * FROM `#@__channeltype` WHERE id='{$arcRow['channel']}'";
     $cInfos = $dsql->GetOne($query);
     if (!is_array($cInfos)) {
         ShowMsg("读取栏目信息出错", "javascript:;");
@@ -134,7 +134,7 @@ if ($dopost != 'save') {
             $imginfos = @GetImageSize($tmpFile, $info);
             if (!is_array($imginfos)) {
                 $imginfos = @GetImageSize($imgfile, $info);
-                $imgurls .= "{dede:img ddimg='$ddurl' text='$iinfo' width='".$imginfos[0]."' height='".$imginfos[1]."'} $iurl {/dede:img}\r\n";
+                $imgurls .= "{dede:img ddimg='$ddurl' text='$iinfo' width='{$imginfos[0]}' height='{$imginfos[1]}'} $iurl {/dede:img}\r\n";
                 continue;
             }
             $mime = get_mime_type($tmpFile);
@@ -155,7 +155,7 @@ if ($dopost != 'save') {
                 ImageResizeNew($imgfile, $cfg_ddimg_width, $cfg_ddimg_height, $litimgfile);
                 $litpicname = $ddurl;
             }
-            $imgurls .= "{dede:img ddimg='$litpicname' text='$iinfo' width='".$imginfos[0]."' height='".$imginfos[1]."'} $iurl {/dede:img}\r\n";
+            $imgurls .= "{dede:img ddimg='$litpicname' text='$iinfo' width='{$imginfos[0]}' height='{$imginfos[1]}'} $iurl {/dede:img}\r\n";
             if ($autolitpic == 1 && empty($litpic)) {
                 $litpic = $litpicname;
             }
@@ -169,7 +169,7 @@ if ($dopost != 'save') {
                 $ddurl = $pagestyle > 2 ? GetImageMapDD($iurl, $cfg_ddimg_width) : $iurl;
             }
             $imginfos = @GetImageSize($imgfile, $info);
-            $imgurls .= "{dede:img ddimg='$ddurl' text='$iinfo' width='".$imginfos[0]."' height='".$imginfos[1]."'} $iurl {/dede:img}\r\n";
+            $imgurls .= "{dede:img ddimg='$ddurl' text='$iinfo' width='{$imginfos[0]}' height='{$imginfos[1]}'} $iurl {/dede:img}\r\n";
             if ($autolitpic == 1 && empty($litpic)) {
                 $litpic = $ddurl;
             }
@@ -213,7 +213,7 @@ if ($dopost != 'save') {
                 $imginfos = GetImageSize($cfg_basedir.$v, $info);
             }
             $imginfo =  !empty($album['txt']) ? $album['txt'] : '';
-            $imgurls .= "{dede:img ddimg='$v' text='$imginfo' width='".$imginfos[0]."' height='".$imginfos[1]."'} $v {/dede:img}\r\n";
+            $imgurls .= "{dede:img ddimg='$v' text='$imginfo' width='{$imginfos[0]}' height='{$imginfos[1]}'} $v {/dede:img}\r\n";
         }
     }
     $imgurls = addslashes($imgurls);

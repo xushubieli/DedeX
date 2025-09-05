@@ -35,7 +35,7 @@ if ($dopost == "viewinfo") {
         if (empty($tablename)) {
             echo "没有指定表名";
         } else {
-            $dsql->SetQuery("SHOW CREATE TABLE ".$dsql->dbName.".".$tablename);
+            $dsql->SetQuery("SHOW CREATE TABLE {$dsql->dbName}.{$tablename}");
             $dsql->Execute('me');
             $row2 = $dsql->GetArray('me', MYSQL_BOTH);
             $ctinfo = $row2[1];

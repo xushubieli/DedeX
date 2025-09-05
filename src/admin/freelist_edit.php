@@ -14,7 +14,7 @@ if (empty($dopost)) {
     $row = $dsql->GetOne("SELECT * FROM `#@__freelist` where aid='$aid' ");
     $dtp = new DedeTagParse();
     $dtp->SetNameSpace("dede", "{", "}");
-    $dtp->LoadSource("--".$row['listtag']."--");
+    $dtp->LoadSource("--{$row['listtag']}--");
     $ctag = $dtp->GetTag('list');
     include DedeInclude('templets/freelist_edit.htm');
     exit();

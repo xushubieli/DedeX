@@ -12,7 +12,7 @@ $action = isset($action)? $action : '';
 $search = isset($search)? HtmlReplace($search, 0)  : '';
 if ($action == "search") {
     if (!empty($search)) {
-        $sql="SELECT * FROM `#@__tagindex` WHERE tag like '%$search%' ORDER BY id DESC"; 
+        $sql="SELECT * FROM `#@__tagindex` WHERE tag like '%{$search}%' ORDER BY id DESC"; 
         $dsql->Execute('al',$sql);
         $result = array();
         while($row=$dsql->GetObject('al')){ 

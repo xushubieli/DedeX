@@ -48,16 +48,16 @@ class smtp
         }
         if ($cc != "")
         {
-            $header .= "Cc: ".$cc."\r\n";
+            $header .= "Cc: {$cc}\r\n";
         }
-        $header .= "From: $webname<".$from.">\r\n";
-        $subject = "=?".$GLOBALS['cfg_soft_lang']."?B?".base64_encode($subject)."?=";
-        $header .= "Subject: ".$subject."\r\n";
+        $header .= "From: {$webname}<{$from}>\r\n";
+        $subject = "=?{$GLOBALS['cfg_soft_lang']}?B?".base64_encode($subject)."?=";
+        $header .= "Subject: {$subject}\r\n";
         $header .= $additional_headers;
         $header .= "Date: ".date("r")."\r\n";
         $header .= "X-Mailer:By Redhat (PHP/".phpversion().")\r\n";
         list($msec, $sec) = explode(" ", microtime());
-        $header .= "Message-ID: <".date("YmdHis", $sec).".".($msec * 1000000).".".$mail_from.">\r\n";
+        $header .= "Message-ID: <".date("YmdHis", $sec).".".($msec * 1000000).".{$mail_from}>\r\n";
         $TO = explode(",", $this->strip_comment($to));
         if ($cc != "") {
             $TO = array_merge($TO, explode(",", $this->strip_comment($cc)));
@@ -68,18 +68,18 @@ class smtp
         $sent = TRUE;
         foreach ($TO as $rcpt_to)
         {
-            $headerto  = "To: ".$rcpt_to."\r\n";
+            $headerto  = "To: {$rcpt_to}\r\n";
             $headerall = $header.$headerto;
             $rcpt_to   = $this->get_address($rcpt_to);
             if (!$this->smtp_sockopen($rcpt_to)) {
-                $this->log_write("Error: Cannot send email to ".$rcpt_to."\n");
+                $this->log_write("Error: Cannot send email to {$rcpt_to}\n");
                 $sent = FALSE;
                 continue;
             }
             if ($this->smtp_send($this->host_name, $mail_from, $rcpt_to, $headerall, $body)) {
-                $this->log_write("E-mail has been sent to <".$rcpt_to.">\n");
+                $this->log_write("E-mail has been sent to <{$rcpt_to}>\n");
             } else {
-                $this->log_write("Error: Cannot send email to <".$rcpt_to.">\n");
+                $this->log_write("Error: Cannot send email to <{$rcpt_to}>\n");
                 $sent = FALSE;
             }
             fclose($this->sock);
@@ -114,10 +114,10 @@ class smtp
                 return $this->smtp_error("sending HELO command");
             }
         }
-        if (!$this->smtp_putcmd("MAIL", "FROM:<".$from.">")) {
+        if (!$this->smtp_putcmd("MAIL", "FROM:<{$from}>")) {
             return $this->smtp_error("sending MAIL FROM command");
         }
-        if (!$this->smtp_putcmd("RCPT", "TO:<".$to.">")) {
+        if (!$this->smtp_putcmd("RCPT", "TO:<{$to}>")) {
             return $this->smtp_error("sending RCPT TO command");
         }
         if (!$this->smtp_putcmd("DATA")) {
@@ -148,7 +148,7 @@ class smtp
         $this->sock = @fsockopen($this->relay_host, $this->smtp_port, $errno, $errstr, $this->time_out);
         if (!($this->sock && $this->smtp_ok())) {
             $this->log_write("Error: Cannot connenct to relay host {$this->relay_host}\n");
-            $this->log_write("Error: ".$errstr." (".$errno.")\n");
+            $this->log_write("Error: {$errstr} ({$errno})\n");
             return FALSE;
         }
         $this->log_write("Connected to relay host {$this->relay_host}\n");
@@ -211,7 +211,7 @@ class smtp
             }
         }
         fputs($this->sock, $cmd."\r\n");
-        $this->smtp_debug("> ".$cmd."\n");
+        $this->smtp_debug("> {$cmd}\n");
         return $this->smtp_ok();
     }
     function smtp_error($string)

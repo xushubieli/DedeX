@@ -69,7 +69,7 @@ function GetCurContentAlbum($body, $rfurl, &$firstdd)
                 $info = '';
                 $imginfos = GetImageSize($rndFileName, $info);
                 SaveUploadInfo($title, $iurl, 1, $imginfos);
-                $rsimg .= "{dede:img ddimg='$litpicname' text='' width='".$imginfos[0]."' height='".$imginfos[1]."'} $iurl {/dede:img}\r\n";
+                $rsimg .= "{dede:img ddimg='$litpicname' text='' width='{$imginfos[0]}' height='{$imginfos[1]}'} $iurl {/dede:img}\r\n";
             }
         } else {
             $rsimg .= "{dede:img ddimg='$value' text='' width='0' height='0'} $value {/dede:img}\r\n";
@@ -91,7 +91,7 @@ function GetImageMapDD($filename, $ddm, $oldname = '')
         $ddpicok = $oldname;
     } else {
         $ddn = substr($filename, -3);
-        $ddpicok = preg_replace("#\.".$ddn."$#", "-X.".$ddn, $filename);
+        $ddpicok = preg_replace("#\.{$ddn}$#", "-X.{$ddn}", $filename);
     }
     $toFile = $GLOBALS['cfg_basedir'].$ddpicok;
     ImageResize($GLOBALS['cfg_basedir'].$filename, $ddm, 300, $toFile);
@@ -120,13 +120,13 @@ function SaveUploadInfo($title, $filename, $medaitype = 1, $addinfos = '')
         $addinfos = GetImageSize($cfg_basedir.$filename, $info);
     }
     $addinfos[2] = @filesize($cfg_basedir.$filename);
-    $row = $dsql->GetOne("SELECT aid,title,url FROM `#@__uploads` WHERE url LIKE '$filename' AND mid='".$cfg_ml->M_ID."';");
+    $row = $dsql->GetOne("SELECT aid,title,url FROM `#@__uploads` WHERE url LIKE '$filename' AND mid='{$cfg_ml->M_ID}';");
     $uptime = time();
     if (is_array($row)) {
         $query = "UPDATE `#@__uploads` SET title='$title',mediatype='$medaitype',width='{$addinfos[0]}',height='{$addinfos[1]}',filesize='{$addinfos[2]}',uptime='$uptime' WHERE aid='{$row['aid']}';";
         $dsql->ExecuteNoneQuery($query);
     } else {
-        $inquery = "INSERT INTO `#@__uploads` (title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('$title','$filename','$medaitype','".$addinfos[0]."','".$addinfos[1]."','0','".$addinfos[2]."','$uptime','".$cfg_ml->M_ID."');";
+        $inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('$arcID','$title','$filename','$medaitype','{$addinfos[0]}','{$addinfos[1]}','0','{$addinfos[2]}','$uptime','{$cfg_ml->M_ID}');";
         $dsql->ExecuteNoneQuery($inquery);
     }
     $fid = $dsql->GetLastID();
@@ -193,8 +193,8 @@ function PrintAutoFieldsAdd($fieldset, $loadtype = 'all', $isprint = TRUE)
             }
         }
     }
-    echo "<input type=\"hidden\" name=\"dede_addonfields\" value=\"".$dede_addonfields."\" />";
-    echo "<input type=\"hidden\" name=\"_csrf_token\" value=\"".$GLOBALS['csrf_token']."\" />";
+    echo "<input type=\"hidden\" name=\"dede_addonfields\" value=\"{$dede_addonfields}\" />";
+    echo "<input type=\"hidden\" name=\"_csrf_token\" value=\"{$GLOBALS['csrf_token']}\" />";
     //添加一个返回
     return $addonfieldsname;
 }
@@ -221,8 +221,8 @@ function PrintAutoFieldsEdit(&$fieldset, &$fieldValues, $loadtype = 'all')
             }
         }
     }
-    echo "<input type=\"hidden\" name=\"dede_addonfields\" value=\"".$dede_addonfields."\" />";
-    echo "<input type=\"hidden\" name=\"_csrf_token\" value=\"".$GLOBALS['csrf_token']."\" />";
+    echo "<input type=\"hidden\" name=\"dede_addonfields\" value=\"{$dede_addonfields}\" />";
+    echo "<input type=\"hidden\" name=\"_csrf_token\" value=\"{$GLOBALS['csrf_token']}\" />";
 }
 /**
  *  创建指定ID的文档

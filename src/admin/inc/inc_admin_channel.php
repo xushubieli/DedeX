@@ -53,12 +53,12 @@ function GetFieldMake($dtype, $fieldname, $dfvalue, $mxlen)
         $fields[1] = "char(100)";
     } else if ($dtype=="checkbox") {
         $dfvalue = str_replace(',',"','",$dfvalue);
-        $dfvalue = "'".$dfvalue."'";
+        $dfvalue = "'{$dfvalue}'";
         $fields[0] = " `$fieldname` SET($dfvalue) NULL;";
         $fields[1] = "SET($dfvalue)";
     } else if ($dtype=="select" || $dtype=="radio") {
         $dfvalue = str_replace(',', "','", $dfvalue);
-        $dfvalue = "'".$dfvalue."'";
+        $dfvalue = "'{$dfvalue}'";
         $fields[0] = " `$fieldname` enum($dfvalue) NULL;";
         $fields[1] = "enum($dfvalue)";
     } else {

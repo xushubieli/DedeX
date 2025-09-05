@@ -56,7 +56,7 @@ class SpecView
             $this->StartTime = GetMkTime($starttime);
         }
         $this->CountRecord();
-        $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/".$GLOBALS['cfg_df_style']."/list_spec.htm";
+        $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/{$GLOBALS['cfg_df_style']}/list_spec.htm";
         if (!file_exists($tempfile) || !is_file($tempfile)) {
             showmsg("专题主题模板htm文件不存在", "javascript:;");
             exit();
@@ -370,10 +370,10 @@ class SpecView
                     $row["info"] = $row["description"];
                     $row["filename"] = $row["arcurl"];
                     $row["stime"] = GetDateMK($row["pubdate"]);
-                    $row["textlink"] = "<a href='".$row["filename"]."'>".$row["title"]."</a>";
-                    $row["typelink"] = "[<a href='".$row["typeurl"]."'>".$row["typename"]."</a>]";
-                    $row["imglink"] = "<a href='".$row["filename"]."'><img src='".$row["picname"]."' width='$imgwidth' height='$imgheight'></a>";
-                    $row["image"] = "<img src='".$row["picname"]."' width='$imgwidth' height='$imgheight'>";
+                    $row["textlink"] = "<a href='{$row["filename"]}'>{$row["title"]}</a>";
+                    $row["typelink"] = "<a href='{$row["typeurl"]}'>{$row["typename"]}</a>";
+                    $row["imglink"] = "<a href='{$row["filename"]}'><img src='{$row["picname"]}' width='{$imgwidth}' height='{$imgheight}'></a>";
+                    $row["image"] = "<img src='{$row["picname"]}' width='{$imgwidth}' height='{$imgheight}'>";
                     $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
                     $row['memberurl'] = $GLOBALS['cfg_memberurl'];
                     $row['face'] = empty($row['face'])? $GLOBALS['cfg_mainsite'].'/static/web/img/admin.png' : $row['face'];
@@ -444,14 +444,14 @@ class SpecView
         $tnamerule = "spec_";
         //获得上页和下页的链接
         if ($this->PageNo != 1) {
-            $prepage .= "<li class='page-item'><a href='{$tnamerule}{$prepagenum}".$GLOBALS['art_shortname']."' class='page-link'>上页</a></li>";
-            $indexpage = "<li class='page-item'><a href='{$tnamerule}1".$GLOBALS['art_shortname']."' class='page-link'>首页</a></li>";
+            $prepage .= "<li class='page-item'><a href='{$tnamerule}{$prepagenum}{$GLOBALS['art_shortname']}' class='page-link'>上页</a></li>";
+            $indexpage = "<li class='page-item'><a href='{$tnamerule}1{$GLOBALS['art_shortname']}' class='page-link'>首页</a></li>";
         } else {
             $indexpage = "<li class='page-item'><span class='page-link'>首页</span></li>";
         }
         if ($this->PageNo != $totalpage && $totalpage > 1) {
-            $nextpage .= "<li class='page-item'><a href='{$tnamerule}{$nextpagenum}".$GLOBALS['art_shortname']."'>下页</a></li>";
-            $endpage = "<li class='page-item'><a href='{$tnamerule}{$totalpage}".$GLOBALS['art_shortname']."'>末页</a></li>";
+            $nextpage .= "<li class='page-item'><a href='{$tnamerule}{$nextpagenum}{$GLOBALS['art_shortname']}'>下页</a></li>";
+            $endpage = "<li class='page-item'><a href='{$tnamerule}{$totalpage}{$GLOBALS['art_shortname']}'>末页</a></li>";
         } else {
             $endpage = "<li class='page-item'><span class='page-link'>末页</span></li>";
         }
@@ -474,7 +474,7 @@ class SpecView
             if ($j == $this->PageNo) {
                 $listdd .= "<li class='page-item active'><span class='page-link'>{$j}</span></li>";
             } else {
-                $listdd .= "<li class='page-item'><a href='{$tnamerule}{$j}".$GLOBALS['art_shortname']."' class='page-link'>{$j}</a></li>";
+                $listdd .= "<li class='page-item'><a href='{$tnamerule}{$j}{$GLOBALS['art_shortname']}' class='page-link'>{$j}</a></li>";
             }
         }
         $plist = $indexpage.$prepage.$listdd.$nextpage.$endpage;

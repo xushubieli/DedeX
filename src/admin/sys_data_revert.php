@@ -9,7 +9,7 @@ if (DEDEX_SAFE_MODE) {
     die(DedeAlert("系统已启用安全模式，无法使用当前功能", ALERT_DANGER));
   }
 CheckPurview('sys_Data');
-$bkdir = DEDEDATA."/".$cfg_backup_dir;
+$bkdir = DEDEDATA."/{$cfg_backup_dir}";
 $filelists = array();
 $dh = dir($bkdir);
 $structfile = "没找到数据结构文件";

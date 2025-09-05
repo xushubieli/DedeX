@@ -40,14 +40,14 @@ if ($dopost == "toadmin") {
         if (function_exists('password_hash')) {
             $password = $row['pwd_new'];
             $inputpwd = ",pwd_new";
-            $inputpwdv = ",'".$password."'";
-            $pwdm = ",pwd_new='".$password."'";
+            $inputpwdv = ",'{$password}'";
+            $pwdm = ",pwd_new='{$password}'";
         } else {
             $password = $row['pwd'];
             $inputpwd = ",pwd";
             $pwd = substr($password, 5, 20);
-            $inputpwdv = ",'".$pwd."'";
-            $pwdm = ",pwd='".$password."'";
+            $inputpwdv = ",'{$pwd}'";
+            $pwdm = ",pwd='{$password}'";
         }
     }
     $typeids = (empty($typeids)) ? array() : $typeids;

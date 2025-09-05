@@ -55,7 +55,7 @@ if ($action == "save") {
         @move_uploaded_file($newimg, DEDEDATA."/mark/".$photo_markimg);
     }
     $configstr .= "\$photo_markimg = '{$photo_markimg}';\r\n";
-    $configstr = "<"."?php\r\n".$configstr."?".">\r\n";
+    $configstr = "<"."?php\r\n{$configstr}?".">\r\n";
     $fp = fopen($ImageWaterConfigFile, "w") or die("写入文件{$ImageWaterConfigFile}失败，请检查权限");
     fwrite($fp, $configstr);
     fclose($fp);

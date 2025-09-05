@@ -217,7 +217,7 @@ else if ($dopost == "checkArchives") {
         if ($row['issystem'] == -1) {
             $dsql->ExecuteNoneQuery("UPDATE `".trim($row['addtable'])."` SET arcrank='0' WHERE aid='$aid' ");
         } else {
-            $dsql->ExecuteNoneQuery("UPDATE `$maintable` SET arcrank='0', dutyadmin='".$cuserLogin->getUserID()."' WHERE id='$aid' ");
+            $dsql->ExecuteNoneQuery("UPDATE `$maintable` SET arcrank='0', dutyadmin='{$cuserLogin->getUserID()}' WHERE id='$aid' ");
         }
         $dsql->ExecuteNoneQuery("UPDATE `#@__taglist` SET arcrank='0' WHERE aid='$aid' ");
         $pageurl = MakeArt($aid, false);

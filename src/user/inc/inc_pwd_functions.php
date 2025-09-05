@@ -18,7 +18,7 @@ function random($length, $numeric = 0)
 {
     PHP_VERSION < '4.2.0' && mt_srand((float)microtime() * 1000000);
     if ($numeric) {
-        $hash = sprintf('%0'.$length.'d', mt_rand(0, pow(10, $length) - 1));
+        $hash = sprintf("%0{$length}d", mt_rand(0, pow(10, $length) - 1));
     } else {
         $hash = '';
         $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
@@ -66,12 +66,12 @@ function newmail($mid, $userid, $mailto, $type, $send)
     global $db, $cfg_adminemail, $cfg_webname, $cfg_basehost, $cfg_memberurl;
     $mailtime = time();
     $randval = random(8);
-    $mailtitle = $cfg_webname.":密码修改";
+    $mailtitle = "来自{$cfg_webname}密码通知";
     $headers = "From: {$cfg_adminemail}\r\nReply-To: {$cfg_adminemail}";
     $mailbody = "尊敬的{$userid}会员，临时验证码：{$randval}\r\n请在3天内修改登录密码：{$cfg_basehost}{$cfg_memberurl}/resetpassword.php?dopost=getpasswd&id={$mid}";
     if ($type == 'INSERT') {
         $key = md5($randval);
-        $sql = "INSERT INTO `#@__pwd_tmp` (`mid` ,`membername` ,`pwd` ,`mailtime`) VALUES ('$mid', '$userid',  '$key', '$mailtime');";
+        $sql = "INSERT INTO `#@__pwd_tmp` (`mid`,`membername`,`pwd`,`mailtime`) VALUES ('$mid','$userid','$key','$mailtime');";
         if ($db->ExecuteNoneQuery($sql)) {
             if ($send == 'Y') {
                 sendmail($mailto, $mailtitle, $mailbody, $headers);
@@ -84,7 +84,7 @@ function newmail($mid, $userid, $mailto, $type, $send)
         }
     } else if ($type == 'UPDATE') {
         $key = md5($randval);
-        $sql = "UPDATE `#@__pwd_tmp` SET `pwd` = '$key',mailtime = '$mailtime' WHERE `mid` ='$mid';";
+        $sql = "UPDATE `#@__pwd_tmp` SET `pwd`='$key',mailtime='$mailtime' WHERE `mid`='$mid';";
         if ($db->ExecuteNoneQuery($sql)) {
             if ($send === 'Y') {
                 sendmail($mailto, $mailtitle, $mailbody, $headers);
@@ -108,7 +108,7 @@ function member($mail, $userid)
 {
     global $db;
     $msql = empty($mail)? "1=1" : "email='$mail'";
-    $sql = "SELECT mid,email,safequestion FROM `#@__member` WHERE $msql AND userid = '$userid'";
+    $sql = "SELECT mid,email,safequestion FROM `#@__member` WHERE $msql AND userid='$userid'";
     $row = $db->GetOne($sql);
     if (!is_array($row)) {
         ShowMsg("会员ID输入错误", "-1");
@@ -131,7 +131,7 @@ function sn($mid, $userid, $mailto, $send = 'Y')
     global $db;
     $tptim = (60 * 10);
     $dtime = time();
-    $sql = "SELECT * FROM `#@__pwd_tmp` WHERE mid = '$mid'";
+    $sql = "SELECT * FROM `#@__pwd_tmp` WHERE mid='$mid'";
     $row = $db->GetOne($sql);
     //发送新邮件
     if (!is_array($row)) {

@@ -148,17 +148,17 @@
 		{dede:include filename='foot.htm'/}
 		<script>
 			//顶踩功能
-			function GetDigg(aid,cid) {
+			function GetDigg(aid, cid) {
 				let url = `{dede:global.cfg_phpurl/}/digg_ajax.php?id=${aid}&cid=${cid}&format=json`;
 				$.get(url, function(data) {
 					let reval = JSON.parse(data);
 					if (reval.code === 200) {
 						$("#goodpost").html(reval.data.goodpost);
 						$("#badpost").html(reval.data.badpost);
-						$("#goodper").css("width", `${reval.data.goodper}%`)
-						$("#badper").css("width", `${reval.data.badper}%`)
+						$("#goodper").css("width", `${reval.data.goodper}%`);
+						$("#badper").css("width", `${reval.data.badper}%`);
 					}
-				})
+				});
 			}
 			function PostDigg(ftype, aid) {
 				var saveid = GetCookie('diggid');
@@ -177,22 +177,26 @@
 							if (j == 19 && !hasid) break;
 						}
 					}
-					if (hasid) { ShowMsg("您已经顶过该帖，请不要重复顶帖"); return; }
-					else saveid += ',' + aid;
+					if (hasid) {
+						ShowMsg("您已经顶过该帖，请不要重复顶帖");
+						return;
+					} else {
+						saveid += ',' + aid;
+					}
 					SetCookie('diggid', saveid, 1);
 				} else {
 					SetCookie('diggid', aid, 1);
 				}
-				let url = "{dede:global.cfg_phpurl/}/digg_ajax.php?action=" + ftype + "&id=" + aid + "&format=json&cid={dede:field.channel/}";
+				let url = `{dede:global.cfg_phpurl/}/digg_ajax.php?action=${ftype}&id=${cid}&format=json&cid={dede:field.channel/}`;
 				$.get(url, function(data) {
 					let reval = JSON.parse(data);
 					if (reval.code === 200) {
 						$("#goodpost").html(reval.data.goodpost);
 						$("#badpost").html(reval.data.badpost);
-						$("#goodper").css("width", `${reval.data.goodper}%`)
-						$("#badper").css("width", `${reval.data.badper}%`)
+						$("#goodper").css("width", `${reval.data.goodper}%`);
+						$("#badper").css("width", `${reval.data.badper}%`);
 					}
-				});
+				});;
 			}
 			GetDigg("{dede:field.id/}", "{dede:field.channel/}");
 			//发表评论
@@ -237,7 +241,7 @@
 					} else {
 						ShowAlert(`._feedback_reply[for="${fid}"]`, `评论失败：${result.msg}`, "danger");
 					}
-				})
+				});
 				$(`._feedback_reply[for="${fid}"]`).find(".btn-send").attr("disabled", "disabled");
 			}
 			//回复某个评论
@@ -311,7 +315,7 @@
 				$.post("{dede:global.cfg_phpurl/}/feedback.php", good, function(data) {
 					let result = JSON.parse(data);
 					$(`#feedbackGood${fid}`).html(result.data);
-				})
+				});
 			}
 		</script>
 	</body>

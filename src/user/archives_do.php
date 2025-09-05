@@ -18,10 +18,10 @@ if ($dopost == "delStow") {
         $tupdate = " AND type = '$type'";
     }
     $ENV_GOBACK_URL = empty($_COOKIE['ENV_GOBACK_URL']) ? "mystow.php" : $_COOKIE['ENV_GOBACK_URL'];
-    $dsql->ExecuteNoneQuery("DELETE FROM `#@__member_stow` WHERE aid='$aid' AND mid='".$cfg_ml->M_ID."'$tupdate;");
+    $dsql->ExecuteNoneQuery("DELETE FROM `#@__member_stow` WHERE aid='$aid' AND mid='{$cfg_ml->M_ID}'$tupdate;");
     //更新会员统计
-    $row = $dsql->GetOne("SELECT COUNT(*) AS nums FROM `#@__member_stow` WHERE `mid`='".$cfg_ml->M_ID."' ");
-    $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET `stow`='$row[nums]' WHERE `mid`='".$cfg_ml->M_ID."'");
+    $row = $dsql->GetOne("SELECT COUNT(*) AS nums FROM `#@__member_stow` WHERE `mid`='{$cfg_ml->M_ID}' ");
+    $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET `stow`='$row[nums]' WHERE `mid`='{$cfg_ml->M_ID}' ");
     ShowMsg("成功删除一条收藏记录", $ENV_GOBACK_URL);
     exit();
 }
@@ -84,9 +84,9 @@ else if ($dopost == "delArc") {
     }
     if (trim($row['maintable']) == '') $row['maintable'] = '#@__archives';
     if ($row['issystem'] == -1) {
-        $equery = "SELECT mid FROM `{$row['addtable']}` WHERE aid='$aid' AND mid='".$cfg_ml->M_ID."' ";
+        $equery = "SELECT mid FROM `{$row['addtable']}` WHERE aid='$aid' AND mid='{$cfg_ml->M_ID}' ";
     } else {
-        $equery = "SELECT mid,litpic from `{$row['maintable']}` WHERE id='$aid' AND mid='".$cfg_ml->M_ID."' ";
+        $equery = "SELECT mid,litpic from `{$row['maintable']}` WHERE id='$aid' AND mid='{$cfg_ml->M_ID}' ";
     }
     $arr = $dsql->GetOne($equery);
     if (!is_array($arr)) {
@@ -118,7 +118,7 @@ else if ($dopost == "delArc") {
         //更新会员记录
         countArchives($channelid);
         //扣除积分
-        $dsql->ExecuteNoneQuery("Update `#@__member` set scores=scores-{$cfg_sendarc_scores} WHERE mid='".$cfg_ml->M_ID."' And (scores-{$cfg_sendarc_scores}) > 0;");
+        $dsql->ExecuteNoneQuery("Update `#@__member` set scores=scores-{$cfg_sendarc_scores} WHERE mid='{$cfg_ml->M_ID}' And (scores-{$cfg_sendarc_scores})>0;");
         ShowMsg("成功删除一篇文档", $ENV_GOBACK_URL);
         exit();
     } else {

@@ -25,7 +25,7 @@ if ($dopost != 'save') {
         ShowMsg("读取文档信息出错", "javascript:;");
         exit();
     }
-    $query = "SELECT * FROM `#@__channeltype` WHERE id='".$arcRow['channel']."'";
+    $query = "SELECT * FROM `#@__channeltype` WHERE id='{$arcRow['channel']}'";
     $cInfos = $dsql->GetOne($query);
     if (!is_array($cInfos)) {
         ShowMsg("读取栏目信息出错", "javascript:;");
@@ -47,7 +47,7 @@ if ($dopost != 'save') {
                     $islocal = $ctag->GetAtt('islocal');
                     if ($islocal != 1) $needmsg = "<label><input type='checkbox' name='del{$newRowStart}' value='1'> 删除</label>";
                     else $needmsg = '<button type="button" name="sel1" id="sel1" class="btn btn-primary btn-sm" onclick="SelectSoft(\'form1.softurl{$newRowStart}\')">选择</button>';
-                    $nForm .= "<p><label>软件网址{$newRowStart}：<input type='text' name='softurl{$newRowStart}' value='".trim($ctag->GetInnerText())."' class='form-control admin-w-lg'></label> <label>下载名称：<input type='text' name='servermsg{$newRowStart}' value='".$ctag->GetAtt("text")."' class='form-control admin-w-sm'></label><input type='hidden' name='islocal{$newRowStart}' value='{$islocal}'> {$needmsg}</p>\r\n";
+                    $nForm .= "<p><label>软件网址{$newRowStart}：<input type='text' name='softurl{$newRowStart}' value='".trim($ctag->GetInnerText())."' class='form-control admin-w-lg'></label> <label>下载名称：<input type='text' name='servermsg{$newRowStart}' value='{$ctag->GetAtt('text')}' class='form-control admin-w-sm'></label><input type='hidden' name='islocal{$newRowStart}' value='{$islocal}'> {$needmsg}</p>\r\n";
                     $newRowStart++;
                 }
             }

@@ -27,7 +27,7 @@ function ReWriteConfig()
         if ($row['type'] == 'number') {
             $row['value'] = preg_replace("#[^0-9.-]#","", $row['value']);
             if ($row['value'] == '') $row['value'] = 0;
-            fwrite($fp, "\${$row['varname']} = ".$row['value'].";\r\n");
+            fwrite($fp, "\${$row['varname']} = {$row['value']};\r\n");
         } else {
             $row['value'] = stripslashes($row['value']);
             fwrite($fp, "\${$row['varname']} = '".str_replace(array("'","\\"), '', $row['value'])."';\r\n");
@@ -109,7 +109,7 @@ else if ($dopost == 'search') {
 EOT;
     echo $configstr;
     if ($keywords) {
-        $dsql->SetQuery("SELECT * FROM `#@__sysconfig` WHERE info LIKE '%$keywords%' OR varname LIKE '%$keywords%' ORDER BY aid ASC");
+        $dsql->SetQuery("SELECT * FROM `#@__sysconfig` WHERE info LIKE '%{$keywords}%' OR varname LIKE '%{$keywords}%' ORDER BY aid ASC");
         $dsql->Execute();
         while ($row = $dsql->GetArray()) {
         ?>

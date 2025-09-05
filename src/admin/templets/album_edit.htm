@@ -183,7 +183,7 @@
 															$fhtml .= "<input type='hidden' name='imgurl{$j}' value='{$bigimg}'>";
 															$fhtml .= "<input type='hidden' name='imgddurl{$j}' value='{$litimg}'>";
 															$fhtml .= "<div class='atlas-head'><img src='{$litimg}' id='lit{$j}'></div>";
-															$fhtml .= "<div class='atlas-body'><input type='text' name='imgmsg{$j}' value='".$ctag->GetAtt('text')."' class='atlas-input' placeholder='请输入图片注释'></div>";
+															$fhtml .= "<div class='atlas-body'><input type='text' name='imgmsg{$j}' value='{$ctag->GetAtt('text')}' class='atlas-input' placeholder='请输入图片注释'></div>";
 															$fhtml .= "<div class='atlas-foot'><span class='btn btn-primary btn-sm opt-button'>更换<input type='file' name='imgfile{$j}' for='item{$j}' class='atlasedit'></span><a href=\"javascript:delAlbPicOld('$bigimg',$j)\" class=\"btn btn-danger btn-sm\">删除</a></div>";
 															$fhtml .= "</div>";
 															echo $fhtml;

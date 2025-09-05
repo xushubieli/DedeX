@@ -67,7 +67,7 @@ function ReWriteConfigAuto()
     $dsql->SetQuery("SELECT `varname`,`type`,`value`,`groupid` FROM `#@__sysconfig` ORDER BY aid ASC ");
     $dsql->Execute();
     while ($row = $dsql->GetArray()) {
-        if ($row['type'] == 'number') fwrite($fp, "\${$row['varname']} = ".$row['value'].";\r\n");
+        if ($row['type'] == 'number') fwrite($fp, "\${$row['varname']} = {$row['value']};\r\n");
         else fwrite($fp, "\${$row['varname']} = '".str_replace("'", '', $row['value'])."';\r\n");
     }
     fwrite($fp, "?".">");
@@ -78,7 +78,7 @@ function UpDateCatCache()
 {
     global $conn, $cfg_multi_site, $dbprefix;
     $cache1 = DEDEDATA."/cache/inc_catalog_base.inc";
-    $rs = mysql_query("SELECT id,reid,channeltype,issend,typename FROM `".$dbprefix."arctype`", $conn);
+    $rs = mysql_query("SELECT id,reid,channeltype,issend,typename FROM `{$dbprefix}arctype`", $conn);
     $fp1 = fopen($cache1, 'w');
     $phph = '?';
     $fp1Header = "<{$phph}php\r\nglobal \$cfg_Cs;\r\n\$cfg_Cs=array();\r\n";

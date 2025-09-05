@@ -74,7 +74,7 @@ $sizes = getimagesize($fullfilename, $info);
 $imgwidthValue = $sizes[0];
 $imgheightValue = $sizes[1];
 $imgsize = filesize($fullfilename);
-$inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('0','$filename','".$activepath."/".$filename."','1','$imgwidthValue','$imgheightValue','0','{$imgsize}','{$nowtme}','".$cuserLogin->getUserID()."'); ";
+$inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('0','$filename','{$activepath}/{$filename}','1','$imgwidthValue','$imgheightValue','0','{$imgsize}','{$nowtme}','{$cuserLogin->getUserID()}'); ";
 $dsql->ExecuteNoneQuery($inquery);
 $fid = $dsql->GetLastID();
 AddMyAddon($fid, $activepath.'/'.$filename);

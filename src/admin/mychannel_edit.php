@@ -421,7 +421,7 @@ if ($dopost == "show") {
                 $label = $ctag->GetAtt('itemname');
                 if (in_array($datatype, $searchtype)) {
                     $checked = in_array($value, $addonfieldsarr) ? 'checked' : '';
-                    $addonfields .= "<label><input type='checkbox' name='addonfields[]' value='$value' $checked> $label</label> ";
+                    $addonfields .= "<label><input type='checkbox' name='addonfields[]' value='{$value}' {$checked}> {$label}</label> ";
                 }
             }
         }
@@ -508,24 +508,24 @@ if ($dopost == "show") {
                 $type = $typearr[$k];
                 $tmp = $name.':'.$type;
                 if (in_array($type, $intarr)) {
-                    $forms .= "$itemname：<input type=\"text\" name=\"start".$name."\" value=\"\"> 到 <input type=\"text\" name=\"end".$name."\" value=\"\"><br>";
+                    $forms .= "$itemname：<input type=\"text\" name=\"start{$name}\" value=\"\"> 到 <input type=\"text\" name=\"end{$name}\" value=\"\"><br>";
                 } else if (in_array($type, $textarr)) {
-                    $forms .= "$itemname：<input type=\"text\" name=\"$name\" value=\"\"><br>";
+                    $forms .= "$itemname：<input type=\"text\" name=\"{$name}\" value=\"\"><br>";
                 } else if ($type == 'select') {
                     $values = explode(',', $valuearr[$k]);
                     if (is_array($values) && !empty($values)) {
-                        $forms .= "$itemname：<select name=\"$name\"><option value=\"\">不限</option>";
+                        $forms .= "$itemname：<select name=\"{$name}\"><option value=\"\">不限</option>";
                         foreach ($values as $value) {
-                            $forms .= "<option value=\"$value\">$value</option>";
+                            $forms .= "<option value=\"{$value}\">{$value}</option>";
                         }
                         $forms .= "</select><br>";
                     }
                 } else if ($type == 'radio') {
                     $values = explode(',', $valuearr[$k]);
                     if (is_array($values) && !empty($values)) {
-                        $forms .= "$itemname：<label><input type=\"radio\" name=\"".$name."\" value=\"\" checked> 不限</label><br>";
+                        $forms .= "$itemname：<label><input type=\"radio\" name=\"{$name}\" value=\"\" checked> 不限</label><br>";
                         foreach ($values as $value) {
-                            $forms .= "<label><input type=\"radio\" name=\"".$name."\" value=\"$value\"> $value</label>";
+                            $forms .= "<label><input type=\"radio\" name=\"{$name}\" value=\"{$value}\"> {$value}</label>";
                         }
                     }
                 } else if ($type == 'checkbox') {
@@ -533,7 +533,7 @@ if ($dopost == "show") {
                     if (is_array($values) && !empty($values)) {
                         $forms .= "$itemname：";
                         foreach ($values as $value) {
-                            $forms .= "<label><input type=\"checkbox\" name=\"".$name."[]\" value=\"$value\"> $value</label><br>";
+                            $forms .= "<label><input type=\"checkbox\" name=\"{$name}[]\" value=\"{$value}\"> {$value}</label><br>";
                         }
                     }
                 } else if ($type == 'datetime') {

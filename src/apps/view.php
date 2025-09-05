@@ -47,7 +47,7 @@ if ($needMoney > 0 || $needRank > 1) {
     }
     //金币处理
     if ($needMoney > 0  && $arc->Fields['mid'] != $cfg_ml->M_ID) {
-        $sql = "SELECT aid,money FROM `#@__member_operation` WHERE buyid='ARCHIVE".$aid."' AND mid='".$cfg_ml->M_ID."'";
+        $sql = "SELECT aid,money FROM `#@__member_operation` WHERE buyid='ARCHIVE{$aid}' AND mid='{$cfg_ml->M_ID}'";
         $row = $dsql->GetOne($sql);
         //未购买过此文档
         if (!is_array($row)) {
@@ -59,9 +59,9 @@ if ($needMoney > 0 || $needRank > 1) {
                 exit();
             } else {
                 if ($dopost == 'buy') {
-                    $inquery = "INSERT INTO `#@__member_operation` (mid,oldinfo,money,mtime,buyid,product,pname,sta) VALUES ('".$cfg_ml->M_ID."','$arctitle','$needMoney','".time()."','ARCHIVE".$aid."','archive','购买内容',2); ";
+                    $inquery = "INSERT INTO `#@__member_operation` (mid,oldinfo,money,mtime,buyid,product,pname,sta) VALUES ('{$cfg_ml->M_ID}','$arctitle','$needMoney','".time()."','ARCHIVE{$aid}','archive','购买内容',2); ";
                     if ($dsql->ExecuteNoneQuery($inquery)) {
-                        $inquery = "UPDATE `#@__member` SET money=money-$needMoney WHERE mid='".$cfg_ml->M_ID."'";
+                        $inquery = "UPDATE `#@__member` SET money=money-$needMoney WHERE mid='{$cfg_ml->M_ID}'";
                         if (!$dsql->ExecuteNoneQuery($inquery)) {
                             showmsg('购买失败, 请返回', -1);
                             exit;

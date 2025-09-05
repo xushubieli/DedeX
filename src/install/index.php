@@ -97,7 +97,7 @@ else if ($step == 2) {
     } else {
         $dbtype = 'mysql';
         $conn = mysql_connect($dbhost, $dbuser, $dbpwd) or die("<script>alert('数据库服务器或登录密码无效，无法连接数据库，请重新设定');javascript:history.go(-1);</script>");
-        mysql_query("CREATE DATABASE IF NOT EXISTS `".$dbname."`;", $conn);
+        mysql_query("CREATE DATABASE IF NOT EXISTS `{$dbname}`;", $conn);
         mysql_select_db($dbname, $conn) or die("<script>alert('选择数据库失败，可能是您没权限，请预先创建一个数据库');javascript:history.go(-1);</script>");
         //获得数据库版本信息
         $rs = mysql_query("SELECT VERSION();", $conn);

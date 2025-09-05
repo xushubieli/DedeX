@@ -14,6 +14,20 @@
 		<script src="/static/web/js/moment.min.js"></script>
 		<script src="/static/web/js/daterangepicker.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
+		<script>
+			var startNum = 2;
+			function MakeUpload() {
+				var upfield = document.getElementById("uploadfield");
+				var endNum = parseInt(document.form1.picnum.value) + startNum;
+				if (endNum > 30) endNum = 30;
+				for (startNum; startNum <= endNum; startNum++) {
+					upfield.innerHTML += "<p><label>软件网址" + startNum + "：<input type='text' name='softurl" + startNum + "' class='form-control admin-w-lg'></label> <label>下载名称" + startNum + "：<input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control admin-w-sm'></label> <button type='button' name='sel1' id='sel1' onclick=\"SelectSoft('form1.softurl" + startNum + "')\" class='btn btn-primary btn-sm'>选择</button></p>";
+				}
+			}
+			function ShowHideAddr() {
+				document.getElementById('morelink').style.display = document.getElementById('morelink').style.display == 'block' ? 'none' : 'block';
+			}
+		</script>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -349,19 +363,5 @@
 			</div>
 		</div>
 		<script>InitPage();</script>
-		<script>
-			var startNum = 2;
-			function MakeUpload() {
-				var upfield = document.getElementById("uploadfield");
-				var endNum = parseInt(document.form1.picnum.value) + startNum;
-				if (endNum > 30) endNum = 30;
-				for (startNum; startNum <= endNum; startNum++) {
-					upfield.innerHTML += "<p><label>软件网址" + startNum + "：<input type='text' name='softurl" + startNum + "' class='form-control admin-w-lg'></label> <label>下载名称" + startNum + "：<input type='text' name='servermsg" + startNum + "' value='服务器" + startNum + "' class='form-control admin-w-sm'></label> <button type='button' name='sel1' id='sel1' onclick=\"SelectSoft('form1.softurl" + startNum + "')\" class='btn btn-primary btn-sm'>选择</button></p>";
-				}
-			}
-			function ShowHideAddr() {
-				document.getElementById('morelink').style.display = document.getElementById('morelink').style.display == 'block' ? 'none' : 'block';
-			}
-		</script>
 	</body>
 </html>

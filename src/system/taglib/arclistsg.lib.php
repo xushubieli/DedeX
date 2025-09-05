@@ -110,7 +110,7 @@ function lib_arclistsg(&$ctag, &$refObj)
     $ordersql = '';
     if ($orderby == 'hot' || $orderby == 'click') $ordersql = " ORDER BY arc.click $orderway";
     else if ($orderby == 'id') $ordersql = " ORDER BY arc.aid $orderway";
-    else if ($orderby == 'near') $ordersql = " ORDER BY ABS(arc.id - ".$arcid.")";
+    else if ($orderby == 'near') $ordersql = " ORDER BY ABS(arc.id - $arcid)";
     else if ($orderby == 'rand') $ordersql = " ORDER BY rand()";
     else $ordersql = " ORDER BY arc.aid $orderway";
     //limit条件
@@ -182,13 +182,13 @@ function lib_arclistsg(&$ctag, &$refObj)
                     $row['litpic'] = $GLOBALS['cfg_mainsite'].$row['litpic'];
                 }
                 $row['picname'] = $row['litpic'];
-                $row['image'] = "<img src='".$row['picname']."' width='{$imgwidth}' height='{$imgheight}' title='".preg_replace("#['><]#", "", $row['title'])."' />";
-                $row['imglink'] = "<a href='".$row['filename']."'>".$row['image']."</a>";
+                $row['image'] = "<img src='{$row['picname']}' width='{$imgwidth}' height='{$imgheight}' title='".preg_replace("#['><]#", "", $row['title'])."' />";
+                $row['imglink'] = "<a href='{$row['filename']}'>{$row['image']}</a>";
                 $row['stime'] = GetDateMK($row['pubdate']);
-                $row['typelink'] = "<a href='".$row['typeurl']."'>".$row['typename']."</a>";
+                $row['typelink'] = "<a href='{$row['typeurl']}'>{$row['typename']}</a>";
                 $row['fulltitle'] = $row['title'];
                 $row['title'] = cn_substr($row['title'], $titlelen);
-                $row['textlink'] = "<a href='".$row['filename']."'>".$row['title']."</a>";
+                $row['textlink'] = "<a href='{$row['filename']}'>{$row['title']}</a>";
                 $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
                 $row['memberurl'] = $GLOBALS['cfg_memberurl'];
                 $row['templeturl'] = $GLOBALS['cfg_templeturl'];
@@ -217,8 +217,8 @@ function lib_arclistsg(&$ctag, &$refObj)
     $idsstr = join(',', $ids);
     if ($idsstr != '' && $needcache && $cfg_index_cache > 0) {
         $mintime = time() - ($cfg_index_cache * 3600);
-        $inquery = "INSERT INTO `#@__arccache` (`md5hash`,`uptime`,`cachedata`) VALUES ('".$md5hash."', '".time()."', '$idsstr'); ";
-        $dsql->ExecuteNoneQuery("DELETE FROM `#@__arccache` WHERE md5hash='".$md5hash."' or uptime < $mintime ");
+        $inquery = "INSERT INTO `#@__arccache` (`md5hash`,`uptime`,`cachedata`) VALUES ('{$md5hash}', '".time()."', '$idsstr'); ";
+        $dsql->ExecuteNoneQuery("DELETE FROM `#@__arccache` WHERE md5hash='{$md5hash}' or uptime < $mintime ");
         $dsql->ExecuteNoneQuery($inquery);
     }
     return $artlist;

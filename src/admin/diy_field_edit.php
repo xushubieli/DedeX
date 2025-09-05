@@ -65,10 +65,10 @@ if ($action == 'save') {
     foreach ($dtp->CTags as $tagid => $ctag) {
         if (trim($fieldname) == trim(strtolower($ctag->GetName()))) {
             if (isset($fields[$fieldname]) && $fields[$fieldname] != $buideType) {
-                $tabsql = "ALTER TABLE `$trueTable` CHANGE `$fieldname` ".$ntabsql;
+                $tabsql = "ALTER TABLE `$trueTable` CHANGE `$fieldname` $ntabsql";
                 $dsql->ExecuteNoneQuery($tabsql);
             } else if (!isset($fields[$fieldname])) {
-                $tabsql = "ALTER TABLE `$trueTable` ADD ".$ntabsql;
+                $tabsql = "ALTER TABLE `$trueTable` ADD $ntabsql";
                 $dsql->ExecuteNoneQuery($tabsql);
             } else {
                 $tabsql = '';

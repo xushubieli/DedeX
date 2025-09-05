@@ -179,7 +179,7 @@ function GetFieldValue($dvalue, $dtype, $aid = 0, $job = 'add', $addvar = '')
             if ($isUrlOpen) {
                 $reimgs = GetRemoteImage($iurl, $GLOBALS['adminid']);
                 if (is_array($reimgs)) {
-                    $imgurl = "{dede:img text='' width='".$reimgs[1]."' height='".$reimgs[2]."'} ".$reimgs[0]." {/dede:img}";
+                    $imgurl = "{dede:img text='' width='{$reimgs[1]}' height='{$reimgs[2]}'} {$reimgs[0]} {/dede:img}";
                 }
             } else {
                 $imgurl = "{dede:img text='' width='' height=''} $iurl {/dede:img}";
@@ -189,7 +189,7 @@ function GetFieldValue($dvalue, $dtype, $aid = 0, $job = 'add', $addvar = '')
             $imgfile = $GLOBALS['cfg_basedir'].$iurl;
             if (is_file($imgfile)) {
                 $imginfos = GetImageSize($imgfile);
-                $imgurl = "{dede:img text='' width='".$imginfos[0]."' height='".$imginfos[1]."'} $iurl {/dede:img}";
+                $imgurl = "{dede:img text='' width='{$imginfos[0]}' height='{$imginfos[1]}'} $iurl {/dede:img}";
             }
         }
         return addslashes($imgurl);

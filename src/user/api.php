@@ -30,7 +30,7 @@ if ($action === 'is_need_check_code') {
         ));
         exit;
     }
-    $row = $dsql->GetOne("SELECT * FROM `#@__member` WHERE mid='".$cfg_ml->M_ID."' ");
+    $row = $dsql->GetOne("SELECT * FROM `#@__member` WHERE mid='{$cfg_ml->M_ID}' ");
     if (function_exists('password_hash') && !empty($row['pwd_new'])) {
         if (!is_array($row) || !password_verify($oldpwd, $row['pwd_new'])) {
             echo json_encode(array(
@@ -160,7 +160,7 @@ if ($action === 'is_need_check_code') {
     $fsize = filesize($ff["tmp_name"]);
     if ($type === "face") {
         $target_file = $cfg_basedir.$cfg_user_dir."/{$cfg_ml->M_ID}/newface.png";
-        $target_url = $cfg_mediasurl.'/userup'."/{$cfg_ml->M_ID}/newface.png";
+        $target_url = $cfg_mediasurl."/userup/{$cfg_ml->M_ID}/newface.png";
         if ($fsize > ($cfg_max_face * 1024)) {
             echo json_encode(array(
                 "code" => -1,
@@ -186,15 +186,15 @@ if ($action === 'is_need_check_code') {
         }
         $nowtme = time();
         $rnd = $nowtme.'-'.mt_rand(1000, 9999);
-        $target_file = $cfg_basedir.$cfg_user_dir."/{$cfg_ml->M_ID}/".$rnd.".".$exts;
-        $target_url = $cfg_mediasurl.'/userup'."/{$cfg_ml->M_ID}/".$rnd.".".$exts;
-        $row = $dsql->GetOne("SELECT aid,title,url FROM `#@__uploads` WHERE url LIKE '$target_url' AND mid='".$cfg_ml->M_ID."'; ");
+        $target_file = $cfg_basedir.$cfg_user_dir."/{$cfg_ml->M_ID}/{$rnd}.".$exts;
+        $target_url = $cfg_mediasurl."/userup/{$cfg_ml->M_ID}/{$rnd}.".$exts;
+        $row = $dsql->GetOne("SELECT aid,title,url FROM `#@__uploads` WHERE url LIKE '$target_url' AND mid='{$cfg_ml->M_ID}'; ");
         $uptime = time();
         if (is_array($row)) {
-            $query = "UPDATE `#@__uploads` SET mediatype={$mediatype},width='{$width}',height='{$height}',filesize='{$fsize}',uptime='$uptime' WHERE aid='{$row['aid']}'; ";
+            $query = "UPDATE `#@__uploads` SET mediatype=$mediatype,width='$width',height='$height',filesize='$fsize',uptime='$uptime' WHERE aid='{$row['aid']}'; ";
             $dsql->ExecuteNoneQuery($query);
         } else {
-            $inquery = "INSERT INTO `#@__uploads`(url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('$target_url','$mediatype','".$width."','".$height."','0','".$fsize."','$uptime','".$cfg_ml->M_ID."'); ";
+            $inquery = "INSERT INTO `#@__uploads`(url,mediatype,width,height,playtime,filesize,uptime,mid) VALUES ('$target_url','$mediatype','$width','$height','0','$fsize','$uptime','{$cfg_ml->M_ID}'); ";
             $dsql->ExecuteNoneQuery($inquery);
         }
     }

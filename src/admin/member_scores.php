@@ -24,8 +24,8 @@ if ($action == 'save') {
             if (empty($k)) {
                 $k = 0;
             }
-            $sql = $fildes."='".$k."'";
-            $dsql->ExecuteNoneQuery("UPDATE `#@__scores` SET ".$sql." WHERE id='{$ID}'");
+            $sql = $fildes."='{$k}'";
+            $dsql->ExecuteNoneQuery("UPDATE `#@__scores` SET {$sql} WHERE id='$ID'");
             if (preg_match("#Ids-#", $rk)) {
                 if ($k) $dsql->ExecuteNoneQuery("DELETE FROM `#@__scores` WHERE id='$ID'");
             }

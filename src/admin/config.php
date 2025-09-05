@@ -73,7 +73,7 @@ if ($cfg_dede_log == 'Y') {
     $s_scriptNames = $s_scriptNames[count($s_scriptNames) - 1];
     $s_userip = GetIP();
     if ($s_method == 'POST' || (!preg_match("#{$s_nologfile}#i", $s_scriptNames) && $s_query != '') || preg_match("#{$s_needlogfile}#i", $s_scriptNames)) {
-        $inquery = "INSERT INTO `#@__log` (adminid,filename,method,query,cip,dtime) VALUES ('".$cuserLogin->getUserID()."','{$s_scriptNames}','{$s_method}','".addslashes($s_query)."','{$s_userip}','".time()."');";
+        $inquery = "INSERT INTO `#@__log` (adminid,filename,method,query,cip,dtime) VALUES ('{$cuserLogin->getUserID()}','{$s_scriptNames}','{$s_method}','".addslashes($s_query)."','{$s_userip}','".time()."');";
         $dsql->ExecuteNoneQuery($inquery);
     }
 }

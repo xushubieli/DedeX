@@ -70,7 +70,7 @@ else if ($dopost == "listArchives") {
 }
 //浏览通用模板目录
 else if ($dopost == "viewTemplet") {
-    header("Location: tpl.php?path=/".$cfg_df_style);
+    header("Location: tpl.php?path=/{$cfg_df_style}");
     exit();
 }
 //浏览单个页面的栏目
@@ -266,61 +266,58 @@ else if ($dopost == 'viewAPI') {
     $durl = "'.$cfg_basehost.'/apps/list.php?tid={$typeid}&mod=1&timestamp={$timestamp}&PageNo=1&PageSize={$row}&sign={$sign}";
     $data = json_decode(file_get_contents($durl),true);
     if ($data[\'code\'] === 0) {
-    	var_dump($data);
+        var_dump($data);
     }
  ?>';
     $gocode = 'package main
 import (
-    "crypto/md5"
-    "encoding/json"
-    "fmt"
-    "io/ioutil"
-    "net/http"
-    "strconv"
-    "time"
+    "crypto/md5",
+    "encoding/json",
+    "fmt",
+    "io/ioutil",
+    "net/http",
+    "strconv",
+    "time",
 )
 func main() {
-    typeid := '.$typeid.'
-    row := 10
-    timestamp := strconv.FormatInt(time.Now().Unix(), 10)
-    apikey := "'.$tl->TypeInfos['apikey'].'"
-    sign := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%d%s%s%d%d", typeid, timestamp, apikey, 1, row))))
-    durl := fmt.Sprintf("'.$cfg_basehost.'/apps/list.php?tid=%d&mod=1&timestamp=%s&PageNo=1&PageSize=%d&sign=%s", typeid, timestamp, row, sign)
-    resp, err := http.Get(durl)
+    typeid := '.$typeid.';
+    row := 10;
+    timestamp := strconv.FormatInt(time.Now().Unix(), 10);
+    apikey := "'.$tl->TypeInfos['apikey'].'";
+    sign := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%d%s%s%d%d", typeid, timestamp, apikey, 1, row))));
+    durl := fmt.Sprintf("'.$cfg_basehost.'/apps/list.php?tid=%d&mod=1&timestamp=%s&PageNo=1&PageSize=%d&sign=%s", typeid, timestamp, row, sign);
+    resp, err := http.Get(durl);
     if err != nil {
-        fmt.Println(err)
-        return
+        fmt.Println(err);
+        return;
     }
-    defer resp.Body.Close()
-    body, err := ioutil.ReadAll(resp.Body)
+    defer resp.Body.Close();
+    body, err := ioutil.ReadAll(resp.Body);
     if err != nil {
-        fmt.Println(err)
-        return
+        fmt.Println(err);
+        return;
     }
     var data map[string]interface{}
     if err := json.Unmarshal(body, &data); err != nil {
-        fmt.Println(err)
-        return
+        fmt.Println(err);
+        return;
     }
     if data["code"].(float64) == 0 {
-        fmt.Printf("%+v", data)
+        fmt.Printf("%+v", data);
     }
 }';
-    $pythoncode = 'import hashlib
-import json
-import time
-import urllib.request
-typeid = '.$typeid.'
-row = 10
-timestamp = int(time.time())
-apikey = \''.$tl->TypeInfos['apikey'].'\'
-sign = hashlib.md5((str(typeid) + str(timestamp) + apikey + \'1\' + str(row)).encode()).hexdigest()
-durl = f"'.$cfg_basehost.'/apps/list.php?tid={typeid}&mod=1&timestamp={timestamp}&PageNo=1&PageSize={row}&sign={sign}"
-with urllib.request.urlopen(durl) as url:
-    data = json.loads(url.read().decode())
-if data[\'code\'] == 0:
-    print(data)
-';
+    $pythoncode = 'import hashlib;
+import json;
+import time;
+import urllib.request;
+typeid = '.$typeid.';
+row = 10;
+timestamp = int(time.time());
+apikey = \''.$tl->TypeInfos['apikey'].'\';
+sign = hashlib.md5((str(typeid) + str(timestamp) + apikey + \'1\' + str(row)).encode()).hexdigest();
+durl = f"'.$cfg_basehost.'/apps/list.php?tid={typeid}&mod=1&timestamp={timestamp}&PageNo=1&PageSize={row}&sign={sign}";
+with urllib.request.urlopen(durl) as url: data = json.loads(url.read().decode());
+if data[\'code\'] == 0: print(data);';
     $jscode = 'const crypto = require(\'crypto\');
 const http = require(\'http\');
 const typeid = '.$typeid.';
@@ -328,7 +325,7 @@ const row = 10;
 const timestamp = Math.floor(Date.now() / 1000);
 const apikey = \''.$tl->TypeInfos['apikey'].'\';
 const sign = crypto.createHash(\'md5\').update(typeid.toString() + timestamp.toString() + apikey + \'1\' + row.toString()).digest(\'hex\');
-const durl = `'.$cfg_basehost.'/apps/list.php?tid=${typeid}&mod=1&timestamp=${timestamp}&PageNo=1&PageSize=${row}&sign=${sign}`
+const durl = `'.$cfg_basehost.'/apps/list.php?tid=${typeid}&mod=1&timestamp=${timestamp}&PageNo=1&PageSize=${row}&sign=${sign}`;
 http.get(durl, (res) => {
     let data = \'\';
     res.on(\'data\', (chunk) => {
@@ -343,14 +340,14 @@ http.get(durl, (res) => {
 }).on(\'error\', (err) => {
     console.log(err);
 });';
-    $tagcode = '<ul>
-    {dede:jsonq url="'.$cfg_basehost.'" row="10" typeid="'.$typeid.'" apikey="'.$tl->TypeInfos['apikey'].'"}
-    <li><a href="[field:arcurl/]">[field:fulltitle/]</a></li>
+    $tagcode = "<ul>
+    {dede:jsonq url='{$cfg_basehost}' row='10' typeid='{$typeid}' apikey='{$tl->TypeInfos['apikey']}'}
+    <li><a href=\"[field:arcurl/]\">[field:fulltitle/]</a></li>
     {/dede:jsonq}
-</ul>';
+</ul>";
     echo json_encode(array(
-        "code"=>0,
-        "data"=>array(
+        "code" => 0,
+        "data" => array(
             "phpcode"=>htmlspecialchars($phpCode),
             "gocode"=>htmlspecialchars($gocode),
             "pythoncode"=>htmlspecialchars($pythoncode),

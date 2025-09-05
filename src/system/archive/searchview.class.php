@@ -110,7 +110,7 @@ class SearchView
             $this->Fields[$k] = $v;
         }
         $this->CountRecord();
-        $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/".$GLOBALS['cfg_df_style']."/search.htm";
+        $tempfile = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir']."/{$GLOBALS['cfg_df_style']}/search.htm";
         if (!file_exists($tempfile) || !is_file($tempfile)) {
             showmsg("模板主题模板htm文件不存在", "javascript:;");
             exit();
@@ -211,12 +211,12 @@ class SearchView
             }
             $k = addslashes($k);
             if ($this->ChannelType < 0 || $this->ChannelTypeid < 0) {
-                $kwsqls[] = " arc.title LIKE '%$k%' ";
+                $kwsqls[] = " arc.title LIKE '%{$k}%' ";
             } else {
                 if ($this->SearchType == "title") {
-                    $kwsqls[] = " arc.title LIKE '%$k%' ";
+                    $kwsqls[] = " arc.title LIKE '%{$k}%' ";
                 } else {
-                    $kwsqls[] = " CONCAT(arc.title,' ',arc.writer,' ',arc.keywords) LIKE '%$k%' ";
+                    $kwsqls[] = " CONCAT(arc.title,' ',arc.writer,' ',arc.keywords) LIKE '%{$k}%' ";
                 }
             }
         }
@@ -252,16 +252,16 @@ class SearchView
             }
             $k = addslashes($k);
             if ($lsql == '') {
-                $lsql = $lsql." CONCAT(spwords,' ') LIKE '%$k %' ";
+                $lsql = $lsql." CONCAT(spwords,' ') LIKE '%{$k}%' ";
             } else {
-                $lsql = $lsql." OR CONCAT(spwords,' ') LIKE '%$k %' ";
+                $lsql = $lsql." OR CONCAT(spwords,' ') LIKE '%{$k}%' ";
             }
         }
         if ($lsql == '') {
             return '';
         } else {
             $likeword = '';
-            $lsql = "(".$lsql.") AND NOT(keyword like '".addslashes($this->Keyword)."') ";
+            $lsql = "({$lsql}) AND NOT(keyword like '".addslashes($this->Keyword)."') ";
             $this->dsql->SetQuery("SELECT keyword,count FROM `#@__search_keywords` WHERE $lsql ORDER BY lasttime DESC LIMIT 0,$num;");
             $this->dsql->Execute('l');
             while ($row = $this->dsql->GetArray('l')) {
@@ -272,7 +272,7 @@ class SearchView
                 } else {
                     $style = '';
                 }
-                $likeword .= "<a href='search.php?keyword=".urlencode($row['keyword'])."&searchtype=titlekeyword'".$style.">".$row['keyword']."</a> ";
+                $likeword .= "<a href='search.php?keyword=".urlencode($row['keyword'])."&searchtype=titlekeyword'{$style}>{$row['keyword']}</a> ";
             }
             return $likeword;
         }
@@ -287,7 +287,7 @@ class SearchView
     function GetRedKeyWord($fstr)
     {
         $k = trim($this->SearchKeyword);
-        return ($k == '')?  $fstr : str_replace($k, "<strong style='color:red'>$k</strong>", $fstr);
+        return ($k == '')?  $fstr : str_replace($k, "<strong style='color:red'>{$k}</strong>", $fstr);
     }
     /**
      *  统计列表里的记录
@@ -335,7 +335,7 @@ class SearchView
         $cquery = "SELECT * FROM `{$this->AddTable}` arc WHERE ".$this->AddSql;
         //var_dump($cquery);
         $hascode = md5($cquery);
-        $row = $this->dsql->GetOne("SELECT * FROM `#@__arccache` WHERE `md5hash`='".$hascode."' ");
+        $row = $this->dsql->GetOne("SELECT * FROM `#@__arccache` WHERE `md5hash`='{$hascode}' ");
         $uptime = time();
         if (is_array($row) && time() - $row['uptime'] < 3600 * 24) {
             $aids = explode(',', $row['cachedata']);
@@ -515,6 +515,7 @@ class SearchView
             $artlist = "<table width='$tablewidth'>";
         }
         $this->dtp2->LoadSource($innertext);
+        $GLOBALS['autoindex'] = 0;
         for ($i = 0; $i < $row; $i++) {
             if ($col > 1) {
                 $artlist .= "<tr>";
@@ -524,6 +525,7 @@ class SearchView
                     $artlist .= "<td width='$colWidth'>";
                 }
                 if ($row = $this->dsql->GetArray("al")) {
+                    $GLOBALS['autoindex']++;
                     if ($this->ChannelType < 0 || $this->ChannelTypeid < 0) {
                         $row["id"] = $row["aid"];
                         $row["ismake"] = empty($row["ismake"]) ? "" : $row["ismake"];
@@ -562,10 +564,10 @@ class SearchView
                     $row["info"] = $row["description"];
                     $row["filename"] = $row["arcurl"];
                     $row["stime"] = GetDateMK($row["pubdate"]);
-                    $row["textlink"] = "<a href='".$row["filename"]."'>".$row["title"]."</a>";
-                    $row["typelink"] = "[<a href='".$row["typeurl"]."'>".$row["typename"]."</a>]";
-                    $row["imglink"] = "<a href='".$row["filename"]."'><img src='".$row["picname"]."' width='$imgwidth' height='$imgheight'></a>";
-                    $row["image"] = "<img src='".$row["picname"]."' width='$imgwidth' height='$imgheight'>";
+                    $row["textlink"] = "<a href='{$row["filename"]}'>{$row["title"]}</a>";
+                    $row["typelink"] = "[<a href='{$row["typeurl"]}'>{$row["typename"]}</a>]";
+                    $row["imglink"] = "<a href='{$row["filename"]}'><img src='{$row["picname"]}' width='{$imgwidth}' height='{$imgheight}'></a>";
+                    $row["image"] = "<img src='{$row["picname"]}' width='{$imgwidth}' height='{$imgheight}'>";
                     $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
                     $row['memberurl'] = $GLOBALS['cfg_memberurl'];
                     $row['templeturl'] = $GLOBALS['cfg_templeturl'];

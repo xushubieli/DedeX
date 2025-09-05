@@ -82,7 +82,7 @@ class DedeSqlite
         $this->Open($pconnect);
     }
     //用指定参数初始数据库信息
-    function SetSource($host, $username, $pwd, $dbname, $dbprefix = "dede_")
+    function SetSource($host, $username, $pwd, $dbname, $dbprefix = "x_")
     {
         $this->dbHost = $host;
         $this->dbUser = $username;
@@ -104,13 +104,13 @@ class DedeSqlite
         if ($dsqlite && !$dsqlite->isClose && $dsqlite->isInit) {
             $this->linkID = $dsqlite->linkID;
         } else {
-            $this->linkID = new SQLite3(DEDEDATA.'/'.$this->dbName.'.db');
+            $this->linkID = new SQLite3(DEDEDATA."/{$this->dbName}.db");
             //复制一个对象副本
             CopySQLiPoint($this);
         }
         //处理错误，成功连接则选择数据库
         if (!$this->linkID) {
-            $this->DisplayError("系统提示：连接数据库失败，数据库密码不对或数据库服务器出错");
+            $this->DisplayError("连接数据库失败，数据库密码出错或服务器负载严重");
             exit();
         }
         $this->isInit = TRUE;
@@ -466,14 +466,14 @@ class DedeSqlite
     {
         global $cfg_cookie_encode;
         $enkey = substr(md5(substr($cfg_cookie_encode.'DedeX', 0, 5)), 0, 10);
-        $RecordLogFile = DEDEDATA.'/mysqli_record_log_'.$enkey.'.inc';
+        $RecordLogFile = DEDEDATA."/mysqli_record_log_{$enkey}.inc";
         $url = $this->GetCurUrl();
         $savemsg = <<<EOT
 
 ------------------------------------------
 SQL:{$this->queryString}
-Page:$url
-Runtime:$runtime
+Page:{$url}
+Runtime:{$runtime}
 EOT;
         $fp = @fopen($RecordLogFile, 'a');
         @fwrite($fp, $savemsg);
@@ -484,16 +484,16 @@ EOT;
     {
         global $cfg_cookie_encode;
         $enkey = substr(md5(substr($cfg_cookie_encode.'DedeX', 0, 5)), 0, 10);
-        $errorTrackFile = DEDEDATA.'/sqlite_error_trace_'.$enkey.'.inc';
+        $errorTrackFile = DEDEDATA."/sqlite_error_trace_{$enkey}.inc";
         if ($this->showError) {
             $msg = str_replace(array("\r","\n"),"",addslashes($msg));
             ShowMsg("{$msg}", "javascript:;", -1);
             exit;
         }
-        $savemsg = 'Page: '.$this->GetCurUrl()."\r\nError: ".$msg."\r\nTime".date('Y-m-d H:i:s');
+        $savemsg = "Page:{$this->GetCurUrl()}\r\nError:{$msg}\r\nTime:".date('Y-m-d H:i:s')."";
         //保存SQLite错误日志
         $fp = @fopen($errorTrackFile, 'a');
-        @fwrite($fp, '<'.'?php  exit();'."\r\n/*\r\n{$savemsg}\r\n*/\r\n?".">\r\n");
+        @fwrite($fp, '<'.'?php exit();'."\r\n/*\r\n{$savemsg}\r\n*/\r\n?".">\r\n");
         @fclose($fp);
     }
     //获得当前的脚本网址

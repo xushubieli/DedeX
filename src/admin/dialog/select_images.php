@@ -122,7 +122,7 @@ if (!empty($iseditor)) {
                             </a>
                         </div>";
                         echo $line;
-                    } else if (preg_match("#\.(".$cfg_imgtype.")#i", $file)) {
+                    } else if (preg_match("#\.({$cfg_imgtype})#i", $file)) {
                         $reurl = "$activeurl/$file";
                         $reurl = preg_replace("#^\.\.#", "", $reurl);
                         if ($file == $comeback) $lstyle = "class='text-danger'";

@@ -14,7 +14,7 @@ $addquery = '';
 $keyword = (!isset($keyword) ? '' : $keyword);
 $likeid = (!isset($likeid) ? '' : $likeid);
 $addq = $likeid != '' ? " AND likeid LIKE '$likeid' " : '';
-$sql = "SELECT aid,title,ismake,uptime,filename,likeid FROM `#@__sgpage` WHERE title LIKE '%$keyword%' $addq ORDER BY aid DESC";
+$sql = "SELECT aid,title,ismake,uptime,filename,likeid FROM `#@__sgpage` WHERE title LIKE '%{$keyword}%' $addq ORDER BY aid DESC";
 $dlist = new DataListCP();
 $dlist->SetTemplet(DEDEADMIN."/templets/templets_one.htm");
 $dlist->SetSource($sql);

@@ -93,7 +93,7 @@ if ($action == 'post') {
             foreach ($diy->getFieldList() as $field => $fieldvalue) {
                 $mailbody .= "{$fieldvalue[0]}：{${$field}}\r\n";
             }
-            $headers = "From: {$cfg_adminemail} Reply-To: {$cfg_adminemail}";
+            $headers = "From: {$cfg_adminemail}\r\nReply-To: {$cfg_adminemail}";
             $mailbody = mb_convert_encoding($mailbody, "GBK", "UTF-8");
             if ($cfg_sendmail_bysmtp == 'Y' && !empty($cfg_smtp_server)) {
                 $mailtype = 'TXT';

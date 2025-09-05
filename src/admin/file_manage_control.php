@@ -112,8 +112,8 @@ else if ($fmdo == "edit") {
 else if ($fmdo == "upload") {
     $j = 0;
     for ($i = 1; $i <= 50; $i++) {
-        $upfile = "upfile".$i;
-        $upfile_name = "upfile".$i."_name";
+        $upfile = "upfile{$i}";
+        $upfile_name = "upfile{$i}_name";
         if (!isset(${$upfile}) || !isset(${$upfile_name})) {
             continue;
         }

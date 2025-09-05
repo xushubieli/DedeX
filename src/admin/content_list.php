@@ -71,8 +71,8 @@ if (empty($totalresult) && empty($keyword) && empty($orderby) && empty($flag)) {
         $tinyQuerys[] = " typeid in(".GetSonIds($cid).") ";
     }
     if ($stime > 0 && $etime > 0) {
-        $tinyQuerys[] = " senddate>$stime ";
-        $tinyQuerys[] = " senddate<$etime ";
+        $tinyQuerys[] = " senddate>{$stime} ";
+        $tinyQuerys[] = " senddate<{$etime} ";
     }
     if (count($tinyQuerys) > 0) {
         $tinyQuery = "WHERE ".join(' AND ', $tinyQuerys);
@@ -126,13 +126,13 @@ while ($frow = $dsql->GetArray('f')) {
     $flagsArr .= ($frow['att'] == $flag ? "<option value='{$frow['att']}' selected>{$frow['attname']}</option>\r\n" : "<option value='{$frow['att']}'>{$frow['attname']}</option>\r\n");
 }
 if (!empty($userCatalogSql)) {
-    $whereSql .= " AND ".$userCatalogSql;
+    $whereSql .= " AND $userCatalogSql";
 }
 if (!empty($mid)) {
     $whereSql .= " AND arc.mid = '$mid' ";
 }
 if ($keyword != '') {
-    $whereSql .= " AND (CONCAT(arc.id,arc.title,arc.writer) LIKE '%$keyword%') ";
+    $whereSql .= " AND (CONCAT(arc.id,arc.title,arc.writer) LIKE '%{$keyword}%') ";
 }
 if ($flag != '') {
     $whereSql .= " AND FIND_IN_SET('$flag', arc.flag) ";
@@ -141,13 +141,13 @@ if ($cid != 0) {
     $whereSql .= ' AND arc.typeid IN ('.GetSonIds($cid).')';
 }
 if ($stime > 0 && $etime > 0) {
-    $whereSql .=  "AND arc.senddate>$stime AND arc.senddate<$etime";
+    $whereSql .=  "AND arc.senddate>{$stime} AND arc.senddate<{$etime}";
 }
 if ($arcrank != '') {
     $whereSql .= " AND arc.arcrank = '$arcrank' ";
-    $CheckUserSend = "<button type='button' class='btn btn-primary btn-sm' onclick=\"location='catalog_do.php?cid=".$cid."&dopost=listArchives&gurl=content_list.php';\">所有文档</button>";
+    $CheckUserSend = "<button type='button' class='btn btn-primary btn-sm' onclick=\"location='catalog_do.php?cid={$cid}&dopost=listArchives&gurl=content_list.php';\">所有文档</button>";
 } else {
-    $CheckUserSend = "<button type='button' class='btn btn-primary btn-sm' onclick=\"location='catalog_do.php?cid=".$cid."&dopost=listArchives&arcrank=-1&gurl=content_list.php';\">稿件审核</button>";
+    $CheckUserSend = "<button type='button' class='btn btn-primary btn-sm' onclick=\"location='catalog_do.php?cid={$cid}&dopost=listArchives&arcrank=-1&gurl=content_list.php';\">稿件审核</button>";
 }
 $orderby = empty($orderby) ? 'id' : preg_replace("#[^a-z0-9]#", "", $orderby);
 $orderbyField = 'arc.'.$orderby;
@@ -168,7 +168,7 @@ $dlist->SetParameter('channelid', $channelid);
 $dlist->SetParameter('f', $f);
 $strTimerange = '';
 if ($stime > 0 && $etime > 0) {
-    $strTimerange = implode(" - ",array(MyDate("Y-m-d H:i:s",$stime),MyDate("Y-m-d H:i:s",$etime)));
+    $strTimerange = implode(" - ", array(MyDate("Y-m-d H:i:s", $stime), MyDate("Y-m-d H:i:s", $etime)));
     $dlist->SetParameter('timerange', $strTimerange);
 }
 if (empty($s_tmplets)) $s_tmplets = 'templets/content_list.htm';

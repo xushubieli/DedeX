@@ -61,9 +61,9 @@ if ($stime > $etime) {
 }
 if (!empty($mid)) $whereSql .= " AND arc.mid = '$mid' ";
 if ($stime > 0 && $etime > 0) {
-    $whereSql .=  "AND arc.senddate>$stime AND arc.senddate<$etime";
+    $whereSql .=  "AND arc.senddate>{$stime} AND arc.senddate<{$etime}";
 }
-if ($keyword != '') $whereSql .= " AND (arc.title like '%$keyword%') ";
+if ($keyword != '') $whereSql .= " AND (arc.title like '%{$keyword}%') ";
 if ($cid != 0 && !empty(GetSonIds($cid))) $whereSql .= " AND arc.typeid in (".GetSonIds($cid).")";
 if ($arcrank != '') {
     $whereSql .= " AND arc.arcrank = '$arcrank' ";
@@ -80,7 +80,7 @@ $dlist->SetParameter("cid", $cid);
 $dlist->SetParameter("channelid", $channelid);
 $strTimerange = '';
 if ($stime > 0 && $etime > 0) {
-    $strTimerange = implode(" - ",array(MyDate("Y-m-d H:i:s",$stime),MyDate("Y-m-d H:i:s",$etime)));
+    $strTimerange = implode(" - ", array(MyDate("Y-m-d H:i:s", $stime), MyDate("Y-m-d H:i:s", $etime)));
     $dlist->SetParameter('timerange', $strTimerange);
 }
 $dlist->SetTemplate(DEDEADMIN."/templets/content_sg_list.htm");

@@ -38,7 +38,7 @@ if ($sortkey == 'mid') {
 } else {
     $sortform = "<option value='logintime'>登录时间</option>\r\n";
 }
-$wheres[] = " (userid LIKE '%$keyword%' OR uname LIKE '%$keyword%' OR email LIKE '%$keyword%') ";
+$wheres[] = " (userid LIKE '%{$keyword}%' OR uname LIKE '%{$keyword}%' OR email LIKE '%{$keyword}%') ";
 if ($sex   != '') {
     $wheres[] = " sex LIKE '$sex' ";
 }

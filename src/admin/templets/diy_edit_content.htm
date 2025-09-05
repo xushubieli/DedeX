@@ -32,7 +32,7 @@
 										if ($row[$field]=='') continue;
 										if (!in_array($fielddata[1],$allowhtml)) {
 											$row[$field] = dede_htmlspecialchars($row[$field]);
-											$row[$field] = "<textarea name='".$field."' class='admin-textarea-xl'>$row[$field]</textarea>";
+											$row[$field] = "<textarea name='{$field}' class='admin-textarea-xl'>{$row[$field]}</textarea>";
 										}
 										echo '<tr><td width="260">'.$fielddata[0].'：'.'</td><td>'.$row[$field].'</td></tr>';
 										$formfields .= 	$formfields == ''? $field.','.$fielddata[1] : ';'.$field.','.$fielddata[1];	

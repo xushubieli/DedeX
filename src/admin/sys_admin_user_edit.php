@@ -67,7 +67,7 @@ if ($dopost == 'saveedit') {
     $dsql->ExecuteNoneQuery($query);
     $query = "UPDATE `#@__member` SET uname='$uname',email='$email' $pwdm $usql WHERE mid='$id'";
     $dsql->ExecuteNoneQuery($query);
-    ShowMsg("成功修改一个账户", "sys_admin_user_edit.php?id=".$cuserLogin->getUserID()."&dopost=edit");
+    ShowMsg("成功修改一个账户", "sys_admin_user_edit.php?id={$cuserLogin->getUserID()}&dopost=edit");
     exit();
 } else if ($dopost == 'delete') {
     if (empty($userok)) $userok = '';
@@ -95,7 +95,7 @@ if ($dopost == 'saveedit') {
         exit();
     }
     //不能删除ID为1的创建人帐号，不能删除自己
-    $rs = $dsql->ExecuteNoneQuery2("DELETE FROM `#@__admin` WHERE id='$id' AND id<>1 AND id<>'".$cuserLogin->getUserID()."' ");
+    $rs = $dsql->ExecuteNoneQuery2("DELETE FROM `#@__admin` WHERE id='$id' AND id<>1 AND id<>'{$cuserLogin->getUserID()}' ");
     if ($rs > 0) {
         //更新前台管理员信息
         $dsql->ExecuteNoneQuery("UPDATE `#@__member` SET matt='0' WHERE mid='$id' LIMIT 1");

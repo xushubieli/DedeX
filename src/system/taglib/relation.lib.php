@@ -39,12 +39,12 @@ function lib_relation(&$ctag, &$refObj)
         $odb = " ORDER BY arc.click DESC";
     }
     if ($channelid > 0) {
-        $query = "SELECT arc.*,tp.typedir,tp.typename,tp.corank,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath FROM `#@__archives` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.arcrank>-1 AND arc.id IN (".$refObj->Fields[$name].") $odb";
+        $query = "SELECT arc.*,tp.typedir,tp.typename,tp.corank,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath FROM `#@__archives` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.arcrank>-1 AND arc.id IN ({$refObj->Fields[$name]}) $odb";
     } else {
         $gquery = "SELECT addtable,listfields FROM `#@__channeltype` WHERE id='$channelid' ";
         $grow = $dsql->GetOne($gquery);
         $maintable = trim($grow['addtable']);
-        $query = "SELECT arc.*,tp.typedir,tp.typename,tp.corank,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath FROM `{$maintable}` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.arcrank>-1 AND arc.aid IN (".$refObj->Fields[$name].") $odb";
+        $query = "SELECT arc.*,tp.typedir,tp.typename,tp.corank,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath FROM `{$maintable}` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.arcrank>-1 AND arc.aid IN ({$refObj->Fields[$name]}) $odb";
     }
     $innertext = trim($ctag->GetInnerText());
     if ($innertext == '') $innertext = GetSysTemplets('part_arclist.htm');
@@ -114,14 +114,13 @@ function lib_relation(&$ctag, &$refObj)
                 $row['picname'] = $row['litpic'];
                 $row['pubdate'] = isset($row['pubdate']) ? $row['pubdate'] : $row['senddate'];
                 $row['stime'] = GetDateMK($row['pubdate']);
-                $row['typelink'] = "<a href='".$row['typeurl']."'>".$row['typename']."</a>";
-                $row['image'] = "<img src='".$row['picname']."' title='".preg_replace("#['><]#", "", $row['title'])."'>";
-                $row['imglink'] = "<a href='".$row['filename']."'>".$row['image']."</a>";
+                $row['typelink'] = "<a href='{$row['typeurl']}'>{$row['typename']}</a>";
+                $row['image'] = "<img src='{$row['picname']}' title='".preg_replace("#['><]#", "", $row['title'])."'>";
+                $row['imglink'] = "<a href='{$row['filename']}'>{$row['image']}</a>";
                 $row['fulltitle'] = $row['title'];
                 $row['title'] = cn_substr($row['title'], $titlelen);
-                if (isset($row['color']) && $row['color'] != '') $row['title'] = "<span style='color:".$row['color']."'>".$row['title']."</span>";
-                if (preg_match('#b#', $row['flag'])) $row['title'] = "".$row['title']."";
-                $row['textlink'] = "<a href='".$row['filename']."'>".$row['title']."</a>";
+                if (isset($row['color']) && $row['color'] != '') $row['title'] = "<span style='color:{$row['color']}'>{$row['title']}</span>";
+                $row['textlink'] = "<a href='{$row['filename']}'>{$row['title']}</a>";
                 $row['plusurl'] = $row['phpurl'] = $GLOBALS['cfg_phpurl'];
                 $row['memberurl'] = $GLOBALS['cfg_memberurl'];
                 $row['templeturl'] = $GLOBALS['cfg_templeturl'];

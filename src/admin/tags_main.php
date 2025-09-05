@@ -15,7 +15,7 @@ if (empty($action)) {
     $tag = HtmlReplace($tag, -1);
     $orderby = empty($orderby) ? 'id' : preg_replace("#[^a-z]#i", '', $orderby);
     $orderway = isset($orderway) && $orderway == 'asc' ? 'asc' : 'desc';
-    if (!empty($tag)) $where = " WHERE tag like '%$tag%' OR id='$tag'";
+    if (!empty($tag)) $where = " WHERE tag like '%{$tag}%' OR id='$tag'";
     else $where = '';
     $neworderway = ($orderway == 'desc' ? 'asc' : 'desc');
     $query = "SELECT T.*,TI.* FROM `#@__tagindex` T LEFT JOIN `#@__tagindex_infos` TI ON TI.tagid=T.id $where ORDER BY $orderby $orderway";
@@ -109,7 +109,7 @@ if (empty($action)) {
                     $tid = $row['id'];
                     $trow = $dsql->GetOne("SELECT COUNT(*) as dd FROM `#@__taglist` WHERE tag LIKE '$keyword'");
                     if (intval($trow['dd']) != $row['total']) {
-                        $query = "UPDATE `#@__tagindex` SET `total`=".$trow['dd'].",uptime=$now WHERE id='$tid' ";
+                        $query = "UPDATE `#@__tagindex` SET `total`={$trow['dd']},uptime=$now WHERE id='$tid' ";
                         $dsql->ExecuteNoneQuery($query);
                     }
                 } else {

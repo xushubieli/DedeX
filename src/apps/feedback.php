@@ -221,8 +221,8 @@ else if ($action == 'send') {
     }
     //统计会员发出的评论
     if ($cfg_ml->M_ID > 0) {
-        $row = $dsql->GetOne("SELECT COUNT(*) AS nums FROM `#@__feedback` WHERE `mid`='".$cfg_ml->M_ID."'");
-        $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET `feedback`='$row[nums]' WHERE `mid`='".$cfg_ml->M_ID."'");
+        $row = $dsql->GetOne("SELECT COUNT(*) AS nums FROM `#@__feedback` WHERE `mid`='{$cfg_ml->M_ID}' ");
+        $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET `feedback`='$row[nums]' WHERE `mid`='{$cfg_ml->M_ID}' ");
     }
     $_SESSION['sedtime'] = time();
     if (empty($uid) && isset($cmtuser)) $uid = $cmtuser;
