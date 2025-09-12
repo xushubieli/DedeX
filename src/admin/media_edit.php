@@ -147,7 +147,7 @@ else if ($dopost == 'save') {
     $query = "UPDATE `#@__uploads` SET title='$title',mediatype='$mediatype',playtime='$playtime'";
     $query .= "$addquery WHERE aid='$aid' ";
     $dsql->ExecuteNoneQuery($query);
-    ShowMsg("成功修改一则附件数据", "media_edit.php?aid={$aid}");
+    ShowMsg("成功修改一个附件数据", "media_edit.php?aid={$aid}");
     exit();
 }
 //读取文档信息

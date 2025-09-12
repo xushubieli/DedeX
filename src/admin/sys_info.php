@@ -88,7 +88,7 @@ else if ($dopost == 'add') {
         exit();
     } else {
         ReWriteConfig();
-        ShowMsg("成功添加一则变量", "sys_info.php?gp={$vargroup}");
+        ShowMsg("成功添加一个变量", "sys_info.php?gp={$vargroup}");
         exit();
     }
 }

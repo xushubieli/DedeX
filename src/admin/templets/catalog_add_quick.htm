@@ -28,13 +28,13 @@
 							<table class="table table-borderless">
 								<tbody>
 									<tr>
-										<td width="10%">是否支持投稿</td>
-										<td width="40%">
+										<td width="160">是否支持投稿</td>
+										<td>
 											<label><input type="radio" name="issend" value="1" checked> 支持</label>
 											<label><input type="radio" name="issend" value="0"> 不支持</label>
 										</td>
-										<td width="10%">目录保存位置</td>
-										<td width="40%">
+										<td width="160">目录保存位置</td>
+										<td>
 											<label><input type="radio" name="referpath" value="parent" checked> 默认网页目录（<?php $pardir = $cfg_arcdir;if (!empty($typedir)) $pardir = $typedir.'/';$pardir = preg_replace("#\/{1,}#", '/', $pardir);echo $pardir;?>）</label>
 											<label><input type="radio" name="referpath" value="cmspath"> 系统根目录</label>
 											<input type="hidden" name="nextdir" id="nextdir" value="<?php echo $pardir;?>">

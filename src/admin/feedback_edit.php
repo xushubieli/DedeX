@@ -24,7 +24,7 @@ if ($dopost == 'edit') {
     }
     $query = "UPDATE `#@__feedback` SET username='$username',msg='$msg',ischeck=1 WHERE id=$id";
     $dsql->ExecuteNoneQuery($query);
-    ShowMsg("成功回复一则留言", $ENV_GOBACK_URL);
+    ShowMsg("成功回复一个留言", $ENV_GOBACK_URL);
     exit();
 } else if ($dopost === 'makehtml') {
     require_once(DEDEADMIN.'/inc/inc_archives_functions.php');

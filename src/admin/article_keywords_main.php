@@ -41,7 +41,7 @@ if ($dopost == 'saveall') {
             $dsql->ExecuteNoneQuery($query1);
         }
     }
-    ShowMsg("成功修改一则关键词", $ENV_GOBACK_URL);
+    ShowMsg("成功修改一个关键词", $ENV_GOBACK_URL);
     exit();
 }
 //添加关键词

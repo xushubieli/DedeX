@@ -47,7 +47,7 @@ else if ($action == 'send') {
     } else {
         @mail($email, $mailtitle, $mailbody, $headers);
     }
-    ShowMsg("成功推荐一篇文档", $arcurl);
+    ShowMsg("成功推荐一个文档", $arcurl);
     exit();
 }
 $arcRow = GetOneArchive($aid);

@@ -362,7 +362,7 @@ else if ($dopost == "delArchives") {
         $win->AddHidden("dopost", $dopost);
         $win->AddHidden("qstr", $qstr);
         $win->AddHidden("aid", $aid);
-        $win->AddTitle("您确定删除，序号{$qstr}文档吗");
+        $win->AddTitle("您确定删除，ID：{$qstr}文档吗");
         $winform = $win->GetWindow("ok");
         $win->Display();
     }
@@ -412,7 +412,7 @@ else if ($dopost == 'clear') {
         $win->AddHidden("qstr", $qstr);
         $win->AddHidden("aid", $aid);
         $win->AddHidden("recycle", $recycle);
-        $win->AddTitle("您确定删除{$num}篇文档，序号{$qstr}文档吗");
+        $win->AddTitle("您确定删除{$num}个文档，ID：{$qstr}文档吗");
         $winform = $win->GetWindow("ok");
         $win->Display();
     }
@@ -449,7 +449,7 @@ else if ($dopost == 'del') {
         $win->AddHidden("qstr", $qstr);
         $win->AddHidden("aid", $aid);
         $win->AddHidden("recycle", $recycle);
-        $win->AddTitle("您确要删除，序号{$qstr}文档吗");
+        $win->AddTitle("您确定删除，ID：{$qstr}文档吗");
         $winform = $win->GetWindow("ok");
         $win->Display();
     }
@@ -578,7 +578,7 @@ else if ($dopost == 'quickEditSave') {
     //更新网页
     $artUrl = MakeArt($aid, TRUE, TRUE);
     $backurl = !empty($_COOKIE['ENV_GOBACK_URL']) ? $_COOKIE['ENV_GOBACK_URL'] : '-1';
-    ShowMsg('成功更新一篇文档属性', $backurl);
+    ShowMsg('成功更新一个文档属性', $backurl);
     exit();
 }
 //分析并自动获取文档关键词

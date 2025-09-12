@@ -14,7 +14,7 @@ $aid = preg_replace("#[^0-9]#", '', $aid);
 $ENV_GOBACK_URL = empty($_COOKIE['ENV_GOBACK_URL']) ? "ad_main.php" : $_COOKIE['ENV_GOBACK_URL'];
 if ($dopost == 'delete') {
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__myad` WHERE aid='$aid' ");
-    ShowMsg("成功删除一则广告代码", $ENV_GOBACK_URL);
+    ShowMsg("成功删除一个广告代码", $ENV_GOBACK_URL);
     exit();
 } else if ($dopost == "gettag") {
     require_once(DEDEINC.'/libraries/oxwindow.class.php');
@@ -36,7 +36,7 @@ if ($dopost == 'delete') {
     $endtime = GetMkTime($endtime);
     $query = "UPDATE `#@__myad` SET clsid='$clsid',typeid='$typeid',adname='$adname',timeset='$timeset',starttime='$starttime',endtime='$endtime',normbody='$normbody',expbody='$expbody' WHERE aid='$aid'";
     $dsql->ExecuteNoneQuery($query);
-    ShowMsg("成功修改一则广告代码", $ENV_GOBACK_URL);
+    ShowMsg("成功修改一个广告代码", $ENV_GOBACK_URL);
     exit();
 }
 $row = $dsql->GetOne("SELECT * FROM `#@__myad` WHERE aid='$aid'");

@@ -8,7 +8,7 @@ if (!defined('DEDEINC')) exit('dedex');
  * @license        GNU GPL v2 (/license.txt)
  */
 /**
- *  获取单篇文档信息
+ *  获取单个文档信息
  *
  * @param     int  $aid  文档ID
  * @return    array

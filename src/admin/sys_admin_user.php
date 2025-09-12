@@ -10,8 +10,12 @@ require_once(dirname(__FILE__)."/config.php");
 CheckPurview('sys_User');
 require_once(DEDEINC."/datalistcp.class.php");
 DedeSetCookie("ENV_GOBACK_URL", $dedeNowurl, time() + 3600, "/");
-if (empty($rank)) $rank = '';
-else $rank = " WHERE CONCAT(#@__admin.usertype)='$rank' ";
+$myrank = $cuserLogin->getUserRank();
+if (empty($rank)) {
+    $rank = " WHERE `#@__admin`.usertype <= '$myrank' ";
+} else {
+    $rank = " WHERE `#@__admin`.usertype='$rank' AND `#@__admin`.usertype <= '$myrank' ";
+}
 $dsql->SetQuery("SELECT `rank`,typename FROM `#@__admintype`");
 $dsql->Execute();
 while ($row = $dsql->GetObject()) {

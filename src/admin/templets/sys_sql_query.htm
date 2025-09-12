@@ -38,7 +38,7 @@
 									$dsql->Execute('n');
 									$row2 = $dsql->GetArray('n',MYSQL_BOTH);
 									$dd = $row2[0];
-									echo "<option value='{$row[0]}'>{$row[0]} ({$dd})</option>\r\n";
+									echo "<option value='{$row[0]}'>{$row[0]}（{$dd}）</option>\r\n";
 								}
 								?>
 							</select>
@@ -47,7 +47,7 @@
 							<button type="Submit" class="btn btn-primary btn-sm" onclick="this.form.dopost.value='viewinfo';">查看表结构</button>
 							<button type="Submit" class="btn btn-primary btn-sm" onclick="this.form.dopost.value='opimizeAll';">优化全部表</button>
 							<button type="Submit" class="btn btn-primary btn-sm" onclick="this.form.dopost.value='repairAll';">修复全部表</button>
-							<?php if ($cfg_dbtype !== 'sqlite'){;?><a  href="sys_sql_query.php?dopost=docs" class="btn btn-primary btn-sm">数据库文档</a><?php };?>
+							<?php if ($cfg_dbtype !== 'sqlite') {;?><a href="sys_sql_query.php?dopost=docs" class="btn btn-primary btn-sm">数据库文档</a><?php };?>
 						</form>
 					</div>
 				</div>

@@ -92,20 +92,18 @@
 									<tr>
 										<td>镜像服务器列表</td>
 										<td>
-											<input type="text" name="serverurl" id="serverurl" placeholder="请输入镜像网站">
-											<input type="text" name="servername" id="servername" placeholder="请输入镜像目录">
-											<input type="text" name="servertype" id="servertype" value="默认下载地址">
-											<button type="button" onclick="AddServer();" class="btn btn-primary btn-sm">添加一项</button>
+											<p>
+												<input type="text" name="serverurl" id="serverurl" placeholder="请输入镜像网站">
+												<input type="text" name="servername" id="servername" placeholder="请输入镜像目录">
+												<input type="text" name="servertype" id="servertype" value="默认下载地址">
+												<button type="button" onclick="AddServer();" class="btn btn-primary btn-sm">添加一项</button>
+											</p>
+											<textarea name="sites" id="sites" class="admin-textarea-xl"><?php echo $row['sites'];?></textarea>
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2"><textarea name="sites" id="sites" class="admin-textarea-xl"><?php echo $row['sites'];?></textarea></td>
-									</tr>
-									<tr>
-										<td colspan="2">下载说明</td>
-									</tr>
-									<tr>
-										<td colspan="2"><?php GetEditor('downmsg',$row['downmsg'],400);?></td>
+										<td>下载说明</td>
+										<td><?php GetEditor('downmsg',$row['downmsg'],400);?></td>
 									</tr>
 									<tr>
 										<td colspan="2" align="center">

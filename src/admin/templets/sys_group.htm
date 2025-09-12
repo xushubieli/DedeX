@@ -38,7 +38,7 @@
 								</thead>
 								<tbody>
 									<?php
-									$dsql->SetQuery("Select `rank`,typename,`system` From `#@__admintype`");
+									$dsql->SetQuery("Select `rank`,typename,`system` FROM `#@__admintype`");
 									$dsql->Execute();
 									while($row = $dsql->GetObject())
 									{
@@ -49,7 +49,7 @@
 										<td>
 											<a href="sys_group_edit.php?rank=<?php echo $row->rank;?>" class="btn btn-primary btn-sm">权限设定</a>
 											<a href="sys_admin_user.php?rank=<?php echo $row->rank;?>" class="btn btn-primary btn-sm">组会员</a>
-											<?php if ($row->system==0) {?><a href='sys_group_edit.php?dopost=del&rank=<?php echo $row->rank;?>' class='btn btn-danger btn-sm'>删除组</a><?php }?>
+											<?php if ($row->system==0) {?><a href="sys_group_edit.php?dopost=del&rank=<?php echo $row->rank;?>" class="btn btn-danger btn-sm">删除组</a><?php }?>
 										</td>
 									</tr>
 									<?php }?>

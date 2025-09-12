@@ -1,8 +1,8 @@
-text,单行文本(varchar)
-textchar,单行文本(char)
+text,varchar单行文本
+textchar,char单行文本
 multitext,多行文本
 htmltext,网页文本
-textdata,网页形式保存数据
+textdata,网页形式保存
 int,整数类型
 float,小数类型
 datetime,时间类型

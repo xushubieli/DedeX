@@ -43,5 +43,5 @@ if ($type == '') {
 //更新会员统计
 $row = $dsql->GetOne("SELECT COUNT(*) AS nums FROM `#@__member_stow` WHERE `mid`='{$ml->M_ID}' ");
 $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET `stow`='{$row['nums']}' WHERE `mid`='{$ml->M_ID}'");
-ShowMsg('成功收藏一篇文档', 'javascript:window.close();');
+ShowMsg('成功收藏一个文档', 'javascript:window.close();');
 ?>

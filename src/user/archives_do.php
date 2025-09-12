@@ -79,7 +79,7 @@ else if ($dopost == "delArc") {
     $equery = "SELECT arc.channel,arc.senddate,arc.arcrank,ch.maintable,ch.addtable,ch.issystem,ch.arcsta FROM `#@__arctiny` arc LEFT JOIN `#@__channeltype` ch ON ch.id=arc.channel WHERE arc.id='$aid' ";
     $row = $dsql->GetOne($equery);
     if (!is_array($row)) {
-        ShowMsg("您没有权限删除这篇文档", "-1");
+        ShowMsg("您没有权限删除该文档", "-1");
         exit();
     }
     if (trim($row['maintable']) == '') $row['maintable'] = '#@__archives';
@@ -90,14 +90,14 @@ else if ($dopost == "delArc") {
     }
     $arr = $dsql->GetOne($equery);
     if (!is_array($arr)) {
-        ShowMsg("您没有权限删除这篇文档", "-1");
+        ShowMsg("您没有权限删除该文档", "-1");
         exit();
     }
     if ($row['arcrank'] >= 0) {
         $dtime = time();
         $maxtime = $cfg_mb_editday * 24 * 3600;
         if ($dtime - $row['senddate'] > $maxtime) {
-            ShowMsg("这篇文档已经锁定，暂时无法删除", "-1");
+            ShowMsg("该文档已锁定，暂时无法修改", "-1");
             exit();
         }
     }
@@ -119,7 +119,7 @@ else if ($dopost == "delArc") {
         countArchives($channelid);
         //扣除积分
         $dsql->ExecuteNoneQuery("Update `#@__member` set scores=scores-{$cfg_sendarc_scores} WHERE mid='{$cfg_ml->M_ID}' And (scores-{$cfg_sendarc_scores})>0;");
-        ShowMsg("成功删除一篇文档", $ENV_GOBACK_URL);
+        ShowMsg("成功删除一个文档", $ENV_GOBACK_URL);
         exit();
     } else {
         ShowMsg("删除文档失败", $ENV_GOBACK_URL);

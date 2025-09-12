@@ -16,7 +16,7 @@ function lib_arccontent(&$ctag, &$refObj)
     $type = $ctag->GetAtt('type');
     $revalue = '';
     if (in_array($type, array("pre", "next")) &&  get_class($refObj) === "Archives") {
-        //在文档页面获取上篇下篇文档
+        //在文档页面获取上篇下文档
         $asql = "WHERE id<{$refObj->Fields['id']}";
         if ($type === "next") {
             $asql = "WHERE id>{$refObj->Fields['id']}";

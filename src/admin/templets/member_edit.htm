@@ -141,18 +141,12 @@
 										</td>
 									</tr>
 									<tr>
-										<td>注册时间/地址</td>
-										<td>
-											<span><?php echo GetDateTimeMk($row['jointime']);?></span>
-											<span><?php echo $row['joinip'];?></span>
-										</td>
+										<td>地址/注册时间</td>
+										<td><?php echo $row['joinip'];?> / <?php echo GetDateTimeMk($row['jointime']);?></td>
 									</tr>
 									<tr>
-										<td>最近时间/地址</td>
-										<td>
-											<span><?php echo GetDateTimeMk($row['logintime']);?></span>
-											<span><?php echo $row['loginip'];?></span>
-										</td>
+										<td>地址/最近时间</td>
+										<td><?php echo $row['loginip'];?> / <?php echo GetDateTimeMk($row['logintime']);?></td>
 									</tr>
 									<tr>
 										<td>操作</td>

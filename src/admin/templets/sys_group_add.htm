@@ -16,7 +16,7 @@
 				<li class="breadcrumb-item active">添加系统会员组</li>
 			</ol>
 			<div class="card shadow-sm">
-				<div class="card-header">会员组管理</div>
+				<div class="card-header">添加系统会员组</div>
 				<div class="card-body">
 					<form name="form1" action="sys_group_add.php" method="post">
 						<input type="hidden" name="dopost" value="save">
@@ -29,7 +29,7 @@
 									</tr>
 									<tr>
 										<td>级别值</td>
-										<td><input type="text" name="rankid" id="rankid" class="form-control admin-w-sm" required>（已占用级别值：1、5、10，级别值必须小于10，大于或等于10所有权限设置无效）</td>
+										<td><input type="text" name="rankid" id="rankid" class="form-control admin-w-sm" required>（已占用级别值：<?php $dsql->SetQuery("SELECT rank FROM `#@__admintype`");$dsql->Execute();while($row = $dsql->GetObject()) echo "<span>{$row->rank}</span>、";?>级别值必须小于10，大于或等于10所有权限设置无效）</td>
 									</tr>
 									<?php
 									$start = 0;
@@ -47,9 +47,9 @@
 											$ls = explode('>',$line);
 											$tag = $ls[1];
 											$tagname = str_replace('[br]', '<br>', $ls[2]);
-											if (!preg_match("#<br>#", $tagname) ) $tagname .= "<span>($tag)</span>";
-											else $tagname = str_replace('<br>', "<span>($tag)</span><br>", $tagname);
-											echo " <label><input name='purviews[]' type='checkbox' id='purviews$k' value='$tag'> $tagname</label> ";
+											if (!preg_match("#<br>#", $tagname) ) $tagname .= "<span>（{$tag}）</span>";
+											else $tagname = str_replace('<br>', "<span>（{$tag}）</span><br>", $tagname);
+											echo "<label><input name='purviews[]' type='checkbox' id='purviews$k' value='$tag'> {$tagname}</label> ";
 										  $k++;
 										}
 									}
@@ -65,7 +65,7 @@
 											$dsql->SetQuery('Select plusname From `#@__plus`');
 											$dsql->Execute();
 											while($row=$dsql->GetObject()){
-												echo " <label><input name='purviews[]' type='checkbox' id='purviews$k' value='plus_{$row->plusname}'> {$row->plusname}</label> ";
+												echo "<label><input name='purviews[]' type='checkbox' id='purviews$k' value='plus_{$row->plusname}'> {$row->plusname}</label> ";
 												$k++;
 												$l++;
 												if ($l%6==0) echo "<br>";

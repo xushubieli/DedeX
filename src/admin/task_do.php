@@ -55,11 +55,11 @@ if ($dopost == 'makeprenext') {
         $arc->MakeHtml();
     }
     if (empty($nextdo)) {
-        ShowMsg("完成所有上下篇文档更新任务", "close::tgtable");
+        ShowMsg("完成所有上下文档更新任务", "close::tgtable");
         exit();
     } else {
         $jumpurl = GetNextUrl();
-        ShowMsg("完成下篇文档更新任务，继续更新其它任务", $jumpurl);
+        ShowMsg("完成下文档更新任务，继续更新其它任务", $jumpurl);
         exit();
     }
 }

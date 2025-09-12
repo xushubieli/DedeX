@@ -82,7 +82,7 @@
 									<tr>
 										<td>程序安装</td>
 										<td>
-											<label><input type="checkbox" name="autosetup" id="autosetup" value="1" onclick="ShowHideField('autosetup','autosetupinput','autosetupct')" <?php if (isset($autosetup) && $autosetup==1) echo 'checked';?>> 自动生成</label><br>
+											<label><input type="checkbox" name="autosetup" id="autosetup" value="1" onclick="ShowHideField('autosetup','autosetupinput','autosetupct')" <?php if (isset($autosetup) && $autosetup==1) echo 'checked';?>> 自动生成</label
 											<div style="display:<?php if (!isset($autosetup) || $autosetup==0) echo 'block'; else echo 'none';?>" id="autosetupinput"><input type="file" name="setup" id="setup" class="form-control admin-w-lg"></div>
 											<div style="display:<?php if (isset($autosetup) && $autosetup==1) echo 'block'; else echo 'none';?>" id="autosetupct">
 												<p>（由系统自动处理安装，请使用MySQL4.0版本格式的SQL语句：MySQL4.1/5.x版本请把创建表语句 ENGINE=MyISAM DEFAULT CHARSET=*，改为TYPE=MyISAM，SQL语句允许换行，但必须用;表示一条SQL语句结束，如果SQL中包含有模块网址的，用 _ROOTURL_ 表示，例：_ROOTURL_/ask/index.php）</p>
