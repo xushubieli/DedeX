@@ -636,10 +636,9 @@ class SearchView
         }
         $infos = "<li class='page-item disabled'><span class='page-link'>{$totalpage}页{$this->TotalResult}条</span></li>";
         $geturl = "";
-        //$geturl = "keyword=".urlencode($oldkeyword)."&searchtype={$this->SearchType}";
-        //$geturl .= "&channeltype={$this->ChannelType}&orderby={$this->OrderBy}";
+        //$geturl .= "&searchtype={$this->SearchType}&channeltype={$this->ChannelType}&orderby={$this->OrderBy}";
         //$geturl .= "&kwtype={$this->KType}&pagesize={$this->pagesize}";
-        $geturl .= "typeid={$this->TypeID}&keyword=".urlencode($oldkeyword)."&";
+        $geturl .= "keyword=".urlencode($oldkeyword)."&typeid={$this->TypeID}&";
         $purl .= "?".$geturl;
         //获得上页和下页的链接
         if ($this->PageNo != 1) {
@@ -676,7 +675,7 @@ class SearchView
                 $listdd .= "<li class='page-item'><a href='{$purl}PageNo={$j}' class='page-link'>{$j}</a></li>";
             }
         }
-		$plist = '';
+        $plist = '';
         $plist .= preg_match('/info/i', $listitem)? $infos : "";
         $plist .= preg_match('/index/i', $listitem)? $indexpage : "";
         $plist .= preg_match('/pre/i', $listitem)? $prepage : "";

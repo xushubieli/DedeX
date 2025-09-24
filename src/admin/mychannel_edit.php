@@ -433,8 +433,8 @@ if ($dopost == "show") {
             $addonfields = '';
         }
         $template = trim($template);
-        $forms = "<form action=\"$cfg_cmspath/apps/advancedsearch.php\" method=\"post\">";
-        $forms .= "<input type=\"hidden\" name=\"mid\" value=\"$mid\">";
+        $forms = "<form action=\"{$cfg_cmspath}/apps/advancedsearch.php\" method=\"post\">";
+        $forms .= "<input type=\"hidden\" name=\"mid\" value=\"{$mid}\">";
         $forms .= "<input type=\"hidden\" name=\"dopost\" value=\"search\">";
         $forms .= "<label>关键词：<input type=\"text\" name=\"q\"></label><br>";
         $mainstring = '';
@@ -558,8 +558,8 @@ if ($dopost == "show") {
 		<script src="/static/web/js/mode/javascript/javascript.js"></script>
 		<script src="/static/web/js/mode/css/css.js"></script>
 		<script src="/static/web/js/mode/htmlmixed/htmlmixed.js"></script>';
-        echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=$cfg_soft_lang\">";
-        echo "<p>下面生成的网页表单，根据自己需求修改样式后粘贴到对应的模板中</p><textarea id='content' class='form-control'>$forms</textarea>";
+        echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset={$cfg_soft_lang}\">";
+        echo "<textarea id=\"content\" class=\"form-control\">{$forms}</textarea>";
         echo "<hr>";
         echo "<script>var editor = CodeMirror.fromTextArea(document.getElementById('content'), {
             lineNumbers: true,

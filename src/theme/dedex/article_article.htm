@@ -37,7 +37,6 @@
 						<div class="column py-3">{dede:pagetitle/}</div>
 						<div class="body py-3">
 							{dede:field.body/}
-							<p>本文链接：{dede:field.id runphp='yes'}$id=@me;$url=GetOneArchive($id);@me=$url['arcurl'];{/dede:field.id}</p>
 							<p>文档于 {dede:field.senddate function="MyDate('Y-m-d H:i',@me)"/} 修改</p>
 						</div>
 						<nav class="column-page py-3">

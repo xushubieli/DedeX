@@ -3,13 +3,17 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-		<title>搜索结果页-<?php echo $cfg_webname;?></title>
+		<title>搜索{dede:global.q function='RemoveXSS(@me)'/}-<?php echo $cfg_webname;?></title>
 		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
 		<main class="container py-3">
+			<div id="ai-box" style="display:none;margin-bottom:1rem;padding:1rem;border:1px solid #e9ecef;border-radius:0.5rem">
+				<h3 class="ai-title mb-3">AI回答</h3>
+				<div id="ai-content">正在思考...</div>
+			</div>
 			{dede:datalist}
 			<?php
 			$fields['stime'] = GetDateTimeMk($fields['senddate']);
@@ -21,9 +25,9 @@
 				<div class="list-article-body bg-white rounded shadow-sm p-3">
 					<h2 class="mb-3"><a href="{dede:field.arcurl/}">{dede:field.title/}</a></h2>
 					<div class="mb-3">
-						<span><i class="fa fa-bars mr-1"></i><a href="{dede:field.typeurl/}" target="_blank">{dede:field.typename/}</a></span>
-						<span><i class="fa fa-eye mr-1"></i>{dede:field.click/}</span>
-						<span><i class="fa fa-calendar mr-1"></i>{dede:field.stime/}</span>
+						<span class="me-3"><i class="fa fa-bars me-3"></i><a href="{dede:field.typeurl/}" target="_blank">{dede:field.typename/}</a></span>
+						<span class="me-3"><i class="fa fa-eye me-3"></i>{dede:field.click/}</span>
+						<span><i class="fa fa-calendar me-2"></i>{dede:field.stime/}</span>
 					</div>
 					<p>{dede:field.description1/}</p>
 				</div>
@@ -31,5 +35,76 @@
 			{/dede:datalist}
 			<ul class="pagination">{dede:pagelist listitem='info,index,end,pre,next,pageno' listsize='1'/}</ul>
 		</main>
+		<script>
+		(function() {
+			const kw = "{dede:global.q function='RemoveXSS(@me)'/}".trim();
+			const content = document.getElementById('ai-content');
+			const box = document.getElementById('ai-box');
+			if (!kw || !content || !box) return;
+			const cacheKey = `q_${kw}`;
+			const PageNo = parseInt(new URLSearchParams(window.location.search).get('pageno')) || 1;
+			const isPagination = PageNo > 1;
+			if (isPagination) {
+				const cached = localStorage.getItem(cacheKey);
+				if (cached) {
+					try {
+						const { paragraphs } = JSON.parse(cached);
+						box.style.display = 'block';
+						content.innerHTML = '';
+						paragraphs.forEach(text => {
+							const p = document.createElement('p');
+							p.textContent = text;
+							content.appendChild(p);
+						});
+						return;
+					} catch (e) {}
+				}
+			}
+			fetch(`{dede:global.cfg_phpurl/}/search_ai.php?q=${encodeURIComponent(kw)}`).then(r => r.ok ? r.text() : Promise.reject()).then(html => {
+				if (!html.trim()) return;
+				const doc = new DOMParser().parseFromString(html, 'text/html');
+				const paras = Array.from(doc.body.children).filter(el => el.tagName === 'P').map(p => p.textContent.trim()).filter(t => t);
+				if (!paras.length) return;
+				localStorage.setItem(cacheKey, JSON.stringify({
+					keyword: kw,
+					paragraphs: paras,
+					timestamp: Date.now(),
+					ttl: 3600000
+				}));
+				box.style.display = 'block';
+				content.innerHTML = '';
+				let i = 0;
+				const next = () => {
+					if (i >= paras.length) return;
+					const p = content.appendChild(document.createElement('p'));
+					let j = 0, txt = paras[i++];
+					const timer = setInterval(() => {
+						if (j < txt.length) p.textContent += txt[j++];
+						else {
+							clearInterval(timer);
+							setTimeout(next, 500);
+						}
+						content.scrollTop = content.scrollHeight;
+					}, 30);
+				};
+				next();
+			})
+			.catch(() => {
+				const cached = localStorage.getItem(cacheKey);
+				if (cached && isPagination) {
+					try {
+						const { paragraphs } = JSON.parse(cached);
+						box.style.display = 'block';
+						content.innerHTML = '';
+						paragraphs.forEach(text => {
+							const p = document.createElement('p');
+							p.textContent = text;
+							content.appendChild(p);
+						});
+					} catch (e) {}
+				}
+			});
+		})();
+		</script>
 	</body>
 </html>

@@ -153,8 +153,7 @@ else if ($step == 2) {
     //创建数据表
     $query = '';
     $fp = fopen(dirname(__FILE__).'/sql-dftables.txt','r');
-    while(!feof($fp))
-    {
+    while (!feof($fp)) {
         $line = rtrim(fgets($fp,1024));
         if (preg_match("#;$#", $line)) {
             $query .= $line."\n";
@@ -243,7 +242,7 @@ else if ($step == 2) {
             $setupsql = preg_replace('/#@__/i', $dbprefix, $setupsql);
             $sqls = preg_split("#;[ \t]{0,}\n#", $setupsql);
             foreach($sqls as $sql) {
-                if(trim($sql)!='') mysql_query($sql, $conn);
+                if (trim($sql)!='') mysql_query($sql, $conn);
             }
             UpDateCatCache();
         } else {

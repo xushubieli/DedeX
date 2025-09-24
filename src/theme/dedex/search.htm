@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-		<title>搜索{dede:global name='keyword' function='RemoveXSS(@me)'/}-{dede:global.cfg_webname/}</title>
+		<title>搜索{dede:global.keyword function='RemoveXSS(@me)'/}-{dede:global.cfg_webname/}</title>
 		<meta name="keywords" content="{dede:field.keywords/}">
 		<meta name="description" content="{dede:field.description/}">
 		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
@@ -18,11 +18,16 @@
 		</div>
 		<main class="container">
 			<div class="row">
-				<div class="col-12">{dede:list pagesize='10' titlelen='230'}
+				<div class="col-12">
+					<div id="ai-box" style="display:none;margin-bottom:1rem;padding:1rem;border:1px solid #e9ecef;border-radius:0.5rem">
+						<h3 class="ai-title mb-3">AI回答</h3>
+						<div id="ai-content">正在思考...</div>
+					</div>
+					{dede:list pagesize='10' titlelen='230'}
 					<article class="list-article bg-white rounded shadow-sm mb-3 p-3">
 						<div class="list-article-body">
 							<h2 class="mb-3"><a href="[field:arcurl/]">[field:title/]</a></h2>
-							<p>[field:description function="cn_substr(@me,130)"/]...</p>
+							<p>[field:description function='cn_substr(Html2text("@me"),130)'/]...</p>
 							<div class="meta">
 								<span class="author me-3"><a href="[field:userurl/]"><img src="[field:face/]" class="user-img-xs me-3">[field:uname/]</a></span>
 								<span class="date"><i class="fa fa-calendar me-3"></i>[field:pubdate function="MyDate('Y-m-d',@me)"/]</span>
@@ -34,5 +39,76 @@
 			</div>
 		</main>
 		{dede:include filename='foot.htm'/}
+		<script>
+		(function() {
+			const kw = "{dede:global.keyword function='RemoveXSS(@me)'/}".trim();
+			const content = document.getElementById('ai-content');
+			const box = document.getElementById('ai-box');
+			if (!kw || !content || !box) return;
+			const cacheKey = `q_${kw}`;
+			const PageNo = parseInt(new URLSearchParams(window.location.search).get('PageNo')) || 1;
+			const isPagination = PageNo > 1;
+			if (isPagination) {
+				const cached = localStorage.getItem(cacheKey);
+				if (cached) {
+					try {
+						const { paragraphs } = JSON.parse(cached);
+						box.style.display = 'block';
+						content.innerHTML = '';
+						paragraphs.forEach(text => {
+							const p = document.createElement('p');
+							p.textContent = text;
+							content.appendChild(p);
+						});
+						return;
+					} catch (e) {}
+				}
+			}
+			fetch(`{dede:global.cfg_phpurl/}/search_ai.php?q=${encodeURIComponent(kw)}`).then(r => r.ok ? r.text() : Promise.reject()).then(html => {
+				if (!html.trim()) return;
+				const doc = new DOMParser().parseFromString(html, 'text/html');
+				const paras = Array.from(doc.body.children).filter(el => el.tagName === 'P').map(p => p.textContent.trim()).filter(t => t);
+				if (!paras.length) return;
+				localStorage.setItem(cacheKey, JSON.stringify({
+					keyword: kw,
+					paragraphs: paras,
+					timestamp: Date.now(),
+					ttl: 3600000
+				}));
+				box.style.display = 'block';
+				content.innerHTML = '';
+				let i = 0;
+				const next = () => {
+					if (i >= paras.length) return;
+					const p = content.appendChild(document.createElement('p'));
+					let j = 0, txt = paras[i++];
+					const timer = setInterval(() => {
+						if (j < txt.length) p.textContent += txt[j++];
+						else {
+							clearInterval(timer);
+							setTimeout(next, 500);
+						}
+						content.scrollTop = content.scrollHeight;
+					}, 30);
+				};
+				next();
+			})
+			.catch(() => {
+				const cached = localStorage.getItem(cacheKey);
+				if (cached && isPagination) {
+					try {
+						const { paragraphs } = JSON.parse(cached);
+						box.style.display = 'block';
+						content.innerHTML = '';
+						paragraphs.forEach(text => {
+							const p = document.createElement('p');
+							p.textContent = text;
+							content.appendChild(p);
+						});
+					} catch (e) {}
+				}
+			});
+		})();
+		</script>
 	</body>
 </html>

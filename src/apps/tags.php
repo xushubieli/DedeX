@@ -10,9 +10,9 @@ require_once(dirname(__FILE__)."/../system/common.inc.php");
 require_once(DEDEINC."/archive/taglist.class.php");
 //根据流量统计，限制用户浏览
 if ($cfg_access == 'Y') {
-    $viewIp = GetIP();
+    $ip = GetIP();
     $moon = time() - (24 * 60 * 60);
-    $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS dd FROM `#@__statistics_detail` WHERE ip='$viewIp' AND t>='$moon' AND url_type IN (4, -1)");
+    $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS dd FROM `#@__statistics_detail` WHERE ip='$ip' AND t>='$moon' AND url_type IN (4, -1)");
     if ($flow && $flow['dd'] > $cfg_access_count) {
         header("HTTP/1.1 403 Forbidden");
         echo "拒绝访问";

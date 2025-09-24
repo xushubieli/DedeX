@@ -24,8 +24,13 @@ if (file_exists($timelock)) {
 @touch($timelock, $timestamp);
 $mid = isset($mid) && is_numeric($mid) ? $mid : 0;
 $sqlhash = isset($sqlhash) && preg_match("/^[A-Za-z0-9]+$/", $sqlhash) ? $sqlhash : '';
+if (!empty($sqlhash) && isset($_SESSION["q_{$sqlhash}"])) {
+    $q = $_SESSION["q_{$sqlhash}"];
+} else {
+    $q = isset($q) ? trim($q) : '';
+}
 if ($mid == 0) {
-    showmsg('参数不正确，高级自定义搜索必须指定模型ID', 'javascript');
+    showmsg('参数不正确，高级自定义搜索必须指定模型ID', '/');
     exit();
 }
 $query = "SELECT maintable, mainfields, addontable, addonfields, template FROM `#@__advancedsearch` WHERE mid='$mid'";
@@ -34,14 +39,14 @@ if (!is_array($searchinfo)) {
     showmsg('自定义搜索模型不存在', '-1');
     exit();
 }
-$template = $searchinfo['template'] != '' ?  $searchinfo['template'] : 'advancedsearch.htm';
+$template = $searchinfo['template'] != '' ? $searchinfo['template'] : 'advancedsearch.htm';
 $sql = empty($_SESSION[$sqlhash]) ? '' : $_SESSION[$sqlhash];
 if (empty($sql)) {
     //主表字段处理
     $q = stripslashes($q);
     $q = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", " ", trim($q));
     if (($cfg_notallowstr != '' && preg_match("#{$cfg_notallowstr}#i", $q)) || ($cfg_replacestr != '' && preg_match("#{$cfg_replacestr}#i", $q))) {
-        echo "信息中存在违规文档，被系统禁止";
+        showmsg('信息中存在违规文档，被系统禁止', '/');
         exit();
     }
     $q = addslashes($q);
@@ -53,44 +58,56 @@ if (empty($sql)) {
     $source = isset($source) ? trim($source) : '';
     $startdate = isset($startdate) ? trim($startdate) : '';
     $enddate = isset($enddate) ? trim($enddate) : '';
-    if ($startdate != '') $starttime = strtotime($startdate);
-    else $starttime = 0;
-    if ($enddate != '') $endtime = strtotime($enddate);
-    else $endtime = 0;
-    $where = ' WHERE main.arcrank>-1 ';
-    if ($q != '') $where .= " AND main.title LIKE '%{$q}%' ";
-    if ($iscommend == 1) $where .= " AND FIND_IN_SET('c', main.flag)>0 ";
+    $starttime = $startdate != '' ? strtotime($startdate) : 0;
+    $endtime = $enddate != '' ? strtotime($enddate) : 0;
+    $where = ' WHERE main.arcrank > -1 ';
+    //if ($q != '') $where .= " AND main.title LIKE '%{$q}%' ";
+    if ($q != '') {
+        $title = "main.title LIKE '%{$q}%'";
+        if (strpos($searchinfo['addonfields'], 'body:') !== false) {
+            $where .= " AND ({$title} OR addon.body LIKE '%{$q}%') ";
+        } else {
+            $where .= " AND {$title} ";
+        }
+    }
+    if ($iscommend == 1) {
+        $where .= " AND FIND_IN_SET('c', main.flag) > 0 ";
+    }
     if (!empty($typeid)) {
         if ($includesons == 1) {
-            $tids =  TypeGetSunID($typeid, $dsql, '', $mid, TRUE);
+            $tids = TypeGetSunID($typeid, $dsql, '', $mid, TRUE);
             $where .= " AND main.typeid IN($tids) ";
         } else {
-            $where .= " AND main.typeid=$typeid ";
+            $where .= " AND main.typeid = $typeid ";
         }
     } else {
-        $where .= " AND main.channel=$mid ";
+        $where .= " AND main.channel = $mid ";
     }
     if ($writer != '') {
         $writer = stripslashes($writer);
         $writer = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim($writer));
         $writer = addslashes($writer);
-        $where .= " AND main.writer='$writer' ";
+        $where .= " AND main.writer = '$writer' ";
     }
     if ($source != '') {
         $source = stripslashes($source);
         $source = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim($source));
         $source = addslashes($source);
-        $where .= " AND main.source='$source' ";
+        $where .= " AND main.source = '$source' ";
     }
-    if ($starttime > 0) $where .= " AND main.senddate>$starttime ";
-    if ($endtime > 0) $where .= " AND main.senddate<$endtime";
+    if ($starttime > 0) {
+        $where .= " AND main.senddate > $starttime ";
+    }
+    if ($endtime > 0) {
+        $where .= " AND main.senddate < $endtime";
+    }
     $maintable = $searchinfo['maintable'];
     $addontable = $searchinfo['addontable'];
     $mainfields = $searchinfo['mainfields'];
     $addonfields = $searchinfo['addonfields'];
     $mainfieldsarr = explode(',', $mainfields);
     $addonfieldsarr = explode(',', $addonfields);
-    array_pop($addonfieldsarr); //弹出
+    array_pop($addonfieldsarr);
     $intarr = array('int', 'float');
     $textarr = array('textdata', 'textchar', 'text', 'htmltext', 'multitext');
     foreach ($addonfieldsarr as $addonfield) {
@@ -99,93 +116,77 @@ if (empty($sql)) {
         $type = $addonfieldarr[1];
         if (in_array($type, $intarr)) {
             if (isset(${'start'.$var}) && trim(${'start'.$var}) != '') {
-                ${'start'.$var} = trim(${'start'.$var});
-                ${'start'.$var} = intval(${'start'.$var});
-                $where .= " AND addon.$var>{${'start' .$var}} ";
+                ${'start'.$var} = intval(trim(${'start'.$var}));
+                $where .= " AND addon.$var > {${'start'.$var}} ";
             }
             if (isset(${'end'.$var}) && trim(${'end'.$var}) != '') {
-                ${'end'.$var} = trim(${'end'.$var});
-                ${'end'.$var} = intval(${'end'.$var});
-                $where .= " AND addon.$var<{${'end' .$var}} ";
+                ${'end'.$var} = intval(trim(${'end'.$var}));
+                $where .= " AND addon.$var < {${'end'.$var}} ";
             }
-        } else if (in_array($type, $textarr)) {
+        } elseif (in_array($type, $textarr)) {
             if (isset(${$var}) && trim(${$var}) != '') {
                 ${$var} = stripslashes(${$var});
                 ${$var} = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim(${$var}));
                 ${$var} = addslashes(${$var});
-                $where .= " AND addon.$var LIKE '%{${$var}}%'";
+                $where .= " AND addon.$var LIKE '%{${$var}}%' ";
             }
-        } else if ($type == 'select') {
-            ${$var} = stripslashes(${$var});
-            ${$var} = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim(${$var}));
-            ${$var} = addslashes(${$var});
-            if (${$var} != '') {
-                $where .= " AND addon.$var LIKE '{${$var}}'";
+        } elseif ($type == 'select' || $type == 'radio') {
+            if (isset(${$var}) && trim(${$var}) != '') {
+                ${$var} = stripslashes(${$var});
+                ${$var} = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim(${$var}));
+                ${$var} = addslashes(${$var});
+                $where .= " AND addon.$var LIKE '{${$var}}' ";
             }
-        } else if ($type == 'radio') {
-            ${$var} = stripslashes(${$var});
-            ${$var} = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim(${$var}));
-            ${$var} = addslashes(${$var});
-            if (${$var} != '') {
-                $where .= " AND addon.$var LIKE '{${$var}}'";
-            }
-        } else if ($type == 'checkbox') {
+        } elseif ($type == 'checkbox') {
             if (is_array(${$var}) && !empty(${$var})) {
                 foreach (${$var} as $tmpvar) {
                     $tmpvar = trim($tmpvar);
                     if ($tmpvar != '') {
                         $tmpvar = stripslashes($tmpvar);
-                        $tmpvar = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim($tmpvar));
+                        $tmpvar = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", $tmpvar);
                         $tmpvar = addslashes($tmpvar);
-                        $where .= " AND CONCAT(',',addon.$var, ',') LIKE '%,{$tmpvar},%' ";
+                        $where .= " AND CONCAT(',', addon.$var, ',') LIKE '%,{$tmpvar},%' ";
                     }
                 }
             }
-        } else if ($type == 'datetime') {
+        } elseif ($type == 'datetime') {
             ${'start'.$var} = trim(${'start'.$var});
-            if (${'start'.$var} != '') {
-                ${'start'.$var} = strtotime(${'start'.$var});
-            } else {
-                ${'start'.$var} = 0;
-            }
+            ${'start'.$var} = ${'start'.$var} != '' ? strtotime(${'start'.$var}) : 0;
             ${'end'.$var} = trim(${'end'.$var});
-            if (${'end'.$var} != '') {
-                ${'end'.$var} = strtotime(${'end'.$var});
-            } else {
-                ${'end'.$var} = 0;
-            }
+            ${'end'.$var} = ${'end'.$var} != '' ? strtotime(${'end'.$var}) : 0;
         }
     }
-    $orderby = ' order by main.senddate desc ';
+    $orderby = ' ORDER BY main.senddate DESC ';
     if ($mid < -1) {
         $where = str_replace('main.', 'addon.', $where);
         $orderby = str_replace('main.', 'addon.', $orderby);
         $query = "SELECT addon.*, arctype.* FROM $addontable addon LEFT JOIN `#@__arctype` arctype ON arctype.id = addon.typeid $where $orderby";
     } else {
-        $query = "SELECT main.id AS aid,main.*,main.description AS description1, type.* FROM $maintable main LEFT JOIN `#@__arctype` type ON type.id = main.typeid LEFT JOIN $addontable addon ON addon.aid = main.id $where $orderby";
+        $query = "SELECT main.id AS aid, main.*, main.description AS description1, type.* FROM $maintable main LEFT JOIN `#@__arctype` type ON type.id = main.typeid LEFT JOIN $addontable addon ON addon.aid = main.id $where $orderby";
     }
     $sql = $query;
 } else {
     $sql = urldecode($sql);
     $query = $sql;
 }
-$sql = urlencode($sql);
-//生成sql的唯一序列化字符串，并sql语句记录到session中去
-$sqlhash = md5($sql);
+$sql_encoded = urlencode($sql);
+$sqlhash = md5($sql_encoded);
 $_SESSION[$sqlhash] = $sql;
+$_SESSION["q_{$sqlhash}"] = $q;
 $dlist = new DataListCP();
-$dlist->pagesize = 30;
+$dlist->pagesize = 10;
+$dlist->SetParameter("q", $q);
 $dlist->SetParameter("hash", $sqlhash);
 $dlist->SetParameter("mid", $mid);
 if (file_exists(DEDEROOT."/theme/dedex/$template")) {
-    $templatefile = DEDEROOT."/theme/dedex/$template";
+    $templatefile = DEDEROOT."/theme/dedex/{$template}";
 } else {
     $templatefile = DEDEROOT."/theme/apps/advancedsearch.htm";
 }
 $dlist->SetTemplate($templatefile);
 $dlist->SetSource($query);
 require_once(DEDEINC."/channelunit.class.php");
-//获得一个指定文档的链接
+//获取文档链接
 function GetArcUrl($aid, $typeid, $timetag, $title, $ismake = 0, $rank = 0, $namerule = '', $artdir = '', $money = 0)
 {
     return GetFileUrl($aid, $typeid, $timetag, $title, $ismake, $rank, $namerule, $artdir, $money);

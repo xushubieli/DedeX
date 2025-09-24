@@ -31,7 +31,7 @@ if ($dopost == 'save') {
     }
     if (isset($check_new)) {
         if ($rank_new > 0 && $name_new != '' && $rank_new > 10) {
-            $inquery = "INSERT INTO `#@__arcrank` (`rank`,`membername`,`adminrank`,`money`,`scores`,`purviews`) VALUES ('$rank_new','$name_new','5','$money_new','$scores',''); ";
+            $inquery = "INSERT INTO `#@__arcrank` (`rank`,`membername`,`adminrank`,`money`,`scores`,`purviews`) VALUES ('$rank_new','$name_new','5','$money_new','$scores_new',''); ";
             $dsql->ExecuteNoneQuery($inquery);
         }
     }

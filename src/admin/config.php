@@ -45,12 +45,8 @@ $s_scriptName = $dedeNowurls[0];
 //检验会员登录状态
 $cuserLogin = new userLogin();
 if ($cuserLogin->getUserID() == -1) {
-    if (preg_match("#PHP (.*) Development Server#", $_SERVER['SERVER_SOFTWARE'])) {
-        $dirname = dirname($_SERVER['SCRIPT_NAME']);
-        header("Location: {$dirname}/login.php?gotopage=".urlencode($dedeNowurl));
-    } else {
-        header("Location: login.php?gotopage=".urlencode($dedeNowurl));
-    }
+    DedeSetCookie("ENV_GOBACK_URL", $dedeNowurl, time() + 3600, "/");
+    header("Location: login.php");
     exit();
 }
 function XSSClean($val)

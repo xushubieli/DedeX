@@ -15,7 +15,7 @@ function ReWriteConfig()
 {
     global $dsql, $configfile;
     if (!is_writeable($configfile)) {
-        echo "配置文件{$configfile}不支持写入，无法修改系统配置参数";
+        ShowMsg("配置文件{$configfile}不支持写入，无法修改系统配置参数", "-1");
         exit();
     }
     $fp = fopen($configfile, 'w');
@@ -25,12 +25,12 @@ function ReWriteConfig()
     $dsql->Execute();
     while ($row = $dsql->GetArray()) {
         if ($row['type'] == 'number') {
-            $row['value'] = preg_replace("#[^0-9.-]#","", $row['value']);
+            $row['value'] = preg_replace("#[^0-9.-]#", "", $row['value']);
             if ($row['value'] == '') $row['value'] = 0;
             fwrite($fp, "\${$row['varname']} = {$row['value']};\r\n");
         } else {
             $row['value'] = stripslashes($row['value']);
-            fwrite($fp, "\${$row['varname']} = '".str_replace(array("'","\\"), '', $row['value'])."';\r\n");
+            fwrite($fp, "\${$row['varname']} = '".str_replace(array('\\"', "'", "\\\\"),array('"', "\'", "\\"),$row['value'])."';\r\n");
         }
     }
     fwrite($fp, "?".">");
@@ -40,12 +40,12 @@ function ReWriteConfig()
 if ($dopost == "save") {
     CheckCSRF();
     foreach ($_POST as $k => $v) {
-        if (preg_match("#^edit___#", $k)) {
+        if (preg_match("#^edit_#", $k)) {
             $v = cn_substrR(${$k}, 1024);
         } else {
             continue;
         }
-        $k = preg_replace("#^edit___#", "", $k);
+        $k = preg_replace("#^edit_#", "", $k);
         
         $v = $dsql->Esc($v);
         $k = $dsql->Esc($k);
@@ -121,14 +121,14 @@ EOT;
                     $c1 = '';
                     $c2 = '';
                     $row['value'] == 'Y' ? $c1 = "checked" : $c2 = "checked";
-                    echo "<label><input type='radio' name='edit___{$row['varname']}' value='Y' $c1> 是</label> ";
-                    echo "<label><input type='radio' name='edit___{$row['varname']}' value='N' $c2> 否</label> ";
+                    echo "<label><input type='radio' name='edit_{$row['varname']}' value='Y' $c1> 是</label> ";
+                    echo "<label><input type='radio' name='edit_{$row['varname']}' value='N' $c2> 否</label> ";
                 } else if ($row['type'] == 'bstring') {
-                    echo "<textarea name='edit___{$row['varname']}' row='4' id='edit___{$row['varname']}' class='admin-textarea-xl'>".dede_htmlspecialchars($row['value'])."</textarea>";
+                    echo "<textarea name='edit_{$row['varname']}' id='edit_{$row['varname']}' class='admin-textarea-xl'>".dede_htmlspecialchars($row['value'])."</textarea>";
                 } else if ($row['type'] == 'number') {
-                    echo "<input type='text' name='edit___{$row['varname']}' id='edit___{$row['varname']}' value='{$row['value']}' class='w-75'>";
+                    echo "<input type='text' name='edit_{$row['varname']}' id='edit_{$row['varname']}' value='{$row['value']}' class='w-75'>";
                 } else {
-                    echo "<input type='text' name='edit___{$row['varname']}' id='edit___{$row['varname']}' value=\"".dede_htmlspecialchars($row['value'])."\" class='w-75'>";
+                    echo "<input type='text' name='edit_{$row['varname']}' id='edit_{$row['varname']}' value=\"".dede_htmlspecialchars($row['value'])."\" class='w-75'>";
                 }
                 ?>
             </td>

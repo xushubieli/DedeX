@@ -15,9 +15,9 @@ if ($tid == 0 && $channelid == 0) die('dedex');
 if (isset($TotalResult)) $TotalResult = intval(preg_replace("/[^\d]/", '', $TotalResult));
 //根据流量统计，限制用户浏览
 if ($cfg_access == 'Y') {
-    $viewIp = GetIP();
+    $ip = GetIP();
     $moon = time() - (24 * 60 * 60);
-    $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS dd FROM `#@__statistics_detail` WHERE ip='$viewIp' AND t>='$moon' AND url_type=1 ");
+    $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS dd FROM `#@__statistics_detail` WHERE ip='$ip' AND t>='$moon' AND url_type=1 ");
     if ($flow && $flow['dd'] > $cfg_access_count) {
         header("HTTP/1.1 403 Forbidden");
         echo "拒绝访问";
@@ -27,12 +27,18 @@ if ($cfg_access == 'Y') {
 //如果指定文档模型ID但没指定栏目ID，则文档模型的第一个顶级栏目作为栏目默认栏目
 if (!empty($channelid) && empty($tid)) {
     $tinfos = $dsql->GetOne("SELECT tp.id,ch.issystem FROM `#@__arctype` tp LEFT JOIN `#@__channeltype` ch ON ch.id=tp.channeltype WHERE tp.channeltype='$channelid' And tp.reid=0 ORDER BY sortrank ASC");
-    if (!is_array($tinfos)) die("频道中没有目录");
+    if (!is_array($tinfos)) {
+        ShowMsg('请求的频道不存在或没有可访问的目录', '/');
+        exit();
+    }
     $tid = $tinfos['id'];
 } else {
     $tinfos = $dsql->GetOne("SELECT ch.issystem FROM `#@__arctype` tp LEFT JOIN `#@__channeltype` ch ON ch.id=tp.channeltype WHERE tp.id='$tid' ");
 }
-if (empty($tinfos)) die(DedeAlert("栏目信息获取失败，请检查是否存在当前栏目", ALERT_DANGER));
+if (empty($tinfos)) {
+    ShowMsg('栏目信息获取失败，请检查是否存在当前栏目', '/');
+    exit();
+}
 if ($tinfos['issystem'] == -1) {
     $nativeplace = ((empty($nativeplace) || !is_numeric($nativeplace)) ? 0 : $nativeplace);
     $infotype = ((empty($infotype) || !is_numeric($infotype)) ? 0 : $infotype);

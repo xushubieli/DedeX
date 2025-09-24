@@ -70,7 +70,7 @@ if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
     }
 }
 //一个支持在PHP Cli Server打印的方法
-function var_dump_cli($val,...$values)
+function var_dump_cli($val,$values)
 {
     ob_start();
     var_dump($val,$values);
@@ -562,7 +562,7 @@ function GetMimeTypeOrExtension($str, $t = 0) {
 function ThemeInclude($path)
 {
     global $cfg_basedir, $cfg_templets_dir, $cfg_df_style;
-    $tmpfile = $cfg_basedir.$cfg_templets_dir.'/'.$cfg_df_style.'/'.$path;
+    $tmpfile = $cfg_basedir.$cfg_templets_dir."/{$cfg_df_style}/".$path;
     $dtp = new PartView();
     $dtp->SetTemplet($tmpfile);
     $dtp->Display();

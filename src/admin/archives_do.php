@@ -25,33 +25,6 @@ if ($dopost == 'editArchives') {
     if ($gurl == '') $gurl = 'article_edit.php';
     header("Location: {$gurl}?aid={$aid}");
     exit();
-} else if ($dopost == 'upload_base64_image') {
-    if ($litpic_b64 != "") {
-        $data = explode(',', $litpic_b64);
-        $ntime = time();
-        $savepath = $cfg_image_dir.'/'.MyDate($cfg_addon_savetype, $ntime);
-        CreateDir($savepath);
-        $fullUrl = $savepath.'/'.dd2char(MyDate('mdHis', $ntime).$cuserLogin->getUserID().mt_rand(1000, 9999));
-        $fullUrl = $fullUrl.".png";
-        file_put_contents($cfg_basedir.$fullUrl, base64_decode($data[1]));
-        //加水印
-        WaterImg($cfg_basedir.$fullUrl, 'up');
-        $litpic = $fullUrl;
-        $result = array(
-            "code" => 200,
-            "data" => array(
-                'image_url' => $litpic,
-            ),
-        );
-        echo json_encode($result);
-    } else {
-        $result = array(
-            "code" => -1,
-            "msg" => 'no image',
-        );
-        echo json_encode($result);
-    }
-    exit();
 }
 //浏览文档
 else if ($dopost == "viewArchives") {
@@ -224,7 +197,9 @@ else if ($dopost == "checkArchives") {
     }
     ShowMsg("成功审核指定文档", $ENV_GOBACK_URL);
     exit();
-} else if ($dopost == 'moveArchives') {
+}
+//移动文档
+else if ($dopost == 'moveArchives') {
     CheckPurview('sys_ArcBatch');
     if (empty($totype)) {
         require_once(DEDEINC.'/typelink/typelink.class.php');

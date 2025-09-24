@@ -47,8 +47,7 @@ if ($action == 'add') {
             if ($issystem != -1) {
                 $tabsql = "CREATE TABLE `$trueTable2` (`aid` int(11) NOT NULL DEFAULT '0',`typeid` int(11) NOT NULL DEFAULT '0',`redirecturl` varchar(255) NOT NULL DEFAULT '',`templet` varchar(30) NOT NULL DEFAULT '',`userip` char(48) NOT NULL DEFAULT '',";
             } else {
-                $tabsql = "CREATE TABLE `$trueTable2` (`aid` int(11) NOT NULL DEFAULT '0',`typeid` int(11) NOT NULL DEFAULT '0',`channel` SMALLINT NOT NULL DEFAULT '0',`arcrank` SMALLINT NOT NULL DEFAULT '0',`mid` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',`click` INT(10) UNSIGNED NOT NULL DEFAULT '0',`title` varchar(255) NOT NULL DEFAULT '',`senddate` int(11) NOT NULL DEFAULT '0',`flag` set('c','h','p','f','s','j','a','b') DEFAULT NULL,`litpic` varchar(60) NOT NULL DEFAULT '',`userip` char(48) NOT NULL DEFAULT '',`lastpost` INT( 10 ) UNSIGNED NOT NULL DEFAULT '0',`scores` MEDIUMINT(8) NOT NULL DEFAULT '0',`goodpost` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',`badpost` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-            ";
+                $tabsql = "CREATE TABLE `$trueTable2` (`aid` int(11) NOT NULL DEFAULT '0',`typeid` int(11) NOT NULL DEFAULT '0',`channel` SMALLINT NOT NULL DEFAULT '0',`arcrank` SMALLINT NOT NULL DEFAULT '0',`mid` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',`click` INT(10) UNSIGNED NOT NULL DEFAULT '0',`title` varchar(255) NOT NULL DEFAULT '',`senddate` int(11) NOT NULL DEFAULT '0',`flag` set('c','h','p','f','s','j','a','b') DEFAULT NULL,`litpic` varchar(60) NOT NULL DEFAULT '',`userip` char(48) NOT NULL DEFAULT '',`lastpost` INT( 10 ) UNSIGNED NOT NULL DEFAULT '0',`scores` MEDIUMINT(8) NOT NULL DEFAULT '0',`goodpost` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',`badpost` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0', ";
             }
             if ($mysql_version < 4.1) {
                 $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) TYPE=MyISAM; ";
