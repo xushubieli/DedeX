@@ -25,7 +25,7 @@ foreach(Array('_GET','_POST','_COOKIE') as $_request)
 require_once(DEDEINC.'/dedealert.func.php');
 require_once(DEDEINC.'/common.func.php');
 if (file_exists(INSLOCKFILE)) {
-    die(DedeAlert("完成软件安装，重新安装，根目录/install文件夹，删除里面install_lock.txt文件",ALERT_DANGER));
+    die(DedeAlert("完成软件安装，重新安装，根目录/install文件夹，删除里面install_lock.txt文件", ALERT_DANGER));
 }
 if (empty($step)) {
     $step = 1;
@@ -52,16 +52,20 @@ if ($step == 1) {
     if (!extension_loaded("gd")) {
         $arrMsg[] = "GD未开启，无法使用验证码、二维码、图片水印等功能";
     }
-    if (!empty($_SERVER['REQUEST_URI']))
-    $scriptName = $_SERVER['REQUEST_URI'];
-    else
-    $scriptName = $_SERVER['PHP_SELF'];
+    if (!empty($_SERVER['REQUEST_URI'])) {
+        $scriptName = $_SERVER['REQUEST_URI'];
+    } else {
+        $scriptName = $_SERVER['PHP_SELF'];
+    }
     $basepath = preg_replace("#\/install(.*)$#i", '', $scriptName);
-    if (!empty($_SERVER['HTTP_HOST'])) $baseurl = $proto.$_SERVER['HTTP_HOST'];
-    else $baseurl = $proto.$_SERVER['SERVER_NAME'];
-    $chars='abcdefghigklmnopqrstuvwxwyABCDEFGHIGKLMNOPQRSTUVWXWY0123456789';
-    $rnd_cookieEncode='';
-    $length = rand(28,32);
+    if (!empty($_SERVER['HTTP_HOST'])) {
+        $baseurl = $proto.$_SERVER['HTTP_HOST'];
+    } else {
+        $baseurl = $proto.$_SERVER['SERVER_NAME'];
+    }
+    $chars = 'abcdefghigklmnopqrstuvwxwyABCDEFGHIGKLMNOPQRSTUVWXWY0123456789';
+    $rnd_cookieEncode = '';
+    $length = rand(28, 32);
     $max = strlen($chars) - 1;
     for ($i = 0; $i < $length; $i++) {
         $rnd_cookieEncode .= $chars[mt_rand(0, $max)];
@@ -77,10 +81,11 @@ else if ($step == 2) {
     if (!in_array($dbtype,array("mysql", "sqlite"))) {
         die(DedeAlert("当前数据库类型不支持", ALERT_DANGER));
     }
-    if (!empty($_SERVER['HTTP_HOST']))
+    if (!empty($_SERVER['HTTP_HOST'])) {
         $dfbaseurl = $proto.$_SERVER['HTTP_HOST'];
-    else
+    } else {
         $dfbaseurl = $proto.$_SERVER['SERVER_NAME'];
+    }
     $dfbasepath = preg_replace("#\/install(.*)$#i", '', $scriptName);
     $dbhost = empty($dbhost)? "localhost" : $dbhost;
     $dbuser = empty($dbuser)? "root" : $dbuser;
@@ -92,6 +97,12 @@ else if ($step == 2) {
     $webname = empty($webname)? "我的网站" : $webname;
     $baseurl = empty($baseurl)? $dfbaseurl : $baseurl;
     $cmspath = empty($cmspath)? $dfbasepath : $cmspath;
+    if (preg_match("#[^0-9a-zA-Z_@!\.-]#", $adminuser)) {
+        die("<script>alert('管理员账号不合法，请使用数字0-9小写a-z大写A-Z符号_@!.-');javascript:history.go(-1);</script>");
+    }
+    if ($adminpwd != '' && preg_match("#[^0-9a-zA-Z_@!\.-]#", $adminpwd)) {
+        die("<script>alert('管理员密码不合法，请使用数字0-9小写a-z大写A-Z符号_@!.-');javascript:history.go(-1);</script>");
+    }
     if ($dbtype == 'sqlite') {
         $db = new SQLite3(DEDEDATA.'/'.$dbname.'.db');
     } else {
@@ -120,16 +131,16 @@ else if ($step == 2) {
     $configStr1 = str_replace("~dbprefix~", $dbprefix, $configStr1);
     $configStr1 = str_replace("~dblang~", $dblang, $configStr1);
     @chmod(DEDEDATA,0777);
-    $fp = fopen(DEDEDATA."/common.inc.php","w") or die("<script>alert('写入配置失败，请检查/data目录是否可写入');javascript:history.go(-1);</script>");
+    $fp = fopen(DEDEDATA."/common.inc.php", "w") or die("<script>alert('写入配置失败，请检查/data目录是否可写入');javascript:history.go(-1);</script>");
     fwrite($fp, $configStr1);
     fclose($fp);
     $cmspath = trim(preg_replace("#\/{1,}#", '/', $cmspath));
     if ($cmspath!='' && !preg_match("#^\/#", $cmspath)) $cmspath = '/'.$cmspath;
     if ($cmspath=='') $indexUrl = '/';
     else $indexUrl = $cmspath;
-    $chars='abcdefghigklmnopqrstuvwxwyABCDEFGHIGKLMNOPQRSTUVWXWY0123456789';
-    $rnd_apikey='';
-    $length = rand(28,32);
+    $chars = 'abcdefghigklmnopqrstuvwxwyABCDEFGHIGKLMNOPQRSTUVWXWY0123456789';
+    $rnd_apikey = '';
+    $length = rand(28, 32);
     $max = strlen($chars) - 1;
     for ($i = 0; $i < $length; $i++) {
         $rnd_apikey .= $chars[mt_rand(0, $max)];
@@ -142,9 +153,6 @@ else if ($step == 2) {
     $configStr2 = str_replace("~webname~", $webname, $configStr2);
     $configStr2 = str_replace("~adminmail~", $adminmail, $configStr2);
     $fp = fopen(DEDEDATA.'/config.cache.inc.php','w');
-    fwrite($fp, $configStr2);
-    fclose($fp);
-    $fp = fopen(DEDEDATA.'/config.cache.bak.php','w');
     fwrite($fp, $configStr2);
     fclose($fp);
     if ($mysqlVersion >= 4.1) {
@@ -264,10 +272,10 @@ else if ($step == 10) {
     $conn = @mysql_connect($dbhost, $dbuser, $dbpwd);
     $info = '';
     if ($conn) {
-		if (empty($dbname)) {
-			$info = "数据库连接正确";
-		} else {
-			$info = mysql_select_db($dbname, $conn)? "数据库已存在，系统将覆盖数据库": "数据库不存在，系统将创建数据库";
+        if (empty($dbname)) {
+            $info = "数据库连接正确";
+        } else {
+            $info = mysql_select_db($dbname, $conn)? "数据库已存在，系统将覆盖数据库": "数据库不存在，系统将创建数据库";
         }
         $result = array(
             "code" => 200,

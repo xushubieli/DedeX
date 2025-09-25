@@ -26,7 +26,6 @@
 				<div class="alert alert-info"><?php echo $msg;?></div>
 				<?php }}?>
 				<div class="alert alert-info">安装<?php echo $dfDbname;?>前，请先阅读<a href="/license.txt" target="_blank">《站点授权协议》</a>，安装即表示同意此协议</div>
-				<div id="dbinfo"></div>
 				<div class="card shadow-sm">
 					<div class="card-header text-center">
 						<h1>安装<?php echo $dfDbname;?> v<?php echo $cfg_version_detail;?></h1>
@@ -35,7 +34,7 @@
 						<form name="form1" action="/install/index.php" method="post">
 							<input type="hidden" name="step" value="2">
 							<input type="hidden" name="cookieencode" value="<?php echo $rnd_cookieEncode;?>">
-							<input type="hidden" name="adminmail" value="admin@qq.com">
+							<input type="hidden" name="adminmail" value="admin@dedex.cn">
 							<div class="mb-3">
 								<label for="dbtype" class="form-label">数据库类型</label>
 								<select id="dbtype" name="dbtype" class="form-select">
@@ -63,21 +62,22 @@
 								<label for="dbname" class="form-label">数据库名称</label>
 								<div class="input-group">
 									<input type="text" name="dbname" id="dbname" class="form-control" placeholder="DedeX">
-									<button type="button" id="dbtip" class="btn btn-primary btn-sm">检查数据库</button>
+									<button type="button" id="dbtip" class="btn btn-primary btn-sm">检查数据库链接</button>
 								</div>
 							</div>
+							<div id="dbinfo"></div>
 							<div class="mb-3">
 								<label for="webname" class="form-label">网站名称</label>
 								<input type="text" name="webname" id="webname" class="form-control" placeholder="我的网站">
 							</div>
 							<div class="mb-3">
 								<label for="adminuser" class="form-label">管理员账号</label>
-								<input type="text" name="adminuser" id="adminuser" class="form-control" placeholder="admin" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');">
+								<input type="text" name="adminuser" id="adminuser" class="form-control" placeholder="admin">
 								<small class="form-text text-black-50">请使用数字0-9小写a-z大写A-Z符号_@!.-</small>
 							</div>
 							<div class="mb-3">
 								<label for="adminpwd" class="form-label">管理员密码</label>
-								<input type="text" name="adminpwd" id="adminpwd" class="form-control" placeholder="admin" onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_@!\.-]/g,'');">
+								<input type="text" name="adminpwd" id="adminpwd" class="form-control" placeholder="admin">
 								<small class="form-text text-black-50">请使用数字0-9小写a-z大写A-Z符号_@!.-</small>
 							</div>
 							<div class="mb-3">

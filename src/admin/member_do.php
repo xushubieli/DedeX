@@ -134,6 +134,10 @@ else if ($dopost == 'edituser') {
     $rank = isset($rank)? intval($rank) : 0;
     $id = isset($id)? intval($id) : 0;
     $email = isset($email)? HtmlReplace($email,1) : '';
+    if ($pwd != '' && preg_match("#[^0-9a-zA-Z_@!\.-]#", $pwd)) {
+        ShowMsg('密码不合法，请使用数字0-9小写a-z大写A-Z符号_@!.-', '-1');
+        exit();
+    }
     if (!CheckEmail($email)) {
         ShowMsg("邮箱格式错误", "-1");
         exit();

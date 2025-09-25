@@ -37,8 +37,8 @@ if ($step == 1) {
             ShowMsg($rs, '-1');
             exit();
         }
-        if (strlen($userid) > 20 || strlen($uname) > 36) {
-            ShowMsg('账号或账号过长，不允许注册', '-1');
+        if (strlen($userid) > 36) {
+            ShowMsg('账号过长，不允许注册', '-1');
             exit();
         }
         if (strlen($userid) < $cfg_mb_idmin || strlen($pwd) < $cfg_mb_pwdmin) {
