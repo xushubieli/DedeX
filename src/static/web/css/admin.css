@@ -7,12 +7,13 @@
 }
 * {
 	scrollbar-width:thin;
-	letter-spacing:0.5px
+	letter-spacing:0.5px;
+	font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',Arial,sans-serif
 }
 body {
 	line-height:1.5;
 	font-size:14px;
-	font-family:Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+	font-weight:400;
 	color:var(--bs-gray);
 	background:var(--xs-bg)
 }
@@ -40,8 +41,8 @@ a:hover {
 }
 h1,h2,h3,h4,h5,h6 {
 	margin:0;
-	line-height:1.2;
-	font-weight:700;
+	line-height:normal;
+	font-weight:600;
 	color:var(--bs-gray-dark)
 }
 img {
@@ -107,7 +108,7 @@ textarea {
 }
 .install-head .logo {
 	font-size:18px;
-	font-weight:700;
+	font-weight:600;
 	color:var(--bs-gray-dark)
 }
 .install-head .logo img,.login-box .logo img {
@@ -138,7 +139,7 @@ textarea {
 }
 .login-box .logo a {
 	font-size:18px;
-	font-weight:700;
+	font-weight:600;
 	color:var(--bs-gray-dark)
 }
 .login-box .title,.login-box .alert {
@@ -190,7 +191,7 @@ textarea {
 .admin-head .logo .name {
 	line-height:18px;
 	font-size:18px;
-	font-weight:700;
+	font-weight:600;
 	color:var(--bs-white);
 	vertical-align:middle
 }
@@ -635,9 +636,9 @@ body.menu-show .admin-content {
 	background:none
 }
 .modal-title {
+	line-height:normal;
 	font-size:14px;
-	font-weight:400;
-	line-height:1.5
+	font-weight:400
 }
 .card,.modal-content {
 	border:none

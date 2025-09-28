@@ -1,11 +1,12 @@
 * {
 	scrollbar-width:thin;
-	letter-spacing:0.5px
+	letter-spacing:0.5px;
+	font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',Arial,sans-serif
 }
 body {
 	line-height:1.5;
 	font-size:14px;
-	font-family:Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+	font-weight:400;
 	color:#6c757d;
 	background:#fff
 }
@@ -23,7 +24,7 @@ ol,ul,dl {
 	padding:0 20px
 }
 h1,h2,h3,h4,h5,h6 {
-	line-height:1.2;
+	line-height:normal;
 	font-weight:600;
 	color:#343a40
 }
