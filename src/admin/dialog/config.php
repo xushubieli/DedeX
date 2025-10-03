@@ -19,12 +19,12 @@ $s_scriptName = $dedeNowurls[0];
 $cuserLogin = new userLogin();
 if ($cuserLogin->getUserID() <= 0) {
     if (empty($adminDirHand)) {
-        ShowMsg("<p>提示：需要输入后台管理目录才能登录</p><form><span>请输入后台管理目录名：</span><input type='hidden' name='gotopage' value='".urlencode($dedeNowurl)."'><input type='text' name='adminDirHand' value='admin'><input type='submit' name='sbt' value='前往登录'></form>", "javascript:;");
+        ShowMsg("<form><input type='hidden' name='gotopage' value='".urlencode($dedeNowurl)."'><span>请输入后台管理名：</span><input type='text' name='adminDirHand'><button type='submit' name='sbt' class='btn btn-primary btn-sm ms-2'>前往</button></form>", "javascript:;");
         exit();
     }
     $adminDirHand = HtmlReplace($adminDirHand, 1);
     $gurl = "/../{$adminDirHand}/login.php?gotopage=".urlencode($dedeNowurl);
-    echo "<script>location='$gurl';</script>";
+    echo "<script>location='{$gurl}';</script>";
     exit();
 }
 ?>

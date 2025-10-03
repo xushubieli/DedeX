@@ -68,10 +68,10 @@ if ($dopost === "bank_ok") {
             $rank = $row['rank'];
             $exptime = $row['exptime'];
             $rs = $dsql->GetOne("SELECT uptime,exptime FROM `#@__member` WHERE mid='{$moRow['mid']}'");
-            if ($rs['uptime']!=0 && $rs['exptime']!=0) {
+            if ($rs['uptime'] != 0 && $rs['exptime'] != 0) {
                 $nowtime = time();
-                $mhasDay = $rs['exptime'] - ceil(($nowtime - $rs['uptime'])/3600/24) + 1;
-                $mhasDay=($mhasDay>0)? $mhasDay : 0;
+                $mhasDay = $rs['exptime'] - ceil(($nowtime - $rs['uptime']) / 3600 / 24) + 1;
+                $mhasDay = ($mhasDay > 0) ? $mhasDay : 0;
             }
             $memrank = $dsql->GetOne("SELECT money,scores FROM `#@__arcrank` WHERE `rank`='$rank'");
             //更新会员信息
@@ -122,6 +122,10 @@ if ($product == 'member') {
         ShowMsg("无法识别您的订单", "operation.php");
         exit();
     }
+    if ($cfg_ml->M_UserMoney < $price) {
+        ShowMsg("余额不足，生成订单失败", "buy.php");
+        exit();
+    }
     $pname = $row['pname'];
     $price = $row['money'];
 } else if ($product == 'card') {
@@ -142,7 +146,7 @@ if ($paytype === 0) {
         exit();
     }
     if ($price == '') {
-        echo "无法识别您的订单";
+        ShowMsg("无法识别您的订单", "operation.php");
         exit();
     }
     //获取支付接口设置
@@ -265,15 +269,19 @@ if ($paytype === 0) {
         } else if ($product == 'member') {
             $rank = $row['rank'];
             $exptime = $row['exptime'];
-            $rs = $dsql->GetOne("SELECT uptime,exptime FROM `#@__member` WHERE mid='{$mid}'");
-            if ($rs['uptime']!=0 && $rs['exptime']!=0) {
+            $rs = $dsql->GetOne("SELECT uptime,exptime,rank,user_money FROM `#@__member` WHERE mid='{$mid}'");
+            if ($rs['uptime'] != 0 && $rs['exptime'] != 0) {
                 $nowtime = time();
-                $mhasDay = $rs['exptime'] - ceil(($nowtime - $rs['uptime'])/3600/24) + 1;
-                $mhasDay=($mhasDay>0)? $mhasDay : 0;
+                $mhasDay = $rs['exptime'] - ceil(($nowtime - $rs['uptime']) / 3600 / 24) + 1;
+                $mhasDay = ($mhasDay > 0) ? $mhasDay : 0;
             }
             $memrank = $dsql->GetOne("SELECT money,scores FROM `#@__arcrank` WHERE `rank`='$rank'");
+            if ($rs['user_money'] < $row['money']) {
+                ShowMsg("余额不足，提升会员失败", "buy.php");
+                exit();
+            }
             //更新会员信息
-            $sqlm =  "UPDATE `#@__member` SET `rank`='$rank',`money`=`money`+'{$memrank['money']}',scores=scores+'{$memrank['scores']}',exptime='$exptime'+'$mhasDay',uptime='".time()."' WHERE mid='{$mid}'";
+            $sqlm =  "UPDATE `#@__member` SET `rank`='$rank',`money`=`money`+'{$memrank['money']}',`user_money`=`user_money`-'{$row['money']}',scores=scores+'{$memrank['scores']}',exptime='$exptime'+'$mhasDay',uptime='".time()."' WHERE mid='{$mid}'";
             $sqlmo = "UPDATE `#@__member_operation` SET sta='2',oldinfo='会员升级成功' WHERE buyid='$buyid' ";
             if (!($dsql->ExecuteNoneQuery($sqlm) && $dsql->ExecuteNoneQuery($sqlmo))) {
                 ShowMsg("升级会员失败", "javascript:;");

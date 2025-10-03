@@ -6,11 +6,9 @@
  * @package        DedeX.Administrator
  * @license        GNU GPL v2 (/license.txt)
  */
-if (preg_match("#PHP (.*) Development Server#", $_SERVER['SERVER_SOFTWARE'])) {
-    if ($_SERVER['REQUEST_URI'] == dirname($_SERVER['SCRIPT_NAME'])) {
-        header('HTTP/1.1 301 Moved Permanently');
-        header('Location: '.$_SERVER['REQUEST_URI'].'/');
-    }
+if (strpos($_SERVER['SERVER_SOFTWARE'], 'PHP') === 0 && $_SERVER['REQUEST_URI'] === dirname($_SERVER['SCRIPT_NAME'])) {
+    header("Location: {$_SERVER['REQUEST_URI']}/", true, 301);
+    exit;
 }
 require_once(dirname(__FILE__)."/config.php");
 require_once(DEDEINC.'/dedetag.class.php');

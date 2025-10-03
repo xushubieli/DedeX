@@ -10,19 +10,19 @@ require_once(dirname(__FILE__)."/../system/common.inc.php");
 $aid = (isset($aid) && is_numeric($aid)) ? $aid : 0;
 $type = empty($type) ? "" : HtmlReplace($type, 1);
 if ($aid == 0) {
-    ShowMsg('文档ID不能为空', 'javascript:window.close();');
+    ShowMsg('文档ID不能为空', '-1');
     exit();
 }
 require_once(DEDEINC."/memberlogin.class.php");
 $ml = new MemberLogin();
 if ($ml->M_ID == 0) {
-    ShowMsg('只有会员才允许收藏操作', 'javascript:window.close();');
+    ShowMsg('只有会员才允许收藏操作', '-1');
     exit();
 }
 //读取文档信息
 $arcRow = GetOneArchive($aid);
 if ($arcRow['aid'] == '') {
-    ShowMsg("无法收藏未知文档", "javascript:window.close();");
+    ShowMsg("无法收藏未知文档", "-1");
     exit();
 }
 extract($arcRow, EXTR_SKIP);
@@ -43,5 +43,5 @@ if ($type == '') {
 //更新会员统计
 $row = $dsql->GetOne("SELECT COUNT(*) AS nums FROM `#@__member_stow` WHERE `mid`='{$ml->M_ID}' ");
 $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET `stow`='{$row['nums']}' WHERE `mid`='{$ml->M_ID}'");
-ShowMsg('成功收藏一个文档', 'javascript:window.close();');
+ShowMsg('成功收藏一个文档', '-1');
 ?>

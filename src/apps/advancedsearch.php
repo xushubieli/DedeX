@@ -10,6 +10,20 @@ require_once(dirname(__FILE__)."/../system/common.inc.php");
 require_once(DEDEINC."/datalistcp.class.php");
 $timestamp = time();
 @session_start();
+//检查是否是POST请求，避免重复提交
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['hash'])) {
+    $p = array();
+    foreach ($_POST as $key => $value) {
+        if (is_array($value)) {
+            $p[$key] = $value;
+        } else {
+            $p[$key] = $value;
+        }
+    }
+    $url = $_SERVER['PHP_SELF'].'?'.http_build_query($p);
+    header("Location: {$url}");
+    exit();
+}
 //限制同时搜索数量
 $timelock = DEDEDATA.'/time.lock';
 if ($cfg_allsearch_limit < 1) {
@@ -123,21 +137,21 @@ if (empty($sql)) {
                 ${'end'.$var} = intval(trim(${'end'.$var}));
                 $where .= " AND addon.$var < {${'end'.$var}} ";
             }
-        } elseif (in_array($type, $textarr)) {
+        } else if (in_array($type, $textarr)) {
             if (isset(${$var}) && trim(${$var}) != '') {
                 ${$var} = stripslashes(${$var});
                 ${$var} = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim(${$var}));
                 ${$var} = addslashes(${$var});
                 $where .= " AND addon.$var LIKE '%{${$var}}%' ";
             }
-        } elseif ($type == 'select' || $type == 'radio') {
+        } else if ($type == 'select' || $type == 'radio') {
             if (isset(${$var}) && trim(${$var}) != '') {
                 ${$var} = stripslashes(${$var});
                 ${$var} = preg_replace("#[\|\"\r\n\t%\*\?\(\)\$;,'%<>]#", "", trim(${$var}));
                 ${$var} = addslashes(${$var});
                 $where .= " AND addon.$var LIKE '{${$var}}' ";
             }
-        } elseif ($type == 'checkbox') {
+        } else if ($type == 'checkbox') {
             if (is_array(${$var}) && !empty(${$var})) {
                 foreach (${$var} as $tmpvar) {
                     $tmpvar = trim($tmpvar);
@@ -149,7 +163,7 @@ if (empty($sql)) {
                     }
                 }
             }
-        } elseif ($type == 'datetime') {
+        } else if ($type == 'datetime') {
             ${'start'.$var} = trim(${'start'.$var});
             ${'start'.$var} = ${'start'.$var} != '' ? strtotime(${'start'.$var}) : 0;
             ${'end'.$var} = trim(${'end'.$var});
