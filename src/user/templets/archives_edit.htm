@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>修改<?php echo $cInfos['typename'];?>-会员中心-<?php echo $cfg_webname;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -27,7 +25,7 @@
 					<div class="mb-3 row">
 						<span class="col-sm-2 col-form-label">缩略图</span>
 						<div class="col-sm-10">
-							<img id="imgLitpic" src="<?php echo empty($row['litpic'])? $cfg_staticurl.'/web/img/thumbnail.jpg' : $row['litpic'];?>" class="thumbnail-md me-3">
+							<img id="imgLitpic" src="<?php echo empty($row['litpic'])? $cfg_staticurl.'/web/img/thumbnail.jpg' : $row['litpic'];?>" class="thumbnail-md me-2">
 							<span class="btn btn-primary btn-sm" id="btnUploadLitpic">修改缩略图</span>
 							<input id="iptLitpic" type="file" name="iptLitpic" class="d-none">
 						</div>

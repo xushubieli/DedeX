@@ -24,13 +24,11 @@ function lib_userinfo(&$ctag, &$refObj)
     $ctp->SetNameSpace('field','[',']');
     $ctp->LoadSource($innerText);
     $dsql->Execute('user',$sql);
-    while($row = $dsql->GetArray('user'))
-    {
+    while ($row = $dsql->GetArray('user')) {
         if ($row['matt']==10) return ''; //不显示管理员信息
         $row['userurl'] = $GLOBALS['cfg_memberurl'].'/index.php?uid='.$row['userid'];
         $row['face'] = empty($row['face'])? $GLOBALS['cfg_mainsite'].'/static/web/img/admin.png' : $row['face'];
-        foreach($ctp->CTags as $tagid=>$ctag)
-        {
+        foreach ($ctp->CTags as $tagid=>$ctag) {
             if (isset($row[$ctag->GetName()])) {
                 $ctp->Assign($tagid,$row[$ctag->GetName()]);
             }

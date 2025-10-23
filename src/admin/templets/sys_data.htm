@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>数据备份</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -138,7 +136,7 @@
 										<td colspan="8">
 											<label>分卷大小：<input name="fsize" type="text" id="fsize" value="2048" class="form-control admin-w-sm"> K</label>
 											<label><input type="checkbox" name="isstruct" id="isstruct" value="1" checked> 备份结构</label>
-											<?php if (@function_exists('gzcompress') && false) {?>
+											<?php if (@function_exists('gzcompress') && false){?>
 											<label><input type="checkbox" name="iszip" id="iszip" value="1" checked> 完成后压缩成ZIP</label>
 											<?php }?>
 											<a href="javascript:SelAll();" class="btn btn-primary btn-sm">全选</a>
@@ -182,10 +180,11 @@
 				if (myform.tables.value) return myform.tables.value;
 				for (i = 0; i < myform.tables.length; i++) {
 					if (myform.tables[i].checked) {
-						if (allSel == "")
+						if (allSel == "") {
 							allSel = myform.tables[i].value;
-						else
+						} else {
 							allSel = allSel + "," + myform.tables[i].value;
+						}
 					}
 				}
 				return allSel;

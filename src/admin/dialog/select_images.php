@@ -54,8 +54,6 @@ if (!empty($iseditor)) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
         <title>选择图片</title>
-        <link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/web/css/admin.css">
         <script src="/static/web/js/jquery.min.js"></script>
     </head>

@@ -43,7 +43,7 @@ class DataListCP
     {
         global $dsql;
         $this->sourceSql = '';
-        $this->pagesize = 30;
+        $this->pagesize = 10;
         $this->queryTime = 0;
         $this->getValues = array();
         $this->isQuery = false;
@@ -239,7 +239,7 @@ class DataListCP
         }
         $plist = "<div class='d-flex justify-content-end'>\r\n";
         $sizesel = "<select name='pagesize' id='dedepagesize' class='form-select' style='width:120px'>\r\n";
-        $sizesel .= "<option value='30' ".($this->pagesize == 30 ? "selected='selected'" : "").">30条/页</option>\r\n";
+        $sizesel .= "<option value='10' ".($this->pagesize == 10 ? "selected='selected'" : "").">10条/页</option>\r\n";
         $sizesel .= "<option value='50' ".($this->pagesize == 50 ? "selected='selected'" : "").">50条/页</option>\r\n";
         $sizesel .= "<option value='100' ".($this->pagesize == 100 ? "selected='selected'" : "").">100条/页</option>\r\n";
         $sizesel .= "<option value='500' ".($this->pagesize == 500 ? "selected='selected'" : "").">500条/页</option>\r\n";

@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title><?php echo $diy->name;?>-<?php echo $cfg_webname;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -24,8 +22,7 @@
 				if (!empty($fields)) {
 					echo "<tbody>";
 					echo '<tr><td>表单'.$fields['id'].' <a href="diy.php?action=view&diyid='.$diy->diyid.'&id='.$fields['id'].'" target="_blank" class="btn btn-light btn-sm">详细</a></td></tr></td>';
-					foreach($fieldlist as $field=>$fielddata)
-					{
+					foreach ($fieldlist as $field=>$fielddata) {
 						if ($fields[$field]=='') continue;
 						echo "<tr><td>{$fielddata[0]}</td></tr><tr><td>{$fields[$field]}</td></tr>";
 					}

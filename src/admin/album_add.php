@@ -72,7 +72,7 @@ if ($dopost != 'save') {
     $sortrank = AddDay($pubdate, $sortup);
     $ismake = $ishtml == 0 ? -1 : 0;
     $title = preg_replace("#\"#", '＂', $title);
-    $title = cn_substrR($title, $cfg_title_maxlen);
+    $title = dede_htmlspecialchars(cn_substrR($title, $cfg_title_maxlen));
     $shorttitle = cn_substrR($shorttitle, 255);
     $color =  cn_substrR($color, 7);
     $writer =  cn_substrR($writer, 255);
@@ -105,7 +105,7 @@ if ($dopost != 'save') {
             if (strpos($data[0], "data:image") > 0) {
                 $data = explode(',', $album['img']);
                 $ext = ".png";
-                if (strpos($data[0], "data:image/jpeg") === 0){
+                if (strpos($data[0], "data:image/jpeg") === 0) {
                     $ext = ".jpg";
                 } else if (strpos($data[0], "data:image/gif") === 0) {
                     $ext = ".gif";
@@ -153,8 +153,7 @@ if ($dopost != 'save') {
                 $vs = explode(',', $v);
                 if (!isset(${$vs[0]})) {
                     ${$vs[0]} = '';
-                } else if ($vs[1] == 'htmltext' || $vs[1] == 'textdata') //网页文本特殊处理
-                {
+                } else if ($vs[1] == 'htmltext' || $vs[1] == 'textdata') {
                     ${$vs[0]} = AnalyseHtmlBody(${$vs[0]}, $description, $litpic, $keywords, $vs[1]);
                 } else {
                     if (!isset(${$vs[0]})) {

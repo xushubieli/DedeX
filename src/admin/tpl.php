@@ -88,14 +88,14 @@ else if ($action == 'saveedit') {
     $fp = fopen($truefile, 'w');
     fwrite($fp, $content);
     fclose($fp);
-    ShowMsg('修改或新建模板成功', 'templets_main.php?acdir='.$acdir);
+    ShowMsg('成功修改或新建模板', 'templets_main.php?acdir='.$acdir);
     exit();
 }
 //删除模板
 else if ($action == 'del') {
     $truefile = $templetdird.'/'.$filename;
     if (unlink($truefile)) {
-        ShowMsg('删除模板成功', 'templets_main.php?acdir='.$acdir);
+        ShowMsg('成功删除模板', 'templets_main.php?acdir='.$acdir);
         exit();
     } else {
         ShowMsg('删除模板失败', '-1');

@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>修改<?php echo $diy->name;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -26,8 +24,7 @@
 								<tbody>
 									<?php
 									$formfields = '';
-									foreach($fieldlist as $field=>$fielddata)
-									{
+									foreach ($fieldlist as $field=>$fielddata) {
 									   $allowhtml = array('htmltext');
 										if ($row[$field]=='') continue;
 										if (!in_array($fielddata[1],$allowhtml)) {

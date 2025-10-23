@@ -21,9 +21,9 @@ $dlist->display();
 function GetSta($sta, $id)
 {
     if ($sta == 1) {
-        return ($id != -1 ? "<span class='btn btn-primary btn-sm'>启用</span><a href='mychannel_edit.php?dopost=hide&id=$id' class='btn btn-outline-secondary btn-sm'>隐藏</a>" : "<span class='btn btn-primary btn-sm'>固定</span>");
+        return ($id != -1 ? "<span class='btn btn-primary btn-sm'>启用</span><a href='mychannel_edit.php?dopost=hide&id={$id}' class='btn btn-outline-secondary btn-sm'>隐藏</a>" : "<span class='btn btn-primary btn-sm'>固定</span>");
     } else {
-        return "<a href='mychannel_edit.php?dopost=show&id=$id' class='btn btn-outline-primary btn-sm'>启用</a><span class='btn btn-secondary btn-sm'>隐藏</span>";
+        return "<a href='mychannel_edit.php?dopost=show&id={$id}' class='btn btn-outline-primary btn-sm'>启用</a><span class='btn btn-secondary btn-sm'>隐藏</span>";
     }
 }
 function IsSystem($s)

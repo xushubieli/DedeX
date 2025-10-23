@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>自定义搜索管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -38,7 +36,7 @@
 										<td>栏目名称</td>
 										<td><?php echo $channel['typename'];?></td>
 									</tr>
-									<?php if ($channel['issystem'] >= 0) {?>
+									<?php if ($channel['issystem'] >= 0){?>
 									<tr>
 										<td>主表可供自定义搜索的字段</td>
 										<td><?php echo $mainfields;?></td>

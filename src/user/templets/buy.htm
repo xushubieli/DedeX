@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>积分钱包-会员中心-<?php echo $cfg_webname;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -16,7 +14,7 @@
 				<div class="col-md-9">
 					<div class="pannel-main-container shadow-sm rounded">
 						<div class="alert alert-info"><?php echo $cfg_ml->GetSta();?></div>
-						<?php if ($cfg_money_scores > 0) {?>
+						<?php if ($cfg_money_scores > 0){?>
 						<?php $canCav = floor($cfg_ml->fields['scores'] / $cfg_money_scores);?>
 						<div class="change pb-3">
 							<h3 class="mb-3">积分换金币</h3>

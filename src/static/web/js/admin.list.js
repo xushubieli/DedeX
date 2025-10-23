@@ -3,10 +3,11 @@ function getCheckboxItem() {
 	if (document.form2.arcID.value) return document.form2.arcID.value;
 	for (i = 0; i < document.form2.arcID.length; i++) {
 		if (document.form2.arcID[i].checked) {
-			if (allSel == '')
+			if (allSel == '') {
 				allSel = document.form2.arcID[i].value;
-			else
+			} else {
 				allSel = allSel + "`" + document.form2.arcID[i].value;
+			}
 		}
 	}
 	return allSel;

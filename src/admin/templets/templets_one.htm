@@ -1,12 +1,9 @@
-{dede:config.pagesize value='30'/}
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>文档单页管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -25,8 +22,7 @@
 							echo "<select name='likeid' id='likeid' class='form-select admin-w-sm'>";
 							$dsql->Execute("s","Select likeid From `#@__sgpage` group by likeid ");
 							echo "<option>不限</option>";
-							while($arr = $dsql->GetArray('s'))
-							{
+							while ($arr = $dsql->GetArray('s')) {
 								if ($likeid==$arr['likeid']) echo "<option value='{$arr['likeid']}' selected>{$arr['likeid']}</option>";
 								else echo "<option value='{$arr['likeid']}'>{$arr['likeid']}</option>";
 							}
@@ -68,9 +64,9 @@
 										<td>{dede:field.likeid/}</td>
 										<td>{dede:field.uptime function='GetDateMk(@me)'/}</td>
 										<td>
-											<a href="templets_one_edit.php?aid={dede:field.aid/}&dopost=edit" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
-											<a href="templets_one_edit.php?aid={dede:field.aid/}&dopost=view" target="_blank" class="btn btn-light btn-sm"><i class="fa fa-eye" title="预览"></i></a>
-											<a href="templets_one_edit.php?aid={dede:field.aid/}&dopost=delete" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+											<a href="templets_one_edit.php?aid={dede:field.aid/}&dopost=edit" class="btn btn-light btn-sm"><i class="bi bi-pencil-square" title="修改"></i></a>
+											<a href="templets_one_edit.php?aid={dede:field.aid/}&dopost=view" target="_blank" class="btn btn-light btn-sm"><i class="bi bi-box-arrow-up-right" title="预览"></i></a>
+											<a href="templets_one_edit.php?aid={dede:field.aid/}&dopost=delete" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a>
 										</td>
 									</tr>
 									{/dede:datalist}

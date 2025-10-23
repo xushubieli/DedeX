@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>金币订单-会员中心-<?php echo $cfg_webname;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -43,7 +41,7 @@
 											<td><?php echo $fields['oldinfo'];?></td>
 											<td>{dede:field.sta function="GetSta(@me)"/}</td>
 											<td>{dede:field.mtime function="GetDateMk(@me)"/}</td>
-											<td><a href="<?php echo $cfg_memberurl?>/operation.php?dopost=del&ids={dede:field.aid/}" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a></td>
+											<td><a href="<?php echo $cfg_memberurl?>/operation.php?dopost=del&ids={dede:field.aid/}" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a></td>
 										</tr>
 										{/dede:datalist}
 									</tbody>

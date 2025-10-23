@@ -7,7 +7,8 @@ if (!defined('DEDEINC')) exit('dedex');
  * @package        DedeX.Helpers
  * @license        GNU GPL v2 (/license.txt)
  */
-function DedeSetCookie($key, $value = "", $expires = 0, $path = ""){
+function DedeSetCookie($key, $value = "", $expires = 0, $path = "")
+{
     global $cfg_domain_cookie,$cfg_cookie_samesite,$cfg_cookie_secure,$cfg_cookie_httponly;
     if (version_compare(PHP_VERSION, '7.3.0', '>=')) {
         $options = array(

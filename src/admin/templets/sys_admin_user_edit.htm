@@ -4,15 +4,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>修改管理员</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<?php if ($cuserLogin->getUserType() >= 10) {?>
+				<?php if ($cuserLogin->getUserType() >= 10){?>
 				<li class="breadcrumb-item"><a href="sys_admin_user.php">管理员管理</a></li>
 				<?php }?>
 				<li class="breadcrumb-item active">修改管理员</li>
@@ -40,7 +38,7 @@
 										<td>密码</td>
 										<td><input type="text" name="pwd" id="pwd" class="form-control admin-w-sm">（留空则不修改，请使用数字0-9小写a-z大写A-Z符号_@!.-）</td>
 									</tr>
-									<?php if ($cuserLogin->getUserType() >= 10) {?>
+									<?php if ($cuserLogin->getUserType() >= 10){?>
 									<tr>
 										<td>类型</td>
 										<td>
@@ -48,8 +46,7 @@
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__admintype` ORDER BY `rank` ASC");
 												$dsql->Execute("ut");
-												while($myrow = $dsql->GetObject("ut"))
-												{
+												while ($myrow = $dsql->GetObject("ut")) {
 													if ($row['usertype']==$myrow->rank) echo "<option value='{$myrow->rank}' selected='1'>{$myrow->typename}</option>";
 													else echo "<option value='{$myrow->rank}'>{$myrow->typename}</option>";
 												}
@@ -75,8 +72,7 @@
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__admintype` ORDER BY `rank` ASC");
 												$dsql->Execute("ut");
-												while($myrow = $dsql->GetObject("ut"))
-												{
+												while ($myrow = $dsql->GetObject("ut")) {
 													if ($row['usertype']==$myrow->rank) echo "<option value='{$myrow->rank}' selected='1'>{$myrow->typename}</option>";
 												}
 												?>

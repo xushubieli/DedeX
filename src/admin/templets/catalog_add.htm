@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>添加栏目</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -53,8 +51,7 @@
 											<input type="hidden" value="{style}" name="dfstyle">
 											<select name="channeltype" id="channeltype" onChange="ParTemplet(this);" class="form-select admin-w-sm">
 												<?php
-												foreach($channelArray as $k=>$arr)
-												{
+												foreach ($channelArray as $k=>$arr) {
 													if ($k==$channelid) {
 														$nid = $arr['nid'];
 														echo "<option value='{$k}' selected>{$arr['typename']} {$arr['nid']}</option>";
@@ -69,8 +66,7 @@
 													<?php
 													$sql = "SELECT * FROM `#@__sys_enum` WHERE egroup LIKE 'infotype' ORDER BY disorder ASC,evalue ASC ";
 													$dsql->Execute('s',$sql);
-													while($arr = $dsql->GetArray('s'))
-													{
+													while ($arr = $dsql->GetArray('s')) {
 														if ($arr['evalue']%500==0) {
 															echo "<option value='{$arr['evalue']}'>{$arr['ename']}</option>";
 														} else if (preg_match("#\.#", $arr['evalue'])) {
@@ -128,12 +124,11 @@
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE `rank` >= 0 ORDER BY `rank` ASC");
 												$dsql->Execute('cc');
-												while($row = $dsql->GetObject('cc')) {
-													if ($corank==$row->rank) echo "<option value='{$row->rank}' selected>{$row->membername}</option>";
-													else {
-														if ($corank==0){
-															echo "<option value='{$row->rank}'>{$row->membername}</option>";
-														}
+												while ($row = $dsql->GetObject('cc')) {
+													if ($corank==$row->rank){
+														echo "<option value='{$row->rank}' selected>{$row->membername}</option>";
+													} else if ($corank==0) {
+														echo "<option value='{$row->rank}'>{$row->membername}</option>";
 													}
 												}
 												?>
@@ -150,7 +145,7 @@
 										<td>目录相对位置</td>
 										<td>
 											<label><input type="radio" name="referpath" value="parent" checked> 上级目录</label>
-											<?php if ($moresite==0) {?>
+											<?php if ($moresite==0){?>
 											<label><input type="radio" name="referpath" value="cmspath"> 系统根目录</label>
 											<label><input type="radio" name="referpath" value="basepath"> 站点根目录</label>
 											<?php }?>
@@ -183,7 +178,7 @@
 											<div id="helpvarco" class="helpinfo mt-3" style="display:none">交叉栏目该栏目与另一个非子栏目交叉的情况，相当于副栏目功能</div>
 										</td>
 									</tr>
-									<?php if ($id==0) {?>
+									<?php if ($id==0){?>
 									<tr>
 										<td>是否开启多站点</td>
 										<td>
@@ -223,12 +218,8 @@
 											<input type="text" name="namerule2" id="namerule2" value="{typedir}/{tid}-{page}.html" class="form-control admin-w-lg">
 											<a href="javascript:ShowHide('helpvar2');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar2" class="helpinfo mt-3" style="display:none">
-												<p>静态规则</p>
 												<p>{tid} 栏目ID</p>
 												<p>{page} 栏目页码数</p>
-												<p>伪静态规则（Nginx）</p>
-												<p>rewrite ^/list/([0-9]+)$ /apps/list.php?tid=$1;</p>
-												<p>rewrite ^/list/([0-9]+)-([0-9]+)$ /apps/list.php?tid=$1&PageNo=$2;</p>
 											</div>
 										</td>
 									</tr>
@@ -238,7 +229,6 @@
 											<input type="text" name="namerule" tid="namerule" value="<?php echo $cfg_df_namerule;?>" class="form-control admin-w-lg">
 											<a href="javascript:ShowHide('helpvar3');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar3" class="helpinfo mt-3" style="display:none">
-												<p>静态规则</p>
 												<p>{Y}{M}{D} 年月日</p>
 												<p>{timestamp} INT类型的UNIX时间戳</p>
 												<p>{aid} 文档ID</p>
@@ -246,9 +236,6 @@
 												<p>{py} 拼音部首加文档ID</p>
 												<p>{typedir} 栏目保存目录</p>
 												<p>{cc} 日期加混编id后用转换为适合字母</p>
-												<p>伪静态规则（Nginx）</p>
-												<p>rewrite ^/article/([0-9]+).html$ /apps/view.php?aid=$1;</p>
-												<p>rewrite ^/article/([0-9]+)-([0-9]+).html$ /apps/view.php?aid=$1&PageNo=$2;</p>
 											</div>
 										</td>
 										<td>SEO标题</td>
@@ -347,7 +334,7 @@
 				if (cross2.checked) crossid.style.display = 'block';
 				else crossid.style.display = 'none';
 			}
-			function makeAPIKey(){
+			function makeAPIKey() {
 				var apikey = document.getElementById('apikey');
 				jQuery.get("sys_info.php?dopost=make_encode", function(data) {
 					jQuery("#apikey").val(data);

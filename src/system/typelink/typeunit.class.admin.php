@@ -109,7 +109,7 @@ class TypeUnit
 echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
-        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
+        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
         <span class='btn btn-primary btn-sm'>列表</span>
         {$nss}
         <span class='btn btn-sm'>ID：{$id}</span>
@@ -117,12 +117,12 @@ echo <<<tpl
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>文档数：{$this->GetTotalArc($id)}</a>
     </div>
     <div class='right'>
-        <a href='{$GLOBALS['cfg_phpurl']}/list.php?tid={$id}' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='预览'></i></a>
-        <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-light btn-sm'><i class='fa fa-file-text' title='文档'></i></a>
-        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-plus-circle' title='添加'></i></a>
-        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-pencil-square' title='修改'></i></a>
-        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='fa fa-share-square' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
+        <a href='{$GLOBALS['cfg_phpurl']}/list.php?tid={$id}' target='_blank' class='btn btn-light btn-sm'><i class='bi bi-box-arrow-up-right' title='预览'></i></a>
+        <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-light btn-sm'><i class='bi bi-file-text' title='文档'></i></a>
+        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
+        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -132,19 +132,19 @@ tpl;
 echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
-        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
+        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
         <span class='btn btn-info btn-sm'>封面</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>ID：{$id}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>{$typeName}</a>
     </div>
     <div class='right'>
-        <a href='{$GLOBALS['cfg_phpurl']}/list.php?tid={$id}' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='预览'></i></a>
-        <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-light btn-sm'><i class='fa fa-file-text' title='文档'></i></a>
-        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-plus-circle' title='添加'></i></a>
-        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-pencil-square' title='修改'></i></a>
-        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='fa fa-share-square' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
+        <a href='{$GLOBALS['cfg_phpurl']}/list.php?tid={$id}' target='_blank' class='btn btn-light btn-sm'><i class='bi bi-box-arrow-up-right' title='预览'></i></a>
+        <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-light btn-sm'><i class='bi bi-file-text' title='文档'></i></a>
+        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
+        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -154,18 +154,18 @@ tpl;
 echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
-        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
+        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
         <span class='btn btn-outline-primary btn-sm'>外部</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>ID：{$id}<a>
         <a href='{$typeDir}' target='_blank' class='btn btn-sm'>{$typeName}</a>
     </div>
     <div class='right'>
-        <a href='{$typeDir}' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='预览'></i></a>
-        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-plus-circle' title='添加'></i></a>
-        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-pencil-square' title='修改'></i></a>
-        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='fa fa-share-square' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
+        <a href='{$typeDir}' target='_blank' class='btn btn-light btn-sm'><i class='bi bi-box-arrow-up-right' title='预览'></i></a>
+        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
+        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -220,7 +220,7 @@ echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
         <span>└─{$step}</span>
-        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
+        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
         <span class='btn btn-primary btn-sm'>列表</span>
         {$nss}
         <span class='btn btn-sm'>ID：{$id}</span>
@@ -228,12 +228,12 @@ echo <<<tpl
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>文档数：{$this->GetTotalArc($id)}</a>
     </div>
     <div class='right'>
-        <a href='{$GLOBALS['cfg_phpurl']}/list.php?tid={$id}' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='预览'></i></a>
-        <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-light btn-sm'><i class='fa fa-file-text' title='文档'></i></a>
-        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-plus-circle' title='添加'></i></a>
-        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-pencil-square' title='修改'></i></a>
-        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='fa fa-share-square' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
+        <a href='{$GLOBALS['cfg_phpurl']}/list.php?tid={$id}' target='_blank' class='btn btn-light btn-sm'><i class='bi bi-box-arrow-up-right' title='预览'></i></a>
+        <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-light btn-sm'><i class='bi bi-file-text' title='文档'></i></a>
+        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
+        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -244,19 +244,19 @@ echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
          <span>└─{$step}</span>
-        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
+        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
         <span class='btn btn-info btn-sm'>封面</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>ID：{$id}</a>
         <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-sm'>{$typeName}</a>
     </div>
     <div class='right'>
-        <a href='{$GLOBALS['cfg_phpurl']}/list.php?tid={$id}' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='预览'></i></a>
-        <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-light btn-sm'><i class='fa fa-file-text' title='文档'></i></a>
-        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-plus-circle' title='添加'></i></a>
-        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-pencil-square' title='修改'></i></a>
-        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='fa fa-share-square' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
+        <a href='{$GLOBALS['cfg_phpurl']}/list.php?tid={$id}' target='_blank' class='btn btn-light btn-sm'><i class='bi bi-box-arrow-up-right' title='预览'></i></a>
+        <a href='catalog_do.php?cid={$id}&dopost=listArchives' class='btn btn-light btn-sm'><i class='bi bi-file-text' title='文档'></i></a>
+        <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
+        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -267,17 +267,17 @@ echo <<<tpl
 <div class='column d-flex justify-content-between py-2'>
     <div class='left'>
          <span>└─{$step}</span>
-        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='fa fa-plus-square'></i></span>
+        <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
         <span class='btn btn-outline-primary btn-sm'>外部</span>
         {$nss}
         <a href='catalog_edit.php?id={$id}' class='btn btn-sm'>ID：{$id}</a>
         <a href='{$typeDir}' target='_blank' class='btn btn-sm'>{$typeName}</a>
     </div>
     <div class='right'>
-        <a href='{$typeDir}' target='_blank' class='btn btn-light btn-sm'><i class='fa fa-eye' title='预览'></i></a>
-        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='fa fa-pencil-square' title='修改'></i></a>
-        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='fa fa-share-square' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
+        <a href='{$typeDir}' target='_blank' class='btn btn-light btn-sm'><i class='bi bi-box-arrow-up-right' title='预览'></i></a>
+        <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
+        <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>

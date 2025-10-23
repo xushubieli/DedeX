@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>会员消费记录</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -81,10 +79,11 @@
 				if (document.form1.aids.value) return document.form1.aids.value;
 				for (i = 0; i < document.form1.aids.length; i++) {
 					if (document.form1.aids[i].checked) {
-						if (allSel == "")
+						if (allSel == "") {
 							allSel = document.form1.aids[i].value;
-						else
+						} else {
 							allSel = allSel + "`" + document.form1.aids[i].value;
+						}
 					}
 				}
 				return allSel;

@@ -54,7 +54,7 @@ if ($dopost == "delete") {
             $query = "DELETE FROM `#@__erradd` WHERE `id` = '$var'";
             $dsql->ExecuteNoneQuery($query);
         }
-        ShowMsg("成功删除指定的文档", "erraddsave.php");
+        ShowMsg("成功删除指定文档", "erraddsave.php");
         exit();
     } else {
         require_once(DEDEINC."/libraries/oxwindow.class.php");

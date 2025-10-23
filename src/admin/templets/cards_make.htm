@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>生成积分</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -30,7 +28,7 @@
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__moneycard_type`");
 												$dsql->Execute();
-												while($row=$dsql->GetArray()){
+												while ($row=$dsql->GetArray()) {
 													echo "  <option value='{$row['tid']}'>{$row['pname']}</option>";
 												}
 												$dsql->Close();

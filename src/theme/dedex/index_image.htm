@@ -6,8 +6,6 @@
 		<title>{dede:field.title/}-{dede:global.cfg_webname/}</title>
 		<meta name="keywords" content="{dede:global.cfg_keywords/}">
 		<meta name="description" content="{dede:global.cfg_description/}">
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -32,8 +30,8 @@
 						<div class="title"><h5><a href="[field:arcurl/]">[field:title/]</a></h5></div>
 						<p>[field:description function="cn_substr(@me,130)"/]...</p>
 						<div class="meta">
-							<span class="author me-3"><a href="[field:userurl/]"><img src="[field:face/]" class="user-img-xs me-3">[field:uname/]</a></span>
-							<span class="date"><i class="fa fa-calendar me-3"></i>[field:pubdate function="MyDate('Y-m-d',@me)"/]</span>
+							<span class="author me-2"><a href="[field:userurl/]"><img src="[field:face/]" class="user-img-xs me-2">[field:uname/]</a></span>
+							<span class="date"><i class="bi bi-calendar-event me-2"></i>[field:pubdate function="MyDate('Y-m-d',@me)"/]</span>
 						</div>
 					</article>
 				</div>{/dede:arclist}{/dede:channelartlist}

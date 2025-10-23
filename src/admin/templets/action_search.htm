@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>搜索结果</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -20,11 +18,11 @@
 					<div class="table-responsive">
 						<table class="table table-borderless">
 							<tbody>
-								<?php foreach ($asresult as $row) {?>
+								<?php foreach($asresult as $row){?>
 								<tr>
 									<td><?php echo $row['title'];?></td>
 								</tr>
-								<?php foreach ($row['soniterm'] as $rows) {?>
+								<?php foreach($row['soniterm'] as $rows){?>
 								<tr>
 									<td><a href="<?php echo $rows['linkurl'];?>" target="main"><?php echo $rows['title'];?></a></td>
 								</tr>

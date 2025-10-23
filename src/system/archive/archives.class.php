@@ -308,10 +308,10 @@ class Archives
         $filenames  = explode(".", $filename);
         $this->ShortName = $filenames[count($filenames) - 1];
         if ($this->ShortName == '') $this->ShortName = 'html';
-        $fileFirst = preg_replace("/\.{$this->ShortName}$/i", "", $filename);
+        $fileFirst = preg_replace('/\.'.preg_quote($this->ShortName, '/').'$/i', '', $filename);
         $this->Fields['namehand'] = basename($fileFirst);
         $filenames  = explode("/", $filename);
-        $this->NameFirst = preg_replace("/\.{$this->ShortName}$/i", "", $filenames[count($filenames) - 1]);
+        $this->NameFirst = preg_replace('/\.'.preg_quote($this->ShortName, '/').'$/i', '', $filenames[count($filenames) - 1]);
         if ($this->NameFirst == '') {
             $this->NameFirst = $this->ArcID;
         }
@@ -594,10 +594,8 @@ class Archives
                         $dtp2 = new DedeTagParse();
                         $dtp2->SetNameSpace('field','[',']');
                         $dtp2->LoadSource($innertext);
-                        foreach($diys as $row)
-                        {
-                            foreach($dtp2->CTags as $tid=>$ctag2)
-                            {
+                        foreach ($diys as $row) {
+                            foreach ($dtp2->CTags as $tid=>$ctag2) {
                                 if (isset($row[$get][$ctag2->GetName()])) {
                                     $dtp2->Assign($tid,$row[$get][$ctag2->GetName()]);
                                 }
@@ -769,7 +767,7 @@ class Archives
                     $revalue .= "<a href='{$this->NameFirst}.{$this->ShortName}'>{$v}</a>";
                 } else {
                     if ($PageNo == $i) {
-                        $revalue .= "$v";
+                        $revalue .= "{$v}";
                     } else {
                         $revalue .= "<a href='{$this->NameFirst}-{$i}.{$this->ShortName}'>{$v}</a>";
                     }
@@ -889,7 +887,7 @@ class Archives
                     }
                 } else {
                     if ($PageNo == $i) {
-                        $revalue .= "$v";
+                        $revalue .= "{$v}";
                     } else {
                         if ($cfg_rewrite == 'Y') {
                             $revalue .= "<a href='/article/{$aid}-{$i}.html'>{$v}</a>";

@@ -18,8 +18,7 @@ $addsql = " WHERE buyid LIKE '%{$buyid}%' ";
 if (!empty($sta)) $addsql .= " AND sta='$sta' ";
 $sql = "SELECT * FROM `#@__member_operation` $addsql ORDER BY aid DESC";
 $dlist = new DataListCP();
-//设定每页显示记录数
-$dlist->pagesize = 30;
+$dlist->pagesize = 10;
 $dlist->SetParameter("buyid", $buyid);
 if (isset($sta)) $dlist->SetParameter("sta", $sta);
 $dlist->dsql->SetQuery("SELECT * FROM `#@__moneycard_type`");

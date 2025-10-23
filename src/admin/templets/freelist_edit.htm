@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>修改自由列表</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<link rel="stylesheet" href="/static/web/css/codemirror.css">
 		<script src="/static/web/js/jquery.min.js"></script>
@@ -72,10 +70,9 @@
 											echo "<option value='0'>不限栏目</option>";
 											$dsql->SetQuery("SELECT id,typename, channeltype FROM `#@__arctype`");
 											$dsql->Execute();
-											while($lrow = $dsql->GetObject()){
+											while ($lrow = $dsql->GetObject()) {
 												$disable = '';
-												if ($lrow->channeltype < -1)
-												{
+												if ($lrow->channeltype < -1) {
 													$disable = 'disabled';
 												}
 												if ($lrow->id==$typeid) echo "<option value='{$lrow->id}' selected $disable>{$lrow->typename}</option>";
@@ -91,8 +88,7 @@
 											echo "<select name='channel' class='form-select admin-w-sm'><option value='0'>不限模型</option>";
 											$dsql->SetQuery("SELECT id,typename FROM `#@__channeltype` WHERE id > 0");
 											$dsql->Execute();
-											while($nrow = $dsql->GetObject())
-											{
+											while ($nrow = $dsql->GetObject()) {
 												if ($nrow->id==$channel) echo "<option value='{$nrow->id}' selected>{$nrow->typename}</option>";
 												else echo "<option value='{$nrow->id}'>{$nrow->typename}</option>";
 											}
@@ -109,10 +105,8 @@
 											echo "<option value='0'>不限</option>";
 											$dsql->SetQuery("SELECT * FROM `#@__arcatt`");
 											$dsql->Execute();
-											while($nrow = $dsql->GetObject())
-											{
-												if ($att==$nrow->att)
-												{
+											while ($nrow = $dsql->GetObject()) {
+												if ($att==$nrow->att) {
 													echo "<option value='{$nrow->att}' selected>{$nrow->attname}</option>";
 												} else {
 													echo "<option value='{$nrow->att}'>{$nrow->attname}</option>";
@@ -158,8 +152,7 @@
 											$orderby = $ctag->GetAtt('orderby');
 											$sorta = "sortrank,置顶权限值;pubdate,发布时间;senddate,录入时间;click,点击量;id,文档ID,lastpost,最后评论时间;postnum,评论总数;rand,随机获取";
 											$sortas = explode(';',$sorta);
-											foreach($sortas as $v)
-											{
+											foreach ($sortas as $v) {
 												$vs = explode(',',$v);
 												$vs[0] = trim($vs[0]);
 												$sortarrs[$vs[0]] = $vs[1];

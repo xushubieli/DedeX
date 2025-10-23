@@ -17,7 +17,7 @@ if ($action=='edit') {
 					</tr>
 					<tr>
 						<td>缓存名</td>
-						<td><input type="text" name="egroup" value="<?php echo $arr['egroup'];?>" class="form-control admin-w-lg" required>（缓存名必须用英文或数字）</td>
+						<td><input type="text" name="egroup" value="<?php echo $arr['egroup'];?>" class="form-control admin-w-lg" required></td>
 					</tr>
 					<tr>
 						<td colspan="2">
@@ -30,9 +30,7 @@ if ($action=='edit') {
 		</form>
 	</div>
 </div>
-<?php
-} else if ($action=='addnew') {
-?>
+<?php } else if ($action=='addnew') {?>
 <div class="card shadow-sm">
 	<div class="card-body">
 		<form action="stepselect_main.php" method="post">
@@ -45,7 +43,7 @@ if ($action=='edit') {
 					</tr>
 					<tr>
 						<td>缓存名</td>
-						<td><input type="text" name="egroup" class="form-control admin-w-lg" required>（缓存名必须用英文或数字）</td>
+						<td><input type="text" name="egroup" class="form-control admin-w-lg" required></td>
 					</tr>
 					<tr>
 						<td colspan="2">
@@ -58,13 +56,12 @@ if ($action=='edit') {
 		</form>
 	</div>
 </div>
-<?php
-} else if ($action=='addenum') {
+<?php } else if ($action=='addenum') {
 	$arr = $dsql->GetOne("SELECT * FROM `#@__stepselect` WHERE id='$id' ");
 	$dsql->Execute('out',"SELECT evalue,ename FROM `#@__sys_enum` WHERE egroup='{$arr['egroup']}' AND (evalue mod 500)=0 ORDER BY disorder ASC,evalue ASC");
 	$options = '';
 	if ($arr['issign']==0) {
-		while($row1 = $dsql->GetArray('out')) $options .= "<option value='{$row1['evalue']}'>{$row1['ename']}</option>";
+		while ($row1 = $dsql->GetArray('out')) $options .= "<option value='{$row1['evalue']}'>{$row1['ename']}</option>";
 	}
 ?>
 <div class="card shadow-sm">
@@ -79,7 +76,7 @@ if ($action=='edit') {
 						<td width="160">所属枚举</td>
 						<td>
 							<select name="topvalue" class="form-select admin-w-lg">
-								<option value="0">保存一级枚举</option>
+								<option value="0">一级枚举</option>
 								<?php echo $options;?>
 							</select>
 						</td>
@@ -103,13 +100,11 @@ if ($action=='edit') {
 		</form>
 	</div>
 </div>
-<?php
-} else if ($action=='view') {
+<?php } else if ($action=='view') {
 		$arr = $dsql->GetOne("SELECT * FROM `#@__stepselect` WHERE id='$id' ");
 		$dsql->Execute('out',"SELECT * FROM `#@__sys_enum` where egroup like '{$arr['egroup']}' ORDER BY disorder asc, evalue ASC");
 		$options = '';
-	while($row1 = $dsql->GetArray('out')) 
-	{
+	while ($row1 = $dsql->GetArray('out')) {
 		if ($row1['evalue']%500==0 || $arr['issign']==1) {
 			$options .= "<option value='{$row1['evalue']}'>└─ {$row1['ename']}</option>";
 		} else {
@@ -128,7 +123,6 @@ if ($action=='edit') {
 							<option value="0">请选择</option>
 							<?php echo $options;?>
 						</select>
-						<span>（这里仅显示数据关系，实际应用中，二级联动生成的表单是支持级连的，并非全部列出）</span>
 					</td>
 				</tr>
 				<tr>

@@ -1,12 +1,9 @@
-{dede:config.pagesize value='30'/}
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>管理员管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -48,9 +45,9 @@
 									</td>
 									<td>{dede:field.typename function="GetChannel(@me)"/}</td>
 									<td>
-										<a href="content_list.php?mid={dede:field.id/}" class="btn btn-light btn-sm"><i class="fa fa-file-text" title="文档"></i></a>
-										<a href="sys_admin_user_edit.php?id={dede:field.id/}&dopost=edit" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
-										<a href="sys_admin_user_edit.php?id={dede:field.id/}&userid={dede:field.userid/}&dopost=delete" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+										<a href="content_list.php?mid={dede:field.id/}" class="btn btn-light btn-sm"><i class="bi bi-file-text" title="文档"></i></a>
+										<a href="sys_admin_user_edit.php?id={dede:field.id/}&dopost=edit" class="btn btn-light btn-sm"><i class="bi bi-pencil-square" title="修改"></i></a>
+										<a href="sys_admin_user_edit.php?id={dede:field.id/}&userid={dede:field.userid/}&dopost=delete" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a>
 									</td>
 								</tr>
 								{/dede:datalist}

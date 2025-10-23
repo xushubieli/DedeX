@@ -12,8 +12,6 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="format-detection" content="telephone=no">
         <title>插入多图</title>
-        <link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/web/css/admin.css">
     </head>
     <body class="p-3">
@@ -81,7 +79,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                     let blobUrl = window.URL.createObjectURL(file)
                     axupimgs.res.push({file:file,blobUrl:blobUrl, url:''});
                     let li = document.createElement('li');
-                    li.setAttribute('class','up-no');
+                    li.setAttribute('class', 'up-no');
                     li.setAttribute('data-time', file.lastModified);
                     li.innerHTML='<div class="picbox"><img src="' + blobUrl + '"></div><div class="namebox"><span>' + file.name + '</span></div><div class="tools"><a class="remove"></a></div>';
                     vDom.appendChild(li);
@@ -181,7 +179,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                     }, function(err) {
                         document.querySelector('#imgs-topbar .upall').innerText='全部上传';
                         document.querySelectorAll('#imgs-list li.up-now').forEach((el,i) => {
-                            el.setAttribute('class','up-no');
+                            el.setAttribute('class', 'up-no');
                         });
                         alert(err);
                     });

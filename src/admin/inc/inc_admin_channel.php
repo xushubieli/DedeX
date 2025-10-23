@@ -90,8 +90,7 @@ function GetAddFieldList(&$dtp,&$oksetting)
     $dtp->SetNameSpace("field", "<", ">");
     $dtp->LoadSource($oksetting);
     if (is_array($dtp->CTags)) {
-        foreach($dtp->CTags as $tagid=>$ctag)
-        {
+        foreach ($dtp->CTags as $tagid=>$ctag) {
             if ($ctag->GetAtt('islist')==1) {
                 $oklist .= ($oklist=='' ? strtolower($ctag->GetName()) : ','.strtolower($ctag->GetName()) );
             }

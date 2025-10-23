@@ -47,7 +47,7 @@ if ($ctagid == 0 && $allfinish) {
 }
 $tag = $dsql->GetOne("SELECT * FROM `#@__tagindex` WHERE id='$ctagid' LIMIT 0,1;");
 //创建TAGS目录
-$tagsDir = str_replace("{cmspath}",$cfg_cmspath,$cfg_tags_dir);
+$tagsDir = str_replace("{cmspath}", $cfg_cmspath, $cfg_tags_dir);
 MkdirAll($cfg_basedir.$tagsDir, $cfg_dir_purview);
 if (is_array($tag) && count($tag) > 0) {
     $dlist = new TagList($tag['id'], 'tag_list.htm');
@@ -76,12 +76,11 @@ if (is_array($tag) && count($tag) > 0) {
             $query = "UPDATE `#@__tagindex` SET mktime=uptime WHERE id='$ctagid' ";
             $dsql->ExecuteNoneQuery($query);
             $reurl .= '/'.$ctagid;
-            ShowMsg("正在更新标签：{$tag['tag']}，<a href='{$reurl}' target='_blank'>点击浏览</a>", "javascript:;");
+            ShowMsg("完成标签更新：{$tag['tag']}，<a href='{$reurl}' target='_blank'>点击浏览</a>", "javascript:;");
         }
         exit();
     } else {
         if ($finishType) {
-            //完成了一个跳到下一个
             if ($upall == 1) {
                 $query = "UPDATE `#@__tagindex` SET mktime={$mktime} WHERE id='$ctagid' ";
                 $dsql->ExecuteNoneQuery($query);
@@ -92,7 +91,6 @@ if (is_array($tag) && count($tag) > 0) {
             ShowMsg("正在更新标签：{$tag['tag']}，继续更新标签", $gourl, 0, 100);
             exit();
         } else {
-            //继续当前这个
             $gourl = "makehtml_taglist_action.php?mkpage={$mkpage}&maxpagesize={$maxpagesize}&tagid={$tagid}&pageno={$pageno}&upall={$upall}&ctagid={$ctagid}&startid={$startid}&endid={$endid}&mktime={$mktime}";
             ShowMsg("正在更新标签：{$tag['tag']}，继续更新标签", $gourl, 0, 100);
             exit();

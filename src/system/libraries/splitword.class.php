@@ -217,8 +217,7 @@ class SplitWord
         //载入副词典
         $hw = '';
         $ds = file($dicAddon);
-        foreach($ds as $d)
-        {
+        foreach ($ds as $d) {
             $d = trim($d);
             if ($d=='') continue;
             $estr = substr($d, 1, 1);
@@ -230,8 +229,7 @@ class SplitWord
                 $ws = explode(',', $d);
                 $wall = iconv('utf-8', UCS2, join($spstr, $ws));
                 $ws = explode(_SP_, $wall);
-                foreach($ws as $estr)
-                {
+                foreach ($ws as $estr) {
                     $this->addonDic[$hw][$estr] = strlen($estr);
                 }
             }
@@ -716,12 +714,10 @@ class SplitWord
     {
         $newarr = array();
         $i = 0;
-        foreach($this->simpleResult as $k=>$v)
-        {
+        foreach ($this->simpleResult as $k=>$v) {
             if (empty($v['w'])) continue;
             if (isset($this->finallyResult[$k]) && count($this->finallyResult[$k]) > 0) {
-                foreach($this->finallyResult[$k] as $w)
-                {
+                foreach ($this->finallyResult[$k] as $w) {
                     if (!empty($w)) {
                         $newarr[$i]['w'] = $w;
                         $newarr[$i]['t'] = 20;
@@ -761,8 +757,7 @@ class SplitWord
     function GetFinallyResult($spword=' ', $word_meanings=FALSE)
     {
         $rsstr = '';
-        foreach($this->finallyResult as $v)
-        {
+        foreach ($this->finallyResult as $v) {
             if ($this->resultType==2 && ($v['t']==3 || $v['t']==5)) {
                 continue;
             }
@@ -788,8 +783,7 @@ class SplitWord
     function GetSimpleResult()
     {
         $rearr = array();
-        foreach($this->simpleResult as $k=>$v)
-        {
+        foreach ($this->simpleResult as $k=>$v) {
             if (empty($v['w'])) continue;
             $w = $this->_out_string_encoding($v['w']);
             if ($w != ' ') $rearr[] = $w;
@@ -803,8 +797,7 @@ class SplitWord
     function GetSimpleResultAll()
     {
         $rearr = array();
-        foreach($this->simpleResult as $k=>$v)
-        {
+        foreach ($this->simpleResult as $k=>$v) {
             $w = $this->_out_string_encoding($v['w']);
             if ($w != ' ') {
                 $rearr[$k]['w'] = $w;
@@ -820,8 +813,7 @@ class SplitWord
     function GetFinallyIndex()
     {
         $rearr = array();
-        foreach($this->finallyResult as $v)
-        {
+        foreach ($this->finallyResult as $v) {
             if ($this->resultType==2 && ($v['t']==3 || $v['t']==5)) {
                 continue;
             }
@@ -881,8 +873,7 @@ class SplitWord
         $heade_rarr = array();
         $alldat = '';
         $start_pos = $this->mask_value * 8;
-        foreach($allk as $k => $v)
-        {
+        foreach ($allk as $k => $v) {
             $dat  = serialize( $v );
             $dlen = strlen($dat);
             $alldat .= $dat;
@@ -924,8 +915,7 @@ class SplitWord
             fseek($this->mainDicHand, $arr['s'], SEEK_SET);
             $data = @unserialize(fread($this->mainDicHand, $arr['l']));
             if ( !is_array($data) ) continue;
-            foreach($data as $k => $v)
-            {
+            foreach ($data as $k => $v) {
                 $w = iconv(UCS2, 'utf-8', $k);
                 fwrite($fp, "{$w},{$v[0]},{$v[1]}\n");
             }

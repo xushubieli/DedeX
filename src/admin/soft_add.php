@@ -69,11 +69,9 @@ if ($dopost != 'save') {
     $pubdate = GetMkTime($pubdate);
     $senddate = time();
     $sortrank = AddDay($pubdate, $sortup);
-    if ($ishtml == 0) $ismake = -1;
-    else $ismake = 0;
-    if (empty($click)) $click = ($cfg_arc_click == '-1' ? mt_rand(1000, 6000) : $cfg_arc_click);
-    $title = preg_replace('#"#', '＂', $title);
-    $title = cn_substrR($title, $cfg_title_maxlen);
+    $ismake = $ishtml == 0 ? -1 : 0;
+    $title = preg_replace("#\"#", '＂', $title);
+    $title = dede_htmlspecialchars(cn_substrR($title, $cfg_title_maxlen));
     $shorttitle = cn_substrR($shorttitle, 255);
     $color =  cn_substrR($color, 7);
     $writer =  cn_substrR($writer, 255);
@@ -91,6 +89,9 @@ if ($dopost != 'save') {
     //处理上传的缩略图
     if (empty($ddisremote)) {
         $ddisremote = 0;
+    }
+    if ($needmoney != 0) {
+        $money = $needmoney;
     }
     $litpic = GetDDImage('none', $picname, $ddisremote);
     //生成文档ID
@@ -116,8 +117,7 @@ if ($dopost != 'save') {
                 $vs = explode(',', $v);
                 if (!isset(${$vs[0]})) {
                     ${$vs[0]} = '';
-                } else if ($vs[1] == 'htmltext' || $vs[1] == 'textdata') //网页文本特殊处理
-                {
+                } else if ($vs[1] == 'htmltext' || $vs[1] == 'textdata') {
                     ${$vs[0]} = AnalyseHtmlBody(${$vs[0]}, $description, $litpic, $keywords, $vs[1]);
                 } else {
                     if (!isset(${$vs[0]})) {

@@ -235,7 +235,7 @@ if ($fmdo == 'sendMail') {
             document.execCommand(\"Copy\");
             ShowMsg(\"复制推广链接成功\");
         }
-        function ShowQrcode(){
+        function ShowQrcode() {
             ShowMsg(document.getElementById('qrcode').innerHTML);
         }
     </script>";

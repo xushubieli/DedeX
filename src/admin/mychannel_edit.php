@@ -550,8 +550,7 @@ if ($dopost == "show") {
         $query = "REPLACE INTO `#@__advancedsearch` (mid, maintable, mainfields, addontable, addonfields, forms, template) VALUES ('$mid','$maintable','$mainstring','$addontable','$addonstring','$formssql', '$template')";
         $dsql->ExecuteNoneQuery($query);
         $formshtml = dede_htmlspecialchars($forms);
-        echo '<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/web/css/admin.css">
+        echo '<link rel="stylesheet" href="/static/web/css/admin.css">
         <link rel="stylesheet" href="/static/web/css/codemirror.css">
 		<script src="/static/web/js/codemirror.js"></script>
 		<script src="/static/web/js/mode/xml/xml.js"></script>

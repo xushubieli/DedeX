@@ -46,7 +46,7 @@ function UpdateReplycount($id)
 if ($job == 'del') {
     $query = "DELETE FROM `#@__feedback` WHERE id IN($ids) ";
     $dsql->ExecuteNoneQuery($query);
-    ShowMsg("成功删除指定的评论", $_COOKIE['ENV_GOBACK_URL']);
+    ShowMsg("成功删除指定评论", $_COOKIE['ENV_GOBACK_URL']);
     exit();
 }
 //删除相同IP的所有评论
@@ -95,7 +95,7 @@ else {
     }
     $querystring = "SELECT * FROM `#@__feedback` WHERE msg LIKE '%{$keyword}%' $addsql ORDER BY dtime DESC";
     $dlist = new DataListCP();
-    $dlist->pagesize = 30;
+    $dlist->pagesize = 10;
     $dlist->SetParameter('aid', $aid);
     $dlist->SetParameter('ip', $ip);
     $dlist->SetParameter('typeid', $typeid);

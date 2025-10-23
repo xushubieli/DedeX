@@ -15,7 +15,7 @@ function GetCookie(c_name) {
 			return unescape(document.cookie.substring(c_start,c_end));
 		}
 	}
-	return null
+	return null;
 }
 function SetCookie(c_name, value, expiredays) {
 	var exdate = new Date();

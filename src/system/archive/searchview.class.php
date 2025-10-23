@@ -104,7 +104,7 @@ class SearchView
             $this->ChannelTypeid = 1;
         } else {
             $row = $this->dsql->GetOne("SELECT channeltype FROM `#@__arctype` WHERE id={$this->TypeID}");
-            $this->ChannelTypeid = $row['channeltype'];
+            $this->ChannelTypeid = isset($row['channeltype']) ? $row['channeltype'] : 0;
         }
         foreach ($GLOBALS['PubFields'] as $k => $v) {
             $this->Fields[$k] = $v;
@@ -119,7 +119,7 @@ class SearchView
         $this->TempInfos['tags'] = $this->dtp->CTags;
         $this->TempInfos['source'] = $this->dtp->SourceString;
         if ($this->pagesize == "") {
-            $this->pagesize = 30;
+            $this->pagesize = 10;
         }
         $this->TotalPage = ceil($this->TotalResult / $this->pagesize);
         if ($this->PageNo == 1) {
@@ -287,7 +287,7 @@ class SearchView
     function GetRedKeyWord($fstr)
     {
         $k = trim($this->SearchKeyword);
-        return ($k == '')?  $fstr : str_replace($k, "<strong style='color:red'>{$k}</strong>", $fstr);
+        return ($k == '')?  $fstr : str_replace($k, "<strong style='color:#dc3545'>{$k}</strong>", $fstr);
     }
     /**
      *  统计列表里的记录

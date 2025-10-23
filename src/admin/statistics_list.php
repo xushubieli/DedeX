@@ -32,19 +32,19 @@ if (isset($id) && isset($reid)) {
 }
 $ip = isset($ip) ? HtmlReplace(trim($ip)) : '';
 $url_type = isset($url_type) ? intval($url_type) : 0;
+$day_peak = isset($day_peak) ? trim($day_peak) : '';
 if (empty($mobile)) $mobile = '';
 if (isset($dopost) && $dopost == "delete") {
     $ids = explode('`',$aids);
     $dquery = "";
-    foreach ($ids as $id)
-    {
+    foreach ($ids as $id) {
         $id = intval($id);
         if ($dquery == "") $dquery .= "id='$id' ";
         else $dquery .= " OR id='$id' ";
     }
     if ($dquery != "") $dquery = " WHERE $dquery";
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__statistics_detail` $dquery");
-    ShowMsg("成功删除指定的记录", "statistics_list.php");
+    ShowMsg("成功删除指定记录", "statistics_list.php");
     exit();
 } else {
     $addsql = " WHERE ip LIKE '%{$ip}%' ";
@@ -53,15 +53,19 @@ if (isset($dopost) && $dopost == "delete") {
     } else if ($url_type === 1) {
         $addsql .= " AND url_type > 0 ";
     }
-    $sql = "SELECT * FROM `#@__statistics_detail` $addsql ORDER BY id DESC";
-    $dlist = new DataListCP();
-    //流量列表数
-    $dlist->pagesize = 30;
-    $tplfile = DEDEADMIN."/templets/statistics_list.htm";
-    $dlist->SetParameter("ip", $ip);
-    $dlist->SetParameter("url_type", $url_type);
-    $dlist->SetTemplate($tplfile);
-    $dlist->SetSource($sql);
-    $dlist->Display();
 }
+$sql = "SELECT * FROM `#@__statistics_detail` $addsql ORDER BY id DESC";
+//今日峰值
+if ($day_peak == '1') {
+    $dsql->Execute('peak', "SELECT ip,dduuid,browser,os,COUNT(*) as count FROM `#@__statistics_detail` WHERE t >= ".strtotime(date('Y-m-d'))." AND url_type != -1 GROUP BY ip ORDER BY count DESC LIMIT 15");
+}
+$dlist = new DataListCP();
+$dlist->pagesize = 10;
+$tplfile = DEDEADMIN."/templets/statistics_list.htm";
+$dlist->SetParameter("ip", $ip);
+$dlist->SetParameter("url_type", $url_type);
+$dlist->SetParameter("day_peak", $day_peak);
+$dlist->SetTemplate($tplfile);
+$dlist->SetSource($sql);
+$dlist->Display();
 ?>

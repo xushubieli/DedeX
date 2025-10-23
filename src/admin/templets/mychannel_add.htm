@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>新增文档模型</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -68,8 +66,7 @@
 												$urank = $cuserLogin->getUserRank();
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` where adminrank<='$urank' And `rank` >= 10");
 												$dsql->Execute();
-												while($row2 = $dsql->GetObject())
-												{
+												while ($row2 = $dsql->GetObject()) {
 													echo "<option value='{$row2->rank}'>{$row2->membername}</option>";
 												}
 												?>

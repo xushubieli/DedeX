@@ -1,0 +1,13 @@
+#Apache Dedex伪静态规则
+RewriteEngine On
+RewriteBase /
+#列表
+RewriteRule ^list/([0-9]+)$ apps/list.php?tid=$1 [L]
+RewriteRule ^list/([0-9]+)-([0-9]+)$ apps/list.php?tid=$1&PageNo=$2 [L]
+#文档
+RewriteRule ^article/([0-9]+)\.html$ apps/view.php?aid=$1 [L]
+RewriteRule ^article/([0-9]+)-([0-9]+)\.html$ apps/view.php?aid=$1&PageNo=$2 [L]
+#标签
+RewriteRule ^tags$ apps/tags.php [L]
+RewriteRule ^tags/([0-9]+)$ apps/tags.php?/$1 [L]
+RewriteRule ^tags/([0-9]+)/([0-9]+)$ apps/tags.php?/$1/$2 [L]

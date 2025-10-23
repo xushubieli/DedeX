@@ -1,12 +1,9 @@
-{dede:config.pagesize value='30'/}
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>联动类型管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -26,8 +23,7 @@
 							<option value="0">所有组</option>
 							<?php
 							$selgroup = '';
-							foreach($etypes as $arr)
-							{
+							foreach ($etypes as $arr) {
 								$stylecolor = '';
 								if ($arr['issystem']==1) $stylecolor = "class='text-black-50'";
 								if ($egroup==$arr['egroup']) {
@@ -52,8 +48,7 @@
 				$arr = $dsql->GetOne("SELECT * FROM `#@__stepselect` WHERE egroup='{$egroup}' ");
 				$dsql->Execute('out',"SELECT evalue,ename FROM `#@__sys_enum` WHERE egroup='{$arr['egroup']}' ORDER BY disorder ASC,evalue ASC");
 				$options = '';
-				while($row1 = $dsql->GetArray('out'))
-				{
+				while ($row1 = $dsql->GetArray('out')) {
 					if (!preg_match("#\.#", $row1['evalue'])) {
 						$row1['ename'] = ($row1['evalue'] % 500 == 0) ? $row1['ename'] : '└─ '.$row1['ename'];
 						if ($topvalue != $row1['evalue']) $options .= "<option value='{$row1['evalue']}'>{$row1['ename']}</option>";
@@ -76,7 +71,7 @@
 							</select>
 							<input type="text" name="ename" class="form-control admin-w-lg" placeholder="请填分类名称">
 							<button type="submit" class="btn btn-primary btn-sm">添加分类</button>
-							<?php if ($egroup=='nativeplace') {echo "<a href='stepselect_main.php?action=exarea' class='btn btn-primary btn-sm'>导入默认地区</a>";}?>
+							<?php if ($egroup=='nativeplace'){echo "<a href='stepselect_main.php?action=exarea' class='btn btn-primary btn-sm'>导入默认地区</a>";}?>
 						</form>
 					</div>
 				</div>
@@ -138,8 +133,8 @@
 											<?php
 											if (!empty($egroup)) {
 											?>
-											<a href='javascript:updateItem({dede:field.id/});' class='btn btn-light btn-sm'><i class='fa fa-repeat' title='更新'></i></a>
-											<a href='stepselect_main.php?action=delenum&id={dede:field.id/}' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
+											<a href='javascript:updateItem({dede:field.id/});' class='btn btn-light btn-sm'><i class='bi bi-arrow-counterclockwise' title='更新'></i></a>
+											<a href='stepselect_main.php?action=delenum&id={dede:field.id/}' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
 											<?php
 											} else {
 												echo "<a href='stepselect_main.php?egroup={$fields['egroup']}'>{$egroups[$fields['egroup']]}</a>";
@@ -204,8 +199,8 @@
 									<td> {dede:field.issystem function="@me==1 ? '是' : '否'"/} </td>
 									<td>{dede:field.egroup/}</td>
 									<td>
-										<a href="stepselect_main.php?action=upallcache&egroup={dede:field.egroup/}" class="btn btn-light btn-sm"><i class="fa fa-repeat" title="更新"></i></a>
-										<a href="stepselect_main.php?egroup={dede:field.egroup/}" class="btn btn-light btn-sm"><i class="fa fa-eye" title="查看"></i></a>
+										<a href="stepselect_main.php?action=upallcache&egroup={dede:field.egroup/}" class="btn btn-light btn-sm"><i class="bi bi-arrow-counterclockwise" title="更新"></i></a>
+										<a href="stepselect_main.php?egroup={dede:field.egroup/}" class="btn btn-light btn-sm"><i class="bi bi-box-arrow-up-right" title="查看"></i></a>
 									</td>
 								</tr>
 								{/dede:datalist}

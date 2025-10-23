@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>添加文档模型字段</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -90,8 +88,7 @@
 											<select name="channeltype" id="channeltype" class="form-select admin-w-sm">
 												<?php
 												$channelid = 1;
-												foreach($channelArray as $k=>$arr)
-												{
+												foreach ($channelArray as $k=>$arr) {
 													if ($k==$channelid) {
 														$nid = $arr['nid'];
 														echo "<option value='{$k}' selected>{$arr['typename']} {$arr['nid']}</option>";

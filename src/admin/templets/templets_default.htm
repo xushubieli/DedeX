@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>默认模板管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -46,7 +44,7 @@
 							<tbody>
 								<?php
 								$files = scandir($templetdird);
-								foreach ($files as $filename){
+								foreach ($files as $filename) {
 									if (!preg_match("#\.htm#", $filename)) continue;
 									$filetime = filemtime($templetdird.'/'.$filename);
 									$filetime = MyDate("Y-m-d H:i:s",$filetime);
@@ -57,9 +55,9 @@
 									<td><?php echo $fileinfo;?></td>
 									<td><?php echo $filetime;?></td>
 									<td>
-										<a href="tpl.php?action=edit&acdir=<?php echo $acdir;?>&filename=<?php echo $filename;?>" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
-										<?php if (!isset($fileinfos[$filename])) {?>
-										<a href="tpl.php?action=del&acdir=<?php echo $acdir;;?>&filename=<?php echo $filename;?>" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+										<a href="tpl.php?action=edit&acdir=<?php echo $acdir;?>&filename=<?php echo $filename;?>" class="btn btn-light btn-sm"><i class="bi bi-pencil-square" title="修改"></i></a>
+										<?php if (!isset($fileinfos[$filename])){?>
+										<a href="tpl.php?action=del&acdir=<?php echo $acdir;;?>&filename=<?php echo $filename;?>" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a>
 										<?php }?>
 									</td>
 								</tr>

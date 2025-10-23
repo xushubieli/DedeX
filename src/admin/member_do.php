@@ -48,7 +48,7 @@ if ($dopost == "delmember") {
                 exit();
             }
         }
-        ShowMsg("成功删除一个账户", $ENV_GOBACK_URL);
+        ShowMsg("成功删除一个会员", $ENV_GOBACK_URL);
         exit();
     }
     $randcode = mt_rand(10000, 99999);
@@ -92,7 +92,7 @@ if ($dopost == "delmember") {
                 exit();
             }
         }
-        ShowMsg("成功删除这些会员", $ENV_GOBACK_URL);
+        ShowMsg("批量删除会员完成", $ENV_GOBACK_URL);
         exit();
     }
     $randcode = mt_rand(10000, 99999);
@@ -212,7 +212,7 @@ else if ($dopost == "memberlogin") {
                     $proRow = $dsql->GetOne("SELECT * FROM `#@__moneycard_type` WHERE tid={$moRow['pid']}");
                     $query = "UPDATE `#@__member` SET money = money+{$proRow['num']} WHERE mid = '{$moRow['mid']}'";
                     $dsql->ExecuteNoneQuery($query);
-                } else if ($moRow['product'] === "member"){
+                } else if ($moRow['product'] === "member") {
                     $row = $dsql->GetOne("SELECT * FROM `#@__member_type` WHERE aid='{$moRow['pid']}'");
                     $rank = $row['rank'];
                     $exptime = $row['exptime'];

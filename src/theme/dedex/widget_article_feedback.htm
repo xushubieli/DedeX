@@ -29,9 +29,9 @@
 	</div>
 	<div class="feedbacks">
 		{dede:feedback}
-		<div class="media pt-3">
-			<a href="[field:userurl/]"><img src="[field:face/]" class="face me-3"></a>
-			<div class="media-body">
+		<div class="media d-flex pt-3">
+			<a href="[field:userurl/]"><img src="[field:face/]" class="face me-2"></a>
+			<div class="media-body w-100">
 				<div class="feedback-infos pb-3">
 					<div class="feedback-basic">
 						<a href="[field:userurl/]"><span>[field:username function="(@me=='guest' ? '游客' : @me)"/]</span></a>
@@ -40,7 +40,7 @@
 					<div class="feedback-action pb-3">
 						<a href="javascript:LoadReplyFeedbacks([field:id/]);" class="btn btn-outline-primary btn-sm">[field:replycount/]条回复</a>
 						<a href="javascript:GoodFeedback([field:id/], [field:good/]);" class="btn btn-outline-primary btn-sm">
-							<i class="fa fa-thumbs-up"></i>
+							<i class="bi bi-hand-thumbs-up"></i>
 							<i id="feedbackGood[field:id/]">[field:good/]</i>
 						</a>
 						<a href="javascript:ReplyFeedback([field:id/]);" class="btn btn-primary btn-sm">回复</a>

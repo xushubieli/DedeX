@@ -4,10 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>修改专题</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
@@ -46,8 +44,7 @@
 											<?php
 											$dsql->SetQuery("SELECT * FROM `#@__arcatt` ORDER BY sortid ASC");
 											$dsql->Execute();
-											while($trow = $dsql->GetObject())
-											{
+											while ($trow = $dsql->GetObject()) {
 												if ($trow->att=='j') continue;
 												if (preg_match("#{$trow->att}#", $arcRow['flag'])) {
 													echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' checked> {$trow->attname}[{$trow->att}]</label> ";
@@ -104,7 +101,7 @@
 									$dtp = new DedeTagParse();
 									$dtp->LoadSource($addRow["note"]);
 									if (is_array($dtp->CTags)) {
-										foreach($dtp->CTags as $tagid=>$ctag) {
+										foreach ($dtp->CTags as $tagid=>$ctag) {
 										if ($ctag->GetName()!="specnote") continue;
 										$notename = $ctag->GetAtt('name');
 										$col = $ctag->GetAtt('col');

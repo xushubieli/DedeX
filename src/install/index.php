@@ -7,7 +7,7 @@
 error_reporting(E_ALL || ~E_NOTICE);
 define('INSLOCKFILE', dirname(__FILE__).'/install_lock.txt');
 $dfDbname = 'DedeX';
-$cfg_version_detail = '1.0.6'; //版本详情
+$cfg_version_detail = '1.0.7'; //版本详情
 $errmsg = '';
 if (version_compare(PHP_VERSION, '8.0.0', '>=') && function_exists("mysqli_report")) {
     mysqli_report(MYSQLI_REPORT_OFF);
@@ -18,14 +18,13 @@ define('DEDEDATA',dirname(__FILE__).'/../data');
 define('DEDEROOT',preg_replace("#[\\\\\/]install#", '', dirname(__FILE__)));
 header("Content-Type: text/html; charset=utf-8");
 require_once(DEDEROOT.'/install/install.inc.php');
-foreach(Array('_GET','_POST','_COOKIE') as $_request)
-{
-    foreach($$_request as $_k => $_v) ${$_k} = RunMagicQuotes($_v);
+foreach (Array('_GET','_POST','_COOKIE') as $_request) {
+    foreach ($$_request as $_k => $_v) ${$_k} = RunMagicQuotes($_v);
 }
 require_once(DEDEINC.'/dedealert.func.php');
 require_once(DEDEINC.'/common.func.php');
 if (file_exists(INSLOCKFILE)) {
-    die(DedeAlert("完成软件安装，重新安装，根目录/install文件夹，删除里面install_lock.txt文件", ALERT_DANGER));
+    die(DedeAlert("已完成安装，需重新安装，根目录/install文件夹，删除里面install_lock.txt文件", ALERT_DANGER));
 }
 if (empty($step)) {
     $step = 1;
@@ -185,8 +184,7 @@ else if ($step == 2) {
     //导入默认数据
     $query = '';
     $fp = fopen(dirname(__FILE__).'/sql-dfdata.txt', 'r');
-    while(!feof($fp))
-    {
+    while (!feof($fp)) {
         $line = rtrim(fgets($fp, 1024));
         if (preg_match("#;$#", $line)) {
             if ($dbtype == 'sqlite') {
@@ -249,7 +247,7 @@ else if ($step == 2) {
             $setupsql = preg_replace("#[\r\n]{1,}#", "\n", $setupsql);
             $setupsql = preg_replace('/#@__/i', $dbprefix, $setupsql);
             $sqls = preg_split("#;[ \t]{0,}\n#", $setupsql);
-            foreach($sqls as $sql) {
+            foreach ($sqls as $sql) {
                 if (trim($sql)!='') mysql_query($sql, $conn);
             }
             UpDateCatCache();

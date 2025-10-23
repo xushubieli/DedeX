@@ -3939,7 +3939,7 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('19','cfg_notallowstr','禁用关键词，支持正则匹配，用|隔开，结尾不要加|','5','bstring','废物|垃圾|脑残|神经病|变态'),
 ('20','cfg_feedbackcheck','是否需审核评论及留言','5','bool','Y'),
 ('21','cfg_keyword_replace','是否使用关键词替换功能，开启影响文档更新速度','2','bool','Y'),
-('22','cfg_rewrite','是否启用伪静态，开启后必须添加伪静态规则','1','bool','N'),
+('22','cfg_rewrite','是否启用伪静态，伪静态规则参考.htaccess','1','bool','N'),
 ('23','cfg_df_style','默认主题模板风格','1','string','dedex'),
 ('24','cfg_multi_site','是否支持多站点，开启后附件栏目连接文档启用绝对网址','2','bool','N'),
 ('25','cfg_rm_remote','下载远程图片和资源','7','bool','N'),

@@ -73,7 +73,7 @@ if ($action == 'post') {
     }
     $query = "SELECT * FROM {$diy->table} $addquery ORDER BY id DESC";
     $datalist = new DataListCP();
-    $datalist->pagesize = 30;
+    $datalist->pagesize = 10;
     $datalist->SetParameter('action', 'list');
     $datalist->SetParameter('diyid', $diyid);
     $datalist->SetParameter('keyword', $keyword);
@@ -185,8 +185,7 @@ if ($action == 'post') {
     print(chr(0xEF).chr(0xBB).chr(0xBF));//清除bom
     $fieldlist = (array)$diy->getFieldList();
     echo "<table><tr>";
-    foreach($fieldlist as $field=>$fielddata)
-    {
+    foreach ($fieldlist as $field=>$fielddata) {
         echo "<th>{$fielddata[0]}</th>";
     }
     echo "<th>状态</th>";
@@ -194,11 +193,9 @@ if ($action == 'post') {
     $sql = "SELECT * FROM {$diy->table} ORDER BY id DESC";
     $dsql->SetQuery($sql);
     $dsql->Execute('t');
-    while($arr = $dsql->GetArray('t'))
-    {
+    while ($arr = $dsql->GetArray('t')) {
         echo "<tr>";
-        foreach($fieldlist as $key => $field)
-        {
+        foreach ($fieldlist as $key => $field) {
             echo "<td>{$arr[$key]}</td>";
         }
     $status = $arr['ifcheck'] == 1 ? '已审核' : '待审核';

@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>数据还原</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -33,8 +31,7 @@
 							<table class="table table-borderless">
 								<tbody>
 									<?php
-									for ($i=0; $i<count($filelists); $i++)
-									{
+									for ($i=0; $i<count($filelists); $i++) {
 										echo "<tr>";
 										$mtd = "<td><input name='bakfile' id='bakfile' type='checkbox' value='{$filelists[$i]}' checked></td><td>{$filelists[$i]}</td>";
 										echo $mtd;
@@ -77,10 +74,11 @@
 				if (myform.bakfile.value) return myform.bakfile.value;
 				for (i = 0; i < myform.bakfile.length; i++) {
 					if (myform.bakfile[i].checked) {
-						if (allSel == "")
+						if (allSel == "") {
 							allSel = myform.bakfile[i].value;
-						else
+						} else {
 							allSel = allSel + "," + myform.bakfile[i].value;
+						}
 					}
 				}
 				return allSel;

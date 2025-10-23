@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>添加友情链接</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -61,8 +59,7 @@
 												<?php
 												$dsql->SetQuery("SELECT * FROM `#@__flinktype`");
 												$dsql->Execute();
-												while($row=$dsql->GetObject())
-												{
+												while ($row=$dsql->GetObject()) {
 													echo " <option value='{$row->id}'>{$row->typename}</option>";
 												}
 												?>

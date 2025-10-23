@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>文档重复检测</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -28,8 +26,7 @@
 											<select name="channelid" class="form-select admin-w-sm">
 												<?php
 												if (!empty($channelinfos)) {
-													foreach($channelinfos as $rs)
-													{
+													foreach ($channelinfos as $rs) {
 														echo "<option value='{$rs['id']}'>{$rs['typename']}</option>";
 													}
 												}

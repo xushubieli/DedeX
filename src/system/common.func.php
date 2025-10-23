@@ -318,7 +318,7 @@ function ShowMsg($msg, $gourl, $onlymsg = 0, $limittime = 0)
         return;
     }
     if (empty($GLOBALS['cfg_plus_dir'])) $GLOBALS['cfg_plus_dir'] = '..';
-    $htmlhead = "<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1'><meta name='viewport' content='width=device-width,initial-scale=1'><title>系统提示</title><link rel='stylesheet' href='/static/web/css/bootstrap.min.css'><link rel='stylesheet' href='/static/web/css/admin.css'></head><base target='_self'><body>";
+    $htmlhead = "<!DOCTYPE html><html><head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' content='IE=Edge,chrome=1'><meta name='viewport' content='width=device-width,initial-scale=1'><title>系统提示</title><link rel='stylesheet' href='/static/web/css/admin.css'></head><base target='_self'><body>";
     $htmlfoot = "</body></html>";
     $litime = ($limittime == 0 ? 1000 : $limittime);
     $func = '';
@@ -388,13 +388,13 @@ function GetSimpleServerSoftware()
 {
     if (preg_match("#^php#i",$_SERVER["SERVER_SOFTWARE"])) {
         return 'PHP Server';
-    } else if (preg_match("#^apache#i",$_SERVER["SERVER_SOFTWARE"])){
+    } else if (preg_match("#^apache#i",$_SERVER["SERVER_SOFTWARE"])) {
         return 'Apache';
-    } else if (preg_match("#^nginx#i",$_SERVER["SERVER_SOFTWARE"])){
+    } else if (preg_match("#^nginx#i",$_SERVER["SERVER_SOFTWARE"])) {
         return 'Nginx';
-    } else if (preg_match("#^microsoft-iis#i",$_SERVER["SERVER_SOFTWARE"])){
+    } else if (preg_match("#^microsoft-iis#i",$_SERVER["SERVER_SOFTWARE"])) {
         return 'IIS';
-    } else if (preg_match("#^caddy#i",$_SERVER["SERVER_SOFTWARE"])){
+    } else if (preg_match("#^caddy#i",$_SERVER["SERVER_SOFTWARE"])) {
         return 'Caddy';
     } else {
         return 'Other';
@@ -557,6 +557,87 @@ function GetMimeTypeOrExtension($str, $t = 0) {
         }
         return "dedex";
     }
+}
+function ConvertMysqlToSqlite($mysqlQuery) {
+    //移除CHARACTER SET和COLLATE
+    $query = preg_replace('/character set \S+/i', '', $mysqlQuery);
+    $query = preg_replace('/collate \S+/i', '', $query);
+    //移除unsigned关键字
+    $query = str_replace('unsigned', '', $query);
+    //替换MySQL的整数类型为SQLite的INTEGER
+    $query = preg_replace('/\b(TINY|SMALL|MEDIUM|BIG)?INT\(\d+\)/i', 'INTEGER', $query);
+    //替换AUTO_INCREMENT为PRIMARY KEY AUTOINCREMENT (仅适用于INTEGER类型)
+    $query = preg_replace('/\bINTEGER\s+NOT NULL\s+PRIMARY KEY AUTOINCREMENT/i', 'INTEGER PRIMARY KEY AUTOINCREMENT', $query);
+    $query = preg_replace('/\bAUTO_INCREMENT\b/i', '', $query);
+    //移除MySQL特有的ENGINE、CHARSET、COLLATE、TYPE选项
+    $query = preg_replace('/ENGINE=\S+/i', '', $query);
+    $query = preg_replace('/DEFAULT CHARSET=\S+/i', '', $query);
+    $query = preg_replace('/COLLATE=\S+/i', '', $query);
+    $query = preg_replace('/TYPE=MyISAM;/i', '', $query);
+    //移除COMMENT语法（SQLite不支持）
+    $query = preg_replace('/COMMENT\s+\'[^\']*\'/i', '', $query);
+    //移除KEY和UNIQUE KEY定义（SQLite会自动管理索引），同时处理USING BTREE
+    $query = preg_replace('/,?\s*KEY\s+\S+\s*\([^)]*\)\s*(USING BTREE)?/i', '', $query);
+    $query = preg_replace('/,?\s*UNIQUE KEY\s+\S+\s*\([^)]*\)\s*(USING BTREE)?/i', '', $query);
+    //移除不完整的UNIQUE定义
+    $query = preg_replace('/,?\s*UNIQUE\s*(?!\()/', '', $query);
+    //替换ENUM和SET为TEXT
+    $query = preg_replace('/\b(ENUM|SET)\([^)]*\)/i', 'TEXT', $query);
+    //替换MEDIUMTEXT为TEXT
+    $query = preg_replace('/\bMEDIUMTEXT\b/i', 'TEXT', $query);
+    //处理DEFAULT CURRENT_TIMESTAMP
+    $query = preg_replace('/DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP/i', 'DEFAULT CURRENT_TIMESTAMP', $query);
+    //处理DEFAULT值
+    $query = preg_replace('/DEFAULT\s+\'([^\']+)\'/i', 'DEFAULT "$1"', $query);
+    //处理PRIMARY KEY只能用于INTEGER
+    if (preg_match('/PRIMARY KEY \(`(\w+)`\)/', $query, $matches)) {
+        $primaryKeyColumn = $matches[1];
+        $query = preg_replace('/,?\s*PRIMARY KEY\s*\(`'.$primaryKeyColumn.'`\)/i', '', $query);
+        $query = preg_replace('/(`'.$primaryKeyColumn.'`\s+INTEGER)/i', '$1 PRIMARY KEY', $query);
+    }
+    //处理CONCAT替换为SQLite兼容形式
+    if (preg_match('/CONCAT\(([^)]*?)\)/i', $query, $matches)) {
+        $query = preg_replace('/CONCAT\(([^)]*?)\)/i', str_replace(",", "||", $matches[1]), $query);
+        $query = str_replace("'||'", "','", $query);
+    }
+    //修正FIND_IN_SET替换
+    $query = preg_replace("/FIND_IN_SET\('([\w]+)', arc.flag\)>0/i", "(',' || arc.flag || ',') LIKE '%,\\1,%'", $query);
+    $query = preg_replace("/FIND_IN_SET\('([\w]+)', arc.flag\)<1/i", "(',' || arc.flag || ',') NOT LIKE '%,\\1,%'", $query);
+    //修正FIND_IN_SET替换（允许列名包含点号）
+    $query = preg_replace_callback(
+        "/FIND_IN_SET\s*\(\s*'([^']+)'\s*,\s*([a-zA-Z0-9_`\.]+)\s*\)/i",
+        function ($matches) {
+            //返回SQLite兼容的LIKE语法
+            return "(',' || ".$matches[2]." || ',' LIKE '%,".$matches[1].",%')";
+        },
+        $query
+    );
+    //替换FIELD函数为CASE表达式
+    $query = preg_replace_callback(
+        '/\bFIELD\s*\(\s*([^,]+)\s*,\s*((?:\'[^\']+\'|`[^`]+`|[^),]+(?:,\s*)?)+)\s*\)/i',
+        function ($matches) {
+            $field = trim($matches[1]);
+            $values = trim($matches[2]);
+            //更精确分割值列表（支持带引号、反引号及无空格分隔的数值）
+            preg_match_all('/\'[^\']+\'|`[^`]+`|\d+|\w+/', $values, $valueParts);
+            $cases = [];
+            $position = 1;
+            foreach ($valueParts[0] as $value) {
+                $cases[] = "WHEN $field = $value THEN $position";
+                $position++;
+            }
+            return "(CASE ".implode(' ', $cases)." ELSE 0 END)";
+        },
+        $query
+    );
+    //新增的转换逻辑
+    $query = preg_replace("/SHOW fields FROM `([\w]+)`/i", "PRAGMA table_info('\\1') ", $query);
+    $query = preg_replace("/SHOW CREATE TABLE `([\w]+)`/i", "SELECT 0,sql FROM sqlite_master WHERE name='\\1'; ", $query);
+    $query = preg_replace("/Show Tables/i", "SELECT name FROM sqlite_master WHERE type = \"table\"", $query);
+    $query = str_replace("\'", "\"", $query);
+    $query = str_replace('\t\n', "", $query);
+    $query = str_ireplace('rand', 'RANDOM', $query);
+    return trim($query);
 }
 //会员和插件引入默认主题模板
 function ThemeInclude($path)

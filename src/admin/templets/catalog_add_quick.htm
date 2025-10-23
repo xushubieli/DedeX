@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>批量添加栏目</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -54,8 +52,7 @@
 										<td>
 											<select name="channeltype" id="channeltype" onChange="ParTemplet(this);" class="form-select admin-w-sm">
 												<?php
-												foreach($channelArray as $k=>$arr)
-												{
+												foreach ($channelArray as $k=>$arr) {
 													if ($k==$channelid) echo "<option value='{$k}' selected>{$arr['typename']} {$arr['nid']}</option>";
 													else  echo "<option value='{$k}'>{$arr['typename']} {$arr['nid']}</option>";
 												}
@@ -75,12 +72,8 @@
 											<input type="text" name="namerule2" id="namerule2" value="{typedir}/{tid}-{page}.html" class="form-control admin-w-lg">
 											<a href="javascript:ShowHide('helpvar1');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar1" class="helpinfo mt-3" style="display:none">
-												<p>静态规则</p>
 												<p>{tid} 栏目ID</p>
 												<p>{page} 栏目页码数</p>
-												<p>伪静态规则（Nginx）</p>
-												<p>rewrite ^/list/([0-9]+)$ /apps/list.php?tid=$1;</p>
-												<p>rewrite ^/list/([0-9]+)-([0-9]+)$ /apps/list.php?tid=$1&PageNo=$2;</p>
 											</div>
 										</td>
 									</tr>
@@ -90,7 +83,6 @@
 											<input type="text" name="namerule" id="namerule" value="{typedir}/{aid}.html" class="form-control admin-w-lg">
 											<a href="javascript:ShowHide('helpvar2');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar2" class="helpinfo mt-3" style="display:none">
-												<p>静态规则</p>
 												<p>{Y}{M}{D} 年月日</p>
 												<p>{timestamp} INT类型的UNIX时间戳</p>
 												<p>{aid} 文档ID</p>
@@ -98,9 +90,6 @@
 												<p>{py} 拼音部首加文档ID</p>
 												<p>{typedir} 栏目保存目录</p>
 												<p>{cc} 日期加混编id后用转换为适合字母</p>
-												<p>伪静态规则（Nginx）</p>
-												<p>rewrite ^/article/([0-9]+).html$ /apps/view.php?aid=$1;</p>
-												<p>rewrite ^/article/([0-9]+)-([0-9]+).html$ /apps/view.php?aid=$1&PageNo=$2;</p>
 											</div>
 										</td>
 										<td>默认页的名称</td>
@@ -127,7 +116,7 @@
 														<td><input type="text" name="sontype" class="pubinputs w-100"></td>
 														<td><button name="" type="button" class="btn btn-danger btn-sm del">删除</button></td>
 													</tr>
-													<?php for($i=2;$i<=10;$i++) {?>
+													<?php for($i=2;$i<=10;$i++){?>
 													<tr class="repeat">
 														<td class="rank">
 															<input type="hidden" name="posttype<?php echo $i;?>" value="<?php echo $i;?>">
@@ -157,7 +146,7 @@
 														<td><input type="text" name="reltype" class="pubinputs admin-w-lg"></td>
 														<td><button name="" type="button" class="btn btn-danger btn-sm del">删除</button></td>
 													</tr>
-													<?php for($i=2;$i<=10;$i++) {?>
+													<?php for($i=2;$i<=10;$i++){?>
 													<tr class="repeat">
 														<td class="rank">
 															<input type="hidden" name="posttype<?php echo $i;?>" value="<?php echo $i;?>">

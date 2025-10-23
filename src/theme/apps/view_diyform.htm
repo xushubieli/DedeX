@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title><?php echo $diy->name;?>-<?php echo $cfg_webname;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -24,8 +22,7 @@
 				echo '<tbody>';
 				echo '<tr><td>id'.$row['id'].'</td></tr>';
 				$allowhtml = array('htmltext');
-				foreach($fieldlist as $field=>$fielddata)
-				{
+				foreach ($fieldlist as $field=>$fielddata) {
 					if ($row[$field]=='') continue;
 				}
 				echo '<tr><td>'.$fielddata[0].'</td></tr><tr><td>'.$row[$field].'</td></tr>';

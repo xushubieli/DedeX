@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>会员等级分类</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -35,9 +33,8 @@
 									$dsql->SetQuery("SELECT * FROM `#@__member_type`");
 									$dsql->Execute();
 									$k=0;
-									while($row = $dsql->GetObject())
-									{
-									$k++;
+									while ($row = $dsql->GetObject()) {
+										$k++;
 									?>
 									<input type="hidden" name="ID_<?php echo $k;?>" value="<?php echo $row->aid;?>">
 									<tr>
@@ -45,7 +42,7 @@
 										<td>
 											<select name="rank_<?php echo $k;?>" id="rank_<?php echo $k;?>" class="form-select admin-w-sm">
 												<?php
-												foreach($arcranks as $kkk=>$vvv){
+												foreach ($arcranks as $kkk=>$vvv) {
 													if ($row->rank==$kkk) echo "<option value='{$kkk}' selected>{$vvv}</option>";
 													else echo "<option value='{$kkk}'>{$vvv}</option>";
 												}
@@ -56,7 +53,7 @@
 										<td>
 											<select name="exptime_<?php echo $k;?>" id="exptime_<?php echo $k;?>" class="form-select admin-w-sm">
 												<?php
-												foreach($times as $kkk=>$vvv){
+												foreach ($times as $kkk=>$vvv) {
 													if ($row->exptime==$kkk) echo "<option value='{$kkk}' selected>{$vvv}</option>";
 													else echo "<option value='{$kkk}'>{$vvv}</option>";
 												}
@@ -72,7 +69,7 @@
 										<td>
 											<select name="rank_new" id="rank_new" class="form-select admin-w-sm">
 												<?php
-												foreach($arcranks as $kkk=>$vvv){
+												foreach ($arcranks as $kkk=>$vvv) {
 													echo "<option value='{$kkk}'>{$vvv}</option>";
 												}
 												?>
@@ -82,7 +79,7 @@
 										<td>
 											<select name="exptime_new" id="exptime_new" class="form-select admin-w-sm">
 												<?php
-												foreach($times as $kkk=>$vvv){
+												foreach ($times as $kkk=>$vvv) {
 													echo "<option value='{$kkk}'>{$vvv}</option>";
 												}
 												?>

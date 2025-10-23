@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>评论管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -58,15 +56,15 @@
 										<td>{dede:field.arctitle function="RemoveXSS(@me)"/}</td>
 										<td>
 											<span>{dede:field.msg function='cn_substr(Text2Html(@me),280)'/}</span>
-											<?php if ($fields['replycount'] > 0) {?><a href='feedback_main.php?fid={dede:field.id/}' class='btn btn-light btn-sm'>{dede:field.replycount/}条回复</a><?php }?>
+											<?php if ($fields['replycount'] > 0){?><a href='feedback_main.php?fid={dede:field.id/}' class='btn btn-light btn-sm'>{dede:field.replycount/}条回复</a><?php }?>
 										</td>
 										<td><a href="feedback_main.php?ip={dede:field.ip/}">{dede:field.ip/}</a></td>
 										<td>{dede:field.dtime function="GetDateTimeMK(@me)"/}</td>
 										<td>{dede:field.ischeck function="IsCheck(@me)"/}</td>
 										<td>
-											<a href="feedback_edit.php?id={dede:field.id/}" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
-											<a href="feedback_edit.php?id={dede:field.id/}&dopost=makehtml" class="btn btn-light btn-sm"><i class="fa fa-repeat" title="更新"></i></a>
-											<a href="archives_do.php?aid={dede:field.aid/}&dopost=viewArchives" target="_blank" class="btn btn-light btn-sm"><i class="fa fa-eye" title="浏览"></i></a>
+											<a href="feedback_edit.php?id={dede:field.id/}" class="btn btn-light btn-sm"><i class="bi bi-pencil-square" title="修改"></i></a>
+											<a href="feedback_edit.php?id={dede:field.id/}&dopost=makehtml" class="btn btn-light btn-sm"><i class="bi bi-arrow-counterclockwise" title="更新"></i></a>
+											<a href="archives_do.php?aid={dede:field.aid/}&dopost=viewArchives" target="_blank" class="btn btn-light btn-sm"><i class="bi bi-box-arrow-up-right" title="浏览"></i></a>
 										</td>
 									</tr>
 									{/dede:datalist}
@@ -94,10 +92,11 @@
 				if (document.feedback.fid.value) return document.feedback.fid.value;
 				for (i = 0; i < document.feedback.fid.length; i++) {
 					if (document.feedback.fid[i].checked) {
-						if (allSel == "")
+						if (allSel == "") {
 							allSel = document.feedback.fid[i].value;
-						else
+						} else {
 							allSel = allSel + "," + document.feedback.fid[i].value;
+						}
 					}
 				}
 				return allSel;

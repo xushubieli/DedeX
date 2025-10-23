@@ -52,9 +52,9 @@ if ($dopost != 'save') {
         CheckCatalog($typeid, "您没有操作栏目{$typeid}文档权限");
     }
     //对保存的文档进行处理
-    if (empty($flags)) $flag = '';
-    else $flag = join(',', $flags);
-    $title = cn_substrR($title, $cfg_title_maxlen);
+    $flag = isset($flags) ? join(',', $flags) : '';
+    $title = preg_replace("#\"#", '＂', $title);
+    $title = dede_htmlspecialchars(cn_substrR($title, $cfg_title_maxlen));
     $isremote  = 0;
     $serviterm = empty($serviterm) ? "" : $serviterm;
     if (!TestPurview('a_Check,a_AccCheck,a_MyCheck')) $arcrank = -1;
@@ -75,8 +75,7 @@ if ($dopost != 'save') {
                     continue;
                 }
                 $vs = explode(',', $v);
-                if ($vs[1] == 'htmltext' || $vs[1] == 'textdata') //网页文本特殊处理
-                {
+                if ($vs[1] == 'htmltext' || $vs[1] == 'textdata') {
                     ${$vs[0]} = AnalyseHtmlBody(${$vs[0]}, $description, $litpic, $keywords, $vs[1]);
                 } else {
                     if (!isset(${$vs[0]})) {

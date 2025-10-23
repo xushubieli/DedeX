@@ -49,8 +49,7 @@ if ($dopost == 'read') {
         $dsql->SetQuery($boxsql);
         $dsql->Execute();
         $query = '';
-        while($row = $dsql->GetArray())
-        {
+        while ($row = $dsql->GetArray()) {
             if ($row && $row['isadmin'] == 1) {
                 $query = "UPDATE `#@__member_pms` SET writetime='0' WHERE id='{$row['id']}' AND folder='inbox' AND toid='{$cfg_ml->M_ID}' AND isadmin='1';";
                 $dsql->ExecuteNoneQuery($query);

@@ -4,10 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>专题列表</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/moment.min.js"></script>
 		<script src="/static/web/js/daterangepicker.js"></script>
@@ -77,8 +75,8 @@
 										<td><?php echo MyDate("Y-m-d H:i:s",$fields['senddate']);?></td>
 										<td>{dede:field.click/}</td>
 										<td>
-											<a href="javascript:editArc({dede:field.id/});" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="编辑"></i></a>
-											<a href="javascript:viewArc({dede:field.id/});" class="btn btn-light btn-sm"><i class="fa fa-eye" title="预览"></i></a>
+											<a href="javascript:editArc({dede:field.id/});" class="btn btn-light btn-sm"><i class="bi bi-pencil-square" title="编辑"></i></a>
+											<a href="javascript:viewArc({dede:field.id/});" class="btn btn-light btn-sm"><i class="bi bi-box-arrow-up-right" title="预览"></i></a>
 										</td>
 									</tr>
 									{/dede:datalist}

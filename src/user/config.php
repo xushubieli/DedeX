@@ -86,7 +86,8 @@ if ($cfg_mb_open == 'N') {
 $keeptime = isset($keeptime) && is_numeric($keeptime) ? $keeptime : -1;
 $cfg_ml = new MemberLogin($keeptime);
 //检查收件箱
-function PmRead(){
+function PmRead()
+{
     global $dsql, $cfg_ml;
     $query = "SELECT * FROM `#@__member_pms` WHERE folder LIKE 'outbox' AND isadmin='1'";
     $dsql->SetQuery($query);
@@ -204,8 +205,7 @@ function GetSafequestion($selid=0,$formname='safequestion')
 {
 	global $safequestions;
 	$safequestions_form = "<select name='{$formname}' id='{$formname}' class='form-select'>";
-	foreach($safequestions as $k=>$v)
-	{
+	foreach ($safequestions as $k=>$v) {
 	 	if ($k==$selid) $safequestions_form .= "<option value='{$k}' selected>{$v}</option>\r\n";
 	 	else $safequestions_form .= "<option value='{$k}'>{$v}</option>\r\n";
 	}

@@ -216,12 +216,12 @@ class SgListView
                 $ctag = $this->dtp->GetTag("list");
             }
             if (!is_object($ctag)) {
-                $this->pagesize = 30;
+                $this->pagesize = 10;
             } else {
                 if ($ctag->GetAtt('pagesize') != '') {
                     $this->pagesize = $ctag->GetAtt('pagesize');
                 } else {
-                    $this->pagesize = 30;
+                    $this->pagesize = 10;
                 }
             }
         } else {
@@ -368,7 +368,7 @@ class SgListView
             $ordersql = " ORDER BY arc.aid $orderWay";
         } else if ($orderby == "hot" || $orderby == "click") {
             $ordersql = " ORDER BY arc.click $orderWay";
-        } else if($orderby == "weight") {
+        } else if ($orderby == "weight") {
             $ordersql = " ORDER BY arc.weight $orderWay";
         } else if ($orderby == "lastpost") {
             $ordersql = " ORDER BY arc.lastpost $orderWay";
@@ -722,7 +722,7 @@ class SgListView
             $ordersql = " ORDER BY arc.aid $orderWay";
         } else if ($orderby == "hot" || $orderby == "click") {
             $ordersql = " ORDER BY arc.click $orderWay";
-        } else if($orderby == "weight") {
+        } else if ($orderby == "weight") {
             $ordersql = " ORDER BY arc.weight $orderWay";
         } else if ($orderby == "lastpost") {
             $ordersql = " ORDER BY arc.lastpost $orderWay";
@@ -959,12 +959,7 @@ class SgListView
         }
         $purl = $this->GetCurUrl();
         //开启伪静态对规则替换
-        if ($cfg_rewrite == 'Y') {
-            $purl = str_replace("/apps", "", $purl);
-            $nowurls = preg_replace("/", ".php?", $purl);
-            $nowurls = explode("?", $nowurls);
-            $purl = $nowurls[0];
-        }
+        if ($cfg_rewrite == 'Y') $purl = "/list/";
         $geturl = "tid={$this->TypeID}&TotalResult={$this->TotalResult}&";
         $purl .= '?'.$geturl;
         $optionlist = '';

@@ -6,8 +6,6 @@
 		<title>{dede:field.title/}-{dede:global.cfg_webname/}</title>
 		<meta name="keywords" content="{dede:field.keywords/}">
 		<meta name="description" content="{dede:field.description/}">
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -27,11 +25,11 @@
 							<h1>{dede:field.title/}</h1>
 						</div>
 						<div class="meta py-3">
-							<a href="{dede:field.userurl/}"><span><img src="{dede:field.face/}" class="user-img-xs me-3">{dede:field.uname/}</span></a>
-							<span><i class="fa fa-calendar me-3"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
-							<span><i class="fa fa-globe me-3"></i>{dede:field.source/}</span>
-							<span><i class="fa fa-user me-3"></i>{dede:field.writer/}</span>
-							<span><i class="fa fa-eye me-3"></i><script src="{dede:global.cfg_phpurl/}/count.php?view=yes&aid={dede:field.id/}&mid={dede:field name='mid'/}"></script>次</span>
+							<a href="{dede:field.userurl/}"><span><img src="{dede:field.face/}" class="user-img-xs me-2">{dede:field.uname/}</span></a>
+							<span><i class="bi bi-calendar-event me-2"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
+							<span><i class="bi bi-globe me-2"></i>{dede:field.source/}</span>
+							<span><i class="bi bi-person-circle me-2"></i>{dede:field.writer/}</span>
+							<span><i class="bi bi-fire me-2"></i><script src="{dede:global.cfg_phpurl/}/count.php?view=yes&aid={dede:field.id/}&mid={dede:field name='mid'/}"></script>次</span>
 						</div>
 						<div class="speciallist row py-3">{dede:field.note/}</div>
 						<div class="body py-3">

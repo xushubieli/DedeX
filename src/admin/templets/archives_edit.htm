@@ -4,10 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>修改自定义文档</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
@@ -44,8 +42,7 @@
 											<?php
 											$dsql->SetQuery("SELECT * FROM `#@__arcatt` ORDER BY sortid ASC");
 											$dsql->Execute();
-											while($trow = $dsql->GetObject())
-											{
+											while ($trow = $dsql->GetObject()) {
 												if ($trow->att=='j') $jumpclick = " onclick='ShowUrlTr()'";
 												else $jumpclick = '';
 												if (preg_match("#{$trow->att}#", $arcRow['flag'])) {
@@ -109,7 +106,7 @@
 										<td>金币</td>
 										<td><input type="text" name="money" id="money" value="<?php echo $arcRow['money'];?>" class="form-control admin-w-sm"></td>
 									</tr>
-									<?php if ($cfg_need_typeid2=='Y') {?>
+									<?php if ($cfg_need_typeid2=='Y'){?>
 									<tr>
 										<td>副栏目</td>
 										<td colspan="3">
@@ -181,7 +178,7 @@
 												$urank = $cuserLogin->getUserRank();
 												$dsql->SetQuery("SELECT * FROM #@__arcrank where adminrank<='$urank' ORDER BY `rank` ASC");
 												$dsql->Execute();
-												while($row = $dsql->GetObject()){
+												while ($row = $dsql->GetObject()) {
 													echo "<option value='{$row->rank}'>{$row->membername}</option>";
 												}
 												?>

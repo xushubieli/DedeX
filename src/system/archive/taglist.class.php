@@ -132,12 +132,12 @@ class TagList
             $ctag = $this->dtp->GetTag("list");
         }
         if (!is_object($ctag)) {
-            $this->pagesize = 30;
+            $this->pagesize = 10;
         } else {
             if ($ctag->GetAtt("pagesize") != '') {
                 $this->pagesize = $ctag->GetAtt("pagesize");
             } else {
-                $this->pagesize = 30;
+                $this->pagesize = 10;
             }
         }
         $this->TotalPage = ceil($this->TotalResult / $this->pagesize);
@@ -151,7 +151,7 @@ class TagList
     function Display()
     {
         global $cfg_cmspath, $cfg_tags_dir;
-        $tagsDir = str_replace("{cmspath}",$cfg_cmspath,$cfg_tags_dir);
+        $tagsDir = str_replace("{cmspath}", $cfg_cmspath, $cfg_tags_dir);
         $makeDir = empty($this->Tag) ? $this->GetTruePath().$tagsDir."/index.html" : $this->GetTruePath().$tagsDir."/{$this->Tag}/index.html";
         if ($this->Tag != '') {
             $this->CountRecord();

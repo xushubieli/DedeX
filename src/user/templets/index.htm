@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>会员中心-<?php echo $cfg_webname;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -23,7 +21,7 @@
 								<div class="col-12 text-center">
 									<img src="<?php echo $cfg_ml->fields['face'];?>" title="<?php echo $cfg_ml->M_LoginID;?>" class="user-img-md">
 									<div class="my-3">
-										<h3 class="d-inline-block me-3" style="vertical-align:middle"><?php echo $cfg_ml->M_UserName;?></h3>
+										<h3 class="d-inline-block me-2" style="vertical-align:middle"><?php echo $cfg_ml->M_UserName;?></h3>
 										<span class="btn btn-outline-primary btn-sm"><?php echo $cfg_ml->GetMemberTypeName();?></span>
 										<span class="btn btn-outline-secondary btn-sm"><?php echo $cfg_ml->M_Honor;?></span>
 									</div>
@@ -41,27 +39,27 @@
 							<div class="media-body">
 								<ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled text-center mb-0">
 									<li class="col">
-										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/pm.php?folder=inbox"><i class="fa fa-commenting"></i></a></div>
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/pm.php?folder=inbox"><i class="bi bi-chat-dots"></i></a></div>
 										<a href="<?php echo $cfg_memberurl;?>/pm.php?folder=inbox">消息管理</a>
 									</li>
 									<li class="col">
-										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/content_list.php?channelid=1"><i class="fa fa-file-text"></i></a></div>
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/content_list.php?channelid=1"><i class="bi bi-file-text"></i></a></div>
 										<a href="<?php echo $cfg_memberurl;?>/content_list.php?channelid=1">文档管理</a>
 									</li>
 									<li class="col">
-										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/mystow.php"><i class="fa fa-star"></i></a></div>
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/mystow.php"><i class="bi bi-bookmark-star"></i></a></div>
 										<a href="<?php echo $cfg_memberurl;?>/mystow.php">我的收藏</a>
 									</li>
 									<li class="col">
-										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/buy.php"><i class="fa fa-credit-card-alt"></i></a></div>
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/buy.php"><i class="bi bi-wallet2"></i></a></div>
 										<a href="<?php echo $cfg_memberurl;?>/buy.php">积分钱包</a>
 									</li>
 									<li class="col">
-										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/edit_baseinfo.php"><i class="fa fa fa-pencil-square"></i></a></div>
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/edit_baseinfo.php"><i class="fa bi bi-pencil-square"></i></a></div>
 										<a href="<?php echo $cfg_memberurl;?>/edit_baseinfo.php">资料修改</a>
 									</li>
 									<li class="col">
-										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/index_do.php?fmdo=purl"><i class="fa fa fa-share"></i></a></div>
+										<div class="bg-light user-meter rounded mb-3 p-4"><a href="<?php echo $cfg_memberurl;?>/index_do.php?fmdo=purl"><i class="bi bi-link"></i></a></div>
 										<a href="<?php echo $cfg_memberurl;?>/index_do.php?fmdo=purl">推广链接</a>
 									</li>
 								</ul>
@@ -85,7 +83,7 @@
 							<div class="media-body item-article">
 								<h3 class="mb-3">最新文档</h3>
 								<ul>
-									<?php foreach ($archives as $archive) {?>
+									<?php foreach($archives as $archive){?>
 									<li><a href="<?php echo $archive['htmlurl'];?>" title="<?php echo $archive['title'];?>"><?php echo $archive['title'];?></a></li>
 									<?php }?>
 								</ul>

@@ -54,7 +54,7 @@ $actionSearch[1] = array(
     'title' => '附件管理',
     'soniterm' => array(
         0  =>  array(
-            'title' => '附件管理',
+            'title' => '附件管理器',
             'purview' => 'sys_Upload,sys_MyUpload',
             'linkurl' => 'media_main.php'
         ),

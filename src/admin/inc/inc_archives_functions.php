@@ -119,7 +119,7 @@ function GetCurContent($body)
             $itype = ".gif";
         } else if ($itype == 'image/png') {
             $itype = ".png";
-        } else if ($itype == 'audio/mpeg'){
+        } else if ($itype == 'audio/mpeg') {
             $itype = ".mp3";
             $isImage = false;
         } else if ($itype == 'image/jpeg') {

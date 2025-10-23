@@ -40,7 +40,7 @@ if ($mediatype > 1) {
 }
 $sql = "SELECT u.aid,u.title,u.url,u.mediatype,u.filesize,u.mid,u.uptime,a.userid AS adminname,m.userid AS membername FROM `#@__uploads` u LEFT JOIN `#@__admin` a ON  a.id = u.mid LEFT JOIN `#@__member` m ON m.mid = u.mid $addsql ORDER BY u.aid DESC";
 $dlist = new DataListCP();
-$dlist->pagesize = 30;
+$dlist->pagesize = 10;
 $dlist->SetParameter("mediatype", $mediatype);
 $dlist->SetParameter("keyword", $keyword);
 $dlist->SetParameter("membertype", $membertype);

@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>附件管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -64,8 +62,8 @@
 										<td>{dede:field.uptime function="MyDate('Y-m-d H:i:s',@me)"/}</td>
 										<td>{dede:field.mediatype function="MediaType(@me,$fields['url'])"/}</td>
 										<td>
-											<a href="media_edit.php?aid={dede:field.aid/}&dopost=edit" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
-											<a href="media_edit.php?aid={dede:field.aid/}&dopost=del" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+											<a href="media_edit.php?aid={dede:field.aid/}&dopost=edit" class="btn btn-light btn-sm"><i class="bi bi-pencil-square" title="修改"></i></a>
+											<a href="media_edit.php?aid={dede:field.aid/}&dopost=del" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a>
 										</td>
 									</tr>
 									{/dede:datalist}
@@ -90,10 +88,11 @@
 				if (document.form1.aids.value) return document.form1.aids.value;
 				for (i = 0; i < document.form1.aids.length; i++) {
 					if (document.form1.aids[i].checked) {
-						if (allSel == "")
+						if (allSel == "") {
 							allSel = document.form1.aids[i].value;
-						else
+						} else {
 							allSel = allSel + "," + document.form1.aids[i].value;
+						}
 					}
 				}
 				return allSel;

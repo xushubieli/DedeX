@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>更新标签</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -22,7 +20,7 @@
 						<div class="table-responsive">
 							<table class="table table-borderless">
 								<tbody>
-									<?php if ($tagid > 0) {$row = $dsql->GetOne("SELECT tag FROM `#@__tagindex` WHERE id = '$tagid' ");?>
+									<?php if ($tagid > 0) {$row = $dsql->GetOne("SELECT tag FROM `#@__tagindex` WHERE id='$tagid' ");?>
 									<tr>
 										<td width="260">输入标签</td>
 										<td>
@@ -33,11 +31,11 @@
 									<?php } else {?>
 									<tr>
 										<td width="260">起始ID</td>
-										<td><input type="text" name="startid" id="startid" class="form-control admin-w-sm">（空或0表示从头开始）</td>
+										<td><input type="text" name="startid" id="startid" class="form-control admin-w-sm">（空或0表示开始ID）</td>
 									</tr>
 									<tr>
 										<td>结束ID</td>
-										<td><input type="text" name="endid" id="endid" class="form-control admin-w-sm">（空或0表示直到结束ID）</td>
+										<td><input type="text" name="endid" id="endid" class="form-control admin-w-sm">（空或0表示结束ID）</td>
 									</tr>
 									<?php }?>
 									<tr>

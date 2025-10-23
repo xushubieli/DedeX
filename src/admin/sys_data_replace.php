@@ -49,10 +49,10 @@ else if ($action == 'apply') {
         $rs = $dsql->ExecuteNoneQuery("UPDATE $exptable SET $rpfield=REPLACE($rpfield,'$rpstring','$tostring') $condition ");
         $dsql->ExecuteNoneQuery("OPTIMIZE TABLE `$exptable`");
         if ($rs) {
-            ShowMsg("成功完成数据替换", "javascript:;");
+            ShowMsg("成功替换数据", "javascript:;");
             exit();
         } else {
-            ShowMsg("数据替换失败", "javascript:;");
+            ShowMsg("替换数据失败", "javascript:;");
             exit();
         }
     } else {

@@ -323,10 +323,10 @@ $(function($) {
 		var bodyMenu = $("body").attr("class");
 		if (bodyMenu === "menu-show") {
 			$("body").attr("class", "menu-hide");
-			$(this).html('<i class="fa fa-indent"></i>');
+			$(this).html('<i class="bi bi-text-indent-left"></i>');
 		} else {
 			$("body").attr("class", "menu-show");
-			$(this).html('<i class="fa fa-dedent"></i>');
+			$(this).html('<i class="fbi bi-text-indent-right"></i>');
 		}
 	});
 	function headColour() {
@@ -348,11 +348,11 @@ $(function($) {
 	$(".side-menu .menu-item").on("click", function() {
 		var $this = $(this);
 		$(".side-menu .menu-sub").stop().slideUp();
-		$this.siblings(".side-menu .menu-item").removeAttr("id");
-		if ($this.attr("id") === "show") {
-			$this.removeAttr("id");
+		$this.siblings(".side-menu .menu-item").removeClass("show");
+		if ($this.hasClass("show")) {
+			$this.removeClass("show");
 		} else {
-			$this.attr("id", "show").next().slideDown();
+			$this.addClass("show").next().slideDown();
 		}
 	});
 	$(".side-menu .sub-item").click(function() {

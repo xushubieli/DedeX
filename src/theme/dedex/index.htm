@@ -6,8 +6,6 @@
 		<title>{dede:global.cfg_indexseotitle/}-{dede:global.cfg_webname/}</title>
 		<meta name="keywords" content="{dede:global.cfg_keywords/}">
 		<meta name="description" content="{dede:global.cfg_description/}">
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -65,14 +63,14 @@
 					<article class="item-theme bg-white shadow-sm rounded">
 						<div class="item-theme-img"><a href="[field:arcurl/]"><img src="[field:litpic/]" alt="[field:title/]" title="[field:title/]"></a></div>
 						<div class="item-theme-box">
-							<h5 class="title mb-3"><a href="[field:arcurl/]">[field:flag runphp='yes']if (stristr(@me,"h")) @me="<span class='btn btn-primary btn-sm me-3'>头条</span>";else if(stristr(@me,"c")) @me="<span class='btn btn-primary btn-sm me-3'>推荐</span>";else @me="";[/field:flag][field:title/]</a></h5>
+							<h5 class="title mb-3"><a href="[field:arcurl/]">[field:flag runphp='yes']if (stristr(@me,"h")) @me="<span class='btn btn-primary btn-sm me-2'>头条</span>";else if (stristr(@me,"c")) @me="<span class='btn btn-primary btn-sm me-2'>推荐</span>";else @me="";[/field:flag][field:title/]</a></h5>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="text-danger">
-									<i class="fa fa-download me-3"></i>
+									<i class="bi bi-download me-2"></i>
 									<span><script src="/apps/disdls.php?aid=[field:id/]"></script></span>
 								</div>
 								<div class="text-end">
-									<a href="[field:userurl/]"><img src="[field:face/]" class="user-img-xs me-3"></a>
+									<a href="[field:userurl/]"><img src="[field:face/]" class="user-img-xs me-2"></a>
 									<a href="[field:userurl/]"><span>[field:uname/]</span></a>
 								</div>
 							</div>
@@ -94,8 +92,8 @@
 						<div class="title"><h5><a href="[field:arcurl/]">[field:title/]</a></h5></div>
 						<p>[field:description function="cn_substr(@me,130)"/]...</p>
 						<div class="meta">
-							<span class="author me-3"><a href="[field:userurl/]"><img src="[field:face/]" class="user-img-xs me-3">[field:uname/]</a></span>
-							<span class="date"><i class="fa fa-calendar me-3"></i>[field:pubdate function="MyDate('Y-m-d',@me)"/]</span>
+							<span class="author me-2"><a href="[field:userurl/]"><img src="[field:face/]" class="user-img-xs me-2">[field:uname/]</a></span>
+							<span class="date"><i class="bi bi-calendar-event me-2"></i>[field:pubdate function="MyDate('Y-m-d',@me)"/]</span>
 						</div>
 					</article>
 				</div>{/dede:arclist}{/dede:channelartlist}

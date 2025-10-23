@@ -8,71 +8,66 @@
  */
 require_once(dirname(__FILE__)."/config.php");
 DedeSetCookie("ENV_GOBACK_URL", $dedeNowurl, time() + 3600, "/");
-if (empty($pagesize)) $pagesize = 30;
+if (empty($pagesize)) $pagesize = 10;
 if (empty($pageno)) $pageno = 1;
 if (empty($dopost)) $dopost = '';
 if (empty($orderby)) $orderby = 'aid';
 $orderby = HtmlReplace($orderby, -1);
 $pageno = intval($pageno);
 $pagesize = intval($pagesize);
-//重载列表
-if ($dopost == 'getlist') {
-    AjaxHead();
-    GetKeywordList($dsql, $pageno, $pagesize, $orderby);
-    exit();
-}
-//更新字段
-else if ($dopost == 'update') {
+//更新词
+if ($dopost == 'update') {
     $aid = preg_replace("#[^0-9]#", "", $aid);
     $count = preg_replace("#[^0-9]#", "", $count);
     $keyword = trim($keyword);
     $spwords = trim($spwords);
     $dsql->ExecuteNoneQuery("UPDATE `#@__search_keywords` SET keyword='$keyword',spwords='$spwords',count='$count' WHERE aid='$aid';");
-    AjaxHead();
-    GetKeywordList($dsql, $pageno, $pagesize, $orderby);
+    ShowMsg("成功更新关键词", "search_keywords_main.php?pageno={$pageno}&pagesize={$pagesize}&orderby={$orderby}");
     exit();
 }
-//删除字段
+//删除词
 else if ($dopost == 'del') {
     $aid = preg_replace("#[^0-9]#", "", $aid);
     $dsql->ExecuteNoneQuery("DELETE FROM `#@__search_keywords` WHERE aid='$aid';");
-    AjaxHead();
-    GetKeywordList($dsql, $pageno, $pagesize, $orderby);
+    ShowMsg("成功删除关键词", "search_keywords_main.php?pageno={$pageno}&pagesize={$pagesize}&orderby={$orderby}");
     exit();
 }
-//批量删除字段
+//批量删词
 else if ($dopost == 'delall') {
-    foreach ($aids as $aid) {
-        $dsql->ExecuteNoneQuery("DELETE FROM `#@__search_keywords` WHERE aid='$aid';");
+    if (!empty($aids) && is_array($aids)) {
+        foreach ($aids as $aid) {
+            $aid = preg_replace("#[^0-9]#", "", $aid);
+            $dsql->ExecuteNoneQuery("DELETE FROM `#@__search_keywords` WHERE aid='$aid';");
+        }
     }
-    ShowMsg("删除成功", $ENV_GOBACK_URL);
+    ShowMsg("批量删除关键词完成", "search_keywords_main.php?pageno={$pageno}");
     exit();
 }
-//第一次进入这个页面
-if ($dopost == '') {
-    $row = $dsql->GetOne("SELECT COUNT(*) AS dd FROM `#@__search_keywords`");
-    $totalRow = $row['dd'];
-    include(DEDEADMIN."/templets/search_keywords_main.htm");
-}
-//获得特定的关键词列表
+$row = $dsql->GetOne("SELECT COUNT(*) AS dd FROM `#@__search_keywords`");
+$totalRow = isset($row['dd']) ? (int)$row['dd'] : 0;
+include(DEDEADMIN."/templets/search_keywords_main.htm");
+//获得特定搜索列表
 function GetKeywordList($dsql, $pageno, $pagesize, $orderby = 'aid')
 {
     global $cfg_phpurl;
     $start = ($pageno - 1) * $pagesize;
     $printhead = "<form name='form3' action='search_keywords_main.php' method='post'>
-    <input name='dopost' type='hidden' value=''>
+    <input name='dopost' type='hidden' value='delall'>
+    <input name='pageno' type='hidden' value='{$pageno}'>
+    <input name='pagesize' type='hidden' value='{$pagesize}'>
+    <input name='orderby' type='hidden' value='{$orderby}'>
     <div class='table-responsive'>
     <table class='table table-borderless table-hover'>
     <thead>
         <tr>
             <td scope='col'>选择</td>
-            <td scope='col'><a href=\"javascript:ReloadPage('aid');\">ID</a></td>
+            <td scope='col'><a href=\"search_keywords_main.php?pageno={$pageno}&pagesize={$pagesize}&orderby=aid\">ID<i class='bi bi-chevron-expand'></i></a></td>
             <td scope='col'>关键词</td>
             <td scope='col'>关键词调整</td>
             <td scope='col'>分词调整</td>
-            <td scope='col'><a href=\"javascript:ReloadPage('count');\">频率调整</a></td>
-            <td scope='col'><a href=\"javascript:ReloadPage('result');\">索引</a></td>
-            <td scope='col'><a href=\"javascript:ReloadPage('lasttime');\">搜索时间</a></td>
+            <td scope='col'><a href=\"search_keywords_main.php?pageno={$pageno}&pagesize={$pagesize}&orderby=count\">频率<i class='bi bi-chevron-expand'></i></a></td>
+            <td scope='col'><a href=\"search_keywords_main.php?pageno={$pageno}&pagesize={$pagesize}&orderby=result\">索引<i class='bi bi-chevron-expand'></i></a></td>
+            <td scope='col'><a href=\"search_keywords_main.php?pageno={$pageno}&pagesize={$pagesize}&orderby=lasttime\">搜索时间<i class='bi bi-chevron-expand'></i></a></td>
             <td scope='col'>操作</td>
         </tr>
     </thead><tbody>";
@@ -86,14 +81,14 @@ function GetKeywordList($dsql, $pageno, $pagesize, $orderby = 'aid')
             <td><input name='aids[]' type='checkbox' value=\"{$row['aid']}\"></td>
             <td>{$row['aid']}</td>
             <td><a href='{$cfg_phpurl}/search.php?keyword=".urlencode($row['keyword'])."' target='_blank'>{$row['keyword']}</a></td>
-            <td><input type='text' name='keyword' id='keyword{$row['aid']}' value='{$row['keyword']}' class='form-control admin-w-sm'></td>
-            <td><input type='text' name='spwords' id='spwords{$row['aid']}' value='{$row['spwords']}' class='form-control admin-w-md'></td>
-            <td><input type='text' name='count' id='count{$row['aid']}' value='{$row['count']}' class='form-control admin-w-sm'></td>
+            <td><input type='text' name='keyword_{$row['aid']}' value='{$row['keyword']}' class='form-control admin-w-sm'></td>
+            <td><input type='text' name='spwords_{$row['aid']}' value='{$row['spwords']}' class='form-control admin-w-md'></td>
+            <td><input type='text' name='count_{$row['aid']}' value='{$row['count']}' class='form-control admin-w-sm'></td>
             <td>{$row['result']}</td>
             <td>".MyDate("Y-m-d H:i:s", $row['lasttime'])."</td>
             <td>
-                <a href='javascript:UpdateNote({$row['aid']});' class='btn btn-light btn-sm'><i class='fa fa-repeat' title='更新'></i></a>
-                <a href='javascript:DelNote({$row['aid']});' class='btn btn-danger btn-sm'><i class='fa fa-trash' title='删除'></i></a>
+                <a href='javascript:void(0);' class='btn btn-light btn-sm' onclick='confirmUpdate({$row['aid']});'><i class='bi bi-arrow-counterclockwise' title='更新'></i></a>
+                <a href='search_keywords_main.php?dopost=del&aid={$row['aid']}&pageno={$pageno}' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
             </td>
         </tr>";
         echo $line;

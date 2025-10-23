@@ -111,7 +111,7 @@ class ImageResize
             } else {
                 throw new ImageResizeException('Unsupported file type');
             }
-        } else if(strstr(finfo_file($finfo, $filename), 'image/webp') !== false) {
+        } else if (strstr(finfo_file($finfo, $filename), 'image/webp') !== false) {
           $checkWebp = true;
           $this->source_type = IMAGETYPE_WEBP;
         }
@@ -250,7 +250,7 @@ class ImageResize
                     $dest_image = imagecreate($this->getDestWidth(), $this->getDestHeight());
                 }
             } else {
-                if(!empty($exact_size) && is_array($exact_size)) {
+                if (!empty($exact_size) && is_array($exact_size)) {
                     $dest_image = imagecreatetruecolor($exact_size[0], $exact_size[1]);
                 } else {
                     $dest_image = imagecreatetruecolor($this->getDestWidth(), $this->getDestHeight());

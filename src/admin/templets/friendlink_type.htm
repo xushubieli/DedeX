@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>网站类型管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -34,9 +32,8 @@
 									$dsql->SetQuery("SELECT * FROM `#@__flinktype`");
 									$dsql->Execute();
 									$k=0;
-									while($row = $dsql->GetObject())
-									{
-									$k++;
+									while ($row = $dsql->GetObject()) {
+										$k++;
 									?>
 									<tr>
 										<td><input type="hidden" name="ID_<?php echo $k;?>" value="<?php echo $row->id;?>"><?php echo $row->id;?></td>

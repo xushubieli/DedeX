@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>自定义宏标签向导</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<link rel="stylesheet" href="/static/web/css/codemirror.css">
 		<script src="/static/web/js/jquery.min.js"></script>
@@ -62,8 +60,7 @@
 											echo "<option value='0' selected>不限模型</option>";
 											$tl->dsql->SetQuery("SELECT id,typename FROM `#@__channeltype` WHERE id > 0");
 											$tl->dsql->Execute();
-											while($row = $tl->dsql->GetObject())
-											{
+											while ($row = $tl->dsql->GetObject()) {
 												echo "<option value='{$row->id}'>{$row->typename}</option>";
 											}
 											echo "</select>";
@@ -78,8 +75,7 @@
 											echo "<option value='0' selected>不限</option>";
 											$tl->dsql->SetQuery("SELECT * FROM `#@__arcatt`");
 											$tl->dsql->Execute();
-											while($row = $tl->dsql->GetObject())
-											{
+											while ($row = $tl->dsql->GetObject()) {
 												echo "<option value='{$row->att}'>{$row->attname}</option>";
 											}
 											echo "</select>";

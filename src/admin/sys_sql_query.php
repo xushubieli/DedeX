@@ -154,7 +154,7 @@ else if ($dopost == "query") {
         $sql4tmp = "ENGINE=MyISAM DEFAULT CHARSET=".$$cfg_db_language;
         $sqlquery = preg_replace("#TYPE=MyISAM#i", $sql4tmp, $sqlquery);
     }
-    echo '<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">';
+    echo '<link rel="stylesheet" href="/static/web/css/admin.css">';
     //运行查询语句
     if (preg_match("#^select #i", $sqlquery)) {
         $dsql->SetQuery($sqlquery);
@@ -219,7 +219,6 @@ else if ($dopost == "query") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/web/css/admin.css">
     <title>DedeX数据库文档</title>
 </head>

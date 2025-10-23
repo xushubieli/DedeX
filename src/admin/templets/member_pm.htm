@@ -5,8 +5,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>会员消息管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -58,7 +56,7 @@
 									<td>{dede:field.message function='cn_substr(HtmlReplace(@me),60)'/}</td>
 									<td>{dede:field.folder function='GetFolders(@me)'/}</td>
 									<td>{dede:field.sendtime function='GetDateMk(@me)'/}</td>
-									<td><a href="member_pm.php?ID={dede:field.id/}&dopost=del" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a></td>
+									<td><a href="member_pm.php?ID={dede:field.id/}&dopost=del" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a></td>
 								</tr>
 								{/dede:datalist}
 							</tbody>

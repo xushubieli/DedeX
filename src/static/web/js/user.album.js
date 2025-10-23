@@ -9,8 +9,7 @@ function MakeUpload(mnum) {
 	if (mnum == 0) endNum = startNum + Number(pnumObj.value);
 	else endNum = mnum;
 	if (endNum > 120) endNum = 120;
-	for (startNum;startNum < endNum;startNum++)
-	{
+	for (startNum;startNum < endNum;startNum++) {
 		if (startNum == 1) {
 			dsel = ' checked="checked" ';
 			dplay = 'display:block';

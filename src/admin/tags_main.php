@@ -13,6 +13,7 @@ $timestamp = time();
 if (empty($tag)) $tag = '';
 if (empty($action)) {
     $tag = HtmlReplace($tag, -1);
+    $pageno = isset($_REQUEST['pageno']) ? (int)$_REQUEST['pageno'] : 1;
     $orderby = empty($orderby) ? 'id' : preg_replace("#[^a-z]#i", '', $orderby);
     $orderway = isset($orderway) && $orderway == 'asc' ? 'asc' : 'desc';
     if (!empty($tag)) $where = " WHERE tag like '%{$tag}%' OR id='$tag'";
@@ -24,7 +25,7 @@ if (empty($action)) {
     $dlist->SetParameter("tag", $tag);
     $dlist->SetParameter("orderway", $orderway);
     $dlist->SetParameter("orderby", $orderby);
-    $dlist->pagesize = 30;
+    $dlist->pagesize = 10;
     $dlist->SetTemplet(DEDEADMIN."/templets/tags_main.htm");
     $dlist->SetSource($query);
     $dlist->Display();
@@ -37,13 +38,14 @@ if (empty($action)) {
     $description = (empty($description) ? '' : HtmlReplace($description, -1));
     $litpic = (empty($litpic) ? '' : HtmlReplace($litpic, -1));
     if (empty($tid)) {
-        die('请选择需要更新的标签');
+        ShowMsg('请选择需要更新的标签', '-1');
+        exit();
     }
     $query = "UPDATE `#@__tagindex` SET `count`='$count',`title`='$title',`keywords`='$keywords',`description`='$description' WHERE id='$tid' ";
     $dsql->ExecuteNoneQuery($query);
     $row = $dsql->GetOne("SELECT COUNT(*) AS dd FROM `#@__tagindex_infos` WHERE tagid='$tid'");
     if ($row['dd'] > 0) {
-        $dsql->ExecuteNoneQuery("UPDATE `#@__tagindex_infos` SET `litpic`=='$litpic'");
+        $dsql->ExecuteNoneQuery("UPDATE `#@__tagindex_infos` SET `litpic`='$litpic' WHERE tagid='$tid'");
     } else {
         $dsql->ExecuteNoneQuery("INSERT INTO `#@__tagindex_infos` (`tagid`,`litpic`) VALUES ('$tid','$litpic')");
     }
@@ -63,9 +65,9 @@ if (empty($action)) {
         $query = "DELETE FROM `#@__taglist` WHERE tid IN ($stringids)";
         $dsql->ExecuteNoneQuery($query);
         $dsql->ExecuteNoneQuery("DELETE FROM `#@__tagindex_infos` WHERE tagid IN ($stringids)");
-        ShowMsg("删除{$stringids}标签成功", 'tags_main.php');
+        ShowMsg("成功删除{$stringids}标签", "tags_main.php?pageno={$pageno}");
     } else {
-        ShowMsg("删除{$stringids}标签失败", 'tags_main.php');
+        ShowMsg("标签{$stringids}删除失败", "tags_main.php?pageno={$pageno}");
     }
     exit();
 } else if ($action == 'fetch') {

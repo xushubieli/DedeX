@@ -31,7 +31,7 @@ class ChannelUnit
         $sql = " SELECT * FROM `#@__channeltype` WHERE id='$cid' ";
         $this->ChannelInfos = $this->dsql->GetOne($sql);
         if (!is_array($this->ChannelInfos)) {
-            echo '读取栏目信息失败，无法进行后续操作';
+            echo "读取该栏目文档ID：{$aid}信息失败，无法进行后续操作";
             exit();
         }
         $dtp = new DedeTagParse();
@@ -175,7 +175,7 @@ class ChannelUnit
                 if ($iw > $maxwidth) $iw = $maxwidth;
                 $iw = (empty($iw) ? "" : "width='$iw'");
                 if ($GLOBALS["htmltype"] == "dm") {
-                    $imgurl = "view.php?aid=$this->ArcID&pageno=$photoid";
+                    $imgurl = "view.php?aid={$this->ArcID}&pageno={$photoid}";
                 } else {
                     if ($photoid == 1) {
                         $imgurl = $GLOBALS["fileFirst"].".html";
@@ -184,7 +184,7 @@ class ChannelUnit
                     }
                 }
                 $imgcls = "image".($photoid - 1);
-                $revalue .= "<dl><dt>$alt<dd>$ddimg<dd>$ddimg<dd>$ddimg<dd><dd><div></div><div></div><dd><dd>$photoid</dd></dl>\r\n";
+                $revalue .= "<dl><dt>{$alt}</dt><dd>{$ddimg}</dd><dd>{$photoid}</dd></dl>\r\n";
                 $photoid++;
             }
         }

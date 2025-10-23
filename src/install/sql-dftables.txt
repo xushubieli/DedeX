@@ -831,8 +831,8 @@ CREATE TABLE `#@__sys_set` (
 DROP TABLE IF EXISTS `#@__sysconfig`;
 CREATE TABLE `#@__sysconfig` (
 	`aid` smallint(8) unsigned NOT NULL default '0' COMMENT '配置ID',
-	`varname` varchar(20) NOT NULL default '' COMMENT '名称',
-	`info` varchar(100) NOT NULL default '' COMMENT '介绍',
+	`varname` varchar(255) NOT NULL default '' COMMENT '名称',
+	`info` varchar(255) NOT NULL default '' COMMENT '介绍',
 	`groupid` smallint(6) NOT NULL default '1' COMMENT '组',
 	`type` varchar(10) NOT NULL default 'string' COMMENT '类型 string:文本 number:数字 bool:布尔 bstring:多行文本 img:图片',
 	`value` text COMMENT '值',

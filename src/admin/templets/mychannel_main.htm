@@ -5,8 +5,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>文档模型管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -49,12 +47,12 @@
 									<td>{dede:field.isshow function="GetSta(@me,$fields['id'])"/}</td>
 									<td>{dede:field.issystem function='IsSystem(@me)'/}</td>
 									<td>
-										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=gettemplets" class="btn btn-light btn-sm"><i class="fa fa-cube" title="模板"></i></a>
-										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=copystart" class="btn btn-light btn-sm"><i class="fa fa-clone" title="复制"></i></a>
-										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=export" class="btn btn-light btn-sm"><i class="fa fa-share-square-o" title="导出"></i></a>
-										<a href="mychannel_edit.php?mid={dede:field.id/}&dopost=modifysearch" class="btn btn-light btn-sm"><i class="fa fa-search" title="搜索"></i></a>
-										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=edit" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
-										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=delete" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=gettemplets" class="btn btn-light btn-sm"><i class="bi bi-stack" title="模板"></i></a>
+										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=copystart" class="btn btn-light btn-sm"><i class="bi bi-back" title="复制"></i></a>
+										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=export" class="btn btn-light btn-sm"><i class="bi bi-upload" title="导出"></i></a>
+										<a href="mychannel_edit.php?mid={dede:field.id/}&dopost=modifysearch" class="btn btn-light btn-sm"><i class="bi bi-search" title="搜索"></i></a>
+										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=edit" class="btn btn-light btn-sm"><i class="bi bi-pencil-square" title="修改"></i></a>
+										<a href="mychannel_edit.php?id={dede:field.id/}&dopost=delete" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a>
 									</td>
 								</tr>
 								{/dede:datalist}

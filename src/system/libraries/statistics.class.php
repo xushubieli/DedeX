@@ -28,25 +28,29 @@ class DedeStatistics {
             session_start();
             $pm['ssid'] = session_id();
         }
-        $url_type = isset($_GET['url_type'])? $_GET['url_type'] : 0;
-        $typeid = isset($_GET['typeid'])? $_GET['typeid'] : 0;
-        $aid = isset($_GET['aid'])? $_GET['aid'] : 0;
-        $value = isset($_GET['value'])? $_GET['value'] : '';
+        $url_type = isset($_GET['url_type']) ? $_GET['url_type'] : 0;
+        $typeid = isset($_GET['typeid']) ? $_GET['typeid'] : 0;
+        $aid = isset($_GET['aid']) ? $_GET['aid'] : 0;
+        $value = isset($_GET['value']) ? $_GET['value'] : '';
         $pm['browser'] = $agent->browser();
         $pm['device'] = $agent->device();
         $pm['device_type'] = $agent->deviceType();
         $pm['os'] = $agent->platform();
         $pm['t'] = time();
-        $pm['created_date'] = MyDate("Ymd",$pm['t']);
-        $pm['created_hour'] = MyDate("H",$pm['t']);
-        $pm['url_type'] = isset($envs['url_type'])? $envs['url_type'] : $url_type;
-        if ($crawler = $agent->robot($agent->getUserAgent())) {
+        $pm['created_date'] = MyDate("Ymd", $pm['t']);
+        $pm['created_hour'] = MyDate("H", $pm['t']);
+        $pm['url_type'] = isset($envs['url_type']) ? $envs['url_type'] : $url_type;
+        //爬虫检测
+        $ua = $agent->getUserAgent();
+        $crawler = $this->botName($ua);
+        $crawler = ($crawler && is_string($crawler)) ? trim($crawler) : $agent->robot($ua);
+        if ($crawler) {
             $pm['url_type'] = -1;
             $pm['browser'] = $crawler;
         }
-        $pm['typeid'] = isset($envs['typeid'])? $envs['typeid'] : $typeid;
-        $pm['aid'] = isset($envs['aid'])? $envs['aid'] : $aid;
-        $pm['value'] = isset($envs['value'])? $envs['value'] : $value;
+        $pm['typeid'] = isset($envs['typeid']) ? $envs['typeid'] : $typeid;
+        $pm['aid'] = isset($envs['aid']) ? $envs['aid'] : $aid;
+        $pm['value'] = isset($envs['value']) ? $envs['value'] : $value;
         ksort($pm);
         $pm['sign'] = sha1(http_build_query($pm).md5($cfg_cookie_encode));
         $pm['dopost'] = "stat";
@@ -62,6 +66,23 @@ class DedeStatistics {
         xhr.send();
     }
 })();";
+    }
+    //爬虫检测方法
+    function botName($ua) {
+        if (!$ua) return false;
+        $ua = strtolower($ua);
+        $bots = [
+            'Googlebot','Bingbot','Baiduspider','YandexBot','DuckDuckBot','Applebot','PetalBot',
+            'Sogou','SosoSpider','YoudaoBot','360Spider','HaosouSpider','SMSpider','Bytespider',
+            'NaverBot','Yeti','SeznamBot','Gigabot','Exabot','Wotbox','MojeekBot','Qwantify',
+            'Adsbot-Google','Google-InspectionTool','BingPreview','archive.org_bot','CCBot'
+        ];
+        foreach ($bots as $b) {
+            if (strpos($ua, strtolower($b)) !== false) {
+                return $b;
+            }
+        }
+        return false;
     }
     //统计
     function Record()
@@ -99,7 +120,7 @@ class DedeStatistics {
         } else if (function_exists("openssl_random_pseudo_bytes")) {
             $bytes = openssl_random_pseudo_bytes(ceil($lenght / 2));
         } else {
-            throw new Exception("no cryptographically secure random function available");
+            throw new Exception("生成uuid失败");
         }
         return substr(bin2hex($bytes), 0, $lenght);
     }
@@ -108,16 +129,16 @@ class DedeStatistics {
         $results = array();
         foreach ($ds as $d) {
             $vv = $this->GetInfoByDate($d);
-            $result[] = $vv;
+            $results[] = $vv;
         }
-        return $result;
+        return $results;
     }
     //获取某天的统计信息
     function GetInfoByDate($d=0)
     {
         global $dsql;
         if ($d == -1) {
-            $row = $dsql->GetOne("SELECT * FROM `#@__statistics`ORDER BY pv DESC ");
+            $row = $dsql->GetOne("SELECT * FROM `#@__statistics` ORDER BY pv DESC LIMIT 1");
             return array(
                 "sdate" => $d,
                 "pv" => $row['pv'],
@@ -127,7 +148,7 @@ class DedeStatistics {
             );
         }
         $today = MyDate("Ymd",time());
-        if ($d==0) {
+        if ($d == 0) {
             $d = $today;
         }
         $d = intval($d);
@@ -142,7 +163,7 @@ class DedeStatistics {
         $vv = $dsql->GetOne("SELECT COUNT(DISTINCT ssid) as total FROM `#@__statistics_detail` WHERE created_date = $d AND url_type >= 0");
         if ($d < intval($today)) {
             //缓存数据
-            $insql = "INSERT INTO `#@__statistics` (`sdate`,`pv`,`uv`,`ip`,`vv`) VALUES ('$d', '{$pv['total']}','{$uv['total']}','{$ip['total']}','{$vv['total']}')";
+            $insql = "INSERT INTO `#@__statistics` (`sdate`,`pv`,`uv`,`ip`,`vv`) VALUES ('{$d}','{$pv['total']}','{$uv['total']}','{$ip['total']}','{$vv['total']}')";
             $dsql->ExecuteNoneQuery($insql);
         }
         return array(

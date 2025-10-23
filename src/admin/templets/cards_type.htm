@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>积分产品分类</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -35,8 +33,7 @@
 									$dsql->SetQuery("SELECT * FROM `#@__moneycard_type`");
 									$dsql->Execute();
 									$k=0;
-									while($row = $dsql->GetObject())
-									{
+									while ($row = $dsql->GetObject()) {
 										$k++;
 									?>
 									<input type="hidden" name="ID_<?php echo $k;?>" value="<?php echo $row->tid;?>">

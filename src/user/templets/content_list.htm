@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>我的文档-会员中心-<?php echo $cfg_webname;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -51,10 +49,10 @@
 										</td>
 										<td><?php echo GetDateMk($fields['senddate']);?></td>
 										<td>
-											<a href="{dede:global.cfg_phpurl/}/view.php?aid={dede:field.id/}" target="_blank" class="btn btn-primary btn-sm"><i class="fa fa-eye" title="查看"></i></a>
-											<?php if ($fields['arcrank']<0 || $dtime - $fields['senddate'] < $maxtime) {?>
-											<a href="<?php echo $cfg_memberurl?>/archives_do.php?dopost=edit&channelid=<?php echo $channelid;?>&aid={dede:field.id/}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square" title="编辑"></i></a>
-											<a href="<?php echo $cfg_memberurl?>/archives_do.php?aid={dede:field.id/}&dopost=delArc" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+											<a href="{dede:global.cfg_phpurl/}/view.php?aid={dede:field.id/}" target="_blank" class="btn btn-primary btn-sm"><i class="bi bi-box-arrow-up-right" title="查看"></i></a>
+											<?php if ($fields['arcrank']<0 || $dtime - $fields['senddate'] < $maxtime){?>
+											<a href="<?php echo $cfg_memberurl?>/archives_do.php?dopost=edit&channelid=<?php echo $channelid;?>&aid={dede:field.id/}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square" title="编辑"></i></a>
+											<a href="<?php echo $cfg_memberurl?>/archives_do.php?aid={dede:field.id/}&dopost=delArc" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a>
 											<?php }?>
 										</td>
 									</tr>

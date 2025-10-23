@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>修改文档模型</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<link rel="stylesheet" href="/static/web/css/codemirror.css">
 		<script src="/static/web/js/codemirror.js"></script>
@@ -24,7 +22,7 @@
 			<div class="card shadow-sm">
 				<div class="card-header">修改文档模型</div>
 				<div class="card-body">
-					<?php if ($row['issystem'] == 1) {?><div class="alert alert-info">默认文档模型字段，请谨慎修改</div><?php }?>
+					<?php if ($row['issystem'] == 1){?><div class="alert alert-info">默认文档模型字段，请谨慎修改</div><?php }?>
 					<form name="form1" action="mychannel_edit.php" method="post">
 						<input type="hidden" name="id" value="<?php echo $id;?>">
 						<input type="hidden" name="dopost" value="save">
@@ -68,8 +66,7 @@
 												$urank = $cuserLogin->getUserRank();
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` where adminrank<='$urank' And `rank` >= 10");
 												$dsql->Execute();
-												while($row2 = $dsql->GetObject())
-												{
+												while ($row2 = $dsql->GetObject()) {
 													if ($row2->rank==$row['sendrank']) echo "<option value='{$row2->rank}' selected>{$row2->membername}</option>";
 													else echo "<option value='{$row2->rank}'>{$row2->membername}</option>";
 												}
@@ -164,7 +161,7 @@
 													</tr>
 												</thead>
 												<tbody>
-												<?php if ($row['issystem']==-1) {?>
+												<?php if ($row['issystem']==-1){?>
 													<tr>
 														<td colspan='5'>不列出aid和typeid强制使用字段</td>
 													</tr>
@@ -172,7 +169,7 @@
 													<?php
 													}
 													$ds = file(DEDEADMIN."/inc/fieldtype.txt");
-													foreach($ds as $d){
+													foreach ($ds as $d) {
 														$dds = explode(',',trim($d));
 														$fieldtypes[$dds[0]] = $dds[1];
 													}
@@ -180,9 +177,8 @@
 													$dtp = new DedeTagParse();
 													$dtp->SetNameSpace("field","<",">");
 													$dtp->LoadSource($fieldset);
-													if (is_array($dtp->CTags)){
-														foreach($dtp->CTags as $ctag)
-														{
+													if (is_array($dtp->CTags)) {
+														foreach ($dtp->CTags as $ctag) {
 													?>
 													<tr>
 														<td>
@@ -211,12 +207,12 @@
 															?>
 														</td>
 														<td>
-															<?php if ($ft==1) {?>
-															<a href="mychannel_field_edit.php?id=<?php echo $id;?>&fname=<?php echo $ctag->GetTagName();?>&issystem=<?php echo $row['issystem'];?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a>
-															<?php if ($row['issystem']!=1) {?>
-															<a href="javascript:DelNote('mychannel_field_edit.php?id=<?php echo $id;?>&fname=<?php echo $ctag->GetTagName();?>&action=delete');" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+															<?php if ($ft==1){?>
+															<a href="mychannel_field_edit.php?id=<?php echo $id;?>&fname=<?php echo $ctag->GetTagName();?>&issystem=<?php echo $row['issystem'];?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square" title="修改"></i></a>
+															<?php if ($row['issystem']!=1){?>
+															<a href="javascript:DelNote('mychannel_field_edit.php?id=<?php echo $id;?>&fname=<?php echo $ctag->GetTagName();?>&action=delete');" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a>
 															<?php }?>
-															<?php } else {echo "<span class='btn btn-danger btn-sm'><i class='fa fa-times' title='禁止'></i></span>";}?>
+															<?php } else {echo "<span class='btn btn-danger btn-sm'><i class='bi bi-x-lg' title='禁止'></i></span>";}?>
 														</td>
 													</tr>
 													<?php }}?>

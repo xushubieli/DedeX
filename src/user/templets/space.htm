@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>{dede:var.spacename/}-<?php echo $cfg_webname;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -47,7 +45,7 @@
 							<h2 class="mb-3"><a href="{dede:field.arcurl/}">{dede:field.title/}</a></h2>
 							<p>{dede:field.description/}...</p>
 							<div class="meta">
-								<span class="date"><i class="fa fa-calendar me-3"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
+								<span class="date"><i class="bi bi-calendar-event me-2"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
 							</div>
 						</div>
 					</article>

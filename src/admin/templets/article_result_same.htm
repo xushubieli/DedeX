@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>文档重复检测记录</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -31,8 +29,7 @@
 								</thead>
 								<tbody>
 									<?php
-									while($row = $dsql->GetArray())
-									{
+									while ($row = $dsql->GetArray()) {
 									   if ($row['dd']==1 ) break;
 									?>
 									<tr>
@@ -66,10 +63,11 @@
 				if (document.form2.arcTitle.value) return document.form2.arcTitle.value;
 				for (i = 0; i < document.form2.arcTitle.length; i++) {
 					if (document.form2.arcTitle[i].checked) {
-						if (allSel == "")
+						if (allSel == "") {
 							allSel = document.form2.arcTitle[i].value;
-						else
+						} else {
 							allSel = allSel + "`" + document.form2.arcTitle[i].value;
+						}
 					}
 				}
 				return allSel;

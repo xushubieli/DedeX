@@ -1,6 +1,6 @@
 <?php
 if (!defined('DEDEINC')) exit('dedex');
-if (isset($_FILES['GLOBALS'])) exit('请求不允许');
+if (isset($_FILES['GLOBALS'])) exit('请求失败');
 /**
  * 文件上传安全校验方法
  *
@@ -11,10 +11,7 @@ if (isset($_FILES['GLOBALS'])) exit('请求不允许');
 //为了防止会员通过注入，这里强制限定的某些文件类型禁止上传
 $cfg_not_allowall = "php|pl|cgi|asp|aspx|jsp|php3|shtm|shtml|htm";
 $keyarr = array('name', 'type', 'tmp_name', 'size');
-if (
-    ($GLOBALS['cfg_html_editor'] == 'ckeditor' ||
-        $GLOBALS['cfg_html_editor'] == 'ckeditor4')  && isset($_FILES['upload'])
-) {
+if (($GLOBALS['cfg_html_editor'] == 'ckeditor' ||$GLOBALS['cfg_html_editor'] == 'ckeditor4')  && isset($_FILES['upload'])) {
     $_FILES['imgfile'] = $_FILES['upload'];
     $CKUpload = TRUE;
     unset($_FILES['upload']);

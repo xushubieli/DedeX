@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>标签文件管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -31,8 +29,7 @@
 							<tbody>
 								<?php
 								$dh = dir($libdir);
-								while($filename=$dh->read())
-								{
+								while ($filename=$dh->read()) {
 									if (!preg_match("#\.php$#", $filename)) continue;
 									$filetime = filemtime($libdir.'/'.$filename);
 									$filetime = MyDate("Y-m-d H:i:s",$filetime);
@@ -42,7 +39,7 @@
 									<td><img src="/static/web/img/icon_php.png"> <?php echo $filename;?></td>
 									<td><?php echo $fileinfo;?></td>
 									<td><?php echo $filetime;?></td>
-									<td><a href="tpl.php?action=edittag&filename=<?php echo $filename;?>" class="btn btn-light btn-sm"><i class="fa fa-pencil-square" title="修改"></i></a></td>
+									<td><a href="tpl.php?action=edittag&filename=<?php echo $filename;?>" class="btn btn-light btn-sm"><i class="bi bi-pencil-square" title="修改"></i></a></td>
 								</tr>
 								<?php }?>
 								<tr>

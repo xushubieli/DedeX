@@ -4,10 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>修改单表文档</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
@@ -45,8 +43,7 @@
 											<?php
 											$dsql->SetQuery("SELECT * FROM `#@__arcatt` WHERE att<>'j' AND att<>'p' ORDER BY sortid ASC");
 											$dsql->Execute();
-											while($trow = $dsql->GetObject())
-											{
+											while ($trow = $dsql->GetObject()) {
 												if (preg_match("#{$trow->att}#", $addRow['flag'])) {
 													echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' checked> {$trow->attname}[{$trow->att}]</label> ";
 												} else {
@@ -95,7 +92,7 @@
 												$urank = $cuserLogin->getUserRank();
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` where adminrank<='$urank' And `rank`<>'{$addRow["arcrank"]}' ");
 												$dsql->Execute();
-												while($row = $dsql->GetObject()) {
+												while ($row = $dsql->GetObject()) {
 													echo "<option value='{$row->rank}'>{$row->membername}</option>";
 												}
 												?>

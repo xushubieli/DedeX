@@ -113,7 +113,7 @@ function lib_channel(&$ctag, &$refObj)
                 } else {
                     $row['typelink'] = $row['typeurl'] = GetOneTypeUrlA($row);
                     if (is_array($dtp2->CTags)) {
-                        foreach($dtp2->CTags as $tagid=>$ctag) {
+                        foreach ($dtp2->CTags as $tagid=>$ctag) {
                             if (isset($row[$ctag->GetName()])) {
                                 $dtp2->Assign($tagid, $row[$ctag->GetName()]);
                             } else if (preg_match('/^sonchannel[0-9]*$/', $ctag->GetName())) {
@@ -161,7 +161,7 @@ function lib_channel_son($ctag, $typeid = 0, $dsql2)
             if ($row = $dsql2->GetArray()) {
                 $row['typelink'] = $row['typeurl'] = GetOneTypeUrlA($row);
                 if (is_array($dtp2->CTags)) {
-                    foreach($dtp2->CTags as $tagid=>$ctag) {
+                    foreach ($dtp2->CTags as $tagid=>$ctag) {
                         if (isset($row[$ctag->GetName()])) {
                             $dtp2->Assign($tagid, $row[$ctag->GetName()]);
                         } else if (preg_match('/^sonchannel[0-9]*$/', $ctag->GetName())) {

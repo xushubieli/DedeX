@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>提升会员</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -21,7 +19,7 @@
 			<div class="card shadow-sm">
 				<div class="card-header">提升会员</div>
 				<div class="card-body">
-					<?php if ($row['matt']==10) {echo '<div class="alert alert-info mb-0">您已经是管理员，不要提升了</div>';} else {?>
+					<?php if ($row['matt']==10){echo '<div class="alert alert-info mb-0">您已经是管理员，不要提升了</div>';} else {?>
 					<form name="form2" action="member_toadmin.php" method="post">
 						<input type="hidden" name="dopost" value="toadmin">
 						<input type="hidden" name="userid" value="<?php echo $row['userid'];?>">
@@ -31,7 +29,7 @@
 								<tbody>
 									<tr>
 										<td width="260">账号</td>
-										<td><?php if ($row['face']!='') {echo "<img src='{$row['face']}' class='user-img-sm'>";};echo " <span>{$row['userid']}</span>";?></td>
+										<td><?php if ($row['face']!=''){echo "<img src='{$row['face']}' class='user-img-sm'>";};echo " <span>{$row['userid']}</span>";?></td>
 									</tr>
 									<tr>
 										<td>昵称</td>
@@ -52,7 +50,7 @@
 												$sql .= " ORDER BY `rank` ASC";
 												$dsql->SetQuery($sql);
 												$dsql->Execute("ut");
-												while($row = $dsql->GetObject("ut")) {
+												while ($row = $dsql->GetObject("ut")) {
 												    echo "<option value='{$row->rank}'>{$row->typename}</option>\n";
 												}
 												?>

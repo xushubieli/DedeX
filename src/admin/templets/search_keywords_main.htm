@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="<?php echo $cfg_soft_lang;;?>">
+		<meta charset="<?php echo $cfg_soft_lang;?>">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>搜索关键词管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -21,129 +19,34 @@
 			<div class="card shadow-sm">
 				<div class="card-header">搜索关键词管理</div>
 				<div class="card-body">
-					<div id="rslist" ><?php GetKeywordList($dsql,$pageno,$pagesize,$orderby);?></div>
-					<div id="pagelist"></div>
+					<?php GetKeywordList($dsql,$pageno,$pagesize,$orderby);?>
+					<?php
+					$pagenum = max(1, ceil($totalRow / $pagesize));
+					$listsize = 2;
+					$prev = $pageno - 1;
+					$next = $pageno + 1;
+					echo "<ul class='pagination justify-content-end'>";
+					echo "<li class='page-item disabled'><span class='page-link'>{$pagenum}页/{$totalRow}条</span></li>";
+					if ($pageno > 1) {
+						echo "<li class='page-item'><a href='search_keywords_main.php?pageno=1&pagesize={$pagesize}&orderby={$orderby}' class='page-link'>首页</a></li>";
+						echo "<li class='page-item'><a href='search_keywords_main.php?pageno={$prev}&pagesize={$pagesize}&orderby={$orderby}' class='page-link'>上页</a></li>";
+					}
+					$start = max(1, $pageno - $listsize);
+					$end = min($pagenum, $pageno + $listsize);
+					for ($i = $start; $i <= $end; $i++) {
+						$active = ($i == $pageno) ? " active" : "";
+						echo "<li class='page-item{$active}'><a href='search_keywords_main.php?pageno={$i}&pagesize={$pagesize}&orderby={$orderby}' class='page-link'>{$i}</a></li>";
+					}
+					if ($pageno < $pagenum) {
+						echo "<li class='page-item'><a href='search_keywords_main.php?pageno={$next}&pagesize={$pagesize}&orderby={$orderby}' class='page-link'>下页</a></li>";
+						echo "<li class='page-item'><a href='search_keywords_main.php?pageno={$pagenum}&pagesize={$pagesize}&orderby={$orderby}' class='page-link'>末页</a></li>";
+					}
+					echo "</ul>";
+					?>
 				</div>
 			</div>
 		</div>
 		<script>
-			var pageno = 1;
-			var totalrow = "<?php echo $totalRow;?>";
-			var pagesize = "<?php echo $pagesize;?>";
-			var orderby = "<?php echo $orderby;?>";
-			//加载列表
-			function ReloadPage(ordertype) {
-				orderby = ordertype;
-				var listArea = $Obj('rslist');
-				var errMsg = "<a href=\"javascript:ReloadPage('" + ordertype + "')\">重新加载列表</a>";
-				fetch("search_keywords_main.php?dopost=getlist&pageno=" + pageno + "&orderby=" + ordertype).then(resp => {
-					if (resp.ok) {
-						return resp.text()
-					}
-					throw new Error(errMsg);
-				}).then((d) => {
-					listArea.innerHTML = d;
-				}).catch((error) => {
-					listArea.innerHTML = errMsg;
-				});
-			}
-			//载入指定页的列表
-			function LoadPage(npage) {
-				pageno = npage;
-				ReloadPage(orderby);
-				ReloadPageNum(pageno);
-			}
-			//更新一个关键词
-			function UpdateNote(nid) {
-				var listArea = $Obj('rslist');
-				var kw = $Obj('keyword' + nid).value;
-				var kws = $Obj('spwords' + nid).value;
-				var ct = $Obj('count' + nid).value;
-				var errMsg = "<a href=\"javascript:LoadPage('" + pageno + "')\">重新加载列表</a>";
-				<?php if (strtolower(substr($cfg_soft_lang, 0, 3)) == 'utf') {?>
-				const formData = new FormData()
-				formData.append('dopost', 'update');
-				formData.append('aid', nid);
-				formData.append('keyword', kw);
-				formData.append('spwords', kws);
-				formData.append('count', ct);
-				formData.append('pageno', pageno);
-				formData.append('orderby', orderby);
-				fetch('search_keywords_main.php', {
-					method: 'POST',
-					body: formData
-				})
-				.then(r => {
-					if (r.ok) {
-						return r.text()
-					}
-					throw new Error(errMsg);
-				})
-				.then(d => {
-					listArea.innerHTML = d;
-				}).catch((error) => {
-					$DE('edsta').innerHTML = errMsg;
-				});
-				<?php }?>
-				ShowMsg('成功更新关键词');
-				//myajax.SendGet("search_keywords_main.php?dopost=update&aid="+nid+"&keyword="+kw+"&spwords="+kws+"&count="+ct+"&pageno="+pageno);
-			}
-			//删除关键词
-			function DelNote(nid) {
-				var listArea = $Obj('rslist');
-				totalrow = totalrow - 1;
-				var pagenum = Math.ceil(totalrow / pagesize);
-				if (pagenum <= pageno) pageno = pagenum;
-				var errMsg = "<a href=\"javascript:LoadPage('" + pageno + "')\">重新加载列表</a>";
-				fetch("search_keywords_main.php?dopost=del&aid=" + nid + "&pageno=" + pageno + "&orderby=" + orderby).then(resp => {
-					if (resp.ok) {
-						return resp.text()
-					}
-					throw new Error(errMsg);
-				}).then((d) => {
-					listArea.innerHTML = d;
-				}).catch((error) => {
-					listArea.innerHTML = errMsg;
-				});
-				ReloadPageNum(pageno);
-			}
-			function ReloadPageNum(startnum) {
-				var ListArea = $Obj('pagelist');
-				var pagenum = Math.ceil(totalrow / pagesize);
-				var listsize = 2;
-				var ahtml = "<ul class='pagination justify-content-end'>";
-				var startloop = 1;
-				var endnum = 0;
-				ahtml += "<li class='page-item disabled'><span class='page-link'>" + pagenum + "页" + totalrow + "条</span></li>";
-				if (pageno > 1 && pageno != 1) ahtml += "<li class='page-item'><a href='javascript:LoadPage(1);' class='page-link'>首页</a></li>";
-				if (pageno > 1) ahtml += "<li class='page-item'><a href='javascript:LoadPage(" + (pageno - 1) + ");' class='page-link'>上页</a></li>";
-				if (startnum >= pagenum - listsize) {
-					startloop = pagenum - (listsize * 2);
-					if (startloop < 1) startloop = 1;
-					for (i = startloop; i <= pagenum; i++) {
-						if (i == pageno) ahtml += "<li class='page-item active'><span class='page-link'>" + i + "</span></li>";
-						else ahtml += "<li class='page-item'><a href='javascript:LoadPage(" + i + ");' class='page-link'>" + i + "</a></li>";
-					}
-				} else if (pagenum < listsize) {
-					for (i = 1; i <= pagenum; i++) {
-						if (i == pageno) ahtml += "<li class='page-item active'><span class='page-link'>" + i + "</span></li>";
-						else ahtml += "<li class='page-item'><a href='javascript:LoadPage(" + i + ");' class='page-link'>" + i + "</a></li>";
-					}
-				} else {
-					startloop = startnum - listsize;
-					if (startloop < 1) { startloop = 1; endnum = startloop + (listsize * 2); }
-					else { endnum = startnum + listsize; }
-					if (endnum >= pagenum) endnum = pagenum;
-					for (i = startloop; i <= endnum; i++) {
-						if (i == pageno) ahtml += "<li class='page-item active'><span class='page-link'>" + i + "</span></li>";
-						else ahtml += "<li class='page-item'><a href='javascript:LoadPage(" + i + ");' class='page-link'>" + i + "</a></li>";
-					}
-				}
-				if (pageno < pagenum) ahtml += "<li class='page-item'><a href='javascript:LoadPage(" + (pageno + 1) + ");' class='page-link'>下页</a></li>";
-				if (pageno != pagenum && pagenum > 1) ahtml += "<li class='page-item'><a href='javascript:LoadPage(" + pagenum + ");' class='page-link'>末页</a></li>";
-				ListArea.innerHTML = ahtml+"</ul>";
-			}
-			ReloadPageNum(1);
 			function selAll() {
 				var celements = document.getElementsByName('aids[]');
 				for (i=0; i<celements.length; i++) {
@@ -154,26 +57,40 @@
 			function noselAll() {
 				var celements = document.getElementsByName('aids[]');
 				for (i=0; i<celements.length; i++) {
-					if (celements[i].checked = true)  {
-						celements[i].checked = false;
-					}
+					celements[i].checked = false;
 				}
 			}
 			function delall() {
-				var celements = document.getElementsByName('aids[]');
-				var checked = Array.from(celements).some(el => el.checked);
-				if (!checked) {
-					DedeConfirm("请选择一个关键词").catch((e) => {
-						console.log(e);
-					});
+				var c = document.getElementsByName('aids[]');
+				var has = false;
+				for (var i = 0; i < c.length; i++) if (c[i].checked) has = true;
+				if (!has) {
 					return;
 				}
-				DedeConfirm("您确定要删除关键词吗").then((v) => {
-					document.form3.dopost.value = 'delall';
-					document.form3.submit();
-				}).catch((e) => {
-					console.log(e);
-				});
+				document.forms['form3'].submit();
+			}
+			function confirmUpdate(aid) {
+				var kw = document.querySelector('input[name="keyword_' + aid + '"]').value;
+				var sp = document.querySelector('input[name="spwords_' + aid + '"]').value;
+				var ct = document.querySelector('input[name="count_' + aid + '"]').value;
+				var f = document.createElement('form');
+				f.method = 'post';
+				f.action = 'search_keywords_main.php';
+				var add = function(n, v) {
+					var i = document.createElement('input');
+					i.type = 'hidden'; i.name = n; i.value = v;
+					f.appendChild(i);
+				};
+				add('dopost', 'update');
+				add('aid', aid);
+				add('keyword', kw);
+				add('spwords', sp);
+				add('count', ct);
+				add('pageno', <?php echo (int)$pageno;?>);
+				add('pagesize', <?php echo (int)$pagesize;?>);
+				add('orderby', '<?php echo addslashes($orderby);?>');
+				document.body.appendChild(f);
+				f.submit();
 			}
 		</script>
 	</body>

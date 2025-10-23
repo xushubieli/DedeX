@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>系统日志列表</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -85,10 +83,11 @@
 				if (document.form1.logs.value) return document.form1.logs.value;
 				for (i = 0; i < document.form1.logs.length; i++) {
 					if (document.form1.logs[i].checked) {
-						if (allSel == "")
+						if (allSel == "") {
 							allSel = document.form1.logs[i].value;
-						else
+						} else {
 							allSel = allSel + "`" + document.form1.logs[i].value;
+						}
 					}
 				}
 				return allSel;

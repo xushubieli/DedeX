@@ -75,14 +75,14 @@ if ($rs < 0) {
     $safeMsg[] = $msg;
 }
 ?>
-<?php if (count($safeMsg) > 0) {?>
+<?php if (count($safeMsg) > 0){?>
 <div class="card shadow-sm">
-    <div class="card-header"><i class="fa fa-shield"></i> 安全提示</div>
+    <div class="card-header">安全提示</div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-borderless">
                 <tbody>
-                    <?php foreach ($safeMsg as $key => $val) {?>
+                    <?php foreach($safeMsg as $key => $val){?>
                     <tr>
                         <td><?php echo $val;?></td>
                     </tr>

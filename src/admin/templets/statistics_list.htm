@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>流量统计表</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -23,15 +21,58 @@
 						<form name="form1" action="statistics_list.php" method="get">
 							<input type="text" name="ip" class="form-control admin-w-lg" placeholder="请输入地址" value="<?php echo !empty($ip)? $ip : '';?>">
 							<select name="url_type" class="form-select admin-w-sm">
-								<option value="0"<?php echo $url_type === 0 ? ' selected' : '';?>>选择类型</option>
-								<option value="1"<?php echo $url_type === 1 ? ' selected' : '';?>>用户</option>
-								<option value="-1"<?php echo $url_type === -1 ? ' selected' : '';?>>蜘蛛</option>
+								<option value="0" <?php echo $url_type === 0 ? 'selected' : '';?>>选择类型</option>
+								<option value="1" <?php echo $url_type === 1 ? 'selected' : '';?>>用户</option>
+								<option value="-1" <?php echo $url_type === -1 ? 'selected' : '';?>>蜘蛛</option>
 							</select>
 							<button type="submit" class="btn btn-primary btn-sm">搜索</button>
+							<?php if (isset($_GET['day_peak']) && $_GET['day_peak'] == '1') {?>
+							<a class="btn btn-primary btn-sm" href="statistics_list.php">流量统计</a>
+							<?php } else {?>
+							<button type="submit" name="day_peak" value="1" class="btn btn-primary btn-sm">今日峰值</button>
+							<?php }?>
+							<a class="btn btn-primary btn-sm" href="sys_cache_up.php">更新缓存</a>
 						</form>
 					</div>
 				</div>
 			</div>
+			<?php if (isset($_GET['day_peak']) && $_GET['day_peak'] == '1') {?>
+			<div class="card shadow-sm mb-3">
+				<div class="card-header">今日峰值表</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-borderless table-hover">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">标记</th>
+									<th scope="col">IP地址</th>
+									<th scope="col">浏览器</th>
+									<th scope="col">操作系统</th>
+									<th scope="col">访问次数</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php 
+								$id = 1;
+								while ($row = $dsql->GetArray('peak')) {
+									echo "<tr>";
+									echo "<td>{$id}</td>";
+									echo "<td>{$row['dduuid']}</td>";
+									echo "<td>{$row['ip']}</td>";
+									echo "<td>{$row['browser']}</td>";
+									echo "<td>{$row['os']}</td>";
+									echo "<td>{$row['count']}</td>";
+									echo "</tr>";
+									$id++;
+								}
+								?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<?php } else {?>
 			<div class="card shadow-sm">
 				<div class="card-header">流量统计表</div>
 				<div class="card-body">
@@ -44,7 +85,7 @@
 										<td scope="col">ID</td>
 										<td scope="col">标记</td>
 										<td scope="col">地址IP</td>
-										<td scope="col">浏览器内核</td>
+										<td scope="col">浏览器</td>
 										<td scope="col">操作系统</td>
 										<td scope="col">浏览类型</td>
 										<td scope="col">浏览时间</td>
@@ -76,6 +117,7 @@
 					{dede:pagelist listsize='2'/}
 				</div>
 			</div>
+			<?php }?>
 		</div>
 		<script>
 			function getCheckboxItem() {
@@ -83,10 +125,11 @@
 				if (document.form2.aids.value) return document.form2.aids.value;
 				for (i = 0; i < document.form2.aids.length; i++) {
 					if (document.form2.aids[i].checked) {
-						if (allSel == "")
-						allSel = document.form2.aids[i].value;
-						else
-						allSel = allSel + "`" + document.form2.aids[i].value;
+						if (allSel == "") {
+							allSel = document.form2.aids[i].value;
+						} else {
+							allSel = allSel + "`" + document.form2.aids[i].value;
+						}
 					}
 				}
 				return allSel;
@@ -105,6 +148,6 @@
 				}
 				location.href = "statistics_list.php?dopost=delete&aids=" + nid;
 			}
-		  </script>
+		</script>
 	</body>
 </html>

@@ -219,12 +219,12 @@ class ListView
                 $ctag = $this->dtp->GetTag("list");
             }
             if (!is_object($ctag)) {
-                $this->pagesize = 30;
+                $this->pagesize = 10;
             } else {
                 if ($ctag->GetAtt("pagesize") != "") {
                     $this->pagesize = $ctag->GetAtt("pagesize");
                 } else {
-                    $this->pagesize = 30;
+                    $this->pagesize = 10;
                 }
             }
         } else {
@@ -386,7 +386,7 @@ class ListView
             $ordersql = " ORDER BY arc.id $orderWay";
         } else if ($orderby == "hot" || $orderby == "click") {
             $ordersql = " ORDER BY arc.click $orderWay";
-        } else if($orderby == "weight") {
+        } else if ($orderby == "weight") {
             $ordersql = " ORDER BY arc.weight $orderWay";
         } else if ($orderby == "lastpost") {
             $ordersql = " ORDER BY arc.lastpost $orderWay";
@@ -400,18 +400,15 @@ class ListView
         //获得附加表的相关信息
         $addtable = $this->ChannelUnit->ChannelInfos['addtable'];
         $filtersql = '';
-        if ($addtable!="")
-        {
+        if ($addtable!="") {
             $addJoin = " LEFT JOIN `$addtable` ON arc.id = {$addtable}.aid ";
             $addField = '';
             $fields = explode(',',$this->ChannelUnit->ChannelInfos['listfields']);
-            foreach($fields as $k=>$v)
-            {
+            foreach ($fields as $k=>$v) {
                 $nfields[$v] = $k;
             }
             if (is_array($this->ChannelUnit->ChannelFields) && !empty($this->ChannelUnit->ChannelFields)) {
-                foreach($this->ChannelUnit->ChannelFields as $k=>$arr)
-                {
+                foreach ($this->ChannelUnit->ChannelFields as $k=>$arr) {
                     if (isset($nfields[$k])) {
                         if (!empty($arr['rename'])) {
                             $addField .= ','.$addtable.'.'.$k.' as '.$arr['rename'];
@@ -799,7 +796,7 @@ class ListView
             $ordersql = " ORDER BY arc.id $orderWay";
         } else if ($orderby == "hot" || $orderby == "click") {
             $ordersql = " ORDER BY arc.click $orderWay";
-        } else if($orderby == "weight") {
+        } else if ($orderby == "weight") {
             $ordersql = " ORDER BY arc.weight $orderWay";
         } else if ($orderby == "lastpost") {
             $ordersql = " ORDER BY arc.lastpost $orderWay";
@@ -813,18 +810,15 @@ class ListView
         //获得附加表的相关信息
         $addtable = $this->ChannelUnit->ChannelInfos['addtable'];
         $filtersql = '';
-        if ($addtable!="")
-        {
+        if ($addtable!="") {
             $addJoin = " LEFT JOIN `$addtable` ON arc.id = {$addtable}.aid ";
             $addField = '';
             $fields = explode(',',$this->ChannelUnit->ChannelInfos['listfields']);
-            foreach($fields as $k=>$v)
-            {
+            foreach ($fields as $k=>$v) {
                 $nfields[$v] = $k;
             }
             if (is_array($this->ChannelUnit->ChannelFields) && !empty($this->ChannelUnit->ChannelFields)) {
-                foreach($this->ChannelUnit->ChannelFields as $k=>$arr)
-                {
+                foreach ($this->ChannelUnit->ChannelFields as $k=>$arr) {
                     if (isset($nfields[$k])) {
                         if (!empty($arr['rename'])) {
                             $addField .= ','.$addtable.'.'.$k.' as '.$arr['rename'];
@@ -1078,12 +1072,7 @@ class ListView
         $maininfo = "<li class='page-item disabled'><span class='page-link'>{$totalpage}页{$this->TotalResult}条</span></li>";
         $purl = $this->GetCurUrl();
         //开启伪静态对规则替换
-        if ($cfg_rewrite == 'Y') {
-            $purl = str_replace("/apps", "", $purl);
-            $nowurls = preg_replace("/", ".php?", $purl);
-            $nowurls = explode("?", $nowurls);
-            $purl = $nowurls[0];
-        }
+        if ($cfg_rewrite == 'Y') $purl = "/list/";
         $geturl = "tid={$this->TypeID}&TotalResult={$this->TotalResult}&";
         $purl .= '?'.$geturl;
         $optionlist = '';

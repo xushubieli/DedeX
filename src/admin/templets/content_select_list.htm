@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>选择文档</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -79,10 +77,11 @@
 				if (document.form2.arcID.value) return document.form2.arcID.value;
 				for (i = 0; i < document.form2.arcID.length; i++) {
 					if (document.form2.arcID[i].checked) {
-					  if (allSel == "")
+						if (allSel == "") {
 							allSel = document.form2.arcID[i].value;
-					  else
+						} else {
 							allSel = allSel + "," + document.form2.arcID[i].value;
+						}
 					}
 				}
 				return allSel;

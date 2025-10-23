@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>文档自定义属性</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -33,8 +31,7 @@
 									$dsql->SetQuery("SELECT * FROM `#@__arcatt` ORDER BY sortid ASC");
 									$dsql->Execute();
 									$k=0;
-									while($row = $dsql->GetObject())
-									{
+									while ($row = $dsql->GetObject()) {
 										$k++;
 									?>
 									<input type="hidden" name="att_<?php echo $k;?>" value="<?php echo $row->att;?>">

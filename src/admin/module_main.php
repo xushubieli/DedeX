@@ -103,8 +103,8 @@ if ($action == '') {
     $prvdir = "<table>\r\n";
     $prvdir .= "<tr><td width='260'>目录</td><td align='center'>可写</td></tr>\r\n";
     foreach ($prvdirs as $k => $v) {
-        if ($v) $cw = "<span class='text-success'><i class='fa fa-check'></i></span>";
-        else $cw = "<span class='text-danger'><i class='fa fa-times'></i></span>";
+        if ($v) $cw = "<span class='text-success'><i class='bi bi-check-lg'></i></span>";
+        else $cw = "<span class='text-danger'><i class='bi bi-x-lg'></i></span>";
         $prvdir .= "<tr><td>$k</td><td align='center'>$cw</td></tr>";
     }
     $prvdir .= "</table>";

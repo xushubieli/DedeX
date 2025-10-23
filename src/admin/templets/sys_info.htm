@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>系统设置</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
@@ -23,23 +21,19 @@
 					<div class="admin-btns">
 						<div class="sys-search d-inline-block">
 							<input type="text" name="keywds" id="keywds" class="form-control admin-w-lg" placeholder="请输入变量说明">
-							<button type="button" id="btnClear" class="btn btn-sm d-none sys-times"><i class="fa fa-times"></i></button>
+							<button type="button" id="btnClear" class="btn btn-sm d-none sys-times"><i class="bi bi-x-lg"></i></button>
 						</div>
 						<a href="javascript:getSearch();" class="btn btn-primary btn-sm">搜索</a>
 						<?php
 						$ds = file(DEDEADMIN.'/inc/configgroup.txt');
 						$totalGroup = count($ds);
 						$i = 0;
-						foreach($ds as $dl)
-						{
+						foreach ($ds as $dl) {
 							$dl = trim($dl);
 							if (empty($dl)) continue;
 							$dls = explode(',',$dl);
 							$i++;
-							if ($i>1) echo "<a href='javascript:ShowConfig($i,$totalGroup)' class='btn btn-primary btn-sm'>{$dls[1]}</a>";
-							else {
-								echo "<a href='javascript:ShowConfig($i,$totalGroup)' class='btn btn-primary btn-sm'>{$dls[1]}</a>";
-							}
+							echo "<a href='javascript:ShowConfig($i,$totalGroup)' class='btn btn-primary btn-sm' onclick='setActive(this)'>{$dls[1]}</a>";
 						}
 						?>
 						<a href="javascript:ShowHide('addvar');" class="btn btn-primary btn-sm">添加变量</a>
@@ -76,7 +70,7 @@
 										<td colspan="4">
 											<?php
 											echo "<select name='vargroup' class='form-select admin-w-sm'>";
-											foreach($ds as $dl){
+											foreach ($ds as $dl) {
 												$dl = trim($dl);
 												if (empty($dl)) continue;
 												$dls = explode(',',$dl);
@@ -105,8 +99,7 @@
 								<?php
 								$n = 0;
 								if (!isset($gp)) $gp = 1;
-								foreach($ds as $dl)
-								{
+								foreach ($ds as $dl) {
 									$dl = trim($dl);
 									if (empty($dl)) continue;
 									$dls = explode(',',$dl);
@@ -115,7 +108,7 @@
 								<table id="tables<?php echo $n;?>" class="table table-borderless" style="<?php if ($n!=$gp) echo 'display:none';?>">
 									<thead>
 										<tr>
-											<td width="360">变量说明</td>
+											<td width="350">变量说明</td>
 											<td scope="col">变量值</td>
 											<td scope="col">变量名称</td>
 										</tr>
@@ -125,8 +118,8 @@
 										$dsql->SetQuery("SELECT * FROM `#@__sysconfig` WHERE groupid='{$dls[0]}' ORDER BY aid ASC");
 										$dsql->Execute();
 										$i = 1;
-										while($row = $dsql->GetArray()) {
-										$i++;
+										while ($row = $dsql->GetArray()) {
+											$i++;
 										?>
 										<tr>
 											<td><?php echo $row['info'];?></td>
@@ -178,6 +171,10 @@
 		</div>
 		<script>
 			var searchconfig = false;
+			function setActive(element) {
+				document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+				element.classList.add('active');
+			}
 			function $Obj(objname) {
 				return document.getElementById(objname);
 			}

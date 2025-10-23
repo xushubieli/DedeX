@@ -18,7 +18,8 @@ $data = json_decode(file_get_contents($cachefile));
 foreach ($data as $key => $value) {
     $GLOBALS['em_infotypes'][$key] = $value;
 }
-function is_str_float($value){
+function is_str_float($value)
+{
     return ((int)$value != $value) ;
 }
 function lib_infolink(&$ctag, &$refObj)

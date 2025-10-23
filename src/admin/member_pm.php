@@ -31,7 +31,7 @@ if (!empty($username)) {
 }
 $sql = "SELECT * FROM `#@__member_pms` $whereSql ORDER BY sendtime DESC";
 $dlist = new DataListCP();
-$dlist->pagesize = 30;
+$dlist->pagesize = 10;
 $dlist->SetParameter("folder", $folder);
 $dlist->SetParameter("username", $username);
 $dlist->SetParameter("keyword", $keyword);
@@ -47,7 +47,7 @@ function GetFolders($me)
 function IsReader($me)
 {
     $me = preg_replace("#[^0-1]#", "", $me);
-    if ($me) return "<span class='text-success'><i class='fa fa-check'></i></span>";
-    else return "<span class='text-danger'><i class='fa fa-times'></i></span>";
+    if ($me) return "<span class='text-success'><i class='bi bi-check-lg'></i></span>";
+    else return "<span class='text-danger'><i class='bi bi-x-lg'></i></span>";
 }
 ?>

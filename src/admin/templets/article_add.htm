@@ -4,10 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>发布文档</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/daterangepicker.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/webajax.js"></script>
@@ -43,8 +41,7 @@
 											<?php
 											$dsql->SetQuery("SELECT * FROM `#@__arcatt` ORDER BY sortid ASC");
 											$dsql->Execute();
-											while($trow = $dsql->GetObject())
-											{
+											while ($trow = $dsql->GetObject()) {
 												if ($trow->att=='j') {
 													echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' onclick='ShowUrlTr()'> {$trow->attname}[{$trow->att}]</label> ";
 												} else {
@@ -99,7 +96,7 @@
 												?>
 											</span>
 											<a href="javascript:ShowCatMap(event,this,<?php echo $channelid;?>,'typeid');" class="btn btn-primary btn-sm">选择</a>
-											<?php if ($cfg_need_typeid2=='Y') {echo "<a href='javascript:AddTypeid2();' class='btn btn-primary btn-sm'>副栏目</a>";}?>
+											<?php if ($cfg_need_typeid2=='Y'){echo "<a href='javascript:AddTypeid2();' class='btn btn-primary btn-sm'>副栏目</a>";}?>
 										</td>
 										<td>金币</td>
 										<td><input type="text" name="money" id="money" value="0" class="form-control admin-w-sm"></td>
@@ -184,8 +181,7 @@
 												$urank = $cuserLogin->getUserRank();
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE adminrank<='$urank' ORDER BY `rank` ASC");
 												$dsql->Execute();
-												while($row = $dsql->GetObject())
-												{
+												while ($row = $dsql->GetObject()) {
 													$selected = $row->rank == 0 ? ' selected' : '';
 													echo "<option value='{$row->rank}'{$selected}>{$row->membername}</option>";
 												}

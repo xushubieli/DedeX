@@ -6,8 +6,6 @@
 		<title>{dede:field.title/}-{dede:global.cfg_webname/}</title>
 		<meta name="keywords" content="{dede:field.keywords/}">
 		<meta name="description" content="{dede:field.description/}">
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -27,11 +25,11 @@
 							<h1>{dede:field.title/}</h1>
 						</div>
 						<div class="meta py-3">
-							<a href="{dede:field.userurl/}"><span><img src="{dede:field.face/}" class="user-img-xs me-3">{dede:field.uname/}</span></a>
-							<span><i class="fa fa-calendar me-3"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
-							<span><i class="fa fa-globe me-3"></i>{dede:field.source/}</span>
-							<span><i class="fa fa-user me-3"></i>{dede:field.writer/}</span>
-							<span><i class="fa fa-eye me-3"></i><script src="{dede:global.cfg_phpurl/}/count.php?view=yes&aid={dede:field.id/}&mid={dede:field name='mid'/}"></script>次</span>
+							<a href="{dede:field.userurl/}"><span><img src="{dede:field.face/}" class="user-img-xs me-2">{dede:field.uname/}</span></a>
+							<span><i class="bi bi-calendar-event me-2"></i>{dede:field.pubdate function="MyDate('Y-m-d',@me)"/}</span>
+							<span><i class="bi bi-globe me-2"></i>{dede:field.source/}</span>
+							<span><i class="bi bi-person-circle me-2"></i>{dede:field.writer/}</span>
+							<span><i class="bi bi-fire me-2"></i><script src="{dede:global.cfg_phpurl/}/count.php?view=yes&aid={dede:field.id/}&mid={dede:field name='mid'/}"></script>次</span>
 						</div>
 						<div class="img py-3">{dede:field.image/}</div>
 						<div class="info py-3">
@@ -66,10 +64,10 @@
 							<div class="col-md-8">
 								<div class="row actbox">
 									<ul>
-										<li><i class="fa fa-star-o me-3"></i><a href="{dede:global.cfg_phpurl/}/stow.php?aid={dede:field.id/}">收藏</a></li>
-										<li><i class="fa fa-bug me-3"></i><a href="javascript:ErrorAddSave({dede:field.id/}, '{dede:field.title/}');">挑错</a></li>
-										<li><i class="fa fa-thumbs-o-up me-3"></i><a href="{dede:global.cfg_phpurl/}/recommend.php?aid={dede:field.id/}">推荐</a></li>
-										<li><i class="fa fa-print me-3"></i><a href="javascript:;" onclick="window.print();">打印</a></li>
+										<li><i class="bi bi-star me-2"></i><a href="{dede:global.cfg_phpurl/}/stow.php?aid={dede:field.id/}">收藏</a></li>
+										<li><i class="bi bi-bug me-2"></i><a href="javascript:ErrorAddSave({dede:field.id/}, '{dede:field.title/}');">挑错</a></li>
+										<li><i class="bi bi-hand-thumbs-up me-2"></i><a href="{dede:global.cfg_phpurl/}/recommend.php?aid={dede:field.id/}">推荐</a></li>
+										<li><i class="bi bi-printer me-2"></i><a href="javascript:;" onclick="window.print();">打印</a></li>
 									</ul>
 								</div>
 							</div>
@@ -118,17 +116,13 @@
 							if (j == 19 && !hasid) break;
 						}
 					}
-					if (hasid) {
-						ShowMsg("您已经顶过该帖，请不要重复顶帖");
-						return;
-					} else {
-						saveid += ',' + aid;
-					}
+					if (hasid) { ShowMsg("您已经顶过该帖，请不要重复顶帖"); return; }
+					else saveid += ',' + aid;
 					SetCookie('diggid', saveid, 1);
 				} else {
 					SetCookie('diggid', aid, 1);
 				}
-				let url = `{dede:global.cfg_phpurl/}/digg_ajax.php?action=${ftype}&id=${cid}&format=json&cid={dede:field.channel/}`;
+				let url = "{dede:global.cfg_phpurl/}/digg_ajax.php?action=" + ftype + "&id=" + aid + "&format=json&cid={dede:field.channel/}";
 				$.get(url, function(data) {
 					let reval = JSON.parse(data);
 					if (reval.code === 200) {
@@ -137,7 +131,7 @@
 						$("#goodper").css("width", `${reval.data.goodper}%`);
 						$("#badper").css("width", `${reval.data.badper}%`);
 					}
-				});;
+				});
 			}
 			GetDigg("{dede:field.id/}", "{dede:field.channel/}");
 			//发表评论
@@ -202,19 +196,19 @@
 						$(`._feedback_reply[for="${fid}"]`).html(replyPannel);
 					}
 				});
-				$(`._feedback_reply[for="${fid}"]`).html('<i class="fa fa-spinner"></i>');
+				$(`._feedback_reply[for="${fid}"]`).html('<i class="bi bi-reply"></i>');
 			}
 			//加载回复评论
 			function LoadReplyFeedbacks(fid) {
-				$(`.feedback_replies[for="${fid}"]`).html('<i class="fa fa-spinner"></i>');
+				$(`.feedback_replies[for="${fid}"]`).html('<i class="bi bi-reply"></i>');
 				$.get("{dede:global.cfg_phpurl/}/feedback.php", {
 					"aid" : "{dede:field.id/}",
 					"fid" : fid,
 				}, function(data) {
 					let result = JSON.parse(data);
-					let tpl = `<div class="media py-3">
-						<img src="~face~" class="face me-3">
-						<div class="media-body">
+					let tpl = `<div class="media d-flex py-3">
+						<img src="~face~" class="face me-2">
+						<div class="media-body w-100">
 							<div class="feedback-infos pb-3">
 								<div class="feedback-basic">
 									<span>~username~</span>
@@ -222,7 +216,7 @@
 								</div>
 								<div class="feedback-action">
 									<a href="javascript:GoodFeedback(~id~, ~good~)">
-										<i class="fa fa-thumbs-up"></i>
+										<i class="bi bi-hand-thumbs-up"></i>
 										<i id="feedbackGood~id~">~good~</i>
 									</a>
 								</div>

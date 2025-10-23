@@ -28,11 +28,11 @@ if ($dopost === "get_payments") {
 } else if ($dopost === "save_config") {
     $json = file_get_contents("php://input");
     $config = json_decode($json);
-    foreach($config as $key => $item) {
+    foreach ($config as $key => $item) {
         $status = 0;
         $sortrank = 0;
         $configItem = new stdClass;
-        foreach($item as $kk => $ii) {
+        foreach ($item as $kk => $ii) {
             if ($kk === "Enabled") {
                 $status = $ii === true ? 1 : 0;
             } else if ($kk === "Sortrank") {

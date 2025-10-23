@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>标签管理</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -39,6 +37,7 @@
 				<div class="card-header">标签管理</div>
 				<div class="card-body">
 					<form name="form3" action="tags_main.php?action=delete" method="post">
+						<input type="hidden" name="pageno" value="<?php echo $pageno;?>">
 						<div class="table-responsive">
 							<table class="table table-borderless table-hover">
 								<thead>
@@ -50,9 +49,9 @@
 										<td scope="col">SEO标题</td>
 										<td scope="col">关键词</td>
 										<td scope="col">描述</td>
-										<td scope="col"><a href="tags_main.php?tag=<?php echo $tag;?>&orderby=count&orderway=<?php echo $neworderway;?>">点击</a></td>
-										<td scope="col"><a href="tags_main.php?tag=<?php echo $tag;?>&orderby=total&orderway=<?php echo $neworderway;?>">文档数</a></td>
-										<td scope="col"><a href="tags_main.php?tag=<?php echo $tag;?>&orderby=addtime&orderway=<?php echo $neworderway;?>">发布时间</a></td>
+										<td scope="col"><a href="tags_main.php?tag=<?php echo $tag;?>&orderby=count&orderway=<?php echo $neworderway;?>">点击<i class="bi bi-chevron-expand"></i></a></td>
+										<td scope="col"><a href="tags_main.php?tag=<?php echo $tag;?>&orderby=total&orderway=<?php echo $neworderway;?>">文档数<i class="bi bi-chevron-expand"></i></a></td>
+										<td scope="col"><a href="tags_main.php?tag=<?php echo $tag;?>&orderby=addtime&orderway=<?php echo $neworderway;?>">发布时间<i class="bi bi-chevron-expand"></i></a></td>
 										<td scope="col">操作</td>
 									</tr>
 								</thead>
@@ -78,9 +77,9 @@
 										<td><?php echo $fields['total'];?></td>
 										<td><?php echo $fields['addtime'];?></td>
 										<td>
-											<a href="javascript:UpdateOne(<?php echo $fields['id'];?>);" class="btn btn-light btn-sm"><i class="fa fa-check" title="保存"></i></a>
-											<a href="makehtml_taglist.php?tagid=<?php echo $fields['id'];?>" class="btn btn-light btn-sm"><i class="fa fa-repeat" title="更新"></i></a>
-											<a href="javascript:DeleteOne(<?php echo $fields['id'];?>);" class="btn btn-danger btn-sm"><i class="fa fa-trash" title="删除"></i></a>
+											<a href="javascript:UpdateOne(<?php echo $fields['id'];?>);" class="btn btn-light btn-sm"><i class="bi bi-check-lg" title="保存"></i></a>
+											<a href="makehtml_taglist.php?tagid=<?php echo $fields['id'];?>" class="btn btn-light btn-sm"><i class="bi bi-arrow-counterclockwise" title="更新"></i></a>
+											<a href="javascript:DeleteOne(<?php echo $fields['id'];?>);" class="btn btn-danger btn-sm"><i class="bi bi-trash" title="删除"></i></a>
 										</td>
 									</tr>
 									{/dede:datalist}
@@ -100,6 +99,7 @@
 			</div>
 		</div>
 		<script>
+			var pageno = <?php echo $pageno;?>;
 			function selAll() {
 				var a = document.getElementsByTagName("input");
 				for (var i = 0; i < a.length; i++) {
@@ -134,7 +134,7 @@
 				});
 			}
 			function DeleteOne(tid) {
-				location = "tags_main.php?action=delete&ids=" + tid;
+				location = "tags_main.php?action=delete&ids=" + tid + "&pageno=" + pageno;
 			}
 		</script>
 	</body>

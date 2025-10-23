@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>添加自由列表</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<link rel="stylesheet" href="/static/web/css/codemirror.css">
 		<script src="/static/web/js/jquery.min.js"></script>
@@ -83,7 +81,7 @@
 											echo "<option value='0'>不限栏目</option>";
 											$dsql->SetQuery("SELECT id,typename, channeltype FROM `#@__arctype`");
 											$dsql->Execute();
-											while($lrow = $dsql->GetObject()){
+											while ($lrow = $dsql->GetObject()) {
 												$disable = '';
 												if ($lrow->channeltype < -1) {
 													$disable = 'disabled';
@@ -100,8 +98,7 @@
 											echo "<option value='0' selected>不限模型</option>";
 											$dsql->SetQuery("SELECT id,typename FROM `#@__channeltype` WHERE id > 0");
 												$dsql->Execute();
-												while($row = $dsql->GetObject())
-												{
+												while ($row = $dsql->GetObject()) {
 													echo "<option value='{$row->ID}'>{$row->typename}</option>";
 												}
 												echo "</select>";
@@ -116,8 +113,7 @@
 											echo "<option value='0' selected>不限</option>";
 											$dsql->SetQuery("SELECT * FROM `#@__arcatt`");
 											$dsql->Execute();
-											while($row = $dsql->GetObject())
-											{
+											while ($row = $dsql->GetObject()) {
 												echo "<option value='{$row->att}'>{$row->attname}</option>";
 											}
 											echo "</select>";

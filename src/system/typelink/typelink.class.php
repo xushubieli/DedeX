@@ -100,13 +100,13 @@ class TypeLink
                 $this->valuePosition = $indexpage.$this->valuePosition;
                 return $this->valuePosition;
             } else {
-                $currentTypeName = '-'.$this->TypeInfos['typename'];
+                $currentTypeName = $this->TypeInfos['typename'];
                 if ($this->TypeInfos['reid'] != 0) {
                     //调用递归逻辑
                     $this->LogicGetPosition($this->TypeInfos['reid'], false);
                 }
                 $this->valuePositionName .= $currentTypeName;
-                return trim($this->valuePositionName, '-');
+                return $this->valuePositionName;
             }
         }
     }
@@ -123,7 +123,7 @@ class TypeLink
         if ($islink) {
             $this->valuePosition = $this->GetOneTypeLink($tinfos).$this->valuePosition;
         } else {
-            $currentTypeName = '-'.$tinfos['typename'];
+            $currentTypeName = $tinfos['typename'].'-';
             $this->valuePositionName = $currentTypeName.$this->valuePositionName;
         }
         if ($tinfos['reid'] > 0) {

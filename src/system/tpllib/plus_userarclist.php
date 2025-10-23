@@ -18,8 +18,7 @@ function plus_userarclist(&$atts, &$refObj, &$fields)
     $dsql->SetQuery($sql);
     $dsql->Execute("ul");
     $rearr = array();
-    while($row = $dsql->GetArray("ul"))
-    {
+    while ($row = $dsql->GetArray("ul")) {
         //处理一些特殊字段
         $row['infos'] = cn_substr($row['description'],$infolen);
         $row['arcurl'] = GetFileUrl($row['id'],$row['typeid'],$row['senddate'],$row['title'],$row['ismake'],

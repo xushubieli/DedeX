@@ -26,19 +26,23 @@ class WebWindow
      * @param     string  $formname  表单名称
      * @return    void
      */
-    function Init($formaction = "", $checkScript = "/static/web/js/admin.blank.js", $formmethod = "POST", $formname = "myform")
+    function Init($formaction = "", $checkScript = "", $formmethod = "POST", $formname = "myform")
     {
+        global $cfg_basedir;
+        if ($checkScript === "") {
+            $checkScript = $cfg_basedir.'/static/web/js/admin.blank.js';
+        } else if ($checkScript[0] === '/') {
+            $checkScript = $cfg_basedir.$checkScript;
+        }
         $this->myWin .= "<script>";
-        if ($checkScript != "" && file_exists($checkScript)) {
-            $fp = fopen($checkScript, "r");
-            $this->myWin .= fread($fp, filesize($checkScript));
-            fclose($fp);
+        if ($checkScript !== "" && file_exists($checkScript)) {
+            $this->myWin .= file_get_contents($checkScript);
         } else {
-            $this->myWin .= "function CheckSubmit(){return true;}";
+            $this->myWin .= "function CheckSubmit() {return true;}";
         }
         $this->myWin .= "</script>";
         $this->formName = $formname;
-        $this->myWin .= "<form name='$formname' action='$formaction' method='$formmethod' onSubmit='return CheckSubmit();'>";
+        $this->myWin .= "<form name='{$formname}' action='{$formaction}' method='{$formmethod}' onSubmit='return CheckSubmit();'>";
     }
     /**
      *  添加隐藏域
@@ -49,7 +53,7 @@ class WebWindow
      */
     function AddHidden($iname, $ivalue)
     {
-        $this->myWin .= "<input type='hidden' name='$iname' value='$ivalue'>";
+        $this->myWin .= "<input type='hidden' name='{$iname}' value='{$ivalue}'>";
     }
     /**
      *  开始窗口
@@ -109,12 +113,12 @@ class WebWindow
     function AddTitle($title, $col = "2")
     {
         if ($col != "" && $col != "0") {
-            $colspan = "colspan='$col'";
+            $colspan = "colspan='{$col}'";
         } else {
             $colspan = '';
         }
         $this->myWinItem .= "<tr>";
-        $this->myWinItem .= "<td $colspan>$title</td>";
+        $this->myWinItem .= "<td {$colspan}>{$title}</td>";
         $this->myWinItem .= "</tr>";
     }
     /**
@@ -151,12 +155,12 @@ class WebWindow
         if ($wintype != "") {
             if ($wintype != "hand") {
                 $this->myWin .= "<div class='text-center'>
-                    <button type='submit' class='btn btn-primary btn-sm'>$tt</button>
+                    <button type='submit' class='btn btn-primary btn-sm'>{$tt}</button>
                     <button type='button' class='btn btn-outline-primary btn-sm' onclick='javascript:history.go(-1);'>返回</button>
                 </div>";
             } else {
                 if ($msg != "") {
-                    $this->myWin .= "<div class='mb-3'>$msg</div>
+                    $this->myWin .= "<div class='mb-3'>{$msg}</div>
                     <div class='text-center'>
                         <button type='button' class='btn btn-primary btn-sm' onclick='javascript:history.go(-1);'>返回</button></td>
                     </div>";

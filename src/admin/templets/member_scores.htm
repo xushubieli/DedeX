@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>积分头衔设置</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -34,7 +32,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach($Scores as $v) {?>
+									<?php foreach($Scores as $v){?>
 									<tr>
 										<td><input type="checkbox" name="Ids-<?php echo $v['id'];?>" id="Ids-<?php echo $v['id'];?>" value="1"></td>
 										<td><input type="text" name="integral-<?php echo $v['id'];?>" id="integral-<?php echo $v['id'];?>" value="<?php echo $v['integral'];?>" class="form-control admin-w-sm"></td>

@@ -1,3 +1,5 @@
+@import url("bootstrap.min.css");
+@import url("bootstrap-icons.min.css");
 :root {
 	--xs-bg:#f8fafb;
 	--xs-blue-300:#86b7fe;
@@ -50,10 +52,7 @@ img {
 	border-radius:var(--xs-radius);
 	object-fit:cover
 }
-form,label {
-	margin-bottom:0
-}
-td {
+th,td {
 	word-break:break-all;
 	word-wrap:break-word
 }
@@ -89,7 +88,7 @@ select[multiple=yes] {
 	height:160px
 }
 option {
-	padding:0.25rem 0;
+	padding:0.25rem 0.5rem;
 	color:var(--bs-gray)
 }
 option:checked {
@@ -102,78 +101,89 @@ textarea {
 	border:1px solid var(--bs-gray-300);
 	vertical-align:middle
 }
-.install-head {
-	padding:1rem 0;
-	background:var(--bs-white)
+xmp {
+	margin:0;
+	white-space:pre-wrap
 }
-.install-head .logo {
-	font-size:18px;
-	font-weight:600;
-	color:var(--bs-gray-dark)
+.install-head.navbar {
+	padding:0.75rem 0;
+	--bs-navbar-brand-padding-y:0.25rem
 }
-.install-head .logo img,.login-box .logo img {
+.install-head.navbar .navbar-toggler {
+	padding:0.25rem;
+	font-size:var(--xs-font-14)
+}
+.install-head .navbar-brand img {
+	display:inline-block;
 	margin-right:0.5rem;
-	height:32px
+	height:32px;
+	border-radius:0;
+	vertical-align:bottom
 }
-.install-box {
-	margin:0 auto;
-	width:768px
+.install-box .content {
+	margin:1rem auto;
+	max-width:767px
 }
-.install-box h1 {
-	font-size:18px
+.install-box .content .form-control,.install-box .content .form-select,.install-box .content .btn-md {
+	height:35px
 }
-.login-step {
+.login-box {
 	height:100vh;
 	overflow-x:hidden
 }
-.login-step .login-bg {
+.login-box .bg {
 	height:100vh;
 	background:var(--bs-gray-300) url(../img/login_bg.jpg)no-repeat top center;
 	background-size:cover
 }
-.login-box {
+.login-box .content {
 	padding:100px 80px 0
 }
-.login-box .logo {
+.login-box .content .logo {
 	margin-bottom:60px
 }
-.login-box .logo a {
+.login-box .content .logo img {
+	margin-right:0.5rem;
+	height:32px
+}
+.login-box .content .logo a {
 	font-size:18px;
 	font-weight:600;
 	color:var(--bs-gray-dark)
 }
-.login-box .title,.login-box .alert {
+.login-box .content .title,.login-box .content .alert {
 	margin-bottom:20px
 }
-.login-box .title h1 {
+.login-box .content .title h1 {
 	margin-bottom:40px;
 	font-size:18px
 }
-.login-from {
+.login-box .content .from {
 	margin-bottom:40px
 }
-.login-from .form-group {
+.login-box .content .from .group {
 	margin-bottom:20px;
 	position:relative
 }
-.login-from .form-control {
+.login-box .content .from .form-control {
 	padding-left:45px;
 	height:50px
 }
-.login-from .form-icon {
+.login-box .content .from .icon {
 	position:absolute;
-	top:16px;
-	left:16px;
+	top:0;
+	left:1rem;
+	line-height:50px;
 	z-index:1998
 }
-.login-from .form-icon i {
+.login-box .content .from .icon i {
 	font-size:18px!important;
 	color:var(--bs-gray-500)
 }
-.login-from .go {
+.login-box .content .from .go {
 	margin-top:40px
 }
-.login-from .go .btn {
+.login-box .content .from .go .btn {
 	width:100%;
 	height:50px
 }
@@ -195,21 +205,21 @@ textarea {
 	color:var(--bs-white);
 	vertical-align:middle
 }
-.admin-head .logo .version {
-	font-size:12px;
-	color:var(--bs-white)
-}
 .admin-head .navbar-nav {
 	margin-right:auto
 }
 .admin-head .nav-item {
 	position:relative
 }
-.admin-head .nav-item .search {
+.admin-head .nav-item .search .form-control {
+	border:none
+}
+.admin-head .nav-item .search .btn {
 	position:absolute;
 	top:16px;
 	right:0;
-	color:var(--bs-gray)
+	border:none;
+	box-shadow:none
 }
 .admin-head .nav-link {
 	padding:0 1rem!important
@@ -260,48 +270,47 @@ body.menu-show .admin-content {
 	width:220px;
 	overflow-y:auto
 }
-.side-menu {
+.admin-aside .side-menu {
 	padding:1rem 0;
 	min-height:100%
 }
-.side-menu .menu-item {
+.admin-aside .side-menu .menu-item {
 	position:relative;
-	padding-left:2.5rem;
+	padding-left:40px;
 	height:40px;
 	line-height:40px;
 	border-left:3px solid transparent;
 	cursor:pointer
 }
-.side-menu .menu-item .menu-link {
-	color:var(--bs-gray)
-}
-.side-menu .menu-item .menu-link .fa {
-	position:absolute;
-	top:13px;
-	left:1rem
-}
-.side-menu .menu-item .fa,.side-menu .sub-item .fa {
-	position:absolute;
-	top:13px;
-	right:1rem
-}
-.side-menu .menu-sub {
-	display:none
-}
-.side-menu .sub-item {
-	position:relative;
-	padding-left:2.675rem;
-	height:40px;
-	line-height:40px
-}
-#show {
+.admin-aside .side-menu .menu-item.show {
 	border-left:3px solid var(--bs-primary)
 }
-#show .menu-link,#show .fa-angle-down,.side-menu .sub-item.active a {
+.admin-aside .side-menu .menu-item.show .menu-link,.admin-aside .side-menu .menu-item.show .bi-chevron-down,.admin-aside .side-menu .sub-item.active a {
 	color:var(--bs-primary)
 }
-#show .fa-angle-down {
-	transform:rotate(180deg)
+.admin-aside .side-menu .menu-item.show .bi-chevron-down {
+	transform:rotate(-180deg)
+}
+.admin-aside .side-menu .menu-item .menu-link {
+	color:var(--bs-gray)
+}
+.admin-aside .side-menu .menu-item .menu-link .bi {
+	position:absolute;
+	left:1rem;
+	right:auto
+}
+.admin-aside .side-menu .menu-item .bi,.admin-aside .side-menu .menu-sub .sub-item .sub-right {
+	position:absolute;
+	right:1rem
+}
+.admin-aside .side-menu .menu-sub {
+	display:none
+}
+.admin-aside .side-menu .menu-sub .sub-item {
+	position:relative;
+	padding-left:43px;
+	height:40px;
+	line-height:40px
 }
 .admin-panel-way .list .font {
 	display:block;
@@ -342,16 +351,6 @@ body.menu-show .admin-content {
 	height:20px;
 	vertical-align:bottom
 }
-#system-info td {
-	white-space:nowrap
-}
-#_fileList,#_verList {
-	height:350px;
-	overflow-y:auto
-}
-#_msgInfo {
-	display:none
-}
 .adminmodalbg {
 	position:fixed;
 	top:0;
@@ -380,13 +379,13 @@ body.menu-show .admin-content {
 	z-index:19993
 }
 .fastselect .topcat {
-	margin-bottom:1rem;
-	padding:0 1rem;
+	margin-bottom:0.5rem;
+	padding:0.5rem;
 	background:var(--bs-light)
 }
 .fastselect .soncat {
-	margin-bottom:1rem;
-	padding:0 1rem
+	margin-bottom:0.5rem;
+	padding:0.5rem
 }
 .fastselect .list {
 	display:inline-block;
@@ -410,7 +409,9 @@ body.menu-show .admin-content {
 .sys-search .sys-times {
 	position:absolute;
 	top:0;
-	right:0
+	right:0;
+	border:none;
+	box-shadow:none
 }
 .helpinfo {
 	display:none;
@@ -490,44 +491,38 @@ body.menu-show .admin-content {
 	text-overflow:ellipsis;
 	white-space:nowrap
 }
-#imgs-list li.up-over .picbox:after {
-	position:absolute;
-	top:0.5rem;
-	left:0.5rem;
-	font-family:'FontAwesome';
-	font-size:14px;
-	color:var(--bs-primary);
-	content:'\f058';
-	z-index:1991
+#imgs-list li:hover .tools {
+	display:block
 }
 #imgs-list li .tools {
 	display:none;
 	position:absolute;
-	bottom:0.5rem;
+	bottom:0.25rem;
 	right:0.5rem;
 	z-index:1992
 }
-#imgs-list li:hover .tools {
-	display:block
-}
-#imgs-list li .tools .remove {
+#imgs-list li .tools .remove:after {
+	font-family:'bootstrap-icons';
+	content:'\F622';
+	font-size:14px;
+	color:var(--bs-danger);
 	cursor:pointer
 }
-#imgs-list li .tools .remove:after {
-	font-family:'FontAwesome';
-	content:'\f1f8';
+#imgs-list .up-over .picbox:after {
+	position:absolute;
+	top:1rem;
+	left:1rem;
+	font-family:'bootstrap-icons';
 	font-size:14px;
-	color:var(--bs-danger)
-}
-#selcolor {
-	padding:0.2rem;
-	width:45px
+	color:var(--bs-teal);
+	content:'\F26A';
+	z-index:1991
 }
 #edsta {
 	display:none;
 	position:absolute;
-	top:100px;
-	left:150px;
+	top:130px;
+	left:220px;
 	width:500px;
 	height:auto
 }
@@ -600,15 +595,15 @@ body.menu-show .admin-content {
 }
 .admin-win-iframe {
 	width:100%;
-	height:350px!important
+	height:350px
 }
 .admin-textarea-xl {
 	width:100%;
-	height:160px!important
+	height:160px
 }
 .admin-textarea-sm {
 	width:350px;
-	height:60px!important
+	height:60px
 }
 .admin-w-lg {
 	width:350px
@@ -628,12 +623,12 @@ body.menu-show .admin-content {
 .admin-btns input,.admin-btns select,.admin-btns button,.admin-btns .btn {
 	margin:0.5rem!important
 }
-.container-fluid {
-	padding:1rem
-}
 .breadcrumb {
 	padding:0;
 	background:none
+}
+.container-fluid {
+	padding:1rem
 }
 .modal-title {
 	line-height:normal;
@@ -738,25 +733,24 @@ input,select,textarea,.form-control,.form-select,.btn {
 	box-shadow:0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb),0.015)!important
 }
 @media screen and (min-width:992px) and (max-width:1199px) {
-	.login-box {
-		padding:2.75rem 1rem
+	.login-box .content {
+		padding:3rem
 	}
 }
-@media  screen and (min-width:767px) {
+@media screen and (min-width:767px) {
 	.modal-dialog,.adminmodal .card {
 		max-width:500px
 	}
 }
 @media screen and (max-width:767px) {
-	td {
+	th,td {
 		white-space:nowrap
 	}
-	.install-box {
-		width:100%;
-		min-width:100%
+	.install-box .content {
+		max-width:100%
 	}
-	.login-box {
-		padding:1.75rem
+	.login-box .content {
+		padding:1.5rem
 	}
 	.admin-head .navbar-nav {
 		margin-right:unset;

@@ -1,6 +1,6 @@
 <?php
 /**
- * 文档描述管理
+ * 自动摘要分页
  *
  * @version        $id:article_description_main.php 14:12 2010年7月12日 tianya $
  * @package        DedeX.Administrator
@@ -16,7 +16,7 @@ if ($dojob == '') {
     exit();
 } else {
     if (empty($startdd)) $startdd = 0;
-    if (empty($pagesize)) $pagesize = 30;
+    if (empty($pagesize)) $pagesize = 10;
     if (empty($totalnum)) $totalnum = 0;
     if (empty($sid)) $sid = 0;
     if (empty($eid)) $eid = 0;

@@ -69,7 +69,7 @@ class Jsonq
     public function select()
     {
         $args = func_get_args();
-        if (count($args) > 0 ){
+        if (count($args) > 0 ) {
             $this->_select = $args;
         }
         return $this;
@@ -83,7 +83,7 @@ class Jsonq
     public function except()
     {
         $args = func_get_args();
-        if (count($args) > 0 ){
+        if (count($args) > 0 ) {
             $this->_except = $args;
         }
         return $this;

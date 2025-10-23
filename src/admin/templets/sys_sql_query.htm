@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>SQL命令工具</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<link rel="stylesheet" href="/static/web/css/codemirror.css">
 		<script src="/static/web/js/codemirror.js"></script>
@@ -32,8 +30,7 @@
 								}
 								$dsql->SetQuery($query);
 								$dsql->Execute('t');
-								while($row = $dsql->GetArray('t',MYSQL_BOTH))
-								{
+								while ($row = $dsql->GetArray('t',MYSQL_BOTH)) {
 									$dsql->SetQuery("SELECT count(*) FROM ".$row[0]);
 									$dsql->Execute('n');
 									$row2 = $dsql->GetArray('n',MYSQL_BOTH);

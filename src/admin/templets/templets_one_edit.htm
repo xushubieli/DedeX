@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>修改自定义页面</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -45,8 +43,7 @@
 											echo "<select name='likeidsel' id='likeidsel' class='form-select admin-w-sm'>";
 											$dsql->Execute('s',"Select likeid From `#@__sgpage` group  by likeid ");
 											echo "<option value='{$row['likeid']}' selected>{$row['likeid']}</option>";
-											while($arr = $dsql->GetArray('s'))
-											{
+											while ($arr = $dsql->GetArray('s')) {
 												if ($arr['likeid']!=$row['likeid']) echo "<option value='{$arr['likeid']}'>{$arr['likeid']}</option>";
 											}
 											echo "</select>";
@@ -67,7 +64,7 @@
 									<tr>
 										<td>是否编译文档</td>
 										<td>
-											<?php if (!DEDEX_SAFE_MODE) {?>
+											<?php if (!DEDEX_SAFE_MODE){?>
 											<label><input type="radio" name="ismake" value="1" <?php if ($row['ismake']==1) echo 'checked';?>> 含模板标记，要编译</label>
 											<?php }?>
 											<label><input type="radio" name="ismake" value="0" <?php if ($row['ismake']==0  || DEDEX_SAFE_MODE) echo 'checked';?>> 不含模板标记，不需要编译</label>

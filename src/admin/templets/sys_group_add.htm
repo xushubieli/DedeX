@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>添加系统会员组</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
@@ -35,7 +33,7 @@
 									$start = 0;
 									$k = 0;
 									$gouplists = file(dirname(__FILE__).'/../inc/grouplist.txt');
-									foreach($gouplists as $line) {
+									foreach ($gouplists as $line) {
 										$line = trim($line);
 										if ($line=="") continue;
 										if (preg_match("#^>>#", $line)) {
@@ -64,7 +62,7 @@
 											$l = 0;
 											$dsql->SetQuery('Select plusname From `#@__plus`');
 											$dsql->Execute();
-											while($row=$dsql->GetObject()){
+											while ($row=$dsql->GetObject()) {
 												echo "<label><input name='purviews[]' type='checkbox' id='purviews$k' value='plus_{$row->plusname}'> {$row->plusname}</label> ";
 												$k++;
 												$l++;

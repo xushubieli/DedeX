@@ -46,7 +46,7 @@ class FreeList
         $this->ListObj = $ndtp->GetTag('list');
         $this->pagesize = $this->ListObj->GetAtt('pagesize');
         if (empty($this->pagesize)) {
-            $this->pagesize = 30;
+            $this->pagesize = 10;
         }
         $channelid = $this->ListObj->GetAtt('channel');
         $channelid = intval($channelid);
@@ -725,12 +725,7 @@ class FreeList
         $maininfo = "<li class='page-item disabled'><span class='page-link'>{$totalpage}页{$this->TotalResult}条</span></li>";
         $purl = $this->GetCurUrl();
         //开启伪静态对规则替换
-        if ($cfg_rewrite == 'Y') {
-            $purl = str_replace("/apps", "", $purl);
-            $nowurls = preg_replace("/", ".php?", $purl);
-            $nowurls = explode("?", $nowurls);
-            $purl = $nowurls[0];
-        }
+        if ($cfg_rewrite == 'Y') $purl = "/list/";
         $geturl = "tid={$this->TypeID}&TotalResult={$this->TotalResult}&";
         $purl .= '?'.$geturl;
         //获得上页和下页的链接

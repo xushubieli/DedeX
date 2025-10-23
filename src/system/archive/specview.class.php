@@ -66,12 +66,12 @@ class SpecView
         $this->TempInfos['source'] = $this->dtp->SourceString;
         $ctag = $this->dtp->GetTag("page");
         if (!is_object($ctag)) {
-            $this->pagesize = 20;
+            $this->pagesize = 10;
         } else {
             if ($ctag->GetAtt("pagesize") != "") {
                 $this->pagesize = $ctag->GetAtt("pagesize");
             } else {
-                $this->pagesize = 20;
+                $this->pagesize = 10;
             }
         }
         $this->TotalPage = ceil($this->TotalResult / $this->pagesize);
@@ -164,8 +164,8 @@ class SpecView
         }
         $this->dtp->Display();
     }
-    function DisplayPartTemplets(){
-        
+    function DisplayPartTemplets()
+    {
     }
     /**
      *  开始创建列表

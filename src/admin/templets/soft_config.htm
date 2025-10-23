@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>软件下载设置</title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -68,8 +66,7 @@
 												$urank = $cuserLogin->getUserRank();
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE `rank` >= 0 ");
 												$dsql->Execute();
-												while($nrow = $dsql->GetArray())
-												{
+												while ($nrow = $dsql->GetArray()) {
 													if ($nrow['rank']==0) $nrow['membername'] = "开放下载";
 													if ($nrow['rank']==$row['dfrank']) echo "<option value='{$nrow['rank']}' selected>{$nrow['membername']}</option>";
 													else echo "<option value='{$nrow['rank']}'>{$nrow['membername']}</option>";

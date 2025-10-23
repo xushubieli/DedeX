@@ -4,8 +4,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 		<title>搜索{dede:global.q function='RemoveXSS(@me)'/}-<?php echo $cfg_webname;?></title>
-		<link rel="stylesheet" href="/static/web/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/web/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/static/web/css/style.css">
 	</head>
 	<body>
@@ -25,9 +23,9 @@
 				<div class="list-article-body bg-white rounded shadow-sm p-3">
 					<h2 class="mb-3"><a href="{dede:field.arcurl/}">{dede:field.title/}</a></h2>
 					<div class="mb-3">
-						<span class="me-3"><i class="fa fa-bars me-3"></i><a href="{dede:field.typeurl/}" target="_blank">{dede:field.typename/}</a></span>
-						<span class="me-3"><i class="fa fa-eye me-3"></i>{dede:field.click/}</span>
-						<span><i class="fa fa-calendar me-2"></i>{dede:field.stime/}</span>
+						<span class="me-2"><i class="bi bi-list-ul me-2"></i><a href="{dede:field.typeurl/}" target="_blank">{dede:field.typename/}</a></span>
+						<span class="me-2"><i class="bi bi-fire me-2"></i>{dede:field.click/}</span>
+						<span><i class="bi bi-calendar-event me-2"></i>{dede:field.stime/}</span>
 					</div>
 					<p>{dede:field.description1/}</p>
 				</div>
