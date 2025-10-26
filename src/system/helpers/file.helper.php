@@ -16,15 +16,18 @@ if (!defined('DEDEINC')) exit('dedex');
  * @return    bool
  */
 if (!function_exists('MkdirAll')) {
-    function MkdirAll($truepath, $mmode)
-    {
-        if (!file_exists($truepath)) {
-            mkdir($truepath, $mmode);
-            chmod($truepath, $mmode);
-            return true;
-        } else {
+    function MkdirAll($truepath, $mmode) {
+        if (file_exists($truepath)) {
             return true;
         }
+        $success = mkdir($truepath, $mmode, true);
+        if (!$success) {
+            $err = error_get_last();
+            error_log("创建{$truepath}目录失败，原因：".(is_array($err) ? $err['message'] : '不正确的服务器响应'));
+            return false;
+        }
+        chmod($truepath, $mmode);
+        return true;
     }
 }
 /**
