@@ -18,15 +18,15 @@ DedeX是一个LTS版本，支持将到2035年11月截止，目前DedeX已经发�
 
 ## 平台需求
 
-1.Windows
+1、Windows
 
 IIS/Apache/Nginx + PHP7/PHP8 + MySQL5/8/10
 
-2.Linux/Unix
+2、Linux/Unix
 
 Apache/Nginx + PHP7/PHP8 + MySQL5/8/10（PHP必须在非安全模式下运行），建议使用平台：Linux + Apache2.4 + PHP8.4 + MySQL8.0
 
-3.PHP必须环境或启用的系统函数
+3、PHP必须环境或启用的系统函数
 
 Fileinfo：文件上传安全校验
 
@@ -34,7 +34,7 @@ GD扩展库：图像验证码、水印、二维码生成
 
 MySQL扩展库：数据存储
 
-4.基本目录结构及文件
+4、基本目录结构及文件
 
 ```
 ./docs              更新记录
@@ -54,7 +54,7 @@ MySQL扩展库：数据存储
 ..|_/resetpwd.php   管理员密码修改工具（如需重置，放至站点根目录，用完删除）
 ```
 
-5.PHP环境容易碰到的不兼容性问题
+5、PHP环境容易碰到的不兼容性问题
 
   * data目录没写入权限，导致系统session无法使用，这将导致无法登录管理后台（直接表现为验证码不能正常显示）；
 
@@ -64,11 +64,11 @@ MySQL扩展库：数据存储
 
 ## 程序安装使用
 
-1.下载程序解压到本地目录；
+1、下载程序解压到本地目录；
 
-2.上传程序目录中的`/src`到网站根目录；
+2、上传程序目录中的`/src`到网站根目录；
 
-3.运行`http://www.yourwebsite.com/install/index.php`（yourwebsite.com）表示您的站点，按照安装说明进行程序安装；
+3、运行`http://www.yourwebsite.com/install/index.php`（yourwebsite.com）表示您的站点，按照安装说明进行程序安装；
 
 ## 版权信息
 
