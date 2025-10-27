@@ -19,11 +19,11 @@
 						<form name="form1" action="diy_list.php">
 							<input type="hidden" name="action" value="list">
 							<input type="hidden" name="diyid" value="<?php echo $diy->diyid;;?>">
-							<input type="text" name="keyword" class="form-control admin-w-lg" value="<?php echo $keyword;;?>" placeholder="请输入关键词">
+							<input type="text" name="keyword" value="<?php echo $keyword;;?>" class="form-control admin-w-lg" placeholder="请输入关键词">
 							<select name="field" class="form-select admin-w-sm">
 								<?php
 								foreach ($fieldlist as $k=>$fielddata) {
-									if ($k==$field) {
+									if ($k == $field) {
 										echo "<option value='{$k}' selected>{$fielddata[0]}</option>\r\n";
 									} else {
 										echo "<option value='{$k}'>{$fielddata[0]}</option>\r\n";
@@ -49,15 +49,15 @@
 									if (!empty($fields)) {
 										$allowhtml = array('htmltext');
 										$fields['sta'] = $fields['ifcheck']==1 ? '已审核' : '待审核';
-										echo '<tr class="table-light">
-											<td width="260">
-												<label><input type="checkbox" name="id[]" value="'.$fields['id'].'"> 表单'.$fields['id'].'</label>
+										echo "<tr class='table-light'>
+											<td width='260'>
+												<label><input type='checkbox' name='id[]' value='{$fields['id']}'> 信息{$fields['id']}</label>
 											</td>
-											<td align="right">
-												<span class="btn btn-primary btn-sm">'.$fields['sta'].'</span>
-												<a href="diy_list.php?action=edit&diyid='.$diy->diyid.'&id='.$fields['id'].'" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square" title="修改"></i></a>
+											<td align='right'>
+												<span class='btn btn-primary btn-sm'>{$fields['sta']}</span>
+												<a href='diy_list.php?action=edit&diyid={$diy->diyid}&id={$fields['id']}' class='btn btn-primary btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
 											</td>
-										</tr>';
+										</tr>";
 										foreach ($fieldlist as $field => $fielddata) {
 											if ($fields[$field]=='') continue;
 											if ($fielddata[1] == 'img') {
@@ -69,7 +69,7 @@
 													$fields[$field] = dede_htmlspecialchars($fields[$field]);
 												}
 											}
-											echo '<tr><td>'.$fielddata[0].'</td><td>'.$fields[$field].'</td></tr>';
+											echo "<tr><td>{$fielddata[0]}</td><td>{$fields[$field]}</td></tr>";
 										}
 									} else {
 										echo '<tr><td>暂无记录</td></tr>';
@@ -78,11 +78,10 @@
 									{/dede:datalist}
 									<tr>
 										<td colspan="2">
-											<label><input type="radio" name="action" value="check"> 审核</label>
-											<label><input type="radio" name="action" value="delete"> 删除</label>
-											<button type="button" onclick="selAll();" class="btn btn-primary btn-sm">全选</button>
+											<button type="button" onclick="selAll();" class="btn btn-primary btn-sm">反选</button>
 											<button type="button" onclick="noSelAll();" class="btn btn-primary btn-sm">取消</button>
-											<button type="submit" class="btn btn-primary btn-sm">提交</button>
+											<button type="submit" name="action" value="check" class="btn btn-primary btn-sm">审核</button>
+											<button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">删除</button>
 										</td>
 									</tr>
 								</tbody>
@@ -94,18 +93,18 @@
 			</div>
 		</div>
 		<script>
-		function selAll() {
-			var a = document.getElementsByTagName("input");
-			for (var i = 0; i < a.length; i++) {
-				if (a[i].type == "checkbox") a[i].checked = true;
+			function selAll() {
+				var a = document.getElementsByName("id[]");
+				for (var i = 0; i < a.length; i++) {
+					a[i].checked = !a[i].checked;
+				}
 			}
-		}
-		function noSelAll() {
-			var a = document.getElementsByTagName("input");
-			for (var i = 0; i < a.length; i++) {
-				if (a[i].type == "checkbox") a[i].checked = false;
+			function noSelAll() {
+				var a = document.getElementsByName("id[]");
+				for (var i = 0; i < a.length; i++) {
+					a[i].checked = false;
+				}
 			}
-		}
 		</script>
 	</body>
 </html>

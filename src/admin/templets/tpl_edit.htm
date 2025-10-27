@@ -39,20 +39,20 @@
 											<div class="admin-btns">
 												<?php
 												foreach ($helps as $key => $help) {
-													echo '<a href="javascript:showdiv(\''.$key.'\');" title="'.trim($help[0]).'" class="btn btn-light btn-sm">'.$key.'</a>'."";
+													echo "<a href='javascript:showdiv(\"{$key}\");' title='".trim($help[0])."' class='btn btn-light btn-sm'>{$key}</a>";
 												}
 												?>
 											</div>
 											<?php
 											foreach ($helps as $key => $help) {
-												echo '<div id="'.$key.'" class="helpinfo mt-3"><span class="float-end"><a href="javascript:;" onclick="showdiv(\'\');" class="btn btn-primary btn-sm">关闭</a></span><p>标签名称：'.$key.'</p><p>标签说明：'.trim($help[0]).'</p><p><textarea id="'.$key.'" class="admin-textarea-xl">'.trim($help[1]).'</textarea></p><span>'."";
+												echo "<div id='{$key}' class='helpinfo mt-3'><span class='float-end'><a href='javascript:;' onclick='showdiv(\"\");' class='btn btn-primary btn-sm'>关闭</a></span><p>标签名称：{$key}</p><p>标签说明:".trim($help[0])."</p><p><textarea id='{$key}' class='admin-textarea-xl'>".trim($help[1])."</textarea></p><span>";
 												$parameters = explode("\n", $help[2]);
 												foreach ($parameters as $parameter) {
 													$parameter = trim($parameter);
 													if ($parameter == "") continue;
-													else echo $parameter,'<br>';
+													else echo $parameter, '<br>';
 												}
-												echo '</span></div>'."";
+												echo "</span></div>";
 											}
 											?>
 										</td>
