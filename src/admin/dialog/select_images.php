@@ -132,18 +132,6 @@ if (!empty($iseditor)) {
                             </a>
                         </div>";
                         echo $line;
-                    } else if (preg_match("#\.(jpg)#i", $file)) {
-                        $reurl = "$activeurl/$file";
-                        $reurl = preg_replace("#^\.\.#", "", $reurl);
-                        if ($file == $comeback) $lstyle = "class='text-danger'";
-                        else $lstyle = '';
-                        $line = "<div class='list'>
-                            <a href='{$reurl}' onclick=\"ReturnImg('{$reurl}');\">
-                                <img src='{$reurl}' title='{$file}'>
-                                <span {$lstyle}>{$file}</span>
-                            </a>
-                        </div>";
-                        echo $line;
                     }
                 }
                 echo "</div>";

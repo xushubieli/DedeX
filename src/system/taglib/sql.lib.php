@@ -39,24 +39,20 @@ function lib_sql(&$ctag, &$refObj)
         $config = $sqltag[$appname];
         if (!isset($config['dbname'])) return '';
         //链接数据库
-        $linkid = @mysql_connect($config['dbhost'], $config['dbuser'], $config['dbpwd']);
+        $linkid = @mysqli_connect($config['dbhost'], $config['dbuser'], $config['dbpwd']);
         if (!$linkid) return '';
-        @mysql_select_db($config['dbname'], $linkid);
-        $mysqlver = explode('.', $dsql->GetVersion());
-        $mysqlver = $mysqlver[0].'.'.$mysqlver[1];
-        //设定数据库编码及长连接
-        if ($mysqlver > 4.0) {
-            @mysql_query("SET NAMES '{$config['dblanguage']}', character_set_client=binary, sql_mode='', interactive_timeout=3600 ;", $linkid);
-        }
+        @mysqli_select_db($linkid, $config['dbname']);
+        @mysqli_query($linkid, "SET NAMES '{$config['dblanguage']}', character_set_client=binary, sql_mode='', interactive_timeout=3600;");
         $prefix = "#@__";
         $sql = str_replace($prefix, $config['dbprefix'], $sql);
         //校验SQL字符串并获取数组返回
         $sql = CheckSql($sql);
-        $rs = @mysql_query($sql, $linkid);
-        while ($row = mysql_fetch_array($rs, MYSQL_ASSOC)) {
+        $rs = @mysqli_query($linkid, $sql);
+        if ($rs === false) return '';
+        while ($row = mysqli_fetch_assoc($rs)) {
             $sqlCt++;
             $GLOBALS['autoindex']++;
-            //根据程序判断编码类型,并进行转码,这里主要就是gbk和utf-8
+            //根据程序判断编码类型,并进行转码，这里主要就是gbk和utf-8
             if (substr($cfg_soft_lang, 0, 2) != substr($config['dblanguage'], 0, 2)) {
                 $row = AutoCharset($row, $config['dblanguage'], $cfg_soft_lang);
             }
@@ -73,7 +69,7 @@ function lib_sql(&$ctag, &$refObj)
             }
             $revalue .= $ctp->GetResult();
         }
-        @mysql_free_result($rs);
+        @mysqli_free_result($rs);
     } else {
         $dsql->Execute($thisrs, $sql);
         while ($row = $dsql->GetArray($thisrs)) {

@@ -16,6 +16,7 @@ require_once(DEDEINC."/libraries/oxwindow.class.php");
 if (empty($action)) $action = '';
 $mdir = DEDEDATA.'/module';
 if ($action == 'upload') {
+    $upfile = isset($_FILES['upfile']['tmp_name']) ? $_FILES['upfile']['tmp_name'] : '';
     if (!is_uploaded_file($upfile)) {
         ShowMsg("请选择上传的模块插件文件", "-1");
         exit();
@@ -70,5 +71,5 @@ if ($action == 'upload') {
     $winform = $win->GetWindow('ok', '');
     $win->Display();
     exit();
-}//ClearAllLink();
+}
 ?>

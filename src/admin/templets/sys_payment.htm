@@ -39,23 +39,23 @@
 						<div class="tab-pane fade show active" id="wechat" role="tabpanel" aria-labelledby="wechat-tab">
 							<form>
 								<div class="mb-3">
-									<input type="checkbox" id="iptWechatEnabled">
 									<label for="iptWechatEnabled">是否启用</label>
+									<input type="checkbox" id="iptWechatEnabled">
 								</div>
 								<div class="mb-3">
-									<label for="iptWechatAppID">AppID</label>
+									<label for="iptWechatAppID" class="form-label">AppID</label>
 									<input type="text" id="iptWechatAppID" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label for="iptWechatAPIv2Secret">APIv2Secret</label>
+									<label for="iptWechatAPIv2Secret" class="form-label">APIv2Secret</label>
 									<input type="text" id="iptWechatAPIv2Secret" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label for="iptWechatMchID">商户号</label>
+									<label for="iptWechatMchID" class="form-label">商户号</label>
 									<input type="text" id="iptWechatMchID" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label for="iptWechatSortrank">排序（越小越靠前）</label>
+									<label for="iptWechatSortrank" class="form-label">排序（越小越靠前）</label>
 									<input type="text" id="iptWechatSortrank" class="form-control" value="0">
 								</div>
 							</form>
@@ -63,27 +63,27 @@
 						<div id="alipay" class="tab-pane fade" role="tabpanel" aria-labelledby="alipay-tab">
 							<form>
 								<div class="mb-3">
-									<input type="checkbox" id="iptAlipayEnabled">
 									<label for="iptAlipayEnabled">是否启用</label>
+									<input type="checkbox" id="iptAlipayEnabled">
 								</div>
 								<div class="mb-3">
-									<label for="iptAlipayAPPID">APPID</label>
+									<label for="iptAlipayAPPID" class="form-label">APPID</label>
 									<input type="text" id="iptAlipayAPPID" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label for="iptAlipayPrivateKey">应用私钥</label>
+									<label for="iptAlipayPrivateKey" class="form-label">应用私钥</label>
 									<input type="text" id="iptAlipayPrivateKey" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label for="iptAlipayCertPublicKey">支付宝公钥证书</label>
+									<label for="iptAlipayCertPublicKey" class="form-label">支付宝公钥证书</label>
 									<input type="text" id="iptAlipayCertPublicKey" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label for="iptAlipaySignType">签名类型</label>
+									<label for="iptAlipaySignType" class="form-label">签名类型</label>
 									<input type="text" id="iptAlipaySignType" class="form-control" value="RSA2" disabled>
 								</div>
 								<div class="mb-3">
-									<label for="iptAlipaySortrank">排序（越小越靠前）</label>
+									<label for="iptAlipaySortrank" class="form-label">排序（越小越靠前）</label>
 									<input type="text" id="iptAlipaySortrank" class="form-control" value="0">
 								</div>
 							</form>
@@ -91,24 +91,23 @@
 						<div id="bank" class="tab-pane fade" role="tabpanel" aria-labelledby="bank-tab">
 							<form>
 								<div class="mb-3">
+									<label for="iptBankEnabled">是否启用（会员支付到指定银行卡，手动确认订单收款）</label>
 									<input type="checkbox" id="iptBankEnabled">
-									<label for="iptBankEnabled">是否启用</label>
-									<span>（会员支付到指定银行卡，手动确认订单收款）</span>
 								</div>
 								<div class="mb-3">
-									<label for="iptBankAccountName">账户名</label>
+									<label for="iptBankAccountName" class="form-label">账户名</label>
 									<input type="text" id="iptBankAccountName" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label for="iptBankAccountNO">账号</label>
+									<label for="iptBankAccountNO" class="form-label">账号</label>
 									<input type="text" id="iptBankAccountNO" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label for="iptBankName">开户行</label>
+									<label for="iptBankName" class="form-label">开户行</label>
 									<input type="text" id="iptBankName" class="form-control">
 								</div>
 								<div class="mb-3">
-									<label for="iptBankSortrank">排序（越小越靠前）</label>
+									<label for="iptBankSortrank" class="form-label">排序（越小越靠前）</label>
 									<input type="text" id="iptBankSortrank" class="form-control" value="0">
 								</div>
 							</form>
@@ -116,12 +115,11 @@
 						<div id="balance" class="tab-pane fade" role="tabpanel" aria-labelledby="balance-tab">
 							<form>
 								<div class="mb-3">
+									<label for="iptBalanceEnabled">是否启用（积分进行支付）</label>
 									<input type="checkbox" id="iptBalanceEnabled">
-									<label for="iptBalanceEnabled">是否启用</label>
-									<span>（采用积分进行支付）</span>
 								</div>
 								<div class="mb-3">
-									<label for="iptBalanceSortrank">排序（越小越靠前）</label>
+									<label for="iptBalanceSortrank" class="form-label">排序（越小越靠前）</label>
 									<input type="text" id="iptBalanceSortrank" class="form-control" value="0">
 								</div>
 							</form>
@@ -129,12 +127,11 @@
 						<div id="cod" class="tab-pane fade" role="tabpanel" aria-labelledby="cod-tab">
 							<form>
 								<div class="mb-3">
+									<label for="iptCodEnabled">是否启用（购买直接发货，到货后支付）</label>
 									<input type="checkbox" id="iptCodEnabled">
-									<label for="iptCodEnabled">是否启用</label>
-									<span>（购买直接发货，到货后支付）</span>
 								</div>
 								<div class="mb-3">
-									<label for="iptCodSortrank">排序（越小越靠前）</label>
+									<label for="iptCodSortrank" class="form-label">排序（越小越靠前）</label>
 									<input type="text" id="iptCodSortrank" class="form-control" value="0">
 								</div>
 							</form>

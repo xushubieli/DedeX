@@ -78,12 +78,12 @@ function UpDateCatCache()
 {
     global $conn, $cfg_multi_site, $dbprefix;
     $cache1 = DEDEDATA."/cache/inc_catalog_base.inc";
-    $rs = mysql_query("SELECT id,reid,channeltype,issend,typename FROM `{$dbprefix}arctype`", $conn);
+    $rs = mysqli_query($conn, "SELECT id,reid,channeltype,issend,typename FROM `{$dbprefix}arctype`");
     $fp1 = fopen($cache1, 'w');
     $phph = '?';
     $fp1Header = "<{$phph}php\r\nglobal \$cfg_Cs;\r\n\$cfg_Cs=array();\r\n";
     fwrite($fp1, $fp1Header);
-    while ($row = mysql_fetch_array($rs)) {
+    while ($row = mysqli_fetch_array($rs)) {
         $row['typename'] = base64_encode($row['typename']);
         fwrite($fp1, "\$cfg_Cs[{$row['id']}]=array({$row['reid']},{$row['channeltype']},{$row['issend']},'{$row['typename']}');\r\n");
     }

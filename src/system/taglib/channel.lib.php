@@ -142,12 +142,12 @@ function lib_channel_son($ctag, $typeid = 0, $dsql2)
     FillAttsDefault($ctag->CAttribute->Items, $attlist);
     extract($ctag->CAttribute->Items, EXTR_SKIP);
     $innertext = $ctag->GetInnerText();
-    $dsql3 = clone $dsql2;
     $likeType = '';
+    $tpsql = '';
     if ($notypeid != 0) {
-        $tpsql = $tpsql."and not(id in($notypeid)) ";
+        $tpsql = " and not(id in($notypeid)) ";
     }
-    $sql = "SELECT * FROM `#@__arctype` WHERE reid='$typeid' AND ishidden<>1 ORDER BY sortrank ASC LIMIT 0, $row";
+    $sql = "SELECT * FROM `#@__arctype` WHERE reid='$typeid' AND ishidden<>1 $tpsql ORDER BY sortrank ASC LIMIT 0, $row";
     $dtp2 = new DedeTagParse();
     $dtp2->SetNameSpace("field","[","]");
     $dtp2->LoadSource($innertext);
@@ -165,7 +165,7 @@ function lib_channel_son($ctag, $typeid = 0, $dsql2)
                         if (isset($row[$ctag->GetName()])) {
                             $dtp2->Assign($tagid, $row[$ctag->GetName()]);
                         } else if (preg_match('/^sonchannel[0-9]*$/', $ctag->GetName())) {
-                            $dtp2->Assign($tagid,lib_channel_son($ctag, $row['id'], $dsql3));
+                            $dtp2->Assign($tagid,lib_channel_son($ctag, $row['id'], $dsql2));
                         }
                     }
                 }
@@ -178,7 +178,6 @@ function lib_channel_son($ctag, $typeid = 0, $dsql2)
             $likeType .= "</dl>";
         }
     }
-    reset($dsql3);
     $dsql2->FreeResult();
     return $likeType;
 }

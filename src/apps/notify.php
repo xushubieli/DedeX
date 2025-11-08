@@ -35,7 +35,6 @@ if ($dopost === 'alipay') {
         unset($_REQUEST['sign_type']);
         $data = $pay->notify(false, $_REQUEST);
         if (isset($data['trade_no']) && !empty($data['trade_no'])) {
-            //$pay = \AliPay\Transfer::instance($config);
             $result = $pay->query($data['out_trade_no']);
             if ($result['trade_status']=== "TRADE_SUCCESS") {
                 if ($moRow['product'] === "card") {
@@ -89,6 +88,10 @@ if ($dopost === 'alipay') {
         $moRow = $dsql->GetOne("SELECT * FROM `#@__member_operation` WHERE buyid='$buyid'");
         if (empty($moRow)) {
             ShowMsg("订单查询错误，请确保是您自己发起的订单", "javascript:;");
+            exit;
+        }
+        if ($moRow['sta'] == 2) {
+            echo "success";
             exit;
         }
         if ($moRow['product'] === "card") {

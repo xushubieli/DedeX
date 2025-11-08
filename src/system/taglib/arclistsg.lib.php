@@ -123,8 +123,11 @@ function lib_arclistsg(&$ctag, &$refObj)
         $orwhere = preg_replace("#^ AND#i", '', $orwhere);
         $orwhere = preg_replace("#AND[ ]{1,}AND#i", 'AND ', $orwhere);
     }
-    if ($orwhere != '') $orwhere = " WHERE $orwhere ";
-    $query = "SELECT $arclistquery,tp.typedir,tp.typename,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath FROM `$maintable` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id $orwhere AND arc.arcrank > -1 $ordersql $limitsql";
+    if ($orwhere != '') {
+        $query = "SELECT $arclistquery,tp.typedir,tp.typename,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath FROM `$maintable` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE $orwhere AND arc.arcrank > -1 $ordersql $limitsql";
+    } else {
+        $query = "SELECT $arclistquery,tp.typedir,tp.typename,tp.isdefault,tp.defaultname,tp.namerule,tp.namerule2,tp.ispart,tp.moresite,tp.siteurl,tp.sitepath FROM `$maintable` arc LEFT JOIN `#@__arctype` tp ON arc.typeid=tp.id WHERE arc.arcrank > -1 $ordersql $limitsql";
+    }
     $md5hash = md5($query);
     $needcache = TRUE;
     if ($idlist != '') $needcache = FALSE;

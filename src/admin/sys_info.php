@@ -25,7 +25,7 @@ function ReWriteConfig()
     $dsql->Execute();
     while ($row = $dsql->GetArray()) {
         if ($row['type'] == 'number') {
-            $row['value'] = preg_replace("#[^0-9.-]#", "", $row['value']);
+            $row['value'] = preg_replace("#[^0-9-]#i", "", $row['value']);
             if ($row['value'] == '') $row['value'] = 0;
             fwrite($fp, "\${$row['varname']} = {$row['value']};\r\n");
         } else {
@@ -36,20 +36,42 @@ function ReWriteConfig()
     fwrite($fp, "?".">");
     fclose($fp);
 }
-//保存配置的改动
+//保存配置变量
 if ($dopost == "save") {
     CheckCSRF();
-    foreach ($_POST as $k => $v) {
-        if (preg_match("#^edit_#", $k)) {
-            $v = cn_substrR(${$k}, 1024);
-        } else {
-            continue;
+    foreach ($_POST as $n => $v) {
+        if (!preg_match("#^edit_#", $n)) continue;
+        $k = preg_replace("#^edit_#", "", $n);
+        $v = cn_substrR($v, 1024);
+        $row = $dsql->GetOne("SELECT `type` FROM `#@__sysconfig` WHERE varname='$k'");
+        if (!$row) continue;
+        if ($row['type'] == 'number') {
+            if ($v != '' && preg_match("#[^0-9-]#i", $v)) {
+                ShowMsg("{$n}数字变量值必须由0-9组成", "-1");
+                exit();
+            }
+            if ($v != '') {
+                if (strpos($v, '-') !== false) {
+                    if ($v[0] != '-') {
+                        ShowMsg("{$n}数字变量值-必须在开头", "-1");
+                        exit();
+                    }
+                    if (strlen($v) == 1) {
+                        ShowMsg("{$n}数字变量值-后面必须跟0-9", "-1");
+                        exit();
+                    }
+                    if (strpos($v, '-', 1) !== false) {
+                        ShowMsg("{$n}数字变量值不能包含多个-", "-1");
+                        exit();
+                    }
+                }
+            } else {
+                $v = 0;
+            }
         }
-        $k = preg_replace("#^edit_#", "", $k);
-        
         $v = $dsql->Esc($v);
         $k = $dsql->Esc($k);
-        $dsql->ExecuteNoneQuery("UPDATE `#@__sysconfig` SET `value`='$v' WHERE varname='$k' ");
+        $dsql->ExecuteNoneQuery("UPDATE `#@__sysconfig` SET `value`='$v' WHERE varname='$k'");
     }
     ReWriteConfig();
     ShowMsg("成功修改系统设置", "sys_info.php");
@@ -62,16 +84,37 @@ else if ($dopost == 'add') {
         ShowMsg("布尔变量值必须为Y或N", "-1");
         exit();
     }
-    if ($valtype == 'number') {
-        $nvarvalue = preg_replace("[^0-9.]","", $nvarvalue);
+    if ($vartype == 'number') {
+        if ($nvarvalue != '' && preg_match("#[^0-9-]#i", $nvarvalue)) {
+            ShowMsg("数字变量值必须由0-9组成", "-1");
+            exit();
+        }
+        if ($nvarvalue != '') {
+            if (strpos($nvarvalue, '-') !== false) {
+                if ($nvarvalue[0] != '-') {
+                    ShowMsg("数字变量值-必须在开头", "-1");
+                    exit();
+                }
+                if (strlen($nvarvalue) == 1) {
+                    ShowMsg("数字变量值-后面必须跟0-9", "-1");
+                    exit();
+                }
+                if (strpos($nvarvalue, '-', 1) !== false) {
+                    ShowMsg("数字变量值不能包含多个-", "-1");
+                    exit();
+                }
+            }
+        } else {
+            $nvarvalue = 0;
+        }
     }
     if (trim($nvarname) == '' || preg_match("#[^a-z_]#i", $nvarname)) {
-        ShowMsg("变量名称不能为空并且必须为a-z_组成", "-1");
+        ShowMsg("变量名称不能为空并且必须由a-z_组成", "-1");
         exit();
     }
     $row = $dsql->GetOne("SELECT varname FROM `#@__sysconfig` WHERE varname LIKE '$nvarname' ");
     if (is_array($row)) {
-        ShowMsg("变量名称已经存在", "-1");
+        ShowMsg("变量名称已经存在，请重新填写", "-1");
         exit();
     }
     $row = $dsql->GetOne("SELECT aid FROM `#@__sysconfig` ORDER BY aid DESC");
@@ -84,7 +127,7 @@ else if ($dopost == 'add') {
         exit();
     }
     if (!is_writeable($configfile)) {
-        ShowMsg("成功保存变量，由于{$configfile}无法写入，更新配置文件失败", "sys_info.php?gp={$vargroup}");
+        ShowMsg("写入{$configfile}失败，无法保存系统配置", "sys_info.php?gp={$vargroup}");
         exit();
     } else {
         ReWriteConfig();
@@ -137,13 +180,9 @@ EOT;
         <?php }?>
     </tbody>
 </table>
-<?php
-exit;
-}
-if ($i == 1) {
+<?php exit;}
     echo '</tbody></table>';
-}
-exit;
+    exit;
 } else if ($dopost == 'make_encode') {
     $chars = 'abcdefghigklmnopqrstuvwxwyABCDEFGHIGKLMNOPQRSTUVWXWY0123456789';
     $hash = '';

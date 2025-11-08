@@ -78,8 +78,11 @@ if (!empty($tid)) {
     }
     //这里统一统计
     $lv->CountRecord();
-    if ($lv->TypeLink->TypeInfos['ispart'] == 0 && $lv->TypeLink->TypeInfos['isdefault'] != -1) $ntotalpage = $lv->TotalPage;
-    else $ntotalpage = 1;
+    if ($lv->TypeLink->TypeInfos['ispart'] == 0 && $lv->TypeLink->TypeInfos['isdefault'] != -1) {
+        $ntotalpage = $lv->TotalPage;
+    } else {
+        $ntotalpage = 1;
+    } 
     //如果栏目的文档太多，分多批次更新
     if ($ntotalpage <= $maxpagesize || $lv->TypeLink->TypeInfos['ispart'] != 0 || $lv->TypeLink->TypeInfos['isdefault'] == -1) {
         $reurl = $lv->MakeHtml('', '');

@@ -34,10 +34,6 @@ class DedeModule
         $this->modulesPath = $modulespath;
         $this->modulesUrl = $modulesUrl;
     }
-    function DedeModule($modulespath = '')
-    {
-        $this->__construct($modulespath);
-    }
     /**
      *  枚举系统里已经存在的模块，缓存功能实际上只作hash与文件名的解析，在此不特别处理
      *
@@ -142,7 +138,6 @@ class DedeModule
         $minfos['name'] = $minfos['info'] = $minfos['time'] = '';
         $minfos['hash'] = $minfos['indexname'] = $minfos['indexurl'] = '';
         $minfos['ismember'] = $minfos['autosetup'] = $minfos['autodel'] = 0;
-        //$minfos['filename'] = $filename;
         if (empty($this->modulesUrl)) {
             $minfos['filesize'] = filesize($filename) / 1024;
             $minfos['filesize'] = number_format($minfos['filesize'], 2, '.', '').' Kb';
@@ -158,8 +153,8 @@ class DedeModule
             } else {
                 if (preg_match("/<\/baseinfo/is", $line)) break;
                 $line = trim($line);
-                list($skey, $svalue) = explode('=', $line);
-
+                if (strpos($line, '=') === false) continue;
+                list($skey, $svalue) = explode('=', $line, 2);
                 $skey = trim($skey);
                 $minfos[$skey] = $svalue;
             }
@@ -267,7 +262,7 @@ class DedeModule
     function DelSystemFile($hashcode, $ntype)
     {
         $filename = $this->modulesPath.'/'.$hashcode."-{$ntype}.php";
-        unlink($filename);
+        @unlink($filename);
     }
     /**
      *  检查是否已经存在指定的模块
@@ -427,9 +422,12 @@ class DedeModule
                             }
                             //转换HTML编码标识
                             if (preg_match('/\.(php|htm|html|shtml|inc|tpl)$/i', $filename)) {
-                                if ($this->sysLang == 'big5') $charset = 'charset=big5';
-                                else  $charset = 'charset=utf-8';
-                                $ct = preg_match("/charset=([a-z0-9-]*)/i", $charset, $ct);
+                                if ($this->sysLang == 'big5') {
+                                    $targetCharset = 'charset=big5';
+                                } else {
+                                    $targetCharset = 'charset=utf-8';
+                                }
+                                $ct = preg_replace('/charset=([a-z0-9-]*)/i', $targetCharset, $ct);
                             }
                         }
                         fwrite($fw, $ct);

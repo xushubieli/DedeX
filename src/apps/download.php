@@ -73,6 +73,7 @@ else if ($open == 1) {
 }
 //提供软件给会员下载新模式
 else if ($open == 2) {
+    $uhash = isset($_GET['uhash']) ? $_GET['uhash'] : '';
     $id = intval($id);
     //获得附加表信息
     $row = $dsql->GetOne("SELECT ch.addtable,arc.mid FROM `#@__arctiny` arc LEFT JOIN `#@__channeltype` ch ON ch.id=arc.channel WHERE arc.id='$id' ");
@@ -201,5 +202,5 @@ else if ($open == 2) {
     }
     header("Location: {$softUrl}");
     exit();
-}//opentype=2
+}
 ?>

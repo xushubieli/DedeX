@@ -174,10 +174,10 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
                     foreach ($typeids as $ttid) {
                         $typeidss[] = GetSonIds($ttid);
                     }
-                    $typeidStr = join(',', $typeidss);
+                    $typeidStr = implode(',', $typeidss);
                     $typeidss = explode(',', $typeidStr);
                     $typeidssok = array_unique($typeidss);
-                    $typeid = join(',', $typeidssok);
+                    $typeid = implode(',', $typeidssok);
                 }
                 $orwheres[] = " arc.typeid IN ($typeid) ";
             } else {
@@ -252,9 +252,9 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
     } else $limitsql = " LIMIT 0,$line ";
     $orwhere = '';
     if (isset($orwheres[0])) {
-        $orwhere = join(' And ', $orwheres);
-        $orwhere = preg_replace("#^ And#is", '', $orwhere);
-        $orwhere = preg_replace("#And[ ]{1,}And#is", 'And ', $orwhere);
+        $orwhere = implode(' And ', $orwheres);
+        $orwhere = preg_replace("/^ And/is", '', $orwhere);
+        $orwhere = preg_replace("/And[ ]{1,}And/is", 'And ', $orwhere);
     }
     if ($orwhere != '') $orwhere = "WHERE $orwhere And tp.ishidden != 1";
     //获取附加表信息
@@ -267,7 +267,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
             $addtable = trim($row['addtable']);
             $addfields = explode(',', $addfield);
             $row['addtable'] = trim($row['addtable']);
-            $addfieldsSql = ",addf.".join(',addf.', $addfields);
+            $addfieldsSql = ",addf.".implode(',addf.', $addfields);
             $addfieldsSqlJoin = " LEFT JOIN `$addtable` addf ON addf.aid = arc.id ";
         }
     }
@@ -375,34 +375,31 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
                     }
                     $GLOBALS['autoindex']++;
                 }
+                $liststr = $dtp2->GetResult();
                 if ($pagesize > 0) {
                     if ($GLOBALS['autoindex'] <= $pagesize) {
-                        $liststr = $dtp2->GetResult();
                         $artlist .= $liststr."\r\n";
                     } else {
-                        $artlist .= '';
                         $orderWeight[] = array(
                             'weight'  => $row['weight'],
-                            'arclist' => ''
+                            'arclist' => $liststr
                         );
                     }
                 } else {
-                    $liststr = $dtp2->GetResult();
                     $artlist .= $liststr."\r\n";
+                    $orderWeight[] = array(
+                        'weight'  => $row['weight'],
+                        'arclist' => $liststr
+                    );
                 }
-                $orderWeight[] = array(
-                    'weight'  => $row['weight'],
-                    'arclist' => $liststr
-                );
             } else {
                 $artlist .= '';
             }
-            //进行判断，如果启用排序则文档输出为重新排序后的文档var_dump($isweight=='y' && count($orderWeight) == $line);
+            //进行判断，如果启用排序则文档输出为重新排序后的文档
             $isweight = strtolower($isweight);
             if ($isweight == 'y') {
                 $artlist = '';
                 $orderWeight = list_sort_by($orderWeight, 'weight', 'asc');
-
                 foreach ($orderWeight as $vv) {
                     $artlist .= $vv['arclist'];
                 }
@@ -480,7 +477,7 @@ function list_sort_by($list, $field, $sortby = 'asc')
     if (is_array($list)) {
         $refer = $resultSet = array();
         foreach ($list as $i => $data)
-            $refer[$i] = &$data[$field];
+            $refer[$i] = (string)$data[$field];
         switch ($sortby) {
             case 'asc'://正向排序
                 asort($refer);

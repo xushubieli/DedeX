@@ -15,7 +15,7 @@ require_once(DEDEINC."/dedetag.class.php");
 require_once(dirname(__FILE__)."/inc/inc_admin_channel.php");
 if (empty($action)) $action = '';
 $id = isset($id) && is_numeric($id) ? $id : 0;
-$mysql_version = $dsql->GetVersion();
+$mysqlVersion = $dsql->GetVersion();
 //获取模型信息
 $row = $dsql->GetOne("SELECT fieldset,'' as maintable,addtable,issystem FROM `#@__channeltype` WHERE id='$id'");
 $fieldset = stripslashes($row['fieldset']);
@@ -61,7 +61,7 @@ if ($action == 'save') {
     }
     //检测数据库是否存在附加表，不存在则新建一个
     $tabsql = "CREATE TABLE IF NOT EXISTS `{$row['addtable']}`(`aid` int(11) NOT NULL default '0', `typeid` int(11) NOT NULL default '0', ";
-    if ($mysql_version < 4.1) {
+    if ($mysqlVersion < 4.1) {
         $tabsql .= " PRIMARY KEY (`aid`), KEY `{$trueTable}_index` (`typeid`)\r\n) TYPE=MyISAM; ";
     } else {
         $tabsql .= " PRIMARY KEY (`aid`), KEY `{$trueTable}_index` (`typeid`)\r\n) ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}; ";

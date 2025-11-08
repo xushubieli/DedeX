@@ -9,7 +9,7 @@ if (isset($_FILES['GLOBALS'])) exit('请求失败');
  * @license        GNU GPL v2 (/license.txt)
  */
 //为了防止会员通过注入，这里强制限定的某些文件类型禁止上传
-$cfg_not_allowall = "php|pl|cgi|asp|aspx|jsp|php3|shtm|shtml|htm";
+$cfg_not_allowall = "php|pl|cgi|asp|aspx|jsp|php5|php4|php3";
 $keyarr = array('name', 'type', 'tmp_name', 'size');
 if (($GLOBALS['cfg_html_editor'] == 'ckeditor' ||$GLOBALS['cfg_html_editor'] == 'ckeditor4')  && isset($_FILES['upload'])) {
     $_FILES['imgfile'] = $_FILES['upload'];

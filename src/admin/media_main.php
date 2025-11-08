@@ -31,12 +31,11 @@ if ($membertype == 1) {
 } else if ($membertype == 2) {
     $addsql .= " AND u.mid > 0 ";
 }
-
 if (empty($mediatype)) {
     $mediatype = 0;
 }
-if ($mediatype > 1) {
-    $addsql .= " AND u.mediatype='$membertype' ";
+if ($mediatype > 0) {
+    $addsql .= " AND u.mediatype='$mediatype' ";
 }
 $sql = "SELECT u.aid,u.title,u.url,u.mediatype,u.filesize,u.mid,u.uptime,a.userid AS adminname,m.userid AS membername FROM `#@__uploads` u LEFT JOIN `#@__admin` a ON  a.id = u.mid LEFT JOIN `#@__member` m ON m.mid = u.mid $addsql ORDER BY u.aid DESC";
 $dlist = new DataListCP();
@@ -50,7 +49,7 @@ $dlist->Display();
 function MediaType($tid, $nurl)
 {
     if ($tid == 1) {
-        return "<a href=\"$nurl\" target=\"_blank\">图片</a>";
+        return "<a href='{$nurl}' target='_blank'>图片</a>";
     } else if ($tid == 2) {
         return "FLASH";
     } else if ($tid == 3) {

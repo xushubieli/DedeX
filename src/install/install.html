@@ -47,7 +47,7 @@
 								</div>
 								<div class="mb-3 server">
 									<label for="dbhost" class="form-label">数据库地址</label>
-									<input type="text" name="dbhost" id="dbhost" class="form-control" placeholder="localhost">
+									<input type="text" name="dbhost" id="dbhost" class="form-control" placeholder="127.0.0.1">
 								</div>
 								<div class="mb-3">
 									<label for="dbname" class="form-label">数据库名</label>
@@ -87,7 +87,7 @@
 										<label for="installdemo" class="form-check-label">安装演示数据（部分功能操作示例）</label>
 									</div>
 								</div>
-								<div class="text-center"><button type="submit" class="btn btn-primary">立即安装</button></div>
+								<div class="text-center"><button type="submit" class="btn btn-primary btn-md">立即安装</button></div>
 							</form>
 						</div>
 					</div>
@@ -99,7 +99,7 @@
 				let dbhost = $("#dbhost").val();
 				let dbuser = $("#dbuser").val();
 				let dbpwd = $("#dbpwd").val();
-				if (!dbhost) dbhost = "localhost";
+				if (!dbhost) dbhost = "127.0.0.1";
 				if (!dbuser) dbuser = "root";
 				$.get('index.php?step=10&dbhost=' + dbhost + '&dbuser=' + dbuser + '&dbpwd=' + dbpwd, function(rs) {
 					console.log(rs);

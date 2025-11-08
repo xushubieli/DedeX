@@ -16,7 +16,8 @@ if (!defined('DEDEINC')) exit('dedex');
  * @return    bool
  */
 if (!function_exists('MkdirAll')) {
-    function MkdirAll($truepath, $mmode) {
+    function MkdirAll($truepath, $mmode)
+    {
         if (file_exists($truepath)) {
             return true;
         }

@@ -1,6 +1,6 @@
 <?php
 /**
- * 选择软件发送
+ * 选择软件回调
  *
  * @version        $id:select_soft_post.php 9:43 2010年7月8日 tianya $
  * @package        DedeX.Dialog
@@ -15,8 +15,10 @@ if (empty($bkurl)) $bkurl = 'select_soft.php';
 define("DEDE_DIALOG_UPLOAD", true);
 $CKEditorFuncNum = (isset($CKEditorFuncNum)) ? $CKEditorFuncNum : 1;
 $newname = (empty($newname) ? '' : preg_replace("#[\\ \"\*\?\t\r\n<>':\/|]#", "", $newname));
-$uploadfile = isset($imgfile) && empty($uploadfile) ? $imgfile : $uploadfile;
-$uploadfile_name = isset($imgfile_name) && empty($uploadfile_name) ? $imgfile_name : $uploadfile_name;
+$uploadfile = isset($_FILES['uploadfile']['tmp_name']) ? $_FILES['uploadfile']['tmp_name'] : '';
+$uploadfile_name = isset($_FILES['uploadfile']['name']) ? $_FILES['uploadfile']['name'] : '';
+$uploadfile_size = isset($_FILES['uploadfile']['size']) ? $_FILES['uploadfile']['size'] : 0;
+$uploadfile_type = isset($_FILES['uploadfile']['type']) ? $_FILES['uploadfile']['type'] : '';
 if (!is_uploaded_file($uploadfile)) {
     ShowMsg("您没有选择上传文件或上传的文件大小被限制", "-1");
     exit();

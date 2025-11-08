@@ -21,9 +21,10 @@
 					<div class="admin-btns">
 						<div class="sys-search d-inline-block">
 							<input type="text" name="keywds" id="keywds" class="form-control admin-w-lg" placeholder="请输入变量说明">
-							<button type="button" id="btnClear" class="btn btn-sm d-none sys-times"><i class="bi bi-x-lg"></i></button>
+							<button type="button" class="sys-times btn btn-sm d-none" onclick="location.reload();"><i class="bi bi-x-lg"></i></button>
 						</div>
 						<a href="javascript:getSearch();" class="btn btn-primary btn-sm">搜索</a>
+						<a href="javascript:ShowHide('addvar');" class="btn btn-primary btn-sm">添加变量</a>
 						<?php
 						$ds = file(DEDEADMIN.'/inc/configgroup.txt');
 						$totalGroup = count($ds);
@@ -33,10 +34,10 @@
 							if (empty($dl)) continue;
 							$dls = explode(',',$dl);
 							$i++;
-							echo "<a href='javascript:ShowConfig($i,$totalGroup)' class='btn btn-primary btn-sm' onclick='setActive(this)'>{$dls[1]}</a>";
+							$btn = ($i === 1) ? 'btn btn-primary btn-sm' : 'btn btn-outline-primary btn-sm';
+							echo "<a href='javascript:ShowConfig({$i}, {$totalGroup})' id='change-{$i}' class='{$btn}' onclick='setActive(this)'>{$dls[1]}</a>";
 						}
 						?>
-						<a href="javascript:ShowHide('addvar');" class="btn btn-primary btn-sm">添加变量</a>
 					</div>
 				</div>
 			</div>
@@ -51,9 +52,9 @@
 								<tbody>
 									<tr>
 										<td width="160">变量说明</td>
-										<td width="370"><input type="text" name="varmsg" id="varmsg" class="form-control admin-w-lg"></td>
+										<td width="350"><input type="text" name="varmsg" id="varmsg" class="form-control admin-w-lg"></td>
 										<td width="160">变量值</td>
-										<td width="370"><input type="text" name="nvarvalue" id="nvarvalue" class="form-control admin-w-lg"></td>
+										<td width="350"><input type="text" name="nvarvalue" id="nvarvalue" class="form-control admin-w-lg"></td>
 										<td width="160">变量名称</td>
 										<td><input type="text" name="nvarname" id="nvarname" class="form-control admin-w-lg"></td>
 									</tr>
@@ -171,9 +172,9 @@
 		</div>
 		<script>
 			var searchconfig = false;
-			function setActive(element) {
-				document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
-				element.classList.add('active');
+			function setActive(el) {
+				document.querySelectorAll('[id^="change-"]').forEach(btn => btn.className = 'btn btn-outline-primary btn-sm');
+				el.className = 'btn btn-primary btn-sm';
 			}
 			function $Obj(objname) {
 				return document.getElementById(objname);
@@ -182,29 +183,32 @@
 				if (searchconfig) location.reload();
 				for (var i = 1; i <= allgr; i++) {
 					if ($Obj("tables" + i)) {
-						if (i == em) $Obj("tables" + i).style.display = "table";
-						else $Obj("tables" + i).style.display = "none";
+						if (i == em) {
+							$Obj("tables" + i).style.display = "table";
+						} else {
+							$Obj("tables" + i).style.display = "none";
+						}
 					}
 				}
 				$Obj("addvar").style.display = "none";
 			}
 			function ShowHide(objname) {
 				var obj = $Obj(objname);
-				if (obj.style.display != "none") obj.style.display = "none";
-				else obj.style.display = "block";
-			}
-			function backSearch() {
-				location.reload();
+				if (obj.style.display != "none") {
+					obj.style.display = "none";
+				} else {
+					obj.style.display = "block";
+				}
 			}
 			function getSearch() {
 				var searchKeywords = $Obj("keywds").value;
 				searchKeywords = searchKeywords.replace(/^cfg_/, "");
 				fetch('sys_info.php?dopost=search&keywords=' + searchKeywords).then(resp => {
 					if (resp.ok) {
-						$("#btnClear").removeClass("d-none").show();
-						return resp.text()
+						$(".sys-times").removeClass("d-none");
+						return resp.text();
 					}
-					throw new Error("系统错误，无法获取数据");
+					throw new Error("搜索系统设置失败");
 				}).then((d) => {
 					$Obj("_search").innerHTML = d;
 				}).catch((error) => {
@@ -218,11 +222,6 @@
 					jQuery("#edit_cfg_cookie_encode").val(data);
 				});
 			}
-			$(function($) {
-				$("#btnClear").click(() => {
-					location.reload();
-				})
-			});
 		</script>
 	</body>
 </html>

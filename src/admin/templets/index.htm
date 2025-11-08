@@ -12,7 +12,7 @@
 	<body class="menu-show">
 		<header class="admin-head navbar navbar-expand navbar-dark">
 			<div class="logo">
-				<a href="/" target="_blank" class="name me-2"><?php echo cn_substr($cfg_webname, 18);?></a><?php if (DEDEX_SAFE_MODE){?><a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-success btn-xs">安全</a><?php } else {?><a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-light btn-xs">开发</a><?php }?>
+				<a href="index_body.php" target="main" class="name me-2"><?php echo cn_substr($cfg_webname, 18);?></a><?php if (DEDEX_SAFE_MODE){?><a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-success btn-xs">安全</a><?php } else {?><a href="index_body.php?dopost=safe_mode" target="main" class="btn btn-light btn-xs">开发</a><?php }?>
 			</div>
 			<nav class="collapse navbar-collapse">
 				<ul class="navbar-nav">
@@ -48,12 +48,9 @@
 		<aside class="admin-aside">
 			<div class="side-menu">
 				<div class="menu-item show">
-					<a href="index_body.php" target="main" class="menu-link"><i class="bi bi-speedometer"></i>仪表盘</a>
+					<a href="index_body.php" target="main" class="menu-link"><i class="bi bi-globe"></i>后台主页</a>
 				</div>
-				<?php 
-				$showitem = 100;
-				GetMenus($cuserLogin->getUserRank(), 'main'); 
-				?>
+				<?php $showitem = 100;GetMenus($cuserLogin->getUserRank(), 'main');?>
 			</div>
 		</aside>
 		<main class="admin-content">

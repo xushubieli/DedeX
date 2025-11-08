@@ -71,12 +71,7 @@ class DedeStatistics {
     function botName($ua) {
         if (!$ua) return false;
         $ua = strtolower($ua);
-        $bots = [
-            'Googlebot','Bingbot','Baiduspider','YandexBot','DuckDuckBot','Applebot','PetalBot',
-            'Sogou','SosoSpider','YoudaoBot','360Spider','HaosouSpider','SMSpider','Bytespider',
-            'NaverBot','Yeti','SeznamBot','Gigabot','Exabot','Wotbox','MojeekBot','Qwantify',
-            'Adsbot-Google','Google-InspectionTool','BingPreview','archive.org_bot','CCBot'
-        ];
+        $bots = ['Googlebot','Bingbot','Baiduspider','YandexBot','DuckDuckBot','Applebot','PetalBot','Sogou','SosoSpider','YoudaoBot','360Spider','HaosouSpider','SMSpider','Bytespider','NaverBot','Yeti','SeznamBot','Gigabot','Exabot','Wotbox','MojeekBot','Qwantify','Adsbot-Google','Google-InspectionTool','BingPreview','archive.org_bot','CCBot'];
         foreach ($bots as $b) {
             if (strpos($ua, strtolower($b)) !== false) {
                 return $b;
@@ -98,11 +93,11 @@ class DedeStatistics {
         $sign = $pmvalue['sign'];
         unset($pmvalue['sign']);
         if (time() - $pmvalue['t'] > 5) {
-            die("统计超时");
+            return false;
         }
         $cs = sha1(http_build_query($pmvalue).md5($cfg_cookie_encode));
         if ($sign !== $cs) {
-            die("检查失败");
+            return false;
         }
         $pmvalue['ip'] = GetIP();
         $kstr = $vstr = array();

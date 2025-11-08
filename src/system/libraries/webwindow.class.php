@@ -32,7 +32,7 @@ class WebWindow
         if ($checkScript === "") {
             $checkScript = $cfg_basedir.'/static/web/js/admin.blank.js';
         } else if ($checkScript[0] === '/') {
-            $checkScript = $cfg_basedir.$checkScript;
+            $checkScript = rtrim($cfg_basedir, '/').$checkScript;
         }
         $this->myWin .= "<script>";
         if ($checkScript !== "" && file_exists($checkScript)) {
@@ -98,7 +98,7 @@ class WebWindow
     function SetCheckScript($scripts)
     {
         $pos = strpos($this->myWin, $this->tmpCode);
-        if ($pos > 0) {
+        if ($pos !== false) {
             $this->myWin = substr_replace($this->myWin, $scripts, $pos, strlen($this->tmpCode));
         }
     }

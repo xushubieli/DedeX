@@ -19,12 +19,10 @@ if (!defined('DEBUG_LEVEL')) {
 }
 if (DEDE_ENVIRONMENT == 'production') {
     ini_set('display_errors', 0);
-    if (version_compare(PHP_VERSION, '5.3', '>=')) {
-        if (version_compare(PHP_VERSION, '8.4', '>=')) {
-            error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
-        } else {
-            error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
-        }
+    if (version_compare(PHP_VERSION, '8.0', '>=')) {
+        error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+    } elseif (version_compare(PHP_VERSION, '5.3', '>=')) {
+        error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
     } else {
         error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
     }
@@ -225,8 +223,8 @@ if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
     require_once(DEDEINC.'/autoload.inc.php');
 }
 //引入数据库类
-if (!defined('MYSQL_BOTH')) {
-    define('MYSQL_BOTH', MYSQLI_BOTH);
+if (!defined('MYSQLI_BOTH')) {
+    define('MYSQLI_BOTH', MYSQLI_BOTH);
 }
 if (!defined('MYSQL_ASSOC')) {
     define('MYSQL_ASSOC', MYSQLI_ASSOC);

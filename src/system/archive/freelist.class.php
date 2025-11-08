@@ -68,8 +68,10 @@ class FreeList
         } else {
             $this->Fields['channeltype'] = 0;
         }
-        foreach ($GLOBALS['PubFields'] as $k => $v) {
-            $this->Fields[$k] = $v;
+        if (isset($GLOBALS['PubFields']) && is_array($GLOBALS['PubFields'])) {
+            foreach ($GLOBALS['PubFields'] as $k => $v) {
+                $this->Fields[$k] = $v;
+            }
         }
         $this->PartView = new PartView();
         $this->CountRecord();
@@ -259,17 +261,21 @@ class FreeList
     {
         $nmfa = 0;
         $tmpdir = $GLOBALS['cfg_basedir'].$GLOBALS['cfg_templets_dir'];
-        if ($this->Fields['ispart'] == 1) {
+        if (isset($this->Fields['ispart']) && $this->Fields['ispart'] == 1) {
             $tempfile = str_replace("{tid}", $this->FreeID, $this->Fields['tempindex']);
-            $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
+            if (isset($this->ChannelUnit) && isset($this->ChannelUnit->ChannelInfos['nid'])) {
+                $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
+            }
             $tempfile = $tmpdir."/".$tempfile;
             if (!file_exists($tempfile)) {
                 $tempfile = $tmpdir."/{$GLOBALS['cfg_df_style']}/index_default.htm";
             }
             $this->PartView->SetTemplet($tempfile);
-        } else if ($this->Fields['ispart'] == 2) {
+        } else if (isset($this->Fields['ispart']) && $this->Fields['ispart'] == 2) {
             $tempfile = str_replace("{tid}", $this->FreeID, $this->Fields['tempone']);
-            $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
+            if (isset($this->ChannelUnit) && isset($this->ChannelUnit->ChannelInfos['nid'])) {
+                $tempfile = str_replace("{cid}", $this->ChannelUnit->ChannelInfos['nid'], $tempfile);
+            }
             if (is_file($tmpdir."/".$tempfile)) {
                 $this->PartView->SetTemplet($tmpdir."/".$tempfile);
             } else {
@@ -277,16 +283,20 @@ class FreeList
                 $nmfa = 1;
             }
         }
-        CreateDir($this->Fields['typedir']);
-        $makeUrl = $this->GetMakeFileRule($this->Fields['id'], "index", $this->Fields['typedir'], $this->Fields['defaultname'], $this->Fields['namerule2']);
-        $makeFile = $this->GetTruePath().$makeUrl;
-        if ($nmfa == 0) {
-            $this->PartView->Display();
-        } else {
-            if (!file_exists($makeFile)) {
+        if (function_exists('CreateDir') && isset($this->Fields['typedir'])) {
+            CreateDir($this->Fields['typedir']);
+        }
+        if (isset($this->Fields['id']) && isset($this->Fields['defaultname']) && isset($this->Fields['namerule2'])) {
+            $makeUrl = $this->GetMakeFileRule($this->Fields['id'], "index", $this->Fields['typedir'], $this->Fields['defaultname'], $this->Fields['namerule2']);
+            $makeFile = $this->GetTruePath().$makeUrl;
+            if ($nmfa == 0) {
                 $this->PartView->Display();
             } else {
-                include($makeFile);
+                if (!file_exists($makeFile)) {
+                    $this->PartView->Display();
+                } else {
+                    include($makeFile);
+                }
             }
         }
     }
@@ -309,7 +319,9 @@ class FreeList
      */
     function ParseTempletsFirst()
     {
-        MakeOneTag($this->dtp, $this);
+        if (function_exists('MakeOneTag')) {
+            MakeOneTag($this->dtp, $this);
+        }
     }
     /**
      *  解析模板，对文档里的变动进行赋值
@@ -321,6 +333,9 @@ class FreeList
      */
     function ParseDMFields($PageNo, $ismake = 1)
     {
+        if (!isset($this->dtp->CTags) || !is_array($this->dtp->CTags)) {
+            return;
+        }
         foreach ($this->dtp->CTags as $tagid => $ctag) {
             if ($ctag->GetName() == "freelist") {
                 $limitstart = ($this->PageNo - 1) * $this->pagesize;
@@ -361,7 +376,9 @@ class FreeList
         if (!preg_match("#\/#", $mdir) && preg_match("#\.#", $mdir)) {
             return $okfile;
         } else {
-            CreateDir($mdir, '', '');
+            if (function_exists('CreateDir')) {
+                CreateDir($mdir, '', '');
+            }
             return $okfile;
         }
     }
@@ -441,6 +458,7 @@ class FreeList
         }
         $orderby = $this->ListObj->GetAtt('orderby');
         $orderWay = $this->ListObj->GetAtt('orderway');
+        if (empty($orderWay)) $orderWay = "DESC";
         //排序方式
         $ordersql = '';
         if ($orderby == "senddate") {
@@ -469,6 +487,7 @@ class FreeList
                 $addJoin = " LEFT JOIN $addtable ON arc.id = {$addtable}.aid ";
                 $addField = '';
                 $fields = explode(",", $this->ChannelUnit->ChannelInfos['listfields']);
+                $nfields = array();
                 foreach ($fields as $k => $v) {
                     $nfields[$v] = $k;
                 }
@@ -531,7 +550,7 @@ class FreeList
                         $row['siteurl'],
                         $row['sitepath']
                     );
-                    if ($ismake == 0 && $GLOBALS['cfg_multi_site'] == 'Y') {
+                    if ($ismake == 0 && isset($GLOBALS['cfg_multi_site']) && $GLOBALS['cfg_multi_site'] == 'Y') {
                         if ($row["siteurl"] == "") {
                             $row["siteurl"] = $GLOBALS['cfg_mainsite'];
                         }
@@ -540,7 +559,7 @@ class FreeList
                     if ($row['litpic'] == '-' || $row['litpic'] == '') {
                         $row['litpic'] = $GLOBALS['cfg_cmspath'].'/static/web/img/thumbnail.jpg';
                     }
-                    if (!preg_match("#^(http|https):\/\/#i", $row['litpic']) && $GLOBALS['cfg_multi_site'] == 'Y') {
+                    if (!preg_match("#^(http|https):\/\/#i", $row['litpic']) && isset($GLOBALS['cfg_multi_site']) && $GLOBALS['cfg_multi_site'] == 'Y') {
                         $row['litpic'] = $GLOBALS['cfg_mainsite'].$row['litpic'];
                     }
                     $row['picname'] = $row['litpic'];
@@ -731,7 +750,7 @@ class FreeList
         //获得上页和下页的链接
         if ($this->PageNo != 1) {
             $prepage .= "<li class='page-item'><a href='{$purl}PageNo={$prepagenum}' class='page-link'>上页</a></li>";
-            $indexpage = "<li class='page-item'><a href='{$purl}PageNo=1' class='page-link'>首页</a>";
+            $indexpage = "<li class='page-item'><a href='{$purl}PageNo=1' class='page-link'>首页</a></li>";
         } else {
             $indexpage = "<li class='page-item'><span class='page-link'>首页</span></li>";
         }

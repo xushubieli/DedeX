@@ -1,6 +1,6 @@
 <?php
 /**
- * 选择图片操作
+ * 选择图片回调
  *
  * @version        $id:select_images_post.php 9:43 2010年7月8日 tianya $
  * @package        DedeX.Dialog
@@ -25,6 +25,8 @@ if (!is_uploaded_file($imgfile)) {
     exit();
 }
 $CKEditorFuncNum = (isset($CKEditorFuncNum)) ? $CKEditorFuncNum : 1;
+$imgfile_name = $_FILES['imgfile']['name'];
+$imgfile_type = $_FILES['imgfile']['type'];
 $imgfile_name = trim(preg_replace("#[ \r\n\t\*\%\\\/\?><\|\":]{1,}#", '', $imgfile_name));
 if (!preg_match("#\.({$cfg_imgtype})#i", $imgfile_name)) {
     ShowMsg("您上传的图片类型错误，请修改系统对扩展名配置", "-1");
@@ -59,13 +61,9 @@ if (empty($resize)) {
     $resize = 0;
 }
 if ($resize == 1) {
-    if (in_array($imgfile_type, $cfg_photo_typenames)) {
-        ImageResize($fullfilename, $iwidth, $iheight);
-    }
+    ImageResize($fullfilename, $iwidth, $iheight);
 } else {
-    if (in_array($imgfile_type, $cfg_photo_typenames)) {
-        WaterImg($fullfilename, 'up');
-    }
+    WaterImg($fullfilename, 'up');
 }
 $info = '';
 $sizes[0] = 0;

@@ -28,9 +28,7 @@ p:last-child {
 }
 ul,ol,li {
 	margin:0;
-	padding:0
-}
-li {
+	padding:0;
 	list-style:none
 }
 a {
@@ -88,8 +86,7 @@ select[multiple=yes] {
 	height:160px
 }
 option {
-	padding:0.25rem 0.5rem;
-	color:var(--bs-gray)
+	padding:0.25rem 0
 }
 option:checked {
 	color:var(--bs-blue)
@@ -99,18 +96,6 @@ textarea {
 	color:var(--bs-gray);
 	background:var(--bs-white);
 	border:1px solid var(--bs-gray-300);
-	vertical-align:middle
-}
-button {
-	padding:0 0.5rem;
-	height:30px;
-	line-height:30px;
-	font-size:12px;
-	color:#fff;
-	border:none;
-	background-color:var(--bs-primary);
-	border-radius:var(--xs-radius);
-	text-align:center;
 	vertical-align:middle
 }
 xmp {
@@ -546,8 +531,8 @@ body.menu-show .admin-content {
 	grid-gap:1rem;
 	grid-template-columns:repeat(auto-fill,minmax(190px,auto))
 }
-.atlas .atlas-head,.atlas .atlas-body {
-	margin-bottom:0.5rem
+.atlas .atlas-body,.atlas .atlas-foot {
+	margin-top:0.5rem
 }
 .atlas .atlas-input {
 	width:100%

@@ -10,7 +10,7 @@ require_once(dirname(__FILE__)."/config.php");
 CheckPurview('sys_Edit');
 require_once(DEDEINC."/image.func.php");
 if ($cfg_photo_support == '') {
-    echo "未安装GD库，不允许使用该功能";
+    ShowMsg("未安装GD库，不允许使用该功能", "javascript:;");
     exit();
 }
 $ImageWaterConfigFile = DEDEDATA."/mark/inc_photowatermark_config.php";
@@ -56,10 +56,13 @@ if ($action == "save") {
     }
     $configstr .= "\$photo_markimg = '{$photo_markimg}';\r\n";
     $configstr = "<"."?php\r\n{$configstr}?".">\r\n";
-    $fp = fopen($ImageWaterConfigFile, "w") or die("写入文件{$ImageWaterConfigFile}失败，请检查权限");
+    if (!$fp = fopen($ImageWaterConfigFile, "w")) {
+        ShowMsg("写入{$ImageWaterConfigFile}水印文件失败，请检查权限", "-1");
+        exit();
+    }
     fwrite($fp, $configstr);
     fclose($fp);
-    ShowMsg('成功更新图片水印设置', '-1');
+    ShowMsg("成功更新图片水印设置", "-1");
     exit();
 }
 require_once($ImageWaterConfigFile);

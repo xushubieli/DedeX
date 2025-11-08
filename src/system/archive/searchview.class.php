@@ -474,7 +474,7 @@ class SearchView
         if ($titlelen == '') $titlelen = 30;
         if ($infolen == '') $infolen = 250;
         if ($imgwidth == '') $imgwidth = 120;
-        if ($imgheight = '') $imgheight = 120;
+        if ($imgheight == '') $imgheight = 120;
         if ($achanneltype == '') $achanneltype = '0';
         $orderby = $orderby == '' ? 'default' : strtolower($orderby);
         $tablewidth = str_replace("%", "", $tablewidth);

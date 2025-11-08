@@ -16,12 +16,12 @@ if (!defined('DEDEINC')) exit('dedex');
 @set_time_limit(0);
 //在工程所有文件中均不需要单独初始化这个类，可直接用$dsql或$db进行操作，为了防止错误，操作完后不必关闭数据库
 if (!function_exists("mysqli_init")) {
-    ShowMsg("尚未发现开启mysqli模块，请在php.ini中启用extension=mysqli", "javasctipt:;", -1) ;
+    ShowMsg("尚未发现开启mysqli模块，请在php.ini中启用extension=mysqli", "javascript:;");
     exit;
 }
 $dsql = $dsqli = $db = new DedeSqli(FALSE);
 /**
- * Dede MySQLi数据库类
+ * DedeX MySQLi数据库类
  *
  * @package        DedeSqli
  * @subpackage     DedeX.Libraries
@@ -67,7 +67,6 @@ class DedeSqli
         $this->linkID = 0;
         //$this->queryString = '';
         //$this->parameters = Array();
-
         $this->result["me"] = 0;
         $this->Open($pconnect);
     }
@@ -102,11 +101,9 @@ class DedeSqli
             @list($dbhost, $dbport) = explode(':', $this->dbHost);
             !$dbport && $dbport = 3306;
             $this->linkID = mysqli_init();
-            try {
-                mysqli_real_connect($this->linkID, $dbhost, $this->dbUser, $this->dbPwd, false, $dbport);
-                mysqli_errno($this->linkID) != 0 && $this->DisplayError("链接（{$this->pconnect}）到MySQL发生错误");
-            } catch (Exception $e) {
-                $this->DisplayError("连接数据库失败，数据库密码出错或服务器负载严重");
+            mysqli_real_connect($this->linkID, $dbhost, $this->dbUser, $this->dbPwd, null, $dbport);
+            if (mysqli_errno($this->linkID) != 0) {
+                $this->DisplayError("数据库连接{$this->pconnect}错误");
                 exit;
             }
             //复制一个对象副本
@@ -114,7 +111,7 @@ class DedeSqli
         }
         //处理错误，成功连接则选择数据库
         if (!$this->linkID) {
-            $this->DisplayError("连接数据库失败，数据库密码出错或服务器负载严重");
+            $this->DisplayError("连接数据库失败，请检查数据库");
             exit();
         }
         $this->isInit = TRUE;
@@ -126,7 +123,7 @@ class DedeSqli
             mysqli_query($this->linkID, "SET sql_mode=''");
         }
         if ($this->dbName && !@mysqli_select_db($this->linkID, $this->dbName)) {
-            $this->DisplayError("连接数据库失败，数据库奔溃");
+            $this->DisplayError("连接数据库错误，请检查数据库");
         }
         return TRUE;
     }
@@ -170,11 +167,7 @@ class DedeSqli
         if (!$dsqli->isInit) {
             $this->Init($this->pconnect);
         }
-        if (version_compare(phpversion(), '4.3.0', '>=')) {
-            return @mysqli_real_escape_string($this->linkID, $_str);
-        } else {
-            return @mysqli_escape_string($this->linkID, $_str);
-        }
+        return @mysqli_real_escape_string($this->linkID, $_str);
     }
     //执行一个不返回结果的SQL语句，如update,delete,insert等
     function ExecuteNoneQuery($sql = '')
@@ -209,7 +202,7 @@ class DedeSqli
         if (DEBUG_LEVEL === TRUE) {
             $queryTime = ExecTime() - $t1;
             if (PHP_SAPI === 'cli') {
-                echo "执行SQL：{$this->queryString}，执行时间：{$queryTime}";
+                echo "执行SQL：{$this->queryString}，执行时间：{$queryTime}\r\n";
             } else {
                 echo DedeAlert("执行SQL：{$this->queryString}，执行时间：{$queryTime}", ALERT_SUCCESS);
             }
@@ -309,7 +302,7 @@ class DedeSqli
     {
         $this->Execute($id, $sql);
     }
-    //执行一个SQL语句,返回前一条记录或仅返回一条记录
+    //执行一个SQL语句，返回前一条记录或仅返回一条记录
     function GetOne($sql = '', $acctype = MYSQLI_ASSOC)
     {
         global $dsqli;
@@ -335,7 +328,7 @@ class DedeSqli
             return ($arr);
         }
     }
-    //执行一个不与任何表名有关的SQL语句,Create等
+    //执行一个不与任何表名有关的SQL语句Create等
     function ExecuteSafeQuery($sql, $id = "me")
     {
         global $dsqli;
@@ -346,7 +339,7 @@ class DedeSqli
             $this->Open(FALSE);
             $dsqli->isClose = FALSE;
         }
-        $this->result[$id] = @mysqli_query($sql, $this->linkID);
+        $this->result[$id] = @mysqli_query($this->linkID, $sql);
     }
     //返回当前的一条记录并把游标移向下一记录
     //MYSQLI_ASSOC、MYSQLI_NUM、MYSQLI_BOTH
@@ -397,13 +390,13 @@ class DedeSqli
         }
         $rs = mysqli_query($this->linkID, "SELECT VERSION();");
         $row = mysqli_fetch_array($rs);
-        $mysql_version = $row[0];
+        $mysqlVersion = $row[0];
         mysqli_free_result($rs);
         if ($isformat) {
-            $mysql_versions = explode(".", trim($mysql_version));
-            $mysql_version = number_format($mysql_versions[0].".".$mysql_versions[1], 2);
+            $mysqlVersions = explode(".", trim($mysqlVersion));
+            $mysqlVersion = number_format($mysqlVersions[0].".".$mysqlVersions[1], 2);
         }
-        return $mysql_version;
+        return $mysqlVersion;
     }
     //获取特定表的信息
     function GetTableFields($tbname, $id = "me")
@@ -457,7 +450,7 @@ class DedeSqli
             }
         }
     }
-    //设置SQL语句，会自动把SQL语句里的#@__替换为$this->dbPrefix(在配置文件中为$cfg_dbprefix)
+    //设置SQL语句，会自动把SQL语句里的#@__替换为$this->dbPrefix在配置文件中为$cfg_dbprefix
     function SetQuery($sql)
     {
         $prefix = "#@__";
@@ -475,8 +468,7 @@ class DedeSqli
         $RecordLogFile = DEDEDATA."/mysqli_record_log_{$enkey}.inc";
         $url = $this->GetCurUrl();
         $savemsg = <<<EOT
-
-------------------------------------------
+----------------------------------
 SQL:{$this->queryString}
 Page:{$url}
 Runtime:{$runtime}

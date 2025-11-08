@@ -21,7 +21,7 @@ class smtp
         $this->auth       = $auth;
         $this->user       = $user;
         $this->pass       = $pass;
-        $this->host_name  = "localhost";
+        $this->host_name  = "127.0.0.1";
         $this->log_file   = '';
         $this->sock       = FALSE;
     }
@@ -152,7 +152,7 @@ class smtp
             return FALSE;
         }
         $this->log_write("Connected to relay host {$this->relay_host}\n");
-        return TRUE;;
+        return TRUE;
     }
     function smtp_sockopen_mx($address)
     {
@@ -228,7 +228,7 @@ class smtp
         $message = date("M d H:i:s ").get_current_user()."[".getmypid()."]: ".$message;
         if (!@file_exists($this->log_file) || !($fp = @fopen($this->log_file, "a"))) {
             $this->smtp_debug("Warning: Cannot open log file \"{$this->log_file}\"\n");
-            return FALSE;;
+            return FALSE;
         }
         flock($fp, LOCK_EX);
         fputs($fp, $message);

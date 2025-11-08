@@ -12,9 +12,9 @@ require_once(DEDEINC."/dedetag.class.php");
 require_once(DEDEADMIN."/inc/inc_admin_channel.php");
 if (empty($action)) $action = '';
 //获取模型信息
-$mysql_version = $dsql->GetVersion();
-$mysql_versions = explode(".", trim($mysql_version));
-$mysql_version = $mysql_versions[0].".".$mysql_versions[1];
+$mysqlVersion = $dsql->GetVersion();
+$mysqlVersions = explode(".", trim($mysqlVersion));
+$mysqlVersion = $mysqlVersions[0].".".$mysqlVersions[1];
 $row = $dsql->GetOne("SELECT `table`,`info` FROM `#@__diyforms` WHERE diyid='$diyid'");
 $fieldset = stripslashes($row['info']);
 $trueTable = $row['table'];
@@ -38,7 +38,7 @@ if ($action == 'save') {
     }
     //检测数据库是否存在附加表，不存在则新建一个
     $tabsql = "CREATE TABLE IF NOT EXISTS `$trueTable` (`id` int(10) unsigned NOT NULL auto_increment,`ifcheck` tinyint(1) NOT NULL default '0', ";
-    if ($mysql_version < 4.1) {
+    if ($mysqlVersion < 4.1) {
         $tabsql .= " PRIMARY KEY (`id`)\r\n) TYPE=MyISAM; ";
     } else {
         $tabsql .= " PRIMARY KEY (`id`)\r\n) ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}; ";

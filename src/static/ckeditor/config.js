@@ -3,8 +3,8 @@
  * For licensing, see https://ckeditor.com/legal/ckeditor-oss-license
  */
 CKEDITOR.editorConfig = function(config) {
-	config.language = 'zh-cn';
 	config.height = 350;
+	config.language = 'zh-cn';
 	config.autoParagraph = true;
 	config.enterMode = CKEDITOR.ENTER_P;
 	config.shiftEnterMode = CKEDITOR.ENTER_P;
@@ -20,6 +20,6 @@ CKEDITOR.editorConfig = function(config) {
 		{name: 'insert', groups: ['insert']},
 		{name: 'tools', groups: ['tools']}
 	];
-	config.removePlugins = 'exportpdf,div,scayt';
-	config.removeButtons = 'Save,Styles,Font,NewPage,Print,Preview,Templates,Smiley,About,ShowBlocks,Iframe,Flash,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField';
+	config.removePlugins = 'div,exportpdf,bootstrapTable,pagebreak,scayt';
+	config.removeButtons = 'About,Button,Checkbox,Flash,Font,bootstrapTable,Form,HiddenField,Iframe,ImageButton,NewPage,Preview,Print,Radio,Save,Select,ShowBlocks,Smiley,Styles,Templates,TextField,Textarea';
 };

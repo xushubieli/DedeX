@@ -93,7 +93,7 @@ function GetCurContent($body)
     $basehost = IsSSL()? "https://".$_SERVER["HTTP_HOST"] : "http://".$_SERVER["HTTP_HOST"];
     $img_array = array();
     $body = str_replace("data-src=", "src=", $body);
-    preg_match_all("/src=[\"|'|\s]([^\"|^\'|^\s]*?)/isU", $body, $img_array);
+    preg_match_all("/src=[\"|'|\s]([^\"|^\'|^\\s]*?)/isU", $body, $img_array);
     $img_array = array_unique($img_array[1]);
     $imgUrl = $cfg_uploaddir.'/'.MyDate("ymd", time());
     $imgPath = $cfg_basedir.$imgUrl;
@@ -341,7 +341,7 @@ function GetDDImage($litpic, $picname, $isremote)
 {
     global $cuserLogin, $cfg_ddimg_width, $cfg_ddimg_height, $cfg_basedir, $cfg_image_dir, $cfg_addon_savetype;
     $ntime = time();
-    if (($litpic != 'none' || $litpic != 'ddfirst') && !empty($_FILES[$litpic]['tmp_name']) && is_uploaded_file($_FILES[$litpic]['tmp_name'])
+    if (($litpic != 'none' && $litpic != 'ddfirst') && !empty($_FILES[$litpic]['tmp_name']) && is_uploaded_file($_FILES[$litpic]['tmp_name'])
     ) {
         //如果会员自行上传缩略图
         $istype = 0;

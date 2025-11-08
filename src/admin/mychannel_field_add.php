@@ -14,7 +14,7 @@ CheckPurview('c_New');
 require_once(DEDEADMIN."/inc/inc_admin_channel.php");
 require_once(DEDEINC."/dedetag.class.php");
 if (empty($action)) $action = '';
-$mysql_version = $dsql->GetVersion();
+$mysqlVersion = $dsql->GetVersion();
 if ($action == 'save') {
     //修改字段配置信息
     $dfvalue = trim($vdefault);
@@ -80,7 +80,7 @@ if ($action == 'save') {
 $row = $dsql->GetOne("SELECT '#@__archives' AS maintable,addtable FROM `#@__channeltype` WHERE id='$id'");
 $trueTable = $row['addtable'];
 $tabsql = "CREATE TABLE IF NOT EXISTS `$trueTable`(`aid` int(11) NOT NULL default '0', `typeid` int(11) NOT NULL default '0', ";
-if ($mysql_version < 4.1) {
+if ($mysqlVersion < 4.1) {
     $tabsql .= " PRIMARY KEY (`aid`), KEY `{$trueTable}_index` (`typeid`)\r\n) TYPE=MyISAM; ";
 } else {
     $tabsql .= " PRIMARY KEY (`aid`), KEY `{$trueTable}_index` (`typeid`)\r\n) ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}; ";

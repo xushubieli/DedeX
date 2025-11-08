@@ -146,7 +146,7 @@ if ($dopost == "show") {
         </tr>");
     }
     //正常的导入过程
-    $mysql_version = $dsql->GetVersion(true);
+    $mysqlVersion = $dsql->GetVersion(true);
     $row = $dsql->GetOne("SELECT * FROM `#@__channeltype` WHERE nid='{$fields['nid']}' ");
     if (is_array($row)) {
         GotoStaMsg("<tr>
@@ -162,7 +162,7 @@ if ($dopost == "show") {
     } else {
         $tabsql = "CREATE TABLE IF NOT EXISTS `{$fields['addtable']}` (`aid` int(11) NOT NULL DEFAULT '0',`typeid` int(11) NOT NULL DEFAULT '0',`channel` SMALLINT NOT NULL DEFAULT '0',`arcrank` SMALLINT NOT NULL DEFAULT '0',`mid` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',`click` INT(10) UNSIGNED NOT NULL DEFAULT '0',`title` varchar(255) NOT NULL DEFAULT '',`senddate` int(11) NOT NULL DEFAULT '0',`flag` set('c','h','p','f','s','j','a','b') DEFAULT NULL,";
     }
-    if ($mysql_version < 4.1) {
+    if ($mysqlVersion < 4.1) {
         $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) TYPE=MyISAM; ";
     } else {
         $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}; ";
@@ -232,10 +232,10 @@ if ($dopost == "show") {
         ${strtolower($k)} = addslashes($v);
     }
     $inquery = " INSERT INTO `#@__channeltype` (`id`,`nid`,`typename`,`addtable`,`addcon`,`mancon`,`editcon`,`useraddcon`,`usermancon`,`usereditcon`,`fieldset`,`listfields`,`issystem`,`isshow`,`issend`,`arcsta`,`usertype`,`sendrank` ) VALUES ('$newid','$newnid','$newtypename','$newaddtable','$addcon','$mancon','$editcon','$useraddcon','$usermancon','$usereditcon','$fieldset','$listfields','$issystem','$isshow','$issend','$arcsta','$usertype','$sendrank'); ";
-    $mysql_version = $dsql->GetVersion(TRUE);
+    $mysqlVersion = $dsql->GetVersion(TRUE);
     if (!$dsql->IsTable($newaddtable)) {
         $dsql->Execute('me', "SHOW CREATE TABLE {$dsql->dbName}.{$addtable}");
-        $row = $dsql->GetArray('me', MYSQL_BOTH);
+        $row = $dsql->GetArray('me', MYSQLI_BOTH);
         $tableStruct = $row[1];
         $tb = str_replace('#@__', $cfg_dbprefix, $addtable);
         $tableStruct = preg_replace("/CREATE TABLE `$addtable` /iU", "CREATE TABLE `$newaddtable`", $tableStruct);

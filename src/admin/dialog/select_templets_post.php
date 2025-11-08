@@ -8,13 +8,13 @@
  */
 require_once(dirname(__FILE__)."/config.php");
 $cfg_txttype = "htm|html|tpl|txt";
-if (empty($uploadfile)) {
-    $uploadfile = '';
-}
-if (!is_uploaded_file($uploadfile)) {
+if (!isset($_FILES['uploadfile']) || $_FILES['uploadfile']['error'] != UPLOAD_ERR_OK) {
     ShowMsg("您没有选择上传文件", "-1");
     exit();
 }
+$uploadfile = $_FILES['uploadfile']['tmp_name'];
+$uploadfile_name = $_FILES['uploadfile']['name'];
+$uploadfile_type = $_FILES['uploadfile']['type'];
 if (!preg_match("#^text#", $uploadfile_type)) {
     ShowMsg("您上传的不是文本类型附件", "-1");
     exit();
@@ -23,6 +23,9 @@ if (!preg_match("#\.({$cfg_txttype})#i", $uploadfile_name)) {
     ShowMsg("您上传的模板文件类型存在问题，请使用htm、html、tpl、txt扩展名", "-1");
     exit();
 }
+$activepath = $_POST['activepath'];
+$f = $_POST['f'];
+$filename = $_POST['filename'];
 if ($filename =='') {
     $filename = $uploadfile_name;
 }

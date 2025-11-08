@@ -17,7 +17,7 @@ CheckPurview('sys_Data');
 if (empty($dopost)) $dopost = '';
 $bkdir = DEDEDATA.'/'.$cfg_backup_dir;
 //跳转一下页的js
-$gotojs = "function GotoNextPage(){document.gonext."."submit();}"."\r\nset"."Timeout('GotoNextPage()',500);";
+$gotojs = "function GotoNextPage(){document.gonext.submit();}"."\r\nsetTimeout('GotoNextPage()',500);";
 $dojs = "<script>{$gotojs}</script>";
 //备份数据
 if ($dopost == 'bak') {
@@ -62,22 +62,22 @@ if ($dopost == 'bak') {
         $dh->close();
         if ($isstruct == 1) {
             $bkfile = $bkdir."/tables_struct_".substr(md5(time().mt_rand(1000, 6000).$cfg_cookie_encode), 0, 16).".txt";
-            $mysql_version = $dsql->GetVersion();
+            $mysqlVersion = $dsql->GetVersion();
             $fp = fopen($bkfile, "w");
             foreach ($tables as $t) {
                 fwrite($fp, "DROP TABLE IF EXISTS `$t`;\r\n");
-                $dsql->SetQuery("SHOW CREATE TABLE `{$dsql->dbName}`.{$t}"); //感谢：LandQ
+                $dsql->SetQuery("SHOW CREATE TABLE `{$dsql->dbName}`.`$t`");
                 $dsql->Execute('me');
-                $row = $dsql->GetArray('me', MYSQL_BOTH);
+                $row = $dsql->GetArray('me', MYSQLI_BOTH);
                 //去除AUTO_INCREMENT
                 $row[1] = preg_replace("#AUTO_INCREMENT=([0-9]{1,})[\r\n]{1,}#i", "", $row[1]);
                 //4.1以下版本备份为低版本
-                if ($datatype == 4.0 && $mysql_version > 4.0) {
+                if ($datatype == 4.0 && $mysqlVersion > 4.0) {
                     $eng1 = "#ENGINE=MyISAM[\r\n]{1,}DEFAULT[\r\n]{1,}CHARSET={$cfg_db_language}#i";
                     $tableStruct = preg_replace($eng1, "TYPE=MyISAM", $row[1]);
                 }
                 //4.1以下版本备份为高版本
-                else if ($datatype == 4.1 && $mysql_version < 4.1) {
+                else if ($datatype == 4.1 && $mysqlVersion < 4.1) {
                     $eng1 = "#ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}#i";
                     $tableStruct = preg_replace("TYPE=MyISAM", $eng1, $row[1]);
                 }
@@ -113,7 +113,7 @@ if ($dopost == 'bak') {
             exit();
         }
         $dsql->GetTableFields($nowtable);
-        $intable = "INSERT INTO `$nowtable` VALUES(";
+        $intable = "INSERT INTO `$nowtable` VALUES (";
         while ($r = $dsql->GetFieldObject()) {
             $fs[$j] = trim($r->name);
             $j++;
@@ -218,7 +218,7 @@ else if ($dopost == 'redat') {
             if (empty(trim($q))) {
                 continue;
             }
-            $rs = $dsql->ExecuteNoneQuery(trim($q).';');
+            $rs = $dsql->ExecuteNoneQuery(trim($q));
         }
         if ($delfile == 1) {
             @unlink("$bkdir/$structfile");

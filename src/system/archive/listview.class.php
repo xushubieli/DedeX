@@ -290,7 +290,9 @@ class ListView
             $murl = $this->GetTrueUrl($murl);
             $this->dtp->SaveTo($makeFile);
             if (PHP_SAPI === 'cli') {
-                DedeCli::showProgress(ceil(($this->PageNo / ($endpage-1)) * 100), 100);
+                if (class_exists('DedeCli')) {
+                    DedeCli::showProgress(ceil(($this->PageNo / ($endpage-1)) * 100), 100);
+                }
             }
         }
         if ($startpage == 1) {

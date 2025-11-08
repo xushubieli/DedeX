@@ -37,7 +37,7 @@ if ($action == 'add') {
         ShowMsg("模型ID和模型名称及附加表名称数据库已存在，请重新填写", "-1");
         exit();
     }
-    $mysql_version = $dsql->GetVersion();
+    $mysqlVersion = $dsql->GetVersion();
     //创建附加表
     if ($trueTable2 != '') {
         $istb = $dsql->IsTable($trueTable2);
@@ -49,7 +49,7 @@ if ($action == 'add') {
             } else {
                 $tabsql = "CREATE TABLE `$trueTable2` (`aid` int(11) NOT NULL DEFAULT '0',`typeid` int(11) NOT NULL DEFAULT '0',`channel` SMALLINT NOT NULL DEFAULT '0',`arcrank` SMALLINT NOT NULL DEFAULT '0',`mid` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',`click` INT(10) UNSIGNED NOT NULL DEFAULT '0',`title` varchar(255) NOT NULL DEFAULT '',`senddate` int(11) NOT NULL DEFAULT '0',`flag` set('c','h','p','f','s','j','a','b') DEFAULT NULL,`litpic` varchar(60) NOT NULL DEFAULT '',`userip` char(48) NOT NULL DEFAULT '',`lastpost` INT( 10 ) UNSIGNED NOT NULL DEFAULT '0',`scores` MEDIUMINT(8) NOT NULL DEFAULT '0',`goodpost` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',`badpost` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0', ";
             }
-            if ($mysql_version < 4.1) {
+            if ($mysqlVersion < 4.1) {
                 $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) TYPE=MyISAM; ";
             } else {
                 $tabsql .= " PRIMARY KEY (`aid`), KEY `typeid` (`typeid`)\r\n) ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}; ";

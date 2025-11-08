@@ -30,10 +30,10 @@
 								}
 								$dsql->SetQuery($query);
 								$dsql->Execute('t');
-								while ($row = $dsql->GetArray('t',MYSQL_BOTH)) {
+								while ($row = $dsql->GetArray('t',MYSQLI_BOTH)) {
 									$dsql->SetQuery("SELECT count(*) FROM ".$row[0]);
 									$dsql->Execute('n');
-									$row2 = $dsql->GetArray('n',MYSQL_BOTH);
+									$row2 = $dsql->GetArray('n',MYSQLI_BOTH);
 									$dd = $row2[0];
 									echo "<option value='{$row[0]}'>{$row[0]}（{$dd}）</option>\r\n";
 								}

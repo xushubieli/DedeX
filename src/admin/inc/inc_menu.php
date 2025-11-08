@@ -11,8 +11,8 @@ require_once(dirname(__FILE__)."/inc_menu_module.php");
 //载入可发布栏目
 $addset = '';
 //检测可用的文档模型
-if ($cfg_admin_channel = 'array' && count($admin_catalogs) > 0) {
-    $admin_catalog = join(',', $admin_catalogs);
+if (is_array($admin_catalogs) && count($admin_catalogs) > 0) {
+    $admin_catalog = implode(',', $admin_catalogs);
     $dsql->SetQuery("SELECT channeltype FROM `#@__arctype` WHERE id IN({$admin_catalog}) GROUP BY channeltype ");
 } else {
     $dsql->SetQuery("SELECT channeltype FROM `#@__arctype` GROUP BY channeltype ");
@@ -47,7 +47,7 @@ if ($cuserLogin->getUserType() >= 10) {
     <m:item name='会员消费记录' link='member_operations.php' rank='sys_Data' target='main' />
     <m:item name='积分产品管理' link='cards_manage.php' rank='sys_Data' target='main' />
     <m:item name='积分产品分类' link='cards_type.php' rank='sys_Data' target='main' />
-    <m:item name='支付接口设置' link='sys_payment.php' .php' rank='sys_Data' target='main' />
+    <m:item name='支付接口设置' link='sys_payment.php' rank='sys_Data' target='main' />
 </m:top>
 <m:top item='12_' name='系统设置' rank='sys_User,sys_Group,sys_Edit,sys_Log,sys_Data' icon='bi bi-gear'>
     <m:item name='系统设置' link='sys_info.php' rank='sys_Edit' target='main' />

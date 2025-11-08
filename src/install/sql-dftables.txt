@@ -227,9 +227,9 @@ CREATE TABLE `#@__arctype` (
 	`enoverview` char(255) NOT NULL default '' COMMENT '英文概述',
 	`bigpic` char(255) NOT NULL default '' COMMENT '栏目大图',
 	`litimg` char(255) NOT NULL default '' COMMENT '栏目小图',
-	`typedir` char(60) NOT NULL default '' COMMENT '栏目生成目录',
+	`typedir` char(255) NOT NULL default '' COMMENT '栏目生成目录',
 	`isdefault` smallint(6) NOT NULL default '0' COMMENT '栏目列表选项 0:列表第一页浏览 1:静态浏览 -1:动态浏览，默认值为0',
-	`defaultname` char(15) NOT NULL default 'index.html' COMMENT '默认页的名称',
+	`defaultname` char(150) NOT NULL default 'index.html' COMMENT '默认页的名称',
 	`issend` smallint(6) NOT NULL default '0' COMMENT '是否支持投稿 0:不支持 1:支持，默认值为不支持',
 	`channeltype` smallint(6) default '1' COMMENT '文档模型',
 	`maxpage` smallint(6) NOT NULL default '-1' COMMENT '最大页数，默认值为-1（可能表示无限制）',
@@ -831,7 +831,7 @@ CREATE TABLE `#@__sys_set` (
 DROP TABLE IF EXISTS `#@__sysconfig`;
 CREATE TABLE `#@__sysconfig` (
 	`aid` smallint(8) unsigned NOT NULL default '0' COMMENT '配置ID',
-	`varname` varchar(255) NOT NULL default '' COMMENT '名称',
+	`varname` varchar(150) NOT NULL default '' COMMENT '名称',
 	`info` varchar(255) NOT NULL default '' COMMENT '介绍',
 	`groupid` smallint(6) NOT NULL default '1' COMMENT '组',
 	`type` varchar(10) NOT NULL default 'string' COMMENT '类型 string:文本 number:数字 bool:布尔 bstring:多行文本 img:图片',

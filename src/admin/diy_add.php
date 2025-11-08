@@ -8,9 +8,9 @@
  */
 require_once(dirname(__FILE__)."/config.php");
 CheckPurview('c_New');
-$mysql_version = $dsql->GetVersion();
-$mysql_versions = explode(".", trim($mysql_version));
-$mysql_version = $mysql_versions[0].".".$mysql_versions[1];
+$mysqlVersion = $dsql->GetVersion();
+$mysqlVersions = explode(".", trim($mysqlVersion));
+$mysqlVersion = $mysqlVersions[0].".".$mysqlVersions[1];
 if (empty($action)) {
     $row = $dsql->GetOne("SELECT diyid FROM `#@__diyforms` ORDER BY diyid DESC LIMIT 0,1");
     if (is_array($row)) $newdiyid = $row['diyid'] + 1;
@@ -47,7 +47,7 @@ if (empty($action)) {
         }
     }
     $sql = "CREATE TABLE IF NOT EXISTS `$table` (`id` int(10) unsigned NOT NULL auto_increment,`ifcheck` tinyint(1) NOT NULL default '0',";
-    if ($mysql_version < 4.1) {
+    if ($mysqlVersion < 4.1) {
         $sql .= " PRIMARY KEY (`id`)\r\n) TYPE=MyISAM; ";
     } else {
         $sql .= " PRIMARY KEY (`id`)\r\n) ENGINE=MyISAM DEFAULT CHARSET={$cfg_db_language}; ";

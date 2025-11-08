@@ -46,7 +46,7 @@ function lib_channelartlist(&$ctag, &$refObj)
     }
     //否定栏目调用
     if ($notypeid != 0) {
-        $tpsql = $tpsql." AND not(id in($notypeid)) ";
+        $tpsql = $tpsql." AND id NOT IN($notypeid) ";
     }
     $dsql->SetQuery("SELECT * FROM `#@__arctype` WHERE $tpsql $order LIMIT $totalnum");
     $dsql->Execute();

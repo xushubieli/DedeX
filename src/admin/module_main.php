@@ -69,7 +69,7 @@ if ($action == '') {
         ShowMsg("获取模块信息错误，模块文件错误", -1);
         exit;
     }
-    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
+    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块语言编码与您系统的编码不一致');
     $filelists = (array)$dm->GetFileLists($hash);
     $filelist = '';
     $prvdirs = array();
@@ -105,7 +105,7 @@ if ($action == '') {
     foreach ($prvdirs as $k => $v) {
         if ($v) $cw = "<span class='text-success'><i class='bi bi-check-lg'></i></span>";
         else $cw = "<span class='text-danger'><i class='bi bi-x-lg'></i></span>";
-        $prvdir .= "<tr><td>$k</td><td align='center'>$cw</td></tr>";
+        $prvdir .= "<tr><td>{$k}</td><td align='center'>{$cw}</td></tr>";
     }
     $prvdir .= "</table>";
     $win = new OxWindow();
@@ -187,12 +187,12 @@ if ($action == '') {
     }
     //系统自动安装
     else {
-        $mysql_version = $dsql->GetVersion(TRUE);
+        $mysqlVersion = $dsql->GetVersion(TRUE);
         //默认使用MySQL 4.1 以下版本的SQL语句，对大于4.1版本采用替换处理 TYPE=MyISAM ==> ENGINE=MyISAM DEFAULT CHARSET=#~lang~#
         $setupsql = $dm->GetSystemFile($hash, 'setupsql40');
         $setupsql = preg_replace("#ENGINE=MyISAM#i", 'TYPE=MyISAM', $setupsql);
         $sql41tmp = 'ENGINE=MyISAM DEFAULT CHARSET='.$cfg_db_language;
-        if ($mysql_version >= 4.1) {
+        if ($mysqlVersion >= 4.1) {
             $setupsql = preg_replace("#TYPE=MyISAM#i", $sql41tmp, $setupsql);
         }
         //_ROOTURL_
@@ -218,7 +218,7 @@ if ($action == '') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
     if ($infos['url']=='') $infos['url'] = '';
-    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
+    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块语言编码与您系统的编码不一致');
     $win = new OxWindow();
     $win->Init("module_main.php", "/static/web/js/admin.blank.js", "post");
     $wintitle = "删除{$infos['name']}";
@@ -264,7 +264,7 @@ if ($action == '') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
     if ($infos['url'] == '') $infos['url'] = ' ';
-    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
+    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块语言编码与您系统的编码不一致');
     $filelists = (array)$dm->GetFileLists($hash);
     $filelist = '';
     foreach ($filelists as $v) {
@@ -356,7 +356,7 @@ if ($action == '') {
     $win = new OxWindow();
     $win->Init("module_main.php", "/static/web/js/admin.blank.js", "post");
     $wintitle = "使用说明";
-    $win->AddMsgItem("<tr><td>$msg</td></tr>");
+    $win->AddMsgItem("<tr><td>{$msg}</td></tr>");
     $winform = $win->GetWindow("hand");
     $win->Display();
     exit();
@@ -364,7 +364,7 @@ if ($action == '') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
     if ($infos['url'] == '') $infos['url'] = '';
-    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块的语言编码与您系统的编码不一致，请向贡献者确认它的兼容性');
+    $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块语言编码与您系统的编码不一致');
     $filelists = (array)$dm->GetFileLists($hash);
     $filelist = '';
     $setupinfo = '';

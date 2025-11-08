@@ -15,25 +15,25 @@ if (!defined('DEDEINC')) exit('dedex');
  */
 @set_time_limit(0);
 if (!extension_loaded("sqlite3")) {
-    ShowMsg("尚未发现开启sqlite3模块，请在php.ini中启用extension=sqlite3", "javasctipt:;", -1) ;
+    ShowMsg("尚未发现开启sqlite3模块，请在php.ini中启用extension=sqlite3", "javascript:;");
     exit;
 }
 //在工程所有文件中均不需要单独初始化这个类，可直接用$dsql或$db进行操作，为了防止错误，操作完后不必关闭数据库
 $dsql = $dsqlitete = $db = new DedeSqlite(FALSE);
 /**
- * Dede SQLite3数据库类
+ * DedeX SQLite3数据库类
  *
  * @package        DedeSqli
  * @subpackage     DedeX.Libraries
  */
-if (!defined('MYSQL_BOTH')) {
-    define('MYSQL_BOTH', MYSQLI_BOTH);
+if (!defined('MYSQLI_BOTH')) {
+    define('MYSQLI_BOTH', SQLITE3_BOTH);
 }
 if (!defined('MYSQL_ASSOC')) {
     define('MYSQL_ASSOC', SQLITE3_ASSOC);
 }
-if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
-    mysqli_report(MYSQLI_REPORT_OFF);
+if (!defined('MYSQL_NUM')) {
+    define('MYSQL_NUM', SQLITE3_NUM);
 }
 class DedeSqlite
 {
@@ -110,7 +110,7 @@ class DedeSqlite
         }
         //处理错误，成功连接则选择数据库
         if (!$this->linkID) {
-            $this->DisplayError("连接数据库失败，数据库密码出错或服务器负载严重");
+            $this->DisplayError("连接数据库失败，请检查数据库");
             exit();
         }
         $this->isInit = TRUE;
@@ -119,7 +119,7 @@ class DedeSqlite
     //为了防止采集等需要较长运行时间的程序超时，在运行这类程序时设置系统等待和交互时间
     function SetLongLink()
     {
-        //@mysqli_query("SET interactive_timeout=3600, wait_timeout=3600 ;", $this->linkID);
+        //@mysqli_query("SET interactive_timeout=3600, wait_timeout=3600;", $this->linkID);
     }
     //获得错误描述
     function GetError()
@@ -250,10 +250,10 @@ class DedeSqlite
             CheckSql($this->queryString);
         }
         $t1 = ExecTime();
-        // var_dump($this->queryString);
+        //var_dump($this->queryString);
         $this->result[$id] = $this->linkID->query($this->queryString);
         if (!$this->result[$id]) {
-            $this->DisplayError("执行SQL错误:{$this->linkID->lastErrorMsg()}");
+            $this->DisplayError("执行SQL错误：{$this->linkID->lastErrorMsg()}");
             exit;
         }
         //var_dump(mysql_error());
@@ -271,7 +271,7 @@ class DedeSqlite
     {
         $this->Execute($id, $sql);
     }
-    //执行一个SQL语句,返回前一条记录或仅返回一条记录
+    //执行一个SQL语句，返回前一条记录或仅返回一条记录
     function GetOne($sql = '', $acctype = SQLITE3_ASSOC)
     {
         global $dsqlite;
@@ -295,7 +295,7 @@ class DedeSqlite
             return ($arr);
         }
     }
-    //执行一个不与任何表名有关的SQL语句,Create等
+    //执行一个不与任何表名有关的SQL语句Create等
     function ExecuteSafeQuery($sql, $id = "me")
     {
         global $dsqlite;
@@ -323,7 +323,7 @@ class DedeSqlite
                 $acctype = SQLITE3_BOTH;
                 break;
         }
-        if ($this->result[$id] === 0) {
+        if ($this->result[$id] === FALSE) {
             return FALSE;
         } else {
             $rs = $this->result[$id]->fetchArray($acctype);
@@ -374,7 +374,7 @@ class DedeSqlite
             $this->Open(FALSE);
             $dsqlite->isClose = FALSE;
         }
-        $rs = $this->linkID->querySingle("select sqlite_version();");
+        $rs = $this->linkID->querySingle("SELECT sqlite_version();");
         $sqlite_version = $rs;
         if ($isformat) {
             $sqlite_versions = explode(".", trim($sqlite_version));
@@ -396,7 +396,7 @@ class DedeSqlite
         $key = spl_object_hash($result);
         $this->result[$key] = $result;
         $this->_fieldIdx[$key] = 0;
-        return $key ;
+        return $key;
     }
     //获取字段详细信息
     function GetFieldObject($id = "me")
@@ -427,7 +427,7 @@ class DedeSqlite
     {
         //如果 AUTO_INCREMENT 的列的类型是 BIGINT，则 mysqli_insert_id() 返回的值不正确
         //可以在 SQL 查询中用 MySQL 内部的 SQL 函数 LAST_INSERT_ID() 来替代
-        //$rs = mysqli_query($this->linkID, "Select LAST_INSERT_ID() as lid");
+        //$rs = mysqli_query($this->linkID, "SELECT LAST_INSERT_ID() as lid");
         //$row = mysqli_fetch_array($rs);
         //return $row["lid"];
         return $this->linkID->lastInsertRowID();
@@ -450,7 +450,7 @@ class DedeSqlite
             }
         }
     }
-    //设置SQL语句，会自动把SQL语句里的#@__替换为$this->dbPrefix(在配置文件中为$cfg_dbprefix)
+    //设置SQL语句，会自动把SQL语句里的#@__替换为$this->dbPrefix在配置文件中为$cfg_dbprefix
     function SetQuery($sql)
     {
         $prefix = "#@__";
@@ -469,8 +469,7 @@ class DedeSqlite
         $RecordLogFile = DEDEDATA."/mysqli_record_log_{$enkey}.inc";
         $url = $this->GetCurUrl();
         $savemsg = <<<EOT
-
-------------------------------------------
+----------------------------------
 SQL:{$this->queryString}
 Page:{$url}
 Runtime:{$runtime}
@@ -490,7 +489,7 @@ EOT;
             ShowMsg("{$msg}", "javascript:;", -1);
             exit;
         }
-        $savemsg = "Page:{$this->GetCurUrl()}\r\nError:{$msg}\r\nTime:".date('Y-m-d H:i:s')."";
+        $savemsg = "Page:{$this->GetCurUrl()}\r\nError:{$msg}\r\nTime:".date('Y-m-d H:i:s')."\r\n";
         //保存SQLite错误日志
         $fp = @fopen($errorTrackFile, 'a');
         @fwrite($fp, '<'.'?php exit();'."\r\n/*\r\n{$savemsg}\r\n*/\r\n?".">\r\n");
@@ -518,3 +517,4 @@ function CopySQLiPoint(&$ndsql)
 {
     $GLOBALS['dsqlite'] = $ndsql;
 }
+?>

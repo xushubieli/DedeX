@@ -37,7 +37,7 @@ if ($dopost == "viewinfo") {
         } else {
             $dsql->SetQuery("SHOW CREATE TABLE {$dsql->dbName}.{$tablename}");
             $dsql->Execute('me');
-            $row2 = $dsql->GetArray('me', MYSQL_BOTH);
+            $row2 = $dsql->GetArray('me', MYSQLI_BOTH);
             $ctinfo = $row2[1];
             echo "<xmp>".trim($ctinfo)."</xmp>";
         }
@@ -78,7 +78,7 @@ else if ($dopost == "opimizeAll") {
             echo "执行数据库失败，原因：".$dsql->GetError();
         }
     } else {
-        while ($row = $dsql->GetArray('t', MYSQL_BOTH)) {
+        while ($row = $dsql->GetArray('t', MYSQLI_BOTH)) {
             $rs = $dsql->ExecuteNoneQuery("OPTIMIZE TABLE `{$row[0]}`");
             if ($rs) {
                 echo "优化表{$row[0]}完成";
@@ -129,7 +129,7 @@ else if ($dopost == "repairAll") {
     } else {
         $dsql->SetQuery("Show Tables");
         $dsql->Execute('t');
-        while ($row = $dsql->GetArray('t', MYSQL_BOTH)) {
+        while ($row = $dsql->GetArray('t', MYSQLI_BOTH)) {
             $rs = $dsql->ExecuteNoneQuery("REPAIR TABLE `{$row[0]}`");
             if ($rs) {
                 echo "修复表{$row[0]}完成";
@@ -229,7 +229,7 @@ else if ($dopost == "query") {
         <li class="breadcrumb-item active"><a href="sys_sql_query.php">SQL命令工具</a></li>
         <li class="breadcrumb-item">数据库文档</li>
     </ol>';
-    while ($row = $dsql->GetArray('t', MYSQL_BOTH)) {
+    while ($row = $dsql->GetArray('t', MYSQLI_BOTH)) {
         $tableName = $row[0];
         $output .= '<div class="card shadow-sm mb-3">
             <div class="card-header">'.$tableName.'表</div>
@@ -238,7 +238,7 @@ else if ($dopost == "query") {
         //获取表的注释
         $dsql->SetQuery("SELECT TABLE_COMMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '$tableName'");
         $dsql->Execute('c');
-        $tableCommentRow = $dsql->GetArray('c', MYSQL_BOTH);
+        $tableCommentRow = $dsql->GetArray('c', MYSQLI_BOTH);
         $tableComment = $tableCommentRow['TABLE_COMMENT'];
         if (!empty($tableComment)) {
             $output .= '<p>表注释：'.$tableComment.'</p>';
@@ -257,7 +257,7 @@ else if ($dopost == "query") {
                 </tr>
             </thead>
             <tbody>';
-        while ($colRow = $dsql->GetArray('col', MYSQL_BOTH)) {
+        while ($colRow = $dsql->GetArray('col', MYSQLI_BOTH)) {
             $columnName = $colRow['COLUMN_NAME'];
             $columnType = $colRow['COLUMN_TYPE'];
             $isNullable = $colRow['IS_NULLABLE'];
