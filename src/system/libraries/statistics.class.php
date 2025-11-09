@@ -15,7 +15,7 @@ class DedeStatistics {
     //获取统计js
     function GetStat()
     {
-        global $envs, $cfg_cookie_encode;
+        global $cfg_cookie_encode;
         $agent = new Agent();
         $pm = array();
         $pm['dduuid'] = GetCookie("DedeStUUID");
@@ -28,10 +28,6 @@ class DedeStatistics {
             session_start();
             $pm['ssid'] = session_id();
         }
-        $url_type = isset($_GET['url_type']) ? $_GET['url_type'] : 0;
-        $typeid = isset($_GET['typeid']) ? $_GET['typeid'] : 0;
-        $aid = isset($_GET['aid']) ? $_GET['aid'] : 0;
-        $value = isset($_GET['value']) ? $_GET['value'] : '';
         $pm['browser'] = $agent->browser();
         $pm['device'] = $agent->device();
         $pm['device_type'] = $agent->deviceType();
@@ -39,7 +35,7 @@ class DedeStatistics {
         $pm['t'] = time();
         $pm['created_date'] = MyDate("Ymd", $pm['t']);
         $pm['created_hour'] = MyDate("H", $pm['t']);
-        $pm['url_type'] = isset($envs['url_type']) ? $envs['url_type'] : $url_type;
+        $pm['url_type'] = isset($_GET['url_type']) ? $_GET['url_type'] : 0;
         //爬虫检测
         $ua = $agent->getUserAgent();
         $crawler = $this->botName($ua);
@@ -48,9 +44,9 @@ class DedeStatistics {
             $pm['url_type'] = -1;
             $pm['browser'] = $crawler;
         }
-        $pm['typeid'] = isset($envs['typeid']) ? $envs['typeid'] : $typeid;
-        $pm['aid'] = isset($envs['aid']) ? $envs['aid'] : $aid;
-        $pm['value'] = isset($envs['value']) ? $envs['value'] : $value;
+        $pm['typeid'] = isset($_GET['typeid']) ? $_GET['typeid'] : 0;
+        $pm['aid'] = isset($_GET['aid']) ? $_GET['aid'] : 0;
+        $pm['value'] = isset($_SERVER['HTTP_USER_AGENT']) ? str_replace('=', '', base64_encode($_SERVER['HTTP_USER_AGENT'])) : '';
         ksort($pm);
         $pm['sign'] = sha1(http_build_query($pm).md5($cfg_cookie_encode));
         $pm['dopost'] = "stat";
@@ -92,8 +88,8 @@ class DedeStatistics {
         ksort($pmvalue);
         $sign = $pmvalue['sign'];
         unset($pmvalue['sign']);
-        if (time() - $pmvalue['t'] > 5) {
-            return false;
+        if (time() - $pmvalue['t'] > 3) {
+            return false;//3秒内不重复入库
         }
         $cs = sha1(http_build_query($pmvalue).md5($cfg_cookie_encode));
         if ($sign !== $cs) {

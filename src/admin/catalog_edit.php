@@ -58,7 +58,7 @@ if ($dopost == "save") {
         }
     }
     UpDateCatCache();
-    ShowMsg("成功修改一个栏目", "catalog_main.php");
+    ShowMsg("成功修改一个栏目", "-1");
     exit();
 } else if ($dopost == "savetime") {
     $uptopsql = '';
@@ -82,7 +82,7 @@ if ($dopost == "save") {
         exit();
     }
     UpDateCatCache();
-    ShowMsg("成功修改一个栏目", "catalog_main.php");
+    ShowMsg("成功修改一个栏目", "-1");
     exit();
 }
 //读取栏目信息
