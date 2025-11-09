@@ -35,6 +35,7 @@ if ($dopost == "ok") {
         $dsql->ExecuteNoneQuery("DELETE FROM `#@__member_pms` WHERE sendtime<'$oldtime' ");
         $msg[] = "过期会员短信";
         $limit = date('Ymd', strtotime('-15 days'));
+        $dsql->ExecuteNoneQuery("DELETE FROM `#@__statistics` WHERE sdate<'$limit' ");
         $dsql->ExecuteNoneQuery("DELETE FROM `#@__statistics_detail` WHERE created_date<'$limit' ");
         $msg[] = "过期流量统计等缓存";
         $url = "sys_cache_up.php?dopost=ok&step=-1&uparc={$uparc}";
