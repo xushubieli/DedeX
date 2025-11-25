@@ -3,3 +3,6 @@ INSERT INTO `#@__sysconfig` VALUES ('122','cfg_access','是否限制用户浏览
 INSERT INTO `#@__sysconfig` VALUES ('123','cfg_access_count','限制用户浏览量','1','number','100');
 INSERT INTO `#@__sysconfig` VALUES ('124','cfg_browse_mode','是否启用栏目和文档动态浏览','2','bool','N');
 INSERT INTO `#@__sysconfig` VALUES ('125','cfg_ty_api','通义API','1','string','');
+
+-- 1.0.8
+INSERT INTO `#@__sysconfig` VALUES ('126','cfg_login_bg','登录背景图（宽度1270PX，高度1080PX）','1','img','');

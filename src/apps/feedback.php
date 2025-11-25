@@ -198,12 +198,12 @@ else if ($action == 'send') {
         $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET scores=scores-{cfg_feedback_sub},badpost=badpost+1,lastpost='$dtime' WHERE id='$aid' ");
     } else if ($feedbacktype == 'good') {
         $row = $dsql->GetOne("SELECT COUNT(*) as dd FROM `#@__feedback_goodbad` WHERE fid={$fid} AND mid={$cfg_ml->M_ID} AND fgtype=0");
-        if (intval($row['dd']) <= 0) {
-            $dsql->ExecuteNoneQuery("INSERT INTO `#@__feedback_goodbad` (`mid`, `fid`, `fgtype`) VALUES ('$cfg_ml->M_ID', '$fid', '0');");
-            $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET scores=scores+{$cfg_feedback_add},goodpost=goodpost+1,lastpost='$dtime' WHERE id='$aid' ");
+        if (is_array($row) && intval($row['dd']) <= 0) {
+            $dsql->ExecuteNoneQuery("INSERT INTO `#@__feedback_goodbad` (`mid`,`fid`,`fgtype`) VALUES ('$cfg_ml->M_ID','$fid','0');");
+            $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET scores=scores+{$cfg_feedback_add},goodpost=goodpost+1,lastpost='$dtime' WHERE id='$aid'");
         } else {
             $dsql->ExecuteNoneQuery("DELETE FROM `#@__feedback_goodbad` WHERE mid='{$cfg_ml->M_ID}' AND fid={$fid} AND fgtype=0");
-            $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET scores=scores-{$cfg_feedback_add},goodpost=goodpost-1,lastpost='$dtime' WHERE id='$aid' ");
+            $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET scores=scores-{$cfg_feedback_add},goodpost=goodpost-1,lastpost='$dtime' WHERE id='$aid'");
         }
         $rr = $dsql->GetOne("SELECT COUNT(*) as dd FROM `#@__feedback_goodbad` WHERE fid={$fid}");
         $dsql->ExecuteNoneQuery("UPDATE `#@__feedback` SET good='{$rr['dd']}' WHERE id={$fid}");
@@ -214,18 +214,15 @@ else if ($action == 'send') {
         ));
         exit;
     } else {
-        $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET scores=scores+1,lastpost='$dtime' WHERE id='$aid' ");
-    }
-    if ($cfg_ml->M_ID > 0) {
-        $dsql->ExecuteNoneQuery("UPDATE `#@__member` SET scores=scores+{$cfg_sendfb_scores} WHERE mid='{$cfg_ml->M_ID}' ");
+        $dsql->ExecuteNoneQuery("UPDATE `#@__archives` SET scores=scores+1,lastpost='$dtime' WHERE id='$aid'");
     }
     //统计会员发出的评论
     if ($cfg_ml->M_ID > 0) {
+        $dsql->ExecuteNoneQuery("UPDATE `#@__member` SET scores=scores+{$cfg_sendfb_scores} WHERE mid='{$cfg_ml->M_ID}'");
         $row = $dsql->GetOne("SELECT COUNT(*) AS nums FROM `#@__feedback` WHERE `mid`='{$cfg_ml->M_ID}' ");
-        $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET `feedback`='$row[nums]' WHERE `mid`='{$cfg_ml->M_ID}' ");
+        $dsql->ExecuteNoneQuery("UPDATE `#@__member_tj` SET `feedback`='{$row['nums']}' WHERE `mid`='{$cfg_ml->M_ID}'");
     }
     $_SESSION['sedtime'] = time();
-    if (empty($uid) && isset($cmtuser)) $uid = $cmtuser;
     if ($ischeck == 0) {
         echo json_encode(array(
             "code" => 200,

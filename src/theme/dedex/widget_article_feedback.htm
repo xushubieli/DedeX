@@ -38,10 +38,10 @@
 						<span>[field:dtime function="MyDate('Y-m-d',@me)"/]</span>
 					</div>
 					<div class="feedback-action pb-3">
-						<a href="javascript:LoadReplyFeedbacks([field:id/]);" class="btn btn-outline-primary btn-sm">[field:replycount/]条回复</a>
+						<a href="javascript:LoadReplyFeedbacks([field:id/]);" class="btn btn-outline-primary btn-sm">[field:replycount/]条评论</a>
 						<a href="javascript:GoodFeedback([field:id/], [field:good/]);" class="btn btn-outline-primary btn-sm">
 							<i class="bi bi-hand-thumbs-up"></i>
-							<i id="feedbackGood[field:id/]">[field:good/]</i>
+							<span id="feedbackGood[field:id/]">[field:good/]</span>
 						</a>
 						<a href="javascript:ReplyFeedback([field:id/]);" class="btn btn-primary btn-sm">回复</a>
 					</div>

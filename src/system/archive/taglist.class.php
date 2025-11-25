@@ -588,7 +588,7 @@ class TagList
         //伪静态标签分页
         if ($cfg_rewrite == 'Y') {
             $plist = str_replace("?/", "", $plist);
-            $plist = preg_replace("/&pageno=(\d+)/i", "/\\1", $plist);
+            $plist = preg_replace("/&PageNo=(\d+)/i", "/\\1", $plist);
         }
         return $plist;
     }

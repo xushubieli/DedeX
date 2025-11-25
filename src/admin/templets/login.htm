@@ -13,7 +13,7 @@
 		<main class="login-box">
 			<div class="row g-0">
 				<div class="col-lg-8 d-none d-lg-block">
-					<div class="bg"></div>
+					<div class="bg" style="<?php echo !empty($cfg_login_bg) ? "background:var(--bs-gray-300) url({$cfg_login_bg})no-repeat top center;background-size:cover" : "";?>"></div>
 				</div>
 				<div class="col-lg-4">
 					<div class="content">
@@ -24,7 +24,7 @@
 							<h1>后台登录</h1>
 							<span><?php echo $cfg_description;?></span>
 						</div>
-						<?php if (preg_match('/MSIE/i',$_SERVER['HTTP_USER_AGENT']) || preg_match('/Trident/i',$_SERVER['HTTP_USER_AGENT'])){?><div class="alert alert-danger">您使用的浏览器已过时，请更换浏览器，提高后台操作体验</div><?php }?>
+						<?php if (preg_match('/MSIE/i',$_SERVER['HTTP_USER_AGENT']) || preg_match('/Trident/i',$_SERVER['HTTP_USER_AGENT'])) {?><div class="alert alert-danger">您使用的浏览器已过时，请更换浏览器</div><?php }?>
 						<?php echo $redmsg;?>
 						<div class="from">
 							<form name="form1" action="login.php" method="post">
