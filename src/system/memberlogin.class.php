@@ -22,8 +22,10 @@ function CheckUserID($uid, $msgtitle = '账号', $ckhas = TRUE)
     global $cfg_mb_notallow, $cfg_mb_idmin, $cfg_md_idurl, $cfg_soft_lang, $dsql;
     if ($cfg_mb_notallow != '') {
         $nas = explode(',', $cfg_mb_notallow);
-        if (in_array($uid, $nas)) {
-            return $msgtitle.'系统禁止的标识';
+        foreach ($nas as $forbidden) {
+            if (stripos($uid, $forbidden) !== false) {
+                return $uid.'是系统禁止的标识';
+            }
         }
     }
     if ($cfg_md_idurl == 'Y' && preg_match("/[^a-z0-9]/i", $uid)) {
