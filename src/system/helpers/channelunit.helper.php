@@ -265,7 +265,7 @@ if (!function_exists('GetParentIds')) {
     {
         global $cfg_Cs;
         $GLOBALS['pTypeArrays'][] = $tid;
-        if (!is_array($cfg_Cs)) {
+        if (!is_array($cfg_Cs) && file_exists(DEDEDATA."/cache/inc_catalog_base.inc")) {
             require_once(DEDEDATA."/cache/inc_catalog_base.inc");
         }
         if (!isset($cfg_Cs[$tid]) || $cfg_Cs[$tid][0] == 0) {
@@ -300,7 +300,7 @@ if (!function_exists('GetTopid')) {
     function GetTopid($tid)
     {
         global $cfg_Cs;
-        if (!is_array($cfg_Cs)) {
+        if (!is_array($cfg_Cs) && file_exists(DEDEDATA."/cache/inc_catalog_base.inc")) {
             require_once(DEDEDATA."/cache/inc_catalog_base.inc");
         }
         if (!isset($cfg_Cs[$tid][0]) || $cfg_Cs[$tid][0] == 0) {
