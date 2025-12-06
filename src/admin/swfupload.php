@@ -12,7 +12,7 @@ require_once(DEDEINC.'/image.func.php');
 if (empty($dopost)) {
     ini_set('html_errors', '0');
     if (empty($Filedata) || !is_uploaded_file($Filedata)) {
-        echo 'ERROR: Upload Error! ';
+        echo 'Error: Upload error! ';
         exit(0);
     }
     //把文件移动到临时目录
@@ -20,7 +20,7 @@ if (empty($dopost)) {
     if (!is_dir($tmpdir)) {
         MkdirAll($tmpdir, $cfg_dir_purview);
         if (!is_dir($tmpdir)) {
-            echo "ERROR: Create {$tmpdir} dir Error! ";
+            echo "Error: Create {$tmpdir} dir error! ";
             exit(0);
         }
     }
@@ -28,11 +28,11 @@ if (empty($dopost)) {
     $FiledataNew = $tmpdir.'/'.preg_replace("/(.*)[\/]/isU", "", $FiledataNew);
     $mime = get_mime_type($Filedata);
     if (preg_match("#^unknow#", $mime)) {
-        echo "ERROR: Create {$tmpdir} dir Error! ";
+        echo "Error: Create {$tmpdir} dir error! ";
         exit;
     }
     if (!preg_match("#^(image|video|audio|application)#i", $mime)) {
-        echo "ERROR: Create {$tmpdir} dir Error! ";
+        echo "Error: Create {$tmpdir} dir error! ";
         exit;
     }
     move_uploaded_file($Filedata, $FiledataNew);
@@ -41,7 +41,7 @@ if (empty($dopost)) {
     //检测文件类型
     if (!is_array($srcInfo)) {
         @unlink($Filedata);
-        echo "ERROR: Image info Error! ";
+        echo "Error: Image info error! ";
         exit(0);
     } else {
         switch ($srcInfo[2]) {
@@ -65,7 +65,7 @@ if (empty($dopost)) {
     }
     if ($ftype == '') {
         @unlink($Filedata);
-        echo "ERROR: Image type Error! ";
+        echo "Error: Image type error! ";
         exit(0);
     }
     //保存原图
@@ -86,7 +86,7 @@ if (empty($dopost)) {
     $rs = copy($FiledataNew, $cfg_basedir.$fileurl);
     unlink($FiledataNew);
     if (!$rs) {
-        echo "ERROR: Copy Uploadfile Error! ";
+        echo "Error: Copy uploadfile Error! ";
         exit(0);
     }
     //WaterImg($cfg_basedir.$fileurl, 'up');

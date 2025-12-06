@@ -11,7 +11,7 @@ $diyid = isset($diyid) && is_numeric($diyid) ? $diyid : 0;
 $action = isset($action) && in_array($action, array('post', 'list', 'view')) ? $action : 'post';
 $id = isset($id) && is_numeric($id) ? $id : 0;
 if (empty($diyid)) {
-    header("Location: /");
+    http_response_code(403);
     exit();
 }
 require_once DEDEINC.'/diyform.class.php';
@@ -139,7 +139,7 @@ if ($action == 'post') {
         exit();
     }
     if (empty($id)) {
-        header("Location: /");
+        http_response_code(403);
         exit();
     }
     if ($diy->public == 2) {

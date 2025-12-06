@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 //配置缓存处理函数
 //\WeChat\Contracts\Tools::$cache_callable = [
 //   'set' => function ($name, $value, $expired = 360) {

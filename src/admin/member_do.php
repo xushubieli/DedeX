@@ -62,7 +62,7 @@ if ($dopost == "delmember") {
     $win->AddHidden("randcode", $randcode);
     $win->AddHidden("safecode", $safecode);
     $win->AddTitle("您确定要删除会员ID：{$id}吗");
-    $win->AddMsgItem("<tr><td>验证安全码：<input name='safecode' type='text' id='safecode' class='form-control admin-w-lg'>（安全码：{$safecode}）</td></tr>");
+    $win->AddMsgItem("<tr><td>验证安全码：<input name='safecode' type='text' id='safecode' class='form-control admin-w-lg'> <code>安全码：{$safecode}</code></td></tr>");
     $winform = $win->GetWindow("ok");
     $win->Display();
 } else if ($dopost == "delmembers") {
@@ -106,7 +106,7 @@ if ($dopost == "delmember") {
     $win->AddHidden("randcode", $randcode);
     $win->AddHidden("safecode", $safecode);
     $win->AddTitle("您确定要删除会员ID：{$id}吗");
-    $win->AddMsgItem("<tr><td>验证安全码：<input name='safecode' type='text' id='safecode' class='form-control admin-w-lg'> (安全码：{$safecode})</td></tr>");
+    $win->AddMsgItem("<tr><td>验证安全码：<input name='safecode' type='text' id='safecode' class='form-control admin-w-lg'> <code>安全码：{$safecode}</code></td></tr>");
     $winform = $win->GetWindow("ok");
     $win->Display();
 }
@@ -145,7 +145,7 @@ else if ($dopost == 'edituser') {
     $uname = isset($uname)? HtmlReplace($uname,1) : '';
     $spacesta = isset($spacesta)? HtmlReplace($spacesta,1) : '';
     $exptime = isset($exptime)? HtmlReplace($exptime,1) : '';
-    if (!isset($_POST['id'])) exit('dedex');
+    if (!isset($_POST['id'])) exit('Error: Invalid! ');
     $pwdsql = empty($pwd) ? '' : ",pwd='".md5($pwd)."'";
     if (function_exists('password_hash')) {
         $pwdsql = empty($pwd) ? '' : ",pwd_new='".password_hash($pwd, PASSWORD_BCRYPT)."'";

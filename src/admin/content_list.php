@@ -154,7 +154,6 @@ $orderbyField = 'arc.'.$orderby;
 $query = "SELECT arc.id,arc.typeid,arc.senddate,arc.flag,arc.ismake,arc.channel,arc.arcrank,arc.click,arc.title,arc.color,arc.litpic,arc.pubdate,arc.mid FROM `$maintable` arc $whereSql ORDER BY $orderbyField DESC";
 if (empty($f) || !preg_match("#form#", $f)) $f = 'form1.arcid1';
 $dlist = new DataListCP();
-$dlist->pagesize = 10;
 $dlist->SetParameter('dopost', 'listArchives');
 $dlist->SetParameter('keyword', $keyword);
 if (!empty($mid)) $dlist->SetParameter('mid', $mid);

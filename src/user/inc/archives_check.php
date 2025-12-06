@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEMEMBER')) exit('dedex');
+if (!defined('DEDEMEMBER')) {http_response_code(403); exit();}
 /**
  * 文档验证
  * 

@@ -1,6 +1,6 @@
 <?php
 namespace WePay;
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 use WeChat\Contracts\BasicWePay;
 use WeChat\Contracts\Tools;
 use WeChat\Exceptions\InvalidArgumentException;

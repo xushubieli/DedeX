@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 搜索视图
  *
@@ -68,7 +68,7 @@ class SearchView
         $achanneltype = "all",
         $searchtype = '',
         $starttime = 0,
-        $upagesize = 20,
+        $upagesize = 10,
         $kwtype = 1,
         $mid = 0
     ) {
@@ -136,7 +136,7 @@ class SearchView
         $achanneltype = "all",
         $searchtype = "",
         $starttime = 0,
-        $upagesize = 20,
+        $upagesize = 10,
         $kwtype = 1,
         $mid = 0
     ) {

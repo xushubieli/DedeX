@@ -1,6 +1,6 @@
 <?php
 namespace WeMini;
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 use WeChat\Contracts\BasicWeChat;
 /**
  * 公众号小程序订阅消息支持

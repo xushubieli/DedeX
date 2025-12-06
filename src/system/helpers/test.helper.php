@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * @version        $id:test.helper.php 5 15:01 2010年7月5日 tianya $
  * @package        DedeX.Helpers

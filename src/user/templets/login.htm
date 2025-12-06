@@ -18,15 +18,15 @@
 						<input type="hidden" name="keeptime" value="604800">
 						<input type="hidden" name="gourl" value="<?php if (!empty($gourl)) echo $gourl;?>">
 						<div class="mb-3">
-							<label for="iptUserid">账号</label>
+							<label for="iptUserid" class="form-label">账号</label>
 							<input type="text" name="userid" id="iptUserid" class="form-control" placeholder="请输入登录账号" required>
 						</div>
 						<div class="mb-3">
-							<label for="iptPwd">密码</label>
+							<label for="iptPwd" class="form-label">密码</label>
 							<input type="password" name="pwd" id="iptPwd" class="form-control" placeholder="请输入登录密码" autocomplete="off" required>
 						</div>
 						<div id="vdimgck" class="mb-3" style="display:none">
-							<label for="iptValidate">验证码</label>
+							<label for="iptValidate" class="form-label">验证码</label>
 							<div class="input-group">
 								<input type="text" name="vdcode" id="iptValidate" class="form-control text-uppercase" placeholder="请输入验证码">
 								<img src="<?php echo $cfg_phpurl;?>/vdimgck.php" id="validateimg" onclick="this.src='<?php echo $cfg_phpurl;?>/vdimgck.php?'+new Date().getTime()+Math.round(Math.random() * 10000)" title="验证码">
@@ -39,7 +39,9 @@
 				</div>
 			</div>
 		</main>
-		<?php ThemeInclude('foot.htm');?>
+		<script src="/static/web/js/jquery.min.js"></script>
+		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
+		<script src="/static/web/js/style.js"></script>
 		<script src="/static/web/js/login.js"></script>
 	</body>
 </html>

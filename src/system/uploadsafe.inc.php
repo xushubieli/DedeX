@@ -1,6 +1,6 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
-if (isset($_FILES['GLOBALS'])) exit('请求失败');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
+if (isset($_FILES['GLOBALS'])) {exit('请求失败');}
 /**
  * 文件上传安全校验方法
  *

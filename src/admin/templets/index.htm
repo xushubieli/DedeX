@@ -7,6 +7,7 @@
 		<title><?php echo $cfg_webname;?>后台管理</title>
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
+		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
 		<script src="/static/web/js/admin.main.js"></script>
 	</head>
 	<body class="menu-show">
@@ -23,8 +24,6 @@
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="statistics_list.php" target="main"><i class="bi bi-activity" title="流量统计"></i></a></li>
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="file_manage_main.php<?php echo DEDEX_SAFE_MODE ? '?activepath='.$cfg_medias_dir:'';?>" target="main"><i class="bi bi-folder2" title="文件管理"></i></a></li>
 					<li class="nav-item"><a class="nav-link" href="diy_main.php" target="main"><i class="bi bi-file-earmark-text" title="自定义表单"></i></a></li>
-					<?php }?>
-					<?php if (!DEDEX_SAFE_MODE){?>
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="templets_main.php" target="main"><i class="bi bi-stack" title="主题模板"></i></a></li>
 					<?php }?>
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="makehtml_all.php" target="main"><i class="bi bi-arrow-counterclockwise" title="更新整站"></i></a></li>
@@ -40,7 +39,15 @@
 				</ul>
 				<ul class="nav">
 					<li class="nav-item d-none d-lg-block"><a class="nav-link" href="javascript:document.getElementById('main').contentWindow.location.reload(true);"><i class="bi bi-arrow-clockwise" title="刷新页面"></i></a></li>
-					<li class="nav-item d-none d-lg-block"><a class="nav-link user" href="sys_admin_user_edit.php?id=<?php echo $cuserLogin->getUserID();?>&dopost=edit" target="main"><img src="<?php echo $cuserLogin->getUserFace();?>"><?php echo $cuserLogin->getUserName();?></a></li>
+					<li class="nav-item d-none d-lg-block">
+						<div class="dropdown user">
+							<a class="dropdown-toggle nav-link" href="javascript:;" data-bs-toggle="dropdown" aria-expanded="false"><img src="<?php echo $cuserLogin->getUserFace();?>"><?php echo $cuserLogin->getUserName();?></a>
+							<ul class="dropdown-menu">
+								<?php if ($cuserLogin->getUserType() >= 5){?><li><a class="dropdown-item" href="sys_admin_user_add.php" target="main">添加管理</a></li><?php }?>
+								<li><a class="dropdown-item" href="sys_admin_user_edit.php?id=<?php echo $cuserLogin->getUserID();?>&dopost=edit" target="main">修改密码</a></li>
+							</ul>
+						</div>
+					</li>
 					<li class="nav-item"><a class="nav-link" href="exit.php"><i class="bi bi-power" title="退了"></i></a></li>
 				</ul>
 			</nav>
@@ -48,7 +55,7 @@
 		<aside class="admin-aside">
 			<div class="side-menu">
 				<div class="menu-item show">
-					<a href="index_body.php" target="main" class="menu-link"><i class="bi bi-globe"></i>后台主页</a>
+					<a href="index_body.php" target="main" class="menu-link"><i class="bi bi-globe"></i>后台面板</a>
 				</div>
 				<?php $showitem = 100;GetMenus($cuserLogin->getUserRank(), 'main');?>
 			</div>

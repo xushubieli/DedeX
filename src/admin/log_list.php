@@ -30,7 +30,6 @@ while ($myrow = $dsql->GetObject('admin')) {
     $adminlist .= "<option value='{$myrow->id}'>{$myrow->uname}</option>\r\n";
 }
 $dlist = new DataListCP();
-$dlist->pagesize = 10;
 $dlist->SetParameter("adminid", $adminid);
 $dlist->SetParameter("cip", $cip);
 $dlist->SetParameter("dtime", $dtime);

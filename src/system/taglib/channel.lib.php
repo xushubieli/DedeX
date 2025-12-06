@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 栏目列表标签
  * {dede:channel}
@@ -73,8 +73,6 @@ function lib_channel(&$ctag, &$refObj)
     //检查是否有子栏目，并返回rel提示，用于二级菜单
     if (preg_match('#:rel#', $innertext)) $needRel = true;
     if (empty($sql)) return '';
-    $dsql->SetQuery($sql);
-    $dsql->Execute();
     $totalRow = $dsql->GetTotalRow();
     //如果用子栏目模式，当没有子栏目时显示同级栏目
     if ($type == 'son' && $reid != 0 && $totalRow == 0) {
@@ -144,6 +142,7 @@ function lib_channel_son($ctag, $typeid = 0, $dsql2)
     $innertext = $ctag->GetInnerText();
     $likeType = '';
     $tpsql = '';
+    //否定栏目调用
     if ($notypeid != 0) {
         $tpsql = " and not(id in($notypeid)) ";
     }

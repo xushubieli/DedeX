@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 //手动加载入口文件
 include "../include.php";
 //准备公众号配置参数

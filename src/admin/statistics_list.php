@@ -60,7 +60,6 @@ if ($day_peak == '1') {
     $dsql->Execute('peak', "SELECT ip,dduuid,browser,os,t,COUNT(*) as count FROM `#@__statistics_detail` WHERE t >= ".strtotime(date('Y-m-d'))." AND url_type != -1 GROUP BY ip ORDER BY count DESC LIMIT 15");
 }
 $dlist = new DataListCP();
-$dlist->pagesize = 10;
 $tplfile = DEDEADMIN."/templets/statistics_list.htm";
 $dlist->SetParameter("ip", $ip);
 $dlist->SetParameter("url_type", $url_type);

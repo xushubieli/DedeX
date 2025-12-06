@@ -137,7 +137,7 @@ if ($dopost == 'quick') {
     }
     if ($moresite == 1) {
         if (!preg_match("/^(http|https):\/\//", $siteurl) || preg_match("#{$cfg_basehost}#i", $siteurl)) {
-            ShowMsg("您输入的网址不合法，请输入http开头网址", "-1");
+            ShowMsg("您输入的网址不合法，请重新输入", "-1");
             exit();
         }
     }

@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 图片标签
  *
@@ -57,7 +57,7 @@ function ch_img($fvalue, &$arcTag, &$refObj, $fname = '')
         $pagesize = $arcTag->GetAtt('pagesize');
     }
     if (empty($pagesize)) {
-        $pagesize = 12;
+        $pagesize = 10;
     }
     $aid = $refObj->ArcID;
     if ($refObj->ChannelInfos['issystem'] == '-1') {

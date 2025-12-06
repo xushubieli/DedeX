@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 $certPublic = <<<CERT
 -----BEGIN CERTIFICATE-----
 你的微信商户证书公钥内容

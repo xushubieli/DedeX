@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 require_once DEDEINC."/libraries/imageresize.class.php";
 /**
  * 图像处理助手

@@ -172,12 +172,11 @@ $cfg_other_medias = $cfg_medias_dir.'/media';
 $cfg_medias_dir = $cfg_cmspath.$cfg_medias_dir;
 $cfg_mediasurl = $cfg_mainsite.$cfg_medias_dir;
 //系统信息摘要
-$cfg_version = '1';
-$cfg_version_detail = '1.0.7'; //版本详情
 $cfg_soft_lang = 'utf-8';
-$cfg_soft_cnname = '得德X系统';
-$cfg_soft_enname = 'DedeX';
+$cfg_soft_name = '得德X系统';
+$cfg_soft_intl = 'DedeX';
 $cfg_soft_devteam = 'DedeX团队';
+$cfg_version_info = '1.0.8'; //版本信息
 //文档默认命名规则
 $art_shortname = $cfg_df_ext = '.html';
 $cfg_df_namerule = '{typedir}/{aid}'.$cfg_df_ext;

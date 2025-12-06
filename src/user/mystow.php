@@ -26,7 +26,6 @@ while ($row = $dsql->GetArray('nn')) {
     $rows[] = $row;
 }
 $dlist = new DataListCP();
-$dlist->pagesize = 10;
 $dlist->SetTemplate(DEDEMEMBER."/templets/mystow.htm");
 $dlist->SetSource($sql);
 $dlist->Display();

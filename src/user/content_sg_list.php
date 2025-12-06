@@ -55,7 +55,6 @@ if ($arcrank == '1') {
 }
 $query = "SELECT arc.aid,arc.aid as id,arc.typeid,arc.senddate,arc.channel,arc.click,arc.title,arc.mid,tp.typename,arc.arcrank FROM `{$cInfos['addtable']}` arc LEFT JOIN `#@__arctype` tp ON tp.id=arc.typeid $whereSql ORDER BY arc.aid DESC";
 $dlist = new DataListCP();
-$dlist->pagesize = 10;
 $dlist->SetParameter("dopost", "listArchives");
 $dlist->SetParameter("keyword", $keyword);
 $dlist->SetParameter("cid", $cid);

@@ -14,8 +14,7 @@ if ($cfg_access == 'Y') {
     $moon = time() - (24 * 60 * 60);
     $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS dd FROM `#@__statistics_detail` WHERE ip='$ip' AND t>='$moon' AND url_type IN (4, -1)");
     if ($flow && $flow['dd'] > $cfg_access_count) {
-        header("HTTP/1.1 403 Forbidden");
-        echo "拒绝访问";
+        http_response_code(403);
         exit();
     }
 }
@@ -30,8 +29,11 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 $tag = FilterSearch(urldecode($tag));
 if ($tag != addslashes($tag)) $tag = '';
-if ($tag == '') $dlist = new TagList($tag, 'tag.htm');
-else $dlist = new TagList($tag, 'tag_list.htm');
+if ($tag == '') {
+    $dlist = new TagList($tag, 'tag.htm');
+} else {
+    $dlist = new TagList($tag, 'tag_list.htm');
+}
 $dlist->Display();
 exit();
 ?>

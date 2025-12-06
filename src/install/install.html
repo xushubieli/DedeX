@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="robots" content="noindex,nofollow">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-		<title>安装<?php echo $dfDbname;?> v<?php echo $cfg_version_detail;?></title>
+		<title>安装<?php echo $cfg_soft_intl;?> v<?php echo $cfg_version_info;?></title>
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -13,7 +13,7 @@
 	<body>
 		<nav class="install-head navbar navbar-expand-lg bg-white shadow-sm">
 			<div class="container">
-				<a href="/" target="_blank" class="navbar-brand"><img src="/static/web/img/logo.png" title="<?php echo $dfDbname;?>"></a>
+				<a href="/" target="_blank" class="navbar-brand"><img src="/static/web/img/logo.png" title="<?php echo $cfg_soft_intl;?>"></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsX" aria-controls="navbarsX" aria-expanded="false">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -30,9 +30,9 @@
 					<?php if (count($arrMsg) > 0) {foreach ($arrMsg as $msg){?>
 					<div class="alert alert-info"><?php echo $msg;?></div>
 					<?php }}?>
-					<div class="alert alert-info">安装<?php echo $dfDbname;?>前，请先阅读<a href="/license.txt" target="_blank">《站点授权协议》</a>，安装即表示同意此协议</div>
+					<div class="alert alert-info">安装<?php echo $cfg_soft_intl;?>，请先阅读<a href="/license.txt" target="_blank">《站点授权协议》</a>，安装即表示同意此协议</div>
 					<div class="card shadow-sm">
-						<div class="card-header">安装<?php echo $dfDbname;?> v<?php echo $cfg_version_detail;?></div>
+						<div class="card-header">安装<?php echo $cfg_soft_intl;?> v<?php echo $cfg_version_info;?></div>
 						<div class="card-body">
 							<form name="form1" action="/install/index.php" method="post">
 								<input type="hidden" name="step" value="2">
@@ -84,7 +84,7 @@
 								<div class="mb-3 server">
 									<div class="form-check">
 										<input type="checkbox" name="installdemo" value="1" id="installdemo" class="form-check-input">
-										<label for="installdemo" class="form-check-label">安装演示数据（部分功能操作示例）</label>
+										<label for="installdemo" class="form-check-label">安装演示数据（部分功能演示）</label>
 									</div>
 								</div>
 								<div class="text-center"><button type="submit" class="btn btn-primary btn-md">立即安装</button></div>

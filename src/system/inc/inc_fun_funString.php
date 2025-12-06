@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 require_once DEDEINC."/libraries/HTMLPurifier/HTMLPurifier.auto.php";
 function SpHtml2Text($html)
 {

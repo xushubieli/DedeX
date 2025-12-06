@@ -22,8 +22,8 @@
 								<thead>
 									<tr>
 										<td scope="col">ID</td>
-										<td scope="col">排序</td>
-										<td scope="col">属性</td>
+										<td scope="col">属性值</td>
+										<td scope="col">属性名</td>
 									</tr>
 								</thead>
 								<tbody>
@@ -36,12 +36,17 @@
 									?>
 									<input type="hidden" name="att_<?php echo $k;?>" value="<?php echo $row->att;?>">
 									<tr>
+										<td><input type="text" name="sortid_<?php echo $k;?>" value="<?php echo $row->sortid;?>" id="sortid_<?php echo $k;?>" class="form-control admin-w-xs"></td>
 										<td><?php echo $row->att;?></td>
-										<td><input type="text" name="sortid_<?php echo $k;?>" value="<?php echo $row->sortid;?>" id="sortid_<?php echo $k;?>" class="form-control admin-w-sm"></td>
 										<td align="left"><input type="text" name="attname_<?php echo $k;?>" value="<?php echo $row->attname;?>" id="attname_<?php echo $k;?>" class="form-control admin-w-lg"></td>
 									</tr>
 									<?php }?>
-									<input type="hidden" name="idend" value="<?php echo $k;?>">
+									<tr>
+										<td><input type="text" name="sortid_<?php echo $k+1;?>" value="<?php echo $k+1;?>" class="form-control admin-w-xs"></td>
+										<td><input type="text" name="att_<?php echo $k+1;?>" value="" class="form-control admin-w-sm"></td>
+										<td align="left"><input type="text" name="attname_<?php echo $k+1;?>" value="" class="form-control admin-w-lg"></td>
+									</tr>
+									<input type="hidden" name="idend" value="<?php echo $k+1;?>">
 									<tr>
 										<td colspan="3" align="center">
 											<button type="submit" class="btn btn-primary btn-sm">保存</button>

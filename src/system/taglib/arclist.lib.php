@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 文档列表标签
  *
@@ -70,8 +70,7 @@ function lib_arclist(&$ctag, &$refObj)
     } else {
         $flag = $ctag->GetAtt('att');
     }
-    return lib_arclistDone ($refObj, $ctag, $typeid, $ctag->GetAtt('row'), $ctag->GetAtt('col'), $titlelen, $infolen, $ctag->GetAtt('imgwidth'), $ctag->GetAtt('imgheight'), $listtype, $orderby, $ctag->GetAtt('keyword'), $innertext, $envs['aid'], $ctag->GetAtt('idlist'), $channelid, $ctag->GetAtt('limit'), $flag,$ctag->GetAtt('orderway'), $ctag->GetAtt('subday'), $ctag->GetAtt('noflag'), $tagid, $pagesize, $isweight, $ctag->GetAtt('notypeid')
-    );
+    return lib_arclistDone ($refObj, $ctag, $typeid, $ctag->GetAtt('notypeid'), $ctag->GetAtt('row'), $ctag->GetAtt('col'), $titlelen, $infolen, $ctag->GetAtt('imgwidth'), $ctag->GetAtt('imgheight'), $listtype, $orderby, $ctag->GetAtt('keyword'), $innertext, $envs['aid'], $ctag->GetAtt('idlist'), $channelid, $ctag->GetAtt('limit'), $flag, $ctag->GetAtt('orderway'), $ctag->GetAtt('subday'), $ctag->GetAtt('noflag'), $tagid, $pagesize, $isweight);
 }
 /**
  *  arclist解析函数
@@ -102,7 +101,7 @@ function lib_arclist(&$ctag, &$refObj)
  * @param     string  $isweight  是否需要对检索出来的文档按照weight排序
  * @return    string
  */
-function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlelen=30, $infolen=160, $imgwidth=120, $imgheight=90, $listtype='all', $orderby='default', $keyword='', $innertext='', $arcid=0, $idlist='', $channelid=0, $limit='', $att='', $order='desc', $subday=0, $noflag='',$tagid='', $pagesize=0, $isweight='N', $notypeid=0)
+function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $notypeid=0, $row=10, $col=1, $titlelen=30, $infolen=160, $imgwidth=120, $imgheight=90, $listtype='all', $orderby='default', $keyword='', $innertext='', $arcid=0, $idlist='', $channelid=0, $limit='', $att='', $order='desc', $subday=0, $noflag='',$tagid='', $pagesize=0, $isweight='N')
 {
     global $dsql, $PubFields, $cfg_keyword_like, $cfg_index_cache, $_arclistEnv, $envs, $cfg_cache_type, $cfg_digg_update;
     $row = AttDef($row, 10);
@@ -165,7 +164,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
             $flags = explode(',', $att);
             for ($i = 0; isset($flags[$i]); $i++) $orwheres[] = " FIND_IN_SET('{$flags[$i]}', arc.flag)>0 ";
         }
-        if (!empty($typeid) && $typeid != 'top') {
+        if (!empty($typeid) && $typeid != 'top' && $typeid != '0') {
             //指定了多个栏目时，不再获取子类的ID
             if (preg_match('#,#', $typeid)) {
                 //指定了getall属性或首页模板例外
@@ -185,7 +184,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
                 $CrossID = '';
                 if ($ctag->GetAtt('cross') == '1') {
                     $arr = $dsql->GetOne("SELECT `id`,`topid`,`cross`,`crossid`,`ispart`,`typename` FROM `#@__arctype` WHERE id='$typeid' ");
-                    if ($arr['cross'] == 0 || ($arr['cross'] == 2 && trim($arr['crossid'] == ''))) {
+                    if ($arr['cross'] == 0 || ($arr['cross'] == 2 && trim($arr['crossid']) == '')) {
                         $orwheres[] = ' arc.typeid IN ('.GetSonIds($typeid).')';
                     } else {
                         $selquery = '';
@@ -256,7 +255,11 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $row=10, $col=1, $titlele
         $orwhere = preg_replace("/^ And/is", '', $orwhere);
         $orwhere = preg_replace("/And[ ]{1,}And/is", 'And ', $orwhere);
     }
-    if ($orwhere != '') $orwhere = "WHERE $orwhere And tp.ishidden != 1";
+    if ($orwhere != '') {
+        $orwhere = " WHERE $orwhere And tp.ishidden !=1 ";
+    } else {
+        $orwhere = " WHERE tp.ishidden !=1 ";
+    }
     //获取附加表信息
     $addfield = trim($ctag->GetAtt('addfields'));
     $addfieldsSql = '';

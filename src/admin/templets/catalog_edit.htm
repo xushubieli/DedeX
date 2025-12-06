@@ -50,7 +50,7 @@
 												}
 												?>
 											</select>
-											<span>（更换模型前，栏目若有文档，请先移至同模型栏目）</span>
+											<span>（更换模型前，栏目若有文档，先移至同模型栏目下）</span>
 											<div id="smclass" class="mt-3" style="<?php echo ($channelid<0 ? '' : 'display:none');?>">
 												<select name="smalltype[]" multiple="yes" class="form-select admin-w-lg">
 													<?php
@@ -73,7 +73,7 @@
 													}
 													?>
 												</select>
-												<span>（请选栏目的信息联动类型支持多选）</span>
+												<span>（所选栏目的信息联动类型支持多选）</span>
 											</div>
 										</td>
 										<td>上级目录</td>
@@ -88,9 +88,9 @@
 										</td>
 									</tr>
 									<tr>
-										<td>中文名称</td>
+										<td>栏目名称</td>
 										<td><input type="text" name="typename" value="<?php echo $myrow['typename'];?>" class="form-control admin-w-lg" required></td>
-										<td>中文概述</td>
+										<td>栏目概述</td>
 										<td><input type="text" name="cnoverview" value="<?php echo $myrow['cnoverview'];?>" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
@@ -136,7 +136,7 @@
 										<td>栏目生成目录</td>
 										<td><input type="text" name="typedir" id="typedir" value="<?php echo $myrow['typedir'];?>" class="form-control admin-w-lg"></td>
 										<td>是否继承选项</td>
-										<td><label><input type="checkbox" name="upnext" id="upnext" value="1"> 子类栏目将继承顶级栏目的浏览权限、文档类型、模板风格等</label></td>
+										<td><label><input type="checkbox" name="upnext" id="upnext" value="1"> 子类栏目继承顶级栏目的浏览权限、文档类型、模板风格等</label></td>
 									</tr>
 									<tr>
 										<td>栏目列表选项</td>
@@ -153,7 +153,7 @@
 										<td>
 											<label><input type="radio" name="ispart" value="0" <?php if ($myrow['ispart']==0) echo 'checked';?>> 列表栏目（允许发布）</label>
 											<label><input type="radio" name="ispart" value="1" <?php if ($myrow['ispart']==1) echo 'checked';?>> 封面栏目（不允许发布）</label>
-											<label><input type="radio" name="ispart" value="2" <?php if ($myrow['ispart']==2) echo 'checked';?>> 外部栏目（栏目生成目录处填写网址）</label>
+											<label><input type="radio" name="ispart" value="2" <?php if ($myrow['ispart']==2) echo 'checked';?>> 外部栏目（栏目生成目录填写网址）</label>
 										</td>
 										<td>栏目交叉</td>
 										<td>
@@ -170,7 +170,7 @@
 										<td>
 											<label><input type="radio" name="moresite" value="1" <?php if ($myrow['moresite']==1) echo 'checked';?>> 启用</label>
 											<label><input type="radio" name="moresite" value="0" <?php if ($myrow['moresite']==0) echo 'checked';?>> 禁用</label>
-											<span>（启用前，在系统设置中核心设置找到开启多站点绝对网址）</span>
+											<span>（启用前，在系统设置中核心设置开启多站点绝对网址）</span>
 										</td>
 										<td>绑定网址</td>
 										<td><input type="text" name="siteurl" id="siteurl" value="<?php echo $myrow['siteurl'];?>" class="form-control admin-w-lg">（请输入网址，效果：网址/栏目生成目录）</td>
@@ -235,7 +235,7 @@
 									<tr>
 										<td>是否启用跨站调用</td>
 										<td colspan="3">
-											<input value="<?php echo $myrow['apikey'];?>" type="text" name="apikey" id="apikey" class="form-control admin-w-lg" placeholder="请输入跨站调用秘钥">
+											<input value="<?php echo $myrow['apikey'];?>" type="text" name="apikey" id="apikey" class="form-control admin-w-lg">
 											<label><input type="radio" name="apienabled" value="1" <?php if ($myrow['apienabled']=="1") echo 'checked';?>> 启用</label>
 											<label><input type="radio" name="apienabled" value="0" <?php if ($myrow['apienabled']=="0") echo 'checked';?>> 禁用</label>
 											<a href="javascript:makeAPIKey();" class="btn btn-primary btn-sm">更新</i></a>

@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 //允许的函数
 $GLOBALS['allowedCalls'] = array(
     //系统

@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 提示框函数
  * @version        $id:dedealert.func.php 2023年12月31日 tianya $

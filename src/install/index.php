@@ -6,8 +6,8 @@
 @set_time_limit(0);
 error_reporting(E_ALL || ~E_NOTICE);
 define('INSLOCKFILE', dirname(__FILE__).'/install_lock.txt');
-$dfDbname = 'DedeX';
-$cfg_version_detail = '1.0.7'; //版本详情
+$cfg_soft_intl = 'DedeX';
+$cfg_version_info = '1.0.8'; //版本详情
 $phpVersion = PHP_VERSION;
 $errmsg = '';
 if (version_compare($phpVersion, '8.0.0', '>=') && function_exists("mysqli_report")) {
@@ -92,7 +92,7 @@ else if ($step == 2) {
     $dbuser = empty($dbuser) ? "root" : $dbuser;
     $dbpwd = empty($dbpwd) ? "root" : $dbpwd;
     $dbprefix = empty($dbprefix) ? "x_" : $dbprefix;
-    $dbname = empty($dbname) ? $dfDbname : $dbname;
+    $dbname = empty($dbname) ? $cfg_soft_intl : $dbname;
     $adminuser = empty($adminuser) ? "admin" : $adminuser;
     $adminpwd = empty($adminpwd) ? "admin" : $adminpwd;
     $webname = empty($webname) ? "我的网站" : $webname;

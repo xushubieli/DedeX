@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 require_once(DEDEINC."/libraries/agent.class.php");
 /**
  * 流量统计操作

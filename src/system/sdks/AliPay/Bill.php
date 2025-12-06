@@ -1,6 +1,6 @@
 <?php
 namespace AliPay;
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 use WeChat\Contracts\BasicAliPay;
 /**
  * 支付宝电子面单下载

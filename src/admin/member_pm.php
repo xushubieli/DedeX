@@ -31,7 +31,6 @@ if (!empty($username)) {
 }
 $sql = "SELECT * FROM `#@__member_pms` $whereSql ORDER BY sendtime DESC";
 $dlist = new DataListCP();
-$dlist->pagesize = 10;
 $dlist->SetParameter("folder", $folder);
 $dlist->SetParameter("username", $username);
 $dlist->SetParameter("keyword", $keyword);

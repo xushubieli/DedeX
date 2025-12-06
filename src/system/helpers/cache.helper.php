@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 缓存助手，支持文件和dedex cache
  *
@@ -24,7 +24,7 @@ if (!function_exists('GetCache')) {
         if ($result === false) {
             return false;
         }
-        $result = str_replace("<?php exit('dedex');?>\n\r", "", $result);
+        $result = str_replace("<?php exit('Error: Invalid! ');?>\n\r", "", $result);
         $result = @unserialize($result);
         if ($result['timeout'] != 0 && $result['timeout'] < time()) {
             return false;
@@ -49,7 +49,7 @@ if (!function_exists('SetCache')) {
         $key = substr($key, 0, 2).'/'.substr($key, 2, 2).'/'.substr($key, 4, 2).'/'.$key;
         $tmp['data'] = $value;
         $tmp['timeout'] = $timeout != 0 ? time() + (int) $timeout : 0;
-        $cache_data = "<?php exit('dedex');?>\n\r".@serialize($tmp);
+        $cache_data = "<?php exit('Error: Invalid! ');?>\n\r".@serialize($tmp);
         return @PutFile(DEDEDATA."/cache/$prefix/$key.php",  $cache_data);
     }
 }

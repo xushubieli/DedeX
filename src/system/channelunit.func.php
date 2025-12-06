@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 栏目助手
  *
@@ -7,7 +7,7 @@ if (!defined('DEDEINC')) exit('dedex');
  * @package        DedeX.Helpers
  * @license        GNU GPL v2 (/license.txt)
  */
-if (!isset($cfg_mainsite)) extract($GLOBALS, EXTR_SKIP);
+if (!isset($cfg_mainsite)) {extract($GLOBALS, EXTR_SKIP);}
 helper('channelunit');
 global $PubFields, $pTypeArrays, $idArrary, $envs, $v1, $v2;
 $pTypeArrays = $idArrary = $PubFields = $envs = array();

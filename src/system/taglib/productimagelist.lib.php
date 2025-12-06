@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * @version        $id:productimagelist.lib.php 9:29 2010年7月6日 tianya $
  * @package        DedeX.Taglib

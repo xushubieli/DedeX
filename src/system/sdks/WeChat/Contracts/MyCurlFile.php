@@ -1,6 +1,6 @@
 <?php
 namespace WeChat\Contracts;
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 自定义CURL文件类
  * Class MyCurlFile

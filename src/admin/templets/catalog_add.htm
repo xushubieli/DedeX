@@ -24,7 +24,7 @@
 						<input type="hidden" name="reid" id="reid" value="<?php echo $id;?>">
 						<input type="hidden" name="topid" id="topid" value="<?php echo $topid;?>">
 						<?php
-						if ($id>0) {
+						if ($id > 0) {
 							echo " <input type='hidden' name='moresite' value='{$myrow['moresite']}'>";
 							echo " <input type='hidden' name='siteurl' value='{$myrow['siteurl']}'>";
 							echo " <input type='hidden' name='sitepath' value='{$myrow['sitepath']}'>";
@@ -77,7 +77,7 @@
 													}
 													?>
 												</select>
-												<span>（请选栏目的信息联动类型支持多选）</span>
+												<span>（所选栏目的信息联动类型支持多选）</span>
 											</div>
 										</td>
 										<td>上级目录</td>
@@ -92,9 +92,9 @@
 										</td>
 									</tr>
 									<tr>
-										<td>中文名称</td>
+										<td>栏目名称</td>
 										<td><input type="text" name="typename" class="form-control admin-w-lg" required></td>
-										<td>中文概述</td>
+										<td>栏目概述</td>
 										<td><input type="text" name="cnoverview" class="form-control admin-w-lg"></td>
 									</tr>
 									<tr>
@@ -166,7 +166,7 @@
 										<td>
 											<label><input type="radio" name="ispart" value="0" checked> 列表栏目（允许发布）</label>
 											<label><input type="radio" name="ispart" value="1"> 封面栏目（不允许发布）</label>
-											<label><input type="radio" name="ispart" id="ispart2" value="2"> 外部栏目（栏目生成目录处填写网址）</label>
+											<label><input type="radio" name="ispart" id="ispart2" value="2"> 外部栏目（栏目生成目录填写网址）</label>
 										</td>
 										<td>栏目交叉</td>
 										<td>
@@ -184,7 +184,7 @@
 										<td>
 											<label><input type="radio" name="moresite" value="1"> 启用</label>
 											<label><input type="radio" name="moresite" value="0" checked> 禁用</label>
-											<span>（启用前，在系统设置中核心设置找到开启多站点绝对网址）</span>
+											<span>（启用前，在系统设置中核心设置开启多站点绝对网址）</span>
 										</td>
 										<td>绑定网址</td>
 										<td><input type="text" name="siteurl" id="siteurl" onChange="CheckPathSet();" class="form-control admin-w-lg">（请输入网址，效果：网址/栏目生成目录）</td>
@@ -193,12 +193,12 @@
 									<tr>
 										<td>列表模板</td>
 										<td>
-											<input type="text" name="templist" value="{style}/list_<?php echo $nid?>.htm" class="form-control admin-w-lg">
+											<input type="text" name="templist" value="{style}/list_<?php echo $nid;?>.htm" class="form-control admin-w-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.templist')">选择</button>
 										</td>
 										<td>封面模板</td>
 										<td>
-											<input type="text" name="tempindex" value="{style}/index_<?php echo $nid?>.htm" class="form-control admin-w-lg">
+											<input type="text" name="tempindex" value="{style}/index_<?php echo $nid;?>.htm" class="form-control admin-w-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.tempindex')">选择</button>
 											<a href="javascript:ShowHide('helpvar1');" class="btn btn-primary btn-sm">说明</a>
 											<div id="helpvar1" class="helpinfo mt-3" style="display:none">
@@ -210,7 +210,7 @@
 									<tr>
 										<td>文档模板</td>
 										<td>
-											<input type="text" name="temparticle" value="{style}/article_<?php echo $nid?>.htm" class="form-control admin-w-lg">
+											<input type="text" name="temparticle" value="{style}/article_<?php echo $nid;?>.htm" class="form-control admin-w-lg">
 											<button type="button" class="btn btn-primary btn-sm" onclick="SelectTemplets('form1.temparticle')">选择</button>
 										</td>
 										<td>列表命名规则</td>
@@ -250,7 +250,7 @@
 									<tr>
 										<td>是否启用跨站调用</td>
 										<td colspan="3">
-											<input type="text" name="apikey" id="apikey" class="form-control admin-w-lg" placeholder="请输入跨站调用秘钥">
+											<input type="text" name="apikey" id="apikey" class="form-control admin-w-lg">
 											<label><input type="radio" name="apienabled" value="1"> 启用</label>
 											<label><input type="radio" name="apienabled" value="0" checked> 禁用</label>
 											<a href="javascript:makeAPIKey();" class="btn btn-primary btn-sm">更新</i></a>

@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * @version        $id:autoload.inc.php 17:44 2020-09-22 tianya $
  * @package        DedeX.Libraries

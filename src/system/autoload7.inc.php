@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * @version        $id:autoload7.inc.php 17:44 2020-09-22 tianya $
  * @package        DedeX.Libraries
@@ -16,7 +16,7 @@ function dede_autoloader($classname)
         $classname = "archive/".$classname;
     }
     $libclassfile = $classname.'.class.php';
-    if (is_file(DEDEINC.'/'.$libclassfile )) {
+    if (is_file(DEDEINC.'/'.$libclassfile)) {
         require DEDEINC.'/'.$libclassfile;
     } else {
         if (DEBUG_LEVEL === TRUE) {

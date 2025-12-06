@@ -111,7 +111,7 @@
 						</div>
 						<div class="col-12">
 							<div class="card shadow-sm">
-								<div class="card-header">流量统计</div>
+								<div class="card-header">历史流量</div>
 								<div class="card-body">
 									<canvas id="statChart"></canvas>
 								</div>
@@ -119,7 +119,7 @@
 						</div>
 						<div class="col-12">
 							<div class="card shadow-sm">
-								<div class="card-header">最新发布</div>
+								<div class="card-header">最新文档</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-borderless table-hover">
@@ -161,17 +161,17 @@
 					<div class="row g-3">
 						<div class="col-12">
 							<div class="card admin-panel-web shadow-sm">
-								<div class="card-header">站点信息</div>
+								<div class="card-header">系统信息</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-borderless">
 											<tbody>
 												<tr>
 													<td width="100">操作系统</td>
-													<td><?php echo PHP_OS;?>/<?php echo GetSimpleServerSoftware();?></td>
+													<td><?php echo PHP_OS;?> <?php echo GetSimpleServerSoftware();?></td>
 												</tr>
 												<tr>
-													<td>服务器IP</td>
+													<td>IP地址</td>
 													<td><?php echo gethostbyname($_SERVER['SERVER_NAME']);?></td>
 												</tr>
 												<tr>
@@ -194,26 +194,30 @@
 						</div>
 						<div class="col-12">
 							<div class="card shadow-sm">
-								<div class="card-header">站点授权</div>
+								<div class="card-header">站点信息</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-borderless">
 											<tbody>
 												<tr>
-													<td width="100">站点授权</td>
-													<td>站点（<?php echo $cfg_basehost;?>）已授权</td>
+													<td width="100">站点网址</td>
+													<td><?php echo $cfg_basehost;?></td>
 												</tr>
 												<tr>
-													<td>系统名称</td>
-													<td><?php echo $cfg_soft_enname;?></td>
+													<td>软件名称</td>
+													<td><?php echo $cfg_soft_intl;?></td>
 												</tr>
 												<tr>
-													<td>当前版本</td>
-													<td>v<?php echo $cfg_version_detail;?></td>
+													<td>版本信息</td>
+													<td>v<?php echo $cfg_version_info;?></td>
 												</tr>
 												<tr>
-													<td>技术支持</td>
-													<td><a href="https://github.com/xushubieli/DedeX" target="_blank" class="text-primary">DedeX团队</a></td>
+													<td>开发团队</td>
+													<td><a href="https://github.com/xushubieli/DedeX" target="_blank" class="text-primary"><?php echo $cfg_soft_devteam;?></a></td>
+												</tr>
+												<tr>
+													<td>特别鸣谢</td>
+													<td>Joe</td>
 												</tr>
 											</tbody>
 										</table>

@@ -50,16 +50,16 @@ if (!DEDEX_SAFE_MODE) {
     $safeMsg[] = '检查出系统运行开发模式，建议您启用安全模式 <a href="index_body.php?dopost=safe_mode" class="btn btn-primary btn-xs">详情</a>';
 }
 if (!IsSSL()) {
-    $safeMsg[] = '检查出站点非安全链接，建议您部署https';
+    $safeMsg[] = '检查出站点非安全链接，建议您部署ssl证书';
 }
 if (IsWritable(DEDEDATA.'/common.inc.php')) {
-    $safeMsg[] = '检查出/data/common.inc.php数据库配置文件权限可以写入，建议您以管理员权限设置禁止写入';
+    $safeMsg[] = '检查出/data/common.inc.php数据库配置文件权限可以写入，建议您以管理员组设置禁止写入';
 }
 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
     $safeMsg[] = '检查出PHP版本过低会导致无法操作后台，建议您升级到PHP.8x';
 }
 if (preg_match("#admin#", $dirname)) {
-    $safeMsg[] = '检查出后台管理文件夹命名为admin，建议您修改后台管理文件夹名称';
+    $safeMsg[] = '检查出后台管理文件夹名为admin，建议您修改后台管理文件夹名称';
 }
 $rs = TestAdminPWD();
 if ($rs < 0) {

@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 自定义宏标签
  *
@@ -31,6 +31,7 @@ function lib_GetMyTagT(&$refObj, $typeid, $tagname, $tablename)
     if (!empty($refObj->Fields['typeid']) && $typeid == 0) $typeid = $refObj->Fields['typeid'];
     $typesql = $row = '';
     if ($typeid > 0) $typesql = " And typeid IN(0,".GetTopids($typeid).") ";
+    $tagname = $dsql->Esc($tagname);
     $row = $dsql->GetOne(" SELECT * FROM $tablename WHERE tagname LIKE '$tagname' $typesql ORDER BY typeid DESC ");
     if (!is_array($row)) return '';
     $nowtime = time();

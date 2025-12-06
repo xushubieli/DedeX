@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 function is_cli()
 {
     return (PHP_SAPI === 'cli' || defined('STDIN'));

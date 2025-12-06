@@ -68,7 +68,6 @@ if ($mtypesid != 0) {
 }
 $query = "SELECT arc.id,arc.typeid,arc.senddate,arc.flag,arc.ismake,arc.channel,arc.arcrank,arc.click,arc.title,arc.color,arc.litpic,arc.pubdate,arc.mid,tp.typename,ch.typename as channelname FROM `#@__archives` arc LEFT JOIN `#@__arctype` tp on tp.id=arc.typeid LEFT JOIN `#@__channeltype` ch on ch.id=arc.channel $whereSql ORDER BY arc.senddate DESC";
 $dlist = new DataListCP();
-$dlist->pagesize = 10;
 $dlist->SetParameter("dopost", "listArchives");
 $dlist->SetParameter("keyword", $keyword);
 $dlist->SetParameter("cid", $cid);

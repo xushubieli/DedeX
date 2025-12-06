@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 系统核心函数
  * @version        $id:customfields.func.php 2 20:50 2010年7月7日 tianya $

@@ -13,9 +13,8 @@ $f = RemoveXSS($f);
 if (empty($keywords)) $keywords = '';
 $sql = "SELECT * FROM `#@__keywords` ORDER BY `rank` DESC";
 $dlist = new DataListCP();
-$dlist->SetTemplate(DEDEADMIN."/templets/article_keywords_select.htm");
-$dlist->pagesize = 10;
 $dlist->SetParameter("f", $f);
+$dlist->SetTemplate(DEDEADMIN."/templets/article_keywords_select.htm");
 $dlist->SetSource($sql);
 $dlist->Display();
 function GetSta($sta)

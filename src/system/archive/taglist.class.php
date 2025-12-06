@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 标签列表
  *
@@ -109,22 +109,21 @@ class TagList
             $this->PageNo = 1;
         }
         if ($this->TotalResult == -1) {
-            $cquery = "SELECT COUNT(*) AS dd FROM `#@__taglist` WHERE tid = '{$this->TagInfos['id']}' AND arcrank >-1 ";
+            $cquery = "SELECT COUNT(*) AS dd FROM `#@__taglist` WHERE tid = '{$this->TagInfos['id']}' AND arcrank > -1 ";
             $row = $this->dsql->GetOne($cquery);
             $this->TotalResult = $row['dd'];
-            //更新Tag信息
             $ntime = time();
             //更新浏览量和记录数
-            $upquery = "UPDATE `#@__tagindex` SET total='{$row['dd']}',count=count+1,weekcc=weekcc+1,monthcc=monthcc+1 WHERE tag LIKE '{$this->TagInfos['tag']}' ";
+            $upquery = "UPDATE `#@__tagindex` SET total='{$row['dd']}',count=count+1,weekcc=weekcc+1,monthcc=monthcc+1 WHERE id='{$this->TagInfos['id']}' ";
             $this->dsql->ExecuteNoneQuery($upquery);
             $oneday = 24 * 3600;
             //周统计
             if (ceil(($ntime - $this->TagInfos['weekup']) / $oneday) > 7) {
-                $this->dsql->ExecuteNoneQuery("UPDATE `#@__tagindex` SET weekcc=0,weekup='{$ntime}' WHERE tag LIKE '{$this->TagInfos['tag']}' ");
+                $this->dsql->ExecuteNoneQuery("UPDATE `#@__tagindex` SET weekcc=0,weekup='{$ntime}' WHERE id='{$this->TagInfos['id']}' ");
             }
             //月统计
             if (ceil(($ntime - $this->TagInfos['monthup']) / $oneday) > 30) {
-                $this->dsql->ExecuteNoneQuery("UPDATE `#@__tagindex` SET monthcc=0,monthup='{$ntime}' WHERE tag LIKE '{$this->TagInfos['tag']}' ");
+                $this->dsql->ExecuteNoneQuery("UPDATE `#@__tagindex` SET monthcc=0,monthup='{$ntime}' WHERE id='{$this->TagInfos['id']}' ");
             }
         }
         $ctag = $this->dtp->GetTag("page");
@@ -153,11 +152,11 @@ class TagList
         global $cfg_cmspath, $cfg_tags_dir;
         $tagsDir = str_replace("{cmspath}", $cfg_cmspath, $cfg_tags_dir);
         $makeDir = empty($this->Tag) ? $this->GetTruePath().$tagsDir."/index.html" : $this->GetTruePath().$tagsDir."/{$this->Tag}/index.html";
-        if ($this->Tag != '') {
+        if ($this->Tag != 0) {
             $this->CountRecord();
         }
         $this->ParseTempletsFirst();
-        if ($this->Tag != '') {
+        if ($this->Tag != 0) {
             if ($this->PageNo == 0) {
                 $this->PageNo = 1;
             }

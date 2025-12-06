@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 require_once(dirname(__FILE__)."/Exceptions/ConditionNotAllowedException.php");
 require_once(dirname(__FILE__)."/Exceptions/FileNotFoundException.php");
 require_once(dirname(__FILE__)."/Exceptions/InvalidJsonException.php");

@@ -1,5 +1,5 @@
 <?php
-if (!defined('DEDEINC')) exit('dedex');
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 当前栏目列表标签
  *
@@ -11,7 +11,7 @@ require_once(DEDEINC.'/archive/partview.class.php');
 function lib_channelartlist(&$ctag, &$refObj)
 {
     global $dsql, $envs, $_sys_globals;
-    $attlist = "typeid|0,row|10,cacheid|,type|,notypeid|0,currentstyle|"; //后续添加否定栏目调用notypeid
+    $attlist = "typeid|0,row|10,cacheid|,type|,notypeid|0,currentstyle|";
     FillAttsDefault($ctag->CAttribute->Items, $attlist);
     extract($ctag->CAttribute->Items, EXTR_SKIP);
     $innertext = trim($ctag->GetInnerText());
@@ -32,7 +32,7 @@ function lib_channelartlist(&$ctag, &$refObj)
     $typeids = array();
     $order = " ORDER BY sortrank ASC ";
     if ($type == 'reid') {        
-        $reid = $refObj->TypeLink->TypeInfos['reid'];          
+        $reid = $refObj->TypeLink->TypeInfos['reid'];
         $tpsql = " reid='$reid' AND ishidden<>1 ";
     } else if ($typeid == 0 || $typeid == 'top') {
         $tpsql = " reid=0 AND ishidden<>1 AND channeltype>0 ";

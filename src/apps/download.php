@@ -12,7 +12,7 @@ if (!isset($open)) $open = 0;
 //读取链接列表
 if ($open == 0) {
     $aid = (isset($aid) && is_numeric($aid)) ? $aid : 0;
-    if ($aid == 0) exit('dedex');
+    if ($aid == 0) exit('Error: Invalid! ');
     $arcRow = GetOneArchive($aid);
     if ($arcRow['aid'] == '') {
         ShowMsg('无法获取未知文档的信息', '-1');

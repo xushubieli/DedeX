@@ -83,7 +83,7 @@
 											<label><input type="checkbox" name="autosetup" id="autosetup" value="1" onclick="ShowHideField('autosetup','autosetupinput','autosetupct')" <?php if (isset($autosetup) && $autosetup==1) echo 'checked';?>> 自动生成</label
 											<div style="display:<?php if (!isset($autosetup) || $autosetup==0) echo 'block'; else echo 'none';?>" id="autosetupinput"><input type="file" name="setup" id="setup" class="form-control admin-w-lg"></div>
 											<div style="display:<?php if (isset($autosetup) && $autosetup==1) echo 'block'; else echo 'none';?>" id="autosetupct">
-												<p>（由系统自动处理安装，请使用MySQL4.0版本格式的SQL语句：MySQL4.1/5.x版本请把创建表语句ENGINE=MyISAM DEFAULT CHARSET=*，改为TYPE=MyISAM，SQL语句允许换行，但必须用;表示一条SQL语句结束，如果SQL中包含有模块网址的，用_ROOTURL_ 表示，例：_ROOTURL_/ask/index.php）</p>
+												<p>（由系统自动处理安装，请使用MySQL4.0版本格式的SQL语句：MySQL4.1/5.x版本请把创建表语句ENGINE=MyISAM DEFAULT CHARSET=*，改为TYPE=MyISAM，SQL语句允许换行，必须用;表示一条SQL语句结束。如果SQL中包含有模块网址的，用_ROOTURL_ 表示，例：_ROOTURL_/ask/index.php）</p>
 												<textarea name="setupsql40" id="setupsql40" class="admin-textarea-xl"><?php echo $setupsql40;?></textarea>
 											</div>
 										</td>
@@ -109,7 +109,7 @@
 									<tr>
 										<td>文件列表</td>
 										<td>
-											<p>（每行指定一个文件或目录，路径为相对于本目录，本目录的文件则直接用文件名即可，对于整个打包的目录，不需要指定子目录里的文件，例：如果已经指定了/book则不需要再指定目录里的/book/index.php 等文件或目录，系统会自动索引整个目录，对于不需要索引整个目录的，请不要指定这个目录，否则会把不必要的文件也放进模块中）</p>
+											<p>（每行指定一个文件或目录，路径为相对本目录，本目录的文件则直接用文件名即可。打包目录，不需要指定子目录里的文件，例：如果已经指定了/book则不需要再指定目录里的/book/index.php文件或目录，系统会自动索引整个目录，不需要索引整个目录，请不要指定这个目录，否则会把不必要的文件也放进模块中）</p>
 											<textarea name="filelist" id="filelist" class="admin-textarea-xl"><?php echo $filelist;?></textarea>
 										</td>
 									</tr>
