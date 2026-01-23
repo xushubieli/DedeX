@@ -32,7 +32,7 @@ if ($dopost == "delete") {
         ShowMsg("成功删除指定链接", $ENV_GOBACK_URL);
         exit();
     } else {
-        ShowMsg("您没选定任何链接", $ENV_GOBACK_URL);
+        ShowMsg("您没选择任何链接", $ENV_GOBACK_URL);
         exit();
     }
 } else if ($dopost == "saveedit") {
@@ -54,11 +54,17 @@ if ($dopost == "delete") {
             ShowMsg("仅支持上传图片文件", -1);
             exit;
         }
-        $logoimg_name = trim(preg_replace("#[ \r\n\t\*\%\\\/\?><\|\":]{1,}#", '', $logoimg_name));
-        $fullfilename = DEDEROOT.'/static/flink/'.$logoimg_name;
+        $logoimg_name = trim(preg_replace("#[\r\n\t\*\%\\\/\?><\|\":]{1,}#", '', $logoimg_name));
+        $names = explode('.', $logoimg_name); 
+        $shortname = '.'.$names[count($names) - 1];
+        if (!preg_match("#(jpg|gif|png)$#", $shortname)) {
+            $shortname = '.gif';
+        }
+        $newfilename = MyDate("ymdHis", time()).$shortname; 
+        $fullfilename = DEDEROOT.$cfg_medias_dir.'/flink/'.$newfilename;
         move_uploaded_file($logoimg, $fullfilename) or die("上传文件到{$fullfilename}失败");
         @unlink($logoimg);
-        $logo = $cfg_cmspath.'/static/flink/'.$logoimg_name;
+        $logo = $cfg_medias_dir.'/flink/'.$newfilename;
     }
     $sortrank = isset($sortrank)? intval($sortrank) : 1;
     $url = isset($url)? HtmlReplace($url, -1) : '';

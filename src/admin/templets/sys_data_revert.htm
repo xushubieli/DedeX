@@ -86,8 +86,11 @@
 			function ReSel() {
 				var myform = document.form1;
 				for (i = 0; i < myform.bakfile.length; i++) {
-					if (myform.bakfile[i].checked) myform.bakfile[i].checked = false;
-					else myform.bakfile[i].checked = true;
+					if (myform.bakfile[i].checked) {
+						myform.bakfile[i].checked = false;
+					} else {
+						myform.bakfile[i].checked = true;
+					}
 				}
 			}
 			function SelAll() {

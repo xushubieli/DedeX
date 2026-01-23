@@ -101,8 +101,6 @@ if ($action == 'post') {
                 $smtp = new smtp($cfg_smtp_server, $cfg_smtp_port, true, $cfg_smtp_usermail, $cfg_smtp_password);
                 $smtp->debug = false;
                 $smtp->sendmail($cfg_adminemail, $cfg_webname, $cfg_smtp_usermail, $mailtitle, $mailbody, $mailtype);
-            } else {
-                @mail($cfg_adminemail, $mailtitle, $mailbody, $headers);
             }
             if ($diy->public == 2) {
                 $goto = "diy.php?action=list&diyid={$diy->diyid}";

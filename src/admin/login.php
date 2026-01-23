@@ -51,13 +51,7 @@ if ($dopost == 'login') {
         $res = $cuserLogin->checkUser($userid, $pwd);
         if ($res == 1) {
             $cuserLogin->keepUser();
-            if (!empty($_COOKIE['ENV_GOBACK_URL'])) {
-                $gotopage = RemoveXSS($_COOKIE['ENV_GOBACK_URL']);
-                DropCookie('ENV_GOBACK_URL');
-            } else if (!empty($_GET['gotopage'])) {
-                $gotopage = RemoveXSS($_GET['gotopage']);
-            }
-            if ($gotopage) {
+            if (!empty($gotopage)) {
                 header("Location: {$gotopage}");
                 exit();
             } else {

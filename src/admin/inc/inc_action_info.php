@@ -28,17 +28,17 @@ $actionSearch[0] = array(
             'linkurl' => 'content_list.php?mid=$cuserLogin->userID'
         ),
         3  =>  array(
-            'title' => '标签管理',
+            'title' => '标签列表',
             'purview' => 'sys_Keyword',
             'linkurl' => 'tags_main.php'
         ),
         4  =>  array(
-            'title' => '评论管理',
+            'title' => '评论列表',
             'purview' => 'sys_Feedback',
             'linkurl' => 'feedback_main.php'
         ),
         5  =>  array(
-            'title' => '专题管理',
+            'title' => '专题列表',
             'purview' => 'spec_New',
             'linkurl' => 'content_s_list.php'
         ),
@@ -144,7 +144,7 @@ $actionSearch[4] = array(
             'linkurl' => 'member_main.php'
         ),
         1  =>  array(
-            'title' => '会员消息管理',
+            'title' => '会员消息列表',
             'purview' => 'member_Type',
             'linkurl' => 'member_pm.php'
         ),
@@ -259,7 +259,7 @@ $actionSearch[8] = array(
             'linkurl' => 'sys_info.php'
         ),
         1  =>  array(
-            'title' => '管理员管理',
+            'title' => '管理员设置',
             'purview' => 'sys_User',
             'linkurl' => 'sys_admin_user.php'
         ),
@@ -283,22 +283,32 @@ $actionSearch[8] = array(
             'purview' => 'sys_SoftConfig',
             'linkurl' => 'soft_config.php'
         ),
-        6  => DEDEX_SAFE_MODE? null : array(
+        6  =>  array(
+            'title' => '文档随机模板设置',
+            'purview' => 'sys_StringMix',
+            'linkurl' => 'article_template_rand.php'
+        ),
+        7  =>  array(
+            'title' => '防采集字符串设置',
+            'purview' => 'sys_StringMix',
+            'linkurl' => 'article_string_mix.php'
+        ),
+        8  => DEDEX_SAFE_MODE? null : array(
             'title' => '数据库备份还原',
             'purview' => 'sys_data',
             'linkurl' => 'sys_data.php'
         ),
-        7  => DEDEX_SAFE_MODE? null : array(
+        9  => DEDEX_SAFE_MODE? null : array(
             'title' => 'SQL命令工具',
             'purview' => 'sys_data',
             'linkurl' => 'sys_sql_query.php'
         ),
-        8  =>  array(
+        10  =>  array(
             'title' => '文件扫描工具',
             'purview' => 'sys_verifies',
             'linkurl' => 'sys_safetest.php'
         ),
-        9  =>  array(
+        11  =>  array(
             'title' => '系统修复工具',
             'purview' => 'sys_verifies',
             'linkurl' => 'sys_repair.php'

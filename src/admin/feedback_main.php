@@ -1,6 +1,6 @@
 <?php
 /**
- * 评论管理
+ * 评论列表
  *
  * @version        $id:feedback_main.php 19:09 2010年7月12日 tianya $
  * @package        DedeX.Administrator

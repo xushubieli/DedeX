@@ -57,8 +57,11 @@
 			}
 			function showHide(objname) {
 				var obj = document.getElementById(objname);
-				if (obj.style.display=="none") obj.style.display = "block";
-				else obj.style.display="none";
+				if (obj.style.display=="none") {
+					obj.style.display = "block";
+				} else {
+					obj.style.display="none";
+				} 
 			}
 		</script>
 	</body>

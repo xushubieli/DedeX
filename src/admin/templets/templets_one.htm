@@ -23,8 +23,11 @@
 							$dsql->Execute("s","Select likeid From `#@__sgpage` group by likeid ");
 							echo "<option>不限</option>";
 							while ($arr = $dsql->GetArray('s')) {
-								if ($likeid==$arr['likeid']) echo "<option value='{$arr['likeid']}' selected>{$arr['likeid']}</option>";
-								else echo "<option value='{$arr['likeid']}'>{$arr['likeid']}</option>";
+								if ($likeid==$arr['likeid']) {
+									echo "<option value='{$arr['likeid']}' selected>{$arr['likeid']}</option>";
+								} else {
+									echo "<option value='{$arr['likeid']}'>{$arr['likeid']}</option>";
+								}
 							}
 							echo "</select>";
 							?>

@@ -192,8 +192,11 @@
 			function ReSel() {
 				var myform = document.form1;
 				for (i = 0; i < myform.tables.length; i++) {
-					if (myform.tables[i].checked) myform.tables[i].checked = false;
-					else myform.tables[i].checked = true;
+					if (myform.tables[i].checked) {
+						myform.tables[i].checked = false;
+					} else {
+						myform.tables[i].checked = true;
+					}
 				}
 			}
 			function SelAll() {

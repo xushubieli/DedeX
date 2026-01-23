@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-		<title>标签管理</title>
+		<title>标签列表</title>
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -13,7 +13,7 @@
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<li class="breadcrumb-item active">标签管理</li>
+				<li class="breadcrumb-item active">标签列表</li>
 			</ol>
 			<div class="card shadow-sm mb-3">
 				<div class="card-body d-md-flex justify-content-md-between">
@@ -34,10 +34,9 @@
 				</div>
 			</div>
 			<div class="card shadow-sm">
-				<div class="card-header">标签管理</div>
+				<div class="card-header">标签列表</div>
 				<div class="card-body">
 					<form name="form3" action="tags_main.php?action=delete" method="post">
-						<input type="hidden" name="pageno" value="<?php echo $pageno;?>">
 						<div class="table-responsive">
 							<table class="table table-borderless table-hover">
 								<thead>
@@ -63,7 +62,7 @@
 									$fields['tag'] = dede_htmlspecialchars($fields['tag']);
 									?>
 									<tr>
-										<td><input type="checkbox" name="ids[]" value="<?php echo $fields['id'];?>"></td>
+										<td><input type="checkbox" name="ids" value="<?php echo $fields['id'];?>"></td>
 										<td>{dede:field.id/}</td>
 										<td><a href="<?php echo $cfg_phpurl;?>/tags.php?/<?php echo $fields['id'];?>" target="_blank">{dede:sfield.tag/}</a></td>
 										<td>
@@ -84,10 +83,10 @@
 									</tr>
 									{/dede:datalist}
 									<tr>
-										<td colspan="8">
-											<a href="javascript:selAll();" class="btn btn-primary btn-sm">全选</a>
-											<a href="javascript:noSelAll();" class="btn btn-primary btn-sm">取消</a>
-											<button type="button" onclick="document.form3.submit();" class="btn btn-danger btn-sm">删除</button>
+										<td colspan="11">
+											<a href="javascript:AllSel();" class="btn btn-primary btn-sm">全选</a>
+											<a href="javascript:NoneSel();" class="btn btn-primary btn-sm">取消</a>
+											<a href="javascript:DelSel();"  class="btn btn-danger btn-sm">删除</a>
 										</td>
 									</tr>
 								</tbody>
@@ -99,18 +98,36 @@
 			</div>
 		</div>
 		<script>
-			var pageno = <?php echo $pageno;?>;
-			function selAll() {
-				var a = document.getElementsByTagName("input");
-				for (var i = 0; i < a.length; i++) {
-					if (a[i].type == "checkbox") a[i].checked = true;
+			function getCheckboxItem() {
+				var allSel = '';
+				if (document.form3.ids.value) return document.form3.ids.value;
+				for (i = 0; i < document.form3.ids.length; i++) {
+					if (document.form3.ids[i].checked) {
+						if (allSel == "") {
+							allSel = document.form3.ids[i].value;
+						} else {
+							allSel = allSel + "," + document.form3.ids[i].value;
+						}
+					}
+				}
+				return allSel;
+			}
+			function AllSel() {
+				for (i = 0; i < document.form3.ids.length; i++) {
+					document.form3.ids[i].checked = true;
 				}
 			}
-			function noSelAll() {
-				var a = document.getElementsByTagName("input");
-				for (var i = 0; i < a.length; i++) {
-					if (a[i].type == "checkbox") a[i].checked = false;
+			function NoneSel() {
+				for (i = 0; i < document.form3.ids.length; i++) {
+					document.form3.ids[i].checked = false;
 				}
+			}
+			function DelSel() {
+				var tid = getCheckboxItem();
+				location = "tags_main.php?action=delete&ids=" + tid;
+			}
+			function DeleteOne(tid) {
+				location = "tags_main.php?action=delete&ids=" + tid;
 			}
 			function UpdateOne(tid) {
 				let count = document.getElementById('count' + tid).value;
@@ -132,9 +149,6 @@
 						ShowMsg(data);
 					}
 				});
-			}
-			function DeleteOne(tid) {
-				location = "tags_main.php?action=delete&ids=" + tid + "&pageno=" + pageno;
 			}
 		</script>
 	</body>

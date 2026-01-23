@@ -25,9 +25,13 @@
 			<div class="card shadow-sm">
 				<div class="card-header">
 					<?php
-					if ($acdir=='plus') echo '插件模板';
-					else if ($acdir=='system') echo '系统模板';
-					else echo $acdir;
+					if ($acdir=='plus') {
+						echo '插件模板';
+					} else if ($acdir=='system') {
+						echo '系统模板';
+					} else {
+						echo $acdir;
+					}
 					?>
 				</div>
 				<div class="card-body">

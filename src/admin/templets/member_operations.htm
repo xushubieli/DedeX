@@ -90,14 +90,17 @@
 			}
 			function ReSel() {
 				for (i = 0; i < document.form1.aids.length; i++) {
-					if (document.form1.aids[i].checked) document.form1.aids[i].checked = false;
-					else document.form1.aids[i].checked = true;
+					if (document.form1.aids[i].checked) {
+						document.form1.aids[i].checked = false;
+					} else {
+						document.form1.aids[i].checked = true;
+					}
 				}
 			}
 			function DelSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					showMsg('请选择要删除消费记录');
+					alert('请选择要删除的选项');
 					return;
 				}
 				location.href = "member_do.php?dopost=deoperations&nid=" + nid;
@@ -105,7 +108,7 @@
 			function UpSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					showMsg('请选择要修改消费记录');
+					alert('请选择要修改的选项');
 					return;
 				}
 				location.href = "member_do.php?dopost=upoperations&nid=" + nid;
@@ -113,7 +116,7 @@
 			function OkSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					showMsg('请选择要修改消费记录');
+					alert('请选择要修改的选项');
 					return;
 				}
 				location.href = "member_do.php?dopost=okoperations&nid=" + nid;

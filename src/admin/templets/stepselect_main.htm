@@ -45,6 +45,7 @@
 			</div>
 			<?php
 			if (!empty($egroup)) {
+				$topvalue = isset($topvalue) ? $topvalue : 0;
 				$arr = $dsql->GetOne("SELECT * FROM `#@__stepselect` WHERE egroup='{$egroup}' ");
 				$dsql->Execute('out',"SELECT evalue,ename FROM `#@__sys_enum` WHERE egroup='{$arr['egroup']}' ORDER BY disorder ASC,evalue ASC");
 				$options = '';
@@ -319,8 +320,11 @@
 			function TogSel() {
 				var ems = document.getElementsByName('ids[]');
 				for (i = 0; i < ems.length; i++) {
-					if (ems[i].checked == false) ems[i].checked = true;
-					else ems[i].checked = false;
+					if (ems[i].checked == false) {
+						ems[i].checked = true;
+					} else {
+						ems[i].checked = false;
+					}
 				}
 			}
 			function DelSel() {

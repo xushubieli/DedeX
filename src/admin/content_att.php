@@ -1,6 +1,6 @@
 <?php
 /**
- * 文档自定义属性
+ * 自定义文档属性
  *
  * @version        $id:content_att.php 14:31 2010年7月12日 tianya $
  * @package        DedeX.Administrator
@@ -36,7 +36,7 @@ if ($dopost == "save") {
     while ($row = $dsql->GetObject()) $attList[] = $row->att;
     $sqlAlter = "ALTER TABLE `#@__archives` CHANGE `flag` `flag` SET('".implode("','", $attList)."')";
     $dsql->ExecuteNoneQuery($sqlAlter);
-    ShowMsg('成功更新文档自定义属性', '-1');
+    ShowMsg('成功更新自定义文档属性', '-1');
     exit();
 }
 include DedeInclude('templets/content_att.htm');

@@ -162,8 +162,11 @@
 			}
 			function ShowHide2(objname) {
 				var obj = $Obj(objname);
-				if (obj.style.display != 'block') { obj.style.display = 'block' }
-				else { obj.style.display = 'none'; }
+				if (obj.style.display != 'block') {
+					obj.style.display = 'block'
+				} else {
+					obj.style.display = 'none';
+				}
 			}
 			function PublicDefault() {
 				if ($Obj('is1').checked || $Obj('is2').checked) {

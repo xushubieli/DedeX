@@ -178,17 +178,25 @@
 			function ChangeListStyle() {
 				var itxt = document.getElementById("myinnertext");
 				var myems = document.getElementsByName("liststyle");
-				if (myems[0].checked) editor.setValue(document.getElementById("list1").innerHTML);
-				else if (myems[1].checked) editor.setValue(document.getElementById("list2").innerHTML);
-				else if (myems[2].checked) editor.setValue(document.getElementById("list3").innerHTML);
-				else if (myems[3].checked) editor.setValue(document.getElementById("list4").innerHTML);
+				if (myems[0].checked) {
+					editor.setValue(document.getElementById("list1").innerHTML);
+				} else if (myems[1].checked) {
+					editor.setValue(document.getElementById("list2").innerHTML);
+				} else if (myems[2].checked) {
+					editor.setValue(document.getElementById("list3").innerHTML);
+				} else if (myems[3].checked) {
+					editor.setValue(document.getElementById("list4").innerHTML);
+				}
 				editor.setValue(editor.getValue().replace("<br>", "<br>"));
 				editor.setValue(editor.getValue().toLowerCase());
 			}
 			function ShowHide(objname) {
 				var obj = document.getElementById(objname);
-				if (obj.style.display == "block" || obj.style.display == "") obj.style.display = "none";
-				else obj.style.display = "block";
+				if (obj.style.display == "block" || obj.style.display == "") {
+					obj.style.display = "none";
+				} else {
+					obj.style.display = "block";
+				}
 			}
 			function SelectTemplets(fname) {
 				var pos = GetWinPos(800, 600);

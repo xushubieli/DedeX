@@ -43,8 +43,11 @@
 											<select name="rank_<?php echo $k;?>" id="rank_<?php echo $k;?>" class="form-select admin-w-sm">
 												<?php
 												foreach ($arcranks as $kkk=>$vvv) {
-													if ($row->rank==$kkk) echo "<option value='{$kkk}' selected>{$vvv}</option>";
-													else echo "<option value='{$kkk}'>{$vvv}</option>";
+													if ($row->rank==$kkk) {
+														echo "<option value='{$kkk}' selected>{$vvv}</option>";
+													} else {
+														echo "<option value='{$kkk}'>{$vvv}</option>";
+													}
 												}
 												?>
 											</select>
@@ -54,8 +57,11 @@
 											<select name="exptime_<?php echo $k;?>" id="exptime_<?php echo $k;?>" class="form-select admin-w-sm">
 												<?php
 												foreach ($times as $kkk=>$vvv) {
-													if ($row->exptime==$kkk) echo "<option value='{$kkk}' selected>{$vvv}</option>";
-													else echo "<option value='{$kkk}'>{$vvv}</option>";
+													if ($row->exptime==$kkk) {
+														echo "<option value='{$kkk}' selected>{$vvv}</option>";
+													} else {
+														echo "<option value='{$kkk}'>{$vvv}</option>";
+													}
 												}
 												?>
 											</select>

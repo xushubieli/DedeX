@@ -329,7 +329,7 @@ class userLogin
     {
         //$this->userChannel
         $cacheFile = DEDEDATA.'/cache/admincat_'.$this->userID.'.inc';
-        //管理员管理的栏目列表
+        //管理员设置栏目列表
         $typeid = trim($this->userChannel);
         if (empty($typeid) || $this->getUserType() >= 10) {
             $firstConfig = "\$cfg_admin_channel = 'all';\r\n\$admin_catalogs = array();\r\n";

@@ -30,7 +30,7 @@
 								<tbody>
 									<?php
 									while ($row = $dsql->GetArray()) {
-									   if ($row['dd']==1 ) break;
+									   if ($row['dd'] == 1) break;
 									?>
 									<tr>
 										<td><input type="checkbox" name="arcTitles" id="arcTitle" value="<?php echo urlencode($row['title']);?>"></td>

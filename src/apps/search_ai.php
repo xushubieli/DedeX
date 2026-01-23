@@ -70,20 +70,22 @@ if ($http_code !== 200) {
 $result = json_decode($response, true);
 if (isset($result['output']['choices'][0]['message']['content']) && !empty(trim($result['output']['choices'][0]['message']['content']))) {
     $content = $result['output']['choices'][0]['message']['content'];
+    $lines = explode("\n", $content);
+    $content = '';
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line !== '') {
+            $content .= "<p>".htmlspecialchars($line)."</p>\n";
+        }
+    }
     $content = str_replace('——', '', $content);
     $content = str_replace('—', '-', $content);
     $content = str_replace('–', '-', $content);
     $content = str_replace('---', '-', $content);
     $content = str_replace('--', '-', $content);
+    $content = str_replace('<p>-', '<p>', $content);
     $content = preg_replace('/[*#]+/', '', $content);
-    $content = preg_replace('/[\r\n]+/', "\n", $content);
-    $content = trim($content);
-    $lines = array_filter(array_map('trim', explode("\n", $content)));
-    foreach ($lines as $line) {
-        if ($line !== '') {
-            echo "<p>".htmlspecialchars($line, ENT_QUOTES, 'UTF-8')."</p>";
-        }
-    }
+    echo trim($content);
 } else {
     echo '<p>暂时无法回答这个问题，请换个说法试试。</p>';
 }

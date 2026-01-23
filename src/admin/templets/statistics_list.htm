@@ -140,14 +140,17 @@
 			}
 			function ReSel() {
 				for (i = 0; i < document.form2.aids.length; i++) {
-					if (document.form2.aids[i].checked) document.form2.aids[i].checked = false;
-					else document.form2.aids[i].checked = true;
+					if (document.form2.aids[i].checked) {
+						document.form2.aids[i].checked = false;
+					} else {
+						document.form2.aids[i].checked = true;
+					}
 				}
 			}
 			function DelSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					ShowMsg("请选择要删除的信息");
+					alert('请选择要删除的选项');
 					return;
 				}
 				location.href = "statistics_list.php?dopost=delete&aids=" + nid;

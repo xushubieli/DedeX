@@ -25,7 +25,7 @@
 							<table class="table table-borderless">
 								<tbody>
 									<tr>
-										<td width="260">选定栏目</td>
+										<td width="260">选择栏目</td>
 										<td>
 											<?php
 											$tl = new TypeLink(0);
@@ -34,6 +34,17 @@
 											echo "<option value='0' selected>不限栏目</option>";
 											echo $typeOptions;
 											echo "</select>";
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td>移动选项</td>
+										<td>
+											<?php
+											echo "<select name='newtypeid' class='form-select admin-w-sm'>";
+											echo $typeOptions;
+											echo "</select> ";
+											echo "<input type='text' name='keyword' value='' class='form-control admin-w-sm' placeholder='请输入指定标题关键词'>";
 											?>
 										</td>
 									</tr>
@@ -49,15 +60,15 @@
 										</td>
 									</tr>
 									<tr>
-										<td>文档发布时间</td>
+										<td>文档时间</td>
 										<td>
 											<label>开始<?php $nowtime = GetDateTimeMk(time()-(24*3600*30));?>：<input type="text" name="starttime" id="starttime" class="form-control datepicker admin-w-sm" value="<?php echo $nowtime;?>"></label>
 											<label>结束<?php $nowtime = GetDateTimeMk(time());?>：<input type="text" name="endtime" id="endtime" class="form-control datepicker admin-w-sm" value="<?php echo $nowtime;?>"></label>
-											<label><input type="checkbox" name="seltime" id="seltime" value="1"> 启用时间筛选（移动或删除文档可用该选项）</label>
+											<label><input type="checkbox" name="seltime" id="seltime" value="1"> 启用时间筛选（支持移动或删除文档）</label>
 										</td>
 									</tr>
 									<tr>
-										<td>文档操作</td>
+										<td>操作</td>
 										<td>
 											<label><input type="radio" name="action" value="check" checked> 审核文档</label>
 											<label><input type="radio" name="action" value="makehtml"> 更新网页</label>

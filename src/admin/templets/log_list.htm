@@ -3,14 +3,14 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-		<title>系统日志列表</title>
+		<title>日志管理</title>
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 	</head>
 	<body>
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<li class="breadcrumb-item active">系统日志列表</li>
+				<li class="breadcrumb-item active">日志管理</li>
 			</ol>
 			<div class="card shadow-sm mb-3">
 				<div class="card-body">
@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			<div class="card shadow-sm">
-				<div class="card-header">系统日志列表</div>
+				<div class="card-header">日志管理</div>
 				<div class="card-body">
 					<form name="form1">
 						<div class="table-responsive">
@@ -94,14 +94,17 @@
 			}
 			function ReSel() {
 				for (i = 0; i < document.form1.logs.length; i++) {
-					if (document.form1.logs[i].checked) document.form1.logs[i].checked = false;
-					else document.form1.logs[i].checked = true;
+					if (document.form1.logs[i].checked) {
+						document.form1.logs[i].checked = false;
+					} else {
+						document.form1.logs[i].checked = true;
+					}
 				}
 			}
 			function DelSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					showMsg('请选择要删除的选项');
+					alert('请选择要删除的选项');
 					return;
 				}
 				location.href = "log_edit.php?dopost=del&ids=" + nid;

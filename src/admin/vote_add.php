@@ -61,7 +61,7 @@ if ($dopost == "save" && $isarc == 0) {
     $vote_content = "document.write(\"{$vote_content}\");";
     $vote_file = DEDEDATA."/vote/vote_{$aid}.js";
     file_put_contents($vote_file, $vote_content);
-    ShowMsg("成功添加一组投票", "vote_main.php?issel=1&aid={$aid}";
+    ShowMsg("成功添加一组投票", "vote_main.php?issel=1&aid={$aid}");
     exit();
 }
 $startDay = time();

@@ -3925,7 +3925,7 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('5','cfg_indexname','首页链接名','1','string','首页'),
 ('6','cfg_indexseotitle','首页SEO标题','1','string','DedeX'),
 ('7','cfg_webname','网站名称','1','string','我的网站'),
-('8','cfg_adminemail','网站发信邮箱','2','string','admin@qq.com'),
+('8','cfg_adminemail','网站发信邮箱','2','string','admin@dedex.cn'),
 ('9','cfg_html_editor','默认CKEditor富文本，支持其它富文本','2','string','ckeditor'),
 ('10','cfg_arcdir','默认文档生成文件路径','1','string','/a'),
 ('11','cfg_medias_dir','默认图片上传文件路径','1','string','/static'),
@@ -3999,11 +3999,11 @@ INSERT INTO `#@__sysconfig` VALUES ('1','cfg_basehost','站点网址','1','strin
 ('79','cfg_search_maxrc','最大返回搜索结果数','6','number','300'),
 ('80','cfg_search_time','搜索间隔时间（秒）','6','number','3'),
 ('81','cfg_smtp_port','SMTP服务器端口','2','string','465'),
-('82','cfg_sendmail_bysmtp','是否启用SMTP方式发送邮件','2','bool','Y'),
+('82','cfg_sendmail_bysmtp','是否启用SMTP方式发送邮件','2','bool','N'),
 ('83','cfg_smtp_server','SMTP服务器','2','string','ssl://smtp.qq.com'),
-('84','cfg_smtp_usermail','SMTP服务器邮箱','2','string','admin@qq.com'),
-('85','cfg_smtp_user','SMTP服务器帐号','2','string','xxx'),
-('86','cfg_smtp_password','SMTP服务器密码','2','string','xxx'),
+('84','cfg_smtp_usermail','SMTP服务器邮箱','2','string','admin@dedex.cn'),
+('85','cfg_smtp_user','SMTP服务器帐号','2','string',''),
+('86','cfg_smtp_password','SMTP服务器密码','2','string',''),
 ('87','cfg_online_type','在线支付网关类型','2','string','nps'),
 ('88','cfg_upload_switch','删除文档同时删除相关附件文件','2','bool','Y'),
 ('89','cfg_allsearch_limit','全局高级搜索间隔时间（秒）','2','string','1'),
@@ -4052,7 +4052,7 @@ INSERT INTO `#@__sys_module` VALUES(1, '1f35620fb42d452fa2bdc1dee1690f92', '文�
 
 INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (1, 'Wechat', '微信支付', '微信', 0, '{"AppID":"","MchID":"","APIv2Secret":""}', 0);
 INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (2, 'Alipay', '支付宝支付', '支付宝', 1, '{"APPID":"","PrivateKey":"","CertPublicKey":"","RootCert":"AlipayRootCert","SignType":"RSA2"}', 0);
-INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (3, 'Bank', '银行转账', '转账', 2, '{"AccountName":"某某银行","AccountNO":"123XXXXXXXXXXXXXX456","Name":"某某公司"}', 1);
+INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (3, 'Bank', '银行转账', '转账', 2, '{"AccountName":"某银行","AccountNO":"123XXX456","Name":"某公司"}', 1);
 INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (4, 'Balance', '余额支付', '余额', 3, '{}', 1);
 INSERT INTO `#@__sys_payment` (`id`, `code`, `name`, `short_name`, `sortrank`, `config`, `status`) VALUES (5, 'Cod', '货到付款', '货到付款', 4, '{}', 0);
 

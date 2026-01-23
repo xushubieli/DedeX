@@ -176,8 +176,11 @@
 		<script>
 			function ShowHide(objname) {
 				var obj = document.getElementById(objname);
-				if (obj.style.display == "block") obj.style.display = "none";
-				else obj.style.display = "block";
+				if (obj.style.display == "block") {
+					obj.style.display = "none";
+				} else {
+					obj.style.display = "block";
+				}
 			};
 			function ShowObj(objname) {
 				var obj = document.getElementById(objname);
@@ -204,8 +207,7 @@
 				//添加按钮事件
 				$("#addQuick .add").click(function() {
 					var id = $("#addQuick tr").prevAll("tr").length + 1;
-					$("#addQuick tr:eq(1)").clone(true).addClass("repeat")
-					.find(".rank input").attr("value", function() {
+					$("#addQuick tr:eq(1)").clone(true).addClass("repeat").find(".rank input").attr("value", function() {
 						return id;
 					}).end().find(".pubinputs").attr("name", function() {
 						return this.name + id;

@@ -91,10 +91,10 @@
 			function DelSel() {
 				var nid = getCheckboxItem();
 				if (nid == "") {
-					showMsg('请选择要删除的选项');
+					alert('请选择要删除的选项');
 					return;
 				}
-				 location.href = "cards_manage.php?dopost=delete&aids=" + nid;
+				location.href = "cards_manage.php?dopost=delete&aids=" + nid;
 			}
 		</script>
 	</body>

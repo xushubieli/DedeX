@@ -67,8 +67,11 @@
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` where adminrank<='$urank' And `rank` >= 10");
 												$dsql->Execute();
 												while ($row2 = $dsql->GetObject()) {
-													if ($row2->rank==$row['sendrank']) echo "<option value='{$row2->rank}' selected>{$row2->membername}</option>";
-													else echo "<option value='{$row2->rank}'>{$row2->membername}</option>";
+													if ($row2->rank==$row['sendrank']) {
+														echo "<option value='{$row2->rank}' selected>{$row2->membername}</option>";
+													} else {
+														echo "<option value='{$row2->rank}'>{$row2->membername}</option>";
+													}
 												}
 												?>
 											</select>
@@ -184,16 +187,22 @@
 														<td>
 															<?php
 															$itname = $ctag->GetAtt('itemname');
-															if ($itname=='') echo "未指定";
-															else echo $itname;
+															if ($itname=='') {
+																echo "未指定";
+															} else {
+																echo $itname;
+															}
 															?>
 														</td>
 														<td><?php echo $ctag->GetTagName();?></td>
 														<td>
 															<?php
 															$ft = $ctag->GetAtt('type');
-															if (isset($fieldtypes[$ft])) echo $fieldtypes[$ft];
-															else  echo "系统类型";
+															if (isset($fieldtypes[$ft])) {
+																echo $fieldtypes[$ft];
+															} else {
+																echo "系统类型";
+															}
 															?>
 														</td>
 														<td>
@@ -247,8 +256,11 @@
 			}
 			function ShowHide2(objname) {
 				var obj = $Obj(objname);
-				if (obj.style.display != 'block') { obj.style.display = 'block' }
-				else { obj.style.display = 'none'; }
+				if (obj.style.display != 'block') {
+					obj.style.display = 'block'
+				} else {
+					obj.style.display = 'none';
+				}
 			}
 			function DelNote(gourl) {
 				DedeConfirm("您确认要删除这个字段吗").then((v) => {

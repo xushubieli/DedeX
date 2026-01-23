@@ -1,6 +1,6 @@
 <?php
 /**
- * 友情链接管理
+ * 友情链接
  *
  * @version        $id:friendlink_main.php 8:48 2010年7月13日 tianya $
  * @package        DedeX.Administrator

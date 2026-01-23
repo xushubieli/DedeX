@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>防采集字符串设置</title>
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/codemirror.css">
+		<script src="/static/web/js/codemirror.js"></script>
+		<script src="/static/web/js/mode/php/php.js"></script>
+		<script src="/static/web/js/mode/clike/clike.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
+				<li class="breadcrumb-item active">防采集字符串设置</li>
+			</ol>
+			<div class="card shadow-sm">
+				<div class="card-header">防采集字符串设置</div>
+				<div class="card-body">
+					<div class="alert alert-info">#start#和#end#请勿删除，按格式增加或修改，前台{dede:field.body function='RndString(@me)'/}调用</div>
+					<form name="form1" action="article_string_mix.php" method="post">
+						<input type="hidden" name="dopost" value="save">
+						<input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>">
+						<div class="table-responsive">
+							<table class="table table-borderless">
+								<tbody>
+									<tr>
+										<td>
+											<textarea name="allsource" id="allsource"><?php echo $allsource;?></textarea>
+										</td>
+									</tr>
+									<tr>
+										<td align="center">
+											<button type="submit" class="btn btn-primary btn-sm">保存</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+			var editor = CodeMirror.fromTextArea(document.getElementById("allsource"), {
+				lineNumbers: true,
+				lineWrapping: true,
+				mode: 'text/x-php',
+			});
+		</script>
+	</body>
+</html>

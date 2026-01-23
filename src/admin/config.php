@@ -24,10 +24,7 @@ function CheckCSRF()
 //生成CSRF校验token，在比较重要的表单中应该要加上这个token校验
 $cc_csrf_token = GetCookie("dede_csrf_token");
 if (!isset($GLOBALS['csrf_token']) || $GLOBALS['csrf_token'] === null) {
-    if (
-        isset($cc_csrf_token) && is_string($cc_csrf_token)
-        && preg_match('#^[0-9a-f]{32}$#iS', $cc_csrf_token) === 1
-    ) {
+    if (isset($cc_csrf_token) && is_string($cc_csrf_token) && preg_match('#^[0-9a-f]{32}$#iS', $cc_csrf_token) === 1) {
         $GLOBALS['csrf_token'] = $cc_csrf_token;
     } else {
         $GLOBALS['csrf_token'] = md5(uniqid(mt_rand(), TRUE));
@@ -45,8 +42,7 @@ $s_scriptName = $dedeNowurls[0];
 //检验会员登录状态
 $cuserLogin = new userLogin();
 if ($cuserLogin->getUserID() == -1) {
-    DedeSetCookie("ENV_GOBACK_URL", $dedeNowurl, time() + 3600, "/");
-    header("Location: login.php");
+    header('location: login.php');
     exit();
 }
 function XSSClean($val)

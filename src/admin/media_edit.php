@@ -56,7 +56,7 @@ if ($dopost == 'del') {
                 $dsql->ExecuteNoneQuery("DELETE FROM `#@__uploads` WHERE aid='{$myrow['aid']}'");
             }
         }
-        ShowMsg('成功删除选定的文件', $backurl);
+        ShowMsg('成功删除选择的文件', $backurl);
         exit();
     }
 }

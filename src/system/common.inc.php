@@ -4,7 +4,7 @@
  * @package        DedeX.Libraries
  * @license        GNU GPL v2 (/license.txt)
  */
-//系统默认运行模式为安全模式，模板管理、标签管理、数据库管理、模块管理等功能已暂停，如果您需要这些功能，DEDEX_SAFE_MODE后面值TRUE改为FALSE恢复使用
+//系统默认运行模式为安全模式，模板管理、标签列表、数据库管理、模块管理等功能已暂停，如果您需要这些功能，DEDEX_SAFE_MODE后面值TRUE改为FALSE恢复使用
 define('DEDEX_SAFE_MODE', FALSE);
 //生产环境使用production，如果采用dev模式，会有一些php的报错信息提示，用于开发调试
 if (!defined('DEDE_ENVIRONMENT')) {

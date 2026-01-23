@@ -1,6 +1,6 @@
 <?php
 /**
- * 搜索关键词管理
+ * 搜索关键词维护
  *
  * @version        $id:search_keywords_main.php 15:46 2010年7月20日 tianya $
  * @package        DedeX.Administrator

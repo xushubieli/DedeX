@@ -46,8 +46,11 @@
 										$dsql->SetQuery("SELECT * FROM `#@__arcatt` ORDER BY sortid ASC");
 										$dsql->Execute();
 										while ($trow = $dsql->GetObject()) {
-											if ($trow->att=='j') $jumpclick = " onclick='ShowUrlTr()'";
-											else $jumpclick = '';
+											if ($trow->att=='j') {
+												$jumpclick = " onclick='ShowUrlTr()'";
+											} else {
+												$jumpclick = '';
+											}
 											if (preg_match("#{$trow->att}#", $arcRow['flag'])) {
 												echo "<label><input type='checkbox' name='flags[]' id='flags{$trow->att}' value='{$trow->att}' {$jumpclick} checked> {$trow->attname}[{$trow->att}]</label> ";
 											} else {

@@ -1,6 +1,6 @@
 <?php
 /**
- * 标签管理
+ * 标签列表
  *
  * @version        $id:tag_test_action.php 23:07 2010年7月20日 tianya $
  * @package        DedeX.Administrator
@@ -13,7 +13,6 @@ $timestamp = time();
 if (empty($tag)) $tag = '';
 if (empty($action)) {
     $tag = HtmlReplace($tag, -1);
-    $pageno = isset($_REQUEST['pageno']) ? (int)$_REQUEST['pageno'] : 1;
     $orderby = empty($orderby) ? 'id' : preg_replace("#[^a-z]#i", '', $orderby);
     $orderway = isset($orderway) && $orderway == 'asc' ? 'asc' : 'desc';
     if (!empty($tag)) $where = " WHERE tag like '%{$tag}%' OR id='$tag'";
@@ -64,9 +63,9 @@ if (empty($action)) {
         $query = "DELETE FROM `#@__taglist` WHERE tid IN ($stringids)";
         $dsql->ExecuteNoneQuery($query);
         $dsql->ExecuteNoneQuery("DELETE FROM `#@__tagindex_infos` WHERE tagid IN ($stringids)");
-        ShowMsg("成功删除{$stringids}标签", "tags_main.php?pageno={$pageno}");
+        ShowMsg("成功删除{$stringids}标签", "tags_main.php");
     } else {
-        ShowMsg("标签{$stringids}删除失败", "tags_main.php?pageno={$pageno}");
+        ShowMsg("标签{$stringids}删除失败", "-1");
     }
     exit();
 } else if ($action == 'fetch') {

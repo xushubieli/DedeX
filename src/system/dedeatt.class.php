@@ -1,4 +1,5 @@
 <?php
+if (!defined('DEDEINC')) {http_response_code(403); exit();}
 /**
  * 属性数据描述
  *

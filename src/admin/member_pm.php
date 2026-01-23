@@ -1,6 +1,6 @@
 <?php
 /**
- * 会员消息管理
+ * 会员消息列表
  *
  * @version        $id:member_pm.php 11:24 2010年7月20日 tianya $
  * @package        DedeX.Administrator

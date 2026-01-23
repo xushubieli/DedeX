@@ -13,7 +13,7 @@
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<li class="breadcrumb-item"><a href="friendlink_main.php">友情链接管理</a></li>
+				<li class="breadcrumb-item"><a href="friendlink_main.php">友情链接</a></li>
 				<li class="breadcrumb-item active">添加友情链接</li>
 			</ol>
 			<div class="card shadow-sm">
@@ -34,7 +34,7 @@
 									</tr>
 									<tr>
 										<td>排列位置</td>
-										<td><input type="text" name="sortrank" id="sortrank" value="1" class="form-control admin-w-sm">（由小到大排列）</td>
+										<td><input type="text" name="sortrank" id="sortrank" value="<?php echo $sortpos;?>" class="form-control admin-w-sm">（由小到大排列）</td>
 									</tr>
 									<tr>
 										<td>网站Logo</td>
@@ -42,7 +42,7 @@
 									</tr>
 									<tr>
 										<td>上传Logo</td>
-										<td><input type="file" name="logoimg" id="logoimg" class="form-control admin-w-lg"></td>
+										<td><input type="file" name="logoimg" id="logoimg" class="form-control admin-w-lg">（支持jpg、gif、png图片格式）</td>
 									</tr>
 									<tr>
 										<td>网站简况</td>

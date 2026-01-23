@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<title>文档随机模板设置</title>
+		<link rel="stylesheet" href="/static/web/css/admin.css">
+		<link rel="stylesheet" href="/static/web/css/codemirror.css">
+		<script src="/static/web/js/codemirror.js"></script>
+		<script src="/static/web/js/mode/php/php.js"></script>
+		<script src="/static/web/js/mode/clike/clike.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
+				<li class="breadcrumb-item active">文档随机模板设置</li>
+			</ol>
+			<div class="card shadow-sm">
+				<div class="card-header">文档随机模板设置</div>
+				<div class="card-body">
+					<div class="alert alert-info">$cfg_tamplate_rand = 1表示启用0则关闭，按格式增加或修改，确保模板存在且数量2个以上</div>
+					<form name="form1" action="article_template_rand.php" method="post">
+						<input type="hidden" name="dopost" value="save">
+						<input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>">
+						<div class="table-responsive">
+							<table class="table table-borderless">
+								<tbody>
+									<tr>
+										<td>
+											<textarea name="templates" id="templates"><?php echo $templates;?></textarea>
+										</td>
+									</tr>
+									<tr>
+										<td align="center">
+											<button type="submit" class="btn btn-primary btn-sm">保存</button>
+											<a href="article_template_rand.php?dopost=makeold&token=<?php echo $_SESSION['token'];?>" class="btn btn-primary btn-sm">应用</a>
+											<a href="article_template_rand.php?dopost=clearold&token=<?php echo $_SESSION['token'];?>" class="btn btn-danger btn-sm">取消</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+			var editor = CodeMirror.fromTextArea(document.getElementById("templates"), {
+				lineNumbers: true,
+				lineWrapping: true,
+				mode: 'text/x-php',
+			});
+		</script>
+	</body>
+</html>

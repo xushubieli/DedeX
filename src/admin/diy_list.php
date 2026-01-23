@@ -58,9 +58,9 @@ if ($action == 'post') {
         $query = "INSERT INTO `{$diy->table}` (`id`, `ifcheck` $addvar)  VALUES (NULL, 0 $addvalue)";
         if ($dsql->ExecuteNoneQuery($query)) {
             $goto = "diy_list.php?action=list&diyid={$diy->diyid}";
-            showmsg('发布成功', $goto);
+            showmsg('发布表单信息成功', $goto);
         } else {
-            showmsg('发布失败', '-1');
+            showmsg('发布表单信息失败', '-1');
         }
     }
 } else if ($action == 'list') {
@@ -134,23 +134,23 @@ if ($action == 'post') {
         $query = "UPDATE `$diy->table` SET $addsql WHERE id=$id";
         if ($dsql->ExecuteNoneQuery($query)) {
             $goto = "diy_list.php?action=list&diyid={$diy->diyid}";
-            showmsg('修改成功', $goto);
+            showmsg('修改表单信息成功', $goto);
         } else {
-            showmsg('修改成功', '-1');
+            showmsg('修改表单信息成功', '-1');
         }
     }
 } else if ($action == 'check') {
     if (is_array($id) && is_all_numeric($id)) {
         $ids = implode(',', $id);
     } else {
-        showmsg('未选中要操作的表单', '-1');
+        showmsg('请选择要审核的选项', '-1');
         exit();
     }
     $query = "UPDATE `$diy->table` SET ifcheck=1 WHERE id IN ($ids)";
     if ($dsql->ExecuteNoneQuery($query)) {
-        showmsg('审核成功', "diy_list.php?action=list&diyid={$diy->diyid}");
+        showmsg('审核表单信息成功', "diy_list.php?action=list&diyid={$diy->diyid}");
     } else {
-        showmsg('审核失败', "diy_list.php?action=list&diyid={$diy->diyid}");
+        showmsg('审核表单信息失败', "diy_list.php?action=list&diyid={$diy->diyid}");
     }
 } else if ($action == 'delete') {
     if (empty($do)) {
@@ -158,23 +158,23 @@ if ($action == 'post') {
             $ids = array_map('intval', $id);
             $ids = implode(',', $id);
         } else {
-            showmsg('未选中要操作的表单', '-1');
+            showmsg('请选择要删除的选项', '-1');
             exit();
         }
         $query = "DELETE FROM `$diy->table` WHERE id IN ($ids)";
         if ($dsql->ExecuteNoneQuery($query)) {
-            showmsg('删除成功', "diy_list.php?action=list&diyid={$diy->diyid}");
+            showmsg('删除表单信息成功', "diy_list.php?action=list&diyid={$diy->diyid}");
         } else {
-            showmsg('删除失败', "diy_list.php?action=list&diyid={$diy->diyid}");
+            showmsg('删除表单信息失败', "diy_list.php?action=list&diyid={$diy->diyid}");
         }
     } else if ($do = 1) {
         $row = $dsql->GetOne("SELECT * FROM `$diy->table` WHERE id='$id'");
         if (file_exists($cfg_basedir.$row[$name])) {
             unlink($cfg_basedir.$row[$name]);
             $dsql->ExecuteNoneQuery("UPDATE `$diy->table` SET $name='' WHERE id='$id'");
-            showmsg('删除成功', "diy_list.php?action=list&diyid={$diy->diyid}");
+            showmsg('删除表单信息成功', "diy_list.php?action=list&diyid={$diy->diyid}");
         } else {
-            showmsg('删除失败', '-1');
+            showmsg('删除表单信息失败', '-1');
             exit();
         }
     }

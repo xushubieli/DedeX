@@ -52,11 +52,13 @@ if ($cuserLogin->getUserType() >= 10) {
 <m:top item='12_' name='系统设置' rank='sys_User,sys_Group,sys_Edit,sys_Log,sys_Data' icon='bi bi-gear'>
     <m:item name='系统设置' link='sys_info.php' rank='sys_Edit' target='main' />
     <m:item name='日志管理' link='log_list.php' rank='sys_Log' target='main' />
-    <m:item name='管理员管理' link='sys_admin_user.php' rank='sys_User' target='main' />
+    <m:item name='管理员设置' link='sys_admin_user.php' rank='sys_User' target='main' />
     <m:item name='会员组管理' link='sys_group.php' rank='sys_Group' target='main' />
     <m:item name='图片水印设置' link='sys_info_mark.php' rank='sys_Edit' target='main' />
     <m:item name='自定义文档属性' link='content_att.php' rank='sys_Att' target='main' />
     <m:item name='软件下载设置' link='soft_config.php' rank='sys_SoftConfig' target='main' />
+    <m:item name='文档随机模板设置' link='article_template_rand.php' rank='sys_StringMix' target='main' />
+    <m:item name='防采集字符串设置' link='article_string_mix.php' rank='sys_StringMix' target='main' />
     ".(DEDEX_SAFE_MODE ? "" : "<m:item name='数据备份' link='sys_data.php' rank='sys_Data' target='main' />")."
     ".(DEDEX_SAFE_MODE ? "" : "<m:item name='SQL命令工具' link='sys_sql_query.php' rank='sys_Data' target='main' />")."
     <m:item name='文件扫描工具' link='sys_safetest.php' rank='sys_verify' target='main' />
@@ -68,9 +70,9 @@ $menusMain = "<m:top item='1_' name='常用功能' icon='bi bi-laptop'>
     <m:item name='所有文档列表' link='content_list.php' rank='a_List,a_AccList' target='main' />
     <m:item name='待审核的文档' link='content_list.php?arcrank=-1' rank='a_Check,a_AccCheck' target='main' />
     <m:item name='我发布的文档' link='content_list.php?mid={$cuserLogin->getUserID()}' rank='a_List,a_AccList,a_MyList' target='main' />
-    <m:item name='标签管理' link='tags_main.php' rank='sys_Keyword' target='main' />
-    <m:item name='评论管理' link='feedback_main.php' rank='sys_Feedback' target='main' />
-    <m:item name='专题管理' link='content_s_list.php' ischannel='1' channelid='-1' linkadd='spec_add.php' rank='spec_New' target='main' />
+    <m:item name='标签列表' link='tags_main.php' rank='sys_Keyword' target='main' />
+    <m:item name='评论列表' link='feedback_main.php' rank='sys_Feedback' target='main' />
+    <m:item name='专题列表' link='content_s_list.php' ischannel='1' channelid='-1' linkadd='spec_add.php' rank='spec_New' target='main' />
     <m:item name='文档回收站' link='recycling.php' ischannel='1' addico='bi bi-x-circle' linkadd='archives_do.php?dopost=clear&aid=no&recycle=1' rank='a_List,a_AccList,a_MyList' target='main' />
     <m:item name='流量统计表' link='statistics_list.php' rank='t_List,t_AccList' target='main' />
 </m:top>
@@ -103,7 +105,7 @@ $adminMenu1
 </m:top>
 <m:top item='9_' name='会员管理' rank='member_List,member_Type' icon='bi bi-person-circle'>
     <m:item name='所有会员列表' link='member_main.php' rank='member_List' target='main' />
-    <m:item name='会员消息管理' link='member_pm.php' rank='member_Type' target='main' />
+    <m:item name='会员消息列表' link='member_pm.php' rank='member_Type' target='main' />
     <m:item name='会员级别设置' link='member_rank.php' rank='member_Type' target='main' />
     <m:item name='会员等级分类' link='member_type.php' rank='sys_Data' target='main' />
     <m:item name='积分头衔设置' link='member_scores.php' rank='member_Type' target='main' />

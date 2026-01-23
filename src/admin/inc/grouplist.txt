@@ -52,7 +52,7 @@
 >temp_Test>测试标记>unsafe
 >temp_Other>模板其它管理>unsafe
 
->>专题管理
+>>专题列表
 
 >spec_New>新建专题
 >spec_List>列出专题
@@ -60,7 +60,7 @@
 
 >>系统管理权限
 
->sys_User>管理员管理
+>sys_User>管理员设置
 >sys_Group>系统组管理
 >sys_MdPwd>修改个人密码
 >sys_DelUpload>删除附件
@@ -76,7 +76,7 @@
 >sys_SoftConfig>软件栏目参数
 >sys_Keyword>关键词管理
 >sys_MakeHtml>更新网页
->sys_Feedback>评论管理
+>sys_Feedback>评论列表
 >sys_Upload>管理任意上传
 >sys_MyUpload>管理我的上传
 

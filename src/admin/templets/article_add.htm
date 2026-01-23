@@ -203,6 +203,21 @@
 										<td>浏览次数</td>
 										<td><input type="text" name="click" value="<?php echo ($cfg_arc_click=='-1' ? mt_rand(1000, 6000) : $cfg_arc_click);?>" class="form-control admin-w-sm"></td>
 									</tr>
+									<?php if (isset($cfg_tamplate_rand) && $cfg_tamplate_rand == 1) {?>
+									<tr>
+										<td>随机模板</td>
+										<td>
+											<select name="templet" class="form-select admin-w-sm">
+												<?php $rndsel = mt_rand(1, count($cfg_tamplate_arr)) - 1;
+													foreach ($cfg_tamplate_arr as $k=>$v) {
+														$v = trim($v);
+														echo ($k == $rndsel ? "<option value='{$v}' selected>{$v}</option>" : "<option value='{$v}'>{$v}</option>");
+													}
+												?>
+											</select>
+										</td>
+									</tr>
+									<?php } else {echo "<input type='hidden' name='templet' value=''>";}?>
 									<tr>
 										<td align="center" colspan="4">
 											<button type="submit" class="btn btn-primary btn-sm">保存</button>

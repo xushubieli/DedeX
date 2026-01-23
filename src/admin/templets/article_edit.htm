@@ -211,6 +211,17 @@
 									<tr>
 										<td>浏览次数</td>
 										<td><input type="text" name="click" value="<?php echo $arcRow['click'];?>" class="form-control admin-w-sm"></td>
+										<?php if (isset($cfg_tamplate_rand) && $cfg_tamplate_rand == 1) {?>
+										<td>随机模板</td>
+										<td>
+											<select name="templet" class="form-select admin-w-sm">
+											<?php foreach($cfg_tamplate_arr as $k=>$v) {
+												$v = trim($v);
+												echo ($v==$addRow['templet'] ? "<option value='{$v}' selected>{$v}</option>" : "<option value='{$v}'>{$v}</option>");
+											}?>
+											</select>
+										<td>
+										<?php } else {echo "<input type='hidden' name='templet' value='{$addRow['templet']}'>";}?>
 									</tr>
 									<tr>
 										<td align="center" colspan="4">

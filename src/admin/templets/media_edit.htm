@@ -61,8 +61,11 @@
 											$info = '';
 											$sizes = getimagesize($fullfilename,$info);
 											if (is_array($sizes)) {
-												if ($sizes[0]>200) $w=200;
-												else $w = $sizes[0];
+												if ($sizes[0]>200) {
+													$w=200;
+												} else {
+													$w = $sizes[0];
+												}
 									?>
 									<tr>
 										<td>预览</td>

@@ -9,6 +9,7 @@ if (!defined('DEDEINC')) {http_response_code(403); exit();}
  */
 require_once(DEDEINC."/typelink/typelink.class.php");
 require_once(DEDEINC."/channelunit.class.php");
+require_once(DEDEINC."/downmix.inc.php");
 @set_time_limit(0);
 class Archives
 {
@@ -56,10 +57,10 @@ class Archives
             $this->TypeLink = new TypeLink($arr['typeid']);
             if ($this->ChannelUnit->ChannelInfos['issystem'] != -1) {
                 //如果当前文档不是系统模型，为自定义模型
-                $query = "SELECT arc.*,tp.reid,tp.typedir,ch.addtable,mb.uname,mb.face,mb.userid,mb.sex FROM `#@__archives` arc LEFT JOIN `#@__arctype` tp on tp.id=arc.typeid LEFT JOIN `#@__channeltype` as ch on arc.channel = ch.id LEFT JOIN `#@__member` mb on arc.mid = mb.mid WHERE arc.id='$aid' ";
+                $query = "SELECT arc.*,tp.reid,tp.typedir,tp.bigpic,tp.litimg,ch.addtable,mb.uname,mb.face,mb.userid,mb.sex FROM `#@__archives` arc LEFT JOIN `#@__arctype` tp on tp.id=arc.typeid LEFT JOIN `#@__channeltype` as ch on arc.channel = ch.id LEFT JOIN `#@__member` mb on arc.mid = mb.mid WHERE arc.id='$aid' ";
                 $this->Fields = $this->dsql->GetOne($query);
                 if (!is_array($this->Fields)) {
-                    echo DedeAlert('id:'.$aid.'的文档数据不存在',ALERT_DANGER);
+                    echo DedeAlert("文档ID：{$aid}数据不存在", ALERT_DANGER);
                 }
             } else {
                 $this->Fields['title'] = '';

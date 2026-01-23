@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-		<title>评论管理</title>
+		<title>评论列表</title>
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -13,7 +13,7 @@
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<li class="breadcrumb-item active">评论管理</li>
+				<li class="breadcrumb-item active">评论列表</li>
 			</ol>
 			<div class="card shadow-sm mb-3">
 				<div class="card-body">
@@ -50,7 +50,7 @@
 								<tbody>
 									{dede:datalist}
 									<tr>
-										<td><input type="checkbox" name="fid" id="fid" value="{dede:field.id/}"></td>
+										<td><input type="checkbox" name="fid" value="{dede:field.id/}"></td>
 										<td>{dede:field.id/}</td>
 										<td>{dede:field.username/}</td>
 										<td>{dede:field.arctitle function="RemoveXSS(@me)"/}</td>
@@ -69,7 +69,7 @@
 									</tr>
 									{/dede:datalist}
 									<tr>
-										<td colspan="8">
+										<td colspan="9">
 											<a href="javascript:selAll();" class="btn btn-primary btn-sm">全选</a>
 											<a href="javascript:selNone();" class="btn btn-primary btn-sm">取消</a>
 											<a href="javascript:selNor();" class="btn btn-primary btn-sm">反选</a>
@@ -113,32 +113,44 @@
 			}
 			function selNor() {
 				for (i = 0; i < document.feedback.fid.length; i++) {
-					if (document.feedback.fid[i].checked == false)
+					if (document.feedback.fid[i].checked == false) {
 						document.feedback.fid[i].checked = true;
-					else
+					} else {
 						document.feedback.fid[i].checked = false;
-
+					}
 				}
-			}
-			function delFeedback() {
-				var qstr = getCheckboxItem();
-				if (qstr == "") ShowMsg("您没选中任何评论");
-				else location.href = "feedback_main.php?job=del&fid=" + qstr;
-			}
-			function delFeedbackIP() {
-				var qstr = getCheckboxItem();
-				if (qstr == "") ShowMsg("您没选中任何评论");
-				else location.href = "feedback_main.php?job=delall&fid=" + qstr;
 			}
 			function checkFeedback() {
 				var qstr = getCheckboxItem();
-				if (qstr == "") ShowMsg("您没选中任何评论");
-				else location.href = "feedback_main.php?job=check&fid=" + qstr;
+				if (qstr == "") {
+					alert('请选择要审核的选项');
+					return;
+				}
+				location.href = "feedback_main.php?job=check&fid=" + qstr;
 			}
 			function editFeedback() {
 				var qstr = getCheckboxItem();
-				if (qstr == "") ShowMsg("您没选中任何评论");
-				else location.href = "feedback_edit.php?job=edit&fid=" + qstr;
+				if (qstr == "") {
+					alert('请选择要修改的选项');
+					return;
+				}
+				location.href = "feedback_edit.php?job=edit&fid=" + qstr;
+			}
+			function delFeedback() {
+				var qstr = getCheckboxItem();
+				if (qstr == "") {
+					alert('请选择要删除的选项');
+					return;
+				}
+				location.href = "feedback_main.php?job=del&fid=" + qstr;
+			}
+			function delFeedbackIP() {
+				var qstr = getCheckboxItem();
+				if (qstr == "") {
+					alert('请选择要删除的选项');
+					return;
+				}
+				location.href = "feedback_main.php?job=delall&fid=" + qstr;
 			}
 		</script>
 	</body>

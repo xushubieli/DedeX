@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-		<title>友情链接管理</title>
+		<title>友情链接</title>
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -13,13 +13,13 @@
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<li class="breadcrumb-item active">友情链接管理</li>
+				<li class="breadcrumb-item active">友情链接</li>
 			</ol>
 			<div class="card shadow-sm mb-3">
 				<div class="card-body">
 					<div class="admin-btns">
 						<form action="friendlink_main.php" name="form1" method="get">
-							<input type="text" name="keyword" id="keyword" placeholder="请输入地址或邮箱" value="<?php echo $keyword;?>" class="form-control admin-w-lg">
+							<input type="text" name="keyword" id="keyword" placeholder="请输入网站或邮箱" value="<?php echo $keyword;?>" class="form-control admin-w-lg">
 							<select name="ischeck" id="ischeck" class="form-select admin-w-sm">
 								<?php
 								foreach ($selCheckArr as $k=>$v) {
@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<div class="card shadow-sm">
-				<div class="card-header">友情链接管理</div>
+				<div class="card-header">友情链接</div>
 				<div class="card-body">
 					<form name="form1" action="friendlink_edit.php" method="post">
 						<input type="hidden" name="dopost" value="delall">
@@ -49,8 +49,8 @@
 									<tr>
 										<td scope="col">选择</td>
 										<td scope="col">名称</td>
-										<td scope="col">地址</td>
-										<td scope="col">图标</td>
+										<td scope="col">网站</td>
+										<td scope="col">Logo</td>
 										<td scope="col">邮箱</td>
 										<td scope="col">时间</td>
 										<td scope="col">状态</td>
@@ -61,7 +61,7 @@
 								<tbody>
 									{dede:datalist}
 									<tr>
-										<td><input type='checkbox' name='aids' value='{dede:field.id/}'></td>
+										<td><input type="checkbox" name="aids" value="{dede:field.id/}"></td>
 										<td>{dede:field.webname function='dede_htmlspecialchars(@me)'/}</td>
 										<td>{dede:field.url/}</td>
 										<td>{dede:field.logo function="GetPic(@me)"/}</td>
@@ -93,16 +93,22 @@
 		<script>
 			function Sel(stype) {
 				for (var i = 0; i < document.getElementsByName('aids').length; i++) {
-					if (stype == 'all') document.getElementsByName('aids')[i].checked = true;
-					else document.getElementsByName('aids')[i].checked = false;
+					if (stype == 'all') {
+						document.getElementsByName('aids')[i].checked = true;
+					} else {
+						document.getElementsByName('aids')[i].checked = false;
+					}
 				}
 			}
 			function checkSubmit() {
 				var str = '';
 				for (var i = 0; i < document.getElementsByName('aids').length; i++) {
 					if (document.getElementsByName('aids')[i].checked) {
-						if (str == "") str += document.getElementsByName('aids')[i].value;
-						else str += ',' + document.getElementsByName('aids')[i].value;
+						if (str == "") {
+							str += document.getElementsByName('aids')[i].value;
+						} else {
+							str += ',' + document.getElementsByName('aids')[i].value;
+						}
 					}
 				}
 				if (str == "") {

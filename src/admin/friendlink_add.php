@@ -9,15 +9,17 @@
 require(dirname(__FILE__)."/config.php");
 CheckPurview('plus_友情链接');
 if (empty($dopost)) $dopost = '';
+$row = $dsql->GetOne("SELECT COUNT(id) AS cc FROM `#@__flink` ");
+$sortpos = $row['cc']+1;
 if ($dopost == "add") {
     $dtime = time();
     if (is_uploaded_file($logoimg)) {
-        $names = split("\.", $logoimg_name);
+        $names = explode('.', $logoimg_name);
         $shortname = ".".$names[count($names) - 1];
         if (!preg_match("#(jpg|gif|png)$#", $shortname)) {
             $shortname = '.gif';
         }
-        $filename = MyDate("ymdHis", time()).mt_rand(1000, 9999).$shortname;
+        $filename = MyDate("ymdHis", time()).$shortname;
         $imgurl = $cfg_medias_dir."/flink";
         if (!is_dir($cfg_basedir.$imgurl)) {
             MkdirAll($cfg_basedir.$imgurl, $cfg_dir_purview);

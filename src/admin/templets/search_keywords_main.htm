@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="<?php echo $cfg_soft_lang;?>">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-		<title>搜索关键词管理</title>
+		<title>搜索关键词维护</title>
 		<link rel="stylesheet" href="/static/web/css/admin.css">
 		<script src="/static/web/js/jquery.min.js"></script>
 		<script src="/static/web/js/bootstrap.bundle.min.js"></script>
@@ -14,10 +14,10 @@
 		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="index_body.php">后台面板</a></li>
-				<li class="breadcrumb-item active">搜索关键词管理</li>
+				<li class="breadcrumb-item active">搜索关键词维护</li>
 			</ol>
 			<div class="card shadow-sm">
-				<div class="card-header">搜索关键词管理</div>
+				<div class="card-header">搜索关键词维护</div>
 				<div class="card-body">
 					<?php GetKeywordList($dsql,$pageno,$pagesize,$orderby);?>
 					<?php

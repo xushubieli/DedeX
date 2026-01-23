@@ -125,7 +125,7 @@
 												$dsql->SetQuery("SELECT * FROM `#@__arcrank` WHERE `rank` >= 0 ORDER BY `rank` ASC");
 												$dsql->Execute('cc');
 												while ($row = $dsql->GetObject('cc')) {
-													if ($corank==$row->rank){
+													if ($corank==$row->rank) {
 														echo "<option value='{$row->rank}' selected>{$row->membername}</option>";
 													} else if ($corank==0) {
 														echo "<option value='{$row->rank}'>{$row->membername}</option>";
@@ -287,8 +287,11 @@
 			}
 			function ShowHide(objname) {
 				var obj = document.getElementById(objname);
-				if (obj.style.display != "none") obj.style.display = "none";
-				else obj.style.display = "block";
+				if (obj.style.display != "none") {
+					obj.style.display = "none";
+				} else {
+					obj.style.display = "block";
+				}
 			}
 			function ShowObj(objname) {
 				var obj = document.getElementById(objname);
@@ -301,8 +304,11 @@
 			function CheckTypeDir() {
 				var upinyin = document.getElementById('upinyin');
 				var tpobj = document.getElementById('typedir');
-				if (upinyin.checked) tpobj.style.display = "none";
-				else tpobj.style.display = "inline-block";
+				if (upinyin.checked) {
+					tpobj.style.display = "none";
+				} else {
+					tpobj.style.display = "inline-block";
+				}
 			}
 			function ParTemplet(obj) {
 				var sevvalue = channelArray[obj.value];
@@ -315,8 +321,11 @@
 				tempindex[0].value = dfstyleValue + "/index_" + sevvalue + ".htm";
 				templist[0].value = dfstyleValue + "/list_" + sevvalue + ".htm";
 				temparticle[0].value = dfstyleValue + "/article_" + sevvalue + ".htm";
-				if (obj.value < 0) tobj.style.display = "block";
-				else tobj.style.display = "none";
+				if (obj.value < 0) {
+					tobj.style.display = "block";
+				} else {
+					tobj.style.display = "none";
+				}
 			}
 			function CheckPathSet() {
 				var surl = document.getElementById("siteurl");
@@ -331,8 +340,11 @@
 			function CheckCross() {
 				var cross2 = document.getElementById('cross2');
 				var crossid = document.getElementById('crossid');
-				if (cross2.checked) crossid.style.display = 'block';
-				else crossid.style.display = 'none';
+				if (cross2.checked) {
+					crossid.style.display = 'block';
+				} else {
+					crossid.style.display = 'none';
+				}
 			}
 			function makeAPIKey() {
 				var apikey = document.getElementById('apikey');

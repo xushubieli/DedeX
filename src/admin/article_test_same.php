@@ -15,7 +15,7 @@ if ($dopost == 'analyse') {
     if (is_array($arr)) {
         $maintable = $arr['maintable'];
     } else {
-        showmsg('栏目ID不正确，无法处理', 'javascript:;');
+        showmsg('栏目ID不正确，无法处理', '-1');
         exit();
     }
     $pagesize = intval($pagesize);
@@ -30,14 +30,14 @@ else if ($dopost == 'delsel') {
     require_once(DEDEINC."/typelink/typelink.class.php");
     require_once(dirname(__FILE__)."/inc/inc_batchup.php");
     if (empty($titles)) {
-        ShowMsg("请选择需要删除的文档", "javascript:;");
+        ShowMsg("请选择需要删除的文档", "-1");
         exit();
     }
     if (!$dsql->IsTable($maintable)) {
         ShowMsg("数据表名称错误", "javascript:;");
         exit();
     }
-    $titless = split('`', $titles);
+    $titless = explode('`', $titles);
     if ($channelid < -1) {
         $orderby = ($deltype == 'delnew' ? " ORDER BY aid DESC " : " ORDER BY aid ASC ");
     } else {
@@ -66,7 +66,7 @@ else if ($dopost == 'delsel') {
             DelArc($naid, 'OFF');
         }
     }
-    $dsql->ExecuteNoneQuery(" OPTIMIZE TABLE `$maintable`;");
+    $dsql->ExecuteNoneQuery("OPTIMIZE TABLE `$maintable`; ");
     ShowMsg("成功删除{$totalarc}篇重复文档", "javascript:;");
     exit();
 }

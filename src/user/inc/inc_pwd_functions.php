@@ -47,8 +47,6 @@ function sendmail($email, $mailtitle, $mailbody, $headers)
         $smtp = new smtp($cfg_smtp_server, $cfg_smtp_port, true, $cfg_smtp_usermail, $cfg_smtp_password);
         $smtp->debug = false;
         $smtp->sendmail($email, $cfg_webname, $cfg_smtp_usermail, $mailtitle, $mailbody, $mailtype);
-    } else {
-        @mail($email, $mailtitle, $mailbody, $headers);
     }
 }
 /**
