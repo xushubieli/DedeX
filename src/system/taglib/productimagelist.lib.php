@@ -33,7 +33,10 @@ function lib_productimagelist(&$ctag, &$refObj)
     $ctp = new DedeTagParse();
     $ctp->SetNameSpace('field', '[', ']');
     $ctp->LoadSource($innerText);
+    $GLOBALS['autoindex'] = 0;
     foreach ($images as $row) {
+        $GLOBALS['autoindex']++;
+        $ctp->Assign('autoindex', $GLOBALS['autoindex']);
         foreach ($ctp->CTags as $tagid => $ctag) {
             if (isset($row[$ctag->GetName()])) {
                 $ctp->Assign($tagid, $row[$ctag->GetName()]);
