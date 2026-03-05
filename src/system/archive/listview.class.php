@@ -32,6 +32,7 @@ class ListView
     var $IsReplace;
     var $remoteDir;
     var $mod;
+    var $orderby;
     var $_parms = array('tid','TotalResult','PageNo','PageSize','mod','timestamp','sign');
     /**
      *  php5构造函数
@@ -42,7 +43,7 @@ class ListView
      * @param     int    $mod  渲染类型 0:HTML 1:JSON
      * @return    string
      */
-    function __construct($typeid, $uppage = 1, $mod = 0)
+    function __construct($typeid, $uppage = 1, $mod = 0, $orderby = "default")
     {
         global $dsql, $envs;
         $envs['url_type'] = 1;
@@ -60,6 +61,7 @@ class ListView
         $this->upPageType = $uppage;
         $this->remoteDir = '';
         $this->mod = $mod;
+        $this->orderby = isset($GLOBALS['orderby']) ? trim($GLOBALS['orderby']) : "default";
         $this->TotalResult = is_numeric($this->TotalResult) ? $this->TotalResult : "";
         if (!is_array($this->TypeLink->TypeInfos)) {
             $this->IsError = true;
@@ -68,6 +70,7 @@ class ListView
             $this->ChannelUnit = new ChannelUnit($this->TypeLink->TypeInfos['channeltype']);
             $this->Fields = $this->TypeLink->TypeInfos;
             $this->Fields['id'] = $typeid;
+            $this->Fields['orderby'] = $this->orderby;
             $this->Fields['position'] = $this->TypeLink->GetPositionLink(true);
             $this->Fields['title'] = preg_replace("/[<>]/", "-", $this->TypeLink->GetPositionLink(false));
             //设置一些全局参数的值
@@ -364,7 +367,8 @@ class ListView
      * @param  mixed $orderWay 排序方式
      * @return array
      */
-    function GetAPIList($PageNo = 1,$row = 10,$titlelen = 30,$infolen = 250,$orderby = "default",$orderWay = 'desc') {
+    function GetAPIList($PageNo = 1, $row = 10, $titlelen = 30, $infolen = 250, $orderby = "default", $orderWay = "desc")
+    {
         $limitstart = ($PageNo - 1) * $row;
         if ($row == '') $row = 10;
         if ($limitstart == '') $limitstart = 0;
@@ -372,7 +376,7 @@ class ListView
         if ($infolen == '') $infolen = 250;
         if ($orderWay == '') $orderWay = 'desc';
         if ($orderby == '') {
-            $orderby = 'default';
+            $orderby = $this->orderby;
         } else {
             $orderby = strtolower($orderby);
         }
@@ -382,8 +386,6 @@ class ListView
             $ordersql = " ORDER BY arc.senddate $orderWay";
         } else if ($orderby == "pubdate") {
             $ordersql = " ORDER BY arc.pubdate $orderWay";
-        } else if ($orderby == "senddate") {
-            $ordersql = " ORDER BY arc.senddate $orderWay";
         } else if ($orderby == "id") {
             $ordersql = " ORDER BY arc.id $orderWay";
         } else if ($orderby == "hot" || $orderby == "click") {
@@ -748,21 +750,8 @@ class ListView
      * @param     string  $orderWay  排序方式
      * @return    string
      */
-    function GetArcList(
-        $limitstart = 0,
-        $row = 10,
-        $col = 1,
-        $titlelen = 30,
-        $infolen = 250,
-        $imgwidth = 120,
-        $imgheight = 90,
-        $listtype = "all",
-        $orderby = "default",
-        $innertext = "",
-        $tablewidth = "100",
-        $ismake = 1,
-        $orderWay = 'desc'
-    ) {
+    function GetArcList($limitstart = 0, $row = 10, $col = 1, $titlelen = 30, $infolen = 250, $imgwidth = 120, $imgheight = 90, $listtype = "all", $orderby = "default", $innertext = "", $tablewidth = "100", $ismake = 1,$orderWay = "desc")
+    {
         if ($row == '') $row = 10;
         if ($limitstart == '') $limitstart = 0;
         if ($titlelen == '') $titlelen = 100;
@@ -772,7 +761,7 @@ class ListView
         if ($listtype == '') $listtype = 'all';
         if ($orderWay == '') $orderWay = 'desc';
         if ($orderby == '') {
-            $orderby = 'default';
+            $orderby = $this->orderby;
         } else {
             $orderby = strtolower($orderby);
         }
@@ -792,8 +781,6 @@ class ListView
             $ordersql = " ORDER BY arc.senddate $orderWay";
         } else if ($orderby == "pubdate") {
             $ordersql = " ORDER BY arc.pubdate $orderWay";
-        } else if ($orderby == "senddate") {
-            $ordersql = " ORDER BY arc.senddate $orderWay";
         } else if ($orderby == "id") {
             $ordersql = " ORDER BY arc.id $orderWay";
         } else if ($orderby == "hot" || $orderby == "click") {
@@ -1076,7 +1063,11 @@ class ListView
         $purl = $this->GetCurUrl();
         //开启伪静态对规则替换
         if ($cfg_rewrite == 'Y') $purl = "/list/";
-        $geturl = "tid={$this->TypeID}&TotalResult={$this->TotalResult}&";
+        $geturl = "tid={$this->TypeID}&";
+        if (!empty($this->orderby) && $this->orderby != 'default') {
+            $geturl .= "orderby={$this->orderby}&";
+        }
+        //$geturl .= "TotalResult={$this->TotalResult}&";
         $purl .= '?'.$geturl;
         if ($GLOBALS['cfg_multi_site'] == 'Y') {
             $purl = $GLOBALS['cfg_basehost'].$purl;
@@ -1128,8 +1119,9 @@ class ListView
         //伪静态栏目分页
         if ($cfg_rewrite == 'Y') {
             $plist = str_replace("?tid=", "", $plist);
-            $plist = preg_replace("/&PageNo=(\d+)/i", "-\\1", $plist);
-            $plist = preg_replace("/&TotalResult=(\d+)/i", "", $plist);//去掉分页数值
+            $plist = preg_replace("/&orderby=([a-z]+)/i", "-\\1", $plist);
+            //$plist = preg_replace("/&TotalResult=([0-9]+)/i", "", $plist);
+            $plist = preg_replace("/&PageNo=([0-9]+)/i", "-\\1", $plist);
         }
         return $plist;
     }

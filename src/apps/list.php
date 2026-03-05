@@ -50,7 +50,7 @@ if ($tinfos['issystem'] == -1) {
     $lv = new SgListView($tid, $cArr, $mod);
 } else {
     include(DEDEINC."/archive/listview.class.php");
-    $lv = new ListView($tid, 1, $mod);
+    $lv = new ListView($tid, 1, $mod, $orderby);
 }
 //对设置了会员级别的栏目进行处理
 if (isset($lv->Fields['corank']) && $lv->Fields['corank'] > 0) {

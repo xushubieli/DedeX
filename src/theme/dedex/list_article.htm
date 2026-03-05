@@ -19,7 +19,23 @@
 		</div>
 		<main class="container py-3">
 			<div class="row">
-				<div class="col-md-9">{dede:list pagesize='10' titlelen='255'}
+				<div class="col-md-9">
+					<div class="sort mb-3">
+						{dede:field.array runphp='yes'}
+						$orderby = @me['orderby'];
+						$typeid = @me['typeid'];
+						$cfg_rewrite = $GLOBALS['cfg_rewrite'];
+						$sorttios = ['default'=>'综合', 'click'=>'点击', 'senddate'=>'最新'];
+						$listsift = '';
+						foreach ($sorttios as $key => $text) {
+							$arcurl = $cfg_rewrite == 'Y' ? "/list/{$typeid}-{$key}" : "?tid={$typeid}&orderby={$key}";
+							$arcurl = str_replace('-default', '', $arcurl);
+							$style = $orderby == $key ? 'btn btn-primary btn-sm' : 'btn btn-outline-primary btn-sm';
+							$listsift .= "<a href='{$arcurl}' class='{$style}'>{$text}</a>";
+						}
+						@me = $listsift;
+						{/dede:field.array}
+					</div>{dede:list pagesize='10' titlelen='255'}
 					<article class="list-article bg-white rounded shadow-sm mb-3 p-3">
 						<div class="list-article-body">
 							<h2 class="mb-3"><a href="[field:arcurl/]">[field:title/]</a></h2>

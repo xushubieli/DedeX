@@ -4,6 +4,8 @@ RewriteBase /
 #列表
 RewriteRule ^list/([0-9]+)$ apps/list.php?tid=$1 [L]
 RewriteRule ^list/([0-9]+)-([0-9]+)$ apps/list.php?tid=$1&PageNo=$2 [L]
+RewriteRule ^list/([0-9]+)-([a-z]+)$ apps/list.php?tid=$1&orderby=$2 [L]
+RewriteRule ^list/([0-9]+)-([a-z]+)-([0-9]+)$ apps/list.php?tid=$1&orderby=$2&PageNo=$3 [L]
 #文档
 RewriteRule ^article/([0-9]+)\.html$ apps/view.php?aid=$1 [L]
 RewriteRule ^article/([0-9]+)-([0-9]+)\.html$ apps/view.php?aid=$1&PageNo=$2 [L]
