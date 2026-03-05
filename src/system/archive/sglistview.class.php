@@ -349,7 +349,7 @@ class SgListView
      * @param  mixed $orderWay 排序方式
      * @return array
      */
-    function GetAPIList($PageNo, $row = 10, $titlelen = 30, $orderby = "default", $orderWay = 'desc')
+    function GetAPIList($PageNo, $row = 10, $titlelen = 30, $orderby = "default", $orderWay = "desc")
     {
         $limitstart = ($PageNo - 1) * $row;
         if ($titlelen == '') $titlelen = 100;
@@ -362,8 +362,6 @@ class SgListView
             $ordersql = " ORDER BY arc.senddate $orderWay";
         } else if ($orderby == "pubdate") {
             $ordersql = " ORDER BY arc.pubdate $orderWay";
-        } else if ($orderby == "senddate") {
-            $ordersql = " ORDER BY arc.senddate $orderWay";
         } else if ($orderby == "id") {
             $ordersql = " ORDER BY arc.aid $orderWay";
         } else if ($orderby == "hot" || $orderby == "click") {
@@ -691,7 +689,7 @@ class SgListView
      * @param     string  $orderWay  排序方式
      * @return    string
      */
-    function GetArcList($limitstart = 0, $row = 10, $col = 1, $titlelen = 30, $listtype = "all", $orderby = "default", $innertext = "", $tablewidth = "100", $ismake = 1, $orderWay = 'desc')
+    function GetArcList($limitstart = 0, $row = 10, $col = 1, $titlelen = 30, $listtype = "all", $orderby = "default", $innertext = "", $tablewidth = "100", $ismake = 1, $orderWay = "desc")
     {
         global $cfg_list_son;
         $typeid = $this->TypeID;
@@ -716,8 +714,6 @@ class SgListView
             $ordersql = " ORDER BY arc.senddate $orderWay";
         } else if ($orderby == "pubdate") {
             $ordersql = " ORDER BY arc.pubdate $orderWay";
-        } else if ($orderby == "senddate") {
-            $ordersql = " ORDER BY arc.senddate $orderWay";
         } else if ($orderby == "id") {
             $ordersql = " ORDER BY arc.aid $orderWay";
         } else if ($orderby == "hot" || $orderby == "click") {
@@ -959,8 +955,10 @@ class SgListView
         }
         $purl = $this->GetCurUrl();
         //开启伪静态对规则替换
-        if ($cfg_rewrite == 'Y') $purl = "/list/";
-        $geturl = "tid={$this->TypeID}&TotalResult={$this->TotalResult}&";
+        if ($cfg_rewrite == 'Y') {
+            $purl = "/list/";
+        }
+        $geturl = "tid={$this->TypeID}&";
         $purl .= '?'.$geturl;
         $optionlist = '';
         //获得上页和下页的链接
@@ -1009,8 +1007,8 @@ class SgListView
         //伪静态栏目分页
         if ($cfg_rewrite == 'Y') {
             $plist = str_replace("?tid=", "", $plist);
-            $plist = preg_replace("/&PageNo=(\d+)/i", "-\\1", $plist);
-            $plist = preg_replace("/&TotalResult=(\d+)/i", "", $plist);//去掉分页数值
+            //$plist = preg_replace("/&TotalResult=([0-9]+)/i", "", $plist);
+            $plist = preg_replace("/&PageNo=([0-9]+)/i", "-\\1", $plist);
         }
         return $plist;
     }

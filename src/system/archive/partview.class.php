@@ -198,7 +198,8 @@ class PartView
      * @param object $ctag
      * @return array
      */
-    function GetArcList($templets='',$typeid = 0,$row = 10,$col = 1,$titlelen = 30,$infolen = 160,$imgwidth = 120,$imgheight = 90,$listtype = "all",$orderby = "default",$keyword = "",$innertext = "",$tablewidth = "100",$arcid = 0,$idlist = "",$channelid = 0,$limit = "",$att = 0,$order = 'desc',$subday = 0,$autopartid = -1,$ismember = 0,$maintable = '',$ctag = '') {
+    function GetArcList($templets='', $typeid = 0, $row = 10, $col = 1, $titlelen = 30, $infolen = 160, $imgwidth = 120, $imgheight = 90, $listtype = "all", $orderby = "default", $keyword = "", $innertext = "", $tablewidth = "100", $arcid = 0, $idlist = "", $channelid = 0, $limit = "", $att = 0, $order = "desc", $subday = 0, $autopartid = -1, $ismember = 0, $maintable = '', $ctag = '')
+    {
         if (empty($autopartid)) {
             $autopartid = -1;
         }

@@ -813,21 +813,8 @@ class FreeList
      * @param     string  $sitepath  站点路径
      * @return    string
      */
-    function GetArcUrl(
-        $aid,
-        $typeid,
-        $timetag,
-        $title,
-        $ismake = 0,
-        $rank = 0,
-        $namerule = '',
-        $artdir = '',
-        $money = 0,
-        $filename = '',
-        $moresite = '',
-        $siteurl = '',
-        $sitepath = ''
-    ) {
+    function GetArcUrl($aid, $typeid, $timetag, $title, $ismake = 0, $rank = 0, $namerule = '', $artdir = '', $money = 0, $filename = '', $moresite = '', $siteurl = '', $sitepath = '')
+    {
         return GetFileUrl(
             $aid,
             $typeid,

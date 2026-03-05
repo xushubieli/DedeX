@@ -61,17 +61,8 @@ class SearchView
      * @param     string  $mid  会员ID
      * @return    string
      */
-    function __construct(
-        $typeid,
-        $keyword,
-        $orderby,
-        $achanneltype = "all",
-        $searchtype = '',
-        $starttime = 0,
-        $upagesize = 10,
-        $kwtype = 1,
-        $mid = 0
-    ) {
+    function __construct($typeid, $keyword, $orderby, $achanneltype = "all", $searchtype = '', $starttime = 0, $upagesize = 10, $kwtype = 1, $mid = 0)
+    {
         global $cfg_search_max, $cfg_search_maxrc, $cfg_search_time, $envs;
         if (empty($upagesize)) {
             $upagesize = 10;
@@ -129,17 +120,8 @@ class SearchView
         $envs['value'] = $keyword;
     }
     //php4构造函数
-    function SearchView(
-        $typeid,
-        $keyword,
-        $orderby,
-        $achanneltype = "all",
-        $searchtype = "",
-        $starttime = 0,
-        $upagesize = 10,
-        $kwtype = 1,
-        $mid = 0
-    ) {
+    function SearchView($typeid, $keyword, $orderby, $achanneltype = "all", $searchtype = "", $starttime = 0, $upagesize = 10, $kwtype = 1, $mid = 0)
+    {
         $this->__construct($typeid, $keyword, $orderby, $achanneltype, $searchtype, $starttime, $upagesize, $kwtype, $mid);
     }
     //关闭相关资源
@@ -287,7 +269,7 @@ class SearchView
     function GetRedKeyWord($fstr)
     {
         $k = trim($this->SearchKeyword);
-        return ($k == '')?  $fstr : str_replace($k, "<strong style='color:#dc3545'>{$k}</strong>", $fstr);
+        return ($k == '') ?  $fstr : str_replace($k, "<strong style='color:#dc3545'>{$k}</strong>", $fstr);
     }
     /**
      *  统计列表里的记录
@@ -455,19 +437,8 @@ class SearchView
      * @param     string  $tablewidth  表格宽度
      * @return    string
      */
-    function GetArcList(
-        $limitstart = 0,
-        $row = 10,
-        $col = 1,
-        $titlelen = 30,
-        $infolen = 250,
-        $imgwidth = 120,
-        $imgheight = 90,
-        $achanneltype = "all",
-        $orderby = "default",
-        $innertext = "",
-        $tablewidth = "100"
-    ) {
+    function GetArcList($limitstart = 0, $row = 10, $col = 1, $titlelen = 30, $infolen = 250, $imgwidth = 120, $imgheight = 90, $achanneltype = "all", $orderby = "default", $innertext = "", $tablewidth = "100")
+    {
         $typeid = $this->TypeID;
         if ($row == '') $row = 10;
         if ($limitstart == '') $limitstart = 0;

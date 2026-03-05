@@ -247,21 +247,8 @@ class TagList
      * @param     string  $orderWay  排序方式
      * @return    string
      */
-    function GetArcList(
-        $limitstart = 0,
-        $row = 10,
-        $col = 1,
-        $titlelen = 30,
-        $infolen = 250,
-        $imgwidth = 120,
-        $imgheight = 90,
-        $listtype = "all",
-        $orderby = "default",
-        $innertext = "",
-        $tablewidth = "100",
-        $ismake = 1,
-        $orderWay = 'desc'
-    ) {
+    function GetArcList($limitstart = 0, $row = 10, $col = 1, $titlelen = 30, $infolen = 250, $imgwidth = 120, $imgheight = 90, $listtype = "all", $orderby = "default", $innertext = "", $tablewidth = "100", $ismake = 1, $orderWay = "desc")
+    {
         $getrow = ($row == '' ? 10 : $row);
         if ($limitstart == '') $limitstart = 0;
         if ($titlelen == '') $titlelen = 100;

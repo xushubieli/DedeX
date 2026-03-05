@@ -1027,7 +1027,7 @@ class Archives
      * @param string $body
      * @return string
      */
-    function ReplaceKeyword($kw,&$body)
+    function ReplaceKeyword($kw, &$body)
     {
         $karr = $kaarr = $GLOBALS['replaced'] = array();
         //暂时屏蔽超链接

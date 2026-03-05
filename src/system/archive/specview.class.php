@@ -254,19 +254,8 @@ class SpecView
      * @param     string  $tablewidth  表格宽度
      * @return    string
      */
-    function GetArcList(
-        $limitstart = 0,
-        $row = 10,
-        $col = 1,
-        $titlelen = 30,
-        $infolen = 250,
-        $imgwidth = 120,
-        $imgheight = 90,
-        $listtype = "all",
-        $orderby = "default",
-        $innertext = "",
-        $tablewidth = "100"
-    ) {
+    function GetArcList($limitstart = 0, $row = 10, $col = 1, $titlelen = 30, $infolen = 250, $imgwidth = 120, $imgheight = 90, $listtype = "all", $orderby = "default", $innertext = "", $tablewidth = "100")
+    {
         $typeid = $this->TypeID;
         if ($row == "") {
             $row = 10;
