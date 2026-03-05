@@ -53,8 +53,11 @@
 											<select name="channeltype" id="channeltype" onChange="ParTemplet(this);" class="form-select admin-w-sm">
 												<?php
 												foreach ($channelArray as $k=>$arr) {
-													if ($k==$channelid) echo "<option value='{$k}' selected>{$arr['typename']} {$arr['nid']}</option>";
-													else  echo "<option value='{$k}'>{$arr['typename']} {$arr['nid']}</option>";
+													if ($k==$channelid) {
+														echo "<option value='{$k}' selected>{$arr['typename']} {$arr['nid']}</option>";
+													} else {
+														echo "<option value='{$k}'>{$arr['typename']} {$arr['nid']}</option>";
+													}
 												}
 												?>
 											</select>
@@ -114,9 +117,9 @@
 														</td>
 														<td><input type="text" name="toptype" class="pubinputs admin-w-lg"></td>
 														<td><input type="text" name="sontype" class="pubinputs w-100"></td>
-														<td><button name="" type="button" class="btn btn-danger btn-sm del">删除</button></td>
+														<td><button type="button" class="btn btn-danger btn-sm del">删除</button></td>
 													</tr>
-													<?php for($i=2;$i<=10;$i++){?>
+													<?php for($i=2; $i<=10; $i++) {?>
 													<tr class="repeat">
 														<td class="rank">
 															<input type="hidden" name="posttype<?php echo $i;?>" value="<?php echo $i;?>">
@@ -124,13 +127,13 @@
 														</td>
 														<td><input type="text" name="toptype<?php echo $i;?>" class="pubinputs admin-w-lg"></td>
 														<td><input type="text" name="sontype<?php echo $i;?>" class="pubinputs w-100"></td>
-														<td><button name="" type="button" class="btn btn-danger btn-sm del">删除</button></td>
+														<td><button type="button" class="btn btn-danger btn-sm del">删除</button></td>
 													</tr>
 													<?php }?>
 												</tbody>
 											</table>
 											<table id="addQuickRel" class="table" style="display:none">
-												</thead>
+												<thead>
 													<tr>
 														<td scope="col">排序</td>
 														<td scope="col">栏目名称</td>
@@ -144,9 +147,9 @@
 															<input type="text" name="rank" value="1" class="pubinputs admin-w-sm">
 														</td>
 														<td><input type="text" name="reltype" class="pubinputs admin-w-lg"></td>
-														<td><button name="" type="button" class="btn btn-danger btn-sm del">删除</button></td>
+														<td><button type="button" class="btn btn-danger btn-sm del">删除</button></td>
 													</tr>
-													<?php for($i=2;$i<=10;$i++){?>
+													<?php for($i=2; $i<=10; $i++){ ?>
 													<tr class="repeat">
 														<td class="rank">
 															<input type="hidden" name="posttype<?php echo $i;?>" value="<?php echo $i;?>">
@@ -204,31 +207,26 @@
 				}
 			};
 			$(document).ready(function() {
-				//添加按钮事件
 				$("#addQuick .add").click(function() {
-					var id = $("#addQuick tr").prevAll("tr").length + 1;
-					$("#addQuick tr:eq(1)").clone(true).addClass("repeat").find(".rank input").attr("value", function() {
-						return id;
-					}).end().find(".pubinputs").attr("name", function() {
-						return this.name + id;
-					}).end().appendTo($("#addQuick"));
+					var $tbody = $("#addQuick tbody");
+					var id = $tbody.find("tr").length + 1;
+					var $newRow = $tbody.find("tr:first").clone(true).addClass("repeat").find(".rank input").val(id).end().find(".pubinputs").each(function() {
+						var name = $(this).attr("name");
+						if (name) $(this).attr("name", name + id);
+					}).end();
+					$newRow.appendTo($tbody);
 				});
-				//删除按钮事件
-				$("#addQuick .del").click(function() {
-					$(this).parents(".repeat").remove();
+				$("#addQuick, #addQuickRel").on("click", ".del", function() {
+					$(this).closest(".repeat").remove();
 				});
-				//删除按钮事件
-				$("#addQuickRel .del").click(function() {
-					$(this).parents(".repeat").remove();
-				});
-				//添加按钮事件
 				$("#addQuickRel .addrel").click(function() {
-					var id = $("#addQuickRel tr").prevAll("tr").length + 1;
-					$("#addQuickRel tr:eq(1)").clone(true).addClass("repeat").find(".rank input").attr("value", function() {
-						return id;
-					}).end().find(".pubinputs").attr("name", function() {
-						return this.name + id;
-					}).end().appendTo($("#addQuickRel"));
+					var $tbody = $("#addQuickRel tbody");
+					var id = $tbody.find("tr").length + 1;
+					var $newRow = $tbody.find("tr:first").clone(true).addClass("repeat").find(".rank input").val(id).end().find(".pubinputs").each(function() {
+						var name = $(this).attr("name");
+						if (name) $(this).attr("name", name + id);
+					}).end();
+					$newRow.appendTo($tbody);
 				});
 			});
 		</script>
