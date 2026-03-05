@@ -113,7 +113,7 @@ if ($dopost != 'save') {
                     if (!isset(${$vs[0]})) ${$vs[0]} = '';
                     ${$vs[0]} = GetFieldValueA(${$vs[0]}, $vs[1], $arcID);
                 }
-                $inadd_f .= ','.$vs[0];
+                $inadd_f .= ',`'.$vs[0].'`';
                 $inadd_v .= " ,'".${$vs[0]}."' ";
             }
         }
