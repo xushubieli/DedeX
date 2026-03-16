@@ -10,7 +10,7 @@
 * {
 	scrollbar-width:thin;
 	letter-spacing:0.5px;
-	font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',Arial,sans-serif
+	font-family:-apple-system,Roboto,'PingFang SC','Helvetica Neue',Arial,sans-serif
 }
 body {
 	line-height:1.5;
@@ -159,8 +159,8 @@ xmp {
 	margin-bottom:40px
 }
 .login-box .content .from .group {
-	margin-bottom:20px;
-	position:relative
+	position:relative;
+	margin-bottom:20px
 }
 .login-box .content .from .form-control {
 	padding-left:45px;
@@ -445,17 +445,14 @@ body.menu-show .admin-content {
 	z-index:19993
 }
 .fastselect .topcat {
-	margin-bottom:0.5rem;
 	padding:0.5rem;
 	background:var(--bs-light)
 }
 .fastselect .soncat {
-	margin-bottom:0.5rem;
-	padding:0.5rem
+	padding:0 1rem
 }
-.fastselect .list {
-	display:inline-block;
-	padding-right:0.5rem
+.fastselect .soncat .list {
+	line-height:30px
 }
 .mysource,.mywriter {
 	width:500px;
@@ -482,14 +479,11 @@ body.menu-show .admin-content {
 }
 #imgs-list,.opt-img {
 	display:grid;
-	grid-gap:1rem;
-	grid-template-columns:repeat(auto-fill,minmax(130px,auto))
+	gap:1rem;
+	grid-template-columns:repeat(auto-fill,minmax(130px,1fr))
 }
 #imgs-list li,.atlas,.opt-img .list {
 	position:relative;
-	padding:0.5rem;
-	background:var(--bs-light);
-	border-radius:var(--xs-radius);
 	text-align:center
 }
 #imgs-list li .picbox img,.atlas .atlas-head img,.opt-img .list a > img {
@@ -508,23 +502,23 @@ body.menu-show .admin-content {
 #imgs-list li .tools {
 	display:none;
 	position:absolute;
-	bottom:0.25rem;
-	right:0.5rem;
+	top:0;
+	left:0;
 	z-index:1992
 }
 #imgs-list li .tools .remove:after {
 	font-family:'bootstrap-icons';
 	content:'\F622';
-	font-size:14px;
+	font-size:16px;
 	color:var(--bs-danger);
 	cursor:pointer
 }
 #imgs-list .up-over .picbox:after {
 	position:absolute;
-	top:1rem;
-	left:1rem;
+	top:0;
+	left:0;
 	font-family:'bootstrap-icons';
-	font-size:14px;
+	font-size:16px;
 	color:var(--bs-teal);
 	content:'\F26A';
 	z-index:1991
@@ -539,8 +533,8 @@ body.menu-show .admin-content {
 }
 #gallery,#galleryedit {
 	display:grid;
-	grid-gap:1rem;
-	grid-template-columns:repeat(auto-fill,minmax(190px,auto))
+	gap:1rem;
+	grid-template-columns:repeat(auto-fill,minmax(190px,1fr))
 }
 .atlas .atlas-body,.atlas .atlas-foot {
 	margin-top:0.5rem
@@ -620,7 +614,7 @@ body.menu-show .admin-content {
 	width:350px
 }
 .admin-w-md {
-	width:230px
+	width:220px
 }
 .admin-w-sm {
 	width:190px
@@ -735,7 +729,7 @@ input,select,textarea,.form-control,.form-select,.btn {
 .shadow-sm {
 	box-shadow:0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb),0.015)!important
 }
-@media screen and (min-width:992px) and (max-width:1199px) {
+@media screen and (min-width:991px) and (max-width:1199px) {
 	.login-box .content {
 		padding:3rem
 	}

@@ -9,7 +9,7 @@
 * {
 	scrollbar-width:thin;
 	letter-spacing:0.5px;
-	font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',Arial,sans-serif
+	font-family:-apple-system,Roboto,'PingFang SC','Helvetica Neue',Arial,sans-serif
 }
 body {
 	line-height:1.5;
@@ -361,8 +361,8 @@ input[type=radio],input[type=checkbox],input[type=radio]:focus,input[type=checkb
 	line-height:36px
 }
 .thumbnail-md {
-	max-width:280px;
-	max-height:168px
+	max-width:160px;
+	max-height:120px
 }
 .admin-textarea-xl {
 	width:100%;
@@ -376,10 +376,10 @@ input[type=radio],input[type=checkbox],input[type=radio]:focus,input[type=checkb
 	width:350px
 }
 .admin-w-md {
-	width:230px
+	width:220px
 }
 .admin-w-sm {
-	width:180px
+	width:190px
 }
 .admin-w-xs {
 	width:70px
