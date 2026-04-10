@@ -26,7 +26,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
         <div class="card shadow-sm">
             <div class="card-header">插入多图</div>
             <div class="card-body">
-                <ul id="imgs-list"></ul>
+                <ul id="opt-setimg"></ul>
             </div>
         </div>
         <script>
@@ -60,7 +60,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
             var upload_base_path = axupimgs.images_upload_base_path;
             //为列表添加排序
             function reSort() {
-                document.querySelectorAll('#imgs-list li').forEach((el, i) => {
+                document.querySelectorAll('#opt-setimg li').forEach((el, i) => {
                     el.setAttribute('data-num', i);
                 });
             }
@@ -84,13 +84,13 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                     li.innerHTML='<div class="picbox"><img src="' + blobUrl + '"></div><div class="namebox"><span>' + file.name + '</span></div><div class="tools"><a class="remove"></a></div>';
                     vDom.appendChild(li);
                 }
-                document.querySelector('#imgs-list').appendChild(vDom);
+                document.querySelector('#opt-setimg').appendChild(vDom);
                 //reSort();
             }
             //清空列表
             document.querySelector('#imgs-topbar .removeall').addEventListener('click', () => {
                 axupimgs.res=[]
-                document.querySelectorAll('#imgs-list li').forEach((el, i) => {
+                document.querySelectorAll('#opt-setimg li').forEach((el, i) => {
                     el.parentNode.removeChild(el)
                 });
             });
@@ -171,14 +171,14 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                         }
                         axupimgs.res[file_i].url = url;
                         filename = url.split('/').pop();
-                        var li = document.querySelectorAll('#imgs-list li')[file_i];
+                        var li = document.querySelectorAll('#opt-setimg li')[file_i];
                         li.setAttribute('class','up-over');
                         li.querySelector('.namebox span').innerText = filename;
                         n++
                         upAllFiles(n);
                     }, function(err) {
                         document.querySelector('#imgs-topbar .upall').innerText='全部上传';
-                        document.querySelectorAll('#imgs-list li.up-now').forEach((el,i) => {
+                        document.querySelectorAll('#opt-setimg li.up-now').forEach((el,i) => {
                             el.setAttribute('class', 'up-no');
                         });
                         alert(err);
@@ -190,7 +190,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                     return false;
                 }
                 if (axupimgs.res.length > 0) {
-                    document.querySelectorAll('#imgs-list li.up-no').forEach((el, i) => {
+                    document.querySelectorAll('#opt-setimg li.up-no').forEach((el, i) => {
                         el.classList ? el.classList.add('up-now') : el.className+=' up-now';
                     });
                     e.target.innerText='上传中';
@@ -203,7 +203,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                         el.querySelector('.remove').addEventListener('click', (e) => {
                             var li = e.target.parentNode.parentNode;
                             var n = li.getAttribute('data-num');
-                            var el = document.querySelectorAll('#imgs-list li')[n];
+                            var el = document.querySelectorAll('#opt-setimg li')[n];
                             el.parentNode.removeChild(el);
                             axupimgs.res.splice(n, 1);
                         });
@@ -211,7 +211,7 @@ include(DEDEDATA.'/mark/inc_photowatermark_config.php');
                 }
                 reSort();
             });
-            observ_flist.observe(document.querySelector('#imgs-list'),{childList:true});
+            observ_flist.observe(document.querySelector('#opt-setimg'),{childList:true});
         </script>
     </body>
 </html>

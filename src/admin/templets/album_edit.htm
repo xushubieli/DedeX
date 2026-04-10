@@ -161,7 +161,7 @@
 								</tr>
 								<tr>
 									<td colspan="4">
-										<div id="galleryedit">
+										<div id="gallery-edit">
 											<?php
 											$j = 1;
 											if ($imgurls!="") {
@@ -183,7 +183,7 @@
 															$fhtml .= "<input type='hidden' name='imgddurl{$j}' value='{$litimg}'>";
 															$fhtml .= "<div class='atlas-head'><img src='{$litimg}' id='lit{$j}'></div>";
 															$fhtml .= "<div class='atlas-body'><input type='text' name='imgmsg{$j}' value='{$ctag->GetAtt('text')}' class='atlas-input' placeholder='请输入图片注释'></div>";
-															$fhtml .= "<div class='atlas-foot'><span class='btn btn-primary btn-sm opt-button'>更换<input type='file' name='imgfile{$j}' for='item{$j}' class='atlasedit'></span><a href=\"javascript:delAlbPicOld('$bigimg',$j)\" class=\"btn btn-danger btn-sm\">删除</a></div>";
+															$fhtml .= "<div class='atlas-foot'><span class='btn btn-primary btn-sm opt-button'>更换<input type='file' name='imgfile{$j}' for='item{$j}' class='atlas-set'></span><a href=\"javascript:delAlbPicOld('$bigimg',$j)\" class=\"btn btn-danger btn-sm\">删除</a></div>";
 															$fhtml .= "</div>";
 															echo $fhtml;
 															$j++;
@@ -198,7 +198,7 @@
 								</tr>
 								<tr>
 									<td>本地上传</td>
-									<td colspan="3"><span class="btn btn-primary btn-sm opt-button">上传多图<input type="file" name="files[]" id="iptAlbumImages" multiple></span></td>
+									<td colspan="3"><span class="btn btn-primary btn-sm opt-button">上传多图<input type="file" name="files[]" id="upAlbums" multiple></span></td>
 								</tr>
 								<tr>
 									<td colspan="4">
@@ -299,7 +299,42 @@
 			var swfu = null;
 			var vcc = 0;
 			var albums = [];
-			$(".atlasedit").change(function(val) {
+			$("#upAlbums").change(function(val) {
+				var files = val.target.files;
+				var upImage = [];
+				var total = files.length;
+				for (let i = 0; i < files.length; i++) {
+					const f = files[i];
+					var formData = new FormData();
+					var fileData = f;
+					formData.append('file', fileData);
+					$.ajax({
+						url: 'api.php?action=upload_image',
+						type: 'POST',
+						data: formData,
+						processData: false,
+						contentType: false,
+						success: function(result) {
+							upImage.push({index: i, result: result});
+							if (upImage.length === total) {
+								upImage.sort((a, b) => a.index - b.index);
+								upImage.forEach(function(item) {
+									if (item.result.code === 0) {
+										addImage(item.result.data, 0);
+									} else {
+										ShowMsg(item.result.error.message);
+									}
+								});
+								$("#upAlbums").val('');
+							}
+						},
+						error: function(xhr, status, error) {
+							ShowMsg(error);
+						}
+					});
+				}
+			});
+			$(".atlas-set").change(function(val) {
 				var formData = new FormData();
 				var fileData = val.target.files[0];
 				formData.append('file', fileData);
@@ -323,33 +358,6 @@
 						ShowMsg(error);
 					}
 				});
-			});
-			$("#iptAlbumImages").change(function(val) {
-				for (let i = 0; i < val.target.files.length; i++) {
-					const f = val.target.files[i];
-					var formData = new FormData();
-					var fileData = f;
-					formData.append('file', fileData);
-					$.ajax({
-						url: 'api.php?action=upload_image',
-						type: 'POST',
-						data: formData,
-						processData: false,
-						contentType: false,
-						success: function(result) {
-							if (result.code === 0) {
-								// console.log(result)
-								addImage(result.data, 0);
-								$("#iptAlbumImages").val('');
-							} else {
-								ShowMsg(result.error.message);
-							}
-						},
-						error: function(xhr, status, error) {
-							ShowMsg(error);
-						}
-					});
-				}
 			});
 		</script>
 		<script>InitPage();</script>

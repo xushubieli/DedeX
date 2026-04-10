@@ -107,7 +107,7 @@ class TypeUnit
             if ($ispart == 0) {
 //列表栏目
 echo <<<tpl
-<div class='column d-flex justify-content-between py-2'>
+<div class='admin-column d-flex justify-content-between py-2'>
     <div class='left'>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
         <span class='btn btn-primary btn-sm'>列表</span>
@@ -130,7 +130,7 @@ tpl;
             } else if ($ispart == 1) {
 //封面栏目
 echo <<<tpl
-<div class='column d-flex justify-content-between py-2'>
+<div class='admin-column d-flex justify-content-between py-2'>
     <div class='left'>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
         <span class='btn btn-info btn-sm'>封面</span>
@@ -152,7 +152,7 @@ tpl;
             } else if ($ispart == 2) {
 //外部栏目
 echo <<<tpl
-<div class='column d-flex justify-content-between py-2'>
+<div class='admin-column d-flex justify-content-between py-2'>
     <div class='left'>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
         <span class='btn btn-outline-primary btn-sm'>外部</span>
@@ -217,7 +217,7 @@ tpl;
                 } if ($ispart == 0) {
 //列表栏目
 echo <<<tpl
-<div class='column d-flex justify-content-between py-2'>
+<div class='admin-column d-flex justify-content-between py-2'>
     <div class='left'>
         <span>└─{$step}</span>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
@@ -241,7 +241,7 @@ tpl;
                 } else if ($ispart == 1) {
 //封面栏目
 echo <<<tpl
-<div class='column d-flex justify-content-between py-2'>
+<div class='admin-column d-flex justify-content-between py-2'>
     <div class='left'>
          <span>└─{$step}</span>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>
@@ -264,7 +264,7 @@ tpl;
                 } else if ($ispart == 2) {
 //外部栏目
 echo <<<tpl
-<div class='column d-flex justify-content-between py-2'>
+<div class='admin-column d-flex justify-content-between py-2'>
     <div class='left'>
          <span>└─{$step}</span>
         <span class='btn btn-light btn-sm'><i id='icon{$id}' onclick="LoadSuns('suns{$id}',{$id});" class='bi bi-plus-lg'></i></span>

@@ -12,7 +12,7 @@ header("Expires:0");
 if ($t == 'source') {
     $m_file = DEDEDATA."/admin/source.txt";
     $allsources = file($m_file);
-    echo "<div class='card shadow-sm'><div class='card-header'><a href=\"javascript:OpenMyWin('article_source_edit.php');ClearDivCt('mysource');\" class='btn btn-primary btn-sm'>设置</a><a href=\"javascript:HideObj('mysource');ChangeFullDiv('hide');\" class='btn btn-primary btn-sm'>关闭</a></div>\r\n";
+    echo "<div class='card shadow-sm'><div class='card-header'><a href=\"javascript:OpenMyWin('article_source_edit.php');ClearDivCt('admin-source');\" class='btn btn-primary btn-sm'>设置</a><a href=\"javascript:HideObj('admin-source');ChangeFullDiv('hide');\" class='btn btn-primary btn-sm'>关闭</a></div>\r\n";
     echo "<div class='card-body'>\r\n";
     foreach ($allsources as $v) {
         $v = trim($v);
@@ -24,7 +24,7 @@ if ($t == 'source') {
 } else {
     //作者列表
     $m_file = DEDEDATA."/admin/writer.txt";
-    echo "<div class='card shadow-sm'><div class='card-header'><a href=\"javascript:OpenMyWin('article_writer_edit.php');ClearDivCt('mywriter');\" class='btn btn-primary btn-sm'>设置</a><a href=\"javascript:HideObj('mywriter');ChangeFullDiv('hide');\" class='btn btn-primary btn-sm'>关闭</a></div>\r\n";
+    echo "<div class='card shadow-sm'><div class='card-header'><a href=\"javascript:OpenMyWin('article_writer_edit.php');ClearDivCt('admin-writer');\" class='btn btn-primary btn-sm'>设置</a><a href=\"javascript:HideObj('admin-writer');ChangeFullDiv('hide');\" class='btn btn-primary btn-sm'>关闭</a></div>\r\n";
     echo "<div class='card-body'>\r\n";
     if (filesize($m_file) > 0) {
         $fp = fopen($m_file, 'r');

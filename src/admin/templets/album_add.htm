@@ -160,7 +160,7 @@
 									</tr>
 									<tr>
 										<td>本地上传</td>
-										<td colspan="3"><span class="btn btn-primary btn-sm opt-button">上传多图<input type="file" name="files[]" id="iptAlbumImages" multiple></span></td>
+										<td colspan="3"><span class="btn btn-primary btn-sm opt-button">上传多图<input type="file" name="files[]" id="upAlbums" multiple></span></td>
 									</tr>
 									<tr id="handfield">
 										<td colspan="4"><div id="gallery"></div></td>
@@ -247,9 +247,12 @@
 			var swfu = null;
 			var vcc = 0;
 			var albums = [];
-			$("#iptAlbumImages").change(function(val) {
-				for (let i = 0; i < val.target.files.length; i++) {
-					const f = val.target.files[i];
+			$("#upAlbums").change(function(val) {
+				var files = val.target.files;
+				var upImage = [];
+				var total = files.length;
+				for (let i = 0; i < files.length; i++) {
+					const f = files[i];
 					var formData = new FormData();
 					var fileData = f;
 					formData.append('file', fileData);
@@ -260,12 +263,17 @@
 						processData: false,
 						contentType: false,
 						success: function(result) {
-							if (result.code === 0) {
-								// console.log(result)
-								addImage(result.data, 0);
-								$("#iptAlbumImages").val('');
-							} else {
-								ShowMsg(result.error.message);
+							upImage.push({index: i, result: result});
+							if (upImage.length === total) {
+								upImage.sort((a, b) => a.index - b.index);
+								upImage.forEach(function(item) {
+									if (item.result.code === 0) {
+										addImage(item.result.data, 0);
+									} else {
+										ShowMsg(item.result.error.message);
+									}
+								});
+								$("#upAlbums").val('');
 							}
 						},
 						error: function(xhr, status, error) {

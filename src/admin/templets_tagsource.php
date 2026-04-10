@@ -14,7 +14,7 @@ CheckPurview('plus_文件管理器');
 $libdir = DEDEINC.'/taglib';
 $helpdir = DEDEINC.'/taglib/help';
 //获取默认文件说明信息
-function GetHelpInfo($tagname)
+function GetAdminHelp($tagname)
 {
     global $helpdir;
     $helpfile = $helpdir.'/'.$tagname.'.txt';
@@ -22,9 +22,9 @@ function GetHelpInfo($tagname)
         return '该标签没帮助信息';
     }
     $fp = fopen($helpfile, 'r');
-    $helpinfo = fgets($fp, 64);
+    $adminhelp = fgets($fp, 64);
     fclose($fp);
-    return $helpinfo;
+    return $adminhelp;
 }
 include DedeInclude('templets/templets_tagsource.htm');
 ?>

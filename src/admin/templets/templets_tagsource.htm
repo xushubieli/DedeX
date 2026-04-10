@@ -33,7 +33,7 @@
 									if (!preg_match("#\.php$#", $filename)) continue;
 									$filetime = filemtime($libdir.'/'.$filename);
 									$filetime = MyDate("Y-m-d H:i:s",$filetime);
-									$fileinfo = GetHelpInfo(str_replace('.lib.php','',$filename));
+									$fileinfo = GetAdminHelp(str_replace('.lib.php','',$filename));
 								?>
 								<tr>
 									<td><img src="/static/web/img/icon_php.png"> <?php echo $filename;?></td>

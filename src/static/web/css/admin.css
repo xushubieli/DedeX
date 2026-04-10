@@ -354,12 +354,7 @@ body.menu-show .admin-content {
 .admin-panel-web .card-body {
 	height:216px
 }
-.spinner-border {
-	width:20px;
-	height:20px;
-	vertical-align:bottom
-}
-.adminmodalbg {
+.admin-modalbg {
 	position:fixed;
 	top:0;
 	left:0;
@@ -369,7 +364,7 @@ body.menu-show .admin-content {
 	opacity:0.5;
 	z-index:19991
 }
-.adminmodal {
+.admin-modal {
 	position:fixed;
 	top:0;
 	left:0;
@@ -377,7 +372,7 @@ body.menu-show .admin-content {
 	height:100%;
 	z-index:19992
 }
-.adminmodal .card {
+.admin-modal .card {
 	margin:1.75rem auto;
 	width:100%
 }
@@ -385,10 +380,7 @@ body.menu-show .admin-content {
 	object-fit:unset;
 	cursor:pointer
 }
-.clear {
-	clear:both
-}
-.helpinfo {
+.admin-help {
 	display:none;
 	padding:0.5rem;
 	width:100%;
@@ -396,7 +388,19 @@ body.menu-show .admin-content {
 	border:1px solid var(--bs-gray-300);
 	border-radius:var(--xs-radius)
 }
-.tipslite {
+.admin-column:hover {
+	background:rgba(0,0,0,0.075)
+}
+.admin-type {
+	float:left;
+	width:180px
+}
+.admin-source,.admin-writer {
+	width:500px;
+	border:1px solid var(--bs-gray-300);
+	z-index:19994
+}
+.tips-lite {
 	background:var(--bs-white);
 	border:1px solid var(--bs-gray-300);
 	z-index:19995
@@ -428,17 +432,6 @@ body.menu-show .admin-content {
 	word-break:break-all;
 	word-wrap:break-word
 }
-.toolad li {
-	display:inline-block;
-	padding:0.5rem;
-	cursor:pointer
-}
-.toolad .active {
-	color:var(--bs-blue)
-}
-.column:hover {
-	background:rgba(0,0,0,0.075)
-}
 .fastselectbox {
 	height:350px;
 	overflow-y:auto;
@@ -454,14 +447,20 @@ body.menu-show .admin-content {
 .fastselect .soncat .list {
 	line-height:30px
 }
-.mysource,.mywriter {
-	width:500px;
-	border:1px solid var(--bs-gray-300);
-	z-index:19994
+.list-group-item.active {
+	background-color:var(--bs-primary);
+	border-color:var(--bs-primary)
 }
-.data-col {
-	float:left;
-	width:180px
+.clear {
+	clear:both
+}
+.plugin-ad li {
+	display:inline-block;
+	padding:0.5rem;
+	cursor:pointer
+}
+.plugin-ad .active {
+	color:var(--bs-blue)
 }
 .sys-search {
 	position:relative
@@ -473,47 +472,43 @@ body.menu-show .admin-content {
 	border:none;
 	box-shadow:none
 }
-.list-group-item.active {
-	background-color:var(--bs-primary);
-	border-color:var(--bs-primary)
-}
-#imgs-list,.opt-img {
+#opt-setimg,.opt-album {
 	display:grid;
 	gap:1rem;
 	grid-template-columns:repeat(auto-fill,minmax(130px,1fr))
 }
-#imgs-list li,.atlas,.opt-img .list {
+#opt-setimg li,.opt-album .list,.atlas {
 	position:relative;
 	text-align:center
 }
-#imgs-list li .picbox img,.atlas .atlas-head img,.opt-img .list a > img {
+#opt-setimg li .picbox img,.opt-album .list a > img,.atlas .atlas-head img {
 	width:100%;
 	aspect-ratio:4 / 3
 }
-#imgs-list li .namebox {
+#opt-setimg li .namebox {
 	padding-top:0.5rem;
 	overflow:hidden;
 	text-overflow:ellipsis;
 	white-space:nowrap
 }
-#imgs-list li:hover .tools {
+#opt-setimg li:hover .tools {
 	display:block
 }
-#imgs-list li .tools {
+#opt-setimg li .tools {
 	display:none;
 	position:absolute;
 	top:0;
 	left:0;
 	z-index:1992
 }
-#imgs-list li .tools .remove:after {
+#opt-setimg li .tools .remove:after {
 	font-family:'bootstrap-icons';
 	content:'\F622';
 	font-size:16px;
 	color:var(--bs-danger);
 	cursor:pointer
 }
-#imgs-list .up-over .picbox:after {
+#opt-setimg .up-over .picbox:after {
 	position:absolute;
 	top:0;
 	left:0;
@@ -523,6 +518,11 @@ body.menu-show .admin-content {
 	content:'\F26A';
 	z-index:1991
 }
+#gallery,#gallery-edit {
+	display:grid;
+	gap:1rem;
+	grid-template-columns:repeat(auto-fill,minmax(190px,1fr))
+}
 #edsta {
 	display:none;
 	position:absolute;
@@ -531,18 +531,13 @@ body.menu-show .admin-content {
 	width:500px;
 	height:auto
 }
-#gallery,#galleryedit {
-	display:grid;
-	gap:1rem;
-	grid-template-columns:repeat(auto-fill,minmax(190px,1fr))
-}
 .atlas .atlas-body,.atlas .atlas-foot {
 	margin-top:0.5rem
 }
 .atlas .atlas-input {
 	width:100%
 }
-.opt-img .list span {
+.opt-album .list span {
 	display:block;
 	margin-top:0.5rem;
 	overflow:hidden;
@@ -628,9 +623,21 @@ body.menu-show .admin-content {
 .admin-btns input,.admin-btns select,.admin-btns button,.admin-btns .btn {
 	margin:0.5rem!important
 }
-.breadcrumb {
-	padding:0;
-	background:none
+input,select,textarea,.form-control,.form-select,.btn {
+	font-size:14px!important;
+	border-radius:var(--xs-radius)
+}
+a:hover,body.menu-hide .admin-content,body.menu-show .admin-content,.sidemenu .submenu li:hover,.admin-head,.admin-column:hover,.table-hover tbody tr:hover {
+	transition:all 0.5s
+}
+.admin-head .user .dropdown-menu,.admin-modal,.admin-source,.admin-writer,.tips-lite,.fastselect .topcat,#edsta,.cke_chrome,.cke_inner,.alert,.card,.rounded {
+	border-radius:var(--xs-radius)!important
+}
+.cke_top {
+	border-radius:var(--xs-radius) var(--xs-radius) 0 0!important
+}
+.cke_bottom {
+	border-radius:0 0 var(--xs-radius) var(--xs-radius)!important
 }
 .container-fluid {
 	padding:1rem
@@ -650,6 +657,34 @@ body.menu-show .admin-content {
 }
 .card-body canvas {
 	height:365px!important
+}
+.page-item:first-child .page-link {
+	border-top-left-radius:var(--xs-radius);
+	border-bottom-left-radius:var(--xs-radius)
+}
+.page-item:last-child .page-link {
+	border-top-right-radius:var(--xs-radius);
+	border-bottom-right-radius:var(--xs-radius)
+}
+.page-link {
+	padding:0.25rem 0.5rem;
+	height:30px;
+	font-size:14px
+}
+.nav-pills .nav-link,.btn-sm {
+	padding:0 0.5rem!important;
+	height:30px;
+	line-height:30px;
+	font-size:12px!important
+}
+.breadcrumb {
+	padding:0;
+	background:none
+}
+.spinner-border {
+	width:20px;
+	height:20px;
+	vertical-align:bottom
 }
 .table {
 	margin-bottom:0;
@@ -671,41 +706,6 @@ body.menu-show .admin-content {
 	padding:0.25rem 0.5rem;
 	height:30px;
 	color:var(--bs-gray)
-}
-a:hover,body.menu-hide .admin-content,body.menu-show .admin-content,.sidemenu .submenu li:hover,.admin-head,.column:hover,.table-hover tbody tr:hover {
-	transition:all 0.5s
-}
-input,select,textarea,.form-control,.form-select,.btn {
-	font-size:14px!important;
-	border-radius:var(--xs-radius)
-}
-.admin-head .user .dropdown-menu,.adminmodal,.fastselect .topcat,.mysource,.mywriter,.tipslite,#edsta,.cke_chrome,.cke_inner,.alert,.card,.rounded {
-	border-radius:var(--xs-radius)!important
-}
-.cke_top {
-	border-radius:var(--xs-radius) var(--xs-radius) 0 0!important
-}
-.cke_bottom {
-	border-radius:0 0 var(--xs-radius) var(--xs-radius)!important
-}
-.page-item:first-child .page-link {
-	border-top-left-radius:var(--xs-radius);
-	border-bottom-left-radius:var(--xs-radius)
-}
-.page-item:last-child .page-link {
-	border-top-right-radius:var(--xs-radius);
-	border-bottom-right-radius:var(--xs-radius)
-}
-.page-link {
-	padding:0.25rem 0.5rem;
-	height:30px;
-	font-size:14px
-}
-.nav-pills .nav-link,.btn-sm {
-	padding:0 0.5rem!important;
-	height:30px;
-	line-height:30px;
-	font-size:12px!important
 }
 .btn+.btn {
 	margin-left:1rem
@@ -735,7 +735,7 @@ input,select,textarea,.form-control,.form-select,.btn {
 	}
 }
 @media screen and (min-width:767px) {
-	.modal-dialog,.adminmodal .card {
+	.modal-dialog,.admin-modal .card {
 		max-width:500px
 	}
 }
@@ -776,10 +776,10 @@ input,select,textarea,.form-control,.form-select,.btn {
 	.card-body canvas {
 		height:220px!important
 	}
-	.adminmodal {
+	.admin-modal {
 		padding:0 0.5rem
 	}
-	.adminmodal .card,.tips-box {
+	.admin-modal .card,.tips-box {
 		margin:0.5rem auto;
 		width:auto
 	}

@@ -78,13 +78,13 @@ function HideObj(objname) {
 function PutSource(str) {
 	var osource = $Obj("source");
 	if (osource) osource.value = str;
-	$Obj("mysource").style.display = "none";
+	$Obj("admin-source").style.display = "none";
 	ChangeFullDiv("hide");
 }
 function PutWriter(str) {
 	var owriter = $Obj("writer");
 	if (owriter) owriter.value = str;
-	$Obj("mywriter").style.display = "none";
+	$Obj("admin-writer").style.display = "none";
 	ChangeFullDiv("hide");
 }
 function ClearDivCt(objname) {
@@ -99,25 +99,25 @@ function ShowHide(objname) {
 	else obj.style.display = "inline-block";
 }
 function SelectSource(e) {
-	LoadNewDiv(e, "article_select_sw.php?t=source&k=8&rnd=" + Math.random(), "mysource");
+	LoadNewDiv(e, "article_select_sw.php?t=source&k=8&rnd=" + Math.random(), "admin-source");
 }
 function SelectWriter(e) {
-	LoadNewDiv(e, "article_select_sw.php?t=writer&k=8&rnd=" + Math.random(), "mywriter");
+	LoadNewDiv(e, "article_select_sw.php?t=writer&k=8&rnd=" + Math.random(), "admin-writer");
 }
 function ColorSel(c, oname) {
 	var tobj = $Obj(oname);
 	if (!tobj) tobj = eval("document.form1." + oname);
 	if (!tobj) {
-		$Obj("tipslite").style.display = "none";
+		$Obj("tips-lite").style.display = "none";
 		return false;
 	} else {
 		tobj.value = c;
-		$Obj("tipslite").style.display = "none";
+		$Obj("tips-lite").style.display = "none";
 		return true;
 	}
 }
 function ShowColor(e, o) {
-	LoadNewDiv(e, "../theme/system/colornew.htm", "tipslite");
+	LoadNewDiv(e, "../theme/system/colornew.htm", "tips-lite");
 }
 function ShowUrlTr() {
 	var jumpTest = $Obj("flagsj");
@@ -136,13 +136,13 @@ function ShowUrlTrEdit() {
 	if (!jumpTest.checked) rurl.value = '';
 }
 function ChangeFullDiv(showhide, screenheigt) {
-	var newobj = $Obj("adminmodalbg");
+	var newobj = $Obj("admin-modalbg");
 	if (showhide == "show") {
 		if (!newobj) {
 			newobj = document.createElement("div");
-			newobj.id = "adminmodalbg";
+			newobj.id = "admin-modalbg";
 			newobj.style.position = "fixed";
-			newobj.className = "adminmodalbg";
+			newobj.className = "admin-modalbg";
 			document.body.appendChild(newobj);
 		} else {
 			newobj.style.display = "block";
@@ -183,7 +183,7 @@ function LoadQuickDiv(e, surl, oname, w, h) {
 		newobj = document.createElement("div");
 		newobj.id = oname;
 		newobj.style.position = "fixed";
-		newobj.className = "adminmodal";
+		newobj.className = "admin-modal";
 		document.body.appendChild(newobj);
 	}
 	newobj.style.top = "0";

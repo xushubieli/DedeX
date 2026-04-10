@@ -97,7 +97,7 @@ if (!empty($iseditor)) {
                     </div>";
                     echo $line;
                 }
-                echo "<div class='opt-img'>";
+                echo "<div class='opt-album'>";
                 foreach ($filtered_dh as $file) {
                     //计算文件大小和创建时间
                     if (!is_dir("$inpath/$file")) {

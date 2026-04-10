@@ -75,7 +75,7 @@
 									<tr>
 										<td>广告内容</td>
 										<td>
-											<ul id="toolAd" class="toolad">
+											<ul id="plugin-ad" class="plugin-ad">
 												<li id="t_code" class="active">代码</li>
 												<li id="t_txt">文字</li>
 												<li id="t_img">图片</li>
@@ -131,12 +131,12 @@
 			}
 			showcode('code');
 			$(function($) {
-				$("#toolAd>li").click(function() {
+				$("#plugin-ad>li").click(function() {
 					var tabLi = $(this);
 					var thistab = tabLi[0].id;
 					$(".content").each(function() {
 						if ("t_" + $(this)[0].id == thistab) {
-							$("#toolAd>li").removeClass("active");
+							$("#plugin-ad>li").removeClass("active");
 							$("#t_" + $(this)[0].id).addClass("active");
 							showcode($(this)[0].id);
 						}

@@ -33,7 +33,7 @@ function delAlbPicOld(picfile, pid) {
 	var tgobj = $Obj("albold" + pid);
 	fetch("swfupload.php?dopost=delold&picfile=" + picfile).then(resp => resp.text()).then((d) => {
 		tgobj.innerHTML = d;
-		$Obj("galleryedit").removeChild(tgobj);
+		$Obj("gallery-edit").removeChild(tgobj);
 	});
 }
 var atlasimg = 0;

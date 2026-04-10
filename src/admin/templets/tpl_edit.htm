@@ -45,7 +45,7 @@
 											</div>
 											<?php
 											foreach ($helps as $key => $help) {
-												echo "<div id='{$key}' class='helpinfo mt-3'><span class='float-end'><a href='javascript:;' onclick='showdiv(\"\");' class='btn btn-primary btn-sm'>关闭</a></span><p>标签名称：{$key}</p><p>标签说明:".trim($help[0])."</p><p><textarea id='{$key}' class='admin-textarea-xl'>".trim($help[1])."</textarea></p><span>";
+												echo "<div id='{$key}' class='admin-help mt-3'><span class='float-end'><a href='javascript:;' onclick='showdiv(\"\");' class='btn btn-primary btn-sm'>关闭</a></span><p>标签名称：{$key}</p><p>标签说明:".trim($help[0])."</p><p><textarea id='{$key}' class='admin-textarea-xl'>".trim($help[1])."</textarea></p><span>";
 												$parameters = explode("\n", $help[2]);
 												foreach ($parameters as $parameter) {
 													$parameter = trim($parameter);
@@ -77,7 +77,7 @@
 		</div>
 		<script>
 			function showdiv(id) {
-				hideobj = GETNAMES("helpinfo");
+				hideobj = GETNAMES("admin-help");
 				for (i = 0; i < hideobj.length; i++) {
 					hideobj[i].style.display = "none";
 				}

@@ -43,7 +43,7 @@ if ($cuserLogin->getUserType() >= 10) {
     <m:item name='自由列表管理' link='freelist_main.php' rank='c_List' target='main' />
     <m:item name='自定义表单管理' link='diy_main.php' rank='c_List' target='main' />
 </m:top>";
-  $adminMenu2 = "<m:top item='10_' name='财务管理' rank='sys_Data' icon='bi bi-wallet2'>
+    $adminMenu2 = "<m:top item='10_' name='财务管理' rank='sys_Data' icon='bi bi-wallet2'>
     <m:item name='会员消费记录' link='member_operations.php' rank='sys_Data' target='main' />
     <m:item name='积分产品管理' link='cards_manage.php' rank='sys_Data' target='main' />
     <m:item name='积分产品分类' link='cards_type.php' rank='sys_Data' target='main' />
@@ -110,8 +110,5 @@ $adminMenu1
     <m:item name='会员等级分类' link='member_type.php' rank='sys_Data' target='main' />
     <m:item name='积分头衔设置' link='member_scores.php' rank='member_Type' target='main' />
 </m:top>
-$adminMenu2
-<m:top item='12_' name='关于我们' icon='bi bi-info-circle'>
-    <m:item name='GitHub' link='https://github.com/xushubieli/DedeX' rank='' target='_blank' />
-</m:top>";
+$adminMenu2";
 ?>

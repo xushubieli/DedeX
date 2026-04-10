@@ -384,21 +384,12 @@ input[type=radio],input[type=checkbox],input[type=radio]:focus,input[type=checkb
 .admin-w-xs {
 	width:70px
 }
-.table td,.table th {
-	padding:0.5rem;
-	vertical-align:middle
-}
-.form-control,.form-select {
-	display:inline-block;
-	padding:0.25rem 0.5rem;
-	color:var(--bs-gray)
-}
-a:hover,.item-theme:hover,.item-news:hover,.table-hover tbody tr:hover {
-	transition:all 0.5s
-}
 input,select,textarea,.form-control,.form-select,.btn {
 	font-size:14px!important;
 	border-radius:var(--xs-radius)
+}
+a:hover,.item-theme:hover,.item-news:hover,.table-hover tbody tr:hover {
+	transition:all 0.5s
 }
 .navbar-toggler,.dropdown-menu,.breadcrumb,.cke_chrome,.cke_inner,.alert,.rounded {
 	border-radius:var(--xs-radius)!important
@@ -412,17 +403,34 @@ input,select,textarea,.form-control,.form-select,.btn {
 .navbar {
 	padding:0.5rem 1rem
 }
+.page-link {
+	padding:0.25rem 0.5rem;
+	height:30px;
+	line-height:1.4;
+	font-size:14px
+}
+.list-group-item.active {
+	background-color:var(--bs-primary);
+	border-color:var(--bs-primary)
+}
+.input-group #validateimg {
+	object-fit:unset;
+	cursor:pointer
+}
 .dropdown-menu {
 	font-size:14px!important
 }
 .rounded-circle {
 	border-radius:50%!important
 }
-.page-link {
+.table td,.table th {
+	padding:0.5rem;
+	vertical-align:middle
+}
+.form-control,.form-select {
+	display:inline-block;
 	padding:0.25rem 0.5rem;
-	height:30px;
-	line-height:1.4;
-	font-size:14px
+	color:var(--bs-gray)
 }
 .btn+.btn {
 	margin-left:1rem
@@ -433,14 +441,6 @@ input,select,textarea,.form-control,.form-select,.btn {
 }
 .bg-primary {
 	background-color:var(--bs-primary)!important
-}
-.list-group-item.active {
-	background-color:var(--bs-primary);
-	border-color:var(--bs-primary)
-}
-.input-group #validateimg {
-	object-fit:unset;
-	cursor:pointer
 }
 .shadow-sm {
 	box-shadow:0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb),0.015)!important
