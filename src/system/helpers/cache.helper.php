@@ -19,7 +19,7 @@ if (!function_exists('GetCache')) {
     function GetCache($prefix, $key)
     {
         $key = md5($key);
-        $key = substr($key, 0, 2).'/'.substr($key, 2, 2).'/'.substr($key, 4, 2).'/'.$key;
+        $key = substr($key, 0, 2).'/'.$key;
         $result = @file_get_contents(DEDEDATA."/cache/$prefix/$key.php");
         if ($result === false) {
             return false;
@@ -46,7 +46,7 @@ if (!function_exists('SetCache')) {
     function SetCache($prefix, $key, $value, $timeout = 3600)
     {
         $key = md5($key);
-        $key = substr($key, 0, 2).'/'.substr($key, 2, 2).'/'.substr($key, 4, 2).'/'.$key;
+        $key = substr($key, 0, 2).'/'.$key;
         $tmp['data'] = $value;
         $tmp['timeout'] = $timeout != 0 ? time() + (int) $timeout : 0;
         $cache_data = "<?php exit('Error: Invalid! ');?>\n\r".@serialize($tmp);
@@ -66,7 +66,7 @@ if (!function_exists('DelCache')) {
     function DelCache($prefix, $key)
     {
         $key = md5($key);
-        $key = substr($key, 0, 2).'/'.substr($key, 2, 2).'/'.substr($key, 4, 2).'/'.$key;
+        $key = substr($key, 0, 2).'/'.$key;
         return @unlink(DEDEDATA."/cache/$prefix/$key.php");
     }
 }

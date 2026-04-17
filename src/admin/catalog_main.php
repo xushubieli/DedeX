@@ -9,5 +9,6 @@
 require_once(dirname(__FILE__)."/config.php");
 require_once(DEDEINC."/typelink/typeunit.class.admin.php");
 $userChannel = $cuserLogin->getUserChannel();
+$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
 include DedeInclude('templets/catalog_main.htm');
 ?>

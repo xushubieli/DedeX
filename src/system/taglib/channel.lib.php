@@ -144,7 +144,7 @@ function lib_channel_son($ctag, $typeid = 0, $dsql2)
     $tpsql = '';
     //否定栏目调用
     if ($notypeid != 0) {
-        $tpsql = " and not(id in($notypeid)) ";
+        $tpsql = " AND id NOT IN($notypeid) ";
     }
     $sql = "SELECT * FROM `#@__arctype` WHERE reid='$typeid' AND ishidden<>1 $tpsql ORDER BY sortrank ASC LIMIT 0, $row";
     $dtp2 = new DedeTagParse();

@@ -68,9 +68,10 @@ class TypeUnit
      * @access    public
      * @param     int   $channel  栏目ID
      * @param     int   $nowdir  当前操作ID
+     * @param     string $keyword 关键词
      * @return    void
      */
-    function ListAllType($channel = 0, $nowdir = 0)
+    function ListAllType($channel = 0, $nowdir = 0, $keyword = '')
     {
         global $cfg_admin_channel, $admin_catalogs;
         //检测会员有权限的顶级栏目
@@ -87,7 +88,12 @@ class TypeUnit
             $admin_catalogs = explode(',', $admin_catalog);
             $admin_catalogs = array_unique($admin_catalogs);
         }
-        $this->dsql->SetQuery("SELECT id,typedir,typename,ispart,sortrank,ishidden,apienabled FROM `#@__arctype` WHERE reid=0 ORDER BY sortrank");
+        if (empty($keyword)) {
+            $whereSql = "WHERE reid=0";
+        } else {
+            $whereSql = "WHERE typename LIKE '%{$keyword}%'";
+        }
+        $this->dsql->SetQuery("SELECT id,typedir,typename,ispart,sortrank,ishidden,apienabled FROM `#@__arctype` $whereSql ORDER BY sortrank");
         $this->dsql->Execute(0);
         $i = 0;
         while ($row = $this->dsql->GetObject(0)) {
@@ -122,7 +128,7 @@ echo <<<tpl
         <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
         <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
         <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode($typeName)."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -144,7 +150,7 @@ echo <<<tpl
         <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
         <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
         <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode($typeName)."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -165,7 +171,7 @@ echo <<<tpl
         <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
         <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
         <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode($typeName)."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -173,8 +179,8 @@ tpl;
             }
             echo "<div id='suns{$id}'>";
             $lastid = GetCookie('lastCid');
-            if ($channel == $id || $lastid == $id || isset($GLOBALS['exallct']) || $cfg_admin_channel == 'array') {
-                $this->LogicListAllSunType($id, "");
+            if (empty($keyword) && ($channel == $id || $lastid == $id || isset($GLOBALS['exallct']) || $cfg_admin_channel == 'array')) {
+                $this->LogicListAllSunType($id, "", $keyword);
             }
             echo "</div>";
             $i++;
@@ -186,13 +192,18 @@ tpl;
      * @access    public
      * @param     int  $id  栏目ID
      * @param     string  $step  层级标志
+     * @param     string  $keyword 关键词
      * @return    void
      */
-    function LogicListAllSunType($id, $step)
+    function LogicListAllSunType($id, $step, $keyword = '')
     {
+        if (!empty($keyword)) {
+            return;
+        }
         global $cfg_admin_channel, $admin_catalogs;
         $fid = $id;
-        $this->dsql->SetQuery("SELECT id,reid,typedir,typename,ispart,sortrank,ishidden FROM `#@__arctype` WHERE reid='{$id}' ORDER BY sortrank");
+        $whereSql = "WHERE reid='$id'";
+        $this->dsql->SetQuery("SELECT id,reid,typedir,typename,ispart,sortrank,ishidden FROM `#@__arctype` $whereSql ORDER BY sortrank");
         $this->dsql->Execute($fid);
         if ($this->dsql->GetTotalRow($fid) > 0) {
             while ($row = $this->dsql->GetObject($fid)) {
@@ -233,7 +244,7 @@ echo <<<tpl
         <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
         <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
         <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode($typeName)."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -256,7 +267,7 @@ echo <<<tpl
         <a href='catalog_add.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-plus-circle' title='添加'></i></a>
         <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
         <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode($typeName)."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
@@ -277,14 +288,14 @@ echo <<<tpl
         <a href='{$typeDir}' target='_blank' class='btn btn-light btn-sm'><i class='bi bi-box-arrow-up-right' title='预览'></i></a>
         <a href='catalog_edit.php?id={$id}' class='btn btn-light btn-sm'><i class='bi bi-pencil-square' title='修改'></i></a>
         <a href='catalog_do.php?dopost=moveCatalog&typeid={$id}' class='btn btn-light btn-sm'><i class='bi bi-arrows-move' title='移动'></i></a>
-        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode({$typeName})."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
+        <a href='catalog_del.php?id={$id}&typeoldname=".urlencode($typeName)."' class='btn btn-danger btn-sm'><i class='bi bi-trash' title='删除'></i></a>
         <input type='text' name='sortrank{$id}' value='{$rank}' class='admin-main-sort'>
     </div>
 </div>
 tpl;
                 }
                 echo "<div id='suns{$id}' style='".(isset($GLOBALS['exallct'])? "" : "display:none")."'>";
-                $this->LogicListAllSunType($id, $step."──");
+                $this->LogicListAllSunType($id, $step."──", $keyword);
                 echo "</div>";
             }
         }
