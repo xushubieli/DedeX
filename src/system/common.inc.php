@@ -4,9 +4,9 @@
  * @package        DedeX.Libraries
  * @license        GNU GPL v2 (/license.txt)
  */
-//系统默认运行模式为安全模式，模板管理、标签列表、数据库管理、模块管理等功能已暂停，如果您需要这些功能，DEDEX_SAFE_MODE后面值TRUE改为FALSE恢复使用
+//系统默认运行安全模式，模板管理、数据库管理、模块管理等高危功能已暂停，启用功能，DEDEX_SAFE_MODE后面值为FALSE
 define('DEDEX_SAFE_MODE', FALSE);
-//生产环境使用production，如果采用dev模式，会有一些php的报错信息提示，用于开发调试
+//系统默认生产环境，切换开发环境提示PHP报错，DEDE_ENVIRONMENT后面值为dev
 if (!defined('DEDE_ENVIRONMENT')) {
     define('DEDE_ENVIRONMENT', 'production');
 }
@@ -21,7 +21,7 @@ if (DEDE_ENVIRONMENT == 'production') {
     ini_set('display_errors', 0);
     if (version_compare(PHP_VERSION, '8.0', '>=')) {
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
-    } elseif (version_compare(PHP_VERSION, '5.3', '>=')) {
+    } else if (version_compare(PHP_VERSION, '5.3', '>=')) {
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
     } else {
         error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
@@ -68,7 +68,7 @@ function _RunMagicQuotes(&$svar)
             $svar[$_k] = _RunMagicQuotes($_v);
         }
     } else {
-        if (strlen($svar) > 0 && preg_match('#^(cfg_|GLOBALS|_GET|_REQUEST|_POST|_COOKIE|_SESSION)#', $svar)) {
+        if (strlen($svar) > 0 && preg_match('#^(cfg_|globals|_get|_request|_post|_cookie|_session)#i', $svar)) {
             exit('所请求的操作被禁止');
         }
         $svar = addslashes($svar);
@@ -77,14 +77,17 @@ function _RunMagicQuotes(&$svar)
 }
 foreach (array('_GET', '_POST', '_COOKIE') as $_req) {
     foreach ($$_req as $_k => $_v) {
-        if (preg_match('#^(cfg_|GLOBALS|_GET|_REQUEST|_POST|_COOKIE|_SESSION)#', $_k)) {
+        if (preg_match('#^(cfg_|globals|_get|_request|_post|_cookie|_session)#i', $_k)) {
             exit('所请求的操作被禁止');
         }
-        if ($_k == 'nvarname') ${$_k} = $_v;
-        else ${$_k} = _RunMagicQuotes($_v);
+        if ($_k == 'nvarname') {
+            ${$_k} = $_v;
+        } else {
+            ${$_k} = _RunMagicQuotes($_v);
+        }
     }
 }
-//系统相关变量检测
+//开启数据防注入/XSS，$needFilter后面值为TRUE
 if (!isset($needFilter)) {
     $needFilter = FALSE;
 }
@@ -176,16 +179,16 @@ $cfg_soft_lang = 'utf-8';
 $cfg_soft_name = '得德X系统';
 $cfg_soft_intl = 'DedeX';
 $cfg_soft_devteam = 'DedeX团队';
-$cfg_version_info = '1.0.8'; //版本信息
+$cfg_version_info = '1.0.9'; //版本信息
 //文档默认命名规则
 $art_shortname = $cfg_df_ext = '.html';
 $cfg_df_namerule = '{typedir}/{aid}'.$cfg_df_ext;
 //新建目录的权限，如果您使用别的属性，不保证程序能顺利在Linux或Unix系统运行
 $cfg_dir_purview = 0755;
 //Cookie设置
-$cfg_cookie_samesite = 'Lax'; //samesite属性（Lax, Strict or None）
+$cfg_cookie_samesite = 'Lax'; //samesite属性（Lax宽松、Strict严格、None无限制）
 $cfg_cookie_secure = FALSE;   //仅当存在安全的HTTPS连接时才会设置Cookie
-$cfg_cookie_httponly = FALSE; //只能通过HTTP(S)访问（无法通过JavaScript访问）
+$cfg_cookie_httponly = TRUE;  //只能通过HTTP(S)访问（无法通过JavaScript访问）
 //特殊全局变量
 $_sys_globals['curfile'] = '';
 $_sys_globals['typeid'] = 0;
@@ -222,8 +225,8 @@ if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
     require_once(DEDEINC.'/autoload.inc.php');
 }
 //引入数据库类
-if (!defined('MYSQLI_BOTH')) {
-    define('MYSQLI_BOTH', MYSQLI_BOTH);
+if (!defined('MYSQL_BOTH')) {
+    define('MYSQL_BOTH', MYSQLI_BOTH);
 }
 if (!defined('MYSQL_ASSOC')) {
     define('MYSQL_ASSOC', MYSQLI_ASSOC);
@@ -239,22 +242,22 @@ if ($GLOBALS['cfg_dbtype'] == 'mysql' || $GLOBALS['cfg_dbtype'] == 'mysqli') {
     require_once(DEDEINC.'/database/dedesqlite.class.php');
 }
 //载入助手配置，并对其进行默认初始化
-$cfg_helper_autoload = array(
-    'charset',    /* 编码助手 */
-    'channelunit',/* 模型单元助手 */
-    'string',     /* 字符串助手 */
-    'time',       /* 日期助手 */
-    'file',       /* 文件助手 */
-    'util',       /* 单元助手 */
-    'validate',   /* 数据验证助手 */
-    'filter',     /* 过滤器助手 */
-    'cookie',     /* cookies助手 */
-    'debug',      /* 调试助手 */
-    'archive',    /* 文档助手 */
-    'upload',     /* 上传助手 */
-    'extend',     /* 扩展助手 */
-    'code',       /* 代码助手 */
-);
+$cfg_helper_autoload = [
+    'charset',     //编码助手
+    'channelunit', //模型单元助手
+    'string',      //字符串助手
+    'time',        //日期助手
+    'file',        //文件助手
+    'util',        //单元助手
+    'validate',    //数据验证助手
+    'filter',      //过滤器助手
+    'cookie',      //cookies助手
+    'debug',       //调试助手
+    'archive',     //文档助手
+    'upload',      //上传助手
+    'extend',      //扩展助手
+    'code',        //代码助手
+];
 //初始化助手
 helper($cfg_helper_autoload);
 ?>
