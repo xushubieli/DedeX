@@ -94,7 +94,7 @@ class ChannelUnit
         //处理各种数据类型
         $ftype = $this->ChannelFields[$fname]['type'];
         if ($fvalue == '') {
-            if ($ftype != 'checkbox') $fvalue = $this->ChannelFields[$fname]['default'];
+            if ($ftype != 'checkbox') $fvalue = isset($this->ChannelFields[$fname]['default']) ? $this->ChannelFields[$fname]['default'] : '';
         }
         if ($ftype == 'text') {
             $fvalue = HtmlReplace($fvalue);

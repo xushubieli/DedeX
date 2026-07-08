@@ -67,7 +67,7 @@ class DedeStatistics {
     function botName($ua) {
         if (!$ua) return false;
         $ua = strtolower($ua);
-        $bots = ['Googlebot','Bingbot','Baiduspider','YandexBot','DuckDuckBot','Applebot','PetalBot','Sogou','SosoSpider','YoudaoBot','360Spider','HaosouSpider','SMSpider','Bytespider','NaverBot','Yeti','SeznamBot','Gigabot','Exabot','Wotbox','MojeekBot','Qwantify','Adsbot-Google','Google-InspectionTool','BingPreview','archive.org_bot','CCBot'];
+        $bots = ['Baiduspider', '360Spider', 'Sogou', 'Bytespider', 'PetalBot','Googlebot', 'Bingbot', 'YandexBot', 'DuckDuckBot', 'Applebot'];
         foreach ($bots as $b) {
             if (strpos($ua, strtolower($b)) !== false) {
                 return $b;
@@ -83,13 +83,14 @@ class DedeStatistics {
         $pm = array('dduuid','ssid','browser','device','device_type','os','t','created_date','created_hour','url_type','typeid','aid','value','sign');
         $pmvalue = array();
         foreach ($pm as $v) {
-            $pmvalue[$v] = $_GET[$v];
+            $pmvalue[$v] = isset($_GET[$v]) ? $_GET[$v] : '';
         }
         ksort($pmvalue);
         $sign = $pmvalue['sign'];
         unset($pmvalue['sign']);
-        if (time() - $pmvalue['t'] > 3) {
-            return false;//3秒内不重复入库
+        //请求超过失效
+        if (time() - $pmvalue['t'] > 5) {
+            return false;
         }
         $cs = sha1(http_build_query($pmvalue).md5($cfg_cookie_encode));
         if ($sign !== $cs) {
@@ -138,7 +139,7 @@ class DedeStatistics {
                 "vv" => $row['vv'],
             );
         }
-        $today = MyDate("Ymd",time());
+        $today = MyDate("Ymd", time());
         if ($d == 0) {
             $d = $today;
         }
@@ -148,21 +149,22 @@ class DedeStatistics {
         if (is_array($info)) {
             return $info;
         }
-        $pv = $dsql->GetOne("SELECT COUNT(*) as total FROM `#@__statistics_detail` WHERE created_date = $d AND url_type >= 0");
-        $uv = $dsql->GetOne("SELECT COUNT(DISTINCT dduuid) as total FROM `#@__statistics_detail` WHERE created_date = $d AND url_type >= 0");
-        $ip = $dsql->GetOne("SELECT COUNT(DISTINCT ip) as total FROM `#@__statistics_detail` WHERE created_date = $d AND url_type >= 0");
-        $vv = $dsql->GetOne("SELECT COUNT(DISTINCT ssid) as total FROM `#@__statistics_detail` WHERE created_date = $d AND url_type >= 0");
+        $row = $dsql->GetOne("SELECT  COUNT(*) as pv,COUNT(DISTINCT dduuid) as uv,COUNT(DISTINCT ip) as ip,COUNT(DISTINCT ssid) as vv FROM `#@__statistics_detail` WHERE created_date = $d AND url_type >= 0");
+        $pv_total = isset($row['pv']) ? $row['pv'] : 0;
+        $uv_total = isset($row['uv']) ? $row['uv'] : 0;
+        $ip_total = isset($row['ip']) ? $row['ip'] : 0;
+        $vv_total = isset($row['vv']) ? $row['vv'] : 0;
         if ($d < intval($today)) {
             //缓存数据
-            $insql = "INSERT INTO `#@__statistics` (`sdate`,`pv`,`uv`,`ip`,`vv`) VALUES ('{$d}','{$pv['total']}','{$uv['total']}','{$ip['total']}','{$vv['total']}')";
+            $insql = "INSERT INTO `#@__statistics` (`sdate`,`pv`,`uv`,`ip`,`vv`) VALUES ('{$d}','{$pv_total}','{$uv_total}','{$ip_total}','{$vv_total}')";
             $dsql->ExecuteNoneQuery($insql);
         }
         return array(
             "sdate" => $d,
-            "pv" => $pv['total'],
-            "uv" => $uv['total'],
-            "ip" => $ip['total'],
-            "vv" => $vv['total'],
+            "pv" => $pv_total,
+            "uv" => $uv_total,
+            "ip" => $ip_total,
+            "vv" => $vv_total,
         );
     }
 }

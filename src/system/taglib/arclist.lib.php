@@ -280,7 +280,7 @@ function lib_arclistDone (&$refObj, &$ctag, $typeid=0, $notypeid=0, $row=10, $co
     $needSaveCache = true;
     //进行tagid的默认处理
     if ($pagesize > 0) $tagid = AttDef($tagid, 'tag'.$taghash);
-    if ($idlist != '' || $GLOBALS['_arclistEnv'] == 'index' || $cfg_index_cache == 0) {
+    if ($idlist != '' || (isset($GLOBALS['_arclistEnv']) && $GLOBALS['_arclistEnv'] == 'index') || $cfg_index_cache == 0) {
         $needSaveCache = false;
     } else {
         $idlist = GetArclistCache($taghash);

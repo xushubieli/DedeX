@@ -11,18 +11,9 @@ $t1 = ExecTime();
 $tid = (isset($tid) && is_numeric($tid) ? $tid : 0);
 $mod = (isset($mod) && is_numeric($mod) ? $mod : 0);
 $channelid = (isset($channelid) && is_numeric($channelid) ? $channelid : 0);
+$orderby = (isset($orderby) ? $orderby : 'default');
 if ($tid == 0 && $channelid == 0) die('dedex');
 if (isset($TotalResult)) $TotalResult = intval(preg_replace("/[^\d]/", '', $TotalResult));
-//根据流量统计，限制用户浏览
-if ($cfg_access == 'Y') {
-    $ip = GetIP();
-    $moon = time() - (24 * 60 * 60);
-    $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS dd FROM `#@__statistics_detail` WHERE ip='$ip' AND t>='$moon' AND url_type=1 ");
-    if ($flow && $flow['dd'] > $cfg_access_count) {
-        http_response_code(403);
-        exit();
-    }
-}
 //如果指定文档模型ID但没指定栏目ID，则文档模型的第一个顶级栏目作为栏目默认栏目
 if (!empty($channelid) && empty($tid)) {
     $tinfos = $dsql->GetOne("SELECT tp.id,ch.issystem FROM `#@__arctype` tp LEFT JOIN `#@__channeltype` ch ON ch.id=tp.channeltype WHERE tp.channeltype='$channelid' And tp.reid=0 ORDER BY sortrank ASC");

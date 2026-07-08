@@ -64,7 +64,7 @@ if (preg_match('#\.(php|pl|cgi|asp|aspx|jsp|php5|php4|php3|shtm|shtml|htm)$#i', 
 $fullfilename = $cfg_basedir.$activepath.'/'.$filename;
 $fullfileurl = $activepath.'/'.$filename;
 $mime = get_mime_type($uploadfile);
-if (preg_match("#^unknow#", $mime)) {
+if (preg_match("#^unknown#", $mime)) {
     ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
     exit;
 }
@@ -83,7 +83,7 @@ $inquery = "INSERT INTO `#@__uploads` (arcid,title,url,mediatype,width,height,pl
 $dsql->ExecuteNoneQuery($inquery);
 $fid = $dsql->GetLastID();
 AddMyAddon($fid, $fullfileurl);
-if ($ck == 1) {
+if (isset($ck) && $ck == 1) {
     $funcNum = isset($_GET['CKEditorFuncNum']) ? $_GET['CKEditorFuncNum'] : 1;
     $url = $fullfileurl;
     $arr = array(

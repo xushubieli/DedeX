@@ -12,6 +12,7 @@ if ($cfg_mb_allowreg == 'N') {
     exit();
 }
 if (!isset($dopost)) $dopost = '';
+$pid = empty($pid) ? '' : $pid;
 $step = empty($step) ? 1 : intval($step);
 if ($step == 1) {
     if ($cfg_ml->IsLogin()) {

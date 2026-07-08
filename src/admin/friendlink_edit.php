@@ -46,7 +46,7 @@ if ($dopost == "delete") {
             exit();
         }
         $mime = get_mime_type($logoimg);
-        if (preg_match("#^unknow#", $mime)) {
+        if (preg_match("#^unknown#", $mime)) {
             ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
             exit;
         }

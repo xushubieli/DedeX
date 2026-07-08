@@ -4,7 +4,7 @@ CREATE TABLE `#@__addonarticle` (
 	`typeid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '栏目ID',
 	`body` mediumtext COMMENT '文档内容',
 	`redirecturl` varchar(255) NOT NULL DEFAULT '' COMMENT '跳转地址',
-	`templet` varchar(30) NOT NULL DEFAULT '' COMMENT '自定义模板',
+	`templet` varchar(255) NOT NULL DEFAULT '' COMMENT '自定义模板',
 	`userip` char(46) NOT NULL DEFAULT '' COMMENT '用户IP',
 	PRIMARY KEY (`aid`),
 	KEY `typeid` (`typeid`)
@@ -22,7 +22,7 @@ CREATE TABLE `#@__addonimages` (
 	`isrm` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否远程 0:否 1:是',
 	`ddmaxwidth` smallint(6) NOT NULL DEFAULT '200' COMMENT '图片宽度',
 	`pagepicnum` tinyint(6) NOT NULL DEFAULT '12' COMMENT '每页图片数',
-	`templet` varchar(30) NOT NULL DEFAULT '' COMMENT '自定义模板',
+	`templet` varchar(255) NOT NULL DEFAULT '' COMMENT '自定义模板',
 	`userip` char(46) NOT NULL DEFAULT '' COMMENT '用户IP',
 	`redirecturl` varchar(255) NOT NULL DEFAULT '' COMMENT '跳转地址',
 	`body` mediumtext COMMENT '文档内容',
@@ -32,18 +32,18 @@ CREATE TABLE `#@__addonimages` (
 
 DROP TABLE IF EXISTS `#@__addoninfos`;
 CREATE TABLE `#@__addoninfos` (
-	`aid` int(11) NOT NULL DEFAULT '0' COMMENT '文档ID',
+	`aid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文档ID',
 	`typeid` smallint(5) NOT NULL DEFAULT '0' COMMENT '栏目ID',
 	`channel` smallint(6) NOT NULL DEFAULT '0' COMMENT '模型',
 	`arcrank` smallint(6) NOT NULL DEFAULT '0' COMMENT '浏览权限',
 	`mid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
-	`click` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击数',
+	`click` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '点击数',
 	`title` varchar(60) NOT NULL DEFAULT '' COMMENT '标题',
-	`litpic` varchar(120) NOT NULL DEFAULT '' COMMENT '缩略图',
+	`litpic` varchar(255) NOT NULL DEFAULT '' COMMENT '缩略图',
 	`userip` varchar(46) NOT NULL DEFAULT '' COMMENT '用户IP',
 	`senddate` int(11) NOT NULL DEFAULT '0' COMMENT '投稿时间',
 	`flag` set('c','h','p','f','s','j','a','b') DEFAULT NULL COMMENT '自定义属性',
-	`lastpost` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后评论时间',
+	`lastpost` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '最后评论时间',
 	`scores` mediumint(8) NOT NULL DEFAULT '0' COMMENT '评论积分',
 	`goodpost` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '顶',
 	`badpost` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '踩',
@@ -53,11 +53,11 @@ CREATE TABLE `#@__addoninfos` (
 	`endtime` int(11) NOT NULL DEFAULT '0' COMMENT '截止日期',
 	`tel` varchar(50) NOT NULL DEFAULT '' COMMENT '联系电话',
 	`email` varchar(50) NOT NULL DEFAULT '' COMMENT '联系邮箱',
-	`address` varchar(100) NOT NULL DEFAULT '' COMMENT '联系地址',
+	`address` varchar(255) NOT NULL DEFAULT '' COMMENT '联系地址',
 	`linkman` varchar(50) NOT NULL DEFAULT '' COMMENT '联系人',
 	PRIMARY KEY (`aid`),
 	KEY `typeid` (`typeid`,`nativeplace`,`infotype`),
-	KEY `channel` (`channel`,`arcrank`,`mid`,`click`,`title`,`litpic`,`senddate`,`flag`,`endtime`)
+	KEY `channel` (`channel`,`arcrank`,`mid`,`title`,`senddate`,`flag`,`endtime`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `#@__addonsoft`;
@@ -76,8 +76,8 @@ CREATE TABLE `#@__addonsoft` (
 	`softlinks` text COMMENT '下载链接',
 	`introduce` text COMMENT '软件介绍',
 	`daccess` tinyint(4) NOT NULL DEFAULT '0' COMMENT '需会员权限',
-	`needmoney` smallint(5) NOT NULL DEFAULT '0' COMMENT '金币',
-	`templet` varchar(30) NOT NULL DEFAULT '' COMMENT '自定义模板',
+	`needmoney` int(11) NOT NULL DEFAULT '0' COMMENT '金币',
+	`templet` varchar(255) NOT NULL DEFAULT '' COMMENT '自定义模板',
 	`userip` char(46) NOT NULL DEFAULT '' COMMENT '用户IP',
 	`redirecturl` varchar(255) NOT NULL DEFAULT '' COMMENT '跳转地址',
 	PRIMARY KEY (`aid`),
@@ -89,7 +89,7 @@ CREATE TABLE `#@__addonspec` (
 	`aid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文档ID',
 	`typeid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '栏目ID',
 	`note` text COMMENT '专题节点',
-	`templet` varchar(30) NOT NULL DEFAULT '' COMMENT '自定义模板',
+	`templet` varchar(255) NOT NULL DEFAULT '' COMMENT '自定义模板',
 	`userip` char(46) NOT NULL DEFAULT '' COMMENT '用户IP',
 	`redirecturl` varchar(255) NOT NULL DEFAULT '' COMMENT '跳转地址',
 	PRIMARY KEY (`aid`),
@@ -107,7 +107,7 @@ CREATE TABLE `#@__admin` (
 	`tname` char(30) NOT NULL DEFAULT '' COMMENT '姓名',
 	`email` char(30) NOT NULL DEFAULT '' COMMENT '邮箱',
 	`typeid` text COMMENT '栏目ID',
-	`logintime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录时间',
+	`logintime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '登录时间',
 	`loginip` varchar(46) NOT NULL DEFAULT '' COMMENT '登录IP',
 	`loginerr` tinyint(4) NULL DEFAULT 0 COMMENT '登录错误次数',
 	PRIMARY KEY (`id`)
@@ -125,12 +125,12 @@ CREATE TABLE `#@__admintype` (
 DROP TABLE IF EXISTS `#@__advancedsearch`;
 CREATE TABLE `#@__advancedsearch` (
 	`mid` int(11) NOT NULL COMMENT '会员ID',
-	`maintable` varchar(256) NOT NULL DEFAULT '' COMMENT '主表',
+	`maintable` varchar(255) NOT NULL DEFAULT '' COMMENT '主表',
 	`mainfields` text COMMENT '主表字段',
-	`addontable` varchar(256) DEFAULT NULL COMMENT '附加表',
+	`addontable` varchar(255) DEFAULT NULL COMMENT '附加表',
 	`addonfields` text COMMENT '附加表字段',
 	`forms` text COMMENT '表单',
-	`template` varchar(256) NOT NULL DEFAULT '' COMMENT '模板',
+	`template` varchar(255) NOT NULL DEFAULT '' COMMENT '模板',
 	UNIQUE KEY `mid` (`mid`)
 ) ENGINE=MyISAM;
 
@@ -155,34 +155,34 @@ CREATE TABLE `#@__archives` (
 	`id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文档ID',
 	`typeid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '栏目ID',
 	`typeid2` varchar(90) NOT NULL DEFAULT '0' COMMENT '副栏目ID',
-	`sortrank` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+	`sortrank` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
 	`flag` set('c','h','p','f','s','j','a','b') DEFAULT NULL COMMENT '自定义属性',
 	`ismake` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否生成 0:未生成 1:已生成 -1:动态',
 	`channel` smallint(6) NOT NULL DEFAULT '1' COMMENT '模型',
 	`arcrank` smallint(6) NOT NULL DEFAULT '0' COMMENT '浏览权限',
-	`click` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '点击数',
-	`money` smallint(6) NOT NULL DEFAULT '0' COMMENT '金币',
+	`click` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '点击数',
+	`money` int(11) NOT NULL DEFAULT '0' COMMENT '金币',
 	`title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
-	`shorttitle` char(255) NOT NULL DEFAULT '' COMMENT '简略标题',
-	`color` char(7) NOT NULL DEFAULT '' COMMENT '颜色',
-	`writer` char(255) NOT NULL DEFAULT '' COMMENT '作者',
-	`source` char(255) NOT NULL DEFAULT '' COMMENT '来源',
-	`litpic` char(100) NOT NULL DEFAULT '' COMMENT '缩略图',
-	`pubdate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布日期',
-	`senddate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '投稿日期',
+	`shorttitle` varchar(255) NOT NULL DEFAULT '' COMMENT '简略标题',
+	`color` varchar(20) NOT NULL DEFAULT '' COMMENT '颜色',
+	`writer` varchar(255) NOT NULL DEFAULT '' COMMENT '作者',
+	`source` varchar(255) NOT NULL DEFAULT '' COMMENT '来源',
+	`litpic` varchar(255) NOT NULL DEFAULT '' COMMENT '缩略图',
+	`pubdate` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '发布日期',
+	`senddate` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '投稿日期',
 	`mid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
 	`keywords` char(255) NOT NULL DEFAULT '' COMMENT '关键词',
-	`lastpost` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后评论时间',
+	`lastpost` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '最后评论时间',
 	`scores` mediumint(8) NOT NULL DEFAULT '0' COMMENT '评论积分',
 	`goodpost` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '顶',
 	`badpost` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '踩',
 	`voteid` mediumint(8) NOT NULL DEFAULT '0' COMMENT '投票ID',
 	`notpost` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否评论 0:允许 1:禁止',
 	`description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
-	`filename` varchar(50) NOT NULL DEFAULT '' COMMENT '文件名',
+	`filename` varchar(255) NOT NULL DEFAULT '' COMMENT '文件名',
 	`dutyadmin` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '网站管理员',
 	`mtype` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '投稿分类',
-	`weight` int(10) NOT NULL DEFAULT '0' COMMENT '权重',
+	`weight` int(11) NOT NULL DEFAULT '0' COMMENT '权重',
 	PRIMARY KEY (`id`),
 	KEY `sortrank` (`sortrank`),
 	KEY `mainindex` (`arcrank`,`typeid`,`channel`,`flag`,`mid`),
@@ -195,7 +195,7 @@ CREATE TABLE `#@__arcrank` (
 	`rank` smallint(6) NOT NULL DEFAULT '0' COMMENT '会员等级编号 0:待审核 10:注册会员',
 	`membername` char(20) NOT NULL DEFAULT '' COMMENT '等级名称',
 	`adminrank` smallint(6) NOT NULL DEFAULT '0' COMMENT '管理员等级',
-	`money` smallint(8) unsigned NOT NULL DEFAULT '500' COMMENT '初始拥有金币',
+	`money` int(11) unsigned NOT NULL DEFAULT '500' COMMENT '初始拥有金币',
 	`scores` mediumint(8) NOT NULL DEFAULT '0' COMMENT '初始拥有积分',
 	`purviews` mediumtext COMMENT '权限列表',
 	PRIMARY KEY (`id`)
@@ -208,8 +208,8 @@ CREATE TABLE `#@__arctiny` (
 	`typeid2` varchar(90) NOT NULL DEFAULT '0' COMMENT '副栏目ID',
 	`arcrank` smallint(6) NOT NULL DEFAULT '0' COMMENT '浏览权限',
 	`channel` smallint(5) NOT NULL DEFAULT '1' COMMENT '模型',
-	`senddate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '投稿时间',
-	`sortrank` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+	`senddate` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '投稿时间',
+	`sortrank` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
 	`mid` int(11) unsigned NOT NULL COMMENT '会员ID',
 	PRIMARY KEY (`id`),
 	KEY `sortrank` (`sortrank`)
@@ -221,32 +221,32 @@ CREATE TABLE `#@__arctype` (
 	`reid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '父栏目ID',
 	`topid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '顶级栏目ID',
 	`sortrank` smallint(5) unsigned NOT NULL DEFAULT '50' COMMENT '排列顺序',
-	`typename` char(255) NOT NULL DEFAULT '' COMMENT '栏目名称',
-	`cnoverview` char(255) NOT NULL DEFAULT '' COMMENT '栏目概述',
-	`enname` char(255) NOT NULL DEFAULT '' COMMENT '英文名称',
-	`enoverview` char(255) NOT NULL DEFAULT '' COMMENT '英文概述',
-	`bigpic` char(255) NOT NULL DEFAULT '' COMMENT '栏目大图',
-	`litimg` char(255) NOT NULL DEFAULT '' COMMENT '栏目小图',
-	`typedir` char(255) NOT NULL DEFAULT '' COMMENT '栏目生成目录',
+	`typename` varchar(255) NOT NULL DEFAULT '' COMMENT '栏目名称',
+	`cnoverview` varchar(255) NOT NULL DEFAULT '' COMMENT '栏目概述',
+	`enname` varchar(255) NOT NULL DEFAULT '' COMMENT '英文名称',
+	`enoverview` varchar(255) NOT NULL DEFAULT '' COMMENT '英文概述',
+	`bigpic` varchar(255) NOT NULL DEFAULT '' COMMENT '栏目大图',
+	`litimg` varchar(255) NOT NULL DEFAULT '' COMMENT '栏目小图',
+	`typedir` varchar(255) NOT NULL DEFAULT '' COMMENT '栏目生成目录',
 	`isdefault` tinyint(4) NOT NULL DEFAULT '0' COMMENT '栏目列表选项 0:列表第一页浏览 1:静态浏览 -1:动态浏览，默认值为0',
-	`defaultname` char(150) NOT NULL DEFAULT 'index.html' COMMENT '默认页的名称',
+	`defaultname` varchar(255) NOT NULL DEFAULT 'index.html' COMMENT '默认页的名称',
 	`issend` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否支持投稿 0:不支持 1:支持，默认值为不支持',
 	`channeltype` smallint(6) DEFAULT '1' COMMENT '文档模型',
 	`maxpage` smallint(6) NOT NULL DEFAULT '-1' COMMENT '最大页数，默认值为-1（可能表示无限制）',
 	`ispart` tinyint(4) NOT NULL DEFAULT '0' COMMENT '栏目属性 0:列表栏目（允许发布） 1:封面栏目（不允许发布）2:外部栏目（栏目生成目录填写链接），默认值为列表栏目',
 	`corank` smallint(6) NOT NULL DEFAULT '0' COMMENT '浏览权限，关联不同的用户组权限，默认值为0',
-	`tempindex` char(50) NOT NULL DEFAULT '' COMMENT '封面模板',
-	`templist` char(50) NOT NULL DEFAULT '' COMMENT '列表模板',
-	`temparticle` char(50) NOT NULL DEFAULT '' COMMENT '文档模板',
-	`namerule` char(50) NOT NULL DEFAULT '' COMMENT '文档命名规则',
-	`namerule2` char(50) NOT NULL DEFAULT '' COMMENT '列表命名规则',
-	`modname` char(20) NOT NULL DEFAULT '' COMMENT '模块名称',
+	`tempindex` varchar(255) NOT NULL DEFAULT '' COMMENT '封面模板',
+	`templist` varchar(255) NOT NULL DEFAULT '' COMMENT '列表模板',
+	`temparticle` varchar(255) NOT NULL DEFAULT '' COMMENT '文档模板',
+	`namerule` varchar(255) NOT NULL DEFAULT '' COMMENT '文档命名规则',
+	`namerule2` varchar(255) NOT NULL DEFAULT '' COMMENT '列表命名规则',
+	`modname` varchar(30) NOT NULL DEFAULT '' COMMENT '模块名称',
 	`description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
 	`keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键词',
 	`seotitle` varchar(255) NOT NULL DEFAULT '' COMMENT 'SEO标题',
 	`moresite` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '多站点支持 0:禁用 1:启用，默认值为禁用',
-	`sitepath` char(60) NOT NULL DEFAULT '' COMMENT '站点路径',
-	`siteurl` char(50) NOT NULL DEFAULT '' COMMENT '绑定网址',
+	`sitepath` varchar(255) NOT NULL DEFAULT '' COMMENT '站点路径',
+	`siteurl` varchar(255) NOT NULL DEFAULT '' COMMENT '绑定网址',
 	`ishidden` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否隐藏栏目 0:显示 1:隐藏，默认值为显示',
 	`cross` tinyint(1) NOT NULL DEFAULT '0' COMMENT '栏目交叉 0:不交叉 1:自动获取同名栏目 2:指定交叉栏目ID（英文逗号隔开），默认值为不交叉',
 	`crossid` text COMMENT '交叉栏目ID，当cross为2时，用于存储指定的交叉栏目ID，英文逗号隔开',
@@ -270,8 +270,8 @@ CREATE TABLE `#@__area` (
 
 DROP TABLE IF EXISTS `#@__channeltype`;
 CREATE TABLE `#@__channeltype` (
-	`id` smallint(6) NOT NULL DEFAULT '0' COMMENT '模型ID',
-	`nid` varchar(20) NOT NULL DEFAULT '' COMMENT '模型标识，由英文、数字或下划线组成，关联模板命名',
+	`id` smallint(5) NOT NULL DEFAULT '0' COMMENT '模型ID',
+	`nid` varchar(50) NOT NULL DEFAULT '' COMMENT '模型标识，由英文、数字或下划线组成，关联模板命名',
 	`typename` varchar(30) NOT NULL DEFAULT '' COMMENT '前后台显示的模型名称',
 	`maintable` varchar(50) NOT NULL DEFAULT '#@__archives' COMMENT '文档模型主表',
 	`addtable` varchar(50) NOT NULL DEFAULT '' COMMENT '附加表',
@@ -304,9 +304,9 @@ DROP TABLE IF EXISTS `#@__diyforms`;
 CREATE TABLE `#@__diyforms` (
 	`diyid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自定义表单ID',
 	`name` varchar(50) NOT NULL DEFAULT '' COMMENT '表单名称',
-	`posttemplate` varchar(50) NOT NULL COMMENT '发布模板',
-	`viewtemplate` varchar(50) NOT NULL COMMENT '文档模板',
-	`listtemplate` varchar(50) NOT NULL COMMENT '列表模板',
+	`posttemplate` varchar(255) NOT NULL COMMENT '发布模板',
+	`viewtemplate` varchar(255) NOT NULL COMMENT '文档模板',
+	`listtemplate` varchar(255) NOT NULL COMMENT '列表模板',
 	`table` varchar(50) NOT NULL DEFAULT '' COMMENT '自定义表单数据的数据表名，不能重复已有表名，创建后不可修改',
 	`info` text COMMENT '表单相关信息，如字段配置等',
 	`public` tinyint(1) NOT NULL DEFAULT '1' COMMENT '公开状态 0:不公开 1:审核公开 2:完全公开',
@@ -326,11 +326,11 @@ CREATE TABLE `#@__erradd` (
 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '挑错ID',
 	`aid` int(11) unsigned NOT NULL COMMENT '文档ID',
 	`mid` int(11) unsigned DEFAULT NULL COMMENT '会员ID',
-	`title` char(60) NOT NULL DEFAULT '' COMMENT '文章标题',
+	`title` varchar(255) NOT NULL DEFAULT '' COMMENT '文章标题',
 	`type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '出错类型 0:其他',
 	`errtxt` mediumtext COMMENT '错误描述',
 	`oktxt` mediumtext COMMENT '修改建议',
-	`sendtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '挑错时间',
+	`sendtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '挑错时间',
 	KEY `id` (`id`)
 ) ENGINE=MyISAM;
 
@@ -341,14 +341,14 @@ CREATE TABLE `#@__feedback` (
 	`fid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父评论的ID',
 	`typeid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '栏目ID',
 	`username` char(20) NOT NULL DEFAULT '' COMMENT '评论人的用户名',
-	`arctitle` varchar(60) NOT NULL DEFAULT '' COMMENT '文档标题',
+	`arctitle` varchar(255) NOT NULL DEFAULT '' COMMENT '文档标题',
 	`ip` char(46) NOT NULL DEFAULT '' COMMENT '评论人的地址IP',
 	`ischeck` tinyint(4) NOT NULL DEFAULT '0' COMMENT '评论审核状态 0:未审核 1:已审核',
-	`dtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论发布时间',
+	`dtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '评论发布时间',
 	`replycount` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '评论的回复数量',
 	`mid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '评论人ID',
-	`bad` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '踩',
-	`good` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '顶',
+	`bad` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '踩',
+	`good` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '顶',
 	`ftype` set('feedback','good','bad') NOT NULL DEFAULT 'feedback' COMMENT '评论类型 1:普通评论 2:好评 3:差评',
 	`face` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '评论表情',
 	`msg` text COMMENT '评论内容',
@@ -369,12 +369,12 @@ DROP TABLE IF EXISTS `#@__flink`;
 CREATE TABLE `#@__flink` (
 	`id` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '友情链接ID',
 	`sortrank` smallint(6) NOT NULL DEFAULT '0' COMMENT '排序，由小到大排列',
-	`url` char(60) NOT NULL DEFAULT '' COMMENT '网址',
-	`webname` char(30) NOT NULL DEFAULT '' COMMENT '网站名称',
-	`msg` char(200) NOT NULL DEFAULT '' COMMENT '网站介绍',
+	`url` varchar(255) NOT NULL DEFAULT '' COMMENT '网址',
+	`webname` varchar(255) NOT NULL DEFAULT '' COMMENT '网站名称',
+	`msg` varchar(255) NOT NULL DEFAULT '' COMMENT '网站介绍',
 	`email` char(50) NOT NULL DEFAULT '' COMMENT '邮箱',
-	`logo` char(60) NOT NULL DEFAULT '' COMMENT 'Logo地址',
-	`dtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+	`logo` varchar(255) NOT NULL DEFAULT '' COMMENT 'Logo地址',
+	`dtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
 	`typeid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '栏目ID',
 	`ischeck` tinyint(4) NOT NULL DEFAULT '1' COMMENT '链接位置 1:内页 2:首页',
 	PRIMARY KEY (`id`)
@@ -390,12 +390,12 @@ CREATE TABLE `#@__flinktype` (
 DROP TABLE IF EXISTS `#@__freelist`;
 CREATE TABLE `#@__freelist` (
 	`aid` int(11) NOT NULL AUTO_INCREMENT COMMENT '文档ID',
-	`title` varchar(50) NOT NULL DEFAULT '' COMMENT '标题',
-	`namerule` varchar(50) NOT NULL DEFAULT '' COMMENT '命名规则，{listdir}表示列表存放目录',
-	`listdir` varchar(60) NOT NULL DEFAULT '' COMMENT '生成目录',
-	`defaultpage` varchar(20) NOT NULL DEFAULT '' COMMENT '默认页名称',
+	`title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
+	`namerule` varchar(255) NOT NULL DEFAULT '' COMMENT '命名规则，{listdir}表示列表存放目录',
+	`listdir` varchar(255) NOT NULL DEFAULT '' COMMENT '生成目录',
+	`defaultpage` varchar(255) NOT NULL DEFAULT '' COMMENT '默认页名称',
 	`nodefault` tinyint(4) NOT NULL DEFAULT '0' COMMENT '默认首页 0:使用 1:不使用',
-	`templet` varchar(50) NOT NULL DEFAULT '' COMMENT '模板文件',
+	`templet` varchar(255) NOT NULL DEFAULT '' COMMENT '模板文件',
 	`edtime` int(11) NOT NULL DEFAULT '0' COMMENT '编辑时间',
 	`maxpage` smallint(5) unsigned NOT NULL DEFAULT '100' COMMENT '最大列出的页数',
 	`click` int(11) NOT NULL DEFAULT '1' COMMENT '点击量',
@@ -407,7 +407,7 @@ CREATE TABLE `#@__freelist` (
 
 DROP TABLE IF EXISTS `#@__homepageset`;
 CREATE TABLE `#@__homepageset` (
-	`templet` char(50) NOT NULL DEFAULT '' COMMENT '模板',
+	`templet` char(255) NOT NULL DEFAULT '' COMMENT '模板',
 	`position` char(30) NOT NULL DEFAULT '' COMMENT '位置',
 	`showmod` tinyint(2) NOT NULL DEFAULT '1' COMMENT '浏览模式 0:动态 1:静态'
 ) ENGINE=MyISAM;
@@ -418,7 +418,7 @@ CREATE TABLE `#@__keywords` (
 	`keyword` char(16) NOT NULL DEFAULT '' COMMENT '关键词',
 	`rank` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '频率',
 	`sta` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态 0:禁用 1:启用',
-	`rpurl` char(60) NOT NULL DEFAULT '' COMMENT '链接网址',
+	`rpurl` varchar(255) NOT NULL DEFAULT '' COMMENT '链接网址',
 	PRIMARY KEY (`aid`),
 	KEY `keyword` (`keyword`,`rank`,`sta`)
 ) ENGINE=MyISAM;
@@ -427,11 +427,11 @@ DROP TABLE IF EXISTS `#@__log`;
 CREATE TABLE `#@__log` (
 	`lid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '日志ID',
 	`adminid` smallint(8) unsigned NOT NULL DEFAULT '0' COMMENT '管理员ID',
-	`filename` char(60) NOT NULL DEFAULT '' COMMENT '地址',
+	`filename` char(255) NOT NULL DEFAULT '' COMMENT '地址',
 	`method` char(10) NOT NULL DEFAULT '' COMMENT '访问方式',
 	`query` char(200) NOT NULL DEFAULT '' COMMENT '会员ID',
 	`cip` char(46) NOT NULL DEFAULT '' COMMENT '参数',
-	`dtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '时间',
+	`dtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '时间',
 	PRIMARY KEY (`lid`)
 ) ENGINE=MyISAM;
 
@@ -447,23 +447,23 @@ CREATE TABLE `#@__member` (
 	`rank` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '会员等级，关联arcrank表的rank字段',
 	`uptime` int(11) NOT NULL DEFAULT '0' COMMENT '会员升级时间，时间戳格式',
 	`exptime` smallint(6) NOT NULL DEFAULT '0' COMMENT '会员有效天数',
-	`money` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '会员金币数量',
+	`money` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '会员金币数量',
 	`email` char(50) NOT NULL DEFAULT '' COMMENT '会员邮箱',
 	`scores` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '会员积分',
 	`matt` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '推荐级别 0:普通 1:推荐 10:管理员',
 	`spacesta` smallint(6) NOT NULL DEFAULT '0' COMMENT '资料状况，具体状态由staArr数组定义',
-	`face` char(50) NOT NULL DEFAULT '' COMMENT '会员头像地址',
+	`face` varchar(255) NOT NULL DEFAULT '' COMMENT '会员头像地址',
 	`safequestion` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '安全问题编号',
 	`safeanswer` char(30) NOT NULL DEFAULT '' COMMENT '安全问题答案',
-	`jointime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员注册时间，时间戳格式',
+	`jointime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '会员注册时间，时间戳格式',
 	`joinip` char(46) NOT NULL DEFAULT '' COMMENT '会员注册地址IP',
-	`logintime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员最近登录时间',
+	`logintime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '会员最近登录时间',
 	`loginip` char(46) NOT NULL DEFAULT '' COMMENT '会员最近登录地址IP',
 	`checkmail` tinyint(4) NOT NULL DEFAULT '-1' COMMENT '邮箱验证状态 -1:未验证',
 	`loginerr` tinyint(4) NULL DEFAULT 0 COMMENT '登录错误次数',
 	`send_max` tinyint(4) DEFAULT '0' COMMENT '投稿限制 0:不能投稿 -1:无限次',
 	`user_money` decimal(10,2) unsigned NULL DEFAULT 0.00 COMMENT '会员余额，保留两位小数',
-	`pmid` int(11) unsigned NULL DEFAULT 0 COMMENT '可能是父会员ID',
+	`pmid` int(11) unsigned NULL DEFAULT 0 COMMENT '可能父会员ID',
 	PRIMARY KEY (`mid`),
 	KEY `userid` (`userid`,`sex`),
 	KEY `logintime` (`logintime`)
@@ -473,7 +473,7 @@ DROP TABLE IF EXISTS `#@__member_flink`;
 CREATE TABLE `#@__member_flink` (
 	`aid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '文档ID',
 	`mid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
-	`title` varchar(30) NOT NULL DEFAULT '' COMMENT '标题',
+	`title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
 	`url` varchar(100) NOT NULL DEFAULT '' COMMENT '链接',
 	PRIMARY KEY (`aid`)
 ) ENGINE=MyISAM;
@@ -483,7 +483,7 @@ CREATE TABLE `#@__member_operation` (
 	`aid` int(11) NOT NULL AUTO_INCREMENT COMMENT '文档ID',
 	`buyid` varchar(80) NOT NULL DEFAULT '' COMMENT '订单号',
 	`pname` varchar(50) NOT NULL DEFAULT '' COMMENT '产品名称',
-	`product` varchar(10) NOT NULL DEFAULT '' COMMENT '产品类型 card:点数卡 archive:购买文档 stc:兑换金币 空:会员升级 默认为会员升级',
+	`product` varchar(30) NOT NULL DEFAULT '' COMMENT '产品类型 card:点数卡 archive:购买文档 stc:兑换金币 空:会员升级 默认为会员升级',
 	`money` int(11) NOT NULL DEFAULT '0' COMMENT '金币',
 	`mtime` int(11) NOT NULL DEFAULT '0' COMMENT '时间',
 	`pid` int(11) NOT NULL DEFAULT '0' COMMENT '产品ID',
@@ -504,8 +504,8 @@ CREATE TABLE `#@__member_pms` (
 	`tologinid` char(20) NOT NULL DEFAULT '' COMMENT '接收人用户名',
 	`folder` enum('inbox','outbox') DEFAULT 'inbox' COMMENT '类型 inbox:收件箱 outbox:发件箱',
 	`subject` varchar(60) NOT NULL DEFAULT '' COMMENT '主题',
-	`sendtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发送时间',
-	`writetime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '编写时间',
+	`sendtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '发送时间',
+	`writetime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '编写时间',
 	`hasview` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否阅读 0:未阅读 1:已阅读',
 	`isadmin` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否是管理信息 0:否 1:是 默认是',
 	`message` text COMMENT '消息内容',
@@ -531,8 +531,8 @@ CREATE TABLE `#@__member_stow` (
 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '收藏ID',
 	`mid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
 	`aid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文档ID',
-	`title` char(60) NOT NULL DEFAULT '' COMMENT '标题',
-	`addtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '收藏时间',
+	`title` char(255) NOT NULL DEFAULT '' COMMENT '标题',
+	`addtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '收藏时间',
 	`type` varchar(10) DEFAULT NULL COMMENT '类型',
 	PRIMARY KEY (`id`),
 	KEY `uid` (`mid`)
@@ -542,7 +542,7 @@ DROP TABLE IF EXISTS `#@__member_stowtype`;
 CREATE TABLE `#@__member_stowtype` (
 	`stowname` varchar(30) NOT NULL COMMENT '收藏名称',
 	`indexname` varchar(30) NOT NULL COMMENT '名称',
-	`indexurl` varchar(50) NOT NULL COMMENT '地址',
+	`indexurl` varchar(60) NOT NULL COMMENT '地址',
 	PRIMARY KEY (`stowname`)
 ) ENGINE=MyISAM;
 
@@ -552,8 +552,8 @@ CREATE TABLE `#@__member_tj` (
 	`article` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '文章',
 	`album` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '相册',
 	`archives` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '文档',
-	`homecount` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '首页访问',
-	`pagecount` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '内容访问',
+	`homecount` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '首页访问',
+	`pagecount` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '内容访问',
 	`feedback` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '评论',
 	`friend` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '好友数',
 	`stow` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '收藏数',
@@ -603,7 +603,7 @@ DROP TABLE IF EXISTS `#@__mtypes`;
 CREATE TABLE `#@__mtypes` (
 	`mtypeid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '会员分类ID',
 	`mtypename` char(40) NOT NULL COMMENT '会员分类名称',
-	`channelid` smallint(6) NOT NULL DEFAULT '1' COMMENT '模型ID',
+	`channelid` smallint(5) NOT NULL DEFAULT '1' COMMENT '模型ID',
 	`mid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
 	PRIMARY KEY (`mtypeid`)
 ) ENGINE=MyISAM;
@@ -616,8 +616,8 @@ CREATE TABLE `#@__myad` (
 	`tagname` varchar(30) NOT NULL DEFAULT '' COMMENT '广告标记名称',
 	`adname` varchar(60) NOT NULL DEFAULT '' COMMENT '广告名称',
 	`timeset` tinyint(4) NOT NULL DEFAULT '0' COMMENT '时间限制设置 0:不限时间 1:限制时间',
-	`starttime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '开始投放时间',
-	`endtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '结束投放时间',
+	`starttime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '开始投放时间',
+	`endtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '结束投放时间',
 	`normbody` text COMMENT '正常内容',
 	`expbody` text COMMENT '过期内容',
 	PRIMARY KEY (`aid`),
@@ -630,8 +630,8 @@ CREATE TABLE `#@__mytag` (
 	`typeid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '栏目ID',
 	`tagname` varchar(30) NOT NULL DEFAULT '' COMMENT '标签名称',
 	`timeset` tinyint(4) NOT NULL DEFAULT '0' COMMENT '时间限制设置 0:不限时间 1:限制时间',
-	`starttime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '开始时间',
-	`endtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
+	`starttime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '开始时间',
+	`endtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
 	`normbody` text COMMENT '正常内容',
 	`expbody` text COMMENT '过期内容',
 	PRIMARY KEY (`aid`),
@@ -663,18 +663,18 @@ CREATE TABLE `#@__purview` (
 DROP TABLE IF EXISTS `#@__pwd_tmp`;
 CREATE TABLE `#@__pwd_tmp` (
 	`mid` int(11) NOT NULL COMMENT '会员ID',
-	`membername` char(16) NOT NULL DEFAULT '' COMMENT '会员名称',
+	`membername` char(30) NOT NULL DEFAULT '' COMMENT '会员名称',
 	`pwd` char(32) NOT NULL DEFAULT '' COMMENT '密码',
-	`mailtime` int(10) NOT NULL DEFAULT '0' COMMENT '找回密码邮件时间',
+	`mailtime` int(11) NOT NULL DEFAULT '0' COMMENT '找回密码邮件时间',
 	PRIMARY KEY (`mid`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `#@__scores`;
 CREATE TABLE `#@__scores` (
 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '积分头衔ID',
-	`titles` char(15) NOT NULL COMMENT '级别头衔',
+	`titles` varchar(20) NOT NULL COMMENT '级别头衔',
 	`icon` smallint(6) unsigned DEFAULT '0' COMMENT '星星数',
-	`integral` int(10) NOT NULL DEFAULT '0' COMMENT '积分大于',
+	`integral` int(11) NOT NULL DEFAULT '0' COMMENT '积分大于',
 	`isdefault` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否默认 0:否 1:是',
 	PRIMARY KEY (`id`),
 	KEY `integral` (`integral`)
@@ -683,7 +683,7 @@ CREATE TABLE `#@__scores` (
 DROP TABLE IF EXISTS `#@__search_cache`;
 CREATE TABLE `#@__search_cache` (
 	`hash` char(32) NOT NULL COMMENT '哈希',
-	`lasttime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后搜索时间',
+	`lasttime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '最后搜索时间',
 	`rsnum` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '结果数',
 	`ids` mediumtext COMMENT '内容id',
 	PRIMARY KEY (`hash`)
@@ -696,7 +696,7 @@ CREATE TABLE `#@__search_keywords` (
 	`spwords` char(50) NOT NULL DEFAULT '' COMMENT '分词',
 	`count` mediumint(8) unsigned NOT NULL DEFAULT '1' COMMENT '搜索次数',
 	`result` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '结果数',
-	`lasttime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '搜索时间',
+	`lasttime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '搜索时间',
 	`channelid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '模型ID',
 	`typeid` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '栏目ID',
 	PRIMARY KEY (`aid`)
@@ -711,15 +711,15 @@ CREATE TABLE `#@__search_limits` (
 
 DROP TABLE IF EXISTS `#@__sgpage`;
 CREATE TABLE `#@__sgpage` (
-	`aid` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '文档ID',
+	`aid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '文档ID',
 	`ismake` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否生成 1:是 0:否',
-	`filename` varchar(60) NOT NULL DEFAULT '' COMMENT '文件名称',
-	`title` char(255) NOT NULL DEFAULT '' COMMENT '标题',
+	`filename` varchar(255) NOT NULL DEFAULT '' COMMENT '文件名称',
+	`title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
 	`keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键词',
 	`description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
-	`template` varchar(30) NOT NULL DEFAULT '' COMMENT '模板',
-	`likeid` varchar(20) NOT NULL DEFAULT '' COMMENT '关联id',
-	`uptime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+	`template` varchar(255) NOT NULL DEFAULT '' COMMENT '模板',
+	`likeid` varchar(255) NOT NULL DEFAULT '' COMMENT '关联id',
+	`uptime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
 	`body` mediumtext COMMENT '内容',
 	PRIMARY KEY (`aid`),
 	KEY `ismake` (`ismake`,`uptime`),
@@ -736,7 +736,7 @@ CREATE TABLE `#@__softconfig` (
 	`downmsg` text COMMENT '下载提示',
 	`moresitedo` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT '镜像上传 1:是 0:否',
 	`dfrank` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '需要权限',
-	`dfywboy` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '金币',
+	`dfywboy` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '金币',
 	`argrange` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '参数限制方式 1:所有软件均使用此权限 0:所有软件重新选择权限',
 	PRIMARY KEY (`downtype`)
 ) ENGINE=MyISAM;
@@ -802,7 +802,7 @@ CREATE TABLE `#@__sys_module` (
 	`hashcode` char(32) NOT NULL DEFAULT '' COMMENT '模型哈希',
 	`modname` varchar(30) NOT NULL DEFAULT '' COMMENT '模块名称',
 	`indexname` varchar(20) NOT NULL DEFAULT '' COMMENT '入口名',
-	`indexurl` varchar(30) NOT NULL DEFAULT '' COMMENT '入口地址',
+	`indexurl` varchar(255) NOT NULL DEFAULT '' COMMENT '入口地址',
 	`ismember` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否会员 0:官方 1:用户',
 	`menustring` text COMMENT '菜单配置',
 	PRIMARY KEY (`id`)
@@ -830,13 +830,14 @@ CREATE TABLE `#@__sys_set` (
 
 DROP TABLE IF EXISTS `#@__sysconfig`;
 CREATE TABLE `#@__sysconfig` (
-	`aid` smallint(8) unsigned NOT NULL DEFAULT '0' COMMENT '配置ID',
+	`aid` smallint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '配置ID',
 	`varname` varchar(150) NOT NULL DEFAULT '' COMMENT '名称',
 	`info` varchar(255) NOT NULL DEFAULT '' COMMENT '介绍',
-	`groupid` smallint(6) NOT NULL DEFAULT '1' COMMENT '组',
+	`groupid` smallint(5) NOT NULL DEFAULT '1' COMMENT '组',
 	`type` varchar(10) NOT NULL DEFAULT 'string' COMMENT '类型 string:文本 number:数字 bool:布尔 bstring:多行文本 img:图片',
 	`value` text COMMENT '值',
-	PRIMARY KEY (`varname`)
+	PRIMARY KEY (`aid`),
+	KEY `idx_varname` (`varname`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `#@__tagindex`;
@@ -853,9 +854,9 @@ CREATE TABLE `#@__tagindex` (
 	`monthcc` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '月点击数',
 	`weekup` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '周更新数',
 	`monthup` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '月更新数',
-	`addtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
-	`uptime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-	`mktime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '生成时间',
+	`addtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+	`uptime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+	`mktime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '生成时间',
 	PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
@@ -881,14 +882,14 @@ DROP TABLE IF EXISTS `#@__uploads`;
 CREATE TABLE `#@__uploads` (
 	`aid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '附件ID',
 	`arcid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文档ID',
-	`title` char(60) NOT NULL DEFAULT '' COMMENT '文件名称',
-	`url` char(80) NOT NULL DEFAULT '' COMMENT '地址',
+	`title` varchar(255) NOT NULL DEFAULT '' COMMENT '文件名称',
+	`url` varchar(255) NOT NULL DEFAULT '' COMMENT '地址',
 	`mediatype` tinyint(4) NOT NULL DEFAULT '1' COMMENT '类型 1:图片 2:动画 3:视频 4:软件',
 	`width` char(10) NOT NULL DEFAULT '' COMMENT '宽度',
 	`height` char(10) NOT NULL DEFAULT '' COMMENT '高度',
 	`playtime` char(10) NOT NULL DEFAULT '' COMMENT '播放时长',
 	`filesize` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '文件尺寸',
-	`uptime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上传时间',
+	`uptime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '上传时间',
 	`mid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
 	PRIMARY KEY (`aid`),
 	KEY `memberid` (`mid`),
@@ -900,7 +901,7 @@ CREATE TABLE `#@__verifies` (
 	`nameid` char(32) NOT NULL DEFAULT '' COMMENT '文件名',
 	`cthash` varchar(32) NOT NULL DEFAULT '' COMMENT '文件哈希',
 	`method` enum('local','official') NOT NULL DEFAULT 'official' COMMENT '类型 local:本地 official:官方',
-	`filename` varchar(254) NOT NULL DEFAULT '' COMMENT '文件名',
+	`filename` varchar(255) NOT NULL DEFAULT '' COMMENT '文件名',
 	PRIMARY KEY (`nameid`)
 ) ENGINE=MyISAM;
 
@@ -908,8 +909,8 @@ DROP TABLE IF EXISTS `#@__vote`;
 CREATE TABLE `#@__vote` (
 	`aid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '投票ID',
 	`votename` varchar(50) NOT NULL DEFAULT '' COMMENT '投票名称',
-	`starttime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '开始时间',
-	`endtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
+	`starttime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '开始时间',
+	`endtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
 	`totalcount` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '投票总人数',
 	`ismore` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否允许多选 0:单选 1:多选',
 	`isallow` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否允许游客投票 0:允许 1:不允许',
@@ -925,7 +926,7 @@ CREATE TABLE `#@__vote_member` (
 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '投票记录ID',
 	`voteid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '投票ID',
 	`userid` varchar(50) NOT NULL DEFAULT '' COMMENT '用户ID',
-	`uptime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '投票时间',
+	`uptime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '投票时间',
 	PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
@@ -935,7 +936,7 @@ CREATE TABLE `#@__dl_log` (
 	`ip` char(46) NOT NULL COMMENT 'ip',
 	`lang` char(6) NOT NULL COMMENT '语言',
 	`dtype` varchar(10) NOT NULL COMMENT '下载类型',
-	`dltime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '下载时间',
+	`dltime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '下载时间',
 	`referrer` varchar(255) NOT NULL DEFAULT '' COMMENT '来源',
 	`user_agent` varchar(255) NOT NULL COMMENT 'User-Agent',
 	PRIMARY KEY (`id`),

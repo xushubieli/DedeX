@@ -90,8 +90,10 @@ if ($dopost != 'save') {
     if (empty($ddisremote)) {
         $ddisremote = 0;
     }
-    if ($needmoney != 0) {
+    if (!empty($needmoney)) {
         $money = $needmoney;
+    } else {
+        $money = 0;
     }
     $litpic = GetDDImage('none', $picname, $ddisremote);
     //生成文档ID
@@ -219,7 +221,7 @@ if ($dopost != 'save') {
     }
     ClearMyAddon($arcID, $title);
     //自动更新关联文档
-    if (is_array($automake)) {
+    if (isset($automake) && is_array($automake)) {
         foreach ($automake as $key => $value) {
             if (isset(${$key}) && !empty(${$key})) {
                 $ids = explode(",", ${$key});

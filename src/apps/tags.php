@@ -8,16 +8,6 @@
  */
 require_once(dirname(__FILE__)."/../system/common.inc.php");
 require_once(DEDEINC."/archive/taglist.class.php");
-//根据流量统计，限制用户浏览
-if ($cfg_access == 'Y') {
-    $ip = GetIP();
-    $moon = time() - (24 * 60 * 60);
-    $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS dd FROM `#@__statistics_detail` WHERE ip='$ip' AND t>='$moon' AND url_type IN (4, -1)");
-    if ($flow && $flow['dd'] > $cfg_access_count) {
-        http_response_code(403);
-        exit();
-    }
-}
 $PageNo = 1;
 if (isset($_SERVER['QUERY_STRING'])) {
     $tag = trim($_SERVER['QUERY_STRING']);

@@ -196,7 +196,7 @@ if ($dopost != 'save') {
     }
     ClearMyAddon($arcID, $title);
     //自动更新关联文档
-    if (is_array($automake)) {
+    if (isset($automake) && is_array($automake)) {
         foreach ($automake as $key => $value) {
             if (isset(${$key}) && !empty(${$key})) {
                 $ids = explode(",", ${$key});

@@ -113,7 +113,7 @@ if (empty($dopost)) {
             $softurl = stripslashes(${'softurl'.$i});
             $softurl = str_replace(array("{dede:", "{/dede:", "}"), "#", $softurl);
             if ($servermsg == '') {
-                $servermsg = '下载地址'.$i;
+                $servermsg = "下载地址{$i}";
             }
             if ($softurl != '' && $softurl != 'http://') {
                 $urls .= "{dede:link text='$servermsg'} $softurl {/dede:link}\r\n";

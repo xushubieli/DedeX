@@ -95,7 +95,7 @@ else if ($action == 'delnulltitle') {
 }
 //删除小于100字符文档
 else if ($action == 'delnullbody') {
-    $dsql->SetQuery("SELECT aid FROM `#@__addonarticle` WHERE LENGTH(body) < 100 ");
+    $dsql->SetQuery("SELECT aid FROM `#@__addonarticle` WHERE LENGTH(body) < 120 ");
     $dsql->Execute('x');
     $tdd = 0;
     while ($row = $dsql->GetObject('x')) {
@@ -152,16 +152,5 @@ else if ($action == 'move') {
     } else {
         ShowMsg("完成操作，没移动任何数据", "javascript:;");
     }
-}
-//删除空标题文档
-else if ($action == 'delnulltitle') {
-    $dsql->SetQuery("SELECT id FROM `#@__archives` WHERE trim(title)='' ");
-    $dsql->Execute('x');
-    $tdd = 0;
-    while ($row = $dsql->GetObject('x')) {
-        if (DelArc($row->id)) $tdd++;
-    }
-    ShowMsg("成功删除{$tdd}条记录", "javascript:;");
-    exit();
 }
 ?>

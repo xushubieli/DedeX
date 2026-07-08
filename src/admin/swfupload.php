@@ -27,7 +27,7 @@ if (empty($dopost)) {
     $FiledataNew = str_replace("\\", '/', $Filedata);
     $FiledataNew = $tmpdir.'/'.preg_replace("/(.*)[\/]/isU", "", $FiledataNew);
     $mime = get_mime_type($Filedata);
-    if (preg_match("#^unknow#", $mime)) {
+    if (preg_match("#^unknown#", $mime)) {
         echo "Error: Create {$tmpdir} dir error! ";
         exit;
     }

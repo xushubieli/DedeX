@@ -139,7 +139,7 @@ if ($dopost != 'save') {
                 continue;
             }
             $mime = get_mime_type($tmpFile);
-            if (preg_match("#^unknow#", $mime)) {
+            if (preg_match("#^unknown#", $mime)) {
                 ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
                 exit;
             }
@@ -262,7 +262,7 @@ if ($dopost != 'save') {
     }
     ClearMyAddon($id, $title);
     //自动更新关联文档
-    if (is_array($automake)) {
+    if (isset($automake) && is_array($automake)) {
         foreach ($automake as $key => $value) {
             if (isset(${$key}) && !empty(${$key})) {
                 $ids = explode(",", ${$key});

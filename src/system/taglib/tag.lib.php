@@ -9,7 +9,7 @@ if (!defined('DEDEINC')) {http_response_code(403); exit();}
  */
 function lib_tag(&$ctag, &$refObj)
 {
-    global $dsql, $envs, $cfg_cmsurl, $cfg_tags_dir, $cfg_rewrite;
+    global $dsql, $envs, $cfg_cmsurl, $cfg_tags_dir, $cfg_rewrite, $cfg_cmspath;
     $attlist = "row|30,sort|new,getall|0,typeid|0,ishtml|0";
     FillAttsDefault($ctag->CAttribute->Items, $attlist);
     extract($ctag->CAttribute->Items, EXTR_SKIP);

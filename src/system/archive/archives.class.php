@@ -121,7 +121,7 @@ class Archives
                 $this->Fields['uname'] = $this->addTableRow['uname'];
             }
             $this->Fields['face'] = empty($this->Fields['face'])? $GLOBALS['cfg_mainsite'].'/static/web/img/admin.png' : $this->Fields['face'];
-            $this->Fields['userurl'] = $GLOBALS['cfg_memberurl'].'/index.php?uid='.$this->Fields['userid'];
+            $this->Fields['userurl'] = $GLOBALS['cfg_memberurl'].'/index.php?uid='.(isset($this->Fields['userid']) ? $this->Fields['userid'] : '');
         }
     }
     //php4构造函数
@@ -1060,7 +1060,7 @@ function _highlight($string, $words, $result, $pre)
     $string = str_replace('\"', '"', $string);
     if ($cfg_replace_num > 0) {
         foreach ($words as $key => $word) {
-            if ($GLOBALS['replaced'][$word] == 1) {
+            if (!empty($GLOBALS['replaced'][$word])) {
                 continue;
             }
             $string = preg_replace("#".preg_quote($word)."#", $result[$key], $string, $cfg_replace_num);

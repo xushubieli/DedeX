@@ -102,6 +102,7 @@ if (empty($dopost)) {
     $body = HtmlReplace($body, -1);
     //更新数据库的SQL语句
     $litpic = isset($litpic)? HtmlReplace($litpic, 1) : '';
+    $mtypesid = intval(isset($mtypesid) ? $mtypesid : 0);
     $upQuery = "UPDATE `#@__archives` SET ismake='$ismake',arcrank='$arcrank',typeid='$typeid',title='$title',description='$description',keywords='$keywords',mtype='$mtypesid',flag='$flag',litpic='$litpic' WHERE id='$aid' AND mid='$mid'; ";
     if (!$dsql->ExecuteNoneQuery($upQuery)) {
         ShowMsg("数据保存到数据库文档主表出错，请联系管理员".$dsql->GetError(), "-1");

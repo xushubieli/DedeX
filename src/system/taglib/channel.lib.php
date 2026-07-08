@@ -134,7 +134,7 @@ function lib_channel(&$ctag, &$refObj)
     $dsql->FreeResult();
     return $likeType;
 }
-function lib_channel_son($ctag, $typeid = 0, $dsql2)
+function lib_channel_son($ctag, $typeid = 0, $dsql2 = null)
 {
     $attlist = 'row|100,col|1,currentstyle|,notypeid|0';
     FillAttsDefault($ctag->CAttribute->Items, $attlist);

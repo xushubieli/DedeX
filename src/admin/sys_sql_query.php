@@ -143,6 +143,9 @@ else if ($dopost == "repairAll") {
 //执行SQL语句
 else if ($dopost == "query") {
     CheckCSRF();
+    $dsql->SetQuery("SELECT VERSION()");
+    $dsql->Execute('me');
+    $row = $dsql->GetArray('me', MYSQLI_BOTH);
     $mysqlVersions = explode('.',trim($row[0]));
     $mysqlVersion = $mysqlVersions[0].".".$mysqlVersions[1];
     $sqlquery = trim(stripslashes($sqlquery));
@@ -151,7 +154,7 @@ else if ($dopost == "query") {
         exit();
     }
     if ($mysqlVersion >= 4.1 && preg_match('#CREATE#i', $sqlquery)) {
-        $sql4tmp = "ENGINE=MyISAM DEFAULT CHARSET=".$$cfg_db_language;
+        $sql4tmp = "ENGINE=MyISAM DEFAULT CHARSET=".$cfg_db_language;
         $sqlquery = preg_replace("#TYPE=MyISAM#i", $sql4tmp, $sqlquery);
     }
     echo '<link rel="stylesheet" href="/static/web/css/admin.css">';
@@ -282,8 +285,6 @@ else if ($dopost == "query") {
     </div>
 </body>
 </html>';
-    //输出网页文档
-    header('Content-Type: text/html');
     echo $output;
     exit();
 }

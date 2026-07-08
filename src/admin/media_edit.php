@@ -109,7 +109,7 @@ else if ($dopost == 'save') {
             MkdirAll($cfg_basedir.$oldfile_path, 777);
         }
         $mime = get_mime_type($upfile);
-        if (preg_match("#^unknow#", $mime)) {
+        if (preg_match("#^unknown#", $mime)) {
             ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
             exit;
         }

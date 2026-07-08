@@ -53,7 +53,7 @@ if (!function_exists('HtmlReplace')) {
             //仅替换网页危险标记
             $configNew = HTMLPurifier_Config::createDefault();
             $configNew->set('Cache.SerializerPath', DEDEDATA.'/cache');
-            $configNew->set('HTML.Allowed', 'p,b,strong,i,em,u,a[href|title],ul,ol,li,img[src|alt|width|height|style],video[src|alt|width|height|style],br,span[class]');
+            $configNew->set('HTML.Allowed', 'p,b,strong,i,em,u,a[href|title],ul,ol,li,img[src|alt|width|height|style],br,span[class]');
             $configNew->set('HTML.ForbiddenElements', ['script', 'iframe', 'object', 'embed', 'form', 'input', 'button', 'textarea', 'select', 'meta', 'link']);
             $purifierNew = new HTMLPurifier($configNew);
             $str = $purifierNew->purify($str);
@@ -77,7 +77,7 @@ if (!function_exists('RemoveXSS')) {
             //启用缓存（提升性能）
             $config->set('Cache.SerializerPath', DEDEDATA.'/cache'); //生产环境建议设定缓存目录
             //允许的网页元素（可以根据需要调整）
-            $config->set('HTML.Allowed', 'p,b,strong,i,em,u,a[href|title],ul,ol,li,img[src|alt|width|height|style],video[src|alt|width|height|style],br,span[class]');
+            $config->set('HTML.Allowed', 'p,b,strong,i,em,u,a[href|title],ul,ol,li,img[src|alt|width|height|style],br,span[class]');
             //过滤JavaScript、CSS注入
             $config->set('CSS.AllowedProperties', []);
             $purifier = new HTMLPurifier($config);

@@ -113,7 +113,7 @@ if ($action == '') {
     $wintitle = "安装{$infos['name']}";
     $win->AddHidden("hash", $hash);
     $win->AddHidden("action",'setupstart');
-    if (trim($infos['url'])=='') $infos['url'] = '无';
+    if (empty($infos['url'])) $infos['url'] = '无';
     $msg = "<tr>
     </tr>
     <tr>
@@ -217,7 +217,7 @@ if ($action == '') {
 } else if ($action == 'del') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
-    if ($infos['url']=='') $infos['url'] = '';
+    if (empty($infos['url'])) $infos['url'] = '';
     $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块语言编码与您系统的编码不一致');
     $win = new OxWindow();
     $win->Init("module_main.php", "/static/web/js/admin.blank.js", "post");
@@ -263,7 +263,7 @@ if ($action == '') {
 } else if ($action == 'uninstall') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
-    if ($infos['url'] == '') $infos['url'] = ' ';
+    if (empty($infos['url'])) $infos['url'] = ' ';
     $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块语言编码与您系统的编码不一致');
     $filelists = (array)$dm->GetFileLists($hash);
     $filelist = '';
@@ -363,7 +363,7 @@ if ($action == '') {
 } else if ($action == 'view') {
     $dm = new DedeModule($mdir);
     $infos = $dm->GetModuleInfo($hash);
-    if ($infos['url'] == '') $infos['url'] = '';
+    if (empty($infos['url'])) $infos['url'] = '';
     $alertMsg = ($infos['lang'] == $cfg_soft_lang ? '' : '该模块语言编码与您系统的编码不一致');
     $filelists = (array)$dm->GetFileLists($hash);
     $filelist = '';

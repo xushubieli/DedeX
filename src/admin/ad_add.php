@@ -21,7 +21,7 @@ if ($dopost == "save") {
     }
     $starttime = GetMkTime($starttime);
     $endtime = GetMkTime($endtime);
-    $link = addslashes($normbody['link']);
+    $link = addslashes(isset($normbody['link']) ? $normbody['link'] : '');
     if ($normbody['style'] == 'code') {
         $normbody = addslashes($normbody['htmlcode']);
     } else if ($normbody['style'] == 'txt') {

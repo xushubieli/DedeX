@@ -109,9 +109,10 @@ class TagList
             $this->PageNo = 1;
         }
         if ($this->TotalResult == -1) {
+            if (empty($this->TagInfos)) return;
             $cquery = "SELECT COUNT(*) AS dd FROM `#@__taglist` WHERE tid = '{$this->TagInfos['id']}' AND arcrank > -1 ";
             $row = $this->dsql->GetOne($cquery);
-            $this->TotalResult = $row['dd'];
+            $this->TotalResult = $row ? $row['dd'] : 0;
             $ntime = time();
             //更新浏览量和记录数
             $upquery = "UPDATE `#@__tagindex` SET total='{$row['dd']}',count=count+1,weekcc=weekcc+1,monthcc=monthcc+1 WHERE id='{$this->TagInfos['id']}' ";
@@ -461,10 +462,10 @@ class TagList
         if (isset($envs['makeTag']) && $envs['makeTag'] == 1) {
             $this->Fields['position'] = $cfg_cmsurl.$tagsdir;
         }
-        if (empty($this->TotalResult) && $this->Tag != "") $this->CountRecord();
+        if (empty($this->TotalResult) && $this->Tag != 0) $this->CountRecord();
         //初步给固定值的标记赋值
         $this->ParseTempletsFirst();
-        if ($this->Tag == "") {
+        if ($this->Tag == 0) {
             MkdirAll($this->GetTruePath().$this->tagsDir, $cfg_dir_purview);
             $this->dtp->SaveTo($this->GetTruePath().$this->tagsDir."/index.html");
         } else {
@@ -494,7 +495,7 @@ class TagList
                 }
                 if ($startpage == 1) {
                     $list_1 = $makeDir."/1/index.html";
-                    copy($list_1, $makeDir."/index.html");
+                    if (file_exists($list_1)) copy($list_1, $makeDir."/index.html");
                 }
             }
         }

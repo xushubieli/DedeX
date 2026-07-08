@@ -65,6 +65,7 @@ if ($action == 'post') {
     }
 } else if ($action == 'list') {
     include_once DEDEINC.'/datalistcp.class.php';
+    $field = isset($field) ? trim($field) : '';
     if (empty($keyword)) {
         $keyword = '';
         $addquery = '';
@@ -167,7 +168,7 @@ if ($action == 'post') {
         } else {
             showmsg('删除表单信息失败', "diy_list.php?action=list&diyid={$diy->diyid}");
         }
-    } else if ($do = 1) {
+    } else if ($do == 1) {
         $row = $dsql->GetOne("SELECT * FROM `$diy->table` WHERE id='$id'");
         if (file_exists($cfg_basedir.$row[$name])) {
             unlink($cfg_basedir.$row[$name]);

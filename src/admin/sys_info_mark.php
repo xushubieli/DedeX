@@ -44,7 +44,7 @@ if ($action == "save") {
         }
         $photo_markimg = 'mark'.$shortname;
         $mime = get_mime_type($newimg);
-        if (preg_match("#^unknow#", $mime)) {
+        if (preg_match("#^unknown#", $mime)) {
             ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
             exit;
         }

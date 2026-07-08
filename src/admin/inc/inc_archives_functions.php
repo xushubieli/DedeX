@@ -362,7 +362,7 @@ function GetDDImage($litpic, $picname, $isremote)
             $fullUrl = $fullUrl.".jpg";
         }
         $mime = get_mime_type($_FILES[$litpic]['tmp_name']);
-        if (preg_match("#^unknow#", $mime)) {
+        if (preg_match("#^unknown#", $mime)) {
             ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
             exit;
         }
@@ -577,7 +577,7 @@ function Replace_Links(&$body, $allow_urls = array())
         $rparr = array();
         $tgarr = array();
         foreach ($arr[0] as $i => $v) {
-            if ($host_rule != '' && preg_match('#'.$host_rule.'#i', $arr[1][$i])) {
+            if ($host_rule != '' && preg_match("#{$host_rule}#i", $arr[1][$i])) {
                 continue;
             } else {
                 $rparr[] = $v;
@@ -664,7 +664,7 @@ function UploadOneImage($upname, $handurl = '', $isremote = 1, $ntitle = '')
             $fullUrl = $fullUrl.".jpg";
         }
         $mime = get_mime_type($_FILES[$upname]['tmp_name']);
-        if (preg_match("#^unknow#", $mime)) {
+        if (preg_match("#^unknown#", $mime)) {
             ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
             exit;
         }

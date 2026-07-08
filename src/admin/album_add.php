@@ -44,6 +44,7 @@ if ($dopost != 'save') {
     if (!isset($autolitpic)) $autolitpic = 0;
     if (!isset($albums)) $albums = '';
     if (!isset($delzip)) $delzip = 0;
+    if (!isset($isrm)) $isrm = 0;
     if (empty($click)) $click = ($cfg_arc_click == '-1' ? mt_rand(1000, 6000) : $cfg_arc_click);
     if (trim($title) == '') {
         ShowMsg("文档标题不能为空", "-1");
@@ -211,7 +212,7 @@ if ($dopost != 'save') {
     }
     ClearMyAddon($arcID, $title);
     //自动更新关联文档
-    if (is_array($automake)) {
+    if (isset($automake) && is_array($automake)) {
         foreach ($automake as $key => $value) {
             if (isset(${$key}) && !empty(${$key})) {
                 $ids = explode(",", ${$key});
