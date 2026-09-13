@@ -13,8 +13,11 @@ require_once(DEDEADMIN.'/file_class.php');
 $activepath = str_replace("..", "", $activepath);
 $activepath = preg_replace("#^\/{1,}#", "/", $activepath);
 if ($activepath == "/") $activepath = '';
-if ($activepath == "") $inpath = $cfg_basedir;
-else $inpath = $cfg_basedir.$activepath;
+if ($activepath == "") {
+    $inpath = $cfg_basedir;
+} else {
+    $inpath = $cfg_basedir.$activepath;
+}
 if (DEDEX_SAFE_MODE && !preg_match("#^/static#",$activepath)) {
     ShowMsg("安全模式下仅允许查看修改static目录文档", -1);
     exit;
@@ -29,7 +32,6 @@ foreach ($files as $ff) {
 function realdir($path) {
     return dirname(realpath($path));
 }
-
 //文件管理器交互与逻辑控制文件
 $fmm = new FileManagement();
 $fmm->Init();
@@ -126,7 +128,7 @@ else if ($fmdo == "upload") {
         if (is_uploaded_file($upfile)) {
             //检查文件类型
             $mime = get_mime_type($upfile);
-            if (preg_match("#^unknow#", $mime)) {
+            if (preg_match("#^unknown#", $mime)) {
                 ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
                 exit;
             }

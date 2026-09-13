@@ -144,7 +144,7 @@ if (!function_exists('MemberUploads')) {
                 $filename = $cfg_user_dir."/{$userid}/{$exname}.".$sname;
             }
             $mime = get_mime_type($GLOBALS[$upname]);
-            if (preg_match("#^unknow#", $mime)) {
+            if (preg_match("#^unknown#", $mime)) {
                 ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
                 exit;
             }

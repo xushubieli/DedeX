@@ -13,21 +13,17 @@ $typeid = (isset($typeid) && is_numeric($typeid)) ? $typeid : 0;
 $channeltype = (isset($channeltype) && is_numeric($channeltype)) ? $channeltype : 0;
 $kwtype = (isset($kwtype) && is_numeric($kwtype)) ? $kwtype : 0;
 $mid = (isset($mid) && is_numeric($mid)) ? $mid : 0;
-$ip = GetIP();
-//根据流量统计，限制用户浏览
-if ($cfg_access == 'Y') {
-    $moon = time() - (24 * 60 * 60);
-    $flow = $dsql->GetOne("SELECT COUNT(DISTINCT id) AS dd FROM `#@__statistics_detail` WHERE ip='$ip' AND t>='$moon' AND url_type=3 ");
-    if ($flow && $flow['dd'] > $cfg_access_count) {
-        http_response_code(403);
-        exit();
-    }
-}
 unset($typeArr);
-if (!isset($orderby)) $orderby = '';
-else $orderby = preg_replace("#[^a-z]#i", '', $orderby);
-if (!isset($searchtype)) $searchtype = 'titlekeyword';
-else $searchtype = preg_replace("#[^a-z]#i", '', $searchtype);
+if (!isset($orderby)) {
+    $orderby = '';
+} else {
+    $orderby = preg_replace("#[^a-z]#i", '', $orderby);
+}
+if (!isset($searchtype)) {
+    $searchtype = 'titlekeyword';
+} else {
+    $searchtype = preg_replace("#[^a-z]#i", '', $searchtype);
+}
 if (!isset($keyword)) {
     if (!isset($q)) $q = '';
     $keyword = $q;
@@ -69,6 +65,7 @@ if (!empty($cfg_notallowstr) && preg_match("#{$cfg_notallowstr}#i", $keyword)) {
     exit();
 }
 //检查搜索间隔时间
+$ip = GetIP();
 $now = time();
 $row = $dsql->GetOne("SELECT * FROM `#@__search_limits` WHERE ip='{$ip}'");
 if (is_array($row)) {

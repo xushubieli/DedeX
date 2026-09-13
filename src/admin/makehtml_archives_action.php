@@ -58,6 +58,7 @@ if ($totalnum > $startdd + $pagesize) {
     $limitSql = " LIMIT $startdd,".($totalnum - $startdd);
 }
 $tjnum = $startdd;
+$id = 0;
 if (empty($sstime)) $sstime = time();
 //如果更新数量大于500，并且没选栏目，按栏目排序更新
 if ($totalnum > 500 && empty($typeid)) {

@@ -45,8 +45,7 @@ if ($dopost != 'save') {
             foreach ($dtp->CTags as $ctag) {
                 if ($ctag->GetName() == 'link') {
                     $islocal = $ctag->GetAtt('islocal');
-                    if ($islocal != 1) $needmsg = "<label><input type='checkbox' name='del{$newRowStart}' value='1'> 删除</label>";
-                    else $needmsg = '<button type="button" name="sel1" id="sel1" class="btn btn-primary btn-sm" onclick="SelectSoft(\'form1.softurl{$newRowStart}\')">选择</button>';
+                    $needmsg = "<label><input type='checkbox' name='del{$newRowStart}'> 删除</label> <button type='button' name='sel{$newRowStart}' id='sel{$newRowStart}' class='btn btn-primary btn-sm' onclick='SelectSoft(\"form1.softurl{$newRowStart}\")'>选择</button>";
                     $nForm .= "<p><label>软件网址{$newRowStart}：<input type='text' name='softurl{$newRowStart}' value='".trim($ctag->GetInnerText())."' class='form-control admin-w-lg'></label> <label>下载名称：<input type='text' name='servermsg{$newRowStart}' value='{$ctag->GetAtt('text')}' class='form-control admin-w-sm'></label><input type='hidden' name='islocal{$newRowStart}' value='{$islocal}'> {$needmsg}</p>\r\n";
                     $newRowStart++;
                 }
@@ -163,12 +162,14 @@ if ($dopost != 'save') {
             $servermsg = str_replace("'", '', stripslashes(${'servermsg'.$i}));
             $softurl = stripslashes(${'softurl'.$i});
             if ($servermsg == '') {
-                $servermsg = '下载地址'.$i;
+                $servermsg = "下载地址{$i}";
             }
-            if ($softurl != '') {
-                if ($islocal == 1) $urls .= "{dede:link islocal='$islocal' text='{$servermsg}'} $softurl {/dede:link}\r\n";
-                else if ($isneed) $urls .= "{dede:link text='$servermsg'} $softurl {/dede:link}\r\n";
-                else continue;
+            if ($softurl != '' && $isneed) {
+                if ($islocal == 1) {
+                    $urls .= "{dede:link islocal='$islocal' text='{$servermsg}'} $softurl {/dede:link}\r\n";
+                } else {
+                    $urls .= "{dede:link text='$servermsg'} $softurl {/dede:link}\r\n";
+                }
             }
         }
     }
@@ -192,7 +193,7 @@ if ($dopost != 'save') {
     }
     ClearMyAddon($id, $title);
     //自动更新关联文档
-    if (is_array($automake)) {
+    if (isset($automake) && is_array($automake)) {
         foreach ($automake as $key => $value) {
             if (isset(${$key}) && !empty(${$key})) {
                 $ids = explode(",", ${$key});

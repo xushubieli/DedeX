@@ -42,7 +42,7 @@ foreach ($_FILES as $_key => $_value) {
         }
     } else {
         $fname = trim(${$_key.'_name'});
-        if (!empty($fname) && (preg_match("#\.({$cfg_not_allowall})$#i", $fname) || !preg_match("#\.#", $fname) || preg_match('#\.[\x00-\x1F\x7F]*$#', trim($value)))) {
+        if (!empty($fname) && (preg_match("#\.({$cfg_not_allowall})$#i", $fname) || !preg_match("#\.#", $fname) || preg_match('#\.[\x00-\x1F\x7F]*$#', trim($fname)))) {
             if (!defined('DEDEADMIN')) {
                 echo DedeAlert('禁止上传当前格式的文件', ALERT_DANGER);
                 exit;

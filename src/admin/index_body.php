@@ -35,10 +35,10 @@ if (empty($dopost)) {
     ));
     exit;
 } else if ($dopost == 'safe_mode') {
-    $safemsg = "系统运行模式为安全模式，模板管理、标签列表、数据库管理、模块管理等功能已暂停，如果您需要这些功能，在/system/common.inc.php文件大约第10行代码找到DEDEX_SAFE_MODE后面值TRUE修改为FALSE恢复使用";
-    $unsafemsg = "系统运行模式为开发模式，模板管理、标签列表、数据库管理、模块管理等功能已恢复，建议在上线后更改为<span class='text-success'>安全模式</span>，在/system/common.inc.php文件大约第10行代码找到DEDEX_SAFE_MODE后面值FALSE修改为TRUE暂停使用";
-    $modeStr = DEDEX_SAFE_MODE? $safemsg : $unsafemsg;
-    ShowMsg($modeStr, "javascript:;");
+    $safemsg = "目前系统运行安全模式，模板管理、数据库管理、模块管理等高危功能已暂停，启用功能，找到/system/common.inc.php文件，根据注释DEDEX_SAFE_MODE后面值为FALSE";
+    $unsafemsg = "目前系统运行开发模式，建议网站上线后运行<span class='text-success'>安全模式</span>，找到/system/common.inc.php文件，根据注释DEDEX_SAFE_MODE后面值为TRUE";
+    $modeStr = DEDEX_SAFE_MODE ? $safemsg : $unsafemsg;
+    showmsg($modeStr, 'index_body.php', 0, 5000);
     exit;
 }
 ?>

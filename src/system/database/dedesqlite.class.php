@@ -26,14 +26,14 @@ $dsql = $dsqlitete = $db = new DedeSqlite(FALSE);
  * @package        DedeSqli
  * @subpackage     DedeX.Libraries
  */
-if (!defined('MYSQLI_BOTH')) {
-    define('MYSQLI_BOTH', SQLITE3_BOTH);
+if (!defined('MYSQL_BOTH')) {
+    define('MYSQL_BOTH', MYSQLI_BOTH);
 }
 if (!defined('MYSQL_ASSOC')) {
     define('MYSQL_ASSOC', SQLITE3_ASSOC);
 }
-if (!defined('MYSQL_NUM')) {
-    define('MYSQL_NUM', SQLITE3_NUM);
+if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
+    mysqli_report(MYSQLI_REPORT_OFF);
 }
 class DedeSqlite
 {
@@ -323,7 +323,7 @@ class DedeSqlite
                 $acctype = SQLITE3_BOTH;
                 break;
         }
-        if ($this->result[$id] === FALSE) {
+        if ($this->result[$id] === 0) {
             return FALSE;
         } else {
             $rs = $this->result[$id]->fetchArray($acctype);

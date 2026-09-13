@@ -49,13 +49,14 @@ if ($dopost == "upload") {
             if (!is_dir($cfg_basedir.$savePath)) {
                 MkdirAll($cfg_basedir.$savePath, 777);
             }
+            $newname = isset($newname) ? trim($newname) : '';
             if (preg_match('#\.(php|pl|cgi|asp|aspx|jsp|php5|php4|php3|shtm|shtml|htm)$#i', trim($newname)) || preg_match('#\.(php|pl|cgi|asp|aspx|jsp|php5|php4|php3|shtm|shtml)$#i', trim($filename))) { 
                 ShowMsg("文件扩展名已被系统禁止", "javascript:;"); 
                 exit(); 
             }
             $fullfilename = $cfg_basedir.$filename;
             $mime = get_mime_type(${"upfile".$i});
-            if (preg_match("#^unknow#", $mime)) {
+            if (preg_match("#^unknown#", $mime)) {
                 ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
                 exit;
             }

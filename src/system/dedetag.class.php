@@ -37,7 +37,7 @@ class DedeTag
     {
         return $this->TagValue;
     }
-    //下面两个成员函数仅是为了兼容旧版
+    //下面两个成员函数仅是为兼容旧版
     function GetTagName()
     {
         return strtolower($this->TagName);
@@ -177,7 +177,7 @@ class DedeTagParse
             $disabled_functions = explode(',', $cfg_disable_funs);
             foreach ($tokens as $token) {
                 if (is_array($token)) {
-                    if ($token[0] = '306' && in_array($token[1], $disabled_functions)) {
+                    if ($token[0] == '306' && in_array($token[1], $disabled_functions)) {
                         $errmsg = 'DedeX Error:function disabled "'.$token[1].'"';
                         return FALSE;
                     }
@@ -550,11 +550,12 @@ class DedeTagParse
             $DedeMeValue = $this->CTags[$i]->TagValue;
             $phpcode = $refObj->GetInnerText();
         }
+        if ($refObj->GetName() == 'field' && $refObj->GetAtt('name') == 'array' && !is_array($DedeMeValue)) {
+            $DedeMeValue = is_array($refObj->Fields) ? $refObj->Fields : array();
+        }
         $phpcode = preg_replace("/'@me'|\"@me\"|@me/i", '$DedeMeValue', $phpcode);
         try {
             @eval($phpcode); 
-            $this->CTags[$i]->TagValue = $DedeMeValue;
-            $this->CTags[$i]->IsReplace = TRUE;
         } catch (Exception $e) {
             //or die("<xmp>$phpcode</xmp>");
         }
@@ -791,11 +792,7 @@ class DedeTagParse
         $functionname = "\$DedeFieldValue = ".$functionname;
         try {
             @eval($functionname.";"); 
-            if (empty($DedeFieldValue)) {
-                return '';
-            } else {
-                return $DedeFieldValue;
-            }
+            return empty($DedeFieldValue) ? '' : $DedeFieldValue;
         } catch (Throwable $e) {
             //or die("<xmp>$functionname</xmp>");
             echo DedeAlert('模板存在无法解析的标签，请检查模板标签后更新网站，错误提示：'.$e->getMessage(),ALERT_WARNING);

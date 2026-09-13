@@ -1,6 +1,6 @@
 <?php
 /**
- * 搜索通义AI
+ * 搜索千问AI
  * 大模型服务平台百炼控制台：https://bailian.console.aliyun.com
  *
  * @version        $id:search_ai.php$

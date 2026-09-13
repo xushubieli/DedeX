@@ -15,6 +15,7 @@ if (DEDEX_SAFE_MODE) {
 }
 CheckPurview('sys_Data');
 if (empty($dopost)) $dopost = '';
+if (empty($datatype)) $datatype = '';
 $bkdir = DEDEDATA.'/'.$cfg_backup_dir;
 //跳转一下页的js
 $gotojs = "function GotoNextPage(){document.gonext.submit();}"."\r\nsetTimeout('GotoNextPage()',500);";

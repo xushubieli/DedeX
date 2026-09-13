@@ -79,7 +79,7 @@ function var_dump_cli($val,$values)
 function get_mime_type($filename)
 {
     if (!function_exists('finfo_open')) {
-        return 'unknow/octet-stream';
+        return 'unknown/octet-stream';
     }
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mimeType = finfo_file($finfo, $filename);
@@ -145,7 +145,7 @@ if (!function_exists('CheckSql')) {
             $notallow1 = "[^0-9a-z@\._-]{1,}(union|sleep|benchmark|load_file|outfile)[^0-9a-z@\.-]{1,}";
             if (preg_match("/{$notallow1}/i", $db_string)) {
                 fputs(fopen($log_file, 'a+'), "$userIP||$getUrl||$db_string||SelectBreak\r\n");
-                exit("<span>安全警报：请求错误步骤1</span>");
+                exit("安全警报：请求错误步骤一");
             }
         }
         //完整的SQL检查
@@ -171,10 +171,7 @@ if (!function_exists('CheckSql')) {
         }
         $clean .= substr($db_string, $old_pos);
         $clean = trim(strtolower(preg_replace(array('~\s+~s'), array(' '), $clean)));
-        if (
-            strpos($clean, '@') !== FALSE  or strpos($clean, 'char(') !== FALSE or strpos($clean, '"') !== FALSE
-            or strpos($clean, '$s$$s$') !== FALSE
-        ) {
+        if (strpos($clean, '@') !== FALSE  or strpos($clean, 'char(') !== FALSE or strpos($clean, '"') !== FALSE or strpos($clean, '$s$$s$') !== FALSE) {
             $fail = TRUE;
             if (preg_match("#^create table#i", $clean)) $fail = FALSE;
             $error = "unusual character";
@@ -210,7 +207,7 @@ if (!function_exists('CheckSql')) {
         }
         if (!empty($fail)) {
             fputs(fopen($log_file, 'a+'), "$userIP||$getUrl||$db_string||$error\r\n");
-            exit("<span>安全警报：请求错误步骤2</span>");
+            exit("安全警报：请求错误步骤二");
         } else {
             return $db_string;
         }
@@ -252,15 +249,18 @@ function helper($helpers)
     }
     //无法载入助手
     if (!isset($_helpers[$helpers])) {
-        exit('无法加载请求的文件/{$helpers}.helper.php');
+        exit('无法加载请求的文件/'.$helpers.'.helper.php');
     }
 }
 function dede_htmlspecialchars($str)
 {
     global $cfg_soft_lang;
     if (version_compare(PHP_VERSION, '5.4.0', '<')) return htmlspecialchars($str);
-    if ($cfg_soft_lang == 'gb2312') return htmlspecialchars($str, ENT_COMPAT, 'ISO-8859-1');
-    else return htmlspecialchars($str);
+    if ($cfg_soft_lang == 'gb2312') {
+        return htmlspecialchars($str, ENT_COMPAT, 'ISO-8859-1');
+    } else {
+        return htmlspecialchars($str);
+    }
 }
 /**
  *  载入助手，这里会员载入用helps载入多个助手

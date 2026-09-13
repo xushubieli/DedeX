@@ -51,7 +51,7 @@ $filename = $filename.'.'.$fs[count($fs) - 1];
 $filename_name = $filename_name.'.'.$fs[count($fs) - 1];
 $fullfilename = $cfg_basedir.$activepath."/".$filename;
 $mime = get_mime_type($imgfile);
-if (preg_match("#^unknow#", $mime)) {
+if (preg_match("#^unknown#", $mime)) {
     ShowMsg("系统不支持fileinfo组件，建议php.ini中开启", -1);
     exit;
 }
