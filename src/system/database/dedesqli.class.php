@@ -14,11 +14,11 @@ if (!defined('DEDEINC')) {http_response_code(403); exit();}
  * @license        GNU GPL v2 (/license.txt)
  */
 @set_time_limit(0);
-//在工程所有文件中均不需要单独初始化这个类，可直接用$dsql或$db进行操作，为了防止错误，操作完后不必关闭数据库
 if (!function_exists("mysqli_init")) {
     ShowMsg("尚未发现开启mysqli模块，请在php.ini中启用extension=mysqli", "javascript:;");
     exit;
 }
+//在工程所有文件中均不需要单独初始化这个类，可直接用$dsql或$db进行操作，为了防止错误，操作完后不必关闭数据库
 $dsql = $dsqli = $db = new DedeSqli(FALSE);
 /**
  * DedeX MySQLi数据库类
@@ -101,9 +101,11 @@ class DedeSqli
             @list($dbhost, $dbport) = explode(':', $this->dbHost);
             !$dbport && $dbport = 3306;
             $this->linkID = mysqli_init();
-            mysqli_real_connect($this->linkID, $dbhost, $this->dbUser, $this->dbPwd, null, $dbport);
-            if (mysqli_errno($this->linkID) != 0) {
-                $this->DisplayError("数据库连接{$this->pconnect}错误");
+            try {
+                mysqli_real_connect($this->linkID, $dbhost, $this->dbUser, $this->dbPwd, false, $dbport);
+                mysqli_errno($this->linkID) != 0 && $this->DisplayError("链接{$this->pconnect}到MySQL发生错误");
+            } catch (Exception $e) {
+                $this->DisplayError("连接数据库失败，请检查数据库");
                 exit;
             }
             //复制一个对象副本
@@ -167,7 +169,11 @@ class DedeSqli
         if (!$dsqli->isInit) {
             $this->Init($this->pconnect);
         }
-        return @mysqli_real_escape_string($this->linkID, $_str);
+        if (version_compare(phpversion(), '4.3.0', '>=')) {
+            return @mysqli_real_escape_string($this->linkID, $_str);
+        } else {
+            return @mysqli_escape_string($this->linkID, $_str);
+        }
     }
     //执行一个不返回结果的SQL语句，如update,delete,insert等
     function ExecuteNoneQuery($sql = '')
@@ -339,7 +345,7 @@ class DedeSqli
             $this->Open(FALSE);
             $dsqli->isClose = FALSE;
         }
-        $this->result[$id] = @mysqli_query($this->linkID, $sql);
+        $this->result[$id] = @mysqli_query($sql, $this->linkID);
     }
     //返回当前的一条记录并把游标移向下一记录
     //MYSQLI_ASSOC、MYSQLI_NUM、MYSQLI_BOTH

@@ -2,8 +2,9 @@
 /**
  * 点击次数
  *
- * 显示点点击次数，添加view参数：<script src="{dede:field name='phpurl'/}/count.php?view=yes&aid={dede:field name='id'/}&mid={dede:field name='mid'/}"></script>普通计数器：<script src="{dede:field name='phpurl'/}/count.php?aid={dede:field name='id'/}&mid={dede:field name='mid'/}"></script>
- *
+ * 默认计数<script src="{dede:field name='phpurl'/}/count.php?aid={dede:field name='id'/}&mid={dede:field name='mid'/}" type="text/javascript"></script>
+ * 动态计数<script src="{dede:field name='phpurl'/}/count.php?view=yes&aid={dede:field name='id'/}&mid={dede:field name='mid'/}" type="text/javascript"></script>
+ * 
  * @version        $id:count.php$
  * @package        DedeX.Site
  * @license        GNU GPL v2 (/license.txt)
@@ -12,6 +13,7 @@ require_once(dirname(__FILE__)."/../system/common.inc.php");
 if (isset($aid)) $arcID = $aid;
 $cid = empty($cid) ? 1 : intval($cid);
 $arcID = $aid = empty($arcID) ? 0 : intval($arcID);
+header("Content-Type:text/javascript; charset={$cfg_soft_lang}");
 $format = isset($format) ? $format : "";
 $maintable = '#@__archives';
 $idtype = 'id';

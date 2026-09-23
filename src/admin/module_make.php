@@ -19,6 +19,7 @@ if ($action == '') {
     require_once(dirname(__FILE__)."/templets/module_make.htm");
     exit();
 } else if ($action=='gethash') {
+    if (!isset($email)) $email = '';
     echo md5($modulname.$email);
     exit();
 }
@@ -27,13 +28,14 @@ else if ($action == 'make') {
     $filelist = str_replace("\r", "\n", trim($filelist));
     $filelist = trim(preg_replace("#[\n]{1,}#", "\n", $filelist));
     if ($filelist == '') {
-        ShowMsg("对不起，你没有指定模块的文件列表，因此不能创建项目", "-1");
+        ShowMsg("模块创建失败，请重新填写模块文件列表", "-1");
         exit();
     }
     //去除转义
     foreach ($_POST as $k => $v) $$k = stripslashes($v);
     if (!isset($autosetup)) $autosetup = 0;
     if (!isset($autodel)) $autodel = 0;
+    if (!isset($email)) $email = '';
     $mdir = DEDEDATA.'/module';
     $hashcode = md5($modulname.$email);
     $moduleFilename = $mdir.'/'.$hashcode.'.xml';
@@ -42,23 +44,26 @@ else if ($action == 'make') {
     $dm = new DedeModule($mdir);
     if ($dm->HasModule($hashcode)) {
         $dm->Clear();
-        ShowMsg("您指定同名模块已经存在，您要更新这个模块先删除：module/{$hashcode}.xml", "-1");
+        ShowMsg("已存在同名模块，更新该模块先删除：module/{$hashcode}.xml", "-1");
         exit();
     }
     $readmef = $setupf = $uninstallf = '';
     if (empty($readmetxt)) {
-        move_uploaded_file($readme, $mdir."/{$hashcode}-r.html") or die("您没填写说明或上传说明文件");
+        $readme_tmp = isset($_FILES['readme']['tmp_name']) ? $_FILES['readme']['tmp_name'] : (isset($readme) ? $readme : '');
+        move_uploaded_file($readme_tmp, $mdir."/{$hashcode}-r.html") or die("请重新填写使用说明文件");
         $readmef = $dm->GetEncodeFile($mdir."/{$hashcode}-r.html", TRUE);
     } else {
         $readmetxt = preg_replace("#[\r\n]{1,}#", "<br>\r\n", $readmetxt);
         $readmef = base64_encode(trim($readmetxt));
     }
     if ($autosetup == 0) {
-        move_uploaded_file($setup, $mdir."/{$hashcode}-s.php") or die("您没上传，或系统无法把setup文件移动到模块目录");
+        $setup_tmp = isset($_FILES['setup']['tmp_name']) ? $_FILES['setup']['tmp_name'] : (isset($setup) ? $setup : '');
+        move_uploaded_file($setup_tmp, $mdir."/{$hashcode}-s.php") or die("请重新填写程序安装");
         $setupf = $dm->GetEncodeFile($mdir."/{$hashcode}-s.php", TRUE);
     }
     if ($autodel == 0) {
-        move_uploaded_file($uninstall, $mdir."/{$hashcode}-u.php") or die("您没上传，或系统无法把uninstall文件移动到模块目录");
+        $uninstall_tmp = isset($_FILES['uninstall']['tmp_name']) ? $_FILES['uninstall']['tmp_name'] : (isset($uninstall) ? $uninstall : '');
+        move_uploaded_file($uninstall_tmp, $mdir."/{$hashcode}-u.php") or die("请重新填写删除程序");
         $uninstallf = $dm->GetEncodeFile($mdir."/{$hashcode}-u.php", TRUE);
     }
     if (trim($setupsql40) == '') $setupsql40 = '';
@@ -67,6 +72,8 @@ else if ($action == 'make') {
     //else $setupsql41 = base64_encode(trim($setupsql41));
     if (trim($delsql) == '') $delsql = '';
     else $delsql = base64_encode(trim($delsql));
+    if (!isset($devInfo)) $devInfo = array('dev_id' => '', 'pub_key' => '');
+    if (!isset($moduleInfo)) $moduleInfo = '';
     $pub_key = base64url_encode($devInfo['pub_key']);
     $modulinfo = "<module>
 <baseinfo>
@@ -132,7 +139,7 @@ else if ($action == 'edit') {
     $filelist = str_replace("\r", "\n", trim($filelist));
     $filelist = trim(preg_replace("#[\n]{1,}#", "\n", $filelist));
     if ($filelist=="") {
-        ShowMsg("对不起，你没有指定模块的文件列表，因此不能创建项目", "-1");
+        ShowMsg("模块创建失败，请重新填写模块文件列表", "-1");
         exit();
     }
     //已经去除转义
@@ -149,15 +156,17 @@ else if ($action == 'edit') {
     $readmef = base64_encode($readmetxt);
     $setupf = $uninstallf = '';
     //编译setup文件
-    if (is_uploaded_file($setup)) {
-        move_uploaded_file($setup, $mdir."/{$hashcode}-s.php") or die("您没上传，或系统无法把setup文件移动到模块目录");
+    $setup_tmp = isset($_FILES['setup']['tmp_name']) ? $_FILES['setup']['tmp_name'] : (isset($setup) ? $setup : '');
+    if (is_uploaded_file($setup_tmp)) {
+        move_uploaded_file($setup_tmp, $mdir."/{$hashcode}-s.php") or die("您没上传，或系统无法把setup文件移动到模块目录");
         $setupf = $dm->GetEncodeFile($mdir."/{$hashcode}-s.php", TRUE);
     } else {
         if ($autosetup == 0) $setupf = base64_encode($dm->GetSystemFile($hashcode, 'setup'));
     }
     //编译uninstall文件
-    if (is_uploaded_file($uninstall)) {
-        move_uploaded_file($uninstall, $mdir."/{$hashcode}-u.php") or die("您没上传，或系统无法把uninstall文件移动到模块目录");
+    $uninstall_tmp = isset($_FILES['uninstall']['tmp_name']) ? $_FILES['uninstall']['tmp_name'] : (isset($uninstall) ? $uninstall : '');
+    if (is_uploaded_file($uninstall_tmp)) {
+        move_uploaded_file($uninstall_tmp, $mdir."/{$hashcode}-u.php") or die("您没上传，或系统无法把uninstall文件移动到模块目录");
         $uninstallf = $dm->GetEncodeFile($mdir."/{$hashcode}-u.php", true);
     } else {
         if ($autodel == 0) $uninstallf = base64_encode($dm->GetSystemFile($hashcode, 'uninstall'));
@@ -168,6 +177,8 @@ else if ($action == 'edit') {
     //else $setupsql41 = base64_encode(trim($setupsql41));
     if (trim($delsql) == '') $delsql = '';
     else $delsql = base64_encode(strip_tags(trim($delsql)));
+    if (!isset($devInfo)) $devInfo = array('dev_id' => '', 'pub_key' => '');
+    if (!isset($moduleInfo)) $moduleInfo = '';
     $pub_key = base64url_encode($devInfo['pub_key']);
     $modulinfo = "<module>
 <baseinfo>

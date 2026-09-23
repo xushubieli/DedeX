@@ -459,7 +459,7 @@ class ListView
             $ids[$row['id']] = $row['id'];
             //处理一些特殊字段
             $row['infos'] = cn_substr($row['description'], $infolen);
-            if ($row['corank'] > 0 && $row['arcrank'] == 0) {
+            if (!empty($row['corank']) && $row['arcrank'] == 0) {
                 $row['arcrank'] = $row['corank'];
             }
             $row['filename'] = $row['arcurl'] = GetFileUrl(
@@ -860,7 +860,7 @@ class ListView
                     $ids[$row['id']] = $row['id'];
                     //处理一些特殊字段
                     $row['infos'] = cn_substr($row['description'], $infolen);
-                    if ($row['corank'] > 0 && $row['arcrank'] == 0) {
+                    if (!empty($row['corank']) && $row['arcrank'] == 0) {
                         $row['arcrank'] = $row['corank'];
                     }
                     $row['filename'] = $row['arcurl'] = GetFileUrl(

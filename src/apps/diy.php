@@ -64,23 +64,13 @@ if ($action == 'post') {
                 }
             }
         }
-        //判断$link、$date、$ip是否输入为空，恢复注释代码使用
+        //判断$link、$date、$ip是否为空
         /*if (empty($link) || empty($date) || empty($ip)) {
             ShowMsg('提交失败，请重新填写', '-1');
             exit();
         }*/
-        //判断$name是否输入违禁词，在后台-系统设置：禁用关键词添加，$name改成您表单字段标识，恢复注释代码使用
-        /*if ($name === '' || preg_match("#{$cfg_notallowstr}#i", $name)) {
-            ShowMsg('您输入的信息存在违禁，请重新填写', '-1');
-            exit();
-        }*/
-        //判断$message是否大于190字符，$message改成您表单字段标识，恢复注释代码使用
-        /*if (strlen($message) > 190) {
-            showmsg('您输入的信息太多了，请重新填写', '-1');
-            exit();
-        }*/
-        //判断是否重复提交表单，根据提交的链接、时间、ip，前台表单可以不用出现该输入框，恢复注释代码使用
-        /*$repeat = $dsql->getOne("SELECT count(*) AS dd FROM `{$diy->table}` WHERE ip='$ip' AND date_format(date,'Y-m-d') = date_format(now(),'Y-m-d')");
+        //判断提交表单是否重复
+        /*$repeat = $dsql->getOne("SELECT count(*) AS dd FROM `{$diy->table}` WHERE ip='{$ip}' AND date_format(date,'Y-m-d') = date_format(now(),'Y-m-d')");
         if ($repeat['dd'] >= 3) {
             showmsg('您已重复提交太多次了，稍后我们会主动联系您', '-1', 0, 5000);
             exit();
